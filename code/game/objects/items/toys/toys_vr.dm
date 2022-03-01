@@ -291,6 +291,15 @@
 	icon_state = "rock"
 	attack_verb = list("grug'd", "unga'd")
 
+/obj/item/toy/rock/harm
+	name = "pet rock"
+	desc = "An actual rock. Don't throw this at windows."
+	icon = 'icons/obj/toy_vr.dmi'
+	icon_state = "rock"
+	force = 5
+	throwforce = 10 //Das gunna hurt
+	attack_verb = list("grug'd", "unga'd")
+
 /obj/item/toy/rock/attackby(obj/item/I as obj, mob/living/user as mob, proximity)
 	if(!proximity) return
 	if(istype(I, /obj/item/weapon/pen))

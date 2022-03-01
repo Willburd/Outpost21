@@ -22923,7 +22923,6 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/mob/living/simple_mob/animal/giant_spider/lorenzo,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/hos)
 "iWh" = (

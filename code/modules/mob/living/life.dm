@@ -255,11 +255,12 @@
 
 	var/brightness = 0.0 //We'll assume it's superdark if we can't find something else.
 
+	//Snowflake treatment of potential locations
 	if(isturf(loc))
 		var/turf/T = loc //Will be true 99% of the time, thus avoiding the whole elif chain
 		brightness = T.get_lumcount()
-
-	//Snowflake treatment of potential locations
+	else if(istype(loc,/obj/structure/closet)) // outpost 21 addition - lockers are dark and spooky! 
+		brightness = 0 // it's dark in here!
 	else if(istype(loc,/obj/mecha)) //I imagine there's like displays and junk in there. Use the lights!
 		brightness = 1
 	else if(istype(loc,/obj/item/weapon/holder)) //Poor carried teshari and whatnot should adjust appropriately

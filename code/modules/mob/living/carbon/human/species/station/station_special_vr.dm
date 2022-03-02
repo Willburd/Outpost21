@@ -219,10 +219,14 @@
 
 		//Handle light/dark areas
 		var/turf/T = get_turf(H)
-		if(!T)
+		var/darkish = FALSE
+		if(istype(H.loc,/obj/structure/closet)) // outpost 21 addition - lockers are dark and spooky!
+			darkish = TRUE
+		else if(T)
+			darkish = (T.get_lumcount() <= 0.1)
+		else
 			update_xenochimera_hud(H, danger, feral_state)
 			return //Nullspace
-		var/darkish = T.get_lumcount() <= 0.1
 
 		//Don't bother doing heavy lifting if we weren't going to give emotes anyway.
 		if(!prob(1))

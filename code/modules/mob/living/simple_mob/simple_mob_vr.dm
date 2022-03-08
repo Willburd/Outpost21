@@ -51,6 +51,8 @@
 	var/obj/item/device/radio/headset/mob_headset/mob_radio		//Adminbus headset for simplemob shenanigans.
 	does_spin = FALSE
 
+	var/voremob_loaded = FALSE //CHOMPedit: On-demand belly loading.
+
 // Release belly contents before being gc'd!
 /mob/living/simple_mob/Destroy()
 	release_vore_contents()

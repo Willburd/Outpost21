@@ -663,6 +663,7 @@
 
 	return ..(G.affecting)
 
+/* outpost 21  edit - nif removal
 //PAIs, borgs, and animals don't need a grab or anything
 /mob/living/silicon/pai/can_shred(var/mob/living/carbon/human/target)
 	if(!target)
@@ -678,6 +679,7 @@
 		return FALSE
 
 	return ..(target)
+*/
 
 /mob/living/silicon/robot/can_shred(var/mob/living/carbon/human/target)
 	if(!target)

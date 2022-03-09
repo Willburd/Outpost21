@@ -15,13 +15,16 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 
 // Call after inserting or instantiating an MMI.
 /mob/living/silicon/robot/proc/post_mmi_setup()
+	/* outpost 21  edit - nif removal
 	if(istype(mmi, /obj/item/device/mmi/inert/ai_remote))
 		make_shell()
 		playsound(src, 'sound/machines/twobeep.ogg', 50, 0)
 	else
-		playsound(src, 'sound/voice/liveagain.ogg', 75, 1)
+	*/
+	playsound(src, 'sound/voice/liveagain.ogg', 75, 1)
 	return
 
+/* outpost 21  edit - nif removal
 /mob/living/silicon/robot/proc/make_shell()
 	shell = TRUE
 	braintype = "AI Shell"
@@ -43,6 +46,7 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	if(!QDELETED(camera))
 		camera.c_tag = real_name
 	updateicon()
+*/
 
 // This should be called before the AI client/mind is actually moved.
 /mob/living/silicon/robot/proc/deploy_init(mob/living/silicon/ai/AI)

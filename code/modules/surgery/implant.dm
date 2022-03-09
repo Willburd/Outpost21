@@ -153,7 +153,9 @@
 	user.drop_item()
 	affected.implants += tool
 	tool.loc = affected
+	/* outpost 21  edit - nif removal
 	if(istype(tool,/obj/item/device/nif)){var/obj/item/device/nif/N = tool;N.implant(target)} //VOREStation Add - NIF support
+	*/
 	affected.cavity = 0
 
 //////////////////////////////////////////////////////////////////
@@ -228,7 +230,9 @@
 					var/obj/item/weapon/implant/imp = obj
 					imp.imp_in = null
 					imp.implanted = 0
+				/* outpost 21  edit - nif removal
 				else if(istype(tool,/obj/item/device/nif)){var/obj/item/device/nif/N = tool;N.unimplant(target)} //VOREStation Add - NIF support
+				*/
 		else
 			user.visible_message("<span class='notice'>[user] removes \the [tool] from [target]'s [affected.name].</span>", \
 			"<span class='notice'>There's something inside [target]'s [affected.name], but you just missed it this time.</span>" )

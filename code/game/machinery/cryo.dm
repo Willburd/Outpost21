@@ -157,7 +157,7 @@
 				beaker = null
 				update_icon()
 		if("ejectOccupant")
-			if(!occupant || isslime(usr) || ispAI(usr))
+			if(!occupant || isslime(usr)) // || ispAI(usr)) outpost 21  edit - nif removal
 				return 0 // don't update UIs attached to this object
 			go_out()
 		else
@@ -189,7 +189,7 @@
 		var/mob/M = grab.affecting
 		qdel(grab)
 		put_mob(M)
-			
+
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to put people into cryo without external assistance

@@ -100,7 +100,7 @@
 					MI.forceMove(get_turf(H))
 					if(!issilicon(MI)) //Don't drop borg modules...
 						for(var/obj/item/II in MI)
-							if(istype(II,/obj/item/weapon/implant) || istype(II,/obj/item/device/nif))
+							if(istype(II,/obj/item/weapon/implant)) // || istype(II,/obj/item/device/nif)) outpost 21  edit - nif removal
 								continue
 							MI.drop_from_inventory(II, dest.loc)
 					var/obj/effect/landmark/finaldest = pick(awayabductors)
@@ -110,7 +110,7 @@
 					MI << 'sound/effects/bamf.ogg'
 					to_chat(MI,"<span class='warning'>You're starting to come to. You feel like you've been out for a few minutes, at least...</span>")
 				for(var/obj/item/I in L)
-					if(istype(I,/obj/item/weapon/implant) || istype(I,/obj/item/device/nif))
+					if(istype(I,/obj/item/weapon/implant)) // || istype(I,/obj/item/device/nif)) outpost 21  edit - nif removal
 						continue
 					L.drop_from_inventory(I, dest.loc)
 			var/obj/effect/landmark/finaldest = pick(awayabductors)

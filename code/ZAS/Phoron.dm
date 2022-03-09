@@ -102,7 +102,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	if(vsc.plc.SKIN_BURNS && (species.breath_type != "phoron"))
 		if(!pl_head_protected() || !pl_suit_protected())
 			burn_skin(0.75)
-			if(prob(20)) 
+			if(prob(20))
 				to_chat(src, "<span class='danger'>Your skin burns!</span>")
 			updatehealth()
 
@@ -123,8 +123,10 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 			burn_eyes = 0
 
 		//VOREStation Edit - NIF Support
+		/* outpost 21  edit - nif removal
 		if(nif && nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))
 			burn_eyes = 0
+		*/
 
 		//If we still need to, burn their eyes
 		if(burn_eyes)

@@ -44,12 +44,12 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 
 	update_icon()
 	wait = world.time + config.gateway_delay	//+ thirty minutes default
-	
+
 	if(GLOB.gateway_away)
 		awaygate = GLOB.gateway_away
 	else
 		awaygate = locate(/obj/machinery/gateway/centeraway)
-	
+
 	. = ..()
 	density = TRUE //VOREStation Add
 
@@ -167,7 +167,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 		if(dest)
 			M.forceMove(dest.loc)
 			M.set_dir(SOUTH)
-			//VOREStation Addition Start: Mcguffin time!			
+			//VOREStation Addition Start: Mcguffin time!
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if(H.client)
@@ -177,7 +177,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 			//VOREStation Addition Start: Abduction!
 			if(istype(M, /mob/living) && dest.abductor)
 				var/mob/living/L = M
-				if(L.nutrition > 500) 
+				if(L.nutrition > 500)
 					L.nutrition = 500 //If the aim is to negate people overpreparing, then they shouldn't be able to stuff themselves full of food either.
 				//Situations to get the mob out of
 				if(L.buckled)
@@ -201,7 +201,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 						MI.forceMove(get_turf(H))
 						if(!issilicon(MI)) //Don't drop borg modules...
 							for(var/obj/item/II in MI)
-								if(istype(II,/obj/item/weapon/implant) || istype(II,/obj/item/device/nif))
+								if(istype(II,/obj/item/weapon/implant)) // || istype(II,/obj/item/device/nif))  outpost 21  edit - nif removal
 									continue
 								MI.drop_from_inventory(II, dest.loc)
 						var/obj/effect/landmark/finaldest = pick(awayabductors)
@@ -211,7 +211,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 						MI << 'sound/effects/bamf.ogg'
 						to_chat(MI,"<span class='warning'>You're starting to come to. You feel like you've been out for a few minutes, at least...</span>")
 					for(var/obj/item/I in L)
-						if(istype(I,/obj/item/weapon/implant) || istype(I,/obj/item/device/nif))
+						if(istype(I,/obj/item/weapon/implant)) // || istype(I,/obj/item/device/nif)) outpost 21  edit - nif removal
 							continue
 						L.drop_from_inventory(I, dest.loc)
 				var/obj/effect/landmark/finaldest = pick(awayabductors)
@@ -225,7 +225,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))
-		if(!awaygate)	
+		if(!awaygate)
 			if(GLOB.gateway_away)
 				awaygate = GLOB.gateway_away
 			else
@@ -257,9 +257,9 @@ GLOBAL_DATUM(gateway_away, /obj/machinery/gateway/centeraway)
 		warning("[src] at [x],[y],[z] appears to be an additional away-gateway")
 	else
 		GLOB.gateway_away = src
-	
+
 	update_icon()
-	
+
 	if(GLOB.gateway_station)
 		stationgate = GLOB.gateway_station
 	else

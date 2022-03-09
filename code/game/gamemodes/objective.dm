@@ -228,7 +228,10 @@ var/global/list/all_objectives = list()
 	if(issilicon(owner.current))
 		return 0
 	var/area/shuttle = locate(/area/shuttle/escape/centcom)
+	/* outpost 21  edit - nif removal
 	var/list/protected_mobs = list(/mob/living/silicon/ai, /mob/living/silicon/pai)
+	*/
+	var/list/protected_mobs = list(/mob/living/silicon/ai)
 	for(var/mob/living/player in player_list)
 		if(player.type in protected_mobs)	continue
 		if (player.mind && (player.mind != owner))
@@ -250,7 +253,10 @@ var/global/list/all_objectives = list()
 	if(!owner.current)
 		return 0
 	var/area/shuttle = locate(/area/shuttle/escape/centcom)
+	/* outpost 21  edit - nif removal
 	var/protected_mobs[] = list(/mob/living/silicon/ai, /mob/living/silicon/pai, /mob/living/silicon/robot)
+	*/
+	var/protected_mobs[] = list(/mob/living/silicon/ai, /mob/living/silicon/robot)
 	for(var/mob/living/player in player_list)
 		if(player.type in protected_mobs)	continue
 		if (player.mind)

@@ -49,7 +49,7 @@
 #define issilicon(A)	istype(A, /mob/living/silicon)
 #define isAI(A)			istype(A, /mob/living/silicon/ai)
 #define isrobot(A)		istype(A, /mob/living/silicon/robot)
-#define ispAI(A)		istype(A, /mob/living/silicon/pai)
+//#define ispAI(A)		istype(A, /mob/living/silicon/pai) outpost 21  edit - nif removal
 
 #define isbot(A)		istype(A, /mob/living/bot)
 

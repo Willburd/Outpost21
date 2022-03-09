@@ -78,7 +78,9 @@
 		handle_medical_side_effects()
 
 		handle_heartbeat()
+		/* outpost 21  edit - nif removal
 		handle_nif() 			//VOREStation Addition
+		*/
 		if(!client)
 			species.handle_npc(src)
 
@@ -739,8 +741,12 @@
 		throw_alert("pressure", /obj/screen/alert/lowpressure, 1)
 	else
 		if( !(COLD_RESISTANCE in mutations))
+			/* outpost 21  edit - nif removal
 			if(!isSynthetic() || !nif || !nif.flag_check(NIF_O_PRESSURESEAL,NIF_FLAGS_OTHER)) //VOREStation Edit - NIF pressure seals
+			*/
+			if(!isSynthetic())
 				take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+
 			if(getOxyLoss() < 55) 		// 12 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 				var/pressure_dam = 3	// 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 										// (Extra 1 oxyloss from failed breath)
@@ -788,8 +794,10 @@
 
 	// FBPs will overheat when alive, prosthetic limbs are fine.
 	if(stat != DEAD && robobody_count)
+		/* outpost 21  edit - nif removal
 		if(!nif || !nif.flag_check(NIF_O_HEATSINKS,NIF_FLAGS_OTHER)) //VOREStation Edit - NIF heatsinks prevent the base heat increase per tick if installed.
 			bodytemperature += round(robobody_count*1.15)
+		*/
 		var/obj/item/organ/internal/robotic/heatsink/HS = internal_organs_by_name[O_HEATSINK]
 		if(!HS || HS.is_broken()) // However, NIF Heatsinks will not compensate for a core FBP component (your heatsink) being lost.
 			bodytemperature += round(robobody_count*0.5)
@@ -1304,8 +1312,10 @@
 				if(G.prescription)
 					apply_nearsighted_overlay = FALSE
 
+			/* outpost 21  edit - nif removal
 			if(nif && nif.flag_check(NIF_V_CORRECTIVE, NIF_FLAGS_VISION)) // VOREStation Edit - NIF
 				apply_nearsighted_overlay = FALSE
+			*/
 
 		set_fullscreen(apply_nearsighted_overlay, "nearsighted", /obj/screen/fullscreen/impaired, 1)
 
@@ -1327,7 +1337,9 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
+				/* outpost 21  edit - nif removal
 				if(!found_welder && nif && nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))	found_welder = 1 //VOREStation Add - NIF
+				*/
 				if(istype(glasses, /obj/item/clothing/glasses/sunglasses/thinblindfold))
 					found_welder = 1
 				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
@@ -1473,13 +1485,13 @@
 		if(!(species.flags & NO_HALLUCINATION))
 
 			// oxygen loss can result in seeing some crazy stuff
-			if(getOxyLoss() >= 50 && rand(1,15) <= 1)	
+			if(getOxyLoss() >= 50 && rand(1,15) <= 1)
 				hallucination += 10
 
 			// hallucinate more often if already doing so in the darkness
 			var/checkthreshold = 1
 			if(hallucination > 5)
-				checkthreshold = 3; 
+				checkthreshold = 3;
 
 			// lockers have it more intense than just standing in darkness, this is to prevent camping in lockers forever
 			var/brightness = 0
@@ -1487,18 +1499,18 @@
 				brightness = 0 // it's dark in here!
 				// spooky in closet...
 				if(brightness <= LIGHTING_SOFT_THRESHOLD)
-					if(rand(1,20) <= checkthreshold)	
+					if(rand(1,20) <= checkthreshold)
 						hallucination += 10
 					if(rand(1,380) <= checkthreshold)
 						playsound_local(src,pick(scarySounds),50, 1, -1)
 						hallucination += 30
-					
+
 			else if(isturf(loc))
 				var/turf/T = loc
-				brightness = T.get_lumcount() 
+				brightness = T.get_lumcount()
 				// spooky walking around
 				if(brightness <= LIGHTING_SOFT_THRESHOLD)
-					if(rand(1,25) <= checkthreshold)	
+					if(rand(1,25) <= checkthreshold)
 						hallucination += 10
 					if(rand(1,400) <= checkthreshold)
 						playsound_local(src,pick(scarySounds),50, 1, -1)

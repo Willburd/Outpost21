@@ -33,6 +33,7 @@
 		unarmed_attacks += new u_type()
 
 /datum/species/create_organs(var/mob/living/carbon/human/H)
+	/* outpost 21  edit - nif removal
 	if(H.nif)
 		var/type = H.nif.type
 		var/durability = H.nif.durability
@@ -43,7 +44,8 @@
 		var/obj/item/device/nif/nif = new type(H,durability,nif_savedata)
 		nif.nifsofts = nifsofts
 	else
-		..()
+	*/
+	..()
 /datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base)
 	ASSERT(src)
 	ASSERT(istype(H))

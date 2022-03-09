@@ -93,7 +93,7 @@
 	options["LEGACY: job_master"] = job_master
 	options["LEGACY: radio_controller"] = radio_controller
 	options["LEGACY: emergency_shuttle"] = emergency_shuttle
-	options["LEGACY: paiController"] = paiController
+	// options["LEGACY: paiController"] = paiController outpost 21  edit - nif removal
 	options["LEGACY: cameranet"] = cameranet
 	options["LEGACY: transfer_controller"] = transfer_controller
 	options["LEGACY: gas_data"] = gas_data

@@ -56,7 +56,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(1);/obj/item/weapon/storage/box/cups,
 				prob(3);/obj/item/weapon/storage/box/mousetraps,
 				prob(3);/obj/item/weapon/storage/wallet,
-				prob(1);/obj/item/device/paicard,
+				// prob(1);/obj/item/device/paicard, outpost 21  edit - nif removal
 				prob(2);/obj/item/clothing/shoes/galoshes,
 				prob(1);/obj/item/clothing/shoes/syndigaloshes,
 				prob(4);/obj/item/clothing/shoes/black,

@@ -74,9 +74,11 @@ SUBSYSTEM_DEF(transcore)
 		//In a human
 		BITSET(H.hud_updateflag, BACKUP_HUD)
 
+		/* outpost 21  edit - nif removal
 		if(H == imp.imp_in && H.mind && H.stat < DEAD)
 			db.m_backup(H.mind,H.nif)
 			persist_nif_data(H)
+		*/
 
 		if(MC_TICK_CHECK)
 			return
@@ -182,9 +184,11 @@ SUBSYSTEM_DEF(transcore)
 			return db
 
 // These are now just interfaces to databases
+/* outpost 21  edit - nif removal
 /datum/controller/subsystem/transcore/proc/m_backup(var/datum/mind/mind, var/obj/item/device/nif/nif, var/one_time = FALSE, var/database_key)
 	var/datum/transcore_db/db = db_by_key(database_key)
 	db.m_backup(mind=mind, nif=nif, one_time=one_time)
+*/
 
 /datum/controller/subsystem/transcore/proc/add_backup(var/datum/transhuman/mind_record/MR, var/database_key)
 	var/datum/transcore_db/db = db_by_key(database_key)
@@ -228,6 +232,7 @@ SUBSYSTEM_DEF(transcore)
 		MR.last_update = world.time
 		MR.one_time = one_time
 
+		/* outpost 21  edit - nif removal
 		//Pass a 0 to not change NIF status (because the elseif is checking for null)
 		if(nif && nif.savetofile) //This is to allow Transcore to skip over saving NIFs that have already been saved.
 			MR.nif_path = nif.type
@@ -245,6 +250,7 @@ SUBSYSTEM_DEF(transcore)
 			MR.nif_durability = null
 			MR.nif_software = null
 			MR.nif_savedata = null
+		*/
 
 	else
 		MR = new(mind, mind.current, add_to_db = TRUE, one_time = one_time, database_key = src.key)

@@ -13,6 +13,7 @@
 	path = /obj/item/device/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
 
+/* outpost 21  edit - nif removal
 /datum/gear/utility/communicator
 	display_name = "communicator selection"
 	path = /obj/item/device/communicator
@@ -24,6 +25,7 @@
 	for(var/obj/item/device/communicator_type as anything in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated,/obj/item/device/communicator/commlink)) //VOREStation Edit - Remove Commlink
 		communicators[initial(communicator_type.name)] = communicator_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
+*/
 
 /datum/gear/utility/camera
 	display_name = "camera"
@@ -71,9 +73,11 @@
 	display_name = "folder, yellow"
 	path = /obj/item/weapon/folder/yellow
 
+/* outpost 21  edit - nif removal
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
+*/
 
 /datum/gear/utility/securecase
 	display_name = "secure briefcase"

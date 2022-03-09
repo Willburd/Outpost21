@@ -33,6 +33,7 @@
 	category = list("Misc")
 	sort_string = "SAAAC"
 
+/* outpost 21  edit - nif removal
 /datum/design/item/ai_holder/paicard
 	name = "'pAI', personal artificial intelligence device"
 	id = "paicard"
@@ -40,6 +41,7 @@
 	materials = list(MAT_GLASS = 500, MAT_STEEL = 500)
 	build_path = /obj/item/device/paicard
 	sort_string = "SBAAA"
+*/
 
 /datum/design/item/ai_holder/intellicard
 	name = "intelliCore"

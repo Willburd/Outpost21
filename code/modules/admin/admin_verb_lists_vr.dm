@@ -112,12 +112,12 @@ var/list/admin_verbs_admin = list(
 	/client/proc/change_human_appearance_self,	// Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
 	/client/proc/view_chemical_reaction_logs,
-	/client/proc/makePAI,
+	///client/proc/makePAI, outpost 21  edit - nif removal
 	/client/proc/toggle_debug_logs,
 	/client/proc/toggle_attack_logs,
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/fixatmos,
-	/datum/admins/proc/quick_nif, //VOREStation Add,
+	///datum/admins/proc/quick_nif, //VOREStation Add, outpost 21  edit - nif removal
 	/datum/admins/proc/set_uplink, //VOREStation Add,
 	/datum/admins/proc/sendFax,
 	/client/proc/despawn_player,
@@ -519,7 +519,7 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/change_human_appearance_admin,     // Allows an admin to change the basic appearance of human-based mobs ,
 	/client/proc/change_human_appearance_self,      // Allows the human-based mob itself change its basic appearance ,
 	/client/proc/change_security_level,
-	/client/proc/makePAI,
+	///client/proc/makePAI, outpost 21  edit - nif removal
 	/client/proc/toggle_debug_logs,
 	/client/proc/toggle_attack_logs,
 	/datum/admins/proc/paralyze_mob,

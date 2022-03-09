@@ -1166,9 +1166,11 @@ About the new airlock wires panel:
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/assembly/signaler))
 		return src.attack_hand(user)
+	/* outpost 21  edit - nif removal
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
+	*/
 	else if(!repairing && C.is_crowbar())
 		if(brace)
 			to_chat(user, text("<span class='notice'>The airlock's brace holds it firmly in place.</span>"))

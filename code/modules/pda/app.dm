@@ -29,9 +29,11 @@
 		var/mob/living/L = null
 		if(pda.loc && isliving(pda.loc))
 			L = pda.loc
+		/* outpost 21  edit - nif removal
 		//Maybe they are a pAI!
 		else
 			L = get(pda, /mob/living/silicon)
+		*/
 
 		if(L)
 			to_chat(L, "[bicon(pda)] [message]")

@@ -61,8 +61,10 @@
 	return FALSE
 /obj/item/device/aicard/digest_act(var/atom/movable/item_storage = null)
 	return FALSE
+/* outpost 21  edit - nif removal
 /obj/item/device/paicard/digest_act(var/atom/movable/item_storage = null)
 	return FALSE
+*/
 /obj/item/weapon/gun/digest_act(var/atom/movable/item_storage = null)
 	return FALSE
 /obj/item/weapon/pinpointer/digest_act(var/atom/movable/item_storage = null)

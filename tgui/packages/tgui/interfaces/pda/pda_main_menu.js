@@ -11,7 +11,7 @@ export const pda_main_menu = (props, context) => {
     ownjob,
     idInserted,
     categories,
-    pai,
+    //pai,
     notifying,
   } = data;
 
@@ -56,6 +56,7 @@ export const pda_main_menu = (props, context) => {
           })}
         </LabeledList>
       </Section>
+      /* outpost 21  edit - nif removal
       {!!pai && (
         <Section level={2} title="pAI">
           <Button
@@ -70,6 +71,7 @@ export const pda_main_menu = (props, context) => {
             onClick={() => act("pai", { option: 2 })} />
         </Section>
       )}
+      */
     </Fragment>
   );
 };

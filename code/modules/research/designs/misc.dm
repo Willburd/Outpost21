@@ -4,6 +4,7 @@
 	..()
 	name = "General purpose design ([item_name])"
 
+/* outpost 21  edit - nif removal
 /datum/design/item/general/communicator
 	name = "Communicator"
 	id = "communicator"
@@ -11,6 +12,7 @@
 	materials = list(MAT_STEEL = 500, MAT_GLASS = 500)
 	build_path = /obj/item/device/communicator
 	sort_string = "TAAAA"
+*/
 
 /datum/design/item/general/laserpointer
 	name = "laser pointer"

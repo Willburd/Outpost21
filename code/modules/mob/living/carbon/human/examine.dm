@@ -144,7 +144,7 @@
 				LAZYADD(pocket_msg, r_store_message)
 		if(LAZYLEN(pocket_msg))
 			tie_msg += " Near the waist it has [english_list(pocket_msg)]."
-		
+
 		if(w_uniform.blood_DNA)
 			msg += "<span class='warning'>[T.He] [T.is] wearing [bicon(w_uniform)] [w_uniform.gender==PLURAL?"some":"a"] [(w_uniform.blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [w_uniform.name]![tie_msg]</span>"
 		else
@@ -299,7 +299,9 @@
 	vorestrings += examine_bellies()
 	vorestrings += examine_pickup_size()
 	vorestrings += examine_step_size()
+	/* outpost 21  edit - nif removal
 	vorestrings += examine_nif()
+	*/
 	vorestrings += examine_chimera()
 	for(var/entry in vorestrings)
 		if(entry == "" || entry == null)

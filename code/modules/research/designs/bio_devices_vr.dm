@@ -1,4 +1,3 @@
-/*
 /datum/design/item/biotech/nif
 	name = "nanite implant framework"
 	id = "nif"
@@ -22,5 +21,3 @@
 	materials = list(MAT_STEEL = 2000, MAT_GLASS = 3000, MAT_URANIUM = 2000, MAT_DIAMOND = 2000)
 	build_path = /obj/item/device/nifrepairer
 	sort_string = "JVABA"
-
-*/ //nifs are dumb and overpowered. - Ignus

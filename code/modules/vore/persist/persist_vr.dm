@@ -1,5 +1,5 @@
 /**
- * Stuff having to do with inter-round persistence. 
+ * Stuff having to do with inter-round persistence.
  */
 
 // Minds represent IC characters.
@@ -224,13 +224,16 @@
 * without invoking the need for a bunch of different save file variables.
 */
 /proc/persist_nif_data(var/mob/living/carbon/human/H,var/datum/preferences/prefs)
+	/* outpost 21  edit - nif removal
 	if(!istype(H))
 		stack_trace("Persist (NIF): Given a nonhuman: [H]")
 		return
+	*/
 
 	if(!prefs)
 		prefs = prep_for_persist(H)
 
+	/* outpost 21  edit - nif removal
 	if(!prefs)
 		warning("Persist (NIF): [H] has no prefs datum, skipping")
 		return
@@ -249,7 +252,9 @@
 		prefs.nif_path = null
 		prefs.nif_durability = null
 		prefs.nif_savedata = null
+	*/
 
+	/* outpost 21  edit - nif removal
 	var/datum/category_group/player_setup_category/vore_cat = prefs.player_setup.categories_by_name["VORE"]
 	var/datum/category_item/player_setup_item/vore/nif/nif_prefs = vore_cat.items_by_name["NIF Data"]
 
@@ -257,3 +262,4 @@
 	if(!S) warning("Persist (NIF): Couldn't load NIF save savefile? [prefs.real_name]")
 	S.cd = "/character[prefs.default_slot]"
 	nif_prefs.save_character(S)
+	*/

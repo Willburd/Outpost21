@@ -1329,8 +1329,10 @@ var/datum/announcement/minor/admin_min_announcer = new
 		else if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
 			to_chat(usr, "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independent)"]: laws:</b>")
+		/* outpost 21  edit - nif removal
 		else if (ispAI(S))
 			to_chat(usr, "<b>pAI [key_name(S, usr)]'s laws:</b>")
+		*/
 		else
 			to_chat(usr, "<b>SOMETHING SILICON [key_name(S, usr)]'s laws:</b>")
 

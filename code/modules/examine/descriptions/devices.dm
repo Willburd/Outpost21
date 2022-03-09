@@ -1,3 +1,4 @@
+/* outpost 21  edit - nif removal
 /obj/item/device/communicator
 	description_info = "This device allows someone to speak to another player sourced from the observer pool, as well as other communicators linked to it.  \
 	To use the device, use it in your hand, and it will open an interface with various buttons.  Near the bottom will be a list of devices currently available \
@@ -9,17 +10,18 @@
 	that is the Exonet.<br>\
 	<br>\
 	The Exonet is the predominant interstellar telecomm system, servicing trillions of devices across a large portion of human-controlled space.  \
-	It is distributed by a massive network of telecommunication satellites, some privately owned and others owned by the systems’ local governments, \
+	It is distributed by a massive network of telecommunication satellites, some privately owned and others owned by the systemsï¿½ local governments, \
 	that utilize FTL technologies to bounce data between satellites at speeds that would not be possible at sub-light technology.  This communicator \
 	uses a protocol called Exonet Protocol Version 2, generally shortened to EPv2.<br>\
 	<br>\
 	EPv2 is the most common communications protocol in the Exonet, and was specifically designed for it.  It was designed to facilitate communication \
-	between any device in a star system, and have the ability to forward interstellar requests at the root node of that system’s Exonet.  \
+	between any device in a star system, and have the ability to forward interstellar requests at the root node of that systemï¿½s Exonet.  \
 	It is also built to cope with the reality that the numerous nodes in a system will likely have frequent outages.  The protocol allows for \
 	up to 18,446,744,073,709,551,616 unique addresses, one of which is assigned to this device."
 
 	description_antag = "Electromagnetic pulses will cause the device to disconnect all linked communicators.  Turning off the Exonet node at the Telecomms \
 	satellite will also accomplish this, but for all communicators on and near the station.  This may be needed to allow for a quiet kill or capture."
+*/
 
 /obj/item/device/electronic_assembly/device
 	description_info = "This is the guts of a 'device' type electronic assembly, and can either be used in this form or can be used inside of the assembly to \

@@ -59,7 +59,7 @@ var/list/be_special_flags = list(
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
 	"Loyalist"         = BE_LOYALIST,
-	"pAI"              = BE_PAI,
+	//"pAI"              = BE_PAI, outpost 21  edit - nif removal
 	//VOREStation Add
 	"Lost Drone"       = BE_LOSTDRONE,
 	"Maint Pred"       = BE_MAINTPRED,

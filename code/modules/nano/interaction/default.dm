@@ -16,11 +16,13 @@
 		return STATUS_CLOSE
 	return STATUS_UPDATE									// Ghosts can view updates
 
+/* outpost 21  edit - nif removal
 /mob/living/silicon/pai/default_can_use_topic(var/src_object)
 	if((src_object == src || src_object == radio || src_object == communicator) && !stat)
 		return STATUS_INTERACTIVE
 	else
 		return ..()
+*/
 
 /mob/living/silicon/robot/default_can_use_topic(var/src_object)
 	. = shared_nano_interaction()

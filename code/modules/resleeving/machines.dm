@@ -494,6 +494,7 @@
 			qdel(G)
 			src.updateUsrDialog()
 			return //Don't call up else we'll get attack messsages
+	/* outpost 21  edit - nif removal
 	if(istype(W, /obj/item/device/sleevecard))
 		var/obj/item/device/sleevecard/C = W
 		user.unEquip(C)
@@ -502,6 +503,7 @@
 		sleevecards++
 		to_chat(user, "<span class='notice'>You store \the [C] in \the [src].</span>")
 		return
+	*/
 
 	return ..()
 
@@ -540,11 +542,13 @@
 	if((!occupant || !istype(occupant) || occupant.stat >= DEAD) && mode == 1)
 		return 0
 
+	/* outpost 21  edit - nif removal
 	if(mode == 2 && sleevecards) //Card sleeving
 		var/obj/item/device/sleevecard/card = new /obj/item/device/sleevecard(get_turf(src))
 		card.sleeveInto(MR, db_key = db_key)
 		sleevecards--
 		return 1
+	*/
 
 	//If we're sleeving a subtarget, briefly swap them to not need to duplicate tons of code.
 	var/mob/living/carbon/human/original_occupant
@@ -571,12 +575,14 @@
 		to_chat(occupant, "<span class='danger'>Your mind backup was a 'one-time' backup. \
 		You will not be able to remember anything since the backup, [how_long] minutes ago.</span>")
 
+	/* outpost 21  edit - nif removal
 	//Re-supply a NIF if one was backed up with them.
 	if(MR.nif_path)
 		var/obj/item/device/nif/nif = new MR.nif_path(occupant,null,MR.nif_savedata)
 		for(var/path in MR.nif_software)
 			new path(nif)
 		nif.durability = MR.nif_durability //Restore backed up durability after restoring the softs.
+	*/
 
 	// If it was a custom sleeve (not owned by anyone), update namification sequences
 	if(!occupant.original_player)

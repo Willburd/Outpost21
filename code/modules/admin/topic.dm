@@ -627,7 +627,10 @@
 
 	//Misc 'roles'
 		counter = 0
+		/* outpost 21  edit - nif removal
 		var/list/misc_roles = list("Dionaea", "Graffiti", "Custom loadout", "pAI", "GhostRoles", "AntagHUD")
+		*/
+		var/list/misc_roles = list("Dionaea", "Graffiti", "Custom loadout", "GhostRoles", "AntagHUD")
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr bgcolor='ccccff'><th colspan='[length(misc_roles)]'>Other Roles</th></tr><tr align='center'>"
 		for(var/entry in misc_roles)
@@ -732,6 +735,7 @@
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
 					joblist += temp.title
+			/* outpost 21  edit - nif removal
 			if("nonhumandept")
 				joblist += "pAI"
 				for(var/jobPos in SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC))
@@ -739,6 +743,7 @@
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
 					joblist += temp.title
+			*/
 			else
 				joblist += href_list["jobban3"]
 

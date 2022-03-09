@@ -69,11 +69,13 @@
 		var/flash_time = strength
 		if(istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
+			/* outpost 21  edit - nif removal
 			//VOREStation Edit Start
 			if(H.nif && H.nif.flag_check(NIF_V_FLASHPROT,NIF_FLAGS_VISION))
 				H.nif.notify("High intensity light detected, and blocked!",TRUE)
 				continue
 			//VOREStation Edit End
+			*/
 			if(!H.eyecheck() <= 0)
 				continue
 			flash_time *= H.species.flash_mod
@@ -115,7 +117,7 @@
 			user.show_message(text("<span class='warning'>[src] can now be moved.</span>"))
 			cut_overlays()
 			unsense_proximity(callback = /atom/proc/HasProximity)
-			
+
 		else if(anchored)
 			user.show_message(text("<span class='warning'>[src] is now secured.</span>"))
 			add_overlay("[base_state]-s")

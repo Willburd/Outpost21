@@ -112,19 +112,25 @@ var/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 7, TECH_PRECURSOR = 2, TECH_ARCANE = 1)
 	item_state = "constructiondrone"
 
+/* outpost 21  edit - nif removal
 /obj/item/weapon/holder/pai
 	origin_tech = list(TECH_DATA = 2)
+*/
 
+/* outpost 21  edit - nif removal
 /obj/item/weapon/holder/pai/Initialize(mapload, mob/held)
 	. = ..()
 	item_state = held.icon_state
+*/
 
 /obj/item/weapon/holder/mouse
 	w_class = ITEMSIZE_TINY
 
+/* outpost 21  edit - nif removal
 /obj/item/weapon/holder/pai/Initialize(mapload, mob/held)
 	. = ..()
 	item_state = held.icon_state
+*/
 
 /obj/item/weapon/holder/possum
 	origin_tech = list(TECH_BIO = 2)

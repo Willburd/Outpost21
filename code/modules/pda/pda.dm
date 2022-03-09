@@ -42,7 +42,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
 
+	/* outpost 21  edit - nif removal
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
+	*/
 
 	var/spam_proof = FALSE // If true, it can't be spammed by random events.
 
@@ -419,12 +421,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
+	/* outpost 21  edit - nif removal
 	else if(istype(C, /obj/item/device/paicard) && !src.pai)
 		user.drop_item()
 		C.loc = src
 		pai = C
 		to_chat(user, "<span class='notice'>You slot \the [C] into \the [src].</span>")
 		SStgui.update_uis(src) // update all UIs attached to src
+	*/
 	else if(istype(C, /obj/item/weapon/pen))
 		var/obj/item/weapon/pen/O = locate() in src
 		if(O)
@@ -460,7 +464,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	current_app = null
 	scanmode = null
+	/* outpost 21  edit - nif removal
 	QDEL_NULL(pai)
+	*/
 	QDEL_LIST(programs)
 	QDEL_NULL(cartridge)
 	return ..()

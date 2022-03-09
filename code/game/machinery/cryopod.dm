@@ -392,6 +392,7 @@
 						if(istype(O,/obj/item/weapon/storage/internal))
 							continue
 						O.forceMove(src)
+		/* outpost 21  edit - nif removal
 		if(ishuman(to_despawn))
 			var/mob/living/carbon/human/H = to_despawn
 			if(H.nif)
@@ -399,6 +400,7 @@
 				if(SC)
 					for(var/bm in SC.brainmobs)
 						despawn_occupant(bm)
+		*/
 	// VOREStation
 
 	//Drop all items into the pod.

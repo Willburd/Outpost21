@@ -118,7 +118,9 @@
 				amount *= M.incoming_damage_percent
 			if(!isnull(M.incoming_brute_damage_percent))
 				amount *= M.incoming_brute_damage_percent
+		/* outpost 21  edit - nif removal
 		if(nif && nif.flag_check(NIF_C_BRUTEARMOR,NIF_FLAGS_COMBAT)){amount *= 0.7} //VOREStation Edit - NIF mod for damage resistance for this type of damage
+		*/
 		take_overall_damage(amount, 0)
 	else
 		for(var/datum/modifier/M in modifiers)
@@ -136,7 +138,9 @@
 				amount *= M.incoming_damage_percent
 			if(!isnull(M.incoming_fire_damage_percent))
 				amount *= M.incoming_fire_damage_percent
+		/* outpost 21  edit - nif removal
 		if(nif && nif.flag_check(NIF_C_BURNARMOR,NIF_FLAGS_COMBAT)){amount *= 0.7} //VOREStation Edit - NIF mod for damage resistance for this type of damage
+		*/
 		take_overall_damage(0, amount)
 	else
 		for(var/datum/modifier/M in modifiers)
@@ -156,7 +160,9 @@
 					amount *= M.incoming_damage_percent
 				if(!isnull(M.incoming_brute_damage_percent))
 					amount *= M.incoming_brute_damage_percent
+			/* outpost 21  edit - nif removal
 			if(nif && nif.flag_check(NIF_C_BRUTEARMOR,NIF_FLAGS_COMBAT)){amount *= 0.7} //VOREStation Edit - NIF mod for damage resistance for this type of damage
+			*/
 			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			for(var/datum/modifier/M in modifiers)
@@ -178,7 +184,9 @@
 					amount *= M.incoming_damage_percent
 				if(!isnull(M.incoming_fire_damage_percent))
 					amount *= M.incoming_fire_damage_percent
+			/* outpost 21  edit - nif removal
 			if(nif && nif.flag_check(NIF_C_BURNARMOR,NIF_FLAGS_COMBAT)){amount *= 0.7} //VOREStation Edit - NIF mod for damage resistance for this type of damage
+			*/
 			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			for(var/datum/modifier/M in modifiers)
@@ -492,7 +500,9 @@ This function restores all organs.
 	switch(damagetype)
 		if(BRUTE)
 			damageoverlaytemp = 20
+			/* outpost 21  edit - nif removal
 			if(nif && nif.flag_check(NIF_C_BRUTEARMOR,NIF_FLAGS_COMBAT)){damage *= 0.7}
+			*/
 			damage = damage*species.brute_mod
 
 			for(var/datum/modifier/M in modifiers)
@@ -505,7 +515,9 @@ This function restores all organs.
 				UpdateDamageIcon()
 		if(BURN)
 			damageoverlaytemp = 20
+			/* outpost 21  edit - nif removal
 			if(nif && nif.flag_check(NIF_C_BURNARMOR,NIF_FLAGS_COMBAT)){damage *= 0.7}
+			*/
 			damage = damage*species.burn_mod
 
 			for(var/datum/modifier/M in modifiers)
@@ -521,11 +533,11 @@ This function restores all organs.
 	if(damage > 0 && !incapacitated() && ((damagetype != TOX) && (damagetype != OXY) && (damagetype != CLONE) && (damagetype != HALLOSS)))
 		// Sharp weapons increase probability of scream, low health also leads to screams
 		var/weaponBonusProb = 0
-		if(edge) 
+		if(edge)
 			weaponBonusProb += 10
 		if(health < 30)
 			weaponBonusProb += 20
-		
+
 		// based on damage, roll probability to scream
 		if(((damage > 10 || health < 50) && prob(5 + weaponBonusProb)) || (damage > 20 && prob(15 + weaponBonusProb)) || (damage > 30 && prob(40 + weaponBonusProb)) || (damage > 50 && prob(50 + weaponBonusProb)))
 			if(organ && organ.organ_can_feel_pain() && !isbelly(loc) && !istype(loc, /obj/item/device/dogborg/sleeper)) //VOREStation Add

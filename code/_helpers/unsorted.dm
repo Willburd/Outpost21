@@ -437,8 +437,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/silicon/ai/M in sortmob)
 		moblist.Add(M)
+	/* outpost 21  edit - nif removal
 	for(var/mob/living/silicon/pai/M in sortmob)
 		moblist.Add(M)
+	*/
 	for(var/mob/living/silicon/robot/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/carbon/human/M in sortmob)

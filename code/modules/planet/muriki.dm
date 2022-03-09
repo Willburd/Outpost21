@@ -355,13 +355,13 @@ var/datum/planet/muriki/planet_muriki = null
 	// drop out early if no damage anyway
 	if(multiplier <= 0)
 		return
-	
+
 	// TODO
 	// check for excluded creatures, if being called as wildlife damage
 	//if(wildlife == TRUE)
 		// stuff like jils here
 		// return
-		
+
 	// burn!
 	L.burn_skin(0.25 * multiplier)
 
@@ -390,22 +390,23 @@ var/datum/planet/muriki/planet_muriki = null
 	if(burn_lungs && H.head.item_flags & AIRTIGHT)
 		burn_lungs = 0
 
+	/* outpost 21  edit - nif removal
 	//VOREStation Edit - NIF Support
 	if(H.nif && H.nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))
 		burn_eyes = 0
-
+	*/
 
 	//burn their eyes!
 	if(burn_eyes)
 		var/obj/item/organ/internal/eyes/O = H.internal_organs_by_name[O_EYES]
-		if(O && prob(20)) 
+		if(O && prob(20))
 			O.damage += 1.5
 			to_chat(H,  "<span class='danger'>Your eyes burn!</span>")
-	
+
 	//burn their lungs!
 	if(burn_lungs)
 		var/obj/item/organ/internal/lungs/O = H.internal_organs_by_name[O_LUNGS]
-		if(O && prob(20)) 
+		if(O && prob(20))
 			O.damage += 1.5
 			to_chat(H,  "<span class='danger'>Your lungs burn!</span>")
 
@@ -414,9 +415,9 @@ var/datum/planet/muriki/planet_muriki = null
 	if(prob(25) && H.reagent_permeability() > min_permeability)
 		// control damage done
 		var/acid_multiplier = 1
-		
+
 		// unfortunately, the area burning code someone else was working on is a lie, and the thermal damage done is simply based on the collective insulation of your clothing....
-		// so effectively, all the damage is random, unless I make some homebrew damage function for each limb instead of using the burn_skin() proc... 
+		// so effectively, all the damage is random, unless I make some homebrew damage function for each limb instead of using the burn_skin() proc...
 		// Which I'd rather not complicate this code base any more than it is... So lets just take permeability into account instead and scale it.
 		// damage to the part is modified by what protection it has, full if none
 		// also no check for gloves because they seem to almost always be highly permeable...
@@ -427,14 +428,13 @@ var/datum/planet/muriki/planet_muriki = null
 			to_chat(H, "<span class='danger'>The acidic environment burns your exposed skin!</span>")
 		else if(protection.permeability_coefficient > min_permeability)
 			// only show the message if the permeability selection actually did any damage at all
-			acid_multiplier = protection.permeability_coefficient 
+			acid_multiplier = protection.permeability_coefficient
 			to_chat(H, "<span class='danger'>The acidic environment leaks through your clothing and burns your skin!</span>")
 		else
 			// nothing shows up, no damage!
 			acid_multiplier = 0
-		
+
 		// apply acid damage
 		process_acid_burning(H, acid_multiplier,FALSE)
 
-		
-		
+

@@ -10,7 +10,7 @@
 	if (!ticker)
 		to_chat(src, "You can't commit suicide before the game starts!")
 		return
-	
+
 	to_chat(src, "<span class='warning'>No. Adminhelp if there is a legitimate reason, and please review our server rules.</span>")
 	message_admins("[ckey] has tried to trigger the suicide verb as human, but it is currently disabled.")
 
@@ -78,6 +78,7 @@
 		adjustOxyLoss(max(getMaxHealth() * 2 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
 		updatehealth()
 
+/* outpost 21  edit - nif removal
 /mob/living/silicon/pai/verb/suicide()
 	set category = "pAI Commands"
 	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
@@ -92,3 +93,4 @@
 		death(0)
 	else
 		to_chat(src, "Aborting suicide attempt.")
+*/

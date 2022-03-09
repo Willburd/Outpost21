@@ -378,7 +378,7 @@
 				droplimb(0, DROPLIMB_EDGE)
 			else if(spread_dam && owner && parent && (brute_overflow || burn_overflow) && (brute_overflow >= 5 || burn_overflow >= 5) && !permutation) //No infinite damage loops.
 				var/brute_third = brute_overflow * 0.33
-				var/burn_third = burn_overflow * 0.33	
+				var/burn_third = burn_overflow * 0.33
 				if(children && children.len)
 					var/brute_on_children = brute_third / children.len
 					var/burn_on_children = burn_third / children.len
@@ -485,7 +485,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
-		if(!istype(implanted_object,/obj/item/weapon/implant) && !istype(implanted_object,/obj/item/device/nif))	// We don't want to remove REAL implants. Just shrapnel etc. //VOREStation Edit - NIFs pls
+		if(!istype(implanted_object,/obj/item/weapon/implant)) // && !istype(implanted_object,/obj/item/device/nif))	// We don't want to remove REAL implants. Just shrapnel etc. //VOREStation Edit - NIFs pls,  outpost 21  edit - nif removal
 			implanted_object.loc = get_turf(src)
 			implants -= implanted_object
 	if(!owner.has_embedded_objects())
@@ -1400,7 +1400,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = 0
 	for(var/obj/item/organ/external/L in organs)
 		for(var/obj/item/I in L.implants)
-			if(!istype(I,/obj/item/weapon/implant) && !istype(I,/obj/item/device/nif)) //VOREStation Add - NIFs
+			if(!istype(I,/obj/item/weapon/implant)) // && !istype(I,/obj/item/device/nif)) //VOREStation Add - NIFs outpost 21  edit - nif removal
 				return 1
 
 /obj/item/organ/external/proc/is_hidden_by_tail()

@@ -59,7 +59,9 @@
 	human_mob_list -= src
 	for(var/organ in organs)
 		qdel(organ)
+	/* outpost 21  edit - nif removal
 	QDEL_NULL(nif)	//VOREStation Add
+	*/
 	worn_clothing.Cut()
 	return ..()
 

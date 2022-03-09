@@ -61,15 +61,19 @@
 	var/mob/observer/dead/G = usr
 	G.dead_tele()
 
+/* outpost 21  edit - nif removal
 /obj/screen/ghost/pai
 	name = "pAI Alert"
 	desc = "Ping all the unoccupied pAI devices in the world."
 	icon_state = "pai"
+*/
 
+/* outpost 21  edit - nif removal
 /obj/screen/ghost/pai/Click()
 	..()
 	var/mob/observer/dead/G = usr
 	G.paialert()
+*/
 
 /obj/screen/ghost/up
 	name = "Move Upwards"
@@ -96,7 +100,7 @@
 
 	var/list/adding = list()
 	HUD.adding = adding
-	
+
 	var/obj/screen/using
 	using = new /obj/screen/ghost/returntomenu()
 	using.screen_loc = ui_ghost_returntomenu
@@ -123,10 +127,12 @@
 	using.hud = src
 	adding += using
 
+/* outpost 21  edit - nif removal
 	using = new /obj/screen/ghost/pai()
 	using.screen_loc = ui_ghost_pai
 	using.hud = src
 	adding += using
+*/
 
 	using = new /obj/screen/ghost/up()
 	using.screen_loc = ui_ghost_updown

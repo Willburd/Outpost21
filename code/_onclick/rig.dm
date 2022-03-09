@@ -59,8 +59,10 @@
 /mob/living/silicon/ai/can_use_rig()
 	return carded
 
+/* outpost 21  edit - nif removal
 /mob/living/silicon/pai/can_use_rig()
 	return loc == card
+*/
 
 /mob/living/proc/HardsuitClickOn(var/atom/A, var/alert_ai = 0)
 	if(!can_use_rig())

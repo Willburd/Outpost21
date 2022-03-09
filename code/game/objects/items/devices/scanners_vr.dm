@@ -143,6 +143,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 	else
 		output += "<span class='warning'>Unable</span><br>"
 
+	/* outpost 21  edit - nif removal
 	//Soulcatcher transfer
 	if(H.nif)
 		var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
@@ -154,6 +155,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 
 			if(stored_mind)
 				output += "<b>Store in Soulcatcher: </b>\[<a href='?src=\ref[src];target=\ref[H];mindput=1'>Perform</a>\]<br>"
+	*/
 
 	to_chat(user,output)
 
@@ -181,15 +183,17 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 			to_chat(usr,"<span class='warning'>Target seems totally braindead.</span>")
 			return
 
+		/* outpost 21  edit - nif removal
 		var/nif
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			nif = H.nif
 			persist_nif_data(H)
+		*/
 
 		usr.visible_message("[usr] begins scanning [target]'s mind.","<span class='notice'>You begin scanning [target]'s mind.</span>")
 		if(do_after(usr,8 SECONDS,target))
-			our_db.m_backup(target.mind,nif,one_time = TRUE)
+			our_db.m_backup(target.null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
 			to_chat(usr,"<span class='notice'>Mind backed up!</span>")
 		else
 			to_chat(usr,"<span class='warning'>You must remain close to your target!</span>")
@@ -233,6 +237,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 
 		return
 
+	/* outpost 21  edit - nif removal
 	if(href_list["mindput"])
 		if(!stored_mind)
 			to_chat(usr,"<span class='warning'>\The [src] no longer has a stored mind.</span>")
@@ -257,6 +262,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 		put_mind(sleevemate_mob)
 		SC.catch_mob(sleevemate_mob)
 		to_chat(usr,"<span class='notice'>Mind transferred into Soulcatcher!</span>")
+	*/
 
 	if(href_list["mindupload"])
 		if(!stored_mind)
@@ -280,6 +286,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 			put_mind(target)
 			to_chat(usr,"<span class='notice'>Mind transferred into [target]!</span>")
 
+	/* outpost 21  edit - nif removal
 	if(href_list["mindrelease"])
 		if(stored_mind)
 			to_chat(usr,"<span class='warning'>There is already someone's mind stored inside</span>")
@@ -295,6 +302,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 				to_chat(usr,"<span class='notice'>Mind downloaded!</span>")
 				return
 		to_chat(usr,"<span class='notice'>Unable to find that mind in Soulcatcher!</span>")
+	*/
 
 /obj/item/device/sleevemate/update_icon()
 	if(stored_mind)

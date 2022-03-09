@@ -281,6 +281,7 @@
 	flags = ONBELT
 	*/
 
+/* outpost 21  edit - nif removal
 /obj/item/weapon/pai_cable
 	desc = "A flexible coated cable with a universal jack on one end."
 	name = "data cable"
@@ -288,10 +289,13 @@
 	icon_state = "wire1"
 
 	var/obj/machinery/machine
+*/
 
+/* outpost 21  edit - nif removal
 /obj/item/weapon/pai_cable/Destroy()
 		machine = null
 		return ..()
+*/
 
 ///////////////////////////////////////Stock Parts /////////////////////////////////
 

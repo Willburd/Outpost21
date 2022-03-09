@@ -63,7 +63,9 @@
 
 	var/obj/item/device/mmi/mmi = null
 
+	/* outpost 21  edit - nif removal
 	var/obj/item/device/pda/ai/rbPDA = null
+	*/
 
 	var/opened = 0
 	var/emagged = 0
@@ -207,6 +209,7 @@
 		return amount
 	return 0
 
+/* outpost 21  edit - nif removal
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
 	if (!rbPDA)
@@ -217,6 +220,7 @@
 	if (!communicator)
 		communicator = new/obj/item/device/communicator/integrated(src)
 	communicator.register_device(name, "[modtype] [braintype]")
+*/
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
@@ -232,17 +236,19 @@
 				mmi.brainmob.languages = languages
 			mmi.brainmob.remove_language("Robot Talk")
 			mind.transfer_to(mmi.brainmob)
-		else if(!shell) // Shells don't have brainmbos in their MMIs.
+		else // if(!shell) // Shells don't have brainmbos in their MMIs.    outpost 21  edit - nif removal
 			to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
 			ghostize()
 			//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
+	/* outpost 21  edit - nif removal
 	if(shell)
 		if(deployed)
 			undeploy()
 		revert_shell() // To get it out of the GLOB list.
+	*/
 	qdel(wires)
 	wires = null
 	return ..()
@@ -265,16 +271,18 @@
 		return
 	var/list/modules = list()
 	//VOREStatation Edit Start: shell restrictions
+	/* outpost 21  edit - nif removal
 	if(shell)
 		modules.Add(shell_module_types)
 	else
-		modules.Add(robot_module_types)
-		if(crisis || security_level == SEC_LEVEL_RED || crisis_override)
-			to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
-			modules += emergency_module_types
-		for(var/module_name in whitelisted_module_types)
-			if(is_borg_whitelisted(src, module_name))
-				modules += module_name
+	*/
+	modules.Add(robot_module_types)
+	if(crisis || security_level == SEC_LEVEL_RED || crisis_override)
+		to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
+		modules += emergency_module_types
+	for(var/module_name in whitelisted_module_types)
+		if(is_borg_whitelisted(src, module_name))
+			modules += module_name
 	//VOREStatation Edit End: shell restrictions
 	modtype = tgui_input_list(usr, "Please, select a module!", "Robot module", modules)
 
@@ -320,11 +328,13 @@
 	real_name = changed_name
 	name = real_name
 
+	/* outpost 21  edit - nif removal
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
 
 	// as well as our communicator registration
 	setup_communicator()
+	*/
 
 	//We also need to update name of internal camera.
 	if (camera)
@@ -512,9 +522,11 @@
 			to_chat(user, "<span class='warning'>You need to open \the [src]'s panel before you can modify them.</span>")
 			return
 
+		/* outpost 21  edit - nif removal
 		if(shell) // AI shells always have the laws of the AI
 			to_chat(user, span("warning", "\The [src] is controlled remotely! You cannot upload new laws this way!"))
 			return
+		*/
 
 		var/obj/item/weapon/aiModule/M = W
 		M.install(src, user)
@@ -821,7 +833,10 @@
 /mob/living/silicon/robot/updateicon()
 	cut_overlays()
 	if(stat == CONSCIOUS)
+		/* outpost 21  edit - nif removal
 		if(!shell || deployed) // Shell borgs that are not deployed will have no eyes.
+		*/
+		if(deployed) 
 			add_overlay("eyes-[module_sprites[icontype]]")
 
 	if(opened)
@@ -1095,8 +1110,10 @@
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/first_arg, var/second_arg)
 	if(!connected_ai)
 		return
+	/* outpost 21  edit - nif removal
 	if(shell && notifytype != ROBOT_NOTIFICATION_AI_SHELL)
 		return // No point annoying the AI/s about renames and module resets for shells.
+	*/
 	switch(notifytype)
 		if(ROBOT_NOTIFICATION_NEW_UNIT) //New Robot
 			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>")
@@ -1107,8 +1124,10 @@
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
 				to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>")
+		/* outpost 21  edit - nif removal
 		if(ROBOT_NOTIFICATION_AI_SHELL) //New Shell
 			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - New AI shell detected: <a href='?src=[REF(connected_ai)];track2=[html_encode(name)]'>[name]</a></span><br>")
+		*/
 
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
@@ -1117,7 +1136,7 @@
 		connected_ai = null
 
 /mob/living/silicon/robot/proc/connect_to_ai(var/mob/living/silicon/ai/AI)
-	if(AI && AI != connected_ai && !shell)
+	if(AI && AI != connected_ai) //&& !shell) outpost 21  edit - nif removal
 		disconnect_from_ai()
 		connected_ai = AI
 		connected_ai.connected_robots |= src
@@ -1134,8 +1153,10 @@
 				to_chat(user, "You fail to emag the cover lock.")
 				to_chat(src, "Hack attempt detected.")
 
+			/* outpost 21  edit - nif removal
 			if(shell) // A warning to Traitors who may not know that emagging AI shells does not slave them.
 				to_chat(user, span("warning", "[src] seems to be controlled remotely! Emagging the interface may not work as expected."))
+			*/
 			return 1
 		else
 			to_chat(user, "The cover is already unlocked.")
@@ -1148,12 +1169,14 @@
 			return
 
 
+		/* outpost 21  edit - nif removal
 		// The block of code below is from TG. Feel free to replace with a better result if desired.
 		if(shell) // AI shells cannot be emagged, so we try to make it look like a standard reset. Smart players may see through this, however.
 			to_chat(user, span("danger", "[src] is remotely controlled! Your emag attempt has triggered a system reset instead!"))
 			log_game("[key_name(user)] attempted to emag an AI shell belonging to [key_name(src) ? key_name(src) : connected_ai]. The shell has been reset as a result.")
 			module_reset()
 			return
+		*/
 
 		sleep(6)
 		if(prob(50))

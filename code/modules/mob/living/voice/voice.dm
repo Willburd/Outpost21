@@ -3,16 +3,19 @@
 	name = "unknown person"
 	desc = "How are you examining me?"
 	see_invisible = SEE_INVISIBLE_LIVING
+	/* outpost 21  edit - nif removal
 	var/obj/item/device/communicator/comm = null
-
+	*/
 	emote_type = 2 //This lets them emote through containers.  The communicator has a image feed of the person calling them so...
 
 /mob/living/voice/Initialize(loc)
 	add_language(LANGUAGE_GALCOM)
 	set_default_language(GLOB.all_languages[LANGUAGE_GALCOM])
 
+	/* outpost 21  edit - nif removal
 	if(istype(loc, /obj/item/device/communicator))
 		comm = loc
+	*/
 	. = ..()
 
 // Proc: transfer_identity()
@@ -47,7 +50,9 @@
 // Parameters: None
 // Description: Removes reference to the communicator, so it can qdel() successfully.
 /mob/living/voice/Destroy()
+	/* outpost 21  edit - nif removal
 	comm = null
+	*/
 	return ..()
 
 // Proc: ghostize()
@@ -57,6 +62,7 @@
 	timeofdeath = world.time
 	. = ..()
 
+/* outpost 21  edit - nif removal
 // Verb: hang_up()
 // Parameters: None
 // Description: Disconnects the voice mob from the communicator.
@@ -70,7 +76,9 @@
 		comm.close_connection(user = src, target = src, reason = "[src] hung up")
 	else
 		to_chat(src, "You appear to not be inside a communicator.  This is a bug and you should report it.")
+*/
 
+/* outpost 21  edit - nif removal
 // Verb: change_name()
 // Parameters: None
 // Description: Allows the voice mob to change their name, assuming it is valid.
@@ -91,7 +99,9 @@
 		src.name = new_name
 	else
 		to_chat(src, "<span class='warning'>Invalid name.  Rejected.</span>")
+*/
 
+/* outpost 21  edit - nif removal
 // Proc: Life()
 // Parameters: None
 // Description: Checks the active variable on the Exonet node, and kills the mob if it goes down or stops existing.
@@ -100,12 +110,14 @@
 		if(!comm.node || !comm.node.on || !comm.node.allow_external_communicators)
 			comm.close_connection(user = src, target = src, reason = "Connection to telecommunications array timed out")
 	..()
+*/
 
 // Proc: say()
 // Parameters: 4 (generic say() arguments)
 // Description: Adds a speech bubble to the communicator device, then calls ..() to do the real work.
 /mob/living/voice/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	//Speech bubbles.
+	/* outpost 21  edit - nif removal
 	if(comm)
 		var/speech_bubble_test = say_test(message)
 		//var/image/speech_bubble = image('icons/mob/talk_vr.dmi',comm,"h[speech_bubble_test]") //VOREStation Edit - Commented out in case of needed reenable.
@@ -117,7 +129,7 @@
 		for(var/mob/M in hearers(comm)) //simplifed since it's just a speech bubble
 			M << speech_bubble
 		src << speech_bubble
-
+	*/
 	..() //mob/living/say() can do the actual talking.
 
 // Proc: speech_bubble_appearance()
@@ -137,6 +149,8 @@
 			return TRUE
 	return ..()
 
+/* outpost 21  edit - nif removal
 /mob/living/voice/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null, var/range = world.view)
 	if(!comm) return
 	..(m_type,message,comm.video_range)
+*/

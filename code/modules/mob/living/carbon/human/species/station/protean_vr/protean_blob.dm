@@ -93,7 +93,7 @@
 
 /mob/living/simple_mob/protean_blob/get_available_emotes()
 	return global._robot_default_emotes
-	
+
 /mob/living/simple_mob/protean_blob/init_vore()
 	return //Don't make a random belly, don't waste your time
 
@@ -347,7 +347,10 @@ var/global/list/disallowed_protean_accessories = list(
 
 	//Drop all our things
 	var/list/things_to_drop = contents.Copy()
+	/* outpost 21  edit - nif removal
 	var/list/things_to_not_drop = list(w_uniform,nif,l_store,r_store,wear_id,l_ear,r_ear) //And whatever else we decide for balancing.
+	*/
+	var/list/things_to_not_drop = list(w_uniform,l_store,r_store,wear_id,l_ear,r_ear) //And whatever else we decide for balancing.
 
 	/* No for now, because insta-pepperspray or flash on unblob
 	if(l_hand && l_hand.w_class <= ITEMSIZE_SMALL) //Hands but only if small or smaller

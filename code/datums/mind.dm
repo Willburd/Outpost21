@@ -538,11 +538,13 @@
 	. = ..()
 	mind.assigned_role = "Cyborg"
 
+/* outpost 21  edit - nif removal
 //PAI
 /mob/living/silicon/pai/mind_initialize()
 	. = ..()
 	mind.assigned_role = "pAI"
 	mind.special_role = ""
+*/
 
 //Animals
 /mob/living/simple_mob/mind_initialize()

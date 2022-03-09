@@ -1028,9 +1028,9 @@
 					/obj/item/clothing/glasses/circuitry = 1,
 					/obj/item/clothing/ears/circuitry = 1,
 					/obj/item/device/text_to_speech = 5,
-					/obj/item/device/paicard = 5,
-					/obj/item/device/communicator = 10,
-					/obj/item/device/communicator/watch = 10,
+					///obj/item/device/paicard = 5, outpost 21  edit - nif removal
+					///obj/item/device/communicator = 10, outpost 21  edit - nif removal
+					///obj/item/device/communicator/watch = 10, outpost 21  edit - nif removal
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
@@ -1052,9 +1052,9 @@
 					/obj/item/clothing/glasses/circuitry = 100,
 					/obj/item/clothing/ears/circuitry = 100,
 					/obj/item/device/text_to_speech = 300,
-					/obj/item/device/paicard = 100,
-					/obj/item/device/communicator = 100,
-					/obj/item/device/communicator/watch = 100,
+					///obj/item/device/paicard = 100, outpost 21  edit - nif removal
+					///obj/item/device/communicator = 100, outpost 21  edit - nif removal
+					///obj/item/device/communicator/watch = 100, outpost 21  edit - nif removal
 					/obj/item/device/radio = 100,
 					/obj/item/device/camera = 100,
 					/obj/item/device/taperecorder = 100,
@@ -1069,7 +1069,7 @@
 					/obj/item/instrument/piano_synth/headphones = 200,
 					/obj/item/instrument/piano_synth/headphones/spacepods = 600)
 	premium = list(/obj/item/device/perfect_tele/one_beacon = 1)
-	contraband = list(/obj/item/weapon/disk/nifsoft/compliance = 1)
+	contraband = list() // /obj/item/weapon/disk/nifsoft/compliance = 1) outpost 21  edit - nif removal
 
 /obj/machinery/vending/event/gadget //FOR FACILITATING AND EQUIPPING EVENTS, DO NOT PLACE ON THE NORMAL MAP//
 	name = "Chips Co."
@@ -1085,9 +1085,9 @@
 					/obj/item/clothing/glasses/circuitry = 1,
 					/obj/item/clothing/ears/circuitry = 1,
 					/obj/item/device/text_to_speech = 5,
-					/obj/item/device/paicard = 5,
-					/obj/item/device/communicator = 10,
-					/obj/item/device/communicator/watch = 10,
+					///obj/item/device/paicard = 5, outpost 21  edit - nif removal
+					///obj/item/device/communicator = 10, outpost 21  edit - nif removal
+					///obj/item/device/communicator/watch = 10, outpost 21  edit - nif removal
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
@@ -1098,7 +1098,7 @@
 					/obj/item/device/laser_pointer = 3,
 					/obj/item/clothing/glasses/omnihud = 10,
 					/obj/item/device/perfect_tele/one_beacon = 1,
-					/obj/item/weapon/disk/nifsoft/compliance = 1,
+					///obj/item/weapon/disk/nifsoft/compliance = 1,
 					/obj/item/device/perfect_tele/alien = 10)
 
 //////////////////END OF CHIPS CO. VENDORS//////////////////
@@ -1529,7 +1529,7 @@
 					/obj/item/clothing/glasses/sunglasses = 1,
 					/obj/item/device/radio/headset/syndicate/alt = 1,
 					/obj/item/device/pda = 1,
-					/obj/item/device/communicator = 1,
+					///obj/item/device/communicator = 1,
 					/obj/item/weapon/tape_roll = 2,
 					/obj/item/weapon/handcuffs = 4,
 					/obj/item/weapon/handcuffs/legcuffs = 4,

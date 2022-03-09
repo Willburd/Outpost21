@@ -411,9 +411,11 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 	else if (isrobot(M))
 		jobname = "Cyborg"
 
+	/* outpost 21  edit - nif removal
 	// --- Personal AI (pAI) ---
 	else if (istype(M, /mob/living/silicon/pai))
 		jobname = "Personal AI"
+	*/
 
 	// --- Unidentifiable mob ---
 	else

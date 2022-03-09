@@ -112,6 +112,7 @@
 		for(var/path in powertypes)
 			abilities += new path()
 
+/* outpost 21  edit - nif removal
 /datum/species/protean/create_organs(var/mob/living/carbon/human/H)
 	var/obj/item/device/nif/saved_nif = H.nif
 	if(saved_nif)
@@ -120,6 +121,7 @@
 	..()
 	if(saved_nif)
 		saved_nif.quick_implant(H)
+*/
 
 /datum/species/protean/get_bodytype(var/mob/living/carbon/human/H)
 	if(H)
@@ -143,6 +145,7 @@
 		H.equip_to_slot_or_del(permit, slot_in_backpack)
 		H.equip_to_slot_or_del(metal_stack, slot_in_backpack)
 
+	/* outpost 21  edit - nif removal
 	spawn(0) //Let their real nif load if they have one
 		if(!H) //Human could have been deleted in this amount of time. Observing does this, mannequins, etc.
 			return
@@ -151,6 +154,7 @@
 			new_nif.quick_implant(H)
 		else
 			H.nif.durability = 25
+	*/
 
 /datum/species/protean/hug(var/mob/living/carbon/human/H, var/mob/living/target)
 	return ..() //Wut

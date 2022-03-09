@@ -69,7 +69,7 @@
 			return TRUE
 		if(other.universal_speak)
 			return TRUE
-		if(isAI(src) && ispAI(other))
+		if(isAI(src)) // && ispAI(other)) outpost 21  edit - nif removal
 			return TRUE
 		if(istype(other, type) || istype(src, other.type))
 			return TRUE

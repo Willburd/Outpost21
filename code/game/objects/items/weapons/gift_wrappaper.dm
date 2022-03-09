@@ -103,7 +103,7 @@
 		/obj/item/toy/sword,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/device/paicard,
+		///obj/item/device/paicard,  outpost 21  edit - nif removal
 		/obj/item/instrument/violin,
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/clothing/accessory/tie/horrible)

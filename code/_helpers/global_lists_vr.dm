@@ -180,7 +180,7 @@ var/global/list/tf_vore_egg_types = list(
 
 var/global/list/edible_trash = list(/obj/item/broken_device,
 				/obj/item/clothing/accessory/collar,
-				/obj/item/device/communicator,
+				///obj/item/device/communicator,
 				/obj/item/clothing/mask,
 				/obj/item/clothing/glasses,
 				/obj/item/clothing/gloves,
@@ -189,7 +189,7 @@ var/global/list/edible_trash = list(/obj/item/broken_device,
 				/obj/item/device/aicard,
 				/obj/item/device/flashlight,
 				/obj/item/device/mmi/digital/posibrain,
-				/obj/item/device/paicard,
+				///obj/item/device/paicard, outpost 21  edit - nif removal
 				/obj/item/device/pda,
 				/obj/item/device/radio/headset,
 				/obj/item/inflatable/torn,

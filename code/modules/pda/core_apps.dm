@@ -10,7 +10,9 @@
 
 	data["apps"] = pda.shortcut_cache
 	data["categories"] = pda.shortcut_cat_order
+	/* outpost 21  edit - nif removal
 	data["pai"] = !isnull(pda.pai)				// pAI inserted?
+	*/
 
 	var/list/notifying[0]
 	for(var/P in pda.notifying_programs)
@@ -26,6 +28,7 @@
 			pda.ownrank = pda.id.rank
 			pda.name = "PDA-[pda.owner] ([pda.ownjob])"
 			return TRUE
+		/* outpost 21  edit - nif removal
 		if("pai")
 			if(pda.pai)
 				if(pda.pai.loc != pda)
@@ -40,6 +43,7 @@
 								pda.pai.loc = T
 								pda.pai = null
 			return TRUE
+		*/
 
 /datum/data/pda/app/notekeeper
 	name = "Notekeeper"

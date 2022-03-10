@@ -127,12 +127,20 @@
 	if(stat != DEAD)
 		// adjust sleep here, needs mind to sleep otherwise...
 		// adding the check so this doesn't conflict with life/handle_regular_status_updates()
-		if(((!mind || !mind.active) && client == null))
-			if(sleeping > 0 )
-				AdjustSleeping(-1)
-				resting = TRUE
-			else
-				resting = FALSE
+		if(((!mind || !mind.active) && client == null) && sleeping > 0 )
+			// sleep process
+			AdjustSleeping(-1)
+			resting = (sleeping > 0)
+			if(!resting) // end sleeping
+				update_icons()
+
+/mob/living/simple_mob/animal/sif/sakimm/jil/update_icons()
+	if(stat == DEAD)
+		// leave icon as is, set by death
+	else if(lying || resting || sleeping > 0)
+		icon_state = icon_rest
+	else
+		icon_state = icon_living
 
 // Jil noises
 /datum/say_list/jil
@@ -493,9 +501,7 @@
 						J.health += 1 // heal!
 						if(J.health > J.maxHealth)
 							J.health = J.maxHealth
-					// quick update...
-					J.icon_state = J.icon_rest
-
+					holder.update_icons()
 
 
 /datum/ai_holder/simple_mob/intentional/sakimm/jil/special_flee_check()

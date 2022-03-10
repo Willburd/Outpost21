@@ -521,6 +521,12 @@
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
 		go_wake()
 
+	// drop item
+	if(holder.get_active_hand())
+		last_search = world.time
+		greed = 0
+		holder.drop_from_inventory(holder.get_active_hand(), get_turf(holder))
+
 	if(istype(holder,/mob/living/simple_mob/animal/sif/sakimm/jil/jillioth))
 		if(!hostile && !retaliate) // Not allowed to defend ourselves.
 			ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)

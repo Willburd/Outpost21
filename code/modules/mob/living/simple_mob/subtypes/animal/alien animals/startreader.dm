@@ -94,14 +94,15 @@
 /mob/living/simple_mob/vore/alienanimals/startreader/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	B.name = "gastric sac"
-	B.desc = "It's cramped and hot! You're forced into a small ball as your shape is squeezed into the slick, wet chamber. Despite being swallowed into the creature, you find that you actually stretch out of the top a ways, and can JUST BARELY wiggle around..."
-	B.mode_flags = 40
-	B.digest_brute = 0.5
-	B.digest_burn = 0.5
-	B.digestchance = 10
-	B.absorbchance = 0
-	B.escapechance = 15
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.name = "gastric sac"
+		B.desc = "It's cramped and hot! You're forced into a small ball as your shape is squeezed into the slick, wet chamber. Despite being swallowed into the creature, you find that you actually stretch out of the top a ways, and can JUST BARELY wiggle around..."
+		B.mode_flags = 40
+		B.digest_brute = 0.5
+		B.digest_burn = 0.5
+		B.digestchance = 10
+		B.absorbchance = 0
+		B.escapechance = 15
 
 /datum/ai_holder/simple_mob/melee/startreader
 	hostile = TRUE

@@ -127,16 +127,17 @@
 /mob/living/simple_mob/vore/fennec/huge/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	B.name = "Stomach"
-	B.desc = "The slimy wet insides of a rather large fennec! Not quite as clean as the fen on the outside."
-	B.human_prey_swallow_time = 5
-	B.nonhuman_prey_swallow_time = 5
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.name = "Stomach"
+		B.desc = "The slimy wet insides of a rather large fennec! Not quite as clean as the fen on the outside."
+		B.human_prey_swallow_time = 5
+		B.nonhuman_prey_swallow_time = 5
 
-	/* todo
-	B.emote_lists[DM_HOLD] = list()
-	B.emote_lists[DM_DIGEST] = list()
-	B.digest_messages_prey = list()
-	*/
+		/* todo
+		B.emote_lists[DM_HOLD] = list()
+		B.emote_lists[DM_DIGEST] = list()
+		B.digest_messages_prey = list()
+		*/
 
 /mob/living/simple_mob/vore/fennec/huge/death()
 	devourable = TRUE

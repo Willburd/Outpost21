@@ -101,7 +101,7 @@
 		return
 	if( ishuman(AM) )
 		if(!stat)
-			bonk(AM,prob(15))
+			bonk(src,prob(15))
 	..()
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/death()
@@ -110,6 +110,14 @@
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()
+
+	if(istype(src,/mob/living/simple_mob/animal/sif/sakimm/jil/jillilah))
+		// drop cap
+		var/obj/item/clothing/head/soft/C = new /obj/item/clothing/head/soft // cargo hat!
+		C.name = "Jillilah's cap"
+		C.add_blood(src)
+		C.desc = "A tiny cargo hat, clearly not sized for a person, soaked in the innocent blood of its owner."
+		C.forceMove(src.loc) // drop on
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/proc/splat()
 	death()
@@ -120,7 +128,13 @@
 	// bonk noise
 	if(sound_play) 
 		M.visible_message("<font color='blue'>[bicon(src)] Merp!</font>")
-		playsound(src, 'sound/voice/merp.ogg', 35, 1)
+		playsound(M, 'sound/voice/merp.ogg', 35, 1)
+
+/mob/living/simple_mob/animal/sif/sakimm/jil/proc/scream(var/mob/M, var/sound_play)
+	// screaming noise
+	if(sound_play) 
+		M.visible_message("<font color='red'>[bicon(src)] Squee!</font>")
+		playsound(M, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)	
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/Life()
 	..()
@@ -274,9 +288,9 @@
 	// jil merp
 	var/mob/living/simple_mob/animal/sif/sakimm/jil/J = holder
 	if(holder.get_active_hand())
-		J.bonk(holder,TRUE)
+		J.bonk(J,TRUE)
 	else
-		J.bonk(holder,prob(5))
+		J.bonk(J,prob(5))
 
 
 /datum/ai_holder/simple_mob/intentional/sakimm/jil/list_targets()
@@ -415,9 +429,8 @@
 
 		if(prob(60))
 			holder.IMove(get_step(holder, pick(alldirs)))
-		if(prob(10))
-			holder.visible_message("<font color='red'>[bicon(src)] Squee!</font>")
-			playsound(holder, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
+		var/mob/living/simple_mob/animal/sif/sakimm/jil/J = holder
+		J.scream(J,TRUE)
 	else
 		// rejuvinate nest!
 		if(home_turf_previous)
@@ -520,6 +533,10 @@
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
 		go_wake()
+		var/mob/living/simple_mob/animal/sif/sakimm/jil/J = holder
+		J.Sleeping(0)
+		J.resting = FALSE
+		J.update_icons()
 
 	// drop item
 	if(holder.get_active_hand())
@@ -543,8 +560,8 @@
 		return give_target(attacker, urgent = TRUE) // Also handles setting the appropiate stance.
 	else
 		ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
-		holder.visible_message("<font color='red'>[bicon(src)] Squee!</font>")
-		playsound(holder, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
+		var/mob/living/simple_mob/animal/sif/sakimm/jil/J = holder
+		J.scream(J,TRUE)
 		fear_run = 10 + rand(30)
 		if(target)
 			// lose target...
@@ -557,10 +574,3 @@
 			lose_target()
 		holder.IMove(get_step(holder, pick(alldirs)))
 		return FALSE
-
-
-
-
-
-
-

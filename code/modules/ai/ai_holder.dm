@@ -211,6 +211,7 @@
 	home_turf = get_turf(holder)
 	manage_processing(AI_PROCESSING)
 	GLOB.stat_set_event.register(holder, src, .proc/holder_stat_change)
+	maximum_path_distance = world.view*6
 	..()
 
 /datum/ai_holder/Destroy()

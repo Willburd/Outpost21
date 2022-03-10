@@ -18,7 +18,7 @@
 	icon_living = "jil"
 	icon_dead = "jil_dead"
 	var/icon_splat = "jil_splat"
-	var/icon_sleep = "jil_sleep"
+	icon_rest = "jil_sleep"
 	kitchen_tag = "rodent"
 
 	faction = "jil"
@@ -71,13 +71,14 @@
 	icon_living = "jil_cargo"
 	icon_dead = "jil_cargo_dead"
 	icon_splat = "jil_cargo_splat"
-	icon_sleep = "jil_cargo_sleep"
+	icon_rest = "jil_cargo_sleep"
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/jillioth
 	name = "jillioth"
 	real_name = "jillioth"
 	desc = "Here to collect."
-
+	tt_desc = "Crinitus Robustus"
+	
 	randomize_size = FALSE
 	maxHealth = 250
 	health = 250
@@ -93,14 +94,14 @@
 	icon_living = "jil_big"
 	icon_dead = "jil_big_dead"
 	icon_splat = "jil_big_splat"
-	icon_sleep = "jil_big_sleep"
+	icon_rest = "jil_big_sleep"
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/Crossed(atom/movable/AM as mob|obj)
 	if(AM.is_incorporeal())
 		return
 	if( ishuman(AM) )
 		if(!stat)
-			bonk(AM)
+			bonk(AM,prob(15))
 	..()
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/death()
@@ -115,24 +116,31 @@
 	src.icon_dead = icon_splat
 	src.icon_state = icon_splat
 
-/mob/living/simple_mob/animal/sif/sakimm/jil/proc/bonk(var/mob/M)
+/mob/living/simple_mob/animal/sif/sakimm/jil/proc/bonk(var/mob/M, var/sound_play)
 	// bonk noise
-	M.visible_message("<font color='blue'>[bicon(src)] Merp!</font>")
-	playsound(src, 'sound/voice/merp.ogg', 35, 1)
+	if(sound_play) 
+		M.visible_message("<font color='blue'>[bicon(src)] Merp!</font>")
+		playsound(src, 'sound/voice/merp.ogg', 35, 1)
 
 /mob/living/simple_mob/animal/sif/sakimm/jil/Life()
 	..()
 	if(stat != DEAD)
 		// adjust sleep here, needs mind to sleep otherwise...
 		// adding the check so this doesn't conflict with life/handle_regular_status_updates()
-		if(sleeping > 0 && (!mind || !mind.active || client == null))
+		if(((!mind || !mind.active) && client == null) && sleeping > 0 )
+			// sleep process
 			AdjustSleeping(-1)
+			resting = (sleeping > 0)
+			if(!resting) // end sleeping
+				update_icons()
 
-		// sleep animate
-		if(stat == UNCONSCIOUS || sleeping > 0)
-			icon_state = icon_sleep
-		else
-			icon_state = icon_living
+/mob/living/simple_mob/animal/sif/sakimm/jil/update_icons()
+	if(stat == DEAD)
+		// leave icon as is, set by death
+	else if(lying || resting || sleeping > 0)
+		icon_state = icon_rest
+	else
+		icon_state = icon_living
 
 // Jil noises
 /datum/say_list/jil
@@ -160,6 +168,7 @@
 	greed = 0	// The probability we will try to steal something. Increases over time if we are not holding something
 	hoard_items = TRUE
 	hoard_distance = 3	// How far an item can be from the Sakimm's home turf to be counted inside its 'hoard'.
+	maximum_path_distance = 10 // jil lag distance help
 	original_home_distance = null
 	search_delay = 8 SECONDS	// How often can we look for item targets?
 	last_search = 0
@@ -177,6 +186,9 @@
 
 /datum/ai_holder/simple_mob/intentional/sakimm/jil/New()
 	..()
+	// pathing setup
+	maximum_path_distance = world.view*1.5
+
 	// search setup
 	greed = rand(0,50)
 	original_home_distance = max_home_distance
@@ -219,9 +231,9 @@
 			// forbid turf, we picked it up or couldn't reach it
 			if(target && istype(target.loc, /turf))
 				unreachable_locs += target.loc // if not inside something!
-
-		// check if we should make a new nest due to being trapped!
-		if(prob(30) && max_home_distance == 1)
+					
+		// check if we should make a new nest due to being trapped on our way back!
+		if(prob(30) && holder.get_active_hand())
 			set_new_home(holder.loc)
 
 		// end path to target
@@ -261,7 +273,10 @@
 
 	// jil merp
 	var/mob/living/simple_mob/animal/sif/sakimm/jil/J = holder
-	J.bonk(holder)
+	if(holder.get_active_hand())
+		J.bonk(holder,TRUE)
+	else
+		J.bonk(holder,prob(5))
 
 
 /datum/ai_holder/simple_mob/intentional/sakimm/jil/list_targets()
@@ -423,8 +438,18 @@
 
 		// disable Astar most of the time, gives jils a dopey side for efficiency, but sometimes they just GOFORIT
 		use_astar = FALSE
-		if(prob(30) || holder.get_active_hand())
-			use_astar = TRUE // oh no no no
+		if(target && istype(target,/mob))
+			// need this to be super cheap...
+			use_astar = FALSE
+		else if(holder.get_active_hand())
+			// long paths
+			use_astar = TRUE
+			maximum_path_distance = world.view*2
+		else
+			// short path to goal!
+			if(prob(50))
+				use_astar = TRUE
+			maximum_path_distance = world.view
 
 		// clear old forbid turf
 		if(prob(10))
@@ -476,9 +501,7 @@
 						J.health += 1 // heal!
 						if(J.health > J.maxHealth)
 							J.health = J.maxHealth
-					// quick update...
-					J.icon_state = J.icon_sleep
-
+					holder.update_icons()
 
 
 /datum/ai_holder/simple_mob/intentional/sakimm/jil/special_flee_check()

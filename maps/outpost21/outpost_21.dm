@@ -13,6 +13,7 @@
 	#include "outpost_areas.dm"
 //	#include "outpost_shuttles.dm"
 	#include "outpost_jobs.dm"
+	#include "outpost_things.dm"
 	#include "job/outfits.dm"
 
 	#define USING_MAP_DATUM /datum/map/outpost

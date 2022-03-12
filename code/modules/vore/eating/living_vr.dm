@@ -65,11 +65,12 @@
 	if(!LAZYLEN(vore_organs))
 		LAZYINITLIST(vore_organs)
 		var/obj/belly/B = new /obj/belly(src)
-		vore_selected = B
-		B.immutable = TRUE
-		B.name = "Stomach"
-		B.desc = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
-		B.can_taste = TRUE
+		if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+			vore_selected = B
+			B.immutable = TRUE
+			B.name = "Stomach"
+			B.desc = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
+			B.can_taste = TRUE
 		return TRUE
 
 //

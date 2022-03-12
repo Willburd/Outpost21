@@ -74,30 +74,31 @@
 /mob/living/simple_mob/vore/leopardmander/init_vore()
 	. = ..()
 	var/obj/belly/B = vore_selected
-	B.name = "stomach"
-	B.desc = "The leopardmander tosses its head back with you firmly clasped in its jaws, and in a few swift moments it finishes swallowing you down into its hot, dark gut. Your weight makes absolutely no impact on its form, the doughy walls giving way beneath you with unnatural softness. The thick, humid air is tinged with an oddly pleasant smell, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder, smothering you in thick hot gutflesh~"
-	B.vore_sound = "Tauric Swallow"
-	B.release_sound = "Pred Escape"
-	B.mode_flags = DM_FLAG_NUMBING
-	B.fancy_vore = 1
-	B.vore_verb = "slurp"
-	B.contamination_color = "grey"
-	B.contamination_flavor = "Wet"
-	B.emote_lists[DM_HEAL] = list(
-		"The drake's idle movement helps its stomach gently churn around you, slimily squelching against your figure.",
-		"The draconic predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
-		"Some hot, viscous slime oozes down over your form, helping slicken you up, and heal your injuries during your stay.",
-		"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
-		"The thick, humid atmosphere within the drake's thick hanging belly works in tandem with its steady, metronome-like heartbeat to soothe you.",
-		"Your surroundings sway from side to side as the drake wanders about, your form sinking bodily into the doughy, soft gutflesh.")
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.name = "stomach"
+		B.desc = "The leopardmander tosses its head back with you firmly clasped in its jaws, and in a few swift moments it finishes swallowing you down into its hot, dark gut. Your weight makes absolutely no impact on its form, the doughy walls giving way beneath you with unnatural softness. The thick, humid air is tinged with an oddly pleasant smell, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder, smothering you in thick hot gutflesh~"
+		B.vore_sound = "Tauric Swallow"
+		B.release_sound = "Pred Escape"
+		B.mode_flags = DM_FLAG_NUMBING
+		B.fancy_vore = 1
+		B.vore_verb = "slurp"
+		B.contamination_color = "grey"
+		B.contamination_flavor = "Wet"
+		B.emote_lists[DM_HEAL] = list(
+			"The drake's idle movement helps its stomach gently churn around you, slimily squelching against your figure.",
+			"The draconic predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
+			"Some hot, viscous slime oozes down over your form, helping slicken you up, and heal your injuries during your stay.",
+			"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
+			"The thick, humid atmosphere within the drake's thick hanging belly works in tandem with its steady, metronome-like heartbeat to soothe you.",
+			"Your surroundings sway from side to side as the drake wanders about, your form sinking bodily into the doughy, soft gutflesh.")
 
-	B.emote_lists[DM_DIGEST] = list(
-		"The drake growls in annoyance before clenching those wrinkled walls tight against your form, grinding away at you!",
-		"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop, sinking briefly into the thick, heavy walls!",
-		"You can barely hear the drake let out a pleased rumble as its stomach eagerly gurgles around its newfound meal!",
-		"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
-		"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
-		"The drake happily wanders around while digesting its meal, almost like it is trying to show off the hanging gut you've given it. Not like it made much of a difference on his already borderline obese form anyway~")
+		B.emote_lists[DM_DIGEST] = list(
+			"The drake growls in annoyance before clenching those wrinkled walls tight against your form, grinding away at you!",
+			"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop, sinking briefly into the thick, heavy walls!",
+			"You can barely hear the drake let out a pleased rumble as its stomach eagerly gurgles around its newfound meal!",
+			"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
+			"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
+			"The drake happily wanders around while digesting its meal, almost like it is trying to show off the hanging gut you've given it. Not like it made much of a difference on his already borderline obese form anyway~")
 
 /datum/say_list/leopardmander
 	speak = list("Prurr.", "Rrrhf.", "Rrrrrll.", "Mrrrrph.")
@@ -141,30 +142,31 @@
 /mob/living/simple_mob/vore/leopardmander/exotic/init_vore()
 	. = ..()
 	var/obj/belly/B = vore_selected
-	B.name = "stomach"
-	B.desc = "The exotic leopardmander tosses its head back with you firmly clasped in its jaws, and in a few swift moments it finishes swallowing you down into its hot, brightly glowing gut. Your weight makes absolutely no impact on its form, the doughy walls giving way beneath you, with their unnatural softness. The thick, humid air is tinged with an oddly pleasant smell, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder, smothering you in thick hot gutflesh~ You can only really sort of see outside that thick-walled gut."
-	B.vore_sound = "Tauric Swallow"
-	B.release_sound = "Pred Escape"
-	B.mode_flags = DM_FLAG_NUMBING
-	B.fancy_vore = 1
-	B.vore_verb = "slurp"
-	B.contamination_color = "pink"
-	B.contamination_flavor = "Wet"
-	B.emote_lists[DM_HEAL] = list(
-		"The drake's idle movement helps its stomach gently churn around you, slimily squelching against your figure.",
-		"The draconic predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
-		"Some hot, viscous slime oozes down over your form, helping slicken you up, and heal your injuries during your stay.",
-		"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
-		"The thick, humid atmosphere within the drake's thick hanging belly works in tandem with its steady, metronome-like heartbeat to soothe you.",
-		"Your surroundings sway from side to side as the drake wanders about, your form sinking bodily into the doughy, soft gutflesh.")
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.name = "stomach"
+		B.desc = "The exotic leopardmander tosses its head back with you firmly clasped in its jaws, and in a few swift moments it finishes swallowing you down into its hot, brightly glowing gut. Your weight makes absolutely no impact on its form, the doughy walls giving way beneath you, with their unnatural softness. The thick, humid air is tinged with an oddly pleasant smell, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder, smothering you in thick hot gutflesh~ You can only really sort of see outside that thick-walled gut."
+		B.vore_sound = "Tauric Swallow"
+		B.release_sound = "Pred Escape"
+		B.mode_flags = DM_FLAG_NUMBING
+		B.fancy_vore = 1
+		B.vore_verb = "slurp"
+		B.contamination_color = "pink"
+		B.contamination_flavor = "Wet"
+		B.emote_lists[DM_HEAL] = list(
+			"The drake's idle movement helps its stomach gently churn around you, slimily squelching against your figure.",
+			"The draconic predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
+			"Some hot, viscous slime oozes down over your form, helping slicken you up, and heal your injuries during your stay.",
+			"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
+			"The thick, humid atmosphere within the drake's thick hanging belly works in tandem with its steady, metronome-like heartbeat to soothe you.",
+			"Your surroundings sway from side to side as the drake wanders about, your form sinking bodily into the doughy, soft gutflesh.")
 
-	B.emote_lists[DM_DIGEST] = list(
-		"The drake growls in annoyance before clenching those wrinkled walls tight against your form, grinding away at you!",
-		"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop, sinking briefly into the thick, heavy walls!",
-		"You can barely hear the drake let out a pleased rumble as its stomach eagerly gurgles around its newfound meal!",
-		"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
-		"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
-		"The drake happily wanders around while digesting its meal, almost like it is trying to show off the hanging gut you've given it. Not like it made much of a difference on his already borderline obese form anyway~")
+		B.emote_lists[DM_DIGEST] = list(
+			"The drake growls in annoyance before clenching those wrinkled walls tight against your form, grinding away at you!",
+			"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop, sinking briefly into the thick, heavy walls!",
+			"You can barely hear the drake let out a pleased rumble as its stomach eagerly gurgles around its newfound meal!",
+			"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
+			"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
+			"The drake happily wanders around while digesting its meal, almost like it is trying to show off the hanging gut you've given it. Not like it made much of a difference on his already borderline obese form anyway~")
 
 /obj/random/mob/leopardmander/item_to_spawn() //Random map spawner
 	return pick(prob(89);/mob/living/simple_mob/vore/leopardmander,

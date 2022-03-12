@@ -118,48 +118,49 @@
 /mob/living/simple_mob/vore/greatwolf/init_vore()
 	. = ..()
 	var/obj/belly/B = vore_selected
-	B.name = "stomach"
-	B.desc = "The moment the wolf gets its jaws around you, it scoops you right up off of the ground, and greedily scarfs you down with a few swift gulps. Your small frame alone is hardly enough to make him look somewhat plump as you slop wetly into that dark, hot chamber, although the dense squish is rather comfortable. The thick, humid air is tinged with the smell of digested meat, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder."
-	B.vore_sound = "Tauric Swallow"
-	B.release_sound = "Pred Escape"
-	B.mode_flags = list(DM_FLAG_NUMBING, DM_FLAG_THICKBELLY, DM_FLAG_AFFECTWORN)
-	B.fancy_vore = 1
-	B.vore_verb = "slurp"
-	B.contamination_color = "grey"
-	B.contamination_flavor = "Wet"
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.name = "stomach"
+		B.desc = "The moment the wolf gets its jaws around you, it scoops you right up off of the ground, and greedily scarfs you down with a few swift gulps. Your small frame alone is hardly enough to make him look somewhat plump as you slop wetly into that dark, hot chamber, although the dense squish is rather comfortable. The thick, humid air is tinged with the smell of digested meat, and the surrounding flesh wastes no time in clenching and massaging down over its newfound fodder."
+		B.vore_sound = "Tauric Swallow"
+		B.release_sound = "Pred Escape"
+		B.mode_flags = list(DM_FLAG_NUMBING, DM_FLAG_THICKBELLY, DM_FLAG_AFFECTWORN)
+		B.fancy_vore = 1
+		B.vore_verb = "slurp"
+		B.contamination_color = "grey"
+		B.contamination_flavor = "Wet"
 
-	B.emote_lists[DM_HOLD] = list(
-		"The wolf's idle wandering helps its stomach gently churn around you, slimily squelching against your figure.",
-		"The lupine predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
-		"Some hot, viscous slime oozes down over your form, helping slicken you up during your stay.",
-		"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
-		"The thick, humid atmosphere within the wolf's hanging belly works in tandem with its steady heartbeat to soothe you.",
-		"Your surroundings sway from side to side as the wolf wanders about, looking for its next treat.")
+		B.emote_lists[DM_HOLD] = list(
+			"The wolf's idle wandering helps its stomach gently churn around you, slimily squelching against your figure.",
+			"The lupine predator takes a moment to intentionally clench its gut around you, encapsulating you in a strange, fleshy hug.",
+			"Some hot, viscous slime oozes down over your form, helping slicken you up during your stay.",
+			"During a moment of relative silence, you can hear the beast's soft, relaxed breathing as it casually goes about its day.",
+			"The thick, humid atmosphere within the wolf's hanging belly works in tandem with its steady heartbeat to soothe you.",
+			"Your surroundings sway from side to side as the wolf wanders about, looking for its next treat.")
 
-	B.emote_lists[DM_DIGEST] = list(
-		"The wolf huffs in annoyance before clenching those soft wrinkled walls tight against your form, lathering you in digestive enzymes!",
-		"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop!",
-		"You can barely hear the wolf let out a pleased growl as its stomach eagerly gurgles around its newfound meal!",
-		"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
-		"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
-		"The wolf happily wanders around while digesting its meal, slow calculated motions suggesting the beast is still on the hunt.")
+		B.emote_lists[DM_DIGEST] = list(
+			"The wolf huffs in annoyance before clenching those soft wrinkled walls tight against your form, lathering you in digestive enzymes!",
+			"As the beast wanders about, you're forced to slip and slide around amidst a pool of thick digestive goop!",
+			"You can barely hear the wolf let out a pleased growl as its stomach eagerly gurgles around its newfound meal!",
+			"As the thinning air begins to make you feel dizzy, menacing bworps and grumbles fill that dark, constantly shifting organ!",
+			"The constant, rhythmic kneading and massaging starts to take its toll along with the muggy heat, making you feel weaker and weaker!",
+			"The wolf happily wanders around while digesting its meal, slow calculated motions suggesting the beast is still on the hunt.")
 
-	B.struggle_messages_outside = list(
-		"%pred's %belly wobbles ever so slightly with a squirming meal.",
-		"%pred's %belly jostles subtly with movement.",
-		"%pred's %belly briefly swells downward as someone pushes from inside.",
-		"%pred's %belly sloshes and churns noisily with a trapped victim.",
-		"%pred's %belly swells in a few places as someone pushes from inside.",
-		"%pred's %belly sloshes around.",
-		"%pred's %belly sloshes and sways softly.",
-		"%pred's %belly lets out a wet squelch as a few rounded shapes appear on its surface for a moment.")
+		B.struggle_messages_outside = list(
+			"%pred's %belly wobbles ever so slightly with a squirming meal.",
+			"%pred's %belly jostles subtly with movement.",
+			"%pred's %belly briefly swells downward as someone pushes from inside.",
+			"%pred's %belly sloshes and churns noisily with a trapped victim.",
+			"%pred's %belly swells in a few places as someone pushes from inside.",
+			"%pred's %belly sloshes around.",
+			"%pred's %belly sloshes and sways softly.",
+			"%pred's %belly lets out a wet squelch as a few rounded shapes appear on its surface for a moment.")
 
-	B.struggle_messages_inside = list(
-		"Your squirming seems to please the canine, though it's hard to tell wether or not it's helping get you out or not.",
-		"Your struggles only cause %pred's %belly to groan and gurgle softly around you.",
-		"Your movement only causes %pred's %belly to clench down upon you, smothering you briefly in thick gutflesh.",
-		"Your motion causes %pred's %belly to rumble irritably as you sink hands into the thick flesh.",
-		"You fidget around awkwardly inside of %pred's %belly.",
-		"You shove against the walls of %pred's %belly, making it briefly swell outward.",
-		"You jostle %pred's %belly with movement, earning yourself another tight smothering squeeze in the process.",
-		"You squirm inside of %pred's %belly, making it sway from side to side.")
+		B.struggle_messages_inside = list(
+			"Your squirming seems to please the canine, though it's hard to tell wether or not it's helping get you out or not.",
+			"Your struggles only cause %pred's %belly to groan and gurgle softly around you.",
+			"Your movement only causes %pred's %belly to clench down upon you, smothering you briefly in thick gutflesh.",
+			"Your motion causes %pred's %belly to rumble irritably as you sink hands into the thick flesh.",
+			"You fidget around awkwardly inside of %pred's %belly.",
+			"You shove against the walls of %pred's %belly, making it briefly swell outward.",
+			"You jostle %pred's %belly with movement, earning yourself another tight smothering squeeze in the process.",
+			"You squirm inside of %pred's %belly, making it sway from side to side.")

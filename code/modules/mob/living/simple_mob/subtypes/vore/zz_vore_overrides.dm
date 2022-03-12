@@ -238,7 +238,8 @@
 	. = ..()
 	var/safe = (faction == "neutral")
 	for(var/obj/belly/B as anything in vore_organs)
-		B.digest_mode = safe ? DM_HOLD : vore_default_mode
+		if(B) // sanity check
+			B.digest_mode = safe ? DM_HOLD : vore_default_mode
 
 /mob/living/simple_mob/animal/space/carp/holographic/set_safety(var/safe)
 	. = ..()

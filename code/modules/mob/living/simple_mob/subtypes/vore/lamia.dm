@@ -101,31 +101,32 @@
 /mob/living/simple_mob/vore/lamia/init_vore()
 	. = ..()
 	var/obj/belly/B = vore_selected
-
-	B.transferchance = vore_upper_transfer_chance
-	B.transferlocation = "tail stomach"
+	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		B.transferchance = vore_upper_transfer_chance
+		B.transferlocation = "tail stomach"
 
 	var/obj/belly/tail = new /obj/belly(src)
-	tail.immutable = TRUE
-	tail.name = "tail stomach"
-	tail.desc = "You slide out into the narrow, constricting tube of flesh that is the lamia's snake half, heated walls and strong muscles all around clinging to your form with every slither."
-	tail.digest_mode = vore_default_mode
-	tail.mode_flags = vore_default_flags
-	tail.item_digest_mode = vore_default_item_mode
-	tail.contaminates = vore_default_contaminates
-	tail.contamination_flavor = vore_default_contamination_flavor
-	tail.contamination_color = vore_default_contamination_color
-	tail.escapable = TRUE // needed for transferchance
-	tail.escapechance = 0 // No directly escaping a tail, gotta squirm back out.
-	tail.digestchance = vore_tail_digest_chance
-	tail.absorbchance = vore_tail_absorb_chance
-	tail.transferchance = vore_tail_transfer_chance
-	tail.transferlocation = "upper stomach"
-	tail.human_prey_swallow_time = swallowTime
-	tail.nonhuman_prey_swallow_time = swallowTime
-	tail.vore_verb = "stuff"
-	tail.emote_lists[DM_HOLD] = B.emote_lists[DM_HOLD].Copy()
-	tail.emote_lists[DM_DIGEST] = B.emote_lists[DM_DIGEST].Copy()
+	if(tail) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		tail.immutable = TRUE
+		tail.name = "tail stomach"
+		tail.desc = "You slide out into the narrow, constricting tube of flesh that is the lamia's snake half, heated walls and strong muscles all around clinging to your form with every slither."
+		tail.digest_mode = vore_default_mode
+		tail.mode_flags = vore_default_flags
+		tail.item_digest_mode = vore_default_item_mode
+		tail.contaminates = vore_default_contaminates
+		tail.contamination_flavor = vore_default_contamination_flavor
+		tail.contamination_color = vore_default_contamination_color
+		tail.escapable = TRUE // needed for transferchance
+		tail.escapechance = 0 // No directly escaping a tail, gotta squirm back out.
+		tail.digestchance = vore_tail_digest_chance
+		tail.absorbchance = vore_tail_absorb_chance
+		tail.transferchance = vore_tail_transfer_chance
+		tail.transferlocation = "upper stomach"
+		tail.human_prey_swallow_time = swallowTime
+		tail.nonhuman_prey_swallow_time = swallowTime
+		tail.vore_verb = "stuff"
+		tail.emote_lists[DM_HOLD] = B.emote_lists[DM_HOLD].Copy()
+		tail.emote_lists[DM_DIGEST] = B.emote_lists[DM_DIGEST].Copy()
 
 // FFTA Bra
 /mob/living/simple_mob/vore/lamia/bra

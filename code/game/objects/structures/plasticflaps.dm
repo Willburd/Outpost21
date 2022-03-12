@@ -8,7 +8,6 @@
 	layer = MOB_LAYER
 	plane = MOB_PLANE
 	explosion_resistance = 5
-	var/can_pass_lying = TRUE
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
 		/mob/living/simple_mob/slime/xenobio,
@@ -41,7 +40,7 @@
 
 	var/mob/living/M = A
 	if(istype(M))
-		if(M.lying && can_pass_lying)
+		if(M.lying)
 			return ..()
 		for(var/mob_type in mobs_can_pass)
 			if(istype(A, mob_type))
@@ -63,6 +62,5 @@
 
 /obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
 	name = "airtight plastic flaps"
-	desc = "Heavy duty, airtight, plastic flaps. Have extra safety installed, preventing passage of living beings."
+	desc = "Heavy duty, airtight, plastic flaps."
 	can_atmos_pass = ATMOS_PASS_NO
-	can_pass_lying = FALSE

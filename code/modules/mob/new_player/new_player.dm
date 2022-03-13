@@ -143,7 +143,12 @@
 	// outpost 21 removal
 	if(href_list["observe"])
 		// outpost 21 change, to encourage new players
-		if(tgui_alert(src,"Are you sure you wish to observe? You will join the round as a wild animal, and be incapable of most actions. If you do, be sure to have a little fun with the players online! If you decide to join the shift, make sure to not use any knowledge gained from observing."))
+		var/admin_mode = (check_rights(R_ADMIN, 0) || check_rights(R_MOD, 0))
+		var/display_message = "Are you sure you wish to observe? You will join the round as a wild animal, and be incapable of most actions. If you do, be sure to have a little fun with the players online! If you decide to join the shift, make sure to not use any knowledge gained from observing."
+		if(admin_mode)
+			display_message = "Begin observing as a ghost? Only admins and moderators can do this. You can set your ckey to possess a mouse manually once you are ingame..."
+
+		if(tgui_alert(src,display_message))
 		//if(tgui_alert(src,"Are you sure you wish to observe? If you do, make sure to not use any knowledge gained from observing if you decide to join later.","Player Setup",list("Yes","No")) == "Yes")
 			if(!client)	return 1
 
@@ -179,7 +184,7 @@
 			observer.set_respawn_timer(time_till_respawn()) // Will keep their existing time if any, or return 0 and pass 0 into set_respawn_timer which will use the defaults
 			
 			// outpost 21 change, find a wild animal, and if one exists, possess it!
-			if(!check_rights(R_ADMIN, 0) && !check_rights(R_MOD, 0))
+			if( !admin_mode )
 				observer.inhabit_mouse() // skip menus from the verb, and go right to the possession!
 
 			qdel(src)

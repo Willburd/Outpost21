@@ -131,6 +131,25 @@
 
 	user.setClickCooldown(user.get_attack_speed(W))
 	
+	// outpost 21 addition - if grabbing a creature, and attacking a wall, SLAM them into it by body or head, and do damage to wall!
+	var/item = user.get_active_hand()
+	if(istype(user,/mob/living) && istype(item,/obj/item/weapon/grab))
+		var/mob/living/L = user
+		var/damage_done = L.slam_grabbed_mob_against_thing(item)
+		if(damage_done > -1)
+			// output message
+			var/obj/item/weapon/grab/G = item
+			var/mob/living/throw_mob = G.throw_held()
+			if(throw_mob)
+				// SMACK wall till it breaks!
+				if(L.zone_sel.selecting != BP_HEAD)
+					to_chat(L, "<span class='danger'>slammed [throw_mob] into the wall</span>")
+					if(damage_done >= STRUCTURE_MIN_DAMAGE_THRESHOLD * 2) attack_generic(L,damage_done,"slammed")
+				else
+					to_chat(L, "<span class='danger'>slammed [throw_mob] by the head into the wall</span>")
+					if(damage_done >= STRUCTURE_MIN_DAMAGE_THRESHOLD * 2) attack_generic(L,damage_done,"slammed")
+		return
+
 	if(!construction_stage && user.a_intent == I_HELP)
 		if(try_graffiti(user,W))
 			return

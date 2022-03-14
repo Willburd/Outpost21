@@ -85,11 +85,13 @@
 /mob/living/carbon/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
 	if(world.time < last_special + (2 SECONDS) || get_active_hand() != E)
 		return FALSE
+	/* outpost 21 edit - protean removal
 	//VOREStation Addition Start
 	if(species.name == SPECIES_PROTEAN)
 		to_chat(src, SPAN_WARNING("This is not compatible with your nanomachine body!"))
 		return FALSE
 	//VOREStation Addition End
+	*/
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
 		return FALSE
@@ -122,11 +124,13 @@
 /mob/living/carbon/human/proc/check_can_detach_modular_limb(var/obj/item/organ/external/E)
 	if(world.time < last_special + (2 SECONDS))
 		return FALSE
+	/* outpost 21 edit - protean removal
 	//VOREStation Addition Start
 	if(species.name == SPECIES_PROTEAN)
 		to_chat(src, SPAN_WARNING("You can't just detach parts of your nanomachine body!"))
 		return FALSE
 	//VOREStation Addition End
+	*/
 	if(incapacitated() || restrained())
 		to_chat(src, SPAN_WARNING("You can't do that in your current state!"))
 		return FALSE

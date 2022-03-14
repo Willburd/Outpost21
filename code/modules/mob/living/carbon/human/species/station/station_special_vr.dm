@@ -314,6 +314,7 @@
 
 	return
 
+/* outpost 21 edit - vasilissan removal
 /////////////////////
 /////SPIDER RACE/////
 /////////////////////
@@ -453,4 +454,4 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
-
+*/

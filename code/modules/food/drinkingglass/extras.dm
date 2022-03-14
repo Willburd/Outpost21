@@ -73,18 +73,22 @@
 // like this is, where it'll likely happen 0-4 times a shift, then don't copy this pattern.
 /obj/item/weapon/glass_extra/straw/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(ismob(target) && proximity_flag)
+		/* outpost 21 edit - removing protean
 		// Clicked protean blob
 		if(istype(target, /mob/living/simple_mob/protean_blob))
 			sipp_mob(target, user, "liquid_protean")
 			return
 		// Clicked humanoid
-		else if(ishuman(target))
+		else */
+		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			var/speciesname = H.species?.name
 			switch(speciesname)
+				/*
 				if(SPECIES_PROTEAN)
 					sipp_mob(target, user, "liquid_protean")
 					return
+				*/
 				if(SPECIES_PROMETHEAN)
 					sipp_mob(target, user, "nutriment")
 					return
@@ -94,7 +98,7 @@
 	if(victim.health <= 0)
 		to_chat(user, "<span class='warning'>There's not enough of [victim] left to sip on!</span>")
 		return
-	
+
 	user.visible_message("<b>[user]</b> starts sipping on [victim] with [src]!", "You start sipping on [victim] with [src].")
 	if(!do_after(user, 3 SECONDS, victim, exclusive = TASK_ALL_EXCLUSIVE))
 		return
@@ -102,9 +106,9 @@
 	user.visible_message("<b>[user]</b> sips some of [victim] with [src]!", "You take a sip of [victim] with [src]. Yum!")
 	if(victim.vore_taste)
 		to_chat(user, "<b>[victim]</b> tastes like... [victim.vore_taste]!")
-	
+
 	victim.apply_damage(5, used_weapon = "straw")
-	
+
 	// If you're human you get the reagent
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user

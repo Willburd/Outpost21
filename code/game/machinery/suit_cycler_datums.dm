@@ -336,8 +336,10 @@ GLOBAL_LIST_EMPTY(suit_cycler_emagged)
 	name = SPECIES_TAJ
 /datum/suit_cycler_choice/species/teshari
 	name = SPECIES_TESHARI
+/* outpost 21 edit - akula species removal
 /datum/suit_cycler_choice/species/akula
 	name = SPECIES_AKULA
+*/
 /datum/suit_cycler_choice/species/sergal
 	name = SPECIES_SERGAL
 /datum/suit_cycler_choice/species/vulpkanin

@@ -263,7 +263,7 @@
 	if(ishuman(sitter)) // Suit checks are in can_buckle_mobs at the bottom of the file.
 		var/mob/living/carbon/human/H = sitter // All human subtypes.
 		var/species_to_check = H.get_species()
-		if(species_to_check == SPECIES_CUSTOM || species_to_check == SPECIES_XENOCHIMERA) // Are we a custom species, or Xenochimera? If so, what is the base icon sprite for our species?
+		if(/*species_to_check == SPECIES_CUSTOM ||*/ species_to_check == SPECIES_XENOCHIMERA) // Are we a custom species, or Xenochimera? If so, what is the base icon sprite for our species?
 			species_to_check = H.species.base_species // Grab the base species and use that as the 'species' for the purpose of printing off your asscheeks.
 		switch(species_to_check)
 			if(SPECIES_HUMAN)
@@ -282,23 +282,31 @@
 				temp_img = icon('icons/obj/butts_vr.dmi', "slime")
 			if(SPECIES_VULPKANIN)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp")
+			/* outpost 21 edit - protean removal
 			if(SPECIES_PROTEAN)
 				temp_img = icon('icons/obj/butts_vr.dmi', "machine")
+			*/
+			/* outpost 21 edit - werebeast removal
 			if(SPECIES_WEREBEAST)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // Give Werewolves their own thicc'er than a boal of oatmeal ass sprite someday?
+			*/
 			if(SPECIES_XENOHYBRID, SPECIES_XENO, SPECIES_XENO_DRONE, SPECIES_XENO_HUNTER, SPECIES_XENO_QUEEN, SPECIES_XENO_SENTINEL) // Xenos + Xenohybrids have their own asses, thanks to Pybro.
 				temp_img = icon('icons/obj/butts_vr.dmi', "xeno")
+			/* outpost 21 edit - zorren species removal
 			if(SPECIES_ZORREN_HIGH)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // placeholder until we get zorren butts.
+			*/
 			if(SPECIES_FENNEC)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // placeholder until we get fennec butts.
+			/* outpost 21 edit - akula removal
 			if(SPECIES_AKULA)
 				temp_img = icon('icons/obj/butts_vr.dmi', "xeno") // placeholder until we get proper sharkbutt. AKULA BE THICC ASS SHARKS MMMMMMMMMMMMMMKAY?
+			*/
 			/* // Commented out because no icons exist, BUT if someone wants to sprite some more ASSCHEEKS, then just uncomment these and you have asses for each species. - Rykka.
 			if(SPECIES_TESHARI)
 				temp_img = icon('icons/obj/butts_vr.dmi', "tesh")
 			if(SPECIES_SHADEKIN || SPECIES_SHADEKIN_CREW)
-				temp_img = icon('icons/obj/butts_vr.dmi', "shadekin") 
+				temp_img = icon('icons/obj/butts_vr.dmi', "shadekin")
 			if(SPECIES_ALRAUNE)
 				temp_img = icon('icons/obj/butts_vr.dmi', "alraune")
 			if(SPECIES_NEVREAN)
@@ -316,7 +324,7 @@
 		temp_img = icon('icons/obj/butts_vr.dmi', "drone")
 	else if(istype(sitter,/mob/living/carbon/alien/diona)) // Are we a nymph, instead of a full-grown Diona?
 		temp_img = icon('icons/obj/butts_vr.dmi', "nymph")
-	else 
+	else
 		return
 	var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)
 	p.desc = "You see [sitter]'s ass on the photo."
@@ -366,7 +374,7 @@
 // VOREStation Edit Start - Rykka
 
 /obj/machinery/photocopier/can_buckle_check(mob/living/M, forced = FALSE)
-	if(!..()) 
+	if(!..())
 		return FALSE
 	for(var/obj/item/clothing/C in M)
 		if(M.item_is_in_hands(C))

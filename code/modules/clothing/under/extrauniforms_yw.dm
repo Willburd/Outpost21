@@ -261,9 +261,11 @@
 	item_state = "victorianredvest"
 
 /obj/item/clothing/under/yw/victsuit/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+	/* outpost 21 edit - grey species removal
 	if(body_type == SPECIES_GREY_YW)
 		if(!inhands)
 			return 'icons/inventory/uniform/mob_grey.dmi'
 
 	else
-		return ..()
+	*/
+	return ..()

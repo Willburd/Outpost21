@@ -1,3 +1,4 @@
+/* outpost 21 edit - akula removal
 /datum/species/monkey/shark
 	name = SPECIES_MONKEY_AKULA
 	name_plural = "Sobaka"
@@ -6,6 +7,7 @@
 	tail = null //The tail is part of its body due to tail using the "icons/effects/species.dmi" file. It must be null, or they'll have a chimp tail.
 	greater_form = "Akula"
 	default_language = "Skrellian" //Closest we have.
+*/
 
 /datum/species/monkey/sergal
 	name = SPECIES_MONKEY_SERGAL

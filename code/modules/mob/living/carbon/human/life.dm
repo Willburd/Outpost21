@@ -1275,6 +1275,7 @@
 			fat_alert = /obj/screen/alert/fat/synth
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth
+		/* outpost 21 edit - removal of custom species
 		//VOREStation Add - Vampire hunger alert
 		else if(get_species() == SPECIES_CUSTOM)
 			var/datum/species/custom/C = species
@@ -1283,6 +1284,7 @@
 				hungry_alert = /obj/screen/alert/hungry/vampire
 				starving_alert = /obj/screen/alert/starving/vampire
 		//VOREStation Add End
+		*/
 
 		switch(nutrition)
 			if(450 to INFINITY)

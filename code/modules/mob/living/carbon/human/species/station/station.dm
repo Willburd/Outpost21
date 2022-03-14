@@ -355,7 +355,7 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
-
+/*
 /datum/species/zaddat
 	name = SPECIES_ZADDAT
 	name_plural = "Zaddat"
@@ -467,7 +467,7 @@
 	for(var/K in damageable)
 		if(!(K in covered))
 			H.apply_damage(light_amount/4, BURN, K, 0, 0, "Abnormal growths")
-
+*/
 
 /datum/species/diona
 	name = SPECIES_DIONA

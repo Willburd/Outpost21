@@ -44,8 +44,8 @@
 		if(M.getMaxHealth() < 20) // In case a badmin makes giant mice or something.
 			visible_message("<font color='red'><b>SPLAT!</b></font>")
 			M.splat()
-	else if(istype(target,/mob/living/simple_mob/animal/sif/sakimm/jil))
-		var/mob/living/simple_mob/animal/sif/sakimm/jil/J = target
+	else if(istype(target,/mob/living/simple_mob/vore/alienanimals/jil))
+		var/mob/living/simple_mob/vore/alienanimals/jil/J = target
 		if(J.getMaxHealth() <= 5) // incase of jillioth
 			visible_message("<font color='red'><b>SPLAT!</b></font>")
 			J.splat()

@@ -75,9 +75,9 @@
 		pref.starting_trait_points = STARTING_SPECIES_POINTS
 		pref.max_traits = MAX_SPECIES_TRAITS
 
-	if(pref.species != SPECIES_CUSTOM)
-		pref.pos_traits.Cut()
-		pref.neg_traits.Cut()
+	// if(pref.species != SPECIES_CUSTOM) outpost 21 - custom race removal
+	pref.pos_traits.Cut()
+	pref.neg_traits.Cut()
 	// Clean up positive traits
 	for(var/datum/trait/path as anything in pref.pos_traits)
 		if(!(path in positive_traits))
@@ -91,7 +91,7 @@
 		if(!(path in neutral_traits))
 			pref.neu_traits -= path
 			continue
-		if(!(pref.species == SPECIES_CUSTOM) && !(path in everyone_traits))
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits)) // outpost 21 - custom race removal
 			pref.neu_traits -= path
 			continue
 		var/take_flags = initial(path.can_take)
@@ -137,14 +137,16 @@
 	//Any additional non-trait settings can be applied here
 	new_S.blood_color = pref.blood_color
 
+	/* outpost 21 - custom race removal
 	if(pref.species == SPECIES_CUSTOM)
 		//Statistics for this would be nice
 		var/english_traits = english_list(new_S.traits, and_text = ";", comma_text = ";")
 		log_game("TRAITS [pref.client_ckey]/([character]) with: [english_traits]") //Terrible 'fake' key_name()... but they aren't in the same entity yet
 	else
-
+	*/
 
 /datum/category_item/player_setup_item/vore/traits/content(var/mob/user)
+	/* outpost 21 - custom race removal
 	. += "<b>Custom Species Name:</b> "
 	. += "<a href='?src=\ref[src];custom_species=1'>[pref.custom_species ? pref.custom_species : "-Input Name-"]</a><br>"
 
@@ -179,8 +181,10 @@
 			var/datum/trait/trait = negative_traits[T]
 			. += "<li>- <a href='?src=\ref[src];clicked_neg_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
 		. += "</ul>"
+	*/
 	. += "<a href='?src=\ref[src];add_trait=[NEUTRAL_MODE]'>Neutral Trait +</a><br>"
 	. += "<ul>"
+	
 	for(var/T in pref.neu_traits)
 		var/datum/trait/trait = neutral_traits[T]
 		. += "<li>- <a href='?src=\ref[src];clicked_neu_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
@@ -203,6 +207,7 @@
 	if(!CanUseTopic(user))
 		return TOPIC_NOACTION
 
+	/*  outpost 21 - custom race removal
 	else if(href_list["custom_species"])
 		var/raw_choice = sanitize(input(user, "Input your custom species name:",
 			"Character Preference", pref.custom_species) as null|text, MAX_NAME_LEN)
@@ -213,11 +218,12 @@
 	else if(href_list["custom_base"])
 		var/list/choices = GLOB.custom_species_bases
 		if(pref.species != SPECIES_CUSTOM)
-			choices = (choices | pref.species)
+		choices = (choices | pref.species)
 		var/text_choice = tgui_input_list(usr, "Pick an icon set for your species:","Icon Base", choices)
 		if(text_choice in choices)
 			pref.custom_base = text_choice
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+	*/
 
 	else if(href_list["blood_color"])
 		var/color_choice = input(usr, "Pick a blood color (does not apply to synths)","Blood Color",pref.blood_color) as color
@@ -285,12 +291,14 @@
 				picklist = positive_traits.Copy() - pref.pos_traits
 				mylist = pref.pos_traits
 			if(NEUTRAL_MODE)
+				/* outpost 21 - custom race removal
 				if(pref.species == SPECIES_CUSTOM)
 					picklist = neutral_traits.Copy() - pref.neu_traits
 					mylist = pref.neu_traits
 				else
-					picklist = everyone_traits.Copy() - pref.neu_traits
-					mylist = pref.neu_traits
+				*/
+				picklist = everyone_traits.Copy() - pref.neu_traits
+				mylist = pref.neu_traits
 			if(NEGATIVE_MODE)
 				picklist = negative_traits.Copy() - pref.neg_traits
 				mylist = pref.neg_traits

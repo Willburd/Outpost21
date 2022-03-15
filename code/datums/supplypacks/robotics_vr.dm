@@ -61,7 +61,7 @@
 			/obj/item/weapon/disk/limb/dsi_sergal,
 			/obj/item/weapon/disk/limb/dsi_nevrean,
 			/obj/item/weapon/disk/limb/dsi_vulpkanin,
-			/obj/item/weapon/disk/limb/dsi_akula,
+			///obj/item/weapon/disk/limb/dsi_akula, outpost 21 - race removal
 			/obj/item/weapon/disk/limb/dsi_spider,
 			/obj/item/weapon/disk/limb/dsi_teshari,
 			/obj/item/weapon/disk/limb/eggnerdltd,

@@ -67,10 +67,12 @@
 	desc = "Its soft and squishy"
 	icon_state = "egg_skrell"
 
+/* outpost 21 - race removal
 /obj/item/weapon/storage/vore_egg/shark
 	name = "akula egg"
 	desc = "Its soft and slimy to the touch"
 	icon_state  = "egg_akula"
+*/
 
 /obj/item/weapon/storage/vore_egg/sergal
 	name = "sergal egg"

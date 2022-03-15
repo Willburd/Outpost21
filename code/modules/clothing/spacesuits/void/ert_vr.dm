@@ -173,7 +173,7 @@
 		SPECIES_SKRELL 			= 'icons/inventory/suit/mob_vr_skrell.dmi',
 		SPECIES_UNATHI 			= 'icons/inventory/suit/mob_vr_unathi.dmi',
 		SPECIES_XENOHYBRID 		= 'icons/inventory/suit/mob_vr_unathi.dmi',
-		SPECIES_AKULA			= 'icons/inventory/suit/mob_vr_akula.dmi',
+		//SPECIES_AKULA			= 'icons/inventory/suit/mob_vr_akula.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/mob_vr_sergal.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
 		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
@@ -190,7 +190,7 @@
 		SPECIES_SKRELL			= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_UNATHI			= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_XENOHYBRID		= 'icons/inventory/suit/item_vr.dmi',
-		SPECIES_AKULA			= 'icons/inventory/suit/item_vr.dmi',
+		//SPECIES_AKULA			= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/item_vr.dmi',
@@ -210,7 +210,7 @@
 		SPECIES_SKRELL 			= 'icons/inventory/head/mob_vr_skrell.dmi',
 		SPECIES_UNATHI 			= 'icons/inventory/head/mob_vr_unathi.dmi',
 		SPECIES_XENOHYBRID 		= 'icons/inventory/head/mob_vr_unathi.dmi',
-		SPECIES_AKULA			= 'icons/inventory/head/mob_vr_unathi.dmi',
+		//SPECIES_AKULA			= 'icons/inventory/head/mob_vr_unathi.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/mob_vr_unathi.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
 		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
@@ -227,7 +227,7 @@
 		SPECIES_SKRELL			= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_UNATHI			= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_XENOHYBRID		= 'icons/inventory/head/item_vr.dmi',
-		SPECIES_AKULA			= 'icons/inventory/head/item_vr.dmi',
+		//SPECIES_AKULA			= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/item_vr.dmi',

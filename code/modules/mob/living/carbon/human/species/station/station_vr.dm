@@ -63,6 +63,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+/* outpost 21 - race removal
 /datum/species/akula
 	name = SPECIES_AKULA
 	name_plural = "Akula"
@@ -109,6 +110,7 @@
 	flesh_color = "#AFA59E"
 	base_color = "#777777"
 	blood_color = "#1D2CBF"
+*/
 
 /datum/species/nevrean
 	name = SPECIES_NEVREAN

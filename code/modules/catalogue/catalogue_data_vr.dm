@@ -3,6 +3,7 @@
 
 //TODO: VIRGO_LORE_WRITING_WIP - this whole file
 
+/* outpost 21 - race removal
 /datum/category_item/catalogue/fauna/akula
 	name = "Sapients - Akula"
 	desc = "A pelagic species hailing from the Barkalis System originally\
@@ -11,6 +12,7 @@
 	Humanity. Many of them have spread among the stars, either\
 	in the nomad fleets or joining colonies as capable hard labour."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/
 
 /datum/category_item/catalogue/fauna/sergal
 	name = "Sapients - Sergal"

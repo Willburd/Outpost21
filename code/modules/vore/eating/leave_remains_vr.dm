@@ -8,8 +8,10 @@
 	skull_type = /obj/item/weapon/digestion_remains/skull/skrell
 /datum/species/spider
 	skull_type = /obj/item/weapon/digestion_remains/skull/vasilissan
+/* outpost 21 - race removal
 /datum/species/akula
 	skull_type = /obj/item/weapon/digestion_remains/skull/akula
+*/
 /datum/species/harpy
 	skull_type = /obj/item/weapon/digestion_remains/skull/rapala
 /datum/species/vulpkanin
@@ -107,9 +109,11 @@
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a vasilissan."
 	icon_state = "skull"
 
+/* outpost 21 - race removal
 /obj/item/weapon/digestion_remains/skull/akula
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to an akula."
 	icon_state = "skull_unathi"
+*/
 
 /obj/item/weapon/digestion_remains/skull/rapala
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a rapala."

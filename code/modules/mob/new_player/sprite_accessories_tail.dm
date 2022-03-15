@@ -460,12 +460,14 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/*
 /datum/sprite_accessory/tail/special/akula
 	name = "akula tail"
 	desc = ""
 	icon_state = "sharktail_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/nevrean
 	name = "nevrean tail"
@@ -544,12 +546,14 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/*
 /datum/sprite_accessory/tail/special/akulahc
 	name = "akula tail, colorable"
 	desc = ""
 	icon_state = "sharktail_hc_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/nevreanhc
 	name = "nevrean tail, colorable"

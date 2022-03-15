@@ -8,7 +8,7 @@
 	valid_transform_species = list(
 		"Human", "Unathi", "Tajara", "Skrell",
 		"Diona", "Teshari", "Monkey","Sergal",
-		"Akula","Nevrean","Zorren",
+		/*"Akula",*/"Nevrean","Zorren", //outpost 21 - race removal
 		"Fennec", "Vulpkanin", "Vasilissan",
 		"Rapala", "Neaera", "Stok", "Farwa", "Sobaka",
 		"Wolpin", "Saru", "Sparra")

@@ -19,7 +19,7 @@
 //species defines
 
 //station species
-#define SPECIES_AKULA			"Akula"
+// #define SPECIES_AKULA			"Akula" outpost 21 - race removal
 #define SPECIES_ALRAUNE			"Alraune"
 #define SPECIES_NEVREAN			"Nevrean"
 #define SPECIES_PROTEAN			"Protean"
@@ -32,7 +32,7 @@
 #define SPECIES_ZORREN_HIGH		"Zorren"
 // #define SPECIES_CUSTOM			"Custom Species" outpost 21 - custom race removal
 //monkey species
-#define SPECIES_MONKEY_AKULA		"Sobaka"
+// #define SPECIES_MONKEY_AKULA		"Sobaka" outpost 21 - race removal
 #define SPECIES_MONKEY_NEVREAN		"Sparra"
 #define SPECIES_MONKEY_SERGAL		"Saru"
 #define SPECIES_MONKEY_VULPKANIN	"Wolpin"

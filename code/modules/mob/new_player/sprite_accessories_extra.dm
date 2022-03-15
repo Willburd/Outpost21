@@ -256,11 +256,13 @@
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_HEAD)
 
+/*
 /datum/sprite_accessory/marking/vr/sharkface
 	name = "Akula snout"
 	icon_state = "sharkface"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_HEAD)
+*/
 
 /datum/sprite_accessory/marking/vr/sheppy_face
 	name = "Shepherd snout"

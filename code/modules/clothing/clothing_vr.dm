@@ -141,7 +141,7 @@
 		SPECIES_NEVREAN 	= 'icons/inventory/face/mob_vr_nevrean.dmi',
 		SPECIES_ZORREN_HIGH	= 'icons/inventory/face/mob_vr_fox.dmi',
 		SPECIES_ZORREN_FLAT = 'icons/inventory/face/mob_vr_fennec.dmi',
-		SPECIES_AKULA 		= 'icons/inventory/face/mob_vr_akula.dmi',
+		//SPECIES_AKULA 		= 'icons/inventory/face/mob_vr_akula.dmi', outpost 21 - race removal
 		SPECIES_VULPKANIN 	= 'icons/inventory/face/mob_vr_vulpkanin.dmi',
 		SPECIES_XENOCHIMERA	= 'icons/inventory/face/mob_vr_tajaran.dmi',
 		SPECIES_WEREBEAST	= 'icons/inventory/face/mob_vr_werebeast.dmi', //YW EDIT: temporary fix

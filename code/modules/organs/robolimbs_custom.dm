@@ -131,6 +131,7 @@ VS Edit - anyone can select these. */
 /obj/item/weapon/disk/limb/dsi_vulpkanin
 	company = "DSI - Vulpkanin"
 
+/*
 /datum/robolimb/dsi_akula
 	company = "DSI - Akula"
 	desc = "This limb feels soft and fleshy, realistic design and squish. Seems a little mischievous. By Darkside Incorperated."
@@ -144,6 +145,7 @@ VS Edit - anyone can select these. */
 
 /obj/item/weapon/disk/limb/dsi_akula
 	company = "DSI - Akula"
+*/
 
 /datum/robolimb/dsi_spider
 	company = "DSI - Vasilissan"

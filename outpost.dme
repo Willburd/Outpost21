@@ -2881,7 +2881,6 @@
 #include "code\modules\mob\living\carbon\human\species\shadekin\shadekin_hud.dm"
 #include "code\modules\mob\living\carbon\human\species\station\blank_op.dm"
 #include "code\modules\mob\living\carbon\human\species\station\golem.dm"
-#include "code\modules\mob\living\carbon\human\species\station\human_subspecies.dm"
 #include "code\modules\mob\living\carbon\human\species\station\monkey.dm"
 #include "code\modules\mob\living\carbon\human\species\station\monkey_vr.dm"
 #include "code\modules\mob\living\carbon\human\species\station\prometheans.dm"

@@ -23,9 +23,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 20
 
 	minimum_character_age = 25
-	min_age_by_species = list(SPECIES_HUMAN_VATBORN = 14)
+	min_age_by_species = list() //SPECIES_HUMAN_VATBORN = 14) outpost 21 race removal
 	ideal_character_age = 70 // Old geezer captains ftw
-	ideal_age_by_species = list(SPECIES_HUMAN_VATBORN = 55) /// Vatborn live shorter, no other race eligible for captain besides human/skrell 
+	ideal_age_by_species = list() //SPECIES_HUMAN_VATBORN = 55) /// Vatborn live shorter, no other race eligible for captain besides human/skrell 
 	banned_job_species = list(SPECIES_UNATHI, SPECIES_TAJ, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "mechanical", "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/captain
@@ -71,9 +71,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 10
 
 	minimum_character_age = 25
-	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 14)
+	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10) //, SPECIES_HUMAN_VATBORN = 14) outpost 21 race removal
 	ideal_character_age = 50
-	ideal_age_by_species = list(SPECIES_UNATHI = 140, SPECIES_TESHARI = 27, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
+	ideal_age_by_species = list(SPECIES_UNATHI = 140, SPECIES_TESHARI = 27, "mechanical" = 20)//, SPECIES_HUMAN_VATBORN = 20) outpost 21 race removal
 	banned_job_species = list(SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital", SPECIES_DIONA)
 
 	outfit_type = /decl/hierarchy/outfit/job/hop

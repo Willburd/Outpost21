@@ -291,7 +291,7 @@
 
 // 'Regular' species.
 #define SPECIES_HUMAN			"Human"
-#define SPECIES_HUMAN_VATBORN	"Vatborn"
+//#define SPECIES_HUMAN_VATBORN	"Vatborn" outpost 21 - race removal
 #define SPECIES_UNATHI			"Unathi"
 #define SPECIES_SKRELL			"Skrell"
 #define SPECIES_TESHARI			"Teshari"

@@ -3,7 +3,6 @@
 
 //TODO: VIRGO_LORE_WRITING_WIP - this whole file
 
-/*
 /datum/category_item/catalogue/fauna/akula
 	name = "Sapients - Akula"
 	desc = "A pelagic species hailing from the Barkalis System originally\
@@ -12,7 +11,6 @@
 	Humanity. Many of them have spread among the stars, either\
 	in the nomad fleets or joining colonies as capable hard labour."
 	value = CATALOGUER_REWARD_TRIVIAL
-*/
 
 /datum/category_item/catalogue/fauna/sergal
 	name = "Sapients - Sergal"
@@ -35,7 +33,6 @@
 	places the Sergals do as comrades and historical allies."
 	value = CATALOGUER_REWARD_TRIVIAL
 
-/*
 /datum/category_item/catalogue/fauna/rapala
 	name = "Sapients - Rapala"
 	desc = "The Rapala, formally “Rapala-Unathi” are a vassal species of the Unathi \
@@ -44,7 +41,6 @@
 	The Rapala act as emissaries, diplomats and spies for their overlords, although it is an open \
 	secret that they work for more autonomy and self-governance."
 	value = CATALOGUER_REWARD_TRIVIAL
-*/
 
 /datum/category_item/catalogue/fauna/xenochimera
 	name = "Sapients - Xenochimera"
@@ -70,7 +66,6 @@
 	recognize them due to genetic drift."
 	value = CATALOGUER_REWARD_TRIVIAL
 
-/*
 /datum/category_item/catalogue/fauna/alraune
 	name = "Sapients - Alraune"
 	desc = "Alraune are enigmatic, strange creatures from the Elysian Colonies. While their main culture is still \
@@ -97,7 +92,6 @@
 	of their precursors, leading to a massive divide between commoners, who live as serfs and the nobility, who live in \
 	comparable conditions as wealthy members of the Diaspora."
 	value = CATALOGUER_REWARD_TRIVIAL
-*/
 
 /datum/category_item/catalogue/fauna/shadekin
 	name = "Sapients - Shadekin"
@@ -115,7 +109,6 @@
 	started to hire those for closer observation."
 	value = CATALOGUER_REWARD_EASY
 
-/*
 /datum/category_item/catalogue/fauna/custom_species
 	name = "Sapients - Other"
 	desc = "ERROR : DNA scan inconclusive. Please interview subject to catalogue them manually. \
@@ -123,7 +116,6 @@
 	<br> <br>\
 	Likely reasons for failure : Genetic Engineering, Hybridization, minor species of Orion Spur Diaspora."
 	value = CATALOGUER_REWARD_TRIVIAL
-*/ 
 
 /datum/category_item/catalogue/technology/resleeving
 	name = "Resleeving"

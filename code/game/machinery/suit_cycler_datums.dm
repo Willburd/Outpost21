@@ -340,13 +340,11 @@ GLOBAL_LIST_EMPTY(suit_cycler_emagged)
 	name = SPECIES_VOX
 /datum/suit_cycler_choice/species/diona
 	name = SPECIES_DIOMA
+/datum/suit_cycler_choice/species/akula
+	name = SPECIES_AKULA
 /datum/suit_cycler_choice/species/sergal
 	name = SPECIES_SERGAL
 /datum/suit_cycler_choice/species/nevrean
 	name = SPECIES_NEVREAN
 /datum/suit_cycler_choice/species/vulpkanin
 	name = SPECIES_VULPKANIN
-/* outpost 21 edit - akula species removal
-/datum/suit_cycler_choice/species/akula
-	name = SPECIES_AKULA
-*/

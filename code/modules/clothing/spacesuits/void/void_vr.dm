@@ -6,11 +6,11 @@
 //
 
 /obj/item/clothing/head/helmet/space/void
-	species_restricted = list(SPECIES_HUMAN/*, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE*/, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
 
 /obj/item/clothing/suit/space/void
-	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL/*, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE*/, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
-
+	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
+	
 /obj/item/clothing/head/helmet/space/void/heck
 	name = "\improper H.E.C.K. helmet"
 	desc = "Hostile Environiment Cross-Kinetic Helmet: A helmet designed to withstand the wide variety of hazards from \[REDACTED\]. It wasn't enough for its last owner."
@@ -151,3 +151,4 @@
 	default_worn_icon = 'icons/inventory/head/mob_vr.dmi'
 	sprite_sheets = ALL_VR_SPRITE_SHEETS_HEAD_MOB
 	sprite_sheets_obj = null
+	

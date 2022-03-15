@@ -142,20 +142,16 @@
 
 	//Set species_restricted list
 	switch(target_species)
-		//VOREStation Edit Start
-		if(SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL/*, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE*/, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
-		if(SPECIES_UNATHI)
-			species_restricted = list(SPECIES_UNATHI, SPECIES_XENOHYBRID)
-		/* outpost 21 edit - vulpakin removal
-		if(SPECIES_VULPKANIN)
-			species_restricted = list(SPECIES_VULPKANIN, SPECIES_ZORREN_HIGH, SPECIES_FENNEC)
-		*/
-		if(SPECIES_SERGAL)
-			species_restricted = list(SPECIES_SERGAL, SPECIES_NEVREAN)
-		//VOREStation Edit End
+		// outpost 21 edit - redid this list code due to broken refitting access
+		// logic is based on if someone could fit inside the suit even with discomfort, or if the suit requires unique construction to hold them
+		if(SPECIES_HUMAN, SPECIES_PROMETHEAN)	//humanoid bodytypes
+			species_restricted = list( SPECIES_HUMAN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_PROMETHEAN) // no tail, four limbs, humanish sized
+		if(SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_UNATHI, SPECIES_DIONA)
+			species_restricted = list( SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_HUMAN, SPECIES_PROMETHEAN) // has simple tail, four limbs, humanish sized
+		if(SPECIES_SERGAL, SPECIES_SKRELL, SPECIES_VOX, SPECIES_UNATHI, SPECIES_DIONA)
+			species_restricted = list(SPECIES_SERGAL, SPECIES_SKRELL, SPECIES_VOX, SPECIES_DIONA, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_HUMAN, SPECIES_PROMETHEAN) // large tail, four limbs, or large sized
 		else
-			species_restricted = list(target_species)
+			species_restricted = list(target_species, SPECIES_PROMETHEAN) // prometheans are silly
 
 	//Set icon
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))

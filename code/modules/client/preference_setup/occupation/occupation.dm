@@ -359,6 +359,7 @@
 					pref.job_engsec_med |= job.flag
 				if(3)
 					pref.job_engsec_low |= job.flag
+		/* outpost 21 - job removals
 		//VOREStation Add
 		if(TALON)
 			pref.job_talon_low &= ~job.flag
@@ -373,6 +374,7 @@
 				if(3)
 					pref.job_talon_low |= job.flag
 		//VOREStation Add End
+		*/
 
 	return 1
 
@@ -427,6 +429,7 @@
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+		/* outpost 21 - job removals
 		//VOREStation Add
 		if(TALON)
 			switch(level)
@@ -437,4 +440,5 @@
 				if(3)
 					return job_talon_low
 		//VOREStation Add End
+		*/
 	return 0

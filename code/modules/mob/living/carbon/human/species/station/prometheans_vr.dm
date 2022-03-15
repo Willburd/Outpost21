@@ -10,7 +10,7 @@
 		"Diona", "Teshari", "Monkey","Sergal",
 		/*"Akula",*/"Nevrean","Zorren", //outpost 21 - race removal
 		"Fennec", "Vulpkanin", "Vasilissan",
-		"Rapala", "Neaera", "Stok", "Farwa", "Sobaka",
+		/*"Rapala",*/ "Neaera", "Stok", "Farwa", "Sobaka", //outpost 21 - race removal
 		"Wolpin", "Saru", "Sparra")
 
 	spawn_flags = SPECIES_CAN_JOIN

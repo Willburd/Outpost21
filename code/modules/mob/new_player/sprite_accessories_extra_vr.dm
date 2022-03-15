@@ -3,7 +3,7 @@
 
 /datum/sprite_accessory/marking //Override for base markings
 	color_blend_mode = ICON_ADD
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW) //This lets all races use
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN/*, SPECIES_RAPALA*/, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW) //This lets all races use
 
 /datum/sprite_accessory/marking/vr_vulp_belly
 	name = "belly fur (Vulp)"
@@ -404,6 +404,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_HAND,BP_R_HAND)
 
+/* outpost 21 race removal
 /datum/sprite_accessory/marking/vr_harpy_feathers
 	name = "Rapala leg Feather"
 	icon = 'icons/mob/human_races/markings_vr.dmi'
@@ -417,6 +418,7 @@
 	icon_state = "harpy-leg"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG)
+*/
 
 /datum/sprite_accessory/marking/vr_chooves
 	name = "Cloven hooves"

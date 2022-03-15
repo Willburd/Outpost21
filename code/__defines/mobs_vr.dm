@@ -23,7 +23,7 @@
 // #define SPECIES_ALRAUNE			"Alraune" outpost 21 - race removal
 #define SPECIES_NEVREAN			"Nevrean"
 #define SPECIES_PROTEAN			"Protean"
-#define SPECIES_RAPALA			"Rapala"
+//#define SPECIES_RAPALA			"Rapala" outpost 21 - race removal
 #define SPECIES_SERGAL			"Sergal"
 #define SPECIES_SHADEKIN_CREW	"Black-Eyed Shadekin"
 #define SPECIES_VASILISSAN		"Vasilissan"

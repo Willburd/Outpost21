@@ -35,6 +35,7 @@
 	places the Sergals do as comrades and historical allies."
 	value = CATALOGUER_REWARD_TRIVIAL
 
+/* outpost 21 - race removal
 /datum/category_item/catalogue/fauna/rapala
 	name = "Sapients - Rapala"
 	desc = "The Rapala, formally “Rapala-Unathi” are a vassal species of the Unathi \
@@ -43,6 +44,7 @@
 	The Rapala act as emissaries, diplomats and spies for their overlords, although it is an open \
 	secret that they work for more autonomy and self-governance."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/
 
 /datum/category_item/catalogue/fauna/xenochimera
 	name = "Sapients - Xenochimera"

@@ -347,6 +347,7 @@
 		)
 	wikilink="https://yawn.izac.live/Vox"
 
+/* outpost 21 - race removal
 /datum/species/harpy
 	name = SPECIES_RAPALA
 	name_plural = "Rapalans"
@@ -387,6 +388,7 @@
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
+*/
 
 /datum/species/crew_shadekin
 	name = SPECIES_SHADEKIN_CREW

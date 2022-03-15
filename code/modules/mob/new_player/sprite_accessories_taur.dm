@@ -303,6 +303,7 @@
 	suit_sprites = 'icons/mob/taursuits_otie.dmi'
 	icon_sprite_tag = "otie"
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/tail/taur/alraune/alraune_2c
 	name = "Alraune (dual color)"
 	icon_state = "alraunecolor_s"
@@ -313,6 +314,7 @@
 	extra_overlay_w = "alraunecolor_closed_markings"
 	clip_mask_state = "taur_clip_mask_alraune"
 	icon_sprite_tag = "alraune"
+*/
 
 /datum/sprite_accessory/tail/taur/wasp
 	name = "Wasp (dual color)"

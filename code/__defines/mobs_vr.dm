@@ -14,13 +14,13 @@
 #define O_FACT		"refactory"
 
 //Alraune organs
-#define A_FRUIT	"fruit gland"
+// #define A_FRUIT	"fruit gland" outpost 21 - race removal
 
 //species defines
 
 //station species
 // #define SPECIES_AKULA			"Akula" outpost 21 - race removal
-#define SPECIES_ALRAUNE			"Alraune"
+// #define SPECIES_ALRAUNE			"Alraune" outpost 21 - race removal
 #define SPECIES_NEVREAN			"Nevrean"
 #define SPECIES_PROTEAN			"Protean"
 #define SPECIES_RAPALA			"Rapala"

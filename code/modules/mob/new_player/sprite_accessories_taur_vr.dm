@@ -412,6 +412,7 @@
 	suit_sprites = 'icons/mob/taursuits_otie_vr.dmi'
 	icon_sprite_tag = "otie"
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/tail/taur/alraune/alraune_2c
 	name = "Alraune (dual color)"
 	icon_state = "alraunecolor_s"
@@ -422,6 +423,7 @@
 	extra_overlay_w = "alraunecolor_closed_markings"
 	clip_mask_state = "taur_clip_mask_alraune"
 	icon_sprite_tag = "alraune"
+*/
 
 /datum/sprite_accessory/tail/taur/wasp
 	name = "Wasp (dual color)"
@@ -546,6 +548,7 @@
 	msg_owner_grab_fail = "You step down onto %prey, squishing them and forcing them down to the ground!"
 	msg_prey_grab_fail = "%owner steps down and squishes you with their leg, forcing you down to the ground!"
 
+/* outpost 21 - race removal
 //natje:
 /datum/sprite_accessory/tail/taur/alraune
 	name = "Alraune (natje) (Taur)"
@@ -577,3 +580,4 @@
 
 	msg_owner_grab_fail = "You step down onto %prey with one of your vines, forcing them onto the ground!"
 	msg_prey_grab_fail = "%owner steps down onto you with one of their vines, squishing you and forcing you onto the ground!"
+*/

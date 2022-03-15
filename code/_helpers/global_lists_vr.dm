@@ -476,7 +476,7 @@ var/global/list/contamination_colors = list("green",
 //For the mechanic of leaving remains. Ones listed below are basically ones that got no bones or leave no trace after death.
 var/global/list/remainless_species = list(SPECIES_PROMETHEAN,
 				SPECIES_DIONA,
-				SPECIES_ALRAUNE,
+				//SPECIES_ALRAUNE, outpost 21 - race removal
 				SPECIES_PROTEAN,
 				SPECIES_MONKEY,					//Exclude all monkey subtypes, to prevent abuse of it. They aren't,
 				SPECIES_MONKEY_TAJ,				//set to have remains anyway, but making double sure,

@@ -68,6 +68,7 @@
 	recognize them due to genetic drift."
 	value = CATALOGUER_REWARD_TRIVIAL
 
+/* outpost 21 - race removal
 /datum/category_item/catalogue/fauna/alraune
 	name = "Sapients - Alraune"
 	desc = "Alraune are enigmatic, strange creatures from the Elysian Colonies. While their main culture is still \
@@ -75,6 +76,7 @@
 	seem to mimic many cultivars throughout space through yet an unknown mechanism. Alraune are pleasant, but \
 	predatory who autocannibalize their own products as a form of nutriment transfer and storage."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/
 
 /datum/category_item/catalogue/fauna/vasilissan
 	name = "Sapients - Vasilissan"

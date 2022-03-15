@@ -394,6 +394,7 @@
 		H.shock_stage = min(H.shock_stage + coldshock, 160) //cold hurts and gives them pain messages, eventually weakening and paralysing, but doesn't damage.
 		return
 
+/* outpost 21 - custom race removal
 /datum/species/werebeast
 	name = SPECIES_WEREBEAST
 	name_plural = "Werebeasts"
@@ -454,3 +455,4 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+*/

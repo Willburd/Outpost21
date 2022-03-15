@@ -284,8 +284,10 @@
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp")
 			if(SPECIES_PROTEAN)
 				temp_img = icon('icons/obj/butts_vr.dmi', "machine")
+			/* outpost 21 - race removal
 			if(SPECIES_WEREBEAST)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // Give Werewolves their own thicc'er than a boal of oatmeal ass sprite someday?
+			*/
 			if(SPECIES_XENOHYBRID, SPECIES_XENO, SPECIES_XENO_DRONE, SPECIES_XENO_HUNTER, SPECIES_XENO_QUEEN, SPECIES_XENO_SENTINEL) // Xenos + Xenohybrids have their own asses, thanks to Pybro.
 				temp_img = icon('icons/obj/butts_vr.dmi', "xeno")
 			if(SPECIES_ZORREN_HIGH)

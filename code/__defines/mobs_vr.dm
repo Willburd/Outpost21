@@ -37,7 +37,7 @@
 #define SPECIES_MONKEY_SERGAL		"Saru"
 #define SPECIES_MONKEY_VULPKANIN	"Wolpin"
 //event species
-#define SPECIES_WEREBEAST			"Werebeast"
+// #define SPECIES_WEREBEAST			"Werebeast" outpost 21 - custom race removal
 #define SPECIES_SHADEKIN			"Shadekin"
 //custom species base sprites
 #define SPECIES_FENNEC				"Fennec"

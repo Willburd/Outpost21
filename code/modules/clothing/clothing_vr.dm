@@ -6,8 +6,8 @@
 	var/recent_squish = 0
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/feet/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/feet/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/feet/mob_vr_werebeast.dmi')
+		SPECIES_VOX = 'icons/inventory/feet/mob_vox.dmi') /*,
+		SPECIES_WEREBEAST = 'icons/inventory/feet/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
 
 /obj/item/clothing/shoes/New()
 	inside_emotes = list(
@@ -88,13 +88,13 @@
 /obj/item/clothing/gloves
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/hands/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/hands/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/hands/mob_vr_werebeast.dmi')
+		SPECIES_VOX = 'icons/inventory/hands/mob_vox.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/hands/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
 
 /obj/item/clothing/ears
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/inventory/ears/mob_teshari.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/ears/mob_vr_werebeast.dmi')
+		SPECIES_TESHARI = 'icons/inventory/ears/mob_teshari.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/ears/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
 
 /obj/item/clothing/relaymove(var/mob/living/user,var/direction)
 
@@ -144,7 +144,7 @@
 		//SPECIES_AKULA 		= 'icons/inventory/face/mob_vr_akula.dmi', outpost 21 - race removal
 		SPECIES_VULPKANIN 	= 'icons/inventory/face/mob_vr_vulpkanin.dmi',
 		SPECIES_XENOCHIMERA	= 'icons/inventory/face/mob_vr_tajaran.dmi',
-		SPECIES_WEREBEAST	= 'icons/inventory/face/mob_vr_werebeast.dmi', //YW EDIT: temporary fix
+		//SPECIES_WEREBEAST	= 'icons/inventory/face/mob_vr_werebeast.dmi', //YW EDIT: temporary fix outpost 21 - custom race removal
 		//SPECIES_GREY_YW     = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/ outpost 21 - race removal
 		)
 //"Spider" 		= 'icons/inventory/mask/mob_spider.dmi' Add this later when they have custom mask sprites and everything.
@@ -153,16 +153,17 @@
 /obj/item/clothing/suit
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/suit/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/suit/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/suit/mob_vr_werebeast.dmi')
+		SPECIES_VOX = 'icons/inventory/suit/mob_vox.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/suit/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
 
 /obj/item/clothing/under
 	sensor_mode = 3
 	var/sensorpref = 5
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/uniform/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/uniform/mob_vr_werebeast.dmi') //YW EDIT: temporary fix
+		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/uniform/mob_vr_werebeast.dmi') //YW EDIT: temporary fix outpost 21 - custom race removal
+		*/
 		//SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*ywedit*/) outpost 21 - race removal
 
 /obj/item/clothing/under/New(var/mob/living/carbon/human/H)
@@ -181,5 +182,5 @@
 /obj/item/clothing/head
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/head/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/head/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/head/mob_vr_werebeast.dmi')
+		SPECIES_VOX = 'icons/inventory/head/mob_vox.dmi') /*,
+		SPECIES_WEREBEAST = 'icons/inventory/head/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/

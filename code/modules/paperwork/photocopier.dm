@@ -290,8 +290,10 @@
 			*/
 			if(SPECIES_XENOHYBRID, SPECIES_XENO, SPECIES_XENO_DRONE, SPECIES_XENO_HUNTER, SPECIES_XENO_QUEEN, SPECIES_XENO_SENTINEL) // Xenos + Xenohybrids have their own asses, thanks to Pybro.
 				temp_img = icon('icons/obj/butts_vr.dmi', "xeno")
+			/* outpost 21 - race removal
 			if(SPECIES_ZORREN_HIGH)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // placeholder until we get zorren butts.
+			*/
 			if(SPECIES_FENNEC)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // placeholder until we get fennec butts.
 			/* 

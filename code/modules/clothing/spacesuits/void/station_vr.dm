@@ -8,7 +8,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/head/mob_unathi.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/mob_unathi.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/head/mob_vr_vulpkanin.dmi'
 		)
 	sprite_sheets_obj = list(
@@ -19,7 +19,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/head/item.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/item.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/item.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/item.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/head/item.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/head/item.dmi'
 		)
 
@@ -33,7 +33,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/suit/mob_vr_akula.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/mob_vr_sergal.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/suit/mob_vr_vulpkanin.dmi'
 		)
 	sprite_sheets_obj = list(
@@ -44,7 +44,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/suit/item.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/item.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/item.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/item.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/item.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/suit/item.dmi'
 		)
 

@@ -9,7 +9,7 @@
 	name = "You should not see this..."
 	icon = 'icons/mob/vore/ears_vr.dmi'
 	do_colouration = 0 // Set to 1 to blend (ICON_ADD) hair color
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID/*, SPECIES_VASILISSAN*//*, SPECIES_RAPALA*/, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_GREY_YW*//*, SPECIES_SHADEKIN_YW*/) //This lets all races use //YW EDIT
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC/*, SPECIES_ZORREN_HIGH*/, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID/*, SPECIES_VASILISSAN*//*, SPECIES_RAPALA*/, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_GREY_YW*//*, SPECIES_SHADEKIN_YW*/) //This lets all races use //YW EDIT
 	color_blend_mode = ICON_ADD // Only appliciable if do_coloration = 1
 
 // Species-unique ears
@@ -183,6 +183,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/ears/foxears
 	name = "highlander zorren ears"
 	desc = ""
@@ -211,6 +212,7 @@
 	extra_overlay = "fenears-inner"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/ears/sergalhc
 	name = "Sergal ears, colorable"

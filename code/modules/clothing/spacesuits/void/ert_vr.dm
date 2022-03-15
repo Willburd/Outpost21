@@ -176,7 +176,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/suit/mob_vr_akula.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/mob_vr_sergal.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
 		SPECIES_SHADEKIN_CREW		= 'icons/inventory/suit/mob_vr_vulpkanin.dmi',
 		//SPECIES_VASILISSAN		= 'icons/inventory/suit/mob_vr.dmi',outpost 21 - race removal
@@ -193,7 +193,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/suit/item_vr.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/item_vr.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/suit/item_vr.dmi',
 		SPECIES_SHADEKIN_CREW		= 'icons/inventory/suit/item_vr.dmi',
 		//SPECIES_VASILISSAN		= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
@@ -213,7 +213,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/head/mob_vr_unathi.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/mob_vr_unathi.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
 		SPECIES_SHADEKIN_CREW		= 'icons/inventory/head/mob_vr_vulpkanin.dmi',
 		//SPECIES_VASILISSAN		= 'icons/inventory/head/mob_vr.dmi',outpost 21 - race removal
@@ -230,7 +230,7 @@
 		//SPECIES_AKULA			= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal
 		SPECIES_SERGAL			= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_VULPKANIN		= 'icons/inventory/head/item_vr.dmi',
-		SPECIES_ZORREN_HIGH		= 'icons/inventory/head/item_vr.dmi',
+		//SPECIES_ZORREN_HIGH		= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal
 		SPECIES_FENNEC			= 'icons/inventory/head/item_vr.dmi',
 		SPECIES_SHADEKIN_CREW		= 'icons/inventory/head/item_vr.dmi',
 		//SPECIES_VASILISSAN		= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal

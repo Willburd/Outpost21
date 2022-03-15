@@ -191,7 +191,7 @@
 		if(SPECIES_UNATHI)
 			species_restricted = list(SPECIES_UNATHI, SPECIES_XENOHYBRID)
 		if(SPECIES_VULPKANIN)
-			species_restricted = list(SPECIES_VULPKANIN, SPECIES_ZORREN_HIGH, SPECIES_FENNEC)
+			species_restricted = list(SPECIES_VULPKANIN/*, SPECIES_ZORREN_HIGH*/, SPECIES_FENNEC)
 		if(SPECIES_SERGAL)
 			species_restricted = list(SPECIES_SERGAL, SPECIES_NEVREAN)
 		//VOREStation Edit End

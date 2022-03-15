@@ -11,7 +11,7 @@
 		/datum/lore/codex/page/nevrean,
 		/datum/lore/codex/page/sergal,
 		/datum/lore/codex/page/vulpkanin,
-		/datum/lore/codex/page/zorren,
+		///datum/lore/codex/page/zorren, outpost 21 - race removal
 		/datum/lore/codex/category/teshari,
 		/datum/lore/codex/category/positronic
 		)

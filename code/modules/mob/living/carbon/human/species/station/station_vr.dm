@@ -162,6 +162,7 @@
 		"Your overheated skin itches."
 		)
 
+/*outpost 21 - race removal
 /datum/species/hi_zoxxen
 	name = SPECIES_ZORREN_HIGH
 	name_plural = "Zorren"
@@ -207,6 +208,7 @@
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
+*/
 
 /datum/species/vulpkanin
 	name = SPECIES_VULPKANIN

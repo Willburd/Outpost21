@@ -20,8 +20,10 @@
 	skull_type = /obj/item/weapon/digestion_remains/skull/vulpkanin
 /datum/species/sergal
 	skull_type = /obj/item/weapon/digestion_remains/skull/sergal
+/* outpost 21 - race removal
 /datum/species/hi_zorren
 	skull_type = /obj/item/weapon/digestion_remains/skull/zorren
+*/
 /datum/species/nevrean
 	skull_type = /obj/item/weapon/digestion_remains/skull/nevrean
 /datum/species/teshari
@@ -131,9 +133,11 @@
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a sergal."
 	icon_state = "skull_taj"
 
+/* outpost 21 - race removal
 /obj/item/weapon/digestion_remains/skull/zorren
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a zorren."
 	icon_state = "skull_taj"
+*/
 
 /obj/item/weapon/digestion_remains/skull/nevrean
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a nevrean."

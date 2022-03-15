@@ -80,6 +80,7 @@
 	value = CATALOGUER_REWARD_TRIVIAL
 */
 
+/*
 /datum/category_item/catalogue/fauna/vasilissan
 	name = "Sapients - Vasilissan"
 	desc = "Vasilissans are an arachnid species uplifted by NT due to their propensity for architectural feats for \
@@ -88,7 +89,9 @@
 	Vasilissans are happily adopted into Coreward Periphery colonies, valued for their infrastructural acumen \
 	and their craftsmanship with their natural silk."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/
 
+/* outpost 21 - race removal
 /datum/category_item/catalogue/fauna/zorren
 	name = "Sapients - Zorren"
 	desc = "The Zorren are the remnants of an ancient precursor which resided in the Coreward Periphery 3000 to 4000 \
@@ -98,6 +101,7 @@
 	of their precursors, leading to a massive divide between commoners, who live as serfs and the nobility, who live in \
 	comparable conditions as wealthy members of the Diaspora."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/ 
 
 /datum/category_item/catalogue/fauna/shadekin
 	name = "Sapients - Shadekin"

@@ -562,6 +562,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/tail/special/foxdefault
 	name = "default zorren tail, colorable"
 	desc = ""
@@ -583,6 +584,7 @@
 	icon_state = "fentail_hc_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/armalishc
 	name = "armalis tail, colorable"

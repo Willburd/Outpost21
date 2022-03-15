@@ -165,6 +165,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/ears/foxears
 	name = "highlander zorren ears"
 	desc = ""
@@ -193,6 +194,7 @@
 	extra_overlay = "fenears-inner"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/ears/sergalhc
 	name = "Sergal ears, colorable"

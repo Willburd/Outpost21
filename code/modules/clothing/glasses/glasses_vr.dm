@@ -128,5 +128,5 @@
 		SPECIES_TESHARI = 'icons/inventory/eyes/mob_teshari.dmi',
 		SPECIES_VOX = 'icons/inventory/eyes/mob_vox.dmi',
 		SPECIES_WEREBEAST = 'icons/inventory/eyes/mob_werebeast.dmi',
-		SPECIES_GREY_YW = 'icons/mob/species/grey/eyes.dmi'/*ywedit*/
+		//SPECIES_GREY_YW = 'icons/mob/species/grey/eyes.dmi'/*ywedit*/ outpost 21 - race removal
 		)

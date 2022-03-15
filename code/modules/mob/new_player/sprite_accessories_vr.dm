@@ -6,7 +6,7 @@
 
 /datum/sprite_accessory/hair
 
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*/, SPECIES_WEREBEAST, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN_YW) //This lets all races use the default hairstyles.
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN/*, SPECIES_ALRAUNE*/, SPECIES_WEREBEAST, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_SHADEKIN_YW*/) //This lets all races use the default hairstyles.
 
 /datum/sprite_accessory/hair/astolfo
 	name = "Astolfo"
@@ -435,7 +435,7 @@
 	icon = 'icons/mob/human_face_vr.dmi'
 	icon_add = 'icons/mob/human_face_vr_add.dmi'
 	icon_state = "shadekin_short"
-	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN_YW) //YW Edits
+	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_SHADEKIN_YW*/) //YW Edits
 	gender = NEUTER
 
 /datum/sprite_accessory/hair/shadekin_hair_poofy
@@ -443,7 +443,7 @@
 	icon = 'icons/mob/human_face_vr.dmi'
 	icon_add = 'icons/mob/human_face_vr_add.dmi'
 	icon_state = "shadekin_poofy"
-	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN_YW) //YW Edits
+	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_SHADEKIN_YW*/) //YW Edits
 	gender = NEUTER
 
 /datum/sprite_accessory/hair/shadekin_hair_long
@@ -451,7 +451,7 @@
 	icon = 'icons/mob/human_face_vr.dmi'
 	icon_add = 'icons/mob/human_face_vr_add.dmi'
 	icon_state = "shadekin_long"
-	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN_YW) //YW Edits
+	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_SHADEKIN_YW*/) //YW Edits
 	gender = NEUTER
 
 /datum/sprite_accessory/hair/shadekin_hair_rivyr
@@ -460,7 +460,7 @@
 	icon_add = 'icons/mob/human_face_vr_add.dmi'
 	icon_state = "shadekin_rivyr"
 	ckeys_allowed = list("verysoft")
-	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN_YW) //YW Edits
+	species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW/*, SPECIES_SHADEKIN_YW*/) //YW Edits
 	gender = NEUTER
 
 /datum/sprite_accessory/facial_hair

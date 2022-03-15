@@ -314,6 +314,7 @@
 
 	return
 
+/* outpost 21 - race removal
 /////////////////////
 /////SPIDER RACE/////
 /////////////////////
@@ -393,6 +394,7 @@
 			H.eye_blurry = 5
 		H.shock_stage = min(H.shock_stage + coldshock, 160) //cold hurts and gives them pain messages, eventually weakening and paralysing, but doesn't damage.
 		return
+*/
 
 /* outpost 21 - custom race removal
 /datum/species/werebeast

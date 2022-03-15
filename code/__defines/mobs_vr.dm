@@ -26,7 +26,7 @@
 //#define SPECIES_RAPALA			"Rapala" outpost 21 - race removal
 #define SPECIES_SERGAL			"Sergal"
 #define SPECIES_SHADEKIN_CREW	"Black-Eyed Shadekin"
-#define SPECIES_VASILISSAN		"Vasilissan"
+// #define SPECIES_VASILISSAN		"Vasilissan" outpost 21 - race removal
 #define SPECIES_VULPKANIN		"Vulpkanin"
 #define SPECIES_XENOCHIMERA		"Xenochimera"
 #define SPECIES_ZORREN_HIGH		"Zorren"

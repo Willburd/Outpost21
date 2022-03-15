@@ -76,8 +76,8 @@
 		pref.max_traits = MAX_SPECIES_TRAITS
 
 	// if(pref.species != SPECIES_CUSTOM) outpost 21 edit - removed custom race
-	pref.pos_traits.Cut()
-	pref.neg_traits.Cut()
+		pref.pos_traits.Cut()
+		pref.neg_traits.Cut()
 	// Clean up positive traits
 	for(var/datum/trait/path as anything in pref.pos_traits)
 		if(!(path in positive_traits))
@@ -138,12 +138,12 @@
 	//Any additional non-trait settings can be applied here
 	new_S.blood_color = pref.blood_color
 
-	/* if(pref.species == SPECIES_CUSTOM) outpost 21 edit - removed custom race
-		//Statistics for this would be nice
-		var/english_traits = english_list(new_S.traits, and_text = ";", comma_text = ";")
-		log_game("TRAITS [pref.client_ckey]/([character]) with: [english_traits]") //Terrible 'fake' key_name()... but they aren't in the same entity yet
-	else
-	*/
+	// if(pref.species == SPECIES_CUSTOM) outpost 21 edit - removed custom race
+	//Statistics for this would be nice
+	var/english_traits = english_list(new_S.traits, and_text = ";", comma_text = ";")
+	log_game("TRAITS [pref.client_ckey]/([character]) with: [english_traits]") //Terrible 'fake' key_name()... but they aren't in the same entity yet
+	//else
+
 
 /datum/category_item/player_setup_item/vore/traits/content(var/mob/user)
 	. += "<b>Custom Species Name:</b> "

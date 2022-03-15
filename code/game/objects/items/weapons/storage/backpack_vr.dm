@@ -77,8 +77,8 @@
 
 /obj/item/weapon/storage/backpack
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/inventory/back/mob_teshari.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/back/mob_vr_werebeast.dmi')
+		SPECIES_TESHARI = 'icons/inventory/back/mob_teshari.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/back/mob_vr_werebeast.dmi') outpost 21 - custom race removal */
 
 /obj/item/weapon/storage/backpack/ert
 	max_storage_space = INVENTORY_DUFFLEBAG_SPACE

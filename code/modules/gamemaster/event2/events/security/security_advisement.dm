@@ -16,7 +16,7 @@
 	var/suspicious_people = 0
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_PROMETHEAN) * 20
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_UNATHI) * 10
-	suspicious_people += metric.count_all_of_specific_species(SPECIES_ZADDAT) * 10
+	//suspicious_people += metric.count_all_of_specific_species(SPECIES_ZADDAT) * 10 outpost 21 race removal
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_SKRELL) * 5 // Not sure why skrell are so high.
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_TAJ) * 5
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_TESHARI) * 5
@@ -36,7 +36,7 @@
 		SPECIES_TESHARI = 2,
 		SPECIES_TAJ = 3,
 		SPECIES_DIONA = 1,
-		SPECIES_ZADDAT = 25,
+		//SPECIES_ZADDAT = 25, outpost 21 race removal
 		SPECIES_PROMETHEAN = 30
 	)
 

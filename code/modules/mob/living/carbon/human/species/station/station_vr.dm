@@ -294,6 +294,7 @@
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	wikilink="https://yawn.izac.live/Skrell"
 
+/* outpost 21 race removal
 /datum/species/zaddat
 	spawn_flags = SPECIES_CAN_JOIN
 	min_age = 18
@@ -310,6 +311,7 @@
 		H.equip_to_slot_or_del(L, slot_r_hand)
 	else
 		H.equip_to_slot_or_del(L, slot_in_backpack)
+*/
 
 /datum/species/diona
 	spawn_flags = SPECIES_CAN_JOIN

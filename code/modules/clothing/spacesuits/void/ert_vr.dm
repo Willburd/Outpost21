@@ -183,7 +183,7 @@
 		SPECIES_NEVREAN			= 'icons/inventory/suit/mob_vr.dmi',
 		//SPECIES_RAPALA			= 'icons/inventory/suit/mob_vr.dmi',outpost 21 - race removal
 		//SPECIES_ALRAUNE			= 'icons/inventory/suit/mob_vr.dmi',outpost 21 - race removal
-		SPECIES_ZADDAT			= 'icons/inventory/suit/mob_vr.dmi'
+		//SPECIES_ZADDAT			= 'icons/inventory/suit/mob_vr.dmi'outpost 21 - race removal
 		)
 	sprite_sheets_obj = list(
 		SPECIES_TAJ			= 'icons/inventory/suit/item_vr.dmi',
@@ -200,7 +200,7 @@
 		SPECIES_NEVREAN			= 'icons/inventory/suit/item_vr.dmi',
 		//SPECIES_RAPALA			= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
 		//SPECIES_ALRAUNE			= 'icons/inventory/suit/item_vr.dmi',outpost 21 - race removal
-		SPECIES_ZADDAT			= 'icons/inventory/suit/item_vr.dmi'
+		//SPECIES_ZADDAT			= 'icons/inventory/suit/item_vr.dmi'outpost 21 - race removal
 		)
 
 /obj/item/clothing/head/helmet/space/void/responseteam
@@ -220,7 +220,7 @@
 		SPECIES_NEVREAN			= 'icons/inventory/head/mob_vr.dmi',
 		//SPECIES_RAPALA			= 'icons/inventory/head/mob_vr.dmi',outpost 21 - race removal
 		//SPECIES_ALRAUNE			= 'icons/inventory/head/mob_vr.dmi',outpost 21 - race removal
-		SPECIES_ZADDAT			= 'icons/inventory/head/mob_vr.dmi'
+		//SPECIES_ZADDAT			= 'icons/inventory/head/mob_vr.dmi'outpost 21 - race removal
 		)
 	sprite_sheets_obj = list(
 		SPECIES_TAJ 			= 'icons/inventory/head/item_vr.dmi',
@@ -237,5 +237,5 @@
 		SPECIES_NEVREAN			= 'icons/inventory/head/item_vr.dmi',
 		//SPECIES_RAPALA			= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal
 		//SPECIES_ALRAUNE			= 'icons/inventory/head/item_vr.dmi',outpost 21 - race removal
-		SPECIES_ZADDAT			= 'icons/inventory/head/item_vr.dmi'
+		//SPECIES_ZADDAT			= 'icons/inventory/head/item_vr.dmi'outpost 21 - race removal
 		)

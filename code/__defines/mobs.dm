@@ -299,7 +299,7 @@
 #define SPECIES_PROMETHEAN		"Promethean"
 #define SPECIES_DIONA			"Diona"
 #define SPECIES_VOX				"Vox"
-#define SPECIES_ZADDAT			"Zaddat"
+//#define SPECIES_ZADDAT			"Zaddat" outpost 21 - race removal
 
 // Monkey and alien monkeys.
 #define SPECIES_MONKEY			"Monkey"

@@ -220,6 +220,7 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 	comes to meeting and exploring the rest of the galaxy."
 	value = CATALOGUER_REWARD_TRIVIAL
 
+/*outpost 21 - race removal
 /datum/category_item/catalogue/fauna/zaddat
 	name = "Sapients - Zaddat"
 	desc = "The Zaddat are an Unathi client species that has recently come to the \
@@ -230,6 +231,7 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 	host nation to fund their search for a new home to replace their \
 	now-lifeless homeworld of Xohox."
 	value = CATALOGUER_REWARD_TRIVIAL
+*/
 
 /datum/category_item/catalogue/fauna/promethean
 	name = "Sapients - Promethean"

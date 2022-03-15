@@ -16,8 +16,8 @@
 					LANGUAGE_SCHECHI = 0,
 					LANGUAGE_EAL	 = 1,
 					LANGUAGE_SIGN	 = 0,
-					LANGUAGE_TERMINUS = 1,
-					LANGUAGE_ZADDAT = 0
+					LANGUAGE_TERMINUS = 1
+					//LANGUAGE_ZADDAT = 0 outpost 21 race removal
 					)
 	sprites = list(
 					"Cerberus" = "syndie_bloodhound",

@@ -225,6 +225,7 @@
 	containername = "Frontier Mining voidsuit crate"
 	access = access_mining
 
+/* outpost 21 - race removal
 /datum/supply_pack/voidsuits/zaddat
 	name = "Zaddat Shroud"
 	contains = list(
@@ -235,6 +236,7 @@
 	containertype = /obj/structure/closet/crate/nanotrasen
 	containername = "Zaddat Shroud crate"
 	access = access_mining
+*/
 
 /datum/supply_pack/voidsuits/unathi_bs_yw
 	name = "Unathi breacher chassis"

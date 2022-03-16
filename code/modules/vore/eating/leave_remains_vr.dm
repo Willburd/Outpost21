@@ -8,16 +8,22 @@
 	skull_type = /obj/item/weapon/digestion_remains/skull/skrell
 /datum/species/spider
 	skull_type = /obj/item/weapon/digestion_remains/skull/vasilissan
+/* outpost 21 - race removal
 /datum/species/akula
 	skull_type = /obj/item/weapon/digestion_remains/skull/akula
+*/
+/* outpost 21 - race removal
 /datum/species/harpy
 	skull_type = /obj/item/weapon/digestion_remains/skull/rapala
+*/
 /datum/species/vulpkanin
 	skull_type = /obj/item/weapon/digestion_remains/skull/vulpkanin
 /datum/species/sergal
 	skull_type = /obj/item/weapon/digestion_remains/skull/sergal
+/* outpost 21 - race removal
 /datum/species/hi_zorren
 	skull_type = /obj/item/weapon/digestion_remains/skull/zorren
+*/
 /datum/species/nevrean
 	skull_type = /obj/item/weapon/digestion_remains/skull/nevrean
 /datum/species/teshari
@@ -107,14 +113,18 @@
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a vasilissan."
 	icon_state = "skull"
 
+/* outpost 21 - race removal
 /obj/item/weapon/digestion_remains/skull/akula
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to an akula."
 	icon_state = "skull_unathi"
+*/
 
+/* outpost 21 - race removal
 /obj/item/weapon/digestion_remains/skull/rapala
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a rapala."
 	icon_state = "skull"
-
+*/
+	
 /obj/item/weapon/digestion_remains/skull/vulpkanin
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a vulpkanin."
 	icon_state = "skull_taj"
@@ -123,9 +133,11 @@
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a sergal."
 	icon_state = "skull_taj"
 
+/* outpost 21 - race removal
 /obj/item/weapon/digestion_remains/skull/zorren
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a zorren."
 	icon_state = "skull_taj"
+*/
 
 /obj/item/weapon/digestion_remains/skull/nevrean
 	desc = "A bleached skull. It looks very weakened. Seems like it belonged to a nevrean."

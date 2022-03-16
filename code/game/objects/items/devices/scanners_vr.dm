@@ -193,7 +193,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 
 		usr.visible_message("[usr] begins scanning [target]'s mind.","<span class='notice'>You begin scanning [target]'s mind.</span>")
 		if(do_after(usr,8 SECONDS,target))
-			our_db.m_backup(target.null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
+			our_db.m_backup( target.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
 			to_chat(usr,"<span class='notice'>Mind backed up!</span>")
 		else
 			to_chat(usr,"<span class='warning'>You must remain close to your target!</span>")
@@ -226,7 +226,7 @@ var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 			to_chat(usr,"<span class='warning'>There is already someone's mind stored inside</span>")
 			return
 
-		var/choice = tgui_alert(usr,"This will remove the target's mind from their body (and from the game as long as they're in the sleevemate). You can put them into a (mindless) body, a NIF, or back them up for normal resleeving, but you should probably have a plan in advance so you don't leave them unable to interact for too long. Continue?","Confirmation",list("Continue","Cancel"))
+		var/choice = tgui_alert(usr,"This will remove the target's mind from their body (and from the game as long as they're in the sleevemate). You can put them into a (mindless) body, or back them up for normal resleeving, but you should probably have a plan in advance so you don't leave them unable to interact for too long. Continue?","Confirmation",list("Continue","Cancel"))
 		if(choice == "Continue" && usr.get_active_hand() == src && usr.Adjacent(target))
 
 			usr.visible_message("<span class='warning'>[usr] begins downloading [target]'s mind!</span>","<span class='notice'>You begin downloading [target]'s mind!</span>")

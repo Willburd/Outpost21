@@ -195,7 +195,7 @@
 /datum/alt_title/monk
 	title = "Monk"
 
-
+/* outpost 21 - job removals
 
 //////////////////////////////////
 //			Entertainer
@@ -262,3 +262,5 @@
 /datum/alt_title/artist
 	title = "Artist"
 	title_blurb = "An Artist's calling is to create beautiful arts! Whatever form may they take, create and have people astonished with your creativity."
+
+*/

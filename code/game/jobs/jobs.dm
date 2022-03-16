@@ -14,8 +14,10 @@ var/const/CYBORG			=(1<<9)
 var/const/CLOWN				=(1<<13) //VOREStation Add
 var/const/MIME				=(1<<14) //VOREStation Add
 var/const/INTERN			=(1<<15) //VOREStation Add
+/* outpost 21 - job removals
 var/const/BLUESHIELD		=(1<<16) //YW addition
 var/const/SECPILOT			=(1<<17) //YW addition
+*/
 
 var/const/MEDSCI			=(1<<1)
 
@@ -30,8 +32,10 @@ var/const/PSYCHIATRIST		=(1<<7)
 var/const/ROBOTICIST		=(1<<8)
 var/const/XENOBIOLOGIST		=(1<<9)
 var/const/PARAMEDIC			=(1<<10)
+/* outpost 21 - job removals
 var/const/PATHFINDER 		=(1<<11) //VOREStation Add
 var/const/EXPLORER 			=(1<<12) //VOREStation Add
+*/
 var/const/SAR 				=(1<<13) //VOREStation Add
 var/const/XENOBOTANIST		=(1<<14) //VOREStation Add
 
@@ -50,9 +54,12 @@ var/const/LAWYER			=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
+/* outpost 21 - job removals
 var/const/PILOT 			=(1<<13) //VOREStation Add
 var/const/ENTERTAINER		=(1<<14) //VOREStation Add
+*/
 
+/* outpost 21 - job removals
 //YAWN Add START
 var/const/TALON				=(1<<3)
 
@@ -62,6 +69,7 @@ var/const/TALDOC			=(1<<2)
 var/const/TALSEC			=(1<<3)
 var/const/TALENG			=(1<<4)
 //YAWN Add END
+*/
 
 /proc/guest_jobbans(var/job)
 	return ( (job in SSjob.get_job_titles_in_department(DEPARTMENT_COMMAND)) || (job in SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC)) || (job in SSjob.get_job_titles_in_department(DEPARTMENT_SECURITY)) )

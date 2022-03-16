@@ -2,9 +2,9 @@
 
 	#include "cryogaia_defines.dm"
 	#include "cryogaia_turfs.dm"
-	#include "cryogaia_jobs.dm"
-	#include "job/outfits.dm"
-	#include "job/outfits_yw.dm"
+	//#include "cryogaia_jobs.dm" outpost 21 - job removals
+	//#include "job/outfits.dm" outpost 21 - job removals
+	//#include "job/outfits_yw.dm" outpost 21 - job removals
 	#include "cryogaia_things.dm"
 	#include "tether_phoronlock.dm"
 	#include "cryogaia_areas.dm"

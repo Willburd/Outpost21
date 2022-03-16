@@ -496,6 +496,7 @@
 
 //Ally Faell
 
+/* outpost 21 - race removal
 /obj/item/clothing/under/fluff/ally_1
 	name = "Skintight bodysuit"
 	desc = "A black-purple bodysuit made of some durable synthetic material fitted for a akula. Lewd."
@@ -504,6 +505,7 @@
 	icon_override = 'icons/vore/custom_onmob_yw.dmi'
 	item_state = "satsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+*/
 
 /obj/item/clothing/under/rank/security/corp/fluff/ally_2
 	name = "Security uniform"
@@ -1021,6 +1023,7 @@
 	icon_state = "jiao_labcoat"
 	icon_override = 'icons/vore/custom_onmob_yw.dmi'
 
+/* outpost 21 - race removal
 /obj/item/clothing/glasses/hud/health/aviator/fluff/jiao_glasses
 	name = "Mitsuko's AR glasses"
 	desc = "A set of metal frame glasses that seem to be modified to fit easier on a elongated snout. On the glasses is a set of low perspiration lenses with a thin overlay for medical hub to be turned on."
@@ -1030,6 +1033,7 @@
 	icon_override = 'icons/vore/custom_onmob_yw.dmi'
 	item_state = "jiao_glasses"
 	species_restricted = list("Akula")
+*/
 
 /obj/item/clothing/under/rank/medical/fluff/jiao_uniform
 	name = "A Kanghu Navy Force medical doctor uniform"

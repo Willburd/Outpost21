@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species. Set to null to perform no checking.
-	var/list/species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN)
+	var/list/species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/)
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -134,7 +134,7 @@
 	name = "Bald"
 	icon_state = "bald"
 	flags = HAIR_VERY_SHORT
-	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX,SPECIES_TESHARI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_VOX,SPECIES_TESHARI)
 
 /datum/sprite_accessory/hair/baldfade
 	name = "Balding Fade"
@@ -213,7 +213,7 @@
 /datum/sprite_accessory/hair/bob
 	name = "Bob"
 	icon_state = "hair_bobcut"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bobcutalt
@@ -229,7 +229,7 @@
 /datum/sprite_accessory/hair/bobcurl
 	name = "Bobcurl"
 	icon_state = "hair_bobcurl"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bowl
@@ -338,7 +338,7 @@
 	name = "Buzzcut"
 	icon_state = "hair_buzzcut"
 	flags = HAIR_VERY_SHORT
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 
 /datum/sprite_accessory/hair/celebcurls
 	name = "Celeb Curls"
@@ -740,7 +740,7 @@
 /datum/sprite_accessory/hair/mohawk
 	name = "Mohawk"
 	icon_state = "hair_d"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 
 /datum/sprite_accessory/hair/regulationmohawk
 	name = "Mohawk Regulation"
@@ -1057,7 +1057,7 @@
 /datum/sprite_accessory/hair/spiky
 	name = "Spiky"
 	icon_state = "hair_spikey"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 
 /datum/sprite_accessory/hair/straightlong
 	name = "Straight Long"
@@ -1528,7 +1528,7 @@ shaved
 	name = "Shaved"
 	icon_state = "bald"
 	gender = NEUTER
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_TAJ,SPECIES_SKRELL, "Machine", SPECIES_TESHARI, SPECIES_TESHARI,SPECIES_PROMETHEAN)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI,SPECIES_TAJ,SPECIES_SKRELL, "Machine", SPECIES_TESHARI, SPECIES_TESHARI,SPECIES_PROMETHEAN)
 
 /datum/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"
@@ -1569,7 +1569,7 @@ shaved
 /datum/sprite_accessory/facial_hair/elvis
 	name = "Elvis Sideburns"
 	icon_state = "facial_elvis"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN/*, SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI)
 
 /datum/sprite_accessory/facial_hair/abe
 	name = "Abraham Lincoln Beard"
@@ -2350,12 +2350,12 @@ shaved
 /datum/sprite_accessory/skin/human
 	name = "Default human skin"
 	icon_state = "default"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/)
 
 /datum/sprite_accessory/skin/human_tatt01
 	name = "Tatt01 human skin"
 	icon_state = "tatt1"
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/)
 
 /datum/sprite_accessory/skin/tajaran
 	name = "Default tajaran skin"

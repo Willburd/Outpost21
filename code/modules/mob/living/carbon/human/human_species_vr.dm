@@ -5,8 +5,10 @@
 	h_style = "Sergal Plain"
 	..(new_loc, "Sergal")
 
+/*outpost 21 - race removal
 /mob/living/carbon/human/akula/New(var/new_loc)
 	..(new_loc, "Akula")
+*/
 
 /mob/living/carbon/human/nevrean/New(var/new_loc)
 	..(new_loc, "Nevrean")
@@ -20,11 +22,15 @@
 /mob/living/carbon/human/vulpkanin/New(var/new_loc)
 	..(new_loc, "Vulpkanin")
 
+/* outpost 21 - race removal
 /mob/living/carbon/human/protean/New(var/new_loc)
 	..(new_loc, "Protean")
+*/
 
+/*outpost 21 - race removal
 /mob/living/carbon/human/alraune/New(var/new_loc)
 	..(new_loc, "Alraune")
+*/
 
 /mob/living/carbon/human/shadekin/New(var/new_loc)
 	..(new_loc, SPECIES_SHADEKIN)

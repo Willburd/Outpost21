@@ -142,18 +142,16 @@
 
 	//Set species_restricted list
 	switch(target_species)
-		//VOREStation Edit Start
-		if(SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
-		if(SPECIES_UNATHI)
-			species_restricted = list(SPECIES_UNATHI, SPECIES_XENOHYBRID)
-		if(SPECIES_VULPKANIN)
-			species_restricted = list(SPECIES_VULPKANIN, SPECIES_ZORREN_HIGH, SPECIES_FENNEC)
-		if(SPECIES_SERGAL)
-			species_restricted = list(SPECIES_SERGAL, SPECIES_NEVREAN)
-		//VOREStation Edit End
+		// outpost 21 edit - redid this list code due to broken refitting access
+		// logic is based on if someone could fit inside the suit even with discomfort, or if the suit requires unique construction to hold them
+		if(SPECIES_HUMAN, SPECIES_PROMETHEAN)	//humanoid bodytypes
+			species_restricted = list( SPECIES_HUMAN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_PROMETHEAN) // no tail, four limbs, humanish sized
+		if(SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_UNATHI, SPECIES_DIONA)
+			species_restricted = list( SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_HUMAN, SPECIES_PROMETHEAN) // has simple tail, four limbs, humanish sized
+		if(SPECIES_SERGAL, SPECIES_SKRELL, SPECIES_VOX, SPECIES_UNATHI, SPECIES_DIONA)
+			species_restricted = list(SPECIES_SERGAL, SPECIES_SKRELL, SPECIES_VOX, SPECIES_DIONA, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_HUMAN, SPECIES_PROMETHEAN) // large tail, four limbs, or large sized
 		else
-			species_restricted = list(target_species)
+			species_restricted = list(target_species, SPECIES_PROMETHEAN) // prometheans are silly
 
 	//Set icon
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
@@ -187,13 +185,13 @@
 	switch(target_species)
 		//VOREStation Edit Start
 		if(SPECIES_HUMAN)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
+			species_restricted = list(SPECIES_HUMAN/*, SPECIES_RAPALA*//*, SPECIES_VASILISSAN*//*, SPECIES_ALRAUNE*/, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
 		if(SPECIES_SKRELL)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_RAPALA, SPECIES_VASILISSAN, SPECIES_ALRAUNE, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL/*, SPECIES_RAPALA*//*, SPECIES_VASILISSAN*//*, SPECIES_ALRAUNE*/, SPECIES_PROMETHEAN, SPECIES_XENOCHIMERA)
 		if(SPECIES_UNATHI)
 			species_restricted = list(SPECIES_UNATHI, SPECIES_XENOHYBRID)
 		if(SPECIES_VULPKANIN)
-			species_restricted = list(SPECIES_VULPKANIN, SPECIES_ZORREN_HIGH, SPECIES_FENNEC)
+			species_restricted = list(SPECIES_VULPKANIN/*, SPECIES_ZORREN_HIGH*/, SPECIES_FENNEC)
 		if(SPECIES_SERGAL)
 			species_restricted = list(SPECIES_SERGAL, SPECIES_NEVREAN)
 		//VOREStation Edit End
@@ -563,7 +561,7 @@
 		SPECIES_VOX = 'icons/inventory/face/mob_vox.dmi',
 		SPECIES_TAJ = 'icons/inventory/face/mob_tajaran.dmi',
 		SPECIES_UNATHI = 'icons/inventory/face/mob_unathi.dmi',
-		SPECIES_GREY_YW = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/
+		//SPECIES_GREY_YW = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/ outpost 21 - race removal
 		)
 
 	var/voicechange = 0
@@ -825,7 +823,7 @@
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/uniform/mob_teshari.dmi',
 		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi',
-		SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*YWedit*/
+		//SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*YWedit*/ outpost 21 - race removal
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.

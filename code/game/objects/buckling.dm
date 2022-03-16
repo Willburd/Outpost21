@@ -121,7 +121,7 @@
 	/* outpost 21  edit - nif removal
 	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
 	*/
-	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user))
+	if(!user.Adjacent(M) || user.restrained() || user.stat)
 		return FALSE
 	if(M in buckled_mobs)
 		to_chat(user, "<span class='warning'>\The [M] is already buckled to \the [src].</span>")

@@ -291,7 +291,7 @@
 
 // 'Regular' species.
 #define SPECIES_HUMAN			"Human"
-#define SPECIES_HUMAN_VATBORN	"Vatborn"
+//#define SPECIES_HUMAN_VATBORN	"Vatborn" outpost 21 - race removal
 #define SPECIES_UNATHI			"Unathi"
 #define SPECIES_SKRELL			"Skrell"
 #define SPECIES_TESHARI			"Teshari"
@@ -299,7 +299,7 @@
 #define SPECIES_PROMETHEAN		"Promethean"
 #define SPECIES_DIONA			"Diona"
 #define SPECIES_VOX				"Vox"
-#define SPECIES_ZADDAT			"Zaddat"
+//#define SPECIES_ZADDAT			"Zaddat" outpost 21 - race removal
 
 // Monkey and alien monkeys.
 #define SPECIES_MONKEY			"Monkey"

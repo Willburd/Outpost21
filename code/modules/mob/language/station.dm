@@ -206,7 +206,7 @@
 /datum/language/teshari/get_random_name(gender)
 	return ..(gender, 2, 4, 1.5)
 
-
+/* outpost 21 race removal
 /datum/language/zaddat
 	name = LANGUAGE_ZADDAT
 	desc = "A harsh buzzing language created by the Zaddat following their exodus from their homeworld."
@@ -218,6 +218,7 @@
 	flags = WHITELISTED
 	space_chance = 20
 	syllables = list("z", "dz", "i", "iv", "ti", "az", "hix", "xo", "av", "xo", "x", "za", "at", "vi")
+*/
 
 /datum/language/promethean
 	name = LANGUAGE_PROMETHEAN

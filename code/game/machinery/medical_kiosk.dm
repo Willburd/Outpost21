@@ -193,7 +193,7 @@
 		persist_nif_data(user)
 	*/
 
-	our_db.m_backup(user, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
+	our_db.m_backup(user.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
 	var/datum/transhuman/body_record/BR = new()
 	BR.init_from_mob(user, TRUE, TRUE, database_key = db_key)
 

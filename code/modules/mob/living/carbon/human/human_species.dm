@@ -116,8 +116,10 @@
 /mob/living/carbon/human/promethean/Initialize(var/new_loc)
 	return ..(new_loc, SPECIES_PROMETHEAN)
 
+/* outpost 21 race removal
 /mob/living/carbon/human/zaddat/Initialize(var/new_loc)
 	return ..(new_loc, SPECIES_ZADDAT)
+*/
 
 /mob/living/carbon/human/monkey/Initialize(var/new_loc)
 	return ..(new_loc, SPECIES_MONKEY)

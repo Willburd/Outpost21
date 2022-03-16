@@ -3792,6 +3792,7 @@
 #include "code\modules\resleeving\implant.dm"
 #include "code\modules\resleeving\infocore_records.dm"
 #include "code\modules\resleeving\machines.dm"
+#include "code\modules\resleeving\machines_op.dm"
 #include "code\modules\resleeving\machines_vr.dm"
 #include "code\modules\resleeving\resleeving_sickness.dm"
 #include "code\modules\rogueminer_vr\asteroid.dm"

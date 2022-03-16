@@ -44,6 +44,7 @@
 	requires_power = 1
 	dynamic_lighting = 1
 
+/*outpost 21 - race removal
 /turf/simulated/floor/water/indoors/surfluid
 	name = "surfluid pool"
 	desc = "A pool of inky-black fluid that shimmers oddly in the light if hit just right."
@@ -51,6 +52,7 @@
 	color = "#222222"
 	outdoors = OUTDOORS_NO
 	reagent_type = "liquid_protean"
+*/
 
 // The 'ship'
 /obj/effect/overmap/visitable/ship/aro2
@@ -88,7 +90,7 @@
 /obj/effect/shuttle_landmark/shuttle_initializer/aroboat2
 	name = "Aronai's Boat Bay"
 	base_area = /area/aro2/boatdeck
-	base_turf = /turf/simulated/floor/water/indoors/surfluid
+	//base_turf = /turf/simulated/floor/water/indoors/surfluid
 	landmark_tag = "omship_spawn_aroboat2"
 	docking_controller = "aroship2_boatbay"
 	shuttle_type = /datum/shuttle/autodock/overmap/aroboat2

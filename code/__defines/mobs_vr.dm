@@ -10,8 +10,8 @@
 #define VIS_COUNT			32
 
 //Protean organs
-#define O_ORCH		"orchestrator"
-#define O_FACT		"refactory"
+//#define O_ORCH		"orchestrator" outpost 21 - race removal
+//define O_FACT		"refactory" outpost 21 - race removal
 
 //Alraune organs
 // #define A_FRUIT	"fruit gland" outpost 21 - race removal
@@ -22,7 +22,7 @@
 // #define SPECIES_AKULA			"Akula" outpost 21 - race removal
 // #define SPECIES_ALRAUNE			"Alraune" outpost 21 - race removal
 #define SPECIES_NEVREAN			"Nevrean"
-#define SPECIES_PROTEAN			"Protean"
+//#define SPECIES_PROTEAN			"Protean" outpost 21 - race removal
 //#define SPECIES_RAPALA			"Rapala" outpost 21 - race removal
 #define SPECIES_SERGAL			"Sergal"
 #define SPECIES_SHADEKIN_CREW	"Black-Eyed Shadekin"

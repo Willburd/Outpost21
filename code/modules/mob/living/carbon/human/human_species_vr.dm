@@ -22,8 +22,10 @@
 /mob/living/carbon/human/vulpkanin/New(var/new_loc)
 	..(new_loc, "Vulpkanin")
 
+/* outpost 21 - race removal
 /mob/living/carbon/human/protean/New(var/new_loc)
 	..(new_loc, "Protean")
+*/
 
 /*outpost 21 - race removal
 /mob/living/carbon/human/alraune/New(var/new_loc)

@@ -477,7 +477,7 @@ var/global/list/contamination_colors = list("green",
 var/global/list/remainless_species = list(SPECIES_PROMETHEAN,
 				SPECIES_DIONA,
 				//SPECIES_ALRAUNE, outpost 21 - race removal
-				SPECIES_PROTEAN,
+				//SPECIES_PROTEAN, outpost 21 - race removal
 				SPECIES_MONKEY,					//Exclude all monkey subtypes, to prevent abuse of it. They aren't,
 				SPECIES_MONKEY_TAJ,				//set to have remains anyway, but making double sure,
 				SPECIES_MONKEY_SKRELL,

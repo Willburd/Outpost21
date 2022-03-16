@@ -282,8 +282,10 @@
 				temp_img = icon('icons/obj/butts_vr.dmi', "slime")
 			if(SPECIES_VULPKANIN)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp")
+			/* outpost 21 - race removal
 			if(SPECIES_PROTEAN)
 				temp_img = icon('icons/obj/butts_vr.dmi', "machine")
+			*/
 			/* outpost 21 - race removal
 			if(SPECIES_WEREBEAST)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // Give Werewolves their own thicc'er than a boal of oatmeal ass sprite someday?

@@ -96,6 +96,7 @@
 	M.adjust_fire_stacks(-reac_volume)
 	M.ExtinguishMob()
 
+/* outpost 21 - race removal
 /datum/reagent/liquid_protean
 	name = "Liquid protean"
 	id = "liquid_protean"
@@ -125,6 +126,7 @@
 				nif.stat = NIF_INSTALLING
 			nif.durability = min(nif.durability + removed*0.1, initial(nif.durability))
 	*/
+*/
 
 //Special toxins for solargrubs
 /datum/reagent/grubshock

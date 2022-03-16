@@ -353,6 +353,16 @@
 	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
 	//update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/voxkit
+	name = "Syringe (phoron stim)"
+	desc = "\[WARNING\] Contains raw phoron. Intended only for vox crewmembers."
+
+/obj/item/weapon/reagent_containers/syringe/voxkit/Initialize()
+	. = ..()
+	reagents.add_reagent("phoron", 15)
+	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
+	//update_icon()
+
 /obj/item/weapon/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."

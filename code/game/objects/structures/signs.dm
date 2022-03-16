@@ -1200,6 +1200,11 @@
 	name = "XENOLAB"
 	icon_state = "xenolab"
 
+/obj/structure/sign/department/voxlab
+	name = "VOX THREATMENT LAB"
+	desc = "Trained medical personal only. Internals required. Hazardous environment."
+	icon_state = "voxlab"
+
 /obj/structure/sign/department/anomaly
 	name = "ANOMALYLAB"
 	icon_state = "anomaly"

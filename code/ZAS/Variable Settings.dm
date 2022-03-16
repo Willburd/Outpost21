@@ -15,7 +15,7 @@ var/global/vs_control/vsc = new
 	var/fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
 
 
-	var/IgnitionLevel = 0.5
+	var/IgnitionLevel = 0.02 // logic is QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= vsc.IgnitionLevel
 	var/IgnitionLevel_DESC = "Determines point at which fire can ignite"
 
 	var/airflow_lightest_pressure = 20

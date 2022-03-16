@@ -73,7 +73,7 @@
 	name = "oxygen deprivation first aid kit"
 	desc = "A box full of oxygen goodies."
 	icon_state = "o2"
-	item_state_slots = list(slot_r_hand_str = "firstaid-o2", slot_l_hand_str = "firstaid-o2") 
+	item_state_slots = list(slot_r_hand_str = "firstaid-o2", slot_l_hand_str = "firstaid-o2")
 	starts_with = list(
 		/obj/item/weapon/reagent_containers/pill/dexalin,
 		/obj/item/weapon/reagent_containers/pill/dexalin,
@@ -114,6 +114,23 @@
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
 		/obj/item/stack/medical/splint,
 		/obj/item/device/healthanalyzer/advanced
+	)
+
+/obj/item/weapon/storage/firstaid/vox
+	name = "vox-safe medical kit"
+	desc = "Contains medical treatments that are safe for vox crewmembers."
+	icon_state = "voxkit"
+	item_state_slots = list(slot_r_hand_str = "firstaid-vox", slot_l_hand_str = "firstaid-vox")
+	starts_with = list(
+		/obj/item/weapon/reagent_containers/syringe/voxkit,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
+		/obj/item/weapon/storage/pill_bottle/tramadol,
+		/obj/item/weapon/storage/pill_bottle/dylovene,
+		/obj/item/weapon/storage/pill_bottle/iron,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/device/healthanalyzer
 	)
 
 /obj/item/weapon/storage/firstaid/surgery

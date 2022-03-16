@@ -65,6 +65,12 @@
 	canister_color = "grey"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/nitrophoric_oxide
+	name = "Canister: \[PN2O\]"
+	icon_state = "purple"
+	canister_color = "purple"
+	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/air/airlock
 	start_pressure = 3 * ONE_ATMOSPHERE
 
@@ -92,6 +98,10 @@
 	name = "Canister \[N2O\]"
 	icon_state = "redws"
 	canister_color = "redws"
+/obj/machinery/portable_atmospherics/canister/empty/nitrophoric_oxide
+	name = "Canister \[PN2O\]"
+	icon_state = "purple"
+	canister_color = "purple"
 
 
 
@@ -311,6 +321,7 @@ update_flag
 					"\[N2\]" = "red", \
 					"\[O2\]" = "blue", \
 					"\[Phoron\]" = "orangeps", \
+					"\[PN2O\]" = "purplews", \
 					"\[CO2\]" = "black", \
 					"\[Air\]" = "grey", \
 					"\[CAUTION\]" = "yellow", \
@@ -394,6 +405,14 @@ update_flag
 	..()
 
 	air_contents.adjust_gas("nitrous_oxide", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/nitrophoric_oxide/New()
+	..()
+	var/list/air_mix = StandardAirMix()
+	src.air_contents.adjust_multi("phoron", air_mix["oxygen"], "nitrous_oxide", air_mix["nitrogen"])
+
 	src.update_icon()
 	return 1
 

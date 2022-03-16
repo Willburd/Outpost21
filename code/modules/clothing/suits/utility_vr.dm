@@ -19,13 +19,13 @@
 /obj/item/clothing/head/radiation
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/head/mob_vr_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/head/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/head/mob_vr_werebeast.dmi'
-		)
+		SPECIES_VOX = 'icons/inventory/head/mob_vox.dmi') /*,
+		SPECIES_WEREBEAST = 'icons/inventory/head/mob_vr_werebeast.dmi' outpost 21 - custom race removal
+		)*/
 
 /obj/item/clothing/suit/radiation
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/suit/mob_vr_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/suit/mob_vox.dmi',
-		SPECIES_WEREBEAST = 'icons/inventory/suit/mob_vr_werebeast.dmi'
-		)
+		SPECIES_VOX = 'icons/inventory/suit/mob_vox.dmi')/*,
+		SPECIES_WEREBEAST = 'icons/inventory/suit/mob_vr_werebeast.dmi' outpost 21 - custom race removal
+		)*/

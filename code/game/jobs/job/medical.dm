@@ -23,11 +23,11 @@
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
 
 	minimum_character_age = 25
-	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 14)
+	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10)//, SPECIES_HUMAN_VATBORN = 14) outpost 21 race removal
 	minimal_player_age = 10
 	ideal_character_age = 50
-	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
-	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
+	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20)//, SPECIES_HUMAN_VATBORN = 20) outpost 21 race removal
+	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN/*, SPECIES_ZADDAT*/, "digital") // outpost 21 - race removal
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \

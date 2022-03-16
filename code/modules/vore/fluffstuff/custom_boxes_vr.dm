@@ -108,6 +108,7 @@
 	new /obj/item/weapon/storage/box/matches(src)
 	new /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake(src)
 
+/* outpost 21 - race removal
 // jemli:Cirra Mayhem
 /obj/item/weapon/storage/box/fluff/cirra
 	name = "Instant Pirate Kit"
@@ -117,6 +118,7 @@
 		/obj/item/clothing/glasses/eyepatch,
 		/obj/item/clothing/suit/pirate,
 		/obj/item/clothing/under/pirate)
+*/
 
 // joey4298:Emoticon
 /obj/item/weapon/storage/box/fluff/emoticon

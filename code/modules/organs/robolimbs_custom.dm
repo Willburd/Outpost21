@@ -131,6 +131,7 @@ VS Edit - anyone can select these. */
 /obj/item/weapon/disk/limb/dsi_vulpkanin
 	company = "DSI - Vulpkanin"
 
+/*
 /datum/robolimb/dsi_akula
 	company = "DSI - Akula"
 	desc = "This limb feels soft and fleshy, realistic design and squish. Seems a little mischievous. By Darkside Incorperated."
@@ -144,6 +145,7 @@ VS Edit - anyone can select these. */
 
 /obj/item/weapon/disk/limb/dsi_akula
 	company = "DSI - Akula"
+*/
 
 /datum/robolimb/dsi_spider
 	company = "DSI - Vasilissan"
@@ -170,7 +172,7 @@ VS Edit - anyone can select these. */
 /datum/robolimb/dsi_teshari/New()
 	species_cannot_use = GLOB.all_species.Copy()
 	species_cannot_use -= SPECIES_TESHARI //VOREStation add - let 'em be selected.
-	species_cannot_use -= SPECIES_CUSTOM //VOREStation add - let 'em be selected.
+	// species_cannot_use -= SPECIES_CUSTOM //VOREStation add - let 'em be selected. outpost 21 - custom race removal
 	..()
 
 /obj/item/weapon/disk/limb/dsi_teshari

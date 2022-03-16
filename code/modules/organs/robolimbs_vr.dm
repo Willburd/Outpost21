@@ -17,6 +17,7 @@ var/const/cyberbeast_monitor_styles = "blank=cyber_blank;\
 	idle=cyber_idle;\
 	nwn=cyber_nwn"
 
+/* outpost 21 - race removal
 // Placeholder for protean limbs during character spawning, before they have a properly set model
 /datum/robolimb/protean
 	company = "protean"
@@ -24,6 +25,7 @@ var/const/cyberbeast_monitor_styles = "blank=cyber_blank;\
 	lifelike = 1
 	unavailable_to_build = 1
 	unavailable_at_chargen = 1
+*/
 
 //////////////// For-specific-character fluff ones /////////////////
 // arokha : Aronai Sieyes

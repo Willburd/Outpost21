@@ -109,7 +109,7 @@ h1.alert, h2.alert		{color: #000000;}
 .daemon					{color: #5E339E; letter-spacing:-1pt; word-spacing:0pt; font-family: "Courier New", Courier, monospace;}
 .bug                                    {color: #9e9e39;}
 .vox					{color: #AA00AA;}
-.zaddat					{color: #941C1C;}
+/*.zaddat					{color: #941C1C;} */
 .promethean				{color: #5A5A5A;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}

@@ -63,6 +63,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+/* outpost 21 - race removal
 /datum/species/akula
 	name = SPECIES_AKULA
 	name_plural = "Akula"
@@ -109,6 +110,7 @@
 	flesh_color = "#AFA59E"
 	base_color = "#777777"
 	blood_color = "#1D2CBF"
+*/
 
 /datum/species/nevrean
 	name = SPECIES_NEVREAN
@@ -160,6 +162,7 @@
 		"Your overheated skin itches."
 		)
 
+/*outpost 21 - race removal
 /datum/species/hi_zoxxen
 	name = SPECIES_ZORREN_HIGH
 	name_plural = "Zorren"
@@ -205,6 +208,7 @@
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
+*/
 
 /datum/species/vulpkanin
 	name = SPECIES_VULPKANIN
@@ -292,6 +296,7 @@
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	wikilink="https://yawn.izac.live/Skrell"
 
+/* outpost 21 race removal
 /datum/species/zaddat
 	spawn_flags = SPECIES_CAN_JOIN
 	min_age = 18
@@ -308,6 +313,7 @@
 		H.equip_to_slot_or_del(L, slot_r_hand)
 	else
 		H.equip_to_slot_or_del(L, slot_in_backpack)
+*/
 
 /datum/species/diona
 	spawn_flags = SPECIES_CAN_JOIN
@@ -345,6 +351,7 @@
 		)
 	wikilink="https://yawn.izac.live/Vox"
 
+/* outpost 21 - race removal
 /datum/species/harpy
 	name = SPECIES_RAPALA
 	name_plural = "Rapalans"
@@ -385,6 +392,7 @@
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
+*/
 
 /datum/species/crew_shadekin
 	name = SPECIES_SHADEKIN_CREW

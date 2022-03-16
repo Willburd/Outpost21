@@ -111,7 +111,7 @@ var/global/list/fancy_release_sounds = list(
 var/global/list/global_vore_egg_types = list(
 	"Unathi",
 	"Tajara",
-	"Akula",
+	//"Akula", outpost 21 - race removal
 	"Skrell",
 	"Sergal",
 	"Nevrean",
@@ -146,7 +146,7 @@ var/global/list/global_vore_egg_types = list(
 var/global/list/tf_vore_egg_types = list(
 	"Unathi" 		= /obj/item/weapon/storage/vore_egg/unathi,
 	"Tajara" 		= /obj/item/weapon/storage/vore_egg/tajaran,
-	"Akula" 		= /obj/item/weapon/storage/vore_egg/shark,
+	//"Akula" 		= /obj/item/weapon/storage/vore_egg/shark, outpost 21 - race removal
 	"Skrell" 		= /obj/item/weapon/storage/vore_egg/skrell,
 	"Sergal"		= /obj/item/weapon/storage/vore_egg/sergal,
 	"Nevrean"		= /obj/item/weapon/storage/vore_egg/nevrean,
@@ -476,13 +476,13 @@ var/global/list/contamination_colors = list("green",
 //For the mechanic of leaving remains. Ones listed below are basically ones that got no bones or leave no trace after death.
 var/global/list/remainless_species = list(SPECIES_PROMETHEAN,
 				SPECIES_DIONA,
-				SPECIES_ALRAUNE,
-				SPECIES_PROTEAN,
+				//SPECIES_ALRAUNE, outpost 21 - race removal
+				//SPECIES_PROTEAN, outpost 21 - race removal
 				SPECIES_MONKEY,					//Exclude all monkey subtypes, to prevent abuse of it. They aren't,
 				SPECIES_MONKEY_TAJ,				//set to have remains anyway, but making double sure,
 				SPECIES_MONKEY_SKRELL,
 				SPECIES_MONKEY_UNATHI,
-				SPECIES_MONKEY_AKULA,
+				//SPECIES_MONKEY_AKULA, outpost 21 - race removal
 				SPECIES_MONKEY_NEVREAN,
 				SPECIES_MONKEY_SERGAL,
 				SPECIES_MONKEY_VULPKANIN,

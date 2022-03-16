@@ -68,6 +68,7 @@
 	dynamic_lighting = 1
 	base_turf = /turf/simulated/floor/reinforced
 
+/* outpost 21 - race removal
 /turf/simulated/floor/water/indoors/surfluid
 	name = "surfluid pool"
 	desc = "A pool of inky-black fluid that shimmers oddly in the light if hit just right."
@@ -75,6 +76,7 @@
 	color = "#222222"
 	outdoors = OUTDOORS_NO
 	reagent_type = "liquid_protean"
+*/
 
 // The 'ship'
 /obj/effect/overmap/visitable/ship/aro3

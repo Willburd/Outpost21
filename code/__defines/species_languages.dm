@@ -92,7 +92,7 @@
 #define LANGUAGE_EVENT1 "Occursus"
 #define LANGUAGE_AKHANI "Akhani"
 #define LANGUAGE_ALAI "Alai"
-#define LANGUAGE_ZADDAT "Vedahq"
+//#define LANGUAGE_ZADDAT "Vedahq" outpost 21 - race removal
 #define LANGUAGE_PROMETHEAN "Promethean Biolinguistics"
 #define LANGUAGE_BLOB "Chemosense Transmission"
 #define LANGUAGE_GIBBERISH "Babel"

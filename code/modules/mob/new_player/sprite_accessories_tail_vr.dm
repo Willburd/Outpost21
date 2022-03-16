@@ -9,7 +9,7 @@
 	name = "You should not see this..."
 	icon = 'icons/mob/vore/tails_vr.dmi'
 	do_colouration = 0 //Set to 1 to enable coloration using the tail color.
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_FENNEC, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE, SPECIES_WEREBEAST, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW) //This lets all races use
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC/*, SPECIES_ZORREN_HIGH*/, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID/*, SPECIES_VASILISSAN*//*, SPECIES_RAPALA*//*, SPECIES_PROTEAN*//*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW) //This lets all races use
 
 /datum/sprite_accessory/tail/New()
 	. = ..()
@@ -556,12 +556,14 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/*
 /datum/sprite_accessory/tail/special/akula
 	name = "akula tail"
 	desc = ""
 	icon_state = "sharktail_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/nevrean
 	name = "nevrean tail"
@@ -621,12 +623,14 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/*
 /datum/sprite_accessory/tail/special/akulahc
 	name = "akula tail, colorable"
 	desc = ""
 	icon_state = "sharktail_hc_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/nevreanhc
 	name = "nevrean tail, colorable"
@@ -635,6 +639,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/tail/special/foxhc
 	name = "highlander zorren tail, colorable"
 	desc = ""
@@ -648,6 +653,7 @@
 	icon_state = "fentail_hc_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/tail/special/armalishc
 	name = "armalis tail, colorable"

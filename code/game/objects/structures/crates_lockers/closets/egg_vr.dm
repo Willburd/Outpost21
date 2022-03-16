@@ -63,12 +63,14 @@
 	icon_closed = "egg_skrell"
 	icon_opened = "egg_skrell_open"
 
+/* outpost 21 - race removal
 /obj/structure/closet/secure_closet/egg/shark
 	name = "akula egg"
 	desc = "Its soft and slimy to the touch"
 	icon_state  = "egg_akula"
 	icon_closed = "egg_akula"
 	icon_opened = "egg_akula_open"
+*/
 
 /obj/structure/closet/secure_closet/egg/sergal
 	name = "sergal egg"

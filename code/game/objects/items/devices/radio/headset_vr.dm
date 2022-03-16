@@ -22,8 +22,8 @@
 	icon_state = "nt_headset_alt"
 
 /obj/item/device/radio/headset
-	sprite_sheets = list(SPECIES_TESHARI = 'icons/inventory/ears/mob_teshari.dmi',
-						SPECIES_WEREBEAST = 'icons/inventory/ears/mob_vr_werebeast.dmi')
+	sprite_sheets = list(SPECIES_TESHARI = 'icons/inventory/ears/mob_teshari.dmi') /*,
+						SPECIES_WEREBEAST = 'icons/inventory/ears/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
 
 /obj/item/device/radio/headset/mob_headset	//Adminbus headset for simplemob shenanigans.
 	name = "nonhuman radio receiver"

@@ -256,11 +256,13 @@
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_HEAD)
 
+/*
 /datum/sprite_accessory/marking/vr/sharkface
 	name = "Akula snout"
 	icon_state = "sharkface"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_HEAD)
+*/
 
 /datum/sprite_accessory/marking/vr/sheppy_face
 	name = "Shepherd snout"
@@ -274,6 +276,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_TORSO,BP_GROIN)
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/marking/vr/zorren_belly_male
 	name = "Zorren Male Torso"
 	icon_state = "zorren_belly"
@@ -331,6 +334,7 @@
 	icon_state = "zorren_longsocks"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
+*/
 
 /datum/sprite_accessory/marking/vr/tesh_feathers
 	name = "Teshari Feathers"
@@ -338,6 +342,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_HAND,BP_R_HAND)
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/marking/vr/harpy_feathers
 	name = "Rapala leg Feather"
 	icon_state = "harpy-feathers"
@@ -349,6 +354,7 @@
 	icon_state = "harpy-leg"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG)
+*/
 
 /datum/sprite_accessory/marking/vr/chooves
 	name = "Cloven hooves"

@@ -6,5 +6,7 @@
 	desc = "A little lunchbox. This one seems to be much sturdier than normal, made of a durable steel!"
 	max_storage_space = ITEMSIZE_COST_SMALL * 6
 
+/* outpost 21 - race removal
 /obj/item/weapon/storage/toolbox/lunchbox/survival/zaddat
 	starts_with = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/glucose = 6)
+*/

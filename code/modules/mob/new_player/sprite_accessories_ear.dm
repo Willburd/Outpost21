@@ -165,6 +165,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/* outpost 21 - race removal
 /datum/sprite_accessory/ears/foxears
 	name = "highlander zorren ears"
 	desc = ""
@@ -193,6 +194,7 @@
 	extra_overlay = "fenears-inner"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+*/
 
 /datum/sprite_accessory/ears/sergalhc
 	name = "Sergal ears, colorable"
@@ -350,7 +352,7 @@
 	desc = ""
 	icon_state = "ears_pointy"
 	do_colouration = 1
-	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/elfs
 	name = "pointed ears (tall)"
@@ -358,7 +360,7 @@
 	icon_state = "elfs"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/elfs3
 	name = "pointed ears (down)"
@@ -366,7 +368,7 @@
 	icon_state = "ears_pointy_down"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/elfs4
 	name = "pointed ears (long)"
@@ -374,7 +376,7 @@
 	icon_state = "ears_pointy_long"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/elfs5
 	name = "pointed ears (long, down)"
@@ -382,7 +384,7 @@
 	icon_state = "ears_pointy_long_down"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN/*, SPECIES_HUMAN_VATBORN*/, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/sleek
 	name = "sleek ears"

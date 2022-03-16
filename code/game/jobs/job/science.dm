@@ -26,10 +26,10 @@
 
 	minimum_character_age = 25
 	minimal_player_age = 14
-	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 14)
+	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10)//, SPECIES_HUMAN_VATBORN = 14) outpost 21 race removal
 	ideal_character_age = 50
-	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
-	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
+	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20)//, SPECIES_HUMAN_VATBORN = 20) outpost 21 race removal
+	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN/*, SPECIES_ZADDAT*/, "digital")// outpost 21 - race removal
 
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 	job_description = "The Research Director manages and maintains the Research department. They are required to ensure the safety of the entire crew, \

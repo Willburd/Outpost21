@@ -105,6 +105,10 @@ var/list/marker_beacon_colors = list(
 /obj/structure/marker_beacon/update_icon()
 	if(!picked_color || !marker_beacon_colors[picked_color])
 		picked_color = pick(marker_beacon_colors)
+
+	if(picked_color == "Random") // oops the one that made this forgot their own random selection key was in the color table!
+		picked_color = "Violet"
+
 	icon_state = "[initial(icon_state)][lowertext(picked_color)]-on"
 	set_light(light_range, light_power, marker_beacon_colors[picked_color])
 

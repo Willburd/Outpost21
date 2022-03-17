@@ -39,6 +39,21 @@
 	desc = "A horrifically dangerous rave in a can."
 	projectile_types = list(/obj/item/projectile/beam/midlaser)
 
+/obj/item/weapon/grenade/shooter/energy/lasertagall
+	name = "laser tag grenade"
+	desc = "A horrifically FUN rave in a can. Now in both colors!"
+	projectile_types = list(/obj/item/projectile/beam/lasertag/blue,/obj/item/projectile/beam/lasertag/red)
+
+/obj/item/weapon/grenade/shooter/energy/lasertagred
+	name = "red laser tag grenade"
+	desc = "A horrifically FUN rave in a can. Now in red!"
+	projectile_types = list(/obj/item/projectile/beam/lasertag/red)
+
+/obj/item/weapon/grenade/shooter/energy/lasertagblue
+	name = "blue laser tag grenade"
+	desc = "A horrifically FUN rave in a can. Now in blue!"
+	projectile_types = list(/obj/item/projectile/beam/lasertag/blue)
+
 /obj/item/weapon/grenade/shooter/energy/flash
 	name = "flash grenade"
 	desc = "A grenade that creates a large number of flashes upon detonation."

@@ -370,7 +370,7 @@ var/bomb_set
 	safety = 1
 	if(!lighthack)
 		icon_state = "nuclearbomb3"
-	playsound(src,'sound/machines/Alarm.ogg',100,0,5)
+	world << sound('sound/machines/Alarm.ogg') // force sound!
 	if(ticker && ticker.mode)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)
@@ -624,21 +624,21 @@ var/bomb_set
 	timing = -1.0
 	yes_code = 0
 	safety = 1
-	playsound(src,'sound/machines/Alarm.ogg',100,0,5)
+	world << sound('sound/machines/Alarm.ogg') // force sound!
 	if(ticker && ticker.mode)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)
 
 	if(ticker)
-		ticker.mode:syndies_didnt_escape = TRUE // for now...
-		ticker.mode:nuke_off_station = FALSE
-		ticker.station_explosion_cinematic( ticker.mode:nuke_off_station, null)
-
+		if(ticker.mode && ticker.mode.name == "Mercenary")
+			ticker.mode:syndies_didnt_escape = TRUE
+			ticker.mode:nuke_off_station = FALSE
+		ticker.station_explosion_cinematic(FALSE,null)
 		if(ticker.mode)
-			ticker.mode.station_was_nuked = TRUE // station always nuked, unable to move this
 			ticker.mode.explosion_in_progress = 0
-			to_world("<B>The station was destroyed by the nuclear blast!</B>")
-		
+			to_world("<B>The station was destoyed by the nuclear blast!</B>")
+
+			ticker.mode.station_was_nuked = FALSE
 			if(!ticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
 				to_world("<B>Resetting in 30 seconds!</B>")
 
@@ -650,4 +650,3 @@ var/bomb_set
 				log_game("Rebooting due to nuclear detonation")
 				world.Reboot()
 				return
-	return

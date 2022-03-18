@@ -195,16 +195,16 @@
 
 /obj/item/projectile/beam/lasertag/omni//A laser tag bolt that stuns EVERYONE
 	icon_state = "omnilaser"
-	light_color = "#00C6FF"
+	light_color = "#AA24AF"
 
-	muzzle_type = /obj/effect/projectile/muzzle/laser_omni
-	tracer_type = /obj/effect/projectile/tracer/laser_omni
-	impact_type = /obj/effect/projectile/impact/laser_omni
+	muzzle_type = /obj/effect/projectile/muzzle/laser_omni_tag
+	tracer_type = /obj/effect/projectile/tracer/laser_omni_tag
+	impact_type = /obj/effect/projectile/impact/laser_omni_tag
 
 /obj/item/projectile/beam/lasertag/omni/on_hit(var/atom/target, var/blocked = 0)
 	if(ishuman(target))
 		var/mob/living/carbon/human/M = target
-		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+		if(istype(M.wear_suit, /obj/item/clothing/suit/omnitag) || istype(M.wear_suit, /obj/item/clothing/suit/bluetag) || istype(M.wear_suit, /obj/item/clothing/suit/redtag))
 			M.Weaken(5)
 	return 1
 

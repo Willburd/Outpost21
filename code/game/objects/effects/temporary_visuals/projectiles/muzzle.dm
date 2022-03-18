@@ -80,6 +80,12 @@
 	light_power = 0.5
 	light_color = "#00C6FF"
 
+/obj/effect/projectile/muzzle/laser_omni_tag
+	icon_state = "muzzle_darkb"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#AA24AF"
+
 /obj/effect/projectile/muzzle/laser
 	icon_state = "muzzle_laser"
 	light_range = 2

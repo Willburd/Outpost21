@@ -32,6 +32,16 @@
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/red)
 	siemens_coefficient = 3.0
 
+/obj/item/clothing/suit/omnitag
+	name = "universal laser tag armour"
+	desc = "For the bold and the brash."
+	icon_state = "omnitag"
+	item_state_slots = list(slot_r_hand_str = "tdomni", slot_l_hand_str = "tdomni")
+	blood_overlay_type = "armor"
+	body_parts_covered = UPPER_TORSO
+	allowed = list (/obj/item/weapon/gun/energy/lasertag)
+	siemens_coefficient = 3.0
+
 /*
  * Costume
  */

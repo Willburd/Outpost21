@@ -29,7 +29,9 @@
 			/obj/item/weapon/gun/energy/lasertag/red,
 			/obj/item/clothing/suit/redtag,
 			/obj/item/weapon/gun/energy/lasertag/blue,
-			/obj/item/clothing/suit/bluetag
+			/obj/item/clothing/suit/bluetag,
+			/obj/item/weapon/gun/energy/lasertag,
+			/obj/item/clothing/suit/omnitag
 			)
 	containertype = /obj/structure/closet/crate/ward
 	containername = "Lasertag Supplies"

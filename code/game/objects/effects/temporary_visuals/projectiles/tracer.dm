@@ -71,6 +71,12 @@
 	light_power = 0.5
 	light_color = "#00C6FF"
 
+/obj/effect/projectile/tracer/laser_omni_tag
+	icon_state = "darkb"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#AA24AF"
+
 /obj/effect/projectile/tracer/xray
 	icon_state = "xray"
 	light_range = 2

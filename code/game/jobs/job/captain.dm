@@ -35,13 +35,14 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	alt_titles = list("Overseer"= /datum/alt_title/overseer)
 
 
+/* outpost 21 edit - commenting out again~
 // YW UNCOMMENTINGSTART: REINSTATE LOYALTY IMPLANT
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(src)
 // YW UNCOMMENTING END
-
+*/
 
 /datum/job/captain/get_access()
 	return get_all_station_access().Copy()

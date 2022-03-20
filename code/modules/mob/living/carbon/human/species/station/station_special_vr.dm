@@ -73,6 +73,11 @@
 
 	reagent_tag = IS_CHIMERA
 
+/datum/species/xenochimera/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 0,var/comprehensive = 0)
+	. = ..()
+	if(.)
+		H.implant_loyalty(src)
+
 /datum/species/xenochimera/handle_environment_special(var/mob/living/carbon/human/H)
 	//If they're KO'd/dead, they're probably not thinking a lot about much of anything.
 	if(!H.stat)

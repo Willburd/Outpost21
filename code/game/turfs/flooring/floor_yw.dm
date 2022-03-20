@@ -7,9 +7,6 @@
 
 	initial_flooring = /decl/flooring/bronze
 
-/turf/simulated/floor/flesh/attackby()
-	return
-
 /decl/flooring/bronze
 	name = "bronze"
 	desc = "Some heavy bronze tiles."

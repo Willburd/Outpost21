@@ -448,9 +448,8 @@ var/bomb_set
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/make_deployable
 	for(var/turf/simulated/floor/T in get_area(src))
-		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
-			flash_tiles += T
-	update_icon()
+		flash_tiles += T
+	update_icon() // this updates the flasher tiles too!
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
 
@@ -479,10 +478,7 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/station/update_icon()
 	var/target_icon_state
-	if(lighthack)
-		target_icon_state = "rcircuit_off"
-		icon_state = "idle"
-	else if(timing == -1)
+	if(timing == -1)
 		target_icon_state = "rcircuitanim"
 		icon_state = "exploding"
 	else if(timing)
@@ -492,13 +488,13 @@ var/bomb_set
 		target_icon_state = "rcircuit"
 		icon_state = "greenlight"
 	else
-		target_icon_state = "rcircuit_off"
+		target_icon_state = "rcircuitanim_broken"
 		icon_state = "idle"
 
 	if(!last_turf_state || target_icon_state != last_turf_state)
 		for(var/thing in flash_tiles)
 			var/turf/simulated/floor/T = thing
-			if(!istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+			if(!istype(T, /turf/simulated/floor/redgrid))
 				flash_tiles -= T
 				continue
 			T.icon_state = target_icon_state
@@ -592,19 +588,23 @@ var/bomb_set
 							if(get_security_level() != "delta")
 								priority_announcement.Announce("Self destruct sequence has been activated. Self-destructing in [timeleft] seconds.", "Self-Destruct Control Computer")
 							set_security_level("delta")
+							update_icon()
 						else
 							bomb_set = 0
+							update_icon()
 					else
 						if(get_security_level() == "delta")
 							priority_announcement.Announce("Self destruct sequence has been cancelled.", "Self-Destruct Control Computer")
 						set_security_level("red")
 						bomb_set = 0
+						update_icon()
 				if(href_list["safety"])
 					if(!bomb_set)
 						safety = !(safety)
 						if(safety)
 							timing = 0
 							bomb_set = 0
+						update_icon()
 					else
 						to_chat(usr, "<span class='warning'>Cannot enable safety, self destruct is armed.</span>")
 
@@ -618,6 +618,7 @@ var/bomb_set
 	return
 
 /obj/machinery/nuclearbomb/station/explode()
+	update_icon()
 	if(safety)
 		timing = 0
 		return

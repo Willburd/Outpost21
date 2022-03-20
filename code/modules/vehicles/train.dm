@@ -38,12 +38,22 @@
 /obj/vehicle/train/Bump(atom/Obstacle)
 	if(!istype(Obstacle, /atom/movable))
 		return
-	var/atom/movable/A = Obstacle
 
-	if(!A.anchored)
-		var/turf/T = get_step(A, dir)
-		if(isturf(T))
-			A.Move(T)	//bump things away when hit
+	var/atom/movable/A = Obstacle
+	var/turf/T = get_step(A, dir)
+	if(isturf(T))
+		if(istype(A, /obj))//Then we check for regular obstacles.
+			/* I'm not sure if this works with portals at all due to chaining shenanigans, I'm only fixing stairs here, TODO?
+			if(istype(A, /obj/effect/portal))	//derpfix
+				src.anchored = 0				// Portals can only move unanchored objects.
+				A.Crossed(src)
+				spawn(0)//countering portal teleport spawn(0), hurr
+					src.anchored = 1
+			*/
+			if(A.anchored)
+				A.Bumped(src) //bonk
+			else
+				A.Move(T)	//bump things away when hit
 
 	if(emagged)
 		if(istype(A, /mob/living))

@@ -228,8 +228,9 @@ default behaviour is:
 		MB.runOver(src)
 
 	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
+		if(buckled != AM) // don't run ourselves over, needed for going down stairs!
+			var/obj/vehicle/V = AM
+			V.RunOver(src)
 
 // Almost all of this handles pulling movables behind us
 /mob/living/Move(atom/newloc, direct, movetime)

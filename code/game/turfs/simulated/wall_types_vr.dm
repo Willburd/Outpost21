@@ -51,8 +51,18 @@ var/list/flesh_overlay_cache = list()
 			var/turf/T = get_step(src,direction)
 			if(istype(T) && !T.density)
 				var/place_dir = turn(direction, 180)
+				var/offset = 32
 				if(!flesh_overlay_cache["flesh_side_[place_dir]"])
 					flesh_overlay_cache["flesh_side_[place_dir]"] = image('icons/turf/stomach_vr.dmi', "flesh_side", dir = place_dir)
+					switch(direction)
+						if(NORTH)
+							flesh_overlay_cache["flesh_side_[place_dir]"].pixel_y = offset
+						if(SOUTH)
+							flesh_overlay_cache["flesh_side_[place_dir]"].pixel_y = -offset
+						if(EAST)
+							flesh_overlay_cache["flesh_side_[place_dir]"].pixel_x = offset
+						if(WEST)
+							flesh_overlay_cache["flesh_side_[place_dir]"].pixel_x = -offset
 				add_overlay(flesh_overlay_cache["flesh_side_[place_dir]"])
 
 	if(update_neighbors)

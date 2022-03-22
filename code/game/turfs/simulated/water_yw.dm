@@ -8,6 +8,11 @@
 	outdoors = FALSE
 
 /turf/simulated/floor/water/hotspring/Entered(atom/movable/AM, atom/oldloc)
+	if(ishuman(AM))
+		var/mob/living/carbon/human/HS = AM
+		if(HS.is_incorporeal())
+			return // no splishy splashy
+
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
 		L.update_water()

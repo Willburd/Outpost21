@@ -487,6 +487,12 @@
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
+	if(ishuman(src))
+		var/mob/living/carbon/human/HS = src
+		if(HS.is_incorporeal())
+			to_chat(src, "<span class='warning'>Cannot pull while phased!</span>")
+			return // stop shadekin from pulling while phased
+
 	if (AM.anchored)
 		to_chat(src, "<span class='warning'>It won't budge!</span>")
 		return

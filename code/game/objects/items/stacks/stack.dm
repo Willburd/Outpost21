@@ -249,6 +249,11 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
+			// bug that only seems to happen when you click stacks stored in a bag, they remain onscreen till GCed randomly
+			if(istype( src.loc, /obj/item/weapon/storage/))
+				// so lets just remove them...
+				var/obj/item/weapon/storage/holder = src.loc
+				holder.remove_from_storage( src, null)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
 		update_icon()
 		return 1

@@ -1108,7 +1108,11 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/attackby(obj/item/C, mob/user as mob)
 	//to_world("airlock attackby src [src] obj [C] mob [user]")
-	
+	if(ishuman(user))
+		var/mob/living/carbon/human/HS = user
+		if(HS.is_incorporeal())
+			return // cannot interact with doors at all
+
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
 	if(brace && C && istype(C, /obj/item/weapon/crowbar/brace_jack))
 		return brace.attackby(C, user)

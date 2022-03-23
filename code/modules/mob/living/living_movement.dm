@@ -51,6 +51,10 @@ default behaviour is:
 	if (istype(AM, /mob/living))
 		var/mob/living/tmob = AM
 
+		// no bumping while incorporial
+		if(src.is_incorporeal() || AM.is_incorporeal()) 
+			return
+
 		//Even if we don't push/swap places, we "touched" them, so spread fire
 		spread_fire(tmob)
 
@@ -228,8 +232,9 @@ default behaviour is:
 		MB.runOver(src)
 
 	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
+		if(buckled != AM) // don't run ourselves over, needed for going down stairs!
+			var/obj/vehicle/V = AM
+			V.RunOver(src)
 
 // Almost all of this handles pulling movables behind us
 /mob/living/Move(atom/newloc, direct, movetime)

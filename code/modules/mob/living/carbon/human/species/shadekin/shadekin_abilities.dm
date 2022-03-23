@@ -141,6 +141,8 @@
 		for(var/obj/belly/B as anything in vore_organs)
 			B.escapable = FALSE
 
+		stop_pulling() // release anything dragged!
+
 		var/obj/effect/temp_visual/shadekin/phase_out/phaseanim = new /obj/effect/temp_visual/shadekin/phase_out(src.loc)
 		phaseanim.dir = dir
 		alpha = 0

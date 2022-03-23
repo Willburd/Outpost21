@@ -1476,6 +1476,7 @@
 #include "code\game\objects\structures\door_assembly.dm"
 #include "code\game\objects\structures\droppod.dm"
 #include "code\game\objects\structures\electricchair.dm"
+#include "code\game\objects\structures\elevator_warning.dm"
 #include "code\game\objects\structures\extinguisher.dm"
 #include "code\game\objects\structures\fence.dm"
 #include "code\game\objects\structures\fireaxe.dm"

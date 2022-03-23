@@ -4,7 +4,7 @@
 	edge_blending_priority = -2
 	movement_cost = 5
 	depth = 1
-	water_state = "water_shallow"
+	water_state = "acid_shallow"
 	outdoors = OUTDOORS_YES
 
 	reagent_type = "water"
@@ -13,7 +13,7 @@
 /turf/simulated/floor/water/acidic/deep
 	name = "acidic pool"
 	desc = "Water contaminated by the terraforming process. Highly unpleasant to most organic creatures. It's very deep,"
-	icon_state = "seadeep" // So it shows up in the map editor as water.
+	icon_state = "acid_deep" // So it shows up in the map editor as water.
 	under_state = "abyss"
 	edge_blending_priority = -2
 	movement_cost = 10
@@ -23,6 +23,9 @@
 	reagent_type = "water"
 
 /turf/simulated/floor/water/acidic/Entered(atom/movable/AM, atom/oldloc)
+	if(AM.is_incorporeal())
+		return // no splishy splashy
+			
 	if(istype(AM, /mob/living))
 		// TODO check if mob is acid proof
 		var/mob/living/L = AM
@@ -104,6 +107,16 @@
 	water_state = "plate_shore" // Water gets generated as an overlay in update_icon()
 
 
+// edges flesh
+/turf/simulated/floor/water/acidic/shoreline/shoreline_flesh
+	icon_state = "shoreline_flesh"
+	water_state = "flesh_shore" // Water gets generated as an overlay in update_icon()
+
+/turf/simulated/floor/water/acidic/shoreline/corner/corner_flesh
+	icon_state = "shorelinecorner_flesh"
+	water_state = "flesh_shore" // Water gets generated as an overlay in update_icon()
+
+
 // CAVE
 /turf/simulated/floor/water/acidic/indoor
 	outdoors = OUTDOORS_NO
@@ -145,4 +158,13 @@
 
 /turf/simulated/floor/water/acidic/shoreline/corner/corner_plate/indoor
 	icon_state = "shorelinecorner_plate"
+	outdoors = OUTDOORS_NO
+
+
+/turf/simulated/floor/water/acidic/shoreline/shoreline_flesh/indoor
+	icon_state = "shoreline_flesh"
+	outdoors = OUTDOORS_NO
+
+/turf/simulated/floor/water/acidic/shoreline/corner/corner_flesh/indoor
+	icon_state = "shorelinecorner_flesh"
 	outdoors = OUTDOORS_NO

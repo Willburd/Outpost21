@@ -529,7 +529,7 @@
 	else
 		var/mob/living/L = target
 		if(!direct_target)
-			if(!L.density)
+			if(!L.density || L.is_incorporeal())
 				return FALSE
 	return TRUE
 

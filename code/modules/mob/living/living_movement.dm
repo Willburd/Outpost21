@@ -51,6 +51,10 @@ default behaviour is:
 	if (istype(AM, /mob/living))
 		var/mob/living/tmob = AM
 
+		// no bumping while incorporial
+		if(src.is_incorporeal() || AM.is_incorporeal()) 
+			return
+
 		//Even if we don't push/swap places, we "touched" them, so spread fire
 		spread_fire(tmob)
 

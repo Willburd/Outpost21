@@ -26,6 +26,7 @@
 	build_path = /obj/item/weapon/circuitboard/quantumpad
 	sort_string = "HABAH"
 
+/* Outpost 21 edit - removed micro mecha
 //////Micro mech stuff
 /datum/design/circuit/mecha/gopher_main
 	name = "'Gopher' central control"
@@ -80,6 +81,7 @@
 	req_tech = list(TECH_DATA = 4, TECH_COMBAT = 2)
 	build_path = /obj/item/weapon/circuitboard/mecha/weasel/targeting
 	sort_string = "NAAGC"
+*/
 
 /datum/design/circuit/transhuman_clonepod
 	name = "grower pod"

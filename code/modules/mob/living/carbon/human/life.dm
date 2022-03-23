@@ -1484,13 +1484,14 @@
 		if (getToxLoss() >= 45)
 			spawn vomit()
 
-		// no spooky scary sounds for species immune to hallucinating them!
+		
 		if(!(species.flags & NO_HALLUCINATION))
-
 			// oxygen loss can result in seeing some crazy stuff
 			if(getOxyLoss() >= 50 && rand(1,15) <= 1)
 				hallucination += 10
 
+		// no spooky scary sounds for species immune to darkness insanity!
+		if(!(species.flags & NO_DARKNESSFEAR))
 			// hallucinate more often if already doing so in the darkness
 			var/checkthreshold = 1
 			if(hallucination > 5)
@@ -1502,9 +1503,9 @@
 				brightness = 0 // it's dark in here!
 				// spooky in closet...
 				if(brightness <= LIGHTING_SOFT_THRESHOLD)
-					if(rand(1,20) <= checkthreshold)
+					if(rand(1,50) <= checkthreshold)
 						hallucination += 10
-					if(rand(1,380) <= checkthreshold)
+					if(rand(1,480) <= checkthreshold)
 						playsound_local(src,pick(scarySounds),50, 1, -1)
 						hallucination += 30
 
@@ -1513,11 +1514,16 @@
 				brightness = T.get_lumcount()
 				// spooky walking around
 				if(brightness <= LIGHTING_SOFT_THRESHOLD)
-					if(rand(1,25) <= checkthreshold)
+					if(rand(1,60) <= checkthreshold)
 						hallucination += 10
-					if(rand(1,400) <= checkthreshold)
+					if(rand(1,600) <= checkthreshold)
 						playsound_local(src,pick(scarySounds),50, 1, -1)
 						hallucination += 25
+		else if(isturf(loc))
+			// spooky environments for darkness lovers
+			var/turf/T = loc
+			if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD && rand(1,1000) <= 1)
+				playsound_local(src,pick(scarySounds),50, 1, -1)
 
 
 /mob/living/carbon/human/handle_stomach()

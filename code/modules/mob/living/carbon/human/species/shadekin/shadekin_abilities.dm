@@ -39,6 +39,10 @@
 		to_chat(src,"<span class='warning'>You can't use that here!</span>")
 		return FALSE
 
+	if(buckled)
+		to_chat(src,"<span class='warning'>You can't use that while buckled!</span>")
+		return FALSE
+
 	var/brightness = T.get_lumcount() //Brightness in 0.0 to 1.0
 	darkness = 1-brightness //Invert
 

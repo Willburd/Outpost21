@@ -28,10 +28,13 @@
 	contains = list(
 			/obj/item/weapon/gun/energy/lasertag/red,
 			/obj/item/clothing/suit/redtag,
+			/obj/item/weapon/lasertagknife/red,
 			/obj/item/weapon/gun/energy/lasertag/blue,
 			/obj/item/clothing/suit/bluetag,
+			/obj/item/weapon/lasertagknife/blue,
 			/obj/item/weapon/gun/energy/lasertag,
-			/obj/item/clothing/suit/omnitag
+			/obj/item/clothing/suit/omnitag,
+			/obj/item/weapon/lasertagknife
 			)
 	containertype = /obj/structure/closet/crate/ward
 	containername = "Lasertag Supplies"

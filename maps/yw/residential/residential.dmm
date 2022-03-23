@@ -1300,7 +1300,7 @@
 "Ws" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/door/firedoor/glass,/obj/machinery/door/airlock{name = "RS11"; req_access = list(8011)},/turf/simulated/floor/plating,/area/residential/corridors)
 "Wt" = (/turf/simulated/wall,/area/residential/room8)
 "Wx" = (/obj/effect/floor_decal/industrial/warning{dir = 9},/turf/simulated/floor/reinforced,/area/residential/ship_bay)
-"WA" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/food/drinks/glass2/mug,/obj/item/mecha_parts/micro/part/gopher_right_arm,/obj/item/robot_parts/r_arm,/turf/simulated/floor/tiled,/area/residential/room11)
+"WA" = (/obj/structure/table/glass,/obj/item/weapon/reagent_containers/food/drinks/glass2/mug,/obj/item/robot_parts/r_arm,/turf/simulated/floor/tiled,/area/residential/room11)
 "WD" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/light{dir = 1},/turf/simulated/floor/carpet/blue,/area/residential/mroom1)
 "WG" = (/turf/simulated/floor/plating,/area/residential/powerroom)
 "WJ" = (/turf/simulated/floor/wood,/area/residential/room9)

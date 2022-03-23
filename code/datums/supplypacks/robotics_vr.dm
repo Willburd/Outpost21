@@ -1,3 +1,4 @@
+/* Outpost 21 edit - removed micro mecha
 /datum/supply_pack/robotics/mecha_gopher
 	name = "Circuit Crate (\"Gopher\" APLU)"
 	contains = list(
@@ -32,6 +33,7 @@
 	containertype = /obj/structure/closet/crate/secure/science
 	containername = "APLU \"Weasel\" Circuit Crate"
 	access = access_robotics
+*/
 
 /datum/supply_pack/robotics/some_robolimbs
 	name = "Basic Robolimb Blueprints"

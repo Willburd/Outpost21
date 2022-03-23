@@ -23,10 +23,8 @@
 	reagent_type = "water"
 
 /turf/simulated/floor/water/acidic/Entered(atom/movable/AM, atom/oldloc)
-	if(ishuman(AM))
-		var/mob/living/carbon/human/HS = AM
-		if(HS.is_incorporeal())
-			return // no splishy splashy
+	if(AM.is_incorporeal())
+		return // no splishy splashy
 			
 	if(istype(AM, /mob/living))
 		// TODO check if mob is acid proof

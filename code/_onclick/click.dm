@@ -42,12 +42,6 @@
 	if(!checkClickCooldown()) // Hard check, before anything else, to avoid crashing
 		return
 
-	// shadekin handling
-	var/iscorporeal = TRUE
-	if(ishuman(src))
-		var/mob/living/carbon/human/HS = src
-		iscorporeal = !HS.is_incorporeal()
-
 	setClickCooldown(1)
 
 	if(client && client.buildmode)
@@ -90,7 +84,7 @@
 		RestrainedClickOn(A)
 		return 1
 
-	if(iscorporeal && in_throw_mode && (isturf(A) || isturf(A.loc)) && throw_item(A))
+	if(!is_incorporeal() && in_throw_mode && (isturf(A) || isturf(A.loc)) && throw_item(A))
 		trigger_aiming(TARGET_CAN_CLICK)
 		throw_mode_off()
 		return TRUE
@@ -135,7 +129,7 @@
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
-	if(!iscorporeal) // shadekin can't interact with anything else! They already can't use their bag
+	if(is_incorporeal()) // shadekin can't interact with anything else! They already can't use their bag
 		return
 
 	//Atoms on turfs (not on your person)

@@ -74,10 +74,8 @@
 	return return_air() // Otherwise their head is above the water, so get the air from the atmosphere instead.
 
 /turf/simulated/floor/water/Entered(atom/movable/AM, atom/oldloc)
-	if(ishuman(AM))
-		var/mob/living/carbon/human/HS = AM
-		if(HS.is_incorporeal())
-			return // no splishy splashy
+	if(AM.is_incorporeal())
+		return // no splishy splashy
 
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM

@@ -51,10 +51,6 @@ default behaviour is:
 	if (istype(AM, /mob/living))
 		var/mob/living/tmob = AM
 
-		// no bumping while incorporial
-		if(src.is_incorporeal() || AM.is_incorporeal()) 
-			return
-
 		//Even if we don't push/swap places, we "touched" them, so spread fire
 		spread_fire(tmob)
 
@@ -218,6 +214,8 @@ default behaviour is:
 		now_pushing = 0
 
 /mob/living/CanPass(atom/movable/mover, turf/target)
+	if(src.is_incorporeal() || mover.is_incorporeal()) 
+		return TRUE
 	if(istype(mover, /obj/structure/blob) && faction == "blob") //Blobs should ignore things on their faction.
 		return TRUE
 	return ..()

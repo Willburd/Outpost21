@@ -11,6 +11,7 @@
 #define UNDEAD			0x200	// Various things that living things don't do, mostly for skeletons
 #define NO_INFECT		0x400	// Don't allow infections in limbs or organs, similar to IS_PLANT, without other strings.
 #define NO_DEFIB		0x800	// Don't allow them to be defibbed
+#define NO_DARKNESSFEAR 0x1000 // Don't go insane from darkess
 // unused: 0x8000 - higher than this will overflow
 
 // Species EMP vuln for carbons

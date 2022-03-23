@@ -31,7 +31,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags =  NO_SCAN | NO_HALLUCINATION // outpost21 edit - no hallucinating in darkness, or at all really.
+	flags =  NO_SCAN | NO_DARKNESSFEAR // outpost21 edit - no hallucinating in darkness, or at all really.
 	spawn_flags = SPECIES_CAN_JOIN
 
 	reagent_tag = IS_SHADEKIN		// for shadekin-unqiue chem interactions

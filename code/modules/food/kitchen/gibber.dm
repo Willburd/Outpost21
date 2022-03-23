@@ -203,6 +203,8 @@
 	// Small mobs don't give as much nutrition.
 	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
+	if(slab_count <= 0)
+		slab_count = 2 // divide by 0 catcher... min two?
 	slab_nutrition /= slab_count
 
 	while(slab_count)

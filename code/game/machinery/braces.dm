@@ -1,6 +1,6 @@
 // MAINTENANCE JACK - Allows removing of braces with certain delay.
 // ported from https://github.com/Baystation12/Baystation12/blob/dev/code/game/machinery/doors/braces.dm, mostly, removed ID and electronics parts. Focuses entirely on maintnence jack lockdowns
-/obj/item/weapon/crowbar/brace_jack
+/obj/item/weapon/tool/crowbar/brace_jack
 	name = "maintenance jack"
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = ITEMSIZE_SMALL
@@ -25,7 +25,7 @@
 	var/cur_health
 	var/max_health = 450
 	var/obj/machinery/door/airlock/airlock = null
-	
+
 
 
 /obj/item/airlock_brace/examine(mob/user)
@@ -49,13 +49,19 @@
 
 
 /obj/item/airlock_brace/update_icon()
+	cut_overlays()
+	. = list()
+
 	if(airlock)
 		// plane and layer set by airlock itself!
 		icon_state = "brace_closed"
+		. += mutable_appearance(icon, "brace_closed_lights")
+		. += emissive_appearance(icon,"brace_closed_lights")
 	else
 		icon_state = "brace_open"
-	..()
-
+		. += mutable_appearance(icon, "brace_open_lights")
+		. += emissive_appearance(icon, "brace_open_lights")
+	add_overlay(.)
 
 /obj/item/airlock_brace/New()
 	..()
@@ -70,10 +76,10 @@
 
 /obj/item/airlock_brace/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
+	if (istype(W, /obj/item/weapon/tool/crowbar/brace_jack))
 		if(!airlock)
 			return
-		var/obj/item/weapon/crowbar/brace_jack/C = W
+		var/obj/item/weapon/tool/crowbar/brace_jack/C = W
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		playsound(user, 'sound/machines/door/airlock_creaking.ogg', 100, 1) // pulling doorjack up!
 		if(do_after(user, rand(150,300), airlock))
@@ -95,8 +101,9 @@
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/lock_brace(var/airlk)
-	if(airlock)
+/obj/item/airlock_brace/proc/lock_brace(var/obj/machinery/door/airlock/airlk)
+	if(!airlk || airlock)
+		// airlock doesn't exist, or already on an airlock!
 		return
 	playsound( src, 'sound/machines/door/airlockforced.ogg', 50, 1)
 	// lock brace to door
@@ -108,6 +115,16 @@
 	plane = airlock.plane
 	layer = airlock.layer + 0.1
 	// update icon
+	if(airlk.locs.len > 1) // multi-tile handling
+		var/doorwid = airlk.locs.len * 32
+		pixel_x = 0
+		pixel_y = 0
+		if(airlk.dir < 4)
+			dir = 4
+			pixel_y += (doorwid / 2) - 16
+		else
+			dir = 1
+			pixel_x += (doorwid / 2) - 16
 	update_icon()
 
 
@@ -121,6 +138,8 @@
 	airlock = null
 	anchored = FALSE
 	// reset brace to item layer
+	pixel_x = 0
+	pixel_y = 0
 	reset_plane_and_layer()
 	update_icon()
 	if(user)

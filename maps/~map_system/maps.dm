@@ -108,9 +108,9 @@ var/list/all_maps = list()
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
 
 	// VOREStation Edit - Persistence!
-	var/datum/spawnpoint/spawnpoint_died = /datum/spawnpoint/arrivals 	// Used if you end the round dead.
-	var/datum/spawnpoint/spawnpoint_left = /datum/spawnpoint/arrivals 	// Used of you end the round at centcom.
-	var/datum/spawnpoint/spawnpoint_stayed = /datum/spawnpoint/cryo 	// Used if you end the round on the station.
+	var/datum/spawnpoint/spawnpoint_died = /datum/spawnpoint/elevator 	// Used if you end the round dead.
+	var/datum/spawnpoint/spawnpoint_left = /datum/spawnpoint/elevator 	// Used of you end the round at centcom.
+	var/datum/spawnpoint/spawnpoint_stayed = /datum/spawnpoint/elevator 	// Used if you end the round on the station.
 	// VOREStation Edit End
 
 	var/use_overmap = 0          // If overmap should be used (including overmap space travel override)

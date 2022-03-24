@@ -37,6 +37,8 @@ var/list/spawntypes = list()
 /datum/spawnpoint/proc/get_spawn_position()
 	return get_turf(pick(turfs))
 
+//OP edit: Outpost only uses the elevator and cyborg.
+/*
 /datum/spawnpoint/arrivals
 	display_name = "Arrivals Shuttle"
 	msg = "will arrive to the station shortly by shuttle"
@@ -52,7 +54,8 @@ var/list/spawntypes = list()
 /datum/spawnpoint/gateway/New()
 	..()
 	turfs = latejoin_gateway
-/* VOREStation Edit
+*/
+
 /datum/spawnpoint/elevator
 	display_name = "Elevator"
 	msg = "has arrived from the residential district"
@@ -60,7 +63,8 @@ var/list/spawntypes = list()
 /datum/spawnpoint/elevator/New()
 	..()
 	turfs = latejoin_elevator
-*/
+
+/*
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
@@ -69,6 +73,7 @@ var/list/spawntypes = list()
 /datum/spawnpoint/cryo/New()
 	..()
 	turfs = latejoin_cryo
+*/
 
 /datum/spawnpoint/cyborg
 	display_name = "Cyborg Storage"
@@ -79,6 +84,7 @@ var/list/spawntypes = list()
 	..()
 	turfs = latejoin_cyborg
 
+/*
 /obj/effect/landmark/arrivals
 	name = "JoinLateShuttle"
 	delete_me = 1
@@ -86,7 +92,7 @@ var/list/spawntypes = list()
 /obj/effect/landmark/arrivals/New()
 	latejoin += loc
 	..()
-
+*/
 var/global/list/latejoin_tram   = list()
 
 /obj/effect/landmark/tram

@@ -112,9 +112,10 @@
 	spawnpoint_died = /datum/spawnpoint/tram
 	spawnpoint_left = /datum/spawnpoint/tram
 	spawnpoint_stayed = /datum/spawnpoint/cryo
-
+/*//OP edit: More area removal testing.
 	meteor_strike_areas = list(/area/borealis2/outdoors/grounds,
 		/area/borealis2/outdoors/exterior)
+
 
 	unit_test_exempt_areas = list(
 		/area/crew_quarters/sleep/Dorm_1/holo,
@@ -175,6 +176,7 @@
 		/area/borealis2/outdoors/grounds/walkway,
 		/area/cryogaia/station/excursion_overhang
 		)
+*/
 
 	unit_test_exempt_from_atmos = list(
 //		/area/engineering/atmos/intake

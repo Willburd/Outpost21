@@ -49,13 +49,19 @@
 
 
 /obj/item/airlock_brace/update_icon()
+	cut_overlays()
+	. = list()
+
 	if(airlock)
 		// plane and layer set by airlock itself!
 		icon_state = "brace_closed"
+		. += mutable_appearance(icon, "brace_closed_lights")
+		. += emissive_appearance(icon,"brace_closed_lights")
 	else
 		icon_state = "brace_open"
-	..()
-
+		. += mutable_appearance(icon, "brace_open_lights")
+		. += emissive_appearance(icon, "brace_open_lights")
+	add_overlay(.)
 
 /obj/item/airlock_brace/New()
 	..()
@@ -95,8 +101,9 @@
 				to_chat(user, "You repair some dents on \the [src].")
 
 
-/obj/item/airlock_brace/proc/lock_brace(var/airlk)
-	if(airlock)
+/obj/item/airlock_brace/proc/lock_brace(var/obj/machinery/door/airlock/airlk)
+	if(!airlk || airlock)
+		// airlock doesn't exist, or already on an airlock!
 		return
 	playsound( src, 'sound/machines/door/airlockforced.ogg', 50, 1)
 	// lock brace to door
@@ -108,6 +115,16 @@
 	plane = airlock.plane
 	layer = airlock.layer + 0.1
 	// update icon
+	if(airlk.locs.len > 1) // multi-tile handling
+		var/doorwid = airlk.locs.len * 32
+		pixel_x = 0
+		pixel_y = 0
+		if(airlk.dir < 4)
+			dir = 4
+			pixel_y += (doorwid / 2) - 16
+		else
+			dir = 1
+			pixel_x += (doorwid / 2) - 16
 	update_icon()
 
 
@@ -121,6 +138,8 @@
 	airlock = null
 	anchored = FALSE
 	// reset brace to item layer
+	pixel_x = 0
+	pixel_y = 0
 	reset_plane_and_layer()
 	update_icon()
 	if(user)

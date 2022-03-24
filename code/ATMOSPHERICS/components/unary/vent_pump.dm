@@ -150,6 +150,9 @@
 	if(!istype(T))
 		return
 
+	// use retro style
+	vent_icon += "retro_"
+
 	if(!T.is_plating() && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
 

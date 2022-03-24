@@ -58,6 +58,9 @@
 
 	var/scrubber_icon = "scrubber"
 
+	// use retro style
+	scrubber_icon += "retro_"
+
 	var/turf/T = get_turf(src)
 	if(!istype(T))
 		return

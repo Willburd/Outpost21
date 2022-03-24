@@ -1,6 +1,6 @@
 // MAINTENANCE JACK - Allows removing of braces with certain delay.
 // ported from https://github.com/Baystation12/Baystation12/blob/dev/code/game/machinery/doors/braces.dm, mostly, removed ID and electronics parts. Focuses entirely on maintnence jack lockdowns
-/obj/item/weapon/crowbar/brace_jack
+/obj/item/weapon/tool/crowbar/brace_jack
 	name = "maintenance jack"
 	desc = "A special crowbar that can be used to safely remove airlock braces from airlocks."
 	w_class = ITEMSIZE_SMALL
@@ -25,7 +25,7 @@
 	var/cur_health
 	var/max_health = 450
 	var/obj/machinery/door/airlock/airlock = null
-	
+
 
 
 /obj/item/airlock_brace/examine(mob/user)
@@ -70,10 +70,10 @@
 
 /obj/item/airlock_brace/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(W, /obj/item/weapon/crowbar/brace_jack))
+	if (istype(W, /obj/item/weapon/tool/crowbar/brace_jack))
 		if(!airlock)
 			return
-		var/obj/item/weapon/crowbar/brace_jack/C = W
+		var/obj/item/weapon/tool/crowbar/brace_jack/C = W
 		to_chat(user, "You begin forcibly removing \the [src] with \the [C].")
 		playsound(user, 'sound/machines/door/airlock_creaking.ogg', 100, 1) // pulling doorjack up!
 		if(do_after(user, rand(150,300), airlock))

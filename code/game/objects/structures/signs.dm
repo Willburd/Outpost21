@@ -74,6 +74,12 @@
 /obj/structure/sign/scenery/map/right
 	icon_state = "map-right"
 
+/obj/structure/sign/scenery/map/left_outpost21
+	icon_state = "map-left-outpost"
+
+/obj/structure/sign/scenery/map/right_outpost21
+	icon_state = "map-right-outpost"
+
 /obj/structure/sign/securearea
 	name = "\improper SECURE AREA"
 	desc = "A warning sign which reads 'SECURE AREA'."

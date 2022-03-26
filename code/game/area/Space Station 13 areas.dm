@@ -758,7 +758,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/maintenance/substation/engineering // Probably will be connected to engineering SMES room, as wires cannot be crossed properly without them sharing powernets.
 	name = "Engineering Substation"
 
-// No longer used:
 /area/maintenance/substation/medical_science // Medbay and Science. Each has it's own separated machinery, but it originates from the same room.
 	name = "Medical Research Substation"
 
@@ -791,6 +790,17 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
+
+//OP addition start
+/area/maintenance/substation/atmos
+	name = "Atmospherics Substation"
+
+/area/maintenance/substation/mining
+	name = "Mining Substation"
+
+/area/maintenance/substation/virology
+	name = "Virology Substation"
+//OP addition end
 
 //Hallway
 
@@ -1200,6 +1210,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/locker
 	name = "\improper Locker Room"
 	icon_state = "locker"
+	forbid_events = FALSE
 
 /area/crew_quarters/locker/locker_toilet
 	name = "\improper Locker Toilets"
@@ -1209,6 +1220,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/fitness
 	name = "\improper Fitness Room"
 	icon_state = "fitness"
+	forbid_events = FALSE
+//Outpost edit: Setting a few of the more public areas to have event flags.
+//All area/crew_quarters is flagged above, which is good for dorms, but not everything.
 
 /area/crew_quarters/longue_area
 	name = "\improper Lounge" //VOREStation Edit - Muh speeling.
@@ -1217,10 +1231,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/recreation_area
 	name = "\improper Recreation Area"
 	icon_state = "recreation_area"
+	forbid_events = FALSE
 
 /area/crew_quarters/recreation_area_hallway
 	name = "\improper Recreation Area Hallway"
 	icon_state = "recreation_area_hallway"
+	forbid_events = FALSE
 
 /area/crew_quarters/recreation_area_restroom
 	name = "\improper Recreation Area Restroom"
@@ -1230,23 +1246,29 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/pool
 	name = "\improper Pool"
 	icon_state = "pool"
+	sound_env = LARGE_ENCLOSED
+	forbid_events = FALSE
 
 /area/crew_quarters/cafeteria
 	name = "\improper Cafeteria"
 	icon_state = "cafeteria"
+	forbid_events = FALSE
 
 /area/crew_quarters/coffee_shop
 	name = "\improper Coffee Shop"
 	icon_state = "coffee_shop"
+	forbid_events = FALSE
 
 /area/crew_quarters/kitchen
 	name = "\improper Kitchen"
 	icon_state = "kitchen"
+	forbid_events = FALSE
 
 /area/crew_quarters/bar
 	name = "\improper Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
+	forbid_events = FALSE
 
 /area/crew_quarters/barrestroom
 	name = "\improper Cafeteria Restroom"
@@ -1279,6 +1301,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/library_conference_room
  	name = "\improper Library Conference Room"
  	icon_state = "library_conference_room"
+
+/area/library_office //Outpost edit: Putting this here because every station should be able to use it. It's not unique to us.
+ 	name = "\improper Librarian Office"
+ 	icon_state = "library"
+ 	sound_env = SMALL_SOFTFLOOR
 
 /area/chapel
 	ambience = AMBIENCE_CHAPEL
@@ -1398,10 +1425,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	ambience = AMBIENCE_ENGINEERING
 
 /area/engineering/atmos
- 	name = "\improper Atmospherics"
- 	icon_state = "atmos"
- 	sound_env = LARGE_ENCLOSED
-	 ambience = AMBIENCE_ATMOS
+	name = "\improper Atmospherics"
+	icon_state = "atmos"
+	sound_env = LARGE_ENCLOSED
+	ambience = AMBIENCE_ATMOS
 
 /area/engineering/atmos/monitoring
 	name = "\improper Atmospherics Monitoring Room"
@@ -1572,23 +1599,23 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 //MedBay
 
 /area/medical/medbay
-	name = "\improper Medbay Hallway - Port"
+	name = "\improper Medbay Hallway - Stairwell"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
-	name = "\improper Medbay Hallway - Starboard"
+	name = "\improper Medbay Hallway - Basement"
 	icon_state = "medbay2"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay3
-	name = "\improper Medbay Hallway - Fore"
+	name = "\improper Medbay Hallway - Primary"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay4
-	name = "\improper Medbay Hallway - Aft"
+	name = "\improper Medbay Hallway - Vox"
 	icon_state = "medbay4"
 	music = 'sound/ambience/signal.ogg'
 
@@ -1754,6 +1781,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Security - Brig"
 	icon_state = "brig"
 
+
 /area/security/brig/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
@@ -1806,7 +1834,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/detectives_office
 	name = "\improper Security - Forensic Office"
 	icon_state = "detective"
-	sound_env = MEDIUM_SOFTFLOOR
+	sound_env = LARGE_ENCLOSED
 
 /area/security/range
 	name = "\improper Security - Firing Range"

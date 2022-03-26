@@ -47,7 +47,7 @@
 	name = "ES Outpost 21 (Landing Pad)"
 	landmark_tag = "outpost_landing_pad"
 	base_turf = /turf/simulated/floor/reinforced
-	base_area = /area/outpost/station/mining_dock
+	base_area = /area/muriki/station/mining_dock
 
 /obj/effect/shuttle_landmark/premade/security/cryogaia
 	name = "ES Outpost 21 (Medical Dock)"

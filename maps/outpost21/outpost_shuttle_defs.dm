@@ -53,6 +53,40 @@
 	docking_controller = "cargo_bay"
 
 //////////////////////////////////////////////////////////////
+// Tramshuttle
+/datum/shuttle/autodock/multi/tram
+	name = "Station Tram"
+	warmup_time = 10
+	shuttle_area = /area/shuttle/tram
+	current_location = "tram_waste"
+//	landmark_transition = "tram_transit"
+	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+
+	destination_tags = list(
+		"tram_waste",
+		"tram_eng",
+		"tram_civ"
+	)
+
+/obj/effect/shuttle_landmark/premade/tram/base
+	name = "Tram Station - Waste and Maintenance"
+	landmark_tag = "skipjack_base"
+//	base_area = /area/space //I don't think these are needed? We'll see
+//	base_turf = /turf/space
+
+/obj/effect/shuttle_landmark/premade/tram/transit
+	name = "Tram Station - Transit"
+	landmark_tag = "tram_transit"
+
+/obj/effect/shuttle_landmark/premade/tram/eng
+	name = "Tram Station - Engineering Cargo"
+	landmark_tag = "tram_eng"
+
+/obj/effect/shuttle_landmark/premade/tram/civ
+	name = "Tram Station - Civilian"
+	landmark_tag = "tram_civ"
+
+//////////////////////////////////////////////////////////////
 // Trade Ship
 /datum/shuttle/autodock/ferry/trade
 	name = "Trade"

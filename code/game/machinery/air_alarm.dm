@@ -27,6 +27,7 @@
 	var/list/air_scrub_names = list()
 	var/list/air_vent_info = list()
 	var/list/air_scrub_info = list()
+	var/list/air_alarms = list()
 
 /obj/machinery/alarm
 	name = "alarm"
@@ -160,13 +161,13 @@
 	if(!master_is_operating())
 		elect_master()
 
-/obj/machinery/alarm/process()
-	if((stat & (NOPOWER|BROKEN)) || shorted)
+/obj/machinery/alarm/proc/scan_atmo()
+	if((alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN)) || alarm_area.master_air_alarm.shorted)
 		return
 
-	var/turf/simulated/location = src.loc
-	if(!istype(location))	return//returns if loc is not simulated
-
+	var/turf/simulated/location = loc
+	if(!istype(location))	
+		return
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
@@ -200,6 +201,15 @@
 		if(RCON_YES)
 			remote_control = 1
 
+/obj/machinery/alarm/process()
+	if((stat & (NOPOWER|BROKEN)) || shorted)
+		return
+	if(src != alarm_area.master_air_alarm || (alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN)) || alarm_area.master_air_alarm.shorted)
+		return
+
+	// if master is working at all, update all sensors!
+	for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+		AA.scan_atmo()
 	return
 
 /obj/machinery/alarm/proc/handle_heating_cooling(var/datum/gas_mixture/environment)
@@ -309,13 +319,20 @@
 	return alarm_area && alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER | BROKEN))
 
 /obj/machinery/alarm/proc/elect_master(exclude_self = FALSE)
+	// loop through all sensors to update the area's sensor list as well
+	alarm_area.master_air_alarm = null
+	alarm_area.air_alarms = list()
 	for(var/obj/machinery/alarm/AA in alarm_area)
+		alarm_area.air_alarms += AA
 		if(exclude_self && AA == src)
+			AA.update_icon()
 			continue
-		if(!(AA.stat & (NOPOWER|BROKEN)))
+		if(!alarm_area.master_air_alarm && !(AA.stat & (NOPOWER|BROKEN)))
 			alarm_area.master_air_alarm = AA
-			return 1
-	return 0
+		// update status!
+		AA.update_icon()
+	
+	return alarm_area.master_air_alarm
 
 /obj/machinery/alarm/update_icon()
 	cut_overlays()
@@ -325,11 +342,30 @@
 		set_light(0)
 		set_light_on(FALSE)
 		return
-	if((stat & (NOPOWER|BROKEN)) || shorted)
+	if(!alarm_area || (stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
 		set_light(0)
 		set_light_on(FALSE)
 		return
+
+	// sub light!
+	if(alarm_area.master_air_alarm == src)
+		// master mode
+		add_overlay(mutable_appearance(icon, "alarm_Mmode"))
+		add_overlay(emissive_appearance(icon, "alarm_Mmode"))
+	else
+		if(!alarm_area.master_air_alarm || alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN) || alarm_area.master_air_alarm.shorted)
+			// master is out! don't show display!
+			icon_state = "alarmp"
+			add_overlay(mutable_appearance(icon, "alarm_Xmode"))
+			add_overlay(emissive_appearance(icon, "alarm_Xmode"))
+			set_light(0)
+			set_light_on(FALSE)
+			return
+		else
+			// passive light on
+			add_overlay(mutable_appearance(icon, "alarm_Pmode"))
+			add_overlay(emissive_appearance(icon, "alarm_Pmode"))
 
 	var/icon_level = danger_level
 	if(alarm_area?.atmosalm)
@@ -339,9 +375,15 @@
 	switch(icon_level)
 		if(0)
 			icon_state = "alarm_0"
-			add_overlay(mutable_appearance(icon, "alarm_ov0"))
-			add_overlay(emissive_appearance(icon, "alarm_ov0"))
-			new_color = "#03A728"
+			if(alarm_area.master_air_alarm == src)
+				add_overlay(mutable_appearance(icon, "alarm_ov0"))
+				add_overlay(emissive_appearance(icon, "alarm_ov0"))
+				new_color = "#03A728"
+			else
+				// passive mode
+				add_overlay(mutable_appearance(icon, "alarm_ovP"))
+				add_overlay(emissive_appearance(icon, "alarm_ovP"))
+				new_color = "#0033FF"
 		if(1)
 			icon_state = "alarm_2" //yes, alarm2 is yellow alarm
 			add_overlay(mutable_appearance(icon, "alarm_ov2"))
@@ -355,6 +397,16 @@
 
 	set_light(l_range = 2, l_power = 0.25, l_color = new_color)
 	set_light_on(TRUE)
+
+
+	// this is dumb, but is needed...
+	// update icons of all other air alarms when master is updated
+	// especially needed if master goes down, or you change master!
+	if(alarm_area.master_air_alarm == src) // prevent endless recursion!
+		for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+			if(AA != alarm_area.master_air_alarm) // we already did this above!
+				AA.update_icon()
+
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -432,8 +484,7 @@
 
 /obj/machinery/alarm/proc/apply_mode()
 	//propagate mode to other air alarms in the area
-	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
-	for(var/obj/machinery/alarm/AA in alarm_area)
+	for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
 		AA.mode = mode
 
 	switch(mode)

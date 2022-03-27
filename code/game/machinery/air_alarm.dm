@@ -163,11 +163,8 @@
 	// 1439 for air pumps, air scrubbers, atmo control
 	// Never change this on the alarm unless you want to break every alarm in their radio circuit.
 	// I'm CLEANING it here, to ensure even if mappers break it, it will fix itself instead, and if they code dig they will know why. Hello by the way~
-	for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
-		AA.frequency = 1439
-		AA.alarm_frequency = 1437
-
-	// set freq and master!
+	frequency = 1439
+	alarm_frequency = 1437
 	set_frequency(frequency)
 
 /obj/machinery/alarm/proc/scan_atmo()

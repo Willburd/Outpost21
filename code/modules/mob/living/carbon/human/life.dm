@@ -1017,10 +1017,12 @@
 					fake_attack(src)
 				if(!handling_hal)
 					spawn handle_hallucinations() //The not boring kind!
+				/* outpost 21 edit - disabled spinview, breaks things pretty badly when flipped 180, mostly double doors... Makes map communication difficult as well, and probably breaks sprites.
 				if(client && prob(5))
 					client.dir = pick(2,4,8)
 					spawn(rand(20,50))
 						client.dir = 1
+				*/
 
 			hallucination = max(0, hallucination - 2)
 		else

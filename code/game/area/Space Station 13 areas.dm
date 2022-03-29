@@ -1780,7 +1780,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/brig
 	name = "\improper Security - Brig"
 	icon_state = "brig"
-
+	flags = RAD_SHIELDED //Outpost edit: So prisoners don't MELT if a radiation storm comes... even if that's hilarious.
 
 /area/security/brig/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
@@ -1793,6 +1793,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+	flags = RAD_SHIELDED
 
 /area/security/prison/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)

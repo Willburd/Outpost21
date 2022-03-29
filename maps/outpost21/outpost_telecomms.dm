@@ -13,7 +13,7 @@
 	listening_level = Z_LEVEL_OUTPOST_SURFACE
 	autolinkers = list("m_relay")
 
-/obj/machinery/telecomms/relay/preset/cryogaia/upper
+/obj/machinery/telecomms/relay/preset/outpost/upper
 	id = "Upper Floors Relay"
 	listening_level =Z_LEVEL_OUTPOST_UPPER
 	autolinkers = list("s_relay")

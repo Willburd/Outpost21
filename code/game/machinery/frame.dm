@@ -134,6 +134,12 @@
 	frame_class = FRAME_CLASS_MACHINE
 	frame_size = 4
 
+/datum/frame/frame_types/metal_detector
+	name = "Threat Scanner"
+	icon_override = 'icons/obj/stock_parts_vr.dmi'
+	circuit = /obj/item/weapon/circuitboard/metal_detector
+	frame_class = FRAME_CLASS_MACHINE
+
 /datum/frame/frame_types/display
 	name = "Display"
 	frame_class = FRAME_CLASS_DISPLAY

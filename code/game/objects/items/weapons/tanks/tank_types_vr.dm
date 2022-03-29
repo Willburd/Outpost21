@@ -27,6 +27,12 @@
 	gauge_cap = 3
 	gauge_icon = "indicator_bigtank"
 
+/obj/item/weapon/tank/phoroanesthetic
+	icon = 'icons/obj/tank_vr.dmi'
+	icon_state = "phoroanesthetic"
+	gauge_cap = 3
+	gauge_icon = "indicator_bigtank"
+
 /obj/item/weapon/tank/air
 	icon = 'icons/obj/tank_vr.dmi'
 	icon_state = "oxygen"

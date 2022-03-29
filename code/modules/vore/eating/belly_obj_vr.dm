@@ -129,7 +129,7 @@
 	var/contamination_color = "green"		// Color of contamination overlay
 
 	// Lets you do a fullscreen overlay. Set to an icon_state string.
-	var/belly_fullscreen = ""
+	var/belly_fullscreen = "base" // outpost 21 edit - base vore belly is blind!
 	var/disable_hud = FALSE
 
 //For serialization, keep this updated, required for bellies to save correctly.

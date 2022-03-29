@@ -139,7 +139,7 @@
 	alarm_area = get_area(src)
 	area_uid = "\ref[alarm_area]"
 	if(name == "alarm")
-		name = "[alarm_area.name] Air Alarm"
+		name = "[alarm_area.name] Air Alarm \[[rand(9999)]\]" // random number id to help with players locating alarms, cosmetic
 
 	if(!wires)
 		wires = new(src)
@@ -153,16 +153,22 @@
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
 
-	update_icon()
-
-/obj/machinery/alarm/Initialize()
-	. = ..()
-	set_frequency(frequency)
+	// select master alarm
 	if(!master_is_operating())
 		elect_master()
 
+	// Mappers messed up, and have alarms with different frequencies in areas. 
+	// This outright does not work, does nothing special, and makes any alarms on other freqs braindead.
+	// 1437 for atmospherics/fire alerts
+	// 1439 for air pumps, air scrubbers, atmo control
+	// Never change this on the alarm unless you want to break every alarm in their radio circuit.
+	// I'm CLEANING it here, to ensure even if mappers break it, it will fix itself instead, and if they code dig they will know why. Hello by the way~
+	frequency = 1439
+	alarm_frequency = 1437
+	set_frequency(frequency)
+
 /obj/machinery/alarm/proc/scan_atmo()
-	if((alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN)) || alarm_area.master_air_alarm.shorted)
+	if(alarm_area.master_air_alarm.shorted)
 		return
 
 	var/turf/simulated/location = loc
@@ -202,9 +208,14 @@
 			remote_control = 1
 
 /obj/machinery/alarm/process()
+	if(!alarm_area)
+		return
+	if(!alarm_area.master_air_alarm)
+		elect_master()
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		return
-	if(src != alarm_area.master_air_alarm || (alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN)) || alarm_area.master_air_alarm.shorted)
+	if(src != alarm_area.master_air_alarm || alarm_area.master_air_alarm.shorted)
+		// only master scans! disable scans if in headless mode!
 		return
 
 	// if master is working at all, update all sensors!
@@ -319,22 +330,37 @@
 	return alarm_area && alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER | BROKEN))
 
 /obj/machinery/alarm/proc/elect_master(exclude_self = FALSE)
+	if(!alarm_area)
+		return 
+
 	// loop through all sensors to update the area's sensor list as well
 	alarm_area.master_air_alarm = null
 	alarm_area.air_alarms = list()
 	for(var/obj/machinery/alarm/AA in alarm_area)
 		alarm_area.air_alarms += AA
 		if(exclude_self && AA == src)
-			AA.update_icon()
 			continue
 		if(!alarm_area.master_air_alarm && !(AA.stat & (NOPOWER|BROKEN)))
 			alarm_area.master_air_alarm = AA
-		// update status!
-		AA.update_icon()
 	
-	return alarm_area.master_air_alarm
+	if(alarm_area.master_air_alarm) 
+		// new master found!
+		alarm_area.master_air_alarm.update_icon() // ensure all alarms update icon with new master
+		return 1
+	else
+		// failed to find new master
+		return 0
 
 /obj/machinery/alarm/update_icon()
+	if(alarm_area && alarm_area.master_air_alarm == src) // only master
+		// this is dumb, but is needed...
+		// update icons of all other air alarms when master is updated
+		// especially needed if master goes down, or you change master!
+		for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+			if(AA != alarm_area.master_air_alarm) // we're already going to do this after.
+				AA.update_icon()
+
+	// start actual update!
 	cut_overlays()
 
 	if(panel_open)
@@ -354,7 +380,7 @@
 		add_overlay(mutable_appearance(icon, "alarm_Mmode"))
 		add_overlay(emissive_appearance(icon, "alarm_Mmode"))
 	else
-		if(!alarm_area.master_air_alarm || alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN) || alarm_area.master_air_alarm.shorted)
+		if(!alarm_area.master_air_alarm || alarm_area.master_air_alarm.shorted)
 			// master is out! don't show display!
 			icon_state = "alarmp"
 			add_overlay(mutable_appearance(icon, "alarm_Xmode"))
@@ -397,15 +423,6 @@
 
 	set_light(l_range = 2, l_power = 0.25, l_color = new_color)
 	set_light_on(TRUE)
-
-
-	// this is dumb, but is needed...
-	// update icons of all other air alarms when master is updated
-	// especially needed if master goes down, or you change master!
-	if(alarm_area.master_air_alarm == src) // prevent endless recursion!
-		for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
-			if(AA != alarm_area.master_air_alarm) // we already did this above!
-				AA.update_icon()
 
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
@@ -484,8 +501,9 @@
 
 /obj/machinery/alarm/proc/apply_mode()
 	//propagate mode to other air alarms in the area
-	for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
-		AA.mode = mode
+	if(alarm_area)
+		for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+			AA.mode = mode
 
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
@@ -720,6 +738,11 @@
 				rcon_setting = RCON_AUTO
 			if(RCON_YES)
 				rcon_setting = RCON_YES
+
+		// update all others on circuit
+		if(alarm_area)
+			for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+				AA.rcon_setting = rcon_setting
 		return TRUE
 
 	if(action == "temperature")
@@ -731,7 +754,12 @@
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
 				to_chat(usr, "Temperature must be between [min_temperature]C and [max_temperature]C")
 			else
-				target_temperature = input_temperature + T0C
+				// update other sensors
+				if(alarm_area)
+					for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+						AA.target_temperature = input_temperature + T0C
+				else
+					target_temperature = input_temperature + T0C
 		return TRUE
 	
 	// Account for remote users here.
@@ -788,6 +816,10 @@
 					TLV[env][name] = round(value, 0.01)
 				clamp_tlv_values(env, name)
 				// investigate_log(" treshold value for [env]:[name] was set to [value] by [key_name(usr)]",INVESTIGATE_ATMOS)
+
+				// update all others
+				for(var/obj/machinery/alarm/AA in alarm_area.air_alarms)
+					AA.TLV[env][name] = TLV[env][name]
 				. = TRUE
 		if("mode")
 			mode = text2num(params["mode"])

@@ -348,12 +348,18 @@
 					to_chat(L, "<span class='warning'>You feel a strange substance on you.</span>")
 					L.reagents.add_reagent(poison_type, poison_per_bite)
 
-
-
-/mob/living/simple_mob/animal/synx/hear_say(message,verb,language,fakename,isItalics,var/mob/living/speaker)
+/mob/living/simple_mob/animal/synx/hear_say(var/list/message_pieces, var/verb = "says", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	. = ..()
-	if(!message || !speaker)    return
-	if (speaker == src) return
+
+	var/list/combined = combine_message(message_pieces, verb, speaker)
+	var/message = combined["raw"]
+	if(!message || !speaker)    
+		return
+	if(message == "")
+		return
+	if (speaker == src) 
+		return
+
 	speaker = speaker.GetVoice()
 	speak += message
 	voices += speaker
@@ -445,8 +451,10 @@
 
 /mob/living/simple_mob/animal/synx/proc/handle_mimic()
 	name = pick(voices)
-	src.say(pick(speak))
-	name = realname
+	spawn(2)
+		src.say(pick(speak))
+	spawn(5)
+		name = realname
 
 //lo- procs adjusted to mobs.
 

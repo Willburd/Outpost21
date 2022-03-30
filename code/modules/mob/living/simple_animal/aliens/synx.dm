@@ -55,9 +55,9 @@
 				"rad" = 100) //Keeping 100 rad armor as mobs cannot easily get radiation storm announcements. If this is reduced it'd be a good idea to make it 100 for the ai types.
 	has_hands = 1
 
-	response_help  = "pokes the synx, shifting the fur-like bristles on its body."
-	response_disarm = "gently pushes aside the synx, dislodging a clump of bristly hair in your hand. The substance quickly melts upon contact with your sweat."
-	response_harm   = "tries to hit the synx. This tears out an area of fur which firmly melts upon contact, covering you in something sticky."
+	response_help  = "pokes and shifts the fur-like bristles on"
+	response_disarm = "gently pushes the synx; Dislodging a clump of bristly, and strangely melting, hair from"
+	response_harm   = "hits the synx; Ripping out a chunk of sticky, and strangely melting, hair from"
 
 
 	melee_damage_lower = SYNX_LOWER_DAMAGE //Massive damage reduction, will be balanced with toxin injection/ //LO-  Made up for in skills. Toxin injection does not technically cause damage with these guys. Stomach acid does when they disegage their stomach from their mouths does, but that could be done differently.
@@ -445,10 +445,8 @@
 
 /mob/living/simple_mob/animal/synx/proc/handle_mimic()
 	name = pick(voices)
-	spawn(2)
-		src.say(pick(speak))
-	spawn(5)
-		name = realname
+	src.say(pick(speak))
+	name = realname
 
 //lo- procs adjusted to mobs.
 
@@ -679,8 +677,6 @@
 	faction = "neutral"
 
 /mob/living/simple_mob/animal/synx/ai/pet/diablo
-	//var/diablo_LIVING = "synx_diablo_living"
-	//var/diablo_DEAD = "synx_diablo_dead" //This isn't how you set different icon states. To-do: Fix this shit.
 	name = "Diablo"
 	desc = "A cold blooded, genderless, parasitic eel from the more distant and stranger areas of the cosmos. grey, perpetually grinning and possessing a hunger as enthusiastic and endless as humanity's sense of exploration. It has a tracking collar that doesn't seem to work."
 	icon_state = "synx_diablo_living"

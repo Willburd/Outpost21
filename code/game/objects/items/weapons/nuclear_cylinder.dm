@@ -1,4 +1,4 @@
-obj/item/nuclear_cylinder
+/obj/item/nuclear_cylinder
 	name = "\improper nuclear cylinder"
 	desc = "This cylinder is used in the self destruct system of the atmospheric CORE."
 	icon = 'icons/obj/nuclear_cylinder.dmi'

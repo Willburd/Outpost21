@@ -1,11 +1,11 @@
 //Atmosphere properties
 #define MURIKI_ONE_ATMOSPHERE	101.13 //kPa
-#define MURIKI_AVG_TEMP	288.15 //kelvin about 15c
+#define MURIKI_AVG_TEMP	291.15 //kelvin 18C
 
-#define MURIKI_PER_N2		0.30 //percent
-#define MURIKI_PER_O2		0.64
+#define MURIKI_PER_N2		0.72 //percent
+#define MURIKI_PER_O2		0.26
 #define MURIKI_PER_N2O	0.00 //Currently no capacity to 'start' a turf with this. See turf.dm
-#define MURIKI_PER_CO2	0.06
+#define MURIKI_PER_CO2	0.02
 #define MURIKI_PER_PHORON	0.00
 
 //Math only beyond this point

@@ -7,13 +7,13 @@
 	//#include "job/outfits_yw.dm" outpost 21 - job removals
 	#include "cryogaia_things.dm"
 	#include "tether_phoronlock.dm"
-	#include "cryogaia_areas.dm"
-	#include "cryogaia_shuttle_defs.dm"
-	#include "cryogaia_shuttles.dm"
+	//#include "cryogaia_areas.dm"
+	//#include "cryogaia_shuttle_defs.dm"
+	//#include "cryogaia_shuttles.dm"
 	#include "cryogaia_telecomms.dm"
 	#include "elevator_areas.dm"
 	#include "service_elevator_things.dm"
-	#include "residential/_residential.dm"
+	//#include "residential/_residential.dm"
 	#include "residential/residential_keys.dm"
 
 	#if !AWAY_MISSION_TEST //Don't include these for just testing away missions
@@ -29,7 +29,7 @@
 		#include "residential/residential.dmm" //residential level
 	#endif
 
-	#include "submaps/_cryogaia_submaps.dm"
+	//#include "submaps/_cryogaia_submaps.dm"
 
 	#define USING_MAP_DATUM /datum/map/cryogaia
 

@@ -26,8 +26,6 @@
 	name = "\improper dorms"
 	base_turf = /turf/simulated/open
 
-
-
 /area/turbolift/lumber_floor_dorms //Not implemented at this time, a sort of apartments area for custom rooms for crew.
 	name = "apartments (top level)"
 	lift_floor_label = "Apartments"

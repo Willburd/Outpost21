@@ -18,13 +18,13 @@
 	use_power = 1
 	icon_state = "map_vent_out"
 	external_pressure_bound = ONE_ATMOSPHERE * 1.1
-
+/*
 /obj/item/blueprints
 	SPACE_OUTSIDE_TYPES = list(
 		/area/borealis2/outdoors/exterior,
         /area/borealis2/outdoors/grounds
 	)
-
+*/
 
 
 /obj/effect/step_trigger/teleporter/planetary_fall/borealis2/find_planet()
@@ -86,11 +86,12 @@
 	icon = 'icons/turf/flooring/maglevs.dmi'
 	icon_state = "maglevup"
 
-	var/area/shock_area = /area/cryogaia/tram
+/*	var/area/shock_area = /area/cryogaia/tram
 
 /turf/simulated/floor/maglev/Initialize()
 	. = ..()
 	shock_area = locate(shock_area)
+*/
 
 // Walking on maglev tracks will shock you! Horray!
 /turf/simulated/floor/maglev/Entered(var/atom/movable/AM, var/atom/old_loc)
@@ -101,7 +102,7 @@
 		track_zap(user)
 /turf/simulated/floor/maglev/proc/track_zap(var/mob/living/user)
 	if (!istype(user)) return
-	if (electrocute_mob(user, shock_area, src))
+	if (electrocute_mob(user, /*shock_area,*/ src)) //OP edit: Removing shock area for area definition creation in OP map.. plus these should work anywhere
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
@@ -223,7 +224,7 @@
 /datum/spawnpoint/tram/New()
 	..()
 	turfs = latejoin_tram
-
+/* //op edit: Removal for area cleaning
 //
 // Holodorms
 //
@@ -307,6 +308,7 @@
 	"Bunking"			= new/datum/holodeck_program(/area/houseboat/holodeck/bunking, list()),
 	"Turn Off" 			= new/datum/holodeck_program(/area/houseboat/holodeck/off, list())
 	)
+*/
 
 // Our map is small, if the supermatter is ejected lets not have it just blow up somewhere else
 /obj/machinery/power/supermatter/touch_map_edge()
@@ -654,7 +656,7 @@
 	teleport_x = 2
 	teleport_y = src.y
 	teleport_z = Z_LEVEL_PLAINS
-
+/* //op edit: Commenting out for area testing.. I think this is defined in submap files? Organize your shit properly, jesus.
 /obj/cryogaia_away_spawner/wilds
 	name = "wilds Spawner"
 	faction = "shadekin"
@@ -679,3 +681,4 @@
 	mobs_to_pick_from = list(
 		/mob/living/simple_mob/animal/passive/gaslamp/snow = 3,
 		)
+*/

@@ -305,7 +305,7 @@ var/global/list/additional_antag_types = list()
 	var/escaped_on_pod_5 = 0
 	var/escaped_on_shuttle = 0
 
-	var/list/area/escape_locations = list(/area/shuttle/escape, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom) //VOREStation Edit
+	var/list/area/escape_locations = list(/area/shuttle/escape) //Outpost Edit - Removed to only the single escape
 
 	for(var/mob/M in player_list)
 		if(M.client)
@@ -369,11 +369,11 @@ var/global/list/additional_antag_types = list()
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivors, [ghosts] ghosts.")
 	SSwebhooks.send(
-		WEBHOOK_ROUNDEND, 
+		WEBHOOK_ROUNDEND,
 		list(
-			"survivors" = surviving_total, 
-			"escaped" = escaped_total, 
-			"ghosts" = ghosts, 
+			"survivors" = surviving_total,
+			"escaped" = escaped_total,
+			"ghosts" = ghosts,
 			"clients" = clients
 		)
 	)

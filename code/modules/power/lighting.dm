@@ -984,6 +984,11 @@ var/global/list/light_type_cache = list()
 	color = "#da0205"
 	brightness_color = "#da0205"
 
+/obj/item/weapon/light/bulb/blue
+	brightness_range = 4
+	color = "#0000ff"
+	brightness_color = "#0000ff"
+
 /obj/item/weapon/light/bulb/fire
 	name = "fire bulb"
 	desc = "A replacement fire bulb."

@@ -55,9 +55,9 @@
 				"rad" = 100) //Keeping 100 rad armor as mobs cannot easily get radiation storm announcements. If this is reduced it'd be a good idea to make it 100 for the ai types.
 	has_hands = 1
 
-	response_help  = "pokes the synx, shifting the fur-like bristles on its body."
-	response_disarm = "gently pushes aside the synx, dislodging a clump of bristly hair in your hand. The substance quickly melts upon contact with your sweat."
-	response_harm   = "tries to hit the synx. This tears out an area of fur which firmly melts upon contact, covering you in something sticky."
+	response_help  = "pokes and shifts the fur-like bristles on"
+	response_disarm = "gently pushes the synx; Dislodging a clump of bristly, and strangely melting, hair from"
+	response_harm   = "hits the synx; Ripping out a chunk of sticky, and strangely melting, hair from"
 
 
 	melee_damage_lower = SYNX_LOWER_DAMAGE //Massive damage reduction, will be balanced with toxin injection/ //LO-  Made up for in skills. Toxin injection does not technically cause damage with these guys. Stomach acid does when they disegage their stomach from their mouths does, but that could be done differently.
@@ -348,12 +348,18 @@
 					to_chat(L, "<span class='warning'>You feel a strange substance on you.</span>")
 					L.reagents.add_reagent(poison_type, poison_per_bite)
 
-
-
-/mob/living/simple_mob/animal/synx/hear_say(message,verb,language,fakename,isItalics,var/mob/living/speaker)
+/mob/living/simple_mob/animal/synx/hear_say(var/list/message_pieces, var/verb = "says", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	. = ..()
-	if(!message || !speaker)    return
-	if (speaker == src) return
+
+	var/list/combined = combine_message(message_pieces, verb, speaker)
+	var/message = combined["raw"]
+	if(!message || !speaker)    
+		return
+	if(message == "")
+		return
+	if (speaker == src) 
+		return
+
 	speaker = speaker.GetVoice()
 	speak += message
 	voices += speaker
@@ -679,8 +685,6 @@
 	faction = "neutral"
 
 /mob/living/simple_mob/animal/synx/ai/pet/diablo
-	//var/diablo_LIVING = "synx_diablo_living"
-	//var/diablo_DEAD = "synx_diablo_dead" //This isn't how you set different icon states. To-do: Fix this shit.
 	name = "Diablo"
 	desc = "A cold blooded, genderless, parasitic eel from the more distant and stranger areas of the cosmos. grey, perpetually grinning and possessing a hunger as enthusiastic and endless as humanity's sense of exploration. It has a tracking collar that doesn't seem to work."
 	icon_state = "synx_diablo_living"

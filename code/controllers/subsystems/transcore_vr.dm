@@ -220,7 +220,7 @@ SUBSYSTEM_DEF(transcore)
 	var/core_dumped = FALSE
 	var/key // Key for this DB
 
-/datum/transcore_db/proc/m_backup(var/datum/mind/mind, var/obj/item/device/nif/nif, var/one_time = FALSE)
+/datum/transcore_db/proc/m_backup(var/datum/mind/mind, var/obj/nif, var/one_time = FALSE)
 	ASSERT(mind)
 	if(!mind.name || core_dumped)
 		return 0

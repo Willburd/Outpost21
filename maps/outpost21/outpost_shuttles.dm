@@ -43,19 +43,19 @@
 	shuttle_tag = "Medical Rescue"
 	req_one_access = list(access_medical)
 
-/obj/effect/shuttle_landmark/premade/mining/outpost
+/obj/effect/shuttle_landmark/premade/mining/muriki
 	name = "ES Outpost 21 (Landing Pad)"
 	landmark_tag = "outpost_landing_pad"
 	base_turf = /turf/simulated/floor/reinforced
 	base_area = /area/muriki/station/mining_dock
 
-/obj/effect/shuttle_landmark/premade/security/cryogaia
+/obj/effect/shuttle_landmark/premade/medical/muriki
 	name = "ES Outpost 21 (Medical Dock)"
 	landmark_tag = "outpost_medical_hangar"
 	base_turf = /turf/simulated/floor/reinforced
 	base_area = /area/medical/hangar
 
-/obj/effect/shuttle_landmark/premade/beltmining/outpost
+/obj/effect/shuttle_landmark/premade/beltmining/muriki
 	name = "ES Outpost 21 (Belter Pad)"
 	landmark_tag = "belter_colony"
 	base_turf = /turf/simulated/floor/reinforced

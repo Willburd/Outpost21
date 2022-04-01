@@ -3,7 +3,7 @@
 #define Z_LEVEL_OUTPOST_BASEMENT					2
 #define Z_LEVEL_OUTPOST_SURFACE						3
 #define Z_LEVEL_OUTPOST_UPPER						4
-//#define Z_LEVEL_OUTPOST_MISC 						5
+#define Z_LEVEL_OUTPOST_MISC 						5
 //Ensure these stay updated with map and z-level changes - Ignus
 
 /datum/map/outpost

@@ -91,24 +91,17 @@
 	icon_state = "Hephaestus_sign"
 	desc = "This appears to be a sign welcoming Hephaestus Industry personnel. It seems rather old and partly rusted."
 
-/obj/structure/showcase/yw/chaplain //yw edit
-	name = "Strange Bronze Machinery"
-	icon = 'icons/obj/clockwork_objects.dmi'
-	icon_state = "mania_motor"
-	desc = "A strange device made of bronze. It has an unknown purpose."
-
-/obj/structure/showcase/yw/chaplain2 //yw edit
-	name = "Strange Bronze Machinery"
-	icon = 'icons/obj/clockwork_objects.dmi'
-	icon_state = "obelisk"
-	desc = "A strange device made of bronze. It has an unknown purpose."
-
 /obj/structure/showcase/yw/plaque //yw edit
 	name = "Commerative Plaque"
 	icon = 'icons/obj/structures_yw32x32.dmi'
 	icon_state = "plaque"
 	desc = "A plaque commerating the building efforts of the sleepiest outpost in the sector, Yawn Wider."
 	density = 0
+
+/obj/structure/showcase/muriki
+	name = "Elevator Gravity Assist"
+	icon = 'icons/obj/machines/gravity_generator.dmi'
+	desc = "A massive, specialized machine for assisting an even more massive freight elevator in its ascent."
 
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 

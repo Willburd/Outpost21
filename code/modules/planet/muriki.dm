@@ -9,7 +9,7 @@ var/datum/planet/muriki/planet_muriki = null
 	current_time = new /datum/time/muriki() // 42 hour
 	// Outptostt21 - See the Defines for this, so that it can be edited there if needed.
 	// expected_z_levels = list()
-	planetary_wall_type = /turf/unsimulated/wall/planetary/borealis2 // TODO - replace with muriki turf
+	planetary_wall_type = /turf/unsimulated/wall/planetary/muriki // TODO - replace with muriki turf
 
 	sun_name = "SL-340"
 	moon_name = ""

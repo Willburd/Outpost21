@@ -1,65 +1,46 @@
 //Simulated
-CRYOGAIA_TURF_CREATE(/turf/simulated/open)
-/turf/simulated/open/cryogaia
+MURIKI_TURF_CREATE(/turf/simulated/open)
+/turf/simulated/open/muriki
 	edge_blending_priority = 0.5 //Turfs which also have e_b_p and higher than this will plop decorative edges onto this turf
-/turf/simulated/open/cryogaia/New()
+/turf/simulated/open/muriki/New()
 	..()
 	if(outdoors)
 		SSplanets.addTurf(src)
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor)
+MURIKI_TURF_CREATE(/turf/simulated/floor)
 
-/turf/simulated/floor/cryogaia_indoors
-	CRYOGAIA_SET_ATMOS
-/turf/simulated/floor/cryogaia_indoors/update_graphic(list/graphic_add = null, list/graphic_remove = null)
+/turf/simulated/floor/muriki_indoors
+	MURIKI_SET_ATMOS
+/turf/simulated/floor/muriki_indoors/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	return 0
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow/snow2)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/snow/gravsnow)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow/snow2)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/gravsnow)
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating/drift)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/rocks)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/plating/snow/plating)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/tiled/cryogaia)
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/tiled/old_tile/gray)
-/turf/simulated/floor/outdoors/grass/cryogaia
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating/drift)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/rocks)
+MURIKI_TURF_CREATE(/turf/simulated/floor/plating/snow/plating)
+MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/muriki)
+MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/old_tile/gray)
+/turf/simulated/floor/outdoors/grass/muriki
 	turf_layers = list(
 		/turf/simulated/floor/outdoors/snow,
-		/turf/simulated/floor/tiled/cryogaia,
+		/turf/simulated/floor/tiled/muriki,
 		)
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/dirt)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/dirt)
 /turf/simulated/floor/outdoors/dirt
 	icon = 'icons/turf/flooring/asteroid.dmi'
 	icon_state = "asteroid"
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
 /turf/simulated/floor/outdoors/grass/sif
 	turf_layers = list(
-		/turf/simulated/floor/outdoors/rocks/cryogaia,
+		/turf/simulated/floor/outdoors/rocks/muriki,
 		/turf/simulated/floor/outdoors/dirt
 		)
-
-//a set of 'covered' outdoor tiles. can be used as shelter from storms and the inside of the caves.
-/turf/simulated/floor/outdoors/snow/snow/cryogaia/covered
-	outdoors = 0
-
-/turf/simulated/floor/outdoors/snow/snow/snow2/cryogaia/covered
-	outdoors = 0
-
-/turf/simulated/floor/outdoors/snow/gravsnow/cryogaia/covered
-	outdoors = 0
-
-/turf/simulated/floor/reinforced/cryogaia
-	name = "hangar hatch"
-	desc = "A heavily reinforced hangar access point. It doesn't look like it'll open easily."
-	outdoors = 1
-	CRYOGAIA_SET_ATMOS
-
-/turf/simulated/floor/tiled/old_tile/gray/cryogaia
-	CRYOGAIA_SET_ATMOS
 
 // Overriding these for the sake of submaps that use them on other planets.
 // This means that mining on tether base and space is oxygen-generating, but solars and mining should use the virgo3b subtype
@@ -95,10 +76,10 @@ CRYOGAIA_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
 	icon = 'icons/turf/shuttle_white.dmi'
 	icon_state = "floor_black"
 
-CRYOGAIA_TURF_CREATE(/turf/simulated/mineral)
-CRYOGAIA_TURF_CREATE(/turf/simulated/mineral/floor)
+MURIKI_TURF_CREATE(/turf/simulated/mineral)
+MURIKI_TURF_CREATE(/turf/simulated/mineral/floor)
 	//This proc is responsible for ore generation on surface turfs
-/turf/simulated/mineral/cryogaia/make_ore(var/rare_ore)
+/turf/simulated/mineral/muriki/make_ore(var/rare_ore)
 	if(mineral || ignore_mapgen)
 		return
 	var/mineral_name
@@ -131,7 +112,7 @@ CRYOGAIA_TURF_CREATE(/turf/simulated/mineral/floor)
 		UpdateMineral()
 	update_icon()
 
-/turf/simulated/mineral/cryogaia/rich/make_ore(var/rare_ore)
+/turf/simulated/mineral/muriki/rich/make_ore(var/rare_ore)
 	if(mineral || ignore_mapgen)
 		return
 	var/mineral_name
@@ -186,14 +167,7 @@ CRYOGAIA_TURF_CREATE(/turf/simulated/mineral/floor)
 		UpdateMineral()
 	update_icon()
 
-//Unsimulated
-/turf/unsimulated/wall/planetary/cryogaia
-	name = "facility wall"
-	desc = "An eight-meter tall carbyne wall. For when the wildlife on your planet is mostly militant megacorps."
-	alpha = 0xFF
-	CRYOGAIA_SET_ATMOS
-
-/turf/unsimulated/mineral/cryogaia
+/turf/unsimulated/mineral/muriki
 	blocks_air = TRUE
 
 /turf/unsimulated/floor/steel
@@ -255,31 +229,31 @@ CRYOGAIA_TURF_CREATE(/turf/simulated/mineral/floor)
 
 //Sky stuff!
 // A simple turf to fake the appearance of flying.
-/turf/simulated/sky/borealis2
+/turf/simulated/sky/muriki
 	color = "#E0FFFF"
 
-/turf/simulated/sky/borealis2/Initialize()
+/turf/simulated/sky/muriki/Initialize()
 	SSplanets.addTurf(src)
 	set_light(2, 2, "#E0FFFF")
 
-/turf/simulated/sky/borealis2/north
+/turf/simulated/sky/muriki/north
 	dir = NORTH
-/turf/simulated/sky/borealis2/south
+/turf/simulated/sky/muriki/south
 	dir = SOUTH
-/turf/simulated/sky/borealis2/east
+/turf/simulated/sky/muriki/east
 	dir = EAST
-/turf/simulated/sky/borealis2/west
+/turf/simulated/sky/muriki/west
 	dir = WEST
 
-/turf/simulated/sky/borealis2/moving
+/turf/simulated/sky/muriki/moving
 	icon_state = "sky_fast"
-/turf/simulated/sky/borealis2/moving/north
+/turf/simulated/sky/muriki/moving/north
 	dir = NORTH
-/turf/simulated/sky/borealis2/moving/south
+/turf/simulated/sky/muriki/moving/south
 	dir = SOUTH
-/turf/simulated/sky/borealis2/moving/east
+/turf/simulated/sky/muriki/moving/east
 	dir = EAST
-/turf/simulated/sky/borealis2/moving/west
+/turf/simulated/sky/muriki/moving/west
 	dir = WEST
 
 /turf/simulated/sky/snowscroll
@@ -294,8 +268,8 @@ CRYOGAIA_TURF_CREATE(/turf/simulated/mineral/floor)
 
 
 // Misc
-/area/mine/explored/cryogaia_wilds
-	name = "\improper cryogaia Wilderness Outer Perimeter"
+/area/mine/explored/muriki_wilds
+	name = "\improper muriki Wilderness Outer Perimeter"
 
-/area/mine/unexplored/cryogaia_wilds
-	name = "\improper cryogaia Wilderness Inner Perimeter"
+/area/mine/unexplored/muriki_wilds
+	name = "\improper muriki Wilderness Inner Perimeter"

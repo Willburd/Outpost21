@@ -34,6 +34,8 @@
 	emergency_shuttle_called_message = "An emergency evacuation elevator has been called. It will arrive at the departure bay in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency elevator has been recalled."
 
+	unit_test_z_levels = list(2.3,4)
+
 	station_networks = list(
 							NETWORK_CARGO,
 							NETWORK_CIVILIAN,
@@ -62,6 +64,7 @@
 
 	allowed_spawns = list("Elevator", "Cyborg Storage")
 
+	planet_datums_to_make = list(/datum/planet/muriki)
 
 /datum/map/outpost/perform_map_generation()
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, world.maxx, world.maxy) // Create the mining Z-level.
@@ -73,6 +76,13 @@
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, 64, 64)         // Create the mining ore distribution map.
 	return 1
+
+/datum/planet/muriki
+	expected_z_levels = list(
+		Z_LEVEL_OUTPOST_BASEMENT,
+		Z_LEVEL_OUTPOST_SURFACE,
+		Z_LEVEL_OUTPOST_UPPER
+	)
 
 /datum/map_z_level/outpost/centcom
 	z = Z_LEVEL_OUTPOST_CENTCOM

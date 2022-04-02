@@ -3962,7 +3962,7 @@
 "byj" = (/obj/effect/floor_decal/corner/red{dir = 5},/obj/item/frame/painting{pixel_y = 32},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/security/brig)
 "byk" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/machinery/medical_kiosk{pixel_y = 2},/obj/effect/floor_decal/corner/red{dir = 5},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/security/brig)
 "byl" = (/obj/machinery/portable_atmospherics/powered/scrubber/huge,/obj/effect/floor_decal/corner/red/full{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/security/brig)
-"bym" = (/obj/turbolift_map_holder/muriki/secevator{areas_to_use = list(/area/turbolift/secbase,/area/turbolift/secmain,/area/turbolift/secupper)},/turf/simulated/floor/tiled/dark,/area/turbolift/secbase)
+"bym" = (/obj/turbolift_map_holder/muriki/secevator,/turf/simulated/floor/tiled/dark,/area/turbolift/secbase)
 "byn" = (/obj/structure/catwalk,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green,/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 26},/turf/simulated/floor/plating,/area/maintenance/secelev)
 "byo" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock/maintenance/sec,/turf/simulated/floor/plating,/area/maintenance/sec)
 "byp" = (/obj/structure/grille,/obj/machinery/door/firedoor,/obj/structure/window/reinforced/full{dir = 10; icon_state = "fwindow"},/turf/simulated/floor/plating,/area/muriki/crew/glass)

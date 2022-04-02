@@ -23,7 +23,8 @@
 	icon_state = "blue"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	sound_env = SPACE
-	ambience = AMBIENCE_FOREBODING
+	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_MEATZONE)
+	music = 'sound/ambience/approaching_planet.ogg'
 
 /area/muriki/processor/hall
 	name = "\improper Core Processor Cavities"
@@ -34,6 +35,7 @@
 	icon_state = "nuke_storage"
 	sound_env = SMALL_ENCLOSED
 	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_ENGINEERING)
+	music = 'sound/ambience/ambimine.ogg'
 
 //
 //Bathrooms. Each department's has a unique ending name, for humor, and navigation.
@@ -150,12 +152,12 @@
 /area/muriki/arriveelev
 	name = "\improper Arrivals Elevators"
 	icon_state = "shuttle"
-	ambience = AMBIENCE_ARRIVALS
+	ambience = AMBIENCE_GENERIC
 
 /area/muriki/arriveproc
 	name = "\improper Arrivals Processing"
 	icon_state = "blublacir"
-	ambience = AMBIENCE_ARRIVALS
+	ambience = AMBIENCE_GENERIC
 
 /area/muriki/arrivejani
 	name = "\improper Arrivals Janitorial Closet"
@@ -312,6 +314,7 @@
 	icon_state = "darkred"
 	sound_env = TUNNEL_ENCLOSED
 	ambience = AMBIENCE_FOREBODING
+	music = 'sound/ambience/ambimine.ogg'
 
 //them dat der bluespezz warpy magic
 /area/teleporter/engineering

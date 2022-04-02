@@ -34,7 +34,7 @@
 	emergency_shuttle_called_message = "An emergency evacuation elevator has been called. It will arrive at the departure bay in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency elevator has been recalled."
 
-	unit_test_z_levels = list(2.3,4)
+	unit_test_z_levels = list(2,3,4)
 
 	station_networks = list(
 							NETWORK_CARGO,

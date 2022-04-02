@@ -331,22 +331,6 @@
 	flags = RAD_SHIELDED
 	requires_power = FALSE
 
-/area/turbolift/start
-	name = "\improper Turbolift Start"
-
-/area/turbolift/basement
-	name = "\improper basement"
-	base_turf = /turf/simulated/open
-
-/area/turbolift/mainfloor
-	name = "\improper main level"
-	base_turf = /turf/simulated/open
-
-/area/turbolift/upperfloor
-	name = "\improper upper level"
-	base_turf = /turf/simulated/open
-
-
 //SECURITY
 /area/turbolift/secbase
 	name = "Security Sublevel 1"

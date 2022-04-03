@@ -22,6 +22,8 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/mud)
 MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/muriki)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/sidewalk)
 MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external/muriki)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outpost_roof)
+MURIKI_TURF_CREATE(/turf/simulated/floor/solarpanel)
 // wow this sucks...
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/deep)

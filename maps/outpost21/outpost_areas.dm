@@ -326,10 +326,48 @@
 
 //
 // Elevator -------------------------------------------------------
-//
+// mapping areas
+/area/muriki/elevator/secbase
+	name = "Security Sublevel 1"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/secmain
+	name = "Security First Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/secupper
+	name = "Security Second Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/medibasement
+	name = "Medbay Sublevel 1"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/medical
+	name = "Medbay First Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/mediupper
+	name = "Medbay Second Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/civbase
+	name = "Civilian Sublevel 1"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/civmain
+	name = "Civilian First Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/civupper
+	name = "Civilian Second Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/scibase
+	name = "Science Sublevel 1"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/scimain
+	name = "Science First Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+/area/muriki/elevator/sciupper
+	name = "Science Second Floor"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+
+// finalized elevator areas, lift itself makes these once init
 /area/turbolift
 	delay_time = 2 SECONDS
-	forced_ambience = list('sound/music/elevator.ogg')
+	forced_ambience = list('sound/music/elevator2.ogg')
 	dynamic_lighting = FALSE //Temporary fix for elevator lighting
 	flags = RAD_SHIELDED
 	requires_power = FALSE
@@ -376,7 +414,7 @@
 /area/turbolift/civbase
 	name = "Civilian Sublevel 1"
 	lift_floor_label = "Basement"
-	lift_floor_name = "Cafe, Pool, Dorms, Lasertag."
+	lift_floor_name = "Cafe, Pool, Dorms, Arcade, Cavern Access."
 	lift_announce_str = "Arriving at Basement."
 
 /area/turbolift/civmain
@@ -395,7 +433,7 @@
 /area/turbolift/scibase
 	name = "Science Sublevel 1"
 	lift_floor_label = "Research Basement"
-	lift_floor_name = "Xnobio, Particle lab, Xenoarch"
+	lift_floor_name = "Xenobio, Particle lab, Xenoarch, Cavern Access"
 	lift_announce_str = "Arriving at Basement."
 
 /area/turbolift/scimain

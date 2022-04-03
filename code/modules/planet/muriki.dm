@@ -7,9 +7,9 @@ var/datum/planet/muriki/planet_muriki = null
 	name = "muriki"
 	desc = "muriki is a TODO MAKE LORE HERE" // Ripped straight from the wiki.
 	current_time = new /datum/time/muriki() // 42 hour
-	// Outptostt21 - See the Defines for this, so that it can be edited there if needed.
+	// Outpost21 - See the Defines for this, so that it can be edited there if needed.
 	// expected_z_levels = list()
-	planetary_wall_type = /turf/unsimulated/wall/planetary/muriki // TODO - replace with muriki turf
+	planetary_wall_type = /turf/unsimulated/wall/planetary/muriki
 
 	sun_name = "SL-340"
 	moon_name = ""
@@ -17,7 +17,7 @@ var/datum/planet/muriki/planet_muriki = null
 /datum/planet/muriki/New()
 	..()
 	planet_muriki = src
-	weather_holder = new /datum/weather_holder/muriki(src) // Cold weather is also nice.
+	weather_holder = new /datum/weather_holder/muriki(src)
 
 // This code is horrible.
 /datum/planet/muriki/update_sun()
@@ -114,9 +114,9 @@ var/datum/planet/muriki/planet_muriki = null
 		WEATHER_HAIL		= new /datum/weather/muriki/acid_hail()
 		)
 	roundstart_weather_chances = list(
-		WEATHER_OVERCAST = 20,
-		WEATHER_RAIN = 45,
-		WEATHER_STORM = 30,
+		WEATHER_OVERCAST = 5,
+		WEATHER_RAIN = 40,
+		WEATHER_STORM = 50,
 		WEATHER_HAIL = 5
 		)
 
@@ -132,8 +132,8 @@ var/datum/planet/muriki/planet_muriki = null
 	light_modifier = 0.7
 	effect_message = "<span class='notice'>Acidic mist surrounds you.</span>"
 	transition_chances = list(
-		WEATHER_OVERCAST = 80,
-		WEATHER_RAIN = 15,
+		WEATHER_OVERCAST = 15,
+		WEATHER_RAIN = 80,
 		WEATHER_HAIL = 5
 		)
 	observed_message = "It is misting, all you can see are corrosive clouds."
@@ -177,10 +177,10 @@ var/datum/planet/muriki/planet_muriki = null
 	effect_message = "<span class='notice'>Acidic rain falls on you.</span>"
 
 	transition_chances = list(
-		WEATHER_OVERCAST = 25,
-		WEATHER_RAIN = 50,
-		WEATHER_STORM = 10,
-		WEATHER_HAIL = 15
+		WEATHER_OVERCAST = 15,
+		WEATHER_RAIN = 30,
+		WEATHER_STORM = 50,
+		WEATHER_HAIL = 5
 		)
 	observed_message = "It is raining."
 	transition_messages = list(
@@ -244,8 +244,8 @@ var/datum/planet/muriki/planet_muriki = null
 
 
 	transition_chances = list(
-		WEATHER_RAIN = 45,
-		WEATHER_STORM = 40,
+		WEATHER_RAIN = 65,
+		WEATHER_STORM = 20,
 		WEATHER_HAIL = 10,
 		WEATHER_OVERCAST = 5
 		)
@@ -302,10 +302,10 @@ var/datum/planet/muriki/planet_muriki = null
 	effect_message = "<span class='warning'>The hail smacks into you!</span>"
 
 	transition_chances = list(
-		WEATHER_RAIN = 45,
-		WEATHER_STORM = 40,
-		WEATHER_HAIL = 10,
-		WEATHER_OVERCAST = 5
+		WEATHER_RAIN = 20,
+		WEATHER_STORM = 5,
+		WEATHER_HAIL = 5,
+		WEATHER_OVERCAST = 70
 		)
 	observed_message = "Frozen acid is falling from the sky."
 	transition_messages = list(

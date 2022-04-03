@@ -3,3 +3,9 @@
 
 /turf/simulated/floor/water/deep/indoors
 	outdoors = OUTDOORS_NO
+
+/turf/simulated/floor/water/beach/indoors
+	outdoors = OUTDOORS_NO
+
+/turf/simulated/floor/water/beach/corner/indoors
+	outdoors = OUTDOORS_NO

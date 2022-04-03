@@ -979,7 +979,7 @@
 "sQ" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/monotile,/area/hydroponics/publicgarden)
 "sR" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/reagent_containers/glass/bottle/biomass,/obj/item/weapon/reagent_containers/glass/bottle/biomass,/obj/item/weapon/reagent_containers/glass/bottle/biomass,/obj/machinery/light_switch{dir = 4; pixel_x = -28},/turf/simulated/floor/tiled/white,/area/medical/resleeving)
 "sS" = (/turf/simulated/floor/water/beach{dir = 10},/area/hydroponics/publicgarden)
-"sT" = (/obj/item/pizzabox/meat{step_x = 3; step_y = 8},/turf/simulated/floor,/area/maintenance/substation/research)
+"sT" = (/obj/item/pizzabox/meat{pixel_x = 3; pixel_y = 8},/turf/simulated/floor,/area/maintenance/substation/research)
 "sU" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/effect/floor_decal/borderfloor{dir = 4},/obj/effect/floor_decal/corner/lightgrey/border{dir = 4},/turf/simulated/floor/tiled,/area/hallway/muriki/civup)
 "sV" = (/turf/simulated/floor/plating,/area/maintenance/crewelev)
 "sW" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor,/area/teleporter/engineering)

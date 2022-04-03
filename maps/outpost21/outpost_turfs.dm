@@ -14,48 +14,26 @@ MURIKI_TURF_CREATE(/turf/simulated/floor)
 /turf/simulated/floor/muriki_indoors/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	return 0
 
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow)
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/snow/snow2)
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/gravsnow)
-
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating)
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/snow/plating/drift)
+// make varients of all outdoor tiles with muriki atmosphere on it, this feels dumb and excessive, but it's the way it's done...
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt_nograss)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/rocks)
-MURIKI_TURF_CREATE(/turf/simulated/floor/plating/snow/plating)
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/mud)
 MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/muriki)
-MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/old_tile/gray)
-/turf/simulated/floor/outdoors/grass/muriki
-	turf_layers = list(
-		/turf/simulated/floor/outdoors/snow,
-		/turf/simulated/floor/tiled/muriki,
-		)
-
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/dirt)
-/turf/simulated/floor/outdoors/dirt
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	icon_state = "asteroid"
-
-MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
-/turf/simulated/floor/outdoors/grass/sif
-	turf_layers = list(
-		/turf/simulated/floor/outdoors/rocks/muriki,
-		/turf/simulated/floor/outdoors/dirt
-		)
-
-// Overriding these for the sake of submaps that use them on other planets.
-// This means that mining on tether base and space is oxygen-generating, but solars and mining should use the virgo3b subtype
-/turf/simulated/mineral
-	oxygen = MOLES_O2STANDARD
-	nitrogen = MOLES_N2STANDARD
-	temperature	= T20C
-/turf/simulated/floor/outdoors
-	oxygen = MOLES_O2STANDARD
-	nitrogen = MOLES_N2STANDARD
-	temperature	= T20C
-/turf/simulated/floor/water
-	oxygen = MOLES_O2STANDARD
-	nitrogen = MOLES_N2STANDARD
-	temperature	= T20C
+MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/sidewalk)
+MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external/muriki)
+// wow this sucks...
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/deep)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_dirt)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_mud)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_plate)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_flesh)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_dirt)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_mud)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_plate)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_flesh)
 
 /turf/simulated/floor/indoorrocks //Not outdoor rocks to prevent weather fuckery
 	name = "rocks"
@@ -77,6 +55,7 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/grass/sif)
 	icon_state = "floor_black"
 
 MURIKI_TURF_CREATE(/turf/simulated/mineral)
+MURIKI_TURF_CREATE(/turf/simulated/mineral/alt)
 MURIKI_TURF_CREATE(/turf/simulated/mineral/floor)
 	//This proc is responsible for ore generation on surface turfs
 /turf/simulated/mineral/muriki/make_ore(var/rare_ore)
@@ -139,41 +118,12 @@ MURIKI_TURF_CREATE(/turf/simulated/mineral/floor)
 		UpdateMineral()
 	update_icon()
 
-//Underdark
-/turf/simulated/mineral/rich/make_ore(var/rare_ore)
-	if(mineral || ignore_mapgen)
-		return
-	var/mineral_name
-	if(rare_ore)
-		mineral_name = pickweight(list(
-			"uranium" = 10,
-			"platinum" = 10,
-			"hematite" = 10,
-			"carbon" = 10,
-			"diamond" = 4,
-			"gold" = 15,
-			"silver" = 15))
-	else
-		mineral_name = pickweight(list(
-			"uranium" = 7,
-			"platinum" = 7,
-			"hematite" = 28,
-			"carbon" = 28,
-			"diamond" = 2,
-			"gold" = 7,
-			"silver" = 7))
-	if(mineral_name && (mineral_name in GLOB.ore_data))
-		mineral = GLOB.ore_data[mineral_name]
-		UpdateMineral()
-	update_icon()
-
 /turf/unsimulated/mineral/muriki
 	blocks_air = TRUE
 
 /turf/unsimulated/floor/steel
 	icon = 'icons/turf/flooring/tiles_vr.dmi'
 	icon_state = "steel"
-
 
 /turf/unsimulated/wall
 	blocks_air = 1
@@ -182,7 +132,6 @@ MURIKI_TURF_CREATE(/turf/simulated/mineral/floor)
 	blocks_air = 0
 
 // Some turfs to make floors look better in centcom tram station.
-
 /turf/unsimulated/floor/techfloor_grid
 	name = "floor"
 	icon = 'icons/turf/flooring/techfloor.dmi'

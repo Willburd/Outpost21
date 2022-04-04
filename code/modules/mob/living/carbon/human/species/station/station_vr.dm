@@ -292,7 +292,7 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
 	reagent_tag = null
 	allergens = null
-	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
+	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL)
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	wikilink="https://yawn.izac.live/Skrell"
 
@@ -340,9 +340,9 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/vox
-	gluttonous = 0
-	spawn_flags = SPECIES_CAN_JOIN /*| SPECIES_IS_WHITELISTED | SPECIES_WHITELIST_SELECTABLE YW Comment out*/
-	min_age = 18	
+	gluttonous = 1
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_WHITELIST_SELECTABLE
+	min_age = 18
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair) //Get ya quills done did
 	icobase = 'icons/mob/human_races/r_vox_old.dmi'
 	deform = 'icons/mob/human_races/r_def_vox_old.dmi'

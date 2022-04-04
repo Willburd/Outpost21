@@ -16,7 +16,7 @@
 	desc = "Has a valve and pump attached to it"
 	use_power = USE_POWER_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 30000			//7500 W ~ 10 HP //VOREStation Edit - 30000 W
+	power_rating = 7500			//7500 W ~ 10 HP //VOREStation Edit - 30000 W //Outpost edit: Back to 7500W. What are you madlads thinking?
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
 	blocks_emissive = FALSE
@@ -102,7 +102,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
-	power_rating = 45000	//15 kW ~ 20 HP //VOREStation Edit - 45000
+	power_rating = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/aux
 	icon_state = "map_vent_aux"
@@ -132,7 +132,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	power_rating = 30000	//15 kW ~ 20 HP
+	power_rating = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()
@@ -188,7 +188,7 @@
 		soundloop.stop()
 		return 0
 	if(!use_power)
-		soundloop.stop() 
+		soundloop.stop()
 		return 0
 	if(welded)
 		soundloop.stop()

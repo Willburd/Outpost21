@@ -706,8 +706,11 @@
 				/obj/item/toy/plushie/teshari/_yw,
 				/obj/item/toy/plushie/teshari/w_yw,
 				/obj/item/toy/plushie/teshari/b_yw,
-				/obj/item/toy/plushie/teshari/y_yw)
+				/obj/item/toy/plushie/teshari/y_yw,
 				//YawnWider Add End
+				//Outpost Add Start
+				/obj/item/toy/plushie/jil)
+				//Outpost Add End
 
 /obj/random/plushielarge
 	name = "random large plushie"

@@ -57,7 +57,7 @@
 	mob_size = MOB_SMALL
 	pass_flags = PASSTABLE
 	holder_type = /obj/item/weapon/holder/human
-	short_sighted = 1
+//	short_sighted = 1 //Outpost edit: Screw this mechanic, it breaks lore and makes playing them awful, in addition with the loneliness mechanic.
 	gluttonous = 1
 	blood_volume = 400
 	hunger_factor = 0.2

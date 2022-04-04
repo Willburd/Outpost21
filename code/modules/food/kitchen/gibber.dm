@@ -25,14 +25,22 @@
 
 /obj/machinery/gibber/autogibber/Initialize()
 	. = ..()
-	for(var/i in cardinal)
-		var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
-		if(input_obj)
-			if(isturf(input_obj.loc))
-				input_plate = input_obj.loc
-				gib_throw_dir = i
-				qdel(input_obj)
-				break
+	// outpost 21 edit - add gibber from above detection
+	var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_zstep(src, UP))
+	if(!input_obj)	
+		for(var/i in cardinal)
+			input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
+			if(input_obj)
+				if(isturf(input_obj.loc))
+					input_plate = input_obj.loc
+					gib_throw_dir = i
+					qdel(input_obj)
+					break
+	else
+		if(isturf(input_obj.loc))
+			input_plate = input_obj.loc
+			// keep gib throw dir default
+			qdel(input_obj)
 
 	if(!input_plate)
 		log_misc("a [src] didn't find an input plate.")
@@ -56,6 +64,10 @@
 			M.loc = src
 			M.gib()
 
+/obj/machinery/gibber/autogibber/process()
+	// auto detect above!
+	if(input_plate && input_plate.z != loc.z)
+		Bumped( locate( /mob, input_plate))
 
 /obj/machinery/gibber/New()
 	..()

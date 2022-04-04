@@ -54,15 +54,20 @@
 	return ..()
 
 /obj/machinery/gibber/autogibber/Bumped(var/atom/A)
-	if(!input_plate) return
-
+	if(!input_plate)
+		return
+	if(stat & (NOPOWER|BROKEN))
+		return
+	if(operating)
+		return
+	if(src.occupant)
+		return
 	if(ismob(A))
-		var/mob/M = A
-
-		if(M.loc == input_plate
-		)
-			M.loc = src
-			M.gib()
+		// bootleg move_into_gibber
+		var/mob/victim = A
+		victim.loc = src
+		src.occupant = victim
+		src.startgibbing( victim)
 
 /obj/machinery/gibber/autogibber/process()
 	// auto detect above!
@@ -216,9 +221,10 @@
 	if(issmall(src.occupant))
 		slab_nutrition *= 0.5
 	if(slab_count <= 0)
-		slab_count = 2 // divide by 0 catcher... min two?
+		slab_count = 1 // no div by 0
 	slab_nutrition /= slab_count
 
+	var/original_slab_count = slab_count
 	while(slab_count)
 		slab_count--
 		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
@@ -226,7 +232,7 @@
 			new_meat.name = "[slab_name] [new_meat.name]"
 			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/original_slab_count,1))
 
 	add_attack_logs(user,occupant,"Used [src] to gib")
 

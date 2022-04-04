@@ -8,18 +8,16 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/red
 
 	starts_with = list(
-		/obj/item/clothing/under/rank/security = 3,
-		/obj/item/clothing/under/rank/security2 = 3,
-		/obj/item/clothing/under/rank/security/turtleneck = 3,
-		/obj/item/clothing/under/rank/security/skirt = 2,
-		/obj/item/clothing/shoes/boots/jackboots = 3,
-		/obj/item/clothing/head/soft/sec = 3,
-		/obj/item/clothing/head/beret/sec = 3,
-		/obj/item/clothing/head/beret/sec/corporate/officer = 3,
-		/obj/item/clothing/mask/bandana/red = 3,
-		/obj/item/clothing/suit/storage/hooded/wintercoat/security = 3,
-		/obj/item/clothing/accessory/armband = 3,
-		/obj/item/clothing/accessory/holster/waist = 3)
+		/obj/item/clothing/under/rank/security = 2,
+		/obj/item/clothing/under/rank/security2 = 2,
+		/obj/item/clothing/under/rank/security/turtleneck = 2,
+		/obj/item/clothing/under/rank/security/skirt = 1,
+		/obj/item/clothing/shoes/boots/jackboots = 2,
+		/obj/item/clothing/head/soft/sec = 2,
+		/obj/item/clothing/head/beret/sec = 2,
+		/obj/item/clothing/head/beret/sec/corporate/officer = 2,
+		/obj/item/clothing/accessory/armband = 2,
+		/obj/item/clothing/accessory/holster/waist = 2)
 
 /obj/structure/closet/wardrobe/red/Initialize()
 	if(prob(50))

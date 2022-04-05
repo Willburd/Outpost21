@@ -229,15 +229,16 @@
 
 //DATUMS -------------------------------------------------------------
 /datum/turbolift
-	music = list('sound/music/elevator.ogg')  // TODO: More elevator music. Hopefully get it to pick one at random?
+	music = list('sound/music/elevator2.ogg')
 
 
 //EFFECTS AND TRIGGERS -----------------------------------------
 /obj/effect/landmark/map_data/muriki
     height = 3 //Height marker. Provides the map with knowledge of how many z levels connecting below.
 
-/obj/effect/step_trigger/elevatorfall
-	var/deathmessage = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
+// override of newly added unsimulated deathdrop tile with black darkness appearance!
+/turf/unsimulated/deathdrop/elevator_shaft
+	death_message = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
 
 //These 'lost in space' ones should be moved to a higher level file, not map specific. Taken from YW
 /obj/effect/step_trigger/lost_in_space

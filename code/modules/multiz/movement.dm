@@ -372,7 +372,8 @@
 	var/atom/A = find_fall_target(oldloc, landing)
 	if(special_fall_handle(A) || !A || !A.check_impact(src))
 		return
-	fall_impact(A)
+	if(!istype(landing,/turf/unsimulated/deathdrop))
+		fall_impact(A)
 
 /atom/movable/proc/special_fall_handle(var/atom/A)
 	return FALSE

@@ -274,6 +274,14 @@
 		if(zapdir)
 			. = zapdir
 
+		var/atom/Aburn = closest_atom // why was this not an atom to begin with? Not changing for fear of breaking everything somehow for a single check
+		if(!Aburn && istype(Aburn.loc,/turf/simulated))
+			var/turf/simulated/T = Aburn.loc
+			var/datum/gas_mixture/air_mix = T.return_air()
+			if(air_mix.return_pressure() > ONE_ATMOSPHERE * 0.02)
+				// burn baby burn
+				T.hotspot_expose(2000,500)
+
 	var/drain_energy = FALSE // VOREStation Edit - Safety First! Drain Tesla fast when its loose
 
 	//per type stuff:

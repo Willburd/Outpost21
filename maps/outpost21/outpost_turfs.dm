@@ -21,21 +21,39 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/rocks)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/mud)
 MURIKI_TURF_CREATE(/turf/simulated/floor/tiled/muriki)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/sidewalk)
-MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external/muriki)
+MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outpost_roof)
 MURIKI_TURF_CREATE(/turf/simulated/floor/solarpanel)
-// wow this sucks...
+MURIKI_TURF_CREATE(/turf/simulated/floor/maglev) // for outdoor track, use normal ones indoors
+// wow this sucks... I've never hated looking at code like this more than I have now!
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/deep)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/deep/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/indoor)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_dirt)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_mud)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_plate)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_flesh)
-MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_dirt)
-MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_mud)
-MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_plate)
-MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_shoreline_flesh)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/shoreline_cave)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/shoreline_dirt/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/shoreline_mud/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/shoreline_plate/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/shoreline_flesh/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/shoreline_cave/indoor)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_dirt)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_mud)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_plate)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_flesh)
+MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_cave)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner_dirt/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner_mud/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner_plate/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner_flesh/indoor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner_cave/indoor)
 
 /turf/simulated/floor/indoorrocks //Not outdoor rocks to prevent weather fuckery
 	name = "rocks"
@@ -56,9 +74,10 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/shoreline/corner/corner_sh
 	icon = 'icons/turf/shuttle_white.dmi'
 	icon_state = "floor_black"
 
-MURIKI_TURF_CREATE(/turf/simulated/mineral)
-MURIKI_TURF_CREATE(/turf/simulated/mineral/alt)
-MURIKI_TURF_CREATE(/turf/simulated/mineral/floor)
+// caves!
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/alt)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/floor)
 	//This proc is responsible for ore generation on surface turfs
 /turf/simulated/mineral/muriki/make_ore(var/rare_ore)
 	if(mineral || ignore_mapgen)

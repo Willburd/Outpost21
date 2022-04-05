@@ -117,6 +117,16 @@
 	water_state = "flesh_shore" // Water gets generated as an overlay in update_icon()
 
 
+// edges cave
+/turf/simulated/floor/water/acidic/shoreline/shoreline_cave
+	icon_state = "shoreline_cave"
+	water_state = "cave_shore" // Water gets generated as an overlay in update_icon()
+
+/turf/simulated/floor/water/acidic/shoreline/corner/corner_cave
+	icon_state = "shorelinecorner_cave"
+	water_state = "cave_shore" // Water gets generated as an overlay in update_icon()
+
+
 // CAVE
 /turf/simulated/floor/water/acidic/indoor
 	outdoors = OUTDOORS_NO
@@ -167,4 +177,13 @@
 
 /turf/simulated/floor/water/acidic/shoreline/corner/corner_flesh/indoor
 	icon_state = "shorelinecorner_flesh"
+	outdoors = OUTDOORS_NO
+
+
+/turf/simulated/floor/water/acidic/shoreline/shoreline_cave/indoor
+	icon_state = "shoreline_cave"
+	outdoors = OUTDOORS_NO
+
+/turf/simulated/floor/water/acidic/shoreline/corner/corner_cave/indoor
+	icon_state = "shorelinecorner_cave"
 	outdoors = OUTDOORS_NO

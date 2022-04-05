@@ -101,6 +101,7 @@
 /obj/structure/showcase/muriki
 	name = "Elevator Gravity Assist"
 	icon = 'icons/obj/machines/gravity_generator.dmi'
+	icon_state = "on_8"
 	desc = "A massive, specialized machine for assisting an even more massive freight elevator in its ascent."
 
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER

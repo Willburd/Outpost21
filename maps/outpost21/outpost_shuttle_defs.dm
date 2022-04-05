@@ -70,9 +70,9 @@
 
 /obj/effect/shuttle_landmark/premade/tram/base
 	name = "Tram Station - Waste and Maintenance"
-	landmark_tag = "skipjack_base"
-//	base_area = /area/space //I don't think these are needed? We'll see
-//	base_turf = /turf/space
+	landmark_tag = "tram_waste"
+	base_area = /area/muriki/tramstation/waste
+	base_turf = /turf/simulated/floor/reinforced
 
 /obj/effect/shuttle_landmark/premade/tram/transit
 	name = "Tram Station - Transit"

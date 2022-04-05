@@ -20,7 +20,7 @@
 #define MAX_TEMPERATURE 90
 #define MIN_TEMPERATURE -40
 
-//all air alarms in area are connected via magic
+//all air alarms in area are connected via magic // you are a liar, they use freq 1439, and if you ever change it you will break everything
 /area
 	var/obj/machinery/alarm/master_air_alarm
 	var/list/air_vent_names = list()
@@ -919,6 +919,21 @@
 	TLV["temperature"] =	list(T0C - 40, T0C - 20, T0C + 40, T0C + 66) // K, Lower Temperature for Freezer Air Alarms (This is because TLV is hardcoded to be generated on first_run, and therefore the only way to modify this without changing TLV generation)
 
 // VOREStation Edit End
+
+// outpost 21 - voxbox medical
+/obj/machinery/alarm/voxbox
+	trace_gas = list("nitrous_oxide") //list of other gases that this air alarm is able to detect
+
+/obj/machinery/alarm/voxbox/first_run()
+	. = ..()
+	TLV["oxygen"] =			list(-1.0, -1.0, 0, 0.5) // Partial pressure, kpa
+	TLV["nitrogen"] =		list(0, 0, 135, 140) // Partial pressure, kpa
+	TLV["carbon dioxide"] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
+	TLV["phoron"] =			list(16, 19, 135, 140) // Partial pressure, kpa
+	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
+	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
+	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
+
 #undef LOAD_TLV_VALUES
 #undef TEST_TLV_VALUES
 #undef DECLARE_TLV_VALUES

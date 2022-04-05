@@ -3,20 +3,20 @@
 	endWhen			= 90 + 15 + 1
 	var/spawncount
 	var/list/possible_slimes = list(
-		/mob/living/simple_mob/slime/purple,
-		/mob/living/simple_mob/slime/orange,
-		/mob/living/simple_mob/slime/metal,
-		/mob/living/simple_mob/slime/yellow,
-		/mob/living/simple_mob/slime/dark_purple,
-		/mob/living/simple_mob/slime/silver,
-		/mob/living/simple_mob/slime/ruby,
-		/mob/living/simple_mob/slime/cerulean,
-		/mob/living/simple_mob/slime/red,
-		/mob/living/simple_mob/slime/green,
-		/mob/living/simple_mob/slime/pink,
-		/mob/living/simple_mob/slime/gold,
-		/mob/living/simple_mob/slime/oil,
-		/mob/living/simple_mob/slime/emerald,
+		/mob/living/simple_mob/slime/xenobio/purple,
+		/mob/living/simple_mob/slime/xenobio/orange,
+		/mob/living/simple_mob/slime/xenobio/metal,
+		/mob/living/simple_mob/slime/xenobio/yellow,
+		/mob/living/simple_mob/slime/xenobio/dark_purple,
+		/mob/living/simple_mob/slime/xenobio/silver,
+		/mob/living/simple_mob/slime/xenobio/ruby,
+		/mob/living/simple_mob/slime/xenobio/cerulean,
+		/mob/living/simple_mob/slime/xenobio/red,
+		/mob/living/simple_mob/slime/xenobio/green,
+		/mob/living/simple_mob/slime/xenobio/pink,
+		/mob/living/simple_mob/slime/xenobio/gold,
+		/mob/living/simple_mob/slime/xenobio/oil,
+		/mob/living/simple_mob/slime/xenobio/emerald,
 	)
 
 

@@ -2,7 +2,7 @@
     name = "Valve"
     desc = "Organic structure that opens on its own."
     icon = 'icons/turf/stomach_vr.dmi'
-    icon_state = "flesh"
+    icon_state = "door1"
 
 /obj/machinery/flesh/inoperable(var/additional_flags = 0)
     // always works

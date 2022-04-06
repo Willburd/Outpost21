@@ -23,15 +23,6 @@
 	density = TRUE
 	blocks_air = 1
 
-/turf/simulated/flesh/colour
-	name = "flesh wall"
-	desc = "The fleshy surface of this wall squishes nicely under your touch but looks and feels extremly strong"
-	icon = 'icons/turf/stomach_vr.dmi'
-	icon_state = "colorable-wall"
-	opacity = 1
-	density = TRUE
-	blocks_air = 1
-
 /turf/simulated/flesh/attackby()
 	return
 

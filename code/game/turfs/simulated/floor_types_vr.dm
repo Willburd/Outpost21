@@ -22,12 +22,14 @@
 	desc = "This slick flesh ripples and squishes under your touch"
 	icon_state = "flesh_floor"
 	icon = 'icons/turf/stomach_vr.dmi'
+	initial_flooring = /decl/flooring/flesh
 
 /turf/simulated/floor/flesh/colour
 	name = "flesh"
 	desc = "This slick flesh ripples and squishes under your touch"
 	icon_state = "c_flesh_floor"
 	icon = 'icons/turf/stomach_vr.dmi'
+	initial_flooring = /decl/flooring/flesh
 
 /turf/simulated/floor/flesh/attackby()
 	return

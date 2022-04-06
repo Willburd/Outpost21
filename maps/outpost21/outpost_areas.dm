@@ -11,31 +11,39 @@
 /area/engineering/atmoshall
 	name = "\improper Atmospherics Hallway"
 	icon_state = "atmos"
+	ambience = list(AMBIENCE_ATMOS, AMBIENCE_ENGINEERING)
 
 /area/muriki/atmos/voxdump
 	name = "\improper Hazardous Gas Filtration Substation"
 	icon_state = "yelblacir"
-	ambience = AMBIENCE_ATMOS
+	ambience = list(AMBIENCE_ATMOS, AMBIENCE_ENGINEERING)
 
 /area/muriki/processor
 	name = "\improper Core Processing"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "blue"
+	forced_ambience = list(AMBIENCE_MEATZONE)
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	requires_power = FALSE
 	sound_env = SPACE
-	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_MEATZONE)
-	music = 'sound/ambience/approaching_planet.ogg'
+	music = 'sound/ambience/ambimine.ogg'
 
 /area/muriki/processor/hall
 	name = "\improper Core Processor Cavities"
 	icon_state = "anohallway"
+	forced_ambience = list(AMBIENCE_MEATZONE)
+	requires_power = FALSE
+	music = 'sound/ambience/ambimine.ogg'
+	sound_env = SMALL_SOFTFLOOR
 
 /area/muriki/processor/euth
 	name = "\improper Processor Euthanization"
 	icon_state = "nuke_storage"
 	sound_env = SMALL_ENCLOSED
 	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_ENGINEERING)
+	requires_power = FALSE
 	music = 'sound/ambience/ambimine.ogg'
+	sound_env = SMALL_ENCLOSED
 
 //
 //Bathrooms. Each department's has a unique ending name, for humor, and navigation.
@@ -313,7 +321,7 @@
 	name = "\improper Core Processor Atmo Tunnel"
 	icon_state = "darkred"
 	sound_env = TUNNEL_ENCLOSED
-	ambience = AMBIENCE_FOREBODING
+	ambience = list(AMBIENCE_FOREBODING)
 	music = 'sound/ambience/ambimine.ogg'
 
 //them dat der bluespezz warpy magic

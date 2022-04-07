@@ -231,7 +231,7 @@
 	icon_state = "tesh_uniform_hop"
 
 /obj/item/clothing/under/teshari/undercoat/jobs/ce
-	name = "cheif engineer undercoat"
+	name = "chief engineer undercoat"
 	desc = "A traditional Teshari garb made for the Chief Engineer"
 	icon_state = "tesh_uniform_ce"
 

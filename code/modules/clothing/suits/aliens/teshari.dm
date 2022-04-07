@@ -130,7 +130,7 @@
 //Engineering
 
 /obj/item/clothing/suit/storage/teshari/cloak/jobs/ce
-	name = "cheif engineer cloak"
+	name = "chief engineer cloak"
 	desc = "A soft Teshari cloak made the Chief Engineer"
 	icon_state = "tesh_cloak_ce"
 

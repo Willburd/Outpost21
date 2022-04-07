@@ -24,12 +24,12 @@
 	icon = 'icons/turf/stomach_vr.dmi'
 	initial_flooring = /decl/flooring/flesh
 
-/turf/simulated/floor/flesh/colour
-	name = "flesh"
-	desc = "This slick flesh ripples and squishes under your touch"
-	icon_state = "c_flesh_floor"
-	icon = 'icons/turf/stomach_vr.dmi'
-	initial_flooring = /decl/flooring/flesh
+/turf/simulated/floor/flesh/Initialize(mapload)
+	. = ..()
+	if(prob(30))
+		// alt puddles
+		flooring_override = pickweight(list("flesh_floor_puddle0","flesh_floor_puddle1","flesh_floor_puddle2","flesh_floor_puddle3"))
+	update_icon()
 
 /turf/simulated/floor/flesh/attackby()
 	return

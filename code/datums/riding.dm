@@ -137,6 +137,7 @@
 	nonhuman_key_exemption = TRUE // Borgs can't hold oars.
 	only_one_driver = TRUE // Would be pretty crazy if five people try to move at the same time.
 
+/* outpost 21 edit - it's funnier this way
 /datum/riding/boat/handle_ride(mob/user, direction)
 	var/turf/next = get_step(ridden, direction)
 	var/turf/current = get_turf(ridden)
@@ -146,6 +147,7 @@
 	else
 		to_chat(user, "<span class='warning'>Boats don't go on land!</span>")
 		return FALSE
+*/
 
 /datum/riding/boat/small // 'Small' boats can hold up to two people.
 

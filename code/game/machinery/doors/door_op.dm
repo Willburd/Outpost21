@@ -4,7 +4,12 @@
     icon = 'icons/turf/stomach_vr.dmi'
     icon_state = "door1"
 
-/obj/machinery/flesh/inoperable(var/additional_flags = 0)
+/obj/machinery/door/flesh/Initialize(mapload)
+    // randomize openclose
+    close_door_at = world.time + next_close_wait()
+    . = ..()
+
+/obj/machinery/door/flesh/inoperable(var/additional_flags = 0)
     // always works
     return FALSE
 
@@ -41,10 +46,11 @@
     . = ..()
 
 /obj/machinery/door/flesh/next_close_wait()
-	return rand(50,200)
+	return rand(200,5000)
 
 /obj/machinery/door/flesh/process()
-	if(world.time >= close_door_at)
+	if(close_door_at >= 0 && world.time >= close_door_at)
+		close_door_at = -1 // wait till ready
 		if(!src.density)
 			spawn(0)
 				close()

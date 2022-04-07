@@ -17,25 +17,84 @@
 	icon_state = "yelblacir"
 	ambience = AMBIENCE_ATMOS
 
+//Processor. Our station is cool enough to have a giant vore eldrich horror for a terraforming station.
 /area/muriki/processor
-	name = "\improper Core Processing"
+	name = "\improper Core Terraformer Processing"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "blue"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	sound_env = SPACE
-	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_MEATZONE)
+	ambience = AMBIENCE_MEATZONE
 	music = 'sound/ambience/approaching_planet.ogg'
-
-/area/muriki/processor/hall
-	name = "\improper Core Processor Cavities"
-	icon_state = "anohallway"
 
 /area/muriki/processor/euth
 	name = "\improper Processor Euthanization"
 	icon_state = "nuke_storage"
 	sound_env = SMALL_ENCLOSED
-	ambience = list(AMBIENCE_FOREBODING, AMBIENCE_ENGINEERING)
+	ambience = AMBIENCE_FOREBODING
 	music = 'sound/ambience/ambimine.ogg'
+//Hallways... I guess?
+/area/muriki/processor/hall
+	name = "\improper Core Processor Cavities"
+	icon_state = "anohallway"
+
+/area/muriki/processor/hall/airmix
+	name = "\improper Terraformer Alveolar duct"
+
+/area/muriki/processor/hall/waterway_upper
+	name = "\improper Terraformer Upper Jejunum"
+
+/area/muriki/processor/hall/waterway_low
+	name = "\improper Terraformer Lower Jejunum"
+
+/area/muriki/processor/hall/waterway_other
+	name = "\improper Terraformer Ileum"
+
+//Glands
+/area/muriki/processor/gland
+	name = "\improper Terraformer Gaseous Glands"
+	icon_state = "green"
+
+/area/muriki/processor/gland/space
+	name = "\improper Terraformer Inhallation Gland"
+
+/area/muriki/processor/gland/airmix
+	name = "\improper Terraformer Primary Enzyme Cavity" //Technically a pool, but it makes more sense here.
+
+/area/muriki/processor/gland/nitrogen
+	name = "\improper Terraformer Common Nitrogen Duct"
+
+/area/muriki/processor/gland/co2
+	name = "\improper Terraformer Carbon Dioxide Bladder"
+
+/area/muriki/processor/gland/phoron
+	name = "\improper Terraformer Phoronic Sack"
+
+//Pools.. don't swim in these.
+/area/muriki/processor/pools
+	name = "\improper Terraformer Enzomatic Pools"
+	icon_state = "yellow"
+
+/area/muriki/processor/pools/pylorus
+	name = "\improper Terraformer Pyloric Pool"
+
+/area/muriki/processor/pools/antrum
+	name = "\improper Terraformer Antrum Pool"
+
+/area/muriki/processor/pools/crop
+	name = "\improper Terraformer Crop"
+
+/area/muriki/processor/pools/cropbig
+	name = "\improper Terraformer Greater Crop"
+
+/area/muriki/processor/pools/gizzard //Note to medical: Don't even bother rescuing anyone in here.
+	name = "\improper Terraformer Gizzard"
+
+/area/muriki/processor/pools/eastfund
+	name = "\improper Terraformer Eastern Fundic Pool"
+
+/area/muriki/processor/pools/eastfund
+	name = "\improper Terraformer Western Fundic Pool"
 
 //
 //Bathrooms. Each department's has a unique ending name, for humor, and navigation.
@@ -479,6 +538,31 @@
 	name = "\improper Muriki Caverns"
 	sound_env = TUNNEL_ENCLOSED
 
+//Moon riiiiver
+/area/mine/explored/muriki/river
+	name = "\improper Muriki River"
+	icon_state = "blue2"
+	sound_env = SOUND_ENVIRONMENT_SEWER_PIPE
+	music = 'sound/ambience/ruins/ruins3.ogg'
+
+/area/mine/explored/muriki/river/mouth
+	name = "\improper River Mouth"
+
+/area/mine/explored/muriki/river/north
+	name = "\improper River North"
+
+/area/mine/explored/muriki/river/south
+	name = "\improper River South"
+
+/area/mine/explored/muriki/river/east
+	name = "\improper River East"
+
+/area/mine/explored/muriki/river/hole
+	name = "\improper River Cave-in"
+
+/area/mine/explored/muriki/river/end
+	name = "\improper River Falls"
+
 //
 // Maintenance ------------------------------------------------------------
 //
@@ -546,7 +630,7 @@
 	name = "\improper Gravity Generator Maintenance"
 	icon_state = "blue"
 
-//caves
+//Cavern maintenance
 /area/maintenance/cave
 	name = "\improper Facility Lower Maintenance"
 	icon_state = "dark128"

@@ -240,6 +240,11 @@
 /turf/unsimulated/deathdrop/elevator_shaft
 	death_message = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
 
+/turf/unsimulated/deathdrop/waterfall
+	death_message = "The increasing speed and current of the river swiftly drags you into the rapids, destoying any boat you had and cracking your body against the rocks. The harsh acids of the water then make short work at dissolving your corpse, lost to the river forever."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_state = "searapids" // So it shows up in the map editor as water.
+
 //These 'lost in space' ones should be moved to a higher level file, not map specific. Taken from YW
 /obj/effect/step_trigger/lost_in_space
 	var/deathmessage = "You drift off into space, floating alone in the void until your life support runs out."

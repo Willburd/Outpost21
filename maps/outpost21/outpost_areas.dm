@@ -93,7 +93,7 @@
 /area/muriki/processor/pools/eastfund
 	name = "\improper Terraformer Eastern Fundic Pool"
 
-/area/muriki/processor/pools/eastfund
+/area/muriki/processor/pools/westfund
 	name = "\improper Terraformer Western Fundic Pool"
 
 //
@@ -508,7 +508,7 @@
 	lift_announce_str = "Arriving at Second Floor."
 
 //
-// Exterior / hazard areas / mine ---------------------------------
+//----------------- Exterior / hazard areas / mine ---------------------------------
 //
 /area/muriki/grounds //Non dangerous variant, for inside the fence
 	name = "\improper Facility Grounds"
@@ -516,17 +516,62 @@
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 	music = 'sound/ambience/ambiatm1.ogg'
 
-/area/muriki/grounds/tramline
-	name = "\improper Exterior Tram Line"
+/area/muriki/grounds/graveyard
+	name = "\improper Facility Graveyard"
+	icon_state = "outside1"
+
+/area/muriki/grounds/terraform
+	name = "\improper Facility Terraformer Base"
+	icon_state = "outside2"
+
+/area/muriki/grounds/engi
+	name = "\improper Facility Near Engineering"
+	icon_state = "orablatri"
+
+/area/muriki/grounds/waste
+	name = "\improper Facility Near Waste Management"
+	icon_state = "orablatri"
+
+/area/muriki/grounds/sec
+	name = "\improper Facility Near Security"
 	icon_state = "redblatri"
 
+/area/muriki/grounds/med
+	name = "\improper Facility Near Medical"
+	icon_state = "cyablatri"
+
+/area/muriki/grounds/shutt
+	name = "\improper Facility Shuttle Pads"
+	icon_state = "deck1"
+
+/area/muriki/grounds/civ
+	name = "\improper Facility Near Civilian Structure"
+	icon_state = "bluwhitri"
+
+/area/muriki/grounds/sci
+	name = "\improper Facility Near Science"
+	icon_state = "purblatri"
+
+/area/muriki/grounds/tramborder
+	name = "\improper Tram Line Edge"
+	icon_state = "redwhicir"
+
+/area/muriki/grounds/tramlineeast
+	name = "\improper Eastern Tram Line"
+	icon_state = "redblasqu"
+
+/area/muriki/grounds/tramlinewest
+	name = "\improper Western Tram Line"
+	icon_state = "redblatri"
+
+//Mine variants for mob spawns.
 /area/mine/explored/muriki/surface
 	name = "\improper Facility Grounds"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 	music = 'sound/ambience/ambiatm1.ogg'
 
 /area/mine/unexplored/muriki/surface
-	name = "\improper Muiriki Surface"
+	name = "\improper Facility Grounds"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 	music = 'sound/ambience/ambiatm1.ogg'
 
@@ -537,6 +582,203 @@
 /area/mine/unexplored/muriki/cave
 	name = "\improper Muriki Caverns"
 	sound_env = TUNNEL_ENCLOSED
+
+//Subdivided areas because holy crap zas hates our map.
+//Basement. Dept.
+/area/mine/explored/muriki/cave/eng
+	name = "\improper Facility Engineering Tunnels"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "orange"
+/area/mine/unexplored/muriki/cave/eng
+	name = "\improper Muriki Caverns Near Engineering"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "orange"
+
+/area/mine/explored/muriki/cave/cargo
+	name = "\improper Muriki Cargo Isle Caverns"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "yellow"
+/area/mine/unexplored/muriki/cave/cargo
+	name = "\improper Muriki Caverns Near Cargo"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "yellow"
+
+/area/mine/explored/muriki/cave/waste
+	name = "\improper Muriki Waste Processing Caves"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "green"
+/area/mine/unexplored/muriki/cave/waste
+	name = "\improper Muriki Caverns Near Waste"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "green"
+
+/area/mine/explored/muriki/cave/sec
+	name = "\improper Muriki Security Caverns"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "darkred"
+/area/mine/unexplored/muriki/cave/sec
+	name = "\improper Muriki Caverns Near Security"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "darkred"
+
+/area/mine/explored/muriki/cave/med
+	name = "\improper Muriki Medical Caverns"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "bluenew"
+/area/mine/unexplored/muriki/cave/med
+	name = "\improper Muriki Caverns Near Medical"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "bluenew"
+
+/area/mine/explored/muriki/cave/sci
+	name = "\improper Muriki Research Caverns"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "purple"
+/area/mine/unexplored/muriki/cave/sci
+	name = "\improper Muriki Caverns Near Research"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "purple"
+
+/area/mine/explored/muriki/cave/civ
+	name = "\improper Muriki Civilian Caverns"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "dark128"
+/area/mine/unexplored/muriki/cave/civ
+	name = "\improper Muriki Caverns Near Civilian"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "dark128"
+
+//fillers
+/area/mine/unexplored/muriki/cave/terra
+	name = "\improper Muriki Caverns Near Terraformer"
+	icon_state = "cave"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/cave/west
+	name = "\improper Muriki Western Caverns"
+	icon_state = "west"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/cave/south
+	name = "\improper Muriki Southern Caverns"
+	icon_state = "south"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/cave/east
+	name = "\improper Muriki Eastern Caverns"
+	icon_state = "east"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/cave/north
+	name = "\improper Muriki Northern Caverns"
+	icon_state = "north"
+	sound_env = TUNNEL_ENCLOSED
+
+//below the mountain
+/area/mine/explored/muriki/mountainbase
+	name = "\improper Facility Mountain Caves"
+	icon_state = "center"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/mountainbase
+	name = "\improper Muriki Easstern Mountain Caverns"
+	icon_state = "east"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/mountainbasenorth
+	name = "\improper Muriki Northern Mountain Caverns"
+	icon_state = "north"
+	sound_env = TUNNEL_ENCLOSED
+
+//------second floor------
+/area/mine/explored/muriki/mountainnorth
+	name = "\improper North Facility Mountainside"
+	icon_state = "north"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/explored/muriki/mountaineast
+	name = "\improper Eastern Facility Mountainside"
+	icon_state = "east"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/unexplored/muriki/mountainnorth
+	name = "\improper Muriki Northern Mountain Caverns"
+	icon_state = "north"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/mountaineast
+	name = "\improper Muriki Eastern Mountain Caverns"
+	icon_state = "east"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/explored/muriki/valley
+	name = "\improper Valley Edge"
+	icon_state = "center"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/unexplored/muriki/valleyeast
+	name = "\improper Muriki Lower Valley"
+	icon_state = "east"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/unexplored/muriki/valleywest
+	name = "\improper Muriki Lower Valley"
+	icon_state = "west"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+//-------third floor--------
+/area/mine/explored/muriki/mountaintopnorth
+	name = "\improper North Facility Mountaintop"
+	icon_state = "north"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/explored/muriki/mountaintopeast
+	name = "\improper Eastern Facility Mountaintop"
+	icon_state = "east"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+
+/area/mine/unexplored/muriki/mountaintopnorth
+	name = "\improper Muriki Northern Mountaintop Caverns"
+	icon_state = "north"
+	sound_env = TUNNEL_ENCLOSED
+
+/area/mine/unexplored/muriki/mountaintopeast
+	name = "\improper Muriki Eastern Mountaintop Caverns"
+	icon_state = "east"
+	sound_env = TUNNEL_ENCLOSED
+
+//Skyline
+/area/muriki/skyline
+	name = "\improper Facility Airspace"
+	icon_state = "dark"
+	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+	music = 'sound/ambience/ambiatm1.ogg'
+
+/area/muriki/skyline/east
+	name = "\improper Eastern Facility Airspace"
+	icon_state = "east"
+
+/area/muriki/skyline/west
+	name = "\improper Western Facility Airspace"
+	icon_state = "west"
+
+/area/muriki/skyline/north
+	name = "\improper Northern Facility Airspace"
+	icon_state = "north"
+
+/area/muriki/skyline/south
+	name = "\improper Southern Facility Airspace"
+	icon_state = "south"
+
+/area/muriki/skyline/cent
+	name = "\improper Central Facility Airspace"
+	icon_state = "center"
+
+//Other areas in the caves
+/area/mine/explored/muriki/tuggrave
+	name = "\improper Tug Graveyard"
+	sound_env = TUNNEL_ENCLOSED
+	icon_state = "dk_yellow"
 
 //Moon riiiiver
 /area/mine/explored/muriki/river

@@ -438,7 +438,7 @@ proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/s
 
 					// apply acid damage
 					H.burn_skin(5 * (acid_base * multiplier))
-			else
+			else if(multiplier >= 1)
 				to_chat(H, "<span class='danger'>The acidic pool is digesting your body!</span>")
 				H.burn_skin(1 * multiplier)
 	else

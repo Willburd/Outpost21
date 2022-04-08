@@ -159,7 +159,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			muriki_enzyme_affect_mob(L,1,TRUE,FALSE)
+			muriki_enzyme_affect_mob(L,2,TRUE,FALSE)
 
 
 /datum/weather/muriki/acid_rain
@@ -208,7 +208,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			muriki_enzyme_affect_mob(L,2,FALSE,FALSE)
+			muriki_enzyme_affect_mob(L,3,FALSE,FALSE)
 
 
 /datum/weather/muriki/acid_storm
@@ -265,7 +265,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			muriki_enzyme_affect_mob(L,3,FALSE,FALSE)
+			muriki_enzyme_affect_mob(L,4,FALSE,FALSE)
 	handle_lightning()
 
 
@@ -377,71 +377,101 @@ proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/s
 
 	// acid burn time!
 	var/mob/living/carbon/human/H = L
+	var/min_permeability = 0.15;
+
+	//Burn eyes, lungs and skin if misting...
+	var/burn_eyes = mist
+	var/burn_lungs = mist
+
+	//Check for protective maskwear
 	if(istype(H))
-		//Burn eyes, lungs and skin if exposed.
-		var/burn_eyes = mist
-		var/burn_lungs = mist
-
+		//Check for protective helmets, if blocks airtight and smoke should be full head helmet anyway like a biohood!
+		if(burn_eyes && H.head && ((H.head.item_flags & BLOCK_GAS_SMOKE_EFFECT) || (H.head.item_flags & AIRTIGHT) || (H.head.flags & PHORONGUARD)))
+			burn_eyes = FALSE
 		//Check for protective glasses
-		if(H.glasses && (H.glasses.body_parts_covered & EYES) && (H.glasses.item_flags & AIRTIGHT))
-			burn_eyes = 0
-		if(H.glasses && H.glasses.item_flags & AIRTIGHT)
-			burn_lungs = 0
-		//Check for protective maskwear
-		if(burn_eyes && H.wear_mask && (H.wear_mask.body_parts_covered & EYES) && (H.wear_mask.item_flags & AIRTIGHT))
-			burn_eyes = 0
-		if(burn_lungs && H.wear_mask.item_flags & AIRTIGHT)
-			burn_lungs = 0
-		//Check for protective helmets
-		if(burn_eyes && H.head && (H.head.body_parts_covered & EYES) && (H.head.item_flags & AIRTIGHT))
-			burn_eyes = 0
-		if(burn_lungs && H.head.item_flags & AIRTIGHT)
-			burn_lungs = 0
+		if(burn_eyes && H.glasses && (H.glasses.body_parts_covered & EYES) && ((H.glasses.item_flags & BLOCK_GAS_SMOKE_EFFECT) || (H.glasses.item_flags & AIRTIGHT) || (H.glasses.flags & PHORONGUARD)))
+			burn_eyes = FALSE
+	if(L.wear_mask)
+		// check for masks
+		if(burn_eyes && (L.wear_mask.body_parts_covered & EYES) && ((L.wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT) || (L.wear_mask.item_flags & AIRTIGHT) || (L.wear_mask.flags & PHORONGUARD)))
+			burn_eyes = FALSE
+		if(burn_lungs && (L.wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT))
+			burn_lungs = FALSE
 
-		//burn their eyes!
-		if(burn_eyes)
-			var/obj/item/organ/internal/eyes/O = H.internal_organs_by_name[O_EYES]
-			if(O && prob(20))
-				O.damage += 1.5
-				to_chat(H,  "<span class='danger'>Your eyes burn!</span>")
-		//burn their lungs!
-		if(burn_lungs)
-			var/obj/item/organ/internal/lungs/O = H.internal_organs_by_name[O_LUNGS]
-			if(O && prob(20))
-				O.damage += 1.5
-				to_chat(H,  "<span class='danger'>Your lungs burn!</span>")
-		// randomly burn their skin in exposed areas!
-		var/min_permeability = 0.10;
-		if(prob(25))
-			if(!submerged)
-				if(H.reagent_permeability() > min_permeability)
-					// control damage done
-					var/acid_base = 1
+	// check if running on internals to protect lungs
+	if(burn_lungs && L.internal)
+		burn_lungs = FALSE
 
-					// unfortunately, the area burning code someone else was working on is a lie, and the thermal damage done is simply based on the collective insulation of your clothing....
-					// so effectively, all the damage is random, unless I make some homebrew damage function for each limb instead of using the burn_skin() proc...
-					// Which I'd rather not complicate this code base any more than it is... So lets just take permeability into account instead and scale it.
-					// damage to the part is modified by what protection it has, full if none
-					// also no check for gloves because they seem to almost always be highly permeable...
-					var/obj/item/protection = pickweight( list(H.wear_suit, H.shoes, H.head))
-					if(protection == null)
-						// full damage, what are you doing!?
-						acid_base = 1
-						to_chat(H, "<span class='danger'>The acidic environment burns your exposed skin!</span>")
-					else if(protection.permeability_coefficient > min_permeability)
-						// only show the message if the permeability selection actually did any damage at all
-						acid_base = protection.permeability_coefficient
-						to_chat(H, "<span class='danger'>The acidic environment leaks through your clothing and burns your skin!</span>")
-					else
-						// nothing shows up, no damage!
-						acid_base = 0
-
-					// apply acid damage
-					H.burn_skin(5 * (acid_base * multiplier))
-			else if(multiplier >= 1)
-				to_chat(H, "<span class='danger'>The acidic pool is digesting your body!</span>")
-				H.burn_skin(1 * multiplier)
-	else
-		L.burn_skin(1 * multiplier)
+	//burn their eyes!
+	if(burn_eyes)
+		var/obj/item/organ/internal/eyes/O = L.internal_organs_by_name[O_EYES]
+		if(O && prob(20))
+			O.damage += 6
+			to_chat(L,  "<span class='danger'>Your eyes burn!</span>")
+	//burn their lungs!
+	if(burn_lungs)
+		var/obj/item/organ/internal/lungs/O = L.internal_organs_by_name[O_LUNGS]
+		if(O && prob(20))
+			O.damage += 9
+			to_chat(L,  "<span class='danger'>Your lungs burn!</span>")
 
 
+	// find damaging zones to burn mobs skin!
+	var/obj/item/protection = null
+
+	var/pick_zone = ran_zone()
+	if(pick_zone == BP_HEAD)
+		if(istype(H))
+			protection = H.head
+	else if(pick_zone == BP_GROIN || BP_TORSO)
+		if(istype(H))
+			protection = H.wear_suit
+			if(protection == null)
+				protection = H.w_uniform
+	else if(pick_zone == BP_L_ARM || pick_zone == BP_R_ARM)
+		if(istype(H))
+			protection = H.wear_suit // suit will protect arms in most cases, otherwise try gloves?
+			if(protection == null)
+				protection = H.gloves
+	else if(pick_zone == BP_L_HAND || pick_zone == BP_R_HAND)
+		if(istype(H))
+			protection = H.wear_suit // avoid checking gloves directly, highly permeable in most cases
+			if(protection == null)
+				protection = H.gloves
+	else if(pick_zone == BP_L_LEG || pick_zone == BP_R_LEG)
+		if(istype(H))
+			protection = H.wear_suit // most nonpermeable boots are large ones like gooloshes, suit usually protects legs first though
+			if(protection == null)
+				protection = H.shoes
+	else if(pick_zone == BP_L_FOOT || pick_zone == BP_R_FOOT)
+		if(istype(H))
+			protection = H.shoes
+
+	if(!submerged)
+		if(protection == null)
+			// full damage, what are you doing!?
+			to_chat(H, "<span class='danger'>The acidic environment burns your [L.get_bodypart_name(pick_zone)]!</span>")
+			L.apply_damage( 3 * multiplier, BURN, pick_zone)
+		
+		else if(protection.permeability_coefficient > min_permeability)
+			// only show the message if the permeability selection actually did any damage at all
+			to_chat(H, "<span class='danger'>The acidic environment leaks through \The [protection], and is burning your [L.get_bodypart_name(pick_zone)]!</span>")
+			L.apply_damage( 3 * (protection.permeability_coefficient * multiplier), BURN, pick_zone)
+
+	else if(prob(65))
+		if(!istype(H) || !protection) // no protection!
+			to_chat(L, "<span class='danger'>The acidic pool is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
+			L.apply_damage( 1 * multiplier,  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
+		else
+			var/obj/item/weapon/rig/R = H.back
+			if(R && R.suit_is_deployed())
+ 				// rig snowflake check
+			else if(protection.permeability_coefficient > min_permeability) // leaky protection
+				to_chat(L, "<span class='danger'>The acidic pool leaks through \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
+				L.apply_damage( 1 * (protection.permeability_coefficient * multiplier),  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
+			else
+				var/liquidbreach = H.get_pressure_weakness( 0) // spacesuit are watertight
+				if(liquidbreach > 0) // unprotected!
+					to_chat(L, "<span class='danger'>The acidic pool splashes into \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
+					L.apply_damage( 1 * (protection.permeability_coefficient * multiplier),  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
+			

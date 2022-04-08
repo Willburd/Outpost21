@@ -23,12 +23,17 @@
 	reagent_type = "water"
 
 /turf/simulated/floor/water/acidic/Entered(atom/movable/AM, atom/oldloc)
-	if(AM.is_incorporeal())
-		return // no splishy splashy
-			
 	if(istype(AM, /mob/living))
+		var/allowburn = TRUE
 		var/mob/living/L = AM
-		muriki_enzyme_affect_mob( L, burnlevel * (1 - L.get_water_protection()), FALSE, TRUE)
+		if(L.buckled && L.buckled.riding_datum)
+			// boats don't burn you if riding
+			if(istype(L.buckled.riding_datum, /datum/riding/boat))
+				allowburn = FALSE
+
+		if(allowburn)
+			// handles incorporial and immune creatures itself...
+			muriki_enzyme_affect_mob( L, burnlevel * (1 - L.get_water_protection()), FALSE, TRUE)
 	..()
 
 /turf/simulated/floor/water/acidic/is_safe_to_enter(mob/living/L)

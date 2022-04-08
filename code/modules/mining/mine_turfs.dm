@@ -109,6 +109,15 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
 
+/turf/simulated/mineral/alt/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/crystal/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/crystal_shiny/ignore_mapgen
+	ignore_mapgen = 1
+
 /turf/simulated/mineral/floor
 	name = "sand"
 	icon = 'icons/turf/flooring/asteroid.dmi'

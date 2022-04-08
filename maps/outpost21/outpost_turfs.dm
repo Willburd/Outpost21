@@ -77,7 +77,13 @@ MURIKI_TURF_CREATE_UN(/turf/simulated/floor/water/acidic/shoreline/corner/corner
 // caves!
 MURIKI_TURF_CREATE_UN(/turf/simulated/mineral)
 MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/alt)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/alt/ignore_mapgen)
 MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/floor)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/crystal)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/crystal_shiny)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/crystal/ignore_mapgen)
+MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/crystal_shiny/ignore_mapgen)
+
 	//This proc is responsible for ore generation on surface turfs
 /turf/simulated/mineral/muriki/make_ore(var/rare_ore)
 	if(mineral || ignore_mapgen)

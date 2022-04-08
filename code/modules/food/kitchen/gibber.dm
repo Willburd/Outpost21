@@ -19,6 +19,9 @@
 	idle_power_usage = 2
 	active_power_usage = 500
 
+/obj/machinery/gibber/AllowDrop()
+	return TRUE // store organs for gibbing
+
 //auto-gibs anything that bumps into it
 /obj/machinery/gibber/autogibber
 	var/turf/input_plate
@@ -54,7 +57,7 @@
 	return ..()
 
 /obj/machinery/gibber/autogibber/Bumped(var/atom/A)
-	if(!input_plate)
+	if(!input_plate || !ismob(A))
 		return
 	if(stat & (NOPOWER|BROKEN))
 		return
@@ -62,7 +65,7 @@
 		return
 	if(src.occupant)
 		return
-	if(ismob(A))
+	if(istype(A, /mob/living/carbon) || istype(A, /mob/living/simple_mob))
 		// bootleg move_into_gibber
 		var/mob/victim = A
 		victim.loc = src
@@ -236,11 +239,11 @@
 
 	add_attack_logs(user,occupant,"Used [src] to gib")
 
+	// process occupant into meaty treaties
 	src.occupant.ghostize()
-
+	occupant.gib()
+	occupant = null
 	spawn(gib_time)
-		occupant.gib()
-		occupant = null
 		playsound(src, 'sound/effects/splat.ogg', 50, 1)
 		operating = 0
 		if(LAZYLEN(byproducts))
@@ -260,6 +263,8 @@
 				else
 					qdel(thing)
 				continue
+
+		for (var/obj/thing in contents)
 			thing.forceMove(get_turf(thing)) // Drop it onto the turf for throwing.
 			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
 

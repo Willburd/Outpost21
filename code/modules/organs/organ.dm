@@ -478,7 +478,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/can_butcher(var/obj/item/O, var/mob/living/user)
 	if(butcherable && meat_type)
 
-		if(istype(O, /obj/machinery/gibber) || istype(O, /obj/machinery/gibber/autogibber))	// The great equalizer.
+		if(istype(O, /obj/machinery/gibber))	// The great equalizer.
 			return TRUE
 
 		if(robotic >= ORGAN_ROBOT)

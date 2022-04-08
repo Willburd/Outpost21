@@ -159,11 +159,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			var/mob/living/carbon/human/H = L
-			if(istype(H))
-				process_complex_mob_burns(H,1)
-			else
-				process_acid_burning(L,1,TRUE)
+			muriki_enzyme_affect_mob(L,1,TRUE,FALSE)
 
 
 /datum/weather/muriki/acid_rain
@@ -212,11 +208,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			var/mob/living/carbon/human/H = L
-			if(istype(H))
-				process_complex_mob_burns(H,0)
-			else
-				process_acid_burning(L,1,TRUE)
+			muriki_enzyme_affect_mob(L,2,FALSE,FALSE)
 
 
 /datum/weather/muriki/acid_storm
@@ -273,11 +265,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
-			var/mob/living/carbon/human/H = L
-			if(istype(H))
-				process_complex_mob_burns(H,0)
-			else
-				process_acid_burning(L,1,TRUE)
+			muriki_enzyme_affect_mob(L,3,FALSE,FALSE)
 	handle_lightning()
 
 
@@ -351,90 +339,109 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 
-/proc/process_acid_burning( var/mob/living/L, var/multiplier, var/wildlife)
+proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/submerged)
 	// drop out early if no damage anyway
 	if(multiplier <= 0)
 		return
 
-	// TODO
-	// check for excluded creatures, if being called as wildlife damage
-	//if(wildlife == TRUE)
-		// stuff like jils here
-		// return
+	// no phased out or observer
+	if(!L || L.is_incorporeal() )
+		return
 
-	// burn!
-	L.burn_skin(0.25 * multiplier)
+	// no synth damage
+	if(istype(L,/mob/living/silicon))
+		return
+	// check for excluded wildlife
+	if(istype(L,/mob/living/simple_mob/vore/aggressive/corrupthound))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/aggressive/dragon))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/bigdragon))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/hippo))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/leopardmander))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/alienanimals/jil))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/alienanimals/teppi))
+		return
+	if(istype(L,/mob/living/simple_mob/animal/giant_spider))
+		return
+	if(istype(L,/mob/living/simple_mob/animal/synx))
+		return
+	if(istype(L,/mob/living/simple_mob/animal/space/carp))
+		return
+	if(istype(L,/mob/living/simple_mob/animal/space/goose))
+		return
 
+	// acid burn time!
+	var/mob/living/carbon/human/H = L
+	if(istype(H))
+		//Burn eyes, lungs and skin if exposed.
+		var/burn_eyes = mist
+		var/burn_lungs = mist
 
-/proc/process_complex_mob_burns( var/mob/living/carbon/human/H, var/mist)
-	//Burn eyes, lungs and skin if exposed.
-	var/burn_eyes = mist
-	var/burn_lungs = mist
+		//Check for protective glasses
+		if(H.glasses && (H.glasses.body_parts_covered & EYES) && (H.glasses.item_flags & AIRTIGHT))
+			burn_eyes = 0
+		if(H.glasses && H.glasses.item_flags & AIRTIGHT)
+			burn_lungs = 0
+		//Check for protective maskwear
+		if(burn_eyes && H.wear_mask && (H.wear_mask.body_parts_covered & EYES) && (H.wear_mask.item_flags & AIRTIGHT))
+			burn_eyes = 0
+		if(burn_lungs && H.wear_mask.item_flags & AIRTIGHT)
+			burn_lungs = 0
+		//Check for protective helmets
+		if(burn_eyes && H.head && (H.head.body_parts_covered & EYES) && (H.head.item_flags & AIRTIGHT))
+			burn_eyes = 0
+		if(burn_lungs && H.head.item_flags & AIRTIGHT)
+			burn_lungs = 0
 
+		//burn their eyes!
+		if(burn_eyes)
+			var/obj/item/organ/internal/eyes/O = H.internal_organs_by_name[O_EYES]
+			if(O && prob(20))
+				O.damage += 1.5
+				to_chat(H,  "<span class='danger'>Your eyes burn!</span>")
+		//burn their lungs!
+		if(burn_lungs)
+			var/obj/item/organ/internal/lungs/O = H.internal_organs_by_name[O_LUNGS]
+			if(O && prob(20))
+				O.damage += 1.5
+				to_chat(H,  "<span class='danger'>Your lungs burn!</span>")
+		// randomly burn their skin in exposed areas!
+		var/min_permeability = 0.10;
+		if(prob(25))
+			if(!submerged)
+				if(H.reagent_permeability() > min_permeability)
+					// control damage done
+					var/acid_base = 1
 
-	//Check for protective glasses
-	if(H.glasses && (H.glasses.body_parts_covered & EYES) && (H.glasses.item_flags & AIRTIGHT))
-		burn_eyes = 0
-	if(H.glasses && H.glasses.item_flags & AIRTIGHT)
-		burn_lungs = 0
+					// unfortunately, the area burning code someone else was working on is a lie, and the thermal damage done is simply based on the collective insulation of your clothing....
+					// so effectively, all the damage is random, unless I make some homebrew damage function for each limb instead of using the burn_skin() proc...
+					// Which I'd rather not complicate this code base any more than it is... So lets just take permeability into account instead and scale it.
+					// damage to the part is modified by what protection it has, full if none
+					// also no check for gloves because they seem to almost always be highly permeable...
+					var/obj/item/protection = pickweight( list(H.wear_suit, H.shoes, H.head))
+					if(protection == null)
+						// full damage, what are you doing!?
+						acid_base = 1
+						to_chat(H, "<span class='danger'>The acidic environment burns your exposed skin!</span>")
+					else if(protection.permeability_coefficient > min_permeability)
+						// only show the message if the permeability selection actually did any damage at all
+						acid_base = protection.permeability_coefficient
+						to_chat(H, "<span class='danger'>The acidic environment leaks through your clothing and burns your skin!</span>")
+					else
+						// nothing shows up, no damage!
+						acid_base = 0
 
-	//Check for protective maskwear
-	if(burn_eyes && H.wear_mask && (H.wear_mask.body_parts_covered & EYES) && (H.wear_mask.item_flags & AIRTIGHT))
-		burn_eyes = 0
-	if(burn_lungs && H.wear_mask.item_flags & AIRTIGHT)
-		burn_lungs = 0
-
-	//Check for protective helmets
-	if(burn_eyes && H.head && (H.head.body_parts_covered & EYES) && (H.head.item_flags & AIRTIGHT))
-		burn_eyes = 0
-	if(burn_lungs && H.head.item_flags & AIRTIGHT)
-		burn_lungs = 0
-
-	/* outpost 21  edit - nif removal
-	//VOREStation Edit - NIF Support
-	if(H.nif && H.nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))
-		burn_eyes = 0
-	*/
-
-	//burn their eyes!
-	if(burn_eyes)
-		var/obj/item/organ/internal/eyes/O = H.internal_organs_by_name[O_EYES]
-		if(O && prob(20))
-			O.damage += 1.5
-			to_chat(H,  "<span class='danger'>Your eyes burn!</span>")
-
-	//burn their lungs!
-	if(burn_lungs)
-		var/obj/item/organ/internal/lungs/O = H.internal_organs_by_name[O_LUNGS]
-		if(O && prob(20))
-			O.damage += 1.5
-			to_chat(H,  "<span class='danger'>Your lungs burn!</span>")
-
-	// randomly burn their skin in exposed areas!
-	var/min_permeability = 0.10;
-	if(prob(25) && H.reagent_permeability() > min_permeability)
-		// control damage done
-		var/acid_multiplier = 1
-
-		// unfortunately, the area burning code someone else was working on is a lie, and the thermal damage done is simply based on the collective insulation of your clothing....
-		// so effectively, all the damage is random, unless I make some homebrew damage function for each limb instead of using the burn_skin() proc...
-		// Which I'd rather not complicate this code base any more than it is... So lets just take permeability into account instead and scale it.
-		// damage to the part is modified by what protection it has, full if none
-		// also no check for gloves because they seem to almost always be highly permeable...
-		var/obj/item/protection = pickweight( list(H.wear_suit, H.shoes, H.head))
-		if(protection == null)
-			// full damage, what are you doing!?
-			acid_multiplier = 1
-			to_chat(H, "<span class='danger'>The acidic environment burns your exposed skin!</span>")
-		else if(protection.permeability_coefficient > min_permeability)
-			// only show the message if the permeability selection actually did any damage at all
-			acid_multiplier = protection.permeability_coefficient
-			to_chat(H, "<span class='danger'>The acidic environment leaks through your clothing and burns your skin!</span>")
-		else
-			// nothing shows up, no damage!
-			acid_multiplier = 0
-
-		// apply acid damage
-		process_acid_burning(H, acid_multiplier,FALSE)
+					// apply acid damage
+					H.burn_skin(5 * (acid_base * multiplier))
+			else
+				to_chat(H, "<span class='danger'>The acidic pool is digesting your body!</span>")
+				H.burn_skin(1 * multiplier)
+	else
+		L.burn_skin(1 * multiplier)
 
 

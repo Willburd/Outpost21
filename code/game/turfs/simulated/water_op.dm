@@ -27,13 +27,8 @@
 		return // no splishy splashy
 			
 	if(istype(AM, /mob/living))
-		// TODO check if mob is acid proof
 		var/mob/living/L = AM
-		if(L.isSynthetic())
-			return
-		burnlevel *= 1 - L.get_water_protection()
-		if(burnlevel > 0)
-			L.burn_skin(burnlevel)
+		muriki_enzyme_affect_mob( L, burnlevel * (1 - L.get_water_protection()), FALSE, TRUE)
 	..()
 
 /turf/simulated/floor/water/acidic/is_safe_to_enter(mob/living/L)

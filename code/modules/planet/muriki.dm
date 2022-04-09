@@ -514,7 +514,7 @@ proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/s
 				org.wounds +=  new /datum/wound/cut/small(21)
 			else
 				var/obj/item/weapon/rig/R = H.back
-				if(R && R.suit_is_deployed())
+				if(istype(H.back,/obj/item/weapon/rig) && R.suit_is_deployed())
 					// rig snowflake check
 				else if(protection.permeability_coefficient > min_permeability) // leaky protection
 					to_chat(L, "<span class='danger'>The acidic pool leaks through \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")

@@ -15,24 +15,26 @@
 	desc = "Magnetic levitation tram tracks. Caution! Electrified!"
 	icon = 'icons/turf/flooring/maglevs.dmi'
 	icon_state = "maglevup"
-/*
-	var/area/shock_area = /area/outpost/tram
+
+	var/area/shock_area = /area/engineering/engine_smes // engine power hue hue hue
 
 /turf/simulated/floor/maglev/Initialize()
 	. = ..()
 	shock_area = locate(shock_area)
-*/ //OP: Removing the area check. These should work everywhere, not just in one area. They can't be constructed or moved, so don't need to worry about it being in weird spots.
 
 // Walking on maglev tracks will shock you! Horray!
 /turf/simulated/floor/maglev/Entered(var/atom/movable/AM, var/atom/old_loc)
-	if(isliving(AM) && prob(50))
+	if(locate(/obj/structure/catwalk) in AM.loc)
+		// safe to walk over!
+		return
+	if(isliving(AM) && prob(80))
 		track_zap(AM)
 /turf/simulated/floor/maglev/attack_hand(var/mob/user)
-	if(prob(75))
+	if(prob(95))
 		track_zap(user)
 /turf/simulated/floor/maglev/proc/track_zap(var/mob/living/user)
 	if (!istype(user)) return
-	if (electrocute_mob(user, /*shock_area,*/ src)) //OP edit: Shouldn't need an area define, these should work everywhere.
+	if (electrocute_mob(user, shock_area, src))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()

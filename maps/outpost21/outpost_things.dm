@@ -254,7 +254,7 @@
 		to_chat(A, "<span class='danger'>[deathmessage]</span>")
 	qdel(A)
 
-obj/effect/step_trigger/lost_in_space/bluespace
+/obj/effect/step_trigger/lost_in_space/bluespace
 	deathmessage = "Everything goes blue as your component particles are scattered throughout the known and unknown universe."
 	var/last_sound = 0
 

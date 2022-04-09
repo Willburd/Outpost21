@@ -65,7 +65,7 @@
 	if(!LAZYLEN(vore_organs))
 		LAZYINITLIST(vore_organs)
 		var/obj/belly/B = new /obj/belly(src)
-		if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 			vore_selected = B
 			B.immutable = TRUE
 			B.name = "Stomach"

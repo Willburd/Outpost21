@@ -384,7 +384,7 @@ var/datum/planet/muriki/planet_muriki = null
 		)
 
 
-proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/submerged)
+/proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/submerged)
 	// drop out early if no damage anyway
 	if(multiplier <= 0)
 		return

@@ -140,7 +140,7 @@ List of things solar grubs should be able to do:
 /mob/living/simple_mob/vore/solargrub/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "stomach"
 		B.desc = "Through either grave error, overwhelming willingness, or some other factor, you find yourself lodged halfway past the solargrub's mandibles. While it had initially hissed and chittered in glee at the prospect of a new meal, it is clearly more versed in suckling on power cables; inch by inch, bit by bit, it undulates forth to slowly, noisily gulp you down its short esophagus... and right into its extra-cramped, surprisingly hot stomach. As the rest of you spills out into the plush-walled chamber, the grub's soft body bulges outwards here and there with your compressed figure. Before long, a thick slime oozes out from the surrounding stomach walls; only time will tell how effective it is on something solid like you..."
 

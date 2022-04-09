@@ -1,7 +1,7 @@
 /mob/living/simple_mob/animal/passive/cat/runtime/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "Stomach"
 		B.desc = "The slimy wet insides of Runtime! Not quite as clean as the cat on the outside."
 

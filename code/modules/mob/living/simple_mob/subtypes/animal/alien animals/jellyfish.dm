@@ -87,7 +87,7 @@ GLOBAL_VAR_INIT(jellyfish_count, 0)
 /mob/living/simple_mob/vore/alienanimals/space_jellyfish/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "internal chamber"
 		B.desc = "It's smooth and translucent. You can see the world around you distort and wobble with the movement of the space jellyfish. It floats casually, while the delicate flesh seems to form to you. It's surprisingly cool, and flickers with its own light. You're on display for all to see, trapped within the confines of this strange space alien!"
 		B.mode_flags = 40

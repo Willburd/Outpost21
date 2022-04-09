@@ -53,7 +53,7 @@
 /mob/living/simple_mob/animal/passive/fox/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "Stomach"
 		B.desc = "Slick foxguts. Cute on the outside, slimy on the inside!"
 
@@ -208,7 +208,7 @@
 /mob/living/simple_mob/animal/passive/fox/renault/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "Stomach"
 		B.desc = "Slick foxguts. They seem somehow more regal than perhaps other foxes!"
 

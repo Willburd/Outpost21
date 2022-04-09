@@ -163,7 +163,7 @@ GLOBAL_VAR_INIT(teppi_count, 0)	// How mant teppi DO we have?
 /mob/living/simple_mob/vore/alienanimals/teppi/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "stomach"
 		B.desc = "The heat of the roiling flesh around you bakes into you immediately as you’re cast into the gloom of a Teppi’s primary gastric chamber. The undulations are practically smothering, clinging to you and grinding you all over as the Teppi continues about its day. The walls are heavy against you, so it’s really difficult to move at all, while the heart of this creature pulses rhythmically somewhere nearby, and you can feel the throb of its pulse in the doughy squish pressing up against you. Your figure sinks a ways into the flesh as it presses in, wrapping limbs up between countless slick folds and kneading waves. It’s not long before you’re positively soaked in a thin layer of slime as you’re rocked and squeezed and jostled in the stomach of your captor."
 		B.mode_flags = 40
@@ -275,49 +275,50 @@ GLOBAL_VAR_INIT(teppi_count, 0)	// How mant teppi DO we have?
 
 // The friend zone. 
 	var/obj/belly/p = new /obj/belly(src)
-	p.immutable = TRUE
-	p.mode_flags = 40
-	p.human_prey_swallow_time = 0.01 SECONDS
-	p.digestchance = 0
-	p.digest_brute = 0
-	p.digest_burn = 0
-	p.absorbchance = 0
-	p.escapable = TRUE
-	p.escapechance = 40
-	p.digest_mode = DM_HEAL
-	p.name = "propeutpericulum" 	//I'm no latin professor I just know that some organs and things are based on latin words 
-									//and google translate says that each of these individually 
-									//"close" "to" "danger" translate to "prope" "ut" "periculum". 
-									//Of course it doesn't translate perfectly, and it's nonsense when squashed together, but
-									//I don't care that much, I just figured that the weird alien animals that store friends in 
-									//their tummy should have a funny name for the organ they do that with. >:I
-	p.desc = "You seem to have found your way into something of a specialized chamber within the Teppi. The walls are slick and smooth and REALLY soft to the touch. While you can hear the Teppi’s heartbeat nearby, and feel it throb throughout its flesh, the motions around you are gentle and careful. You’re pressed into a small shape within the pleasant heat, with the flesh forming to your figure. You can wriggle around a bit and get comfortable here, but as soon as you get still for a bit the smooth, almost silky flesh seems to form to you once again, like a heavy blanket wrapping you up. As you lounge here the pleasant kneading sensations ease aches and pains, and leave you feeling fresher than before. For a curious fleshy sac inside of some alien monster, this place isn’t all that bad!"
-	p.contaminates = 1
-	p.contamination_flavor = "Wet"
-	p.contamination_color = "grey"
-	p.item_digest_mode = IM_HOLD
-	p.belly_fullscreen = "yet_another_tumby"
-	p.fancy_vore = 1
-	p.vore_verb = "nyomp"
-	friend_zone = p
+	if(istype(B) && istype(p)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+		p.immutable = TRUE
+		p.mode_flags = 40
+		p.human_prey_swallow_time = 0.01 SECONDS
+		p.digestchance = 0
+		p.digest_brute = 0
+		p.digest_burn = 0
+		p.absorbchance = 0
+		p.escapable = TRUE
+		p.escapechance = 40
+		p.digest_mode = DM_HEAL
+		p.name = "propeutpericulum" 	//I'm no latin professor I just know that some organs and things are based on latin words 
+										//and google translate says that each of these individually 
+										//"close" "to" "danger" translate to "prope" "ut" "periculum". 
+										//Of course it doesn't translate perfectly, and it's nonsense when squashed together, but
+										//I don't care that much, I just figured that the weird alien animals that store friends in 
+										//their tummy should have a funny name for the organ they do that with. >:I
+		p.desc = "You seem to have found your way into something of a specialized chamber within the Teppi. The walls are slick and smooth and REALLY soft to the touch. While you can hear the Teppi’s heartbeat nearby, and feel it throb throughout its flesh, the motions around you are gentle and careful. You’re pressed into a small shape within the pleasant heat, with the flesh forming to your figure. You can wriggle around a bit and get comfortable here, but as soon as you get still for a bit the smooth, almost silky flesh seems to form to you once again, like a heavy blanket wrapping you up. As you lounge here the pleasant kneading sensations ease aches and pains, and leave you feeling fresher than before. For a curious fleshy sac inside of some alien monster, this place isn’t all that bad!"
+		p.contaminates = 1
+		p.contamination_flavor = "Wet"
+		p.contamination_color = "grey"
+		p.item_digest_mode = IM_HOLD
+		p.belly_fullscreen = "yet_another_tumby"
+		p.fancy_vore = 1
+		p.vore_verb = "nyomp"
+		friend_zone = p
 
-	p.emote_lists[DM_DRAIN] = B.emote_lists[DM_DRAIN]
+		p.emote_lists[DM_DRAIN] = B.emote_lists[DM_DRAIN]
 
-	p.emote_lists[DM_DIGEST] = B.emote_lists[DM_DIGEST]
+		p.emote_lists[DM_DIGEST] = B.emote_lists[DM_DIGEST]
 
-	p.emote_lists[DM_HOLD] = B.emote_lists[DM_HOLD]
+		p.emote_lists[DM_HOLD] = B.emote_lists[DM_HOLD]
 
-	p.emote_lists[DM_ABSORB] = B.emote_lists[DM_ABSORB]
+		p.emote_lists[DM_ABSORB] = B.emote_lists[DM_ABSORB]
 
-	p.emote_lists[DM_HEAL] = B.emote_lists[DM_HEAL]
+		p.emote_lists[DM_HEAL] = B.emote_lists[DM_HEAL]
 
-	p.struggle_messages_inside = B.struggle_messages_inside
+		p.struggle_messages_inside = B.struggle_messages_inside
 
-	p.struggle_messages_outside = B.struggle_messages_outside
+		p.struggle_messages_outside = B.struggle_messages_outside
 
-	p.examine_messages = B.examine_messages
+		p.examine_messages = B.examine_messages
 
-	p.digest_messages_prey = B.digest_messages_prey
+		p.digest_messages_prey = B.digest_messages_prey
 
 ///////////////////////////////////////Other stuff///////////////////////////////////////////
 
@@ -771,6 +772,8 @@ GLOBAL_VAR_INIT(teppi_count, 0)	// How mant teppi DO we have?
 /mob/living/simple_mob/vore/alienanimals/teppi/lay_down()
 	..()
 	if(client || !teppi_adult)
+		return
+	if(!vore_selected)
 		return
 	if(vore_selected == friend_zone)
 		return

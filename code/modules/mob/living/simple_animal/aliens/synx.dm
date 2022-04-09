@@ -108,7 +108,7 @@
 /mob/living/simple_mob/animal/synx/init_vore()
 	.=..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		//B.human_prey_swallow_time = 6 SECONDS //doesnt work
 		//B.nonhuman_prey_swallow_time = 3 SECONDS //doesnt work
 		B.vore_verb = "swallow"
@@ -560,7 +560,7 @@
 /mob/living/simple_mob/animal/synx/ai/pet/init_vore()
 	.=..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.vore_verb = "swallow"
 		B.digest_burn = 1
 		B.digest_brute = 0
@@ -568,7 +568,7 @@
 /mob/living/simple_mob/animal/synx/ai/pet/holo/init_vore()
 	.=..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.vore_verb = "swallow"
 		B.digest_burn = 5
 		B.digest_brute = 5

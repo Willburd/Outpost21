@@ -127,7 +127,7 @@
 /mob/living/simple_mob/vore/fennec/huge/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "Stomach"
 		B.desc = "The slimy wet insides of a rather large fennec! Not quite as clean as the fen on the outside."
 		B.human_prey_swallow_time = 5

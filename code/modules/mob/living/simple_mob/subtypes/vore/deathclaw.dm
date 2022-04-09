@@ -79,7 +79,7 @@
 /mob/living/simple_mob/vore/aggressive/deathclaw/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "stomach"
 		B.desc = "The giant mutant of a lizard finishes stuffing you into its jaws and down its ravenously clenching gullet with a worrying ease and efficiency. An assortment of slick, slimy noises assault your senses for a few gulp-filled moments... before you spill out into the apex predator's swelteringly hot stomach, its walls already possessively grinding into your body."
 

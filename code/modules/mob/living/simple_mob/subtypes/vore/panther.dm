@@ -60,7 +60,7 @@
 /mob/living/simple_mob/vore/aggressive/panther/init_vore()
 	..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.name = "stomach"
 		B.desc = "All it takes is a few more rasps of the panther's rough, barbed tongue to shovel the rest of you down its tightly rippling gullet... and with a final couple ravenous swallows, you spill out into the predatory feline's stomach! Right away, that gut's muscular walls knead and contract around you, forcing you into a curled-up ball as the panther's noisy purring rumbles into you from every direction."
 

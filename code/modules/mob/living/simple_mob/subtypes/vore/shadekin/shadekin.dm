@@ -139,7 +139,7 @@
 		return
 
 	var/obj/belly/B = new /obj/belly(src)
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		vore_selected = B
 		B.immutable = 1
 		B.name = vore_stomach_name ? vore_stomach_name : "stomach"

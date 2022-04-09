@@ -507,7 +507,7 @@ I think I covered everything.
 
 /mob/living/simple_mob/vore/bigdragon/init_vore()
 	var/obj/belly/B = new /obj/belly/dragon/maw(src)
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.emote_lists[DM_HOLD] = list(
 			"The dragon's breath continues to pant over you rhythmically, each exhale carrying a bone-shivering growl",
 			"The thick, heavy tongue lifts, curling around you, cramming you tightly against it's teeth, to squeeze some flavor out of you.",

@@ -101,12 +101,12 @@
 /mob/living/simple_mob/vore/lamia/init_vore()
 	. = ..()
 	var/obj/belly/B = vore_selected
-	if(B) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(B)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		B.transferchance = vore_upper_transfer_chance
 		B.transferlocation = "tail stomach"
 
 	var/obj/belly/tail = new /obj/belly(src)
-	if(tail) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
+	if(istype(tail)) // massive runtime errors everywhere on startup without this, assigning things to null anyway, so would be pointless executing anyway.
 		tail.immutable = TRUE
 		tail.name = "tail stomach"
 		tail.desc = "You slide out into the narrow, constricting tube of flesh that is the lamia's snake half, heated walls and strong muscles all around clinging to your form with every slither."

@@ -140,7 +140,7 @@ Class Procs:
 	var/space = !istype(B)
 
 	if(!space)
-		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || current_cycle == 0)))
+		if( A.zone.contents.len + B.zone.contents.len <= ZONE_MAX_SIZE && (min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || current_cycle == 0))))
 			merge(A.zone,B.zone)
 			return
 

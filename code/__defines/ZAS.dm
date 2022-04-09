@@ -4,6 +4,7 @@
 #define BLOCKED 3		// Blocked, zone boundaries will not cross even if opened.
 
 #define ZONE_MIN_SIZE 14 // Zones with less than this many turfs will always merge, even if the connection is not direct
+#define ZONE_MAX_SIZE 4000 // Zones merging, that will create a new zone with with more than this many turfs, will never merge even if the connection is direct. Prevents the automated creation of collosal zones on planets
 
 // Used for quickly making certain things allow airflow or not.
 // More complicated, conditional airflow should override CanZASPass().

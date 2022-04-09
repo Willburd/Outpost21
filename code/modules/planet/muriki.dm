@@ -108,12 +108,16 @@ var/datum/planet/muriki/planet_muriki = null
 /datum/weather_holder/muriki
 	temperature = 293.15 // 20c
 	allowed_weather_types = list(
+		WEATHER_CLEAR	= new /datum/weather/muriki/clear(),
+		WEATHER_LIGHT_SNOW	= new /datum/weather/muriki/light_snow(),
 		WEATHER_OVERCAST	= new /datum/weather/muriki/acid_overcast(),
 		WEATHER_RAIN        = new /datum/weather/muriki/acid_rain(),
 		WEATHER_STORM		= new /datum/weather/muriki/acid_storm(),
 		WEATHER_HAIL		= new /datum/weather/muriki/acid_hail()
 		)
 	roundstart_weather_chances = list(
+		WEATHER_CLEAR = 0,
+		WEATHER_LIGHT_SNOW = 0,
 		WEATHER_OVERCAST = 5,
 		WEATHER_RAIN = 40,
 		WEATHER_STORM = 50,
@@ -125,8 +129,29 @@ var/datum/planet/muriki/planet_muriki = null
 	temp_high = 313.15	// 40c
 	temp_low = 288.15	// 15c
 
+/datum/weather/muriki/clear
+	name = "clear"
+	temp_high = 283.15 // 10c
+	temp_low = T0C
+	wind_high = 2
+	wind_low = 1
+	transition_chances = list(
+		WEATHER_CLEAR = 15,
+		WEATHER_RAIN = 75,
+		WEATHER_HAIL = 5,
+		WEATHER_LIGHT_SNOW = 5
+		)
+	observed_message = "The sky is clear."
+	transition_messages = list(
+		"The sky clears up.",
+		"The sky is visible.",
+		"The weather is calm."
+		)
+	sky_visible = TRUE
+
 /datum/weather/muriki/acid_overcast
 	name = "fog"
+	icon_state = "fog"
 	wind_high = 1
 	wind_low = 0
 	light_modifier = 0.7
@@ -134,7 +159,8 @@ var/datum/planet/muriki/planet_muriki = null
 	transition_chances = list(
 		WEATHER_OVERCAST = 15,
 		WEATHER_RAIN = 80,
-		WEATHER_HAIL = 5
+		WEATHER_HAIL = 4,
+		WEATHER_CLEAR = 1
 		)
 	observed_message = "It is misting, all you can see are corrosive clouds."
 	transition_messages = list(
@@ -292,8 +318,9 @@ var/datum/planet/muriki/planet_muriki = null
 	transition_chances = list(
 		WEATHER_RAIN = 20,
 		WEATHER_STORM = 5,
-		WEATHER_HAIL = 5,
-		WEATHER_OVERCAST = 70
+		WEATHER_HAIL = 4,
+		WEATHER_OVERCAST = 70,
+		WEATHER_CLEAR = 1
 		)
 	observed_message = "Frozen acid is falling from the sky."
 	transition_messages = list(
@@ -337,6 +364,24 @@ var/datum/planet/muriki/planet_muriki = null
 			// show transition messages
 			if(show_message)
 				to_chat(L, effect_message)
+
+/datum/weather/muriki/light_snow
+	name = "light snow"
+	icon_state = "snowfall_light"
+	temp_high = T0C
+	temp_low = 263.15 // -10c
+	wind_high = 1
+	wind_low = 0
+	light_modifier = 0.8
+	transition_chances = list(
+		WEATHER_LIGHT_SNOW = 80,
+		WEATHER_CLEAR = 20
+		)
+	observed_message = "It is snowing lightly."
+	transition_messages = list(
+		"Small snowflakes begin to fall from above.",
+		"It begins to snow lightly.",
+		)
 
 
 proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/submerged)

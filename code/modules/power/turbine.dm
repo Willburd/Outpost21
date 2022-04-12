@@ -189,9 +189,9 @@
 // These are crucial to working of a turbine - the stats modify the power output. TurbGenQ modifies how much raw energy can you get from
 // rpms, TurbGenG modifies the shape of the curve - the lower the value the less straight the curve is.
 
-#define TURBPRES 9000000
-#define TURBGENQ 100000
-#define TURBGENG 0.8
+#define TURBPRES 7000000
+#define TURBGENQ 850000
+#define TURBGENG 0.62
 
 /obj/machinery/power/turbine/Initialize()
 	. = ..()

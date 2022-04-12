@@ -15,7 +15,7 @@
 	var/update_falling = FALSE
 
 	var/obj/machinery/portable_atmospherics/canister/tank = AM
-	if(tank && !tank.destroyed) // rupture tanks
+	if(istype(tank,/obj/machinery/portable_atmospherics/canister) && !tank.destroyed) // rupture tanks
 		tank.take_damage(10000) // BANG
 		update_falling = TRUE
 

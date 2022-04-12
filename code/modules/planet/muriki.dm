@@ -436,6 +436,9 @@ var/datum/planet/muriki/planet_muriki = null
 		//Check for protective glasses
 		if(burn_eyes && H.glasses && (H.glasses.body_parts_covered & EYES) && ((H.glasses.item_flags & BLOCK_GAS_SMOKE_EFFECT) || (H.glasses.item_flags & AIRTIGHT) || (H.glasses.flags & PHORONGUARD)))
 			burn_eyes = FALSE
+		// no breathers
+		if(!H.species || !H.species.breath_type)
+			burn_lungs = FALSE
 	if(L.wear_mask)
 		// check for masks
 		if(burn_eyes && (L.wear_mask.body_parts_covered & EYES) && ((L.wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT) || (L.wear_mask.item_flags & AIRTIGHT) || (L.wear_mask.flags & PHORONGUARD)))
@@ -450,13 +453,13 @@ var/datum/planet/muriki/planet_muriki = null
 	//burn their eyes!
 	if(burn_eyes)
 		var/obj/item/organ/internal/eyes/O = L.internal_organs_by_name[O_EYES]
-		if(O && prob(20))
+		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
 			O.damage += 6
 			to_chat(L,  "<span class='danger'>Your eyes burn!</span>")
 	//burn their lungs!
 	if(burn_lungs)
 		var/obj/item/organ/internal/lungs/O = L.internal_organs_by_name[O_LUNGS]
-		if(O && prob(20))
+		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
 			O.damage += 9
 			to_chat(L,  "<span class='danger'>Your lungs burn!</span>")
 

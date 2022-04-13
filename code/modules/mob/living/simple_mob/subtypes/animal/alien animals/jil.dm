@@ -179,6 +179,20 @@
 				resting = (sleeping > 0)
 		update_icons()
 
+/mob/living/simple_mob/vore/alienanimals/jil/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(stat == DEAD)
+		return ..()
+	if(istype(O, /obj/item/weapon/grab))
+		return ..()
+	if(istype(O, /obj/item/weapon/holder))
+		return ..()
+	if(user.a_intent != I_HELP)
+		// num num num
+		if(istype(O,/obj/item/weapon/reagent_containers/food))
+			var/obj/item/weapon/reagent_containers/food/F = O
+			F.attack(src,src)
+	return ..()
+
 // Jil noises
 /datum/say_list/jil
 	speak = list()
@@ -247,7 +261,7 @@
 /datum/ai_holder/simple_mob/intentional/jil/pre_melee_attack(atom/A)
 	if(istype(A, /obj/item))
 		var/obj/item/I = A
-		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))	// If we can't pick it up, or it's edible, go to harm.
+		if(istype(I, /obj/item/weapon/reagent_containers/food))	// If we can't pick it up, or it's edible, go to harm.
 			holder.a_intent = I_HURT
 		else
 			holder.a_intent = I_HELP
@@ -334,7 +348,7 @@
 	last_search = world.time
 
 	for(var/atom/A in view(holder, vision_range))
-		if(!istype(A, /obj/item/weapon/reagent_containers/food/snacks) && get_dist(A, home_turf) < hoard_distance)
+		if(!istype(A, /obj/item/weapon/reagent_containers/food) && get_dist(A, home_turf) < hoard_distance)
 			// disable for things already in hoard, food needs to be eaten though
 			continue
 

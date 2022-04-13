@@ -747,6 +747,11 @@
 	icon_state = "east"
 	sound_env = TUNNEL_ENCLOSED
 
+/area/muriki/crystal
+	name = "\improper Muriki Crystal Den"
+	icon_state = "bluwhicir"
+	sound_env = TUNNEL_ENCLOSED
+
 //Skyline
 /area/muriki/skyline
 	name = "\improper Facility Airspace"
@@ -1024,6 +1029,10 @@
 
 /area/security/brig/drunk
 	name = "\improper Security Drunktank"
+	icon_state = "brig"
+
+/area/security/brig/isolate
+	name = "\improper Security Solitary Confinement"
 	icon_state = "brig"
 
 /area/security/tankstore

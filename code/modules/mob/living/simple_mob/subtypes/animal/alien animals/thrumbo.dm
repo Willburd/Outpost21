@@ -7,8 +7,8 @@
 	icon_living = "thrumbo"
 	icon_dead = "thrumbo_dead"
 	icon_rest = "thrumbo_rest"
-	maxHealth = 500
-	health = 500
+	maxHealth = 800
+	health = 800
 	faction = "thrumbo"
 	pixel_x = -16
 	special_attack_min_range = 3

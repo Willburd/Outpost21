@@ -62,7 +62,7 @@
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
 	var/id = 0
-	var/door_status = 0
+	var/door_status = TRUE
 
 /obj/item/weapon/circuitboard/machine/power_compressor
 	name = T_BOARD("power compressor")
@@ -391,12 +391,19 @@
 			locate_machinery()
 			. = TRUE
 		if("doors")
-			door_status = !door_status
+			var/can_toggle = TRUE
 			for(var/obj/machinery/door/blast/D in src.doors)
-				if (door_status)
-					spawn(0) D.close()
-				else
-					spawn(0)D.open()
+				if(D.operating)
+					can_toggle = FALSE
+			if(can_toggle)
+				door_status = !door_status
+				for(var/obj/machinery/door/blast/D in src.doors)
+					if (door_status)
+						spawn(0) 
+							D.close()
+					else
+						spawn(0) 
+							D.open()
 			. = TRUE
 
 #undef COMPFRICTION

@@ -44,10 +44,8 @@
 		/obj/item/seeds/watermelonseed = 3,
 		/obj/item/seeds/wheatseed = 3,
 		/obj/item/seeds/whitebeetseed = 3,
-		/obj/item/seeds/wurmwoad = 3,
-		/obj/item/seeds/shrinkshroom = 3,
-		/obj/item/seeds/megashroom = 3)
-
+		/obj/item/seeds/wurmwoad = 3)
+//Outpost: Added pitcher plant, moved lustseed to be alphabetical
 /obj/machinery/seed_storage/xenobotany
 	name = "Xenobotany seed storage"
 	scanner = list("stats", "produce", "soil", "temperature", "light")
@@ -76,10 +74,12 @@
 		/obj/item/seeds/lettuce = 3,
 		/obj/item/seeds/libertymycelium = 2,
 		/obj/item/seeds/limeseed = 3,
+		/obj/item/seeds/lustflower = 2,
 		/obj/item/seeds/mtearseed = 2,
 		/obj/item/seeds/nettleseed = 2,
 		/obj/item/seeds/orangeseed = 3,
 		/obj/item/seeds/peanutseed = 3,
+		/obj/item/seeds/pitcherseed = 3,
 		/obj/item/seeds/plastiseed = 3,
 		/obj/item/seeds/plumpmycelium = 3,
 		/obj/item/seeds/poppyseed = 3,
@@ -102,7 +102,4 @@
 		/obj/item/seeds/watermelonseed = 3,
 		/obj/item/seeds/wheatseed = 3,
 		/obj/item/seeds/whitebeetseed = 3,
-		/obj/item/seeds/wurmwoad = 3,
-		/obj/item/seeds/shrinkshroom = 3,
-		/obj/item/seeds/megashroom = 3,
-		/obj/item/seeds/lustflower = 2)
+		/obj/item/seeds/wurmwoad = 3)

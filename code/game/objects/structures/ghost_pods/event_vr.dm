@@ -41,9 +41,12 @@
 								  "Frost Giant Spider" = /mob/living/simple_mob/animal/giant_spider/frost,
 								  "Nurse Giant Spider" = /mob/living/simple_mob/animal/giant_spider/nurse/eggless,
 								  "Giant Spider Queen" = /mob/living/simple_mob/animal/giant_spider/nurse/queen/eggless,
-								  "Weretiger" = /mob/living/simple_mob/vore/weretiger,
+								  "Slug" = /mob/living/simple_mob/vore/slug,
+								  "Dragon" = /mob/living/simple_mob/vore/bigdragon/friendly/maintpred,
+								  "Red Eye'd Shadekin" = /mob/living/simple_mob/shadekin/red,
 								  "Catslug" = /mob/living/simple_mob/vore/alienanimals/catslug
 								  )
+// Outpost edit: Remove werebeast, added slugs, dragons, red eyes.
 
 /obj/structure/ghost_pod/ghost_activated/maintpred/create_occupant(var/mob/M)
 	..()

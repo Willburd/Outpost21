@@ -419,6 +419,12 @@ var/datum/planet/muriki/planet_muriki = null
 		return
 	if(istype(L,/mob/living/simple_mob/animal/space/goose))
 		return
+	if(istype(L,/mob/living/simple_mob/animal/thrumbo))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/slug))
+		return
+	if(istype(L,/mob/living/simple_mob/vore/pitcher_plant))
+		return
 
 	// acid burn time!
 	var/mob/living/carbon/human/H = L
@@ -503,7 +509,7 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, "<span class='danger'>The acidic environment burns your [L.get_bodypart_name(pick_zone)]!</span>")
 				L.apply_damage( 3 * multiplier, BURN, pick_zone)
 				org.wounds +=  new /datum/wound/cut/small(mist ? 16 : 8)
-			
+
 			else if(protection.permeability_coefficient > min_permeability)
 				// only show the message if the permeability selection actually did any damage at all
 				to_chat(H, "<span class='danger'>The acidic environment leaks through \The [protection], and is burning your [L.get_bodypart_name(pick_zone)]!</span>")
@@ -529,4 +535,3 @@ var/datum/planet/muriki/planet_muriki = null
 						to_chat(L, "<span class='danger'>The acidic pool splashes into \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
 						L.apply_damage( 1 * (protection.permeability_coefficient * multiplier),  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
 						org.wounds +=  new /datum/wound/cut/small(21)
-			

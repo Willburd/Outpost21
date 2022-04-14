@@ -282,6 +282,15 @@
 					to_chat(H, "The [P] calms you down, reminding you of people...")
 					H.next_loneliness_time = world.time+500
 
+		for(var/obj/structure/plushie/tesh/S in range(8, H)) //Bigger, more range.
+			if(H.loneliness_stage > 0)
+				H.loneliness_stage -= alone_calming
+				if(H.loneliness_stage < 0)
+					H.loneliness_stage = 0
+				if(world.time >= H.next_loneliness_time)
+					to_chat(H, "The [S] calms you down, reminding you of people...")
+					H.next_loneliness_time = world.time+800 //longer effect
+
 		// No company? Suffer :(
 		if(H.loneliness_stage < warning_cap)
 			H.loneliness_stage += 1

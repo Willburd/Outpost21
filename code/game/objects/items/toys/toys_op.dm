@@ -15,3 +15,23 @@
 
 /obj/item/toy/plushie/jil/proc/cooldownreset()
 	cooldown = 0
+
+
+//Large plushies.
+/obj/structure/plushie/tesh/taaa
+	name = "Silly Teshari Plush"
+	desc = "A large plush of some huge, colorful teshari."
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "taaa_plush"
+	anchored = FALSE
+	density = TRUE
+	phrase = "WHY!"
+
+/obj/structure/plushie/tesh/gold
+	name = "Gold Teshari Plush"
+	desc = "A large plush of some a colorful, golden teshari, very huggable!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "teshplush_gold"
+	anchored = FALSE
+	density = TRUE
+	phrase = "Chirp!"

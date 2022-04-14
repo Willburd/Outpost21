@@ -1,7 +1,4 @@
 //Tweaked existing vendors
-/obj/machinery/vending/hydroseeds/New()
-	products += list(/obj/item/seeds/shrinkshroom = 3,/obj/item/seeds/megashroom = 3)
-	..()
 
 /obj/machinery/vending/security/New()
 	products += list(/obj/item/weapon/gun/energy/taser = 8,/obj/item/weapon/gun/energy/stunrevolver = 4,

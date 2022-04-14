@@ -82,6 +82,7 @@ GLOBAL_LIST_INIT(pitcher_plant_lure_messages, list(
 		B.desc	= "You leaned a little too close to the pitcher plant, stumbling over the lip and splashing into a puddle of liquid filling the bottom of the cramped pitcher. You squirm madly, righting yourself and scrabbling at the walls in vain as the slick surface offers no purchase. The dim light grows dark as the pitcher's cap lowers, silently sealing the exit. With a sinking feeling you realize you won't be able to push the exit open even if you could somehow climb that high, leaving you helplessly trapped in the slick, tingling fluid. ((You can't escape this mob without help but you may use OOC Escape if you wish.))"
 		B.digest_burn = 0.5
 		B.digest_brute = 0
+		B.belly_fullscreen = "base"
 		B.vore_verb = "trip"
 		B.name = "pitcher"
 		B.mode_flags = DM_FLAG_THICKBELLY

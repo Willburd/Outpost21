@@ -6,7 +6,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/fauna/slug)
 	tt_desc = "S Arion hortensis"
 	icon = 'icons/mob/vore_ch.dmi'
-	icon_dead = "slug-dead"
+	icon_dead = "slug_dead"
 	icon_living = "slug"
 	icon_state = "slug"
 	faction = "slug" //A faction other than neutral is necessary to get the slug to try eating station crew.
@@ -59,12 +59,12 @@
 	var/obj/belly/B = vore_selected
 	if(istype(B))
 		B.desc	= "Stuck in the thick slime, you can't escape as the slow slug began to wrap its radula around your body and gradually draw you into its pharynx. The slug moves with agonizing slowness and devours prey at a snail's pace; inch by inch you're crammed down its gullet and squishes and squeezed into the slug's gizzard. Thick walls bear down, covered with shallow, toothy ridges. The slimy moss in here suggests you're not the slug's diet but the gizzard seems intent on churning and scraping over you regardless..."
-		B.digest_burn = 0.1
-		B.digest_brute = 0.2
+		B.digest_burn = 0.2
+		B.digest_brute = 0.3
 		B.vore_verb = "engulf"
 		B.name = "gizzard"
 		B.mode_flags = DM_FLAG_THICKBELLY
-		B.escapechance = 5
+		B.escapechance = 15
 		B.fancy_vore = 1
 		B.vore_sound = "Squish2"
 		B.release_sound = "Pred Escape"

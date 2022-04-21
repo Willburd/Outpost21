@@ -1,13 +1,22 @@
 /obj/vehicle/has_interior/controller
-	name = "cargo train tug"
-	dir = 4
+	/*=================================================================
+	Explaination:
+		This is the core of the vehicle's code. It handles multi-tile movement,
+		running things over, etc. Players that click the vehicle can enter it
+		from whatever tile is specific as the entrance tile. They will be teleported
+		to the 'interior_area_mapset' specified, at the 'vehicle_interior/entrypos' landmark
+		in that area.
 
-	move_delay = 1
+		This 'interior_area_mapset' also scans for certain seats and consoles defined
+		in this file. Each child object of this controller can have different
+		seat and console requirements, such as driver, gunner, maingun, loader, etc.
+		For example, an APC wouldn't have a maingun, but instead multiple gunners.
+		Placing a main gun inside it would not work, as the child object itself does
+		not have a main gun defined on the exterior of the vehicle. The vehicle itself
+		also requires every seat and console for each gunner present.
+	=================================================================*/
 
-	health = 100
-	maxhealth = 100
-	fire_dam_coeff = 0.7
-	brute_dam_coeff = 0.5
+	name = "interior capable vehicle controller"
 
 	desc = "If you can read this, something is wrong."
 	icon = 'icons/obj/vehicles_vr.dmi'	//VOREStation Edit
@@ -20,16 +29,56 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	mob_offset_y = 7
-	var/active_engines = 0
+
+	// area needed for each unique vehicle interior! 
+	// Cannot share map locations either.
+	// DO NOT SET IN CHILD OBJECTS, this is for MAPPERS to set!
+	var/interior_area = null
+	
+	// set AUTOMAGICALLY by init! DO NOT SET
+	var/area/intarea = null
+	var/camera_network = "armored vehicles"
+	var/turf/entrypos = null // where to place atoms that enter the interior
+	var/turf/exitpos = null // where to place atoms that enter the interior
+	
+	var/driver_seat = null // should only be one
+	var/gunner_seats = list() // dakkas
+	var/maingun_seats = list() // guns that are fed by...
+	var/feed_machine = null // ammo is put into this and used up by mainguns
 
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/Initialize()
+	// set exit pos
+	exitpos = src.loc
+
+	// find interior entrypos
+	for(var/area/A)
+		if(istype( A, interior_area))
+			intarea = A // become reference...
+			for(var/turf/T in intarea.get_contents())
+				if(istype(T))
+					// scan for interior drop location
+					if(istype( locate(/obj/effect/landmark/vehicle_interior/entrypos) in T.contents, /obj/effect/landmark/vehicle_interior/entrypos))
+						entrypos = T
+					// scan for exit triggers
+					for(var/obj/effect/step_trigger/vehicle_interior/exit_trigger/R in T.contents)
+						R.interior_controller = src // set controller so we can leave this vehicle!
+
+
+	if(!istype(intarea))
+		log_debug("Interior vehicle [name] was missing a defined area! Could not init...")
+	else
+		// load all interior parts as components of vehicle!
+		log_debug("Interior vehicle [name] setting up...")
+
 	. = ..()
 
 /obj/vehicle/has_interior/controller/Move()
 	. = ..()
+	// update location
+	exitpos = src.loc
 
 /obj/vehicle/has_interior/controller/Bump(atom/Obstacle)
 	if(!istype(Obstacle, /atom/movable))
@@ -63,7 +112,7 @@
 
 //trains are commonly open topped, so there is a chance the projectile will hit the mob riding the train instead
 /obj/vehicle/has_interior/controller/bullet_act(var/obj/item/projectile/Proj)
-	..()
+	. = ..()
 
 /obj/vehicle/has_interior/controller/update_icon()
 	. = ..()
@@ -72,8 +121,7 @@
 // Vehicle procs
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/explode()
-	..()
-
+	. = ..()
 
 //-------------------------------------------
 // Interaction procs
@@ -81,7 +129,6 @@
 /obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
 	if(user != load)
 		return 0
-
 	if(Move(get_step(src, direction)))
 		return 1
 	return 0
@@ -89,14 +136,17 @@
 /obj/vehicle/has_interior/controller/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
 		return
+	enter_interior(user)
+	/*
 	if(!load(C, user))
 		to_chat(user, "<font color='red'>You were unable to load [C] on [src].</font>")
-
+	*/
 
 /obj/vehicle/has_interior/controller/attack_hand(mob/user as mob)
 	if(user.stat || user.restrained() || !Adjacent(user))
 		return 0
-
+	enter_interior(user)
+	/*
 	if(user != load && (user in src))
 		user.forceMove(loc)			//for handling players stuck in src
 	else if(load)
@@ -105,9 +155,37 @@
 		load(user, user)				//else try climbing on board
 	else
 		return 0
+	*/
+
+/obj/vehicle/has_interior/controller/proc/enter_interior(var/atom/movable/C)
+	// moves atom to interior access point of tank
+	if(istype(entrypos,/turf/))
+		C.forceMove(entrypos)
+	else
+		C.visible_message("<span class='notice'>Interior inaccessible...</span>")
+
+/obj/vehicle/has_interior/controller/proc/exit_interior(var/atom/movable/C)
+	// moves atom to interior access point of tank
+	if(istype(exitpos,/turf/))
+		C.forceMove(exitpos)
+	else
+		C.visible_message("<span class='notice'>Exterior inaccessible...</span>")
 
 /obj/vehicle/has_interior/controller/load(var/atom/movable/C, var/mob/user)
 	if(!istype(C, /mob/living/carbon/human))
 		return 0
 
 	return ..()
+
+
+// interior area objects
+/obj/effect/landmark/vehicle_interior/entrypos // where mobs are placed on entering the tank
+	name = "interior entrypos"
+
+/obj/effect/step_trigger/vehicle_interior/exit_trigger // exit the vehicle through any means! NEEDS TO BE INSIDE THE VEHICLES INTERIOR AREA!
+	name = "vehicle exit"
+	affect_ghosts = TRUE // bad ectoplasms
+	var/obj/vehicle/has_interior/controller/interior_controller = null
+
+/obj/effect/step_trigger/vehicle_interior/exit_trigger/Trigger(var/atom/movable/A)
+	interior_controller.exit_interior(A)

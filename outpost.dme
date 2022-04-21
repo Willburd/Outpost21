@@ -3979,6 +3979,8 @@
 #include "code\modules\vehicles\train.dm"
 #include "code\modules\vehicles\vehicle.dm"
 #include "code\modules\vehicles\has_interior\controller.dm"
+#include "code\modules\vehicles\has_interior\heavyarmor_carrier.dm"
+#include "code\modules\vehicles\has_interior\heavyarmor_tank.dm"
 #include "code\modules\ventcrawl\ventcrawl.dm"
 #include "code\modules\ventcrawl\ventcrawl_atmospherics.dm"
 #include "code\modules\ventcrawl\ventcrawl_multiz.dm"

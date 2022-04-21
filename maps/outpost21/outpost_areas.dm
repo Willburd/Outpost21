@@ -1260,3 +1260,21 @@
 /area/shuttle/skipjack
 	name = "\improper Vox Vessel"
 	flags = AREA_FLAG_IS_NOT_PERSISTENT
+
+//
+// Vehicle interiors ---------------------------------------------------------------------
+//
+/area/vehicle_interior/heavyarmor_carrier_A
+	name = "\improper Carrier A"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+
+/*
+// just an example of how to add a new carrier/tank
+/area/vehicle_interior/heavyarmor_carrier_B
+	name = "\improper Carrier A"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+*/
+
+/area/vehicle_interior/heavyarmor_tank_A
+	name = "\improper Tank A"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT

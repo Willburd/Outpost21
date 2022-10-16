@@ -209,7 +209,7 @@
 	update_icon()
 
 	var/slab_name = occupant.name
-	var/slab_count = 2 + occupant.meat_amount
+	var/slab_count = occupant.meat_amount
 	var/slab_type = occupant.meat_type ? occupant.meat_type : /obj/item/weapon/reagent_containers/food/snacks/meat
 	var/slab_nutrition = src.occupant.nutrition / 15
 
@@ -235,7 +235,7 @@
 			new_meat.name = "[slab_name] [new_meat.name]"
 			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/original_slab_count,1))
+				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/(2 + occupant.meat_amount),1))
 
 	add_attack_logs(user,occupant,"Used [src] to gib")
 

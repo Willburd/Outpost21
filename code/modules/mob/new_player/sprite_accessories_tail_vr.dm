@@ -9,7 +9,7 @@
 	name = "You should not see this..."
 	icon = 'icons/mob/vore/tails_vr.dmi'
 	do_colouration = 0 //Set to 1 to enable coloration using the tail color.
-	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC/*, SPECIES_ZORREN_HIGH*/, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID/*, SPECIES_VASILISSAN*//*, SPECIES_RAPALA*//*, SPECIES_PROTEAN*//*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW) //This lets all races use
+	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN/*, SPECIES_AKULA*/, SPECIES_SERGAL, SPECIES_FENNEC/*, SPECIES_ZORREN_HIGH*/, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID/*, SPECIES_VASILISSAN*//*, SPECIES_RAPALA*//*, SPECIES_PROTEAN*//*, SPECIES_ALRAUNE*//*, SPECIES_WEREBEAST*/, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_ALTEVIAN) //This lets all races use
 
 /datum/sprite_accessory/tail/New()
 	. = ..()
@@ -210,13 +210,6 @@
 	name = "bee thorax"
 	desc = ""
 	icon_state = "beethorax"
-
-/datum/sprite_accessory/tail/doublekitsune
-	name = "double kitsune tail, colorable"
-	desc = ""
-	icon_state = "doublekitsune"
-	do_colouration = 1
-	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/tail/spade_color
 	name = "spade-tail (colorable)"
@@ -970,6 +963,52 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
+/datum/sprite_accessory/tail/fennec_tail
+	name = "Fennec tail"
+	desc = ""
+	icon_state = "fennec_tail_s"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/tail/fox_tail
+	name = "Fox tail, colorable"
+	desc = ""
+	icon_state = "fox_tail_s"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/tail/fox_tail_plain
+	name = "Fox tail, colorable, plain"
+	desc = ""
+	icon_state = "fox_tail_plain_s"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/tail/foxtail
+	name = "Fox tail, colourable (vwag)"
+	desc = ""
+	icon_state = "foxtail"
+	extra_overlay = "foxtail-tips"
+	do_colouration = TRUE
+	color_blend_mode = ICON_MULTIPLY
+	ani_state = "foxtail_w"
+	extra_overlay_w = "foxtail-tips_w"
+
+/datum/sprite_accessory/tail/doublekitsune
+	name = "Kitsune 2 tails, colorable"
+	desc = ""
+	icon_state = "doublekitsune"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/tail/doublekitsunealt
+	name = "Kitsune 2 tails, colorable, alt"
+	desc = ""
+	icon_state = "doublekitsunealt"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "doublekitsunealt-tips"
+
 /datum/sprite_accessory/tail/triplekitsune_colorable
 	name = "Kitsune 3 tails, colorable"
 	desc = ""
@@ -978,6 +1017,14 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "triplekitsune_tips"
 
+/datum/sprite_accessory/tail/sevenkitsune_colorable
+	name = "Kitsune 7 tails, colorable"
+	desc = ""
+	icon_state = "sevenkitsune"
+	extra_overlay = "sevenkitsune-tips"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
 /datum/sprite_accessory/tail/ninekitsune_colorable
 	name = "Kitsune 9 tails, colorable"
 	desc = ""
@@ -985,6 +1032,16 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "ninekitsune-tips"
+
+/datum/sprite_accessory/tail/hideableninetails
+    name = "Kitsune 9-in-1 tail, colourable (vwag)"
+    desc = ""
+    icon_state = "ninekitsune"
+    extra_overlay = "ninekitsune-tips"
+    do_colouration = TRUE
+    color_blend_mode = ICON_MULTIPLY
+    ani_state = "foxtail_w"
+    extra_overlay_w = "foxtail-tips_w"
 
 /datum/sprite_accessory/tail/shadekin_short
 	name = "Shadekin Short Tail, colorable"
@@ -1064,27 +1121,6 @@
 	ani_state = "Segmentedtail_w"
 	extra_overlay_w = "Segmentedlights_w"
 
-/datum/sprite_accessory/tail/fox_tail
-	name = "Fox tail"
-	desc = ""
-	icon_state = "fox_tail_s"
-	do_colouration = 1
-	color_blend_mode = ICON_MULTIPLY
-
-/datum/sprite_accessory/tail/fox_tail_plain
-	name = "Fox tail"
-	desc = ""
-	icon_state = "fox_tail_plain_s"
-	do_colouration = 1
-	color_blend_mode = ICON_MULTIPLY
-
-/datum/sprite_accessory/tail/fennec_tail
-	name = "Fennec tail"
-	desc = ""
-	icon_state = "fennec_tail_s"
-	do_colouration = 1
-	color_blend_mode = ICON_MULTIPLY
-
 /datum/sprite_accessory/tail/lizard_tail_smooth
 	name = "Lizard Tail (Smooth)"
 	desc = ""
@@ -1144,6 +1180,21 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	ckeys_allowed = list("prettiebyrd")
+
+/datum/sprite_accessory/tail/altevian
+	name = "Altevian Tail"
+	icon = 'icons/mob/vore/tails_vr.dmi'
+	icon_state = "altevian"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	lower_layer_dirs = list(SOUTH, WEST)
+
+/datum/sprite_accessory/tail/shark_finless
+	name = "shark tail, finless (colorable)"
+	desc = ""
+	icon_state = "sharktail_finless"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/tail/tentacle
 	name = "Tentacle, colorable (vwag)"

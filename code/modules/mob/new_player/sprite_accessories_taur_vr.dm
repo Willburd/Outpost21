@@ -69,6 +69,15 @@
 	extra_overlay2 = "wolf_markings_2"
 	//icon_sprite_tag = "wolf2c"
 
+/datum/sprite_accessory/tail/taur/wolf/wolf_2c_wag
+	name = "Wolf 3-color (Taur, vwag)"
+	icon_state = "wolf_s"
+	extra_overlay = "wolf_markings"
+	extra_overlay2 = "wolf_markings_2"
+	ani_state = "fatwolf_s"
+	extra_overlay_w = "fatwolf_markings"
+	extra_overlay2_w = "wolf_markings_2"
+
 /datum/sprite_accessory/tail/taur/wolf/fatwolf_2c
 	name = "Fat Wolf 3-color (Taur)"
 	icon_state = "fatwolf_s"
@@ -134,6 +143,13 @@
 	icon_state = "naga_s"
 	extra_overlay = "naga_markings"
 	//icon_sprite_tag = "naga2c"
+
+/datum/sprite_accessory/tail/taur/naga/alt_2c
+	name = "Naga alt style dual-color (Taur)"
+	suit_sprites = 'icons/mob/taursuits_naga_alt_vr.dmi'
+	icon_state = "altnaga_s"
+	extra_overlay = "altnaga_markings"
+	//icon_sprite_tag = "altnaga2c"
 
 /datum/sprite_accessory/tail/taur/horse
 	name = "Horse (Taur)"
@@ -403,6 +419,14 @@
 	extra_overlay = "drake_markings"
 	suit_sprites = 'icons/mob/taursuits_drake_vr.dmi'
 	icon_sprite_tag = "drake"
+	can_loaf = TRUE // VOREStation Edit: Taur Loafing
+	loaf_offset = 6 // VOREStation Edit: Taur Loafing
+
+/datum/sprite_accessory/tail/taur/ch/fatdrake
+	name = "Drake (Fat Taur dual-color)"
+	icon_state = "fatdrake_s"
+	extra_overlay = "fatdrake_markings"
+	icon_sprite_tag = "drake"
 
 /datum/sprite_accessory/tail/taur/otie
 	name = "Otie (Taur)"
@@ -581,3 +605,19 @@
 	msg_owner_grab_fail = "You step down onto %prey with one of your vines, forcing them onto the ground!"
 	msg_prey_grab_fail = "%owner steps down onto you with one of their vines, squishing you and forcing you onto the ground!"
 */
+
+/datum/sprite_accessory/tail/taur/rat
+	name = "Rat (dual color)"
+	icon_state = "rat_s"
+	extra_overlay = "rat_markings"
+	clip_mask_state = "taur_clip_mask_rat"
+	icon_sprite_tag = "rat"
+
+/datum/sprite_accessory/tail/taur/noodle
+	name = "Eastern Dragon (Taur)"
+	icon_state = "noodle_s"
+	extra_overlay = "noodle_markings"
+	extra_overlay2 = "noodle_markings_2"
+	suit_sprites = 'icons/mob/taursuits_noodle_vr.dmi'
+	clip_mask_state = "taur_clip_mask_noodle"
+	icon_sprite_tag = "noodle"

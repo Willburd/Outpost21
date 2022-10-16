@@ -7,6 +7,8 @@ var/list/admin_verbs_default = list(
 	/client/proc/cmd_admin_say,			//VOREStation Add,
 	/client/proc/cmd_mod_say,			//VOREStation Add,
 	/client/proc/cmd_event_say,			//VOREStation Add,
+	/client/proc/cmd_mentor_ticket_panel,
+	/client/proc/cmd_mentor_say
 //	/client/proc/hide_verbs,			//hides all our adminverbs, //VOREStation Remove,
 //	/client/proc/hide_most_verbs,		//hides all our hideable adminverbs, //VOREStation Remove,
 //	/client/proc/debug_variables,		//allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify, //VOREStation Remove,
@@ -122,6 +124,8 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/sendFax,
 	/client/proc/despawn_player,
 	/datum/admins/proc/view_feedback,
+	/client/proc/make_mentor,
+	/client/proc/unmake_mentor,
 	/client/proc/setckey, //YW add - readds SetCkey proc
 	/client/proc/dbcon_fix //YW add - adds Fix Database Connection proc
 	)
@@ -134,7 +138,8 @@ var/list/admin_verbs_ban = list(
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
-	/client/proc/play_server_sound
+	/client/proc/play_server_sound,
+	/client/proc/play_z_sound
 	)
 
 var/list/admin_verbs_fun = list(
@@ -158,7 +163,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/smite_vr, //VOREStation Add,
 	/client/proc/admin_lightning_strike,
 	/client/proc/resize, //VOREStation Add,
-	/client/proc/cmd_admin_droppod_deploy
+	/client/proc/cmd_admin_droppod_deploy,
+	/client/proc/adminorbit //VOREStation Add,
 	)
 
 var/list/admin_verbs_spawn = list(

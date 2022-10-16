@@ -40,6 +40,7 @@
 	var/ricochets = 0
 	var/ricochets_max = 2
 	var/ricochet_chance = 30
+	var/can_miss = TRUE
 
 	//Hitscan
 	var/hitscan = FALSE		//Whether this is hitscan. If it is, speed is basically ignored.
@@ -83,10 +84,10 @@
 
 	//Misc/Polaris variables
 
-	var/def_zone = ""	//Aiming at
-	var/mob/firer = null//Who shot it
-	var/silenced = 0	//Attack message
-	var/shot_from = "" // name of the object which shot us
+	var/def_zone = ""	 //Aiming at
+	var/mob/firer = null //Who shot it
+	var/silenced = FALSE //Attack message
+	var/shot_from = ""   // name of the object which shot us
 
 	var/accuracy = 0
 	var/dispersion = 0.0
@@ -139,6 +140,10 @@
 	var/impact_effect_type = null
 
 	var/list/impacted_mobs = list()
+
+	// TGMC Ammo HUD Port
+	var/hud_state = "unknown" // What HUD state we use when we have ammunition.
+	var/hud_state_empty = "unknown" // The empty state. DON'T USE _FLASH IN THE NAME OF THE EMPTY STATE STRING, THAT IS ADDED BY THE CODE.
 
 /obj/item/projectile/proc/Range()
 	range--
@@ -651,7 +656,7 @@
 
 	//roll to-hit
 	miss_modifier = max(15*(distance-2) - accuracy + miss_modifier + target_mob.get_evasion(), -100)
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob), force_hit = !can_miss) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS
 	if(hit_zone)
@@ -748,7 +753,7 @@
 /obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
 
 	shot_from = launcher.name
-	silenced = launcher.silenced
+	silenced |= launcher.silenced // Silent bullets (e.g., BBs) are always silent
 	if(user)
 		firer = user
 

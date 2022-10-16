@@ -28,7 +28,8 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 
 	var/durability = 100					// Durability remaining
 	var/bioadap = FALSE						// If it'll work in fancy species
-	var/savetofile = TRUE					/*Start True so that Transcore saves any NIF that's newly installed with the correct scans or implant.
+	var/gib_nodrop = FALSE					// NIF self-destructs when owner is gibbed
+	var/savetofile = TRUE					/*YW EDIT: Start True so that Transcore saves any NIF that's newly installed with the correct scans or implant.
 											DO NOT CHANGE durability WITHOUT SETTING THIS TO TRUE. */
 
 	var/tmp/power_usage = 0						// Nifsoft adds to this
@@ -100,7 +101,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 	//If given wear (like when spawned) then done
 	if(wear)
 		durability = wear
-		savetofile = TRUE
+		savetofile = TRUE // YW EDIT
 		wear(0) //Just make it update.
 
 	//Draw me yo.
@@ -170,9 +171,10 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 		SC.brainmobs = list()
 	stat = NIF_PREINSTALL
 	vis_update()
-	H.verbs -= /mob/living/carbon/human/proc/set_nif_examine
+	if(H)
+		H.verbs -= /mob/living/carbon/human/proc/set_nif_examine
+		H.nif = null
 	qdel_null(menu)
-	H.nif = null
 	human = null
 	install_done = null
 	update_icon()
@@ -199,7 +201,10 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 /obj/item/device/nif/proc/wear(var/wear = 0)
 	wear *= (rand(85,115) / 100) //Apparently rand() only takes integers.
 	durability -= wear
-	savetofile = TRUE
+	savetofile = TRUE // YW EDIT
+
+	if(human)
+		persist_nif_data(human)
 
 	if(durability <= 0)
 		stat = NIF_TEMPFAIL
@@ -208,6 +213,13 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 		if(human)
 			notify("Danger! General system insta#^!($",TRUE)
 			to_chat(human,"<span class='danger'>Your NIF vision overlays disappear and your head suddenly seems very quiet...</span>")
+
+//Repair update/check proc
+/obj/item/device/nif/proc/repair(var/repair = 0)
+	durability = min(durability + repair, initial(durability))
+
+	if(human)
+		persist_nif_data(human)
 
 //Attackby proc, for maintenance
 /obj/item/device/nif/attackby(obj/item/weapon/W, mob/user as mob)
@@ -238,7 +250,8 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 			playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			open = FALSE
 			durability = initial(durability)
-			savetofile = TRUE
+			repair(initial(durability))
+			savetofile = TRUE // YW EDIT
 			stat = NIF_PREINSTALL
 			update_icon()
 
@@ -263,7 +276,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 /obj/item/device/nif/proc/handle_install()
 	if(human.stat || !human.mind) //No stuff while KO or not sleeved
 		return FALSE
-
+	persist_storable = FALSE		//VOREStation edit - I am not sure if polaris has nifs, but just in case.
 	//Firsties
 	if(!install_done)
 		if(human.mind.name == owner)
@@ -370,7 +383,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 
 	last_notification = message // TGUI Hook
 
-	to_chat(human,"<b>\[[bicon(src.big_icon)]NIF\]</b> displays, \"<span class='[alert ? "danger" : "notice"]'>[message]</span>\"")
+	to_chat(human,"<b>\[\icon[src.big_icon][bicon(src.big_icon)]NIF\]</b> displays, \"<span class='[alert ? "danger" : "notice"]'>[message]</span>\"")
 	if(prob(1)) human.visible_message("<span class='notice'>\The [human] [pick(look_messages)].</span>")
 	if(alert)
 		human << bad_sound
@@ -623,6 +636,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 	desc = "A NIF that is part of a protean's body structure. Where did you get that anyway?"
 	durability = 25
 	bioadap = TRUE
+	gib_nodrop = TRUE
 
 ////////////////////////////////
 // Special Promethean """surgery"""
@@ -663,7 +677,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 		to_chat(src,"<span class='warning'>You don't have a NIF, not sure why this was here.</span>")
 		return
 
-	var/new_flavor = sanitize(input(src,"Describe how your NIF alters your appearance, like glowy eyes or metal plate on your head, etc. Be sensible. Clear this for no examine text. 128ch max.","Describe NIF", nif.examine_msg) as null|text, max_length = 128)
+	var/new_flavor = sanitize(tgui_input_text(src,"Describe how your NIF alters your appearance, like glowy eyes or metal plate on your head, etc. Be sensible. Clear this for no examine text. 128ch max.","Describe NIF", nif.examine_msg, 128), max_length = 128)
 	//They clicked cancel or meanwhile lost their NIF
 	if(!nif || isnull(new_flavor))
 		return //No changes

@@ -25,6 +25,7 @@
 //#define SPECIES_PROTEAN			"Protean" outpost 21 - race removal
 //#define SPECIES_RAPALA			"Rapala" outpost 21 - race removal
 #define SPECIES_SERGAL			"Sergal"
+#define SPECIES_ALTEVIAN		"Altevian"
 #define SPECIES_SHADEKIN_CREW	"Black-Eyed Shadekin"
 // #define SPECIES_VASILISSAN		"Vasilissan" outpost 21 - race removal
 #define SPECIES_VULPKANIN		"Vulpkanin"

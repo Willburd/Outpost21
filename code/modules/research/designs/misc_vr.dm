@@ -12,7 +12,7 @@
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 3, TECH_POWER = 6)
 	materials = list(MAT_PLASTEEL = 4000, MAT_GLASS = 4000)
 	build_path = /obj/item/clothing/under/hyperfiber/bluespace
-	sort_string = "TAVAA"
+	sort_string = "TAVAB"
 
 /* outpost 21 removal
 /datum/design/item/general/sizegun
@@ -23,6 +23,14 @@
 	build_path = /obj/item/weapon/gun/energy/sizegun
 	sort_string = "TAVBA"
 */
+
+/datum/design/item/general/sizegun_gradual
+	name = "Gradual size gun"
+	id = "gradsizegun"
+	req_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 3, TECH_POWER = 2)
+	materials = list(MAT_STEEL = 3000, MAT_GLASS = 2000)
+	build_path = /obj/item/device/slow_sizegun
+	sort_string = "TAVBB"
 
 /datum/design/item/general/bodysnatcher
 	name = "Body Snatcher"

@@ -52,6 +52,7 @@
 	robot_modules["BoozeHound"] = /obj/item/weapon/robot_module/robot/booze
 	robot_modules["KMine"] = /obj/item/weapon/robot_module/robot/kmine
 	robot_modules["Stray"] = /obj/item/weapon/robot_module/robot/stray
+	robot_modules["TraumaHound"] = /obj/item/weapon/robot_module/robot/medical/trauma
 	return 1
 
 //Just add a new proc with the robot_module type if you wish to run some other vore code
@@ -75,7 +76,8 @@
 	vr_sprites = list(
 						"Acheron" = "mechoid-Medical",
 						"Shellguard Noble" = "Noble-MED",
-						"ZOOM-BA" = "zoomba-medical"
+						"ZOOM-BA" = "zoomba-medical",
+						"Feminine Humanoid" = "uptall-medical"
 					 )
 
 /obj/item/weapon/robot_module/robot/medical/crisis
@@ -84,7 +86,8 @@
 						"Handy" = "handy-med",
 						"Acheron" = "mechoid-Medical",
 						"Shellguard Noble" = "Noble-MED",
-						"ZOOM-BA" = "zoomba-crisis"
+						"ZOOM-BA" = "zoomba-crisis",
+						"Feminine Humanoid" = "uptall-crisis"
 					 )
 
 /obj/item/weapon/robot_module/robot/clerical/butler
@@ -94,7 +97,8 @@
 						"Handy - Hydro" = "handy-hydro",
 						"Acheron" = "mechoid-Service",
 						"Shellguard Noble" = "Noble-SRV",
-						"ZOOM-BA" = "zoomba-service"
+						"ZOOM-BA" = "zoomba-service",
+						"Feminine Humanoid" = "uptall-service"
 					 )
 
 /obj/item/weapon/robot_module/robot/clerical/general
@@ -103,7 +107,8 @@
 						"Handy" = "handy-clerk",
 						"Acheron" = "mechoid-Service",
 						"Shellguard Noble" = "Noble-SRV",
-						"ZOOM-BA" = "zoomba-clerical"
+						"ZOOM-BA" = "zoomba-clerical",
+						"Feminine Humanoid" = "uptall-service"
 					 )
 
 /obj/item/weapon/robot_module/robot/janitor
@@ -112,7 +117,8 @@
 						"Handy" = "handy-janitor",
 						"Acheron" = "mechoid-Janitor",
 						"Shellguard Noble" = "Noble-CLN",
-						"ZOOM-BA" = "zoomba-janitor"
+						"ZOOM-BA" = "zoomba-janitor",
+						"Feminine Humanoid" = "uptall-janitor"
 					 )
 
 /obj/item/weapon/robot_module/robot/security/general
@@ -121,7 +127,8 @@
 						"Handy" = "handy-sec",
 						"Acheron" = "mechoid-Security",
 						"Shellguard Noble" = "Noble-SEC",
-						"ZOOM-BA" = "zoomba-security"
+						"ZOOM-BA" = "zoomba-security",
+						"Feminine Humanoid" = "uptall-security"
 					 )
 
 /obj/item/weapon/robot_module/robot/miner
@@ -130,7 +137,8 @@
 						"Handy" = "handy-miner",
 						"Acheron" = "mechoid-Miner",
 						"Shellguard Noble" = "Noble-DIG",
-						"ZOOM-BA" = "zoomba-miner"
+						"ZOOM-BA" = "zoomba-miner",
+						"Feminine Humanoid" = "uptall-miner"
 					 )
 
 /obj/item/weapon/robot_module/robot/standard
@@ -139,14 +147,17 @@
 						"Handy" = "handy-standard",
 						"Acheron" = "mechoid-Standard",
 						"Shellguard Noble" = "Noble-STD",
-						"ZOOM-BA" = "zoomba-standard"
+						"ZOOM-BA" = "zoomba-standard",
+						"Feminine Humanoid" = "uptall-standard",
+						"Feminine Humanoid, Variant 2" = "uptall-standard2"
 					 )
 /obj/item/weapon/robot_module/robot/engineering/general
 	pto_type = PTO_ENGINEERING
 	vr_sprites = list(
 						"Acheron" = "mechoid-Engineering",
 						"Shellguard Noble" = "Noble-ENG",
-						"ZOOM-BA" = "zoomba-engineering"
+						"ZOOM-BA" = "zoomba-engineering",
+						"Feminine Humanoid" = "uptall-engineering"
 					 )
 
 /obj/item/weapon/robot_module/robot/research
@@ -154,14 +165,16 @@
 	vr_sprites = list(
 						"Acheron" = "mechoid-Science",
 						"ZOOM-BA" = "zoomba-research",
-						"XI-GUS" = "spiderscience"
+						"XI-GUS" = "spiderscience",
+						"Feminine Humanoid" = "uptall-science"
 					 )
 
 /obj/item/weapon/robot_module/robot/security/combat
 	pto_type = PTO_SECURITY
 	vr_sprites = list(
 						"Acheron" = "mechoid-Combat",
-						"ZOOM-BA" = "zoomba-combat"
+						"ZOOM-BA" = "zoomba-combat",
+						"Feminine Humanoid" = "uptall-security"
 					 )
 
 /obj/item/weapon/robot_module/robot/knine
@@ -178,6 +191,7 @@
 	networks = list(NETWORK_SECURITY)
 	pto_type = PTO_SECURITY
 	can_be_pushed = 0
+	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
 /obj/item/weapon/robot_module/robot/knine/New(var/mob/living/silicon/robot/R)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src) //You need cuffs to be a proper sec borg!
@@ -261,19 +275,27 @@
 	src.modules += new /obj/item/device/healthanalyzer(src) // See who's hurt specificially.
 	src.modules += new /obj/item/borg/sight/hud/med(src) //See who's hurt generally.
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src) //In case the chemist is nice!
-	src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)//For holding the chemicals when the chemist is nice
+	src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)//For holding the chemicals when the chemist is nice, made it the large variant in 2022
 	src.modules += new /obj/item/device/sleevemate(src) //Lets them scan people.
 	src.modules += new /obj/item/weapon/shockpaddles/robot/hound(src) //Paws of life
+	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src) //This is kinda important for rescuing people without making it worse for everyone
+	src.modules += new /obj/item/weapon/gripper/medical(src) //Let them do literally anything in medbay other than patch external damage and lick people
+	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src) //dropper is nice to have for so much actually
 	src.emag 	 = new /obj/item/weapon/dogborg/pounce(src) //Pounce
 
-	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(2000)
+	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
 	synths += medicine
 
 	var/obj/item/stack/medical/advanced/clotting/C = new (src)
+	var/obj/item/stack/medical/splint/S = new /obj/item/stack/medical/splint(src)
 	C.uses_charge = 1
-	C.charge_costs = list(1000)
+	C.charge_costs = list(5000)
 	C.synths = list(medicine)
+	S.uses_charge = 1
+	S.charge_costs = list(1000)
+	S.synths = list(medicine)
 	src.modules += C
+	src.modules += S
 
 	var/datum/matter_synth/water = new /datum/matter_synth(500)
 	water.name = "Water reserves"
@@ -295,6 +317,93 @@
 
 	R.icon = 'icons/mob/widerobot_med_vr.dmi'
 	R.wideborg_dept = 'icons/mob/widerobot_med_vr.dmi'
+	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
+	R.ui_style_vr = TRUE
+	R.pixel_x 	 = -16
+	R.old_x  	 = -16
+	R.default_pixel_x = -16
+	R.dogborg = TRUE
+	R.wideborg = TRUE
+	R.verbs |= /mob/living/silicon/robot/proc/ex_reserve_refill
+	R.verbs |= /mob/living/silicon/robot/proc/robot_mount
+	R.verbs |= /mob/living/proc/toggle_rider_reins
+	R.verbs |= /mob/living/proc/shred_limb
+	R.verbs |= /mob/living/silicon/robot/proc/rest_style
+	..()
+
+/obj/item/weapon/robot_module/robot/medical/trauma
+	name = "traumahound robot module"
+	channels = list("Medical" = 1)
+	networks = list(NETWORK_MEDICAL)
+	subsystems = list(/mob/living/silicon/proc/subsystem_crew_monitor)
+	pto_type = PTO_MEDICAL
+	can_be_pushed = 0
+	sprites = list(
+					"Traumahound" = "traumavale",
+					"Drake" = "draketrauma"
+					)
+
+/obj/item/weapon/robot_module/robot/medical/trauma/New(var/mob/living/silicon/robot/R)
+	src.modules += new /obj/item/device/healthanalyzer(src)
+	src.modules += new /obj/item/weapon/dogborg/jaws/small(src)
+	src.modules += new /obj/item/device/dogborg/boop_module(src)
+	src.modules += new /obj/item/weapon/autopsy_scanner(src)
+	src.modules += new /obj/item/weapon/surgical/scalpel/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/hemostat/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/retractor/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/cautery/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/bonegel/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/FixOVein/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/bonesetter/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/circular_saw/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/surgicaldrill/cyborg(src)
+	src.modules += new /obj/item/weapon/surgical/bioregen/cyborg(src) //let them succ
+	src.modules += new /obj/item/weapon/gripper/no_use/organ(src)
+	src.modules += new /obj/item/weapon/gripper/medical(src)
+	src.modules += new /obj/item/weapon/shockpaddles/robot/hound(src) //Paws of life
+	src.modules += new /obj/item/weapon/reagent_containers/dropper(src) // Allows surgeon borg to fix necrosis
+	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
+	src.emag 	= new /obj/item/weapon/dogborg/pounce(src) //Pounce, also, lets not give them polyacid spray
+
+	var/datum/matter_synth/water = new /datum/matter_synth(500)
+	water.name = "Water reserves"
+	water.recharge_rate = 0
+	R.water_res = water
+	synths += water
+
+	var/obj/item/device/dogborg/tongue/T = new /obj/item/device/dogborg/tongue(src)
+	T.water = water
+	src.modules += T
+
+	var/obj/item/weapon/reagent_containers/borghypo/hound/trauma/H = new /obj/item/weapon/reagent_containers/borghypo/hound/trauma(src) //surgeon chems
+	H.water = water
+	src.modules += H
+
+	var/obj/item/device/dogborg/sleeper/compactor/trauma/B = new /obj/item/device/dogborg/sleeper/compactor/trauma(src) //So they can nom people and heal them
+	B.water = water
+	src.modules += B
+
+	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000) //this is so they can do brute/burn surgeries and fix assisted/prosthetic organs
+	synths += medicine
+
+	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
+	var/obj/item/stack/medical/advanced/bruise_pack/S = new /obj/item/stack/medical/advanced/bruise_pack(src)
+	var/obj/item/stack/medical/advanced/ointment/O = new /obj/item/stack/medical/advanced/ointment(src)
+	N.uses_charge = 1
+	N.charge_costs = list(1000)
+	N.synths = list(medicine)
+	S.uses_charge = 1
+	S.charge_costs = list(1000)
+	S.synths = list(medicine)
+	O.uses_charge = 1
+	O.charge_costs = list(1000)
+	O.synths = list(medicine)
+	src.modules += N
+	src.modules += S
+	src.modules += O
+
+	R.icon = 'icons/mob/widerobot_trauma_vr.dmi'
+	R.wideborg_dept = 'icons/mob/widerobot_trauma_vr.dmi'
 	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
 	R.ui_style_vr = TRUE
 	R.pixel_x 	 = -16
@@ -460,6 +569,7 @@
 	channels = list("Science" = 1)
 	pto_type = PTO_SCIENCE
 	can_be_pushed = 0
+	supported_upgrades = list(/obj/item/borg/upgrade/advrped)
 
 /obj/item/weapon/robot_module/robot/science/New(var/mob/living/silicon/robot/R)
 	src.modules += new /obj/item/weapon/dogborg/jaws/small(src)
@@ -475,8 +585,18 @@
 	src.modules += new /obj/item/weapon/storage/part_replacer(src)
 	src.modules += new /obj/item/device/robotanalyzer(src)
 	src.modules += new /obj/item/weapon/card/robot(src)
+	//Added a circuit gripper
+	src.modules += new /obj/item/weapon/gripper/circuit(src)
 	src.modules += new /obj/item/weapon/gripper/no_use/organ/robotics(src)
+	//src.modules += new /obj/item/weapon/surgical/scalpel/cyborg(src) //these are on the normal one, but do not appear to have a purpose other than borging
+	//src.modules += new /obj/item/weapon/surgical/circular_saw/cyborg(src) //so I am leaving them here but commented out because robotics no do the borging w/o medical
+	src.modules += new /obj/item/weapon/portable_destructive_analyzer(src) //destructive analyzer option for pref respect while also being able to do job
 	src.modules += new /obj/item/weapon/gripper/no_use/mech(src)
+	src.modules += new /obj/item/weapon/shockpaddles/robot/jumper(src) //unkilling synths may be important actually
+	src.modules += new /obj/item/weapon/melee/baton/slime/robot(src) //save the xenobio from themselves
+	src.modules += new /obj/item/weapon/gun/energy/taser/xeno/robot(src) //save the xenobio from themselves from a distance
+	src.modules += new /obj/item/device/xenoarch_multi_tool(src) //go find fancy rock
+	src.modules += new /obj/item/weapon/pickaxe/excavationdrill(src) //go get fancy rock
 	src.emag = new /obj/item/weapon/hand_tele(src)
 
 	var/datum/matter_synth/water = new /datum/matter_synth(500)
@@ -558,36 +678,38 @@
 	src.modules += new /obj/item/device/dogborg/boop_module(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/gripper/circuit(src)
-	src.modules += new /obj/item/device/pipe_painter(src)
+	// The RPD does the exact same thing, this just take space.
+	//src.modules += new /obj/item/device/pipe_painter(src)
 	src.modules += new /obj/item/device/floor_painter(src)
 	src.modules += new /obj/item/weapon/rms(src)
+	src.modules += new /obj/item/weapon/pipe_dispenser(src)
 	src.emag 	 = new /obj/item/weapon/dogborg/pounce(src)
 	src.modules += new /obj/item/weapon/pipe_dispenser(src) //YW change
 
 	//Painfully slow charger regen but high capacity. Also starts with low amount.
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
 	metal.name = "Steel reserves"
-	metal.recharge_rate = 100
+	metal.recharge_rate = 500
 	metal.max_energy = 50000
 	metal.energy = 10000
 	var/datum/matter_synth/glass = new /datum/matter_synth/glass()
 	glass.name = "Glass reserves"
-	glass.recharge_rate = 100
+	glass.recharge_rate = 500
 	glass.max_energy = 50000
 	glass.energy = 10000
 	var/datum/matter_synth/wood = new /datum/matter_synth/wood()
 	wood.name = "Wood reserves"
-	wood.recharge_rate = 100
+	wood.recharge_rate = 500
 	wood.max_energy = 50000
 	wood.energy = 10000
 	var/datum/matter_synth/plastic = new /datum/matter_synth/plastic()
 	plastic.name = "Plastic reserves"
-	plastic.recharge_rate = 100
+	plastic.recharge_rate = 500
 	plastic.max_energy = 50000
 	plastic.energy = 10000
 	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
 	plasteel.name = "Plasteel reserves"// Adding plasteel synthesizer to move in-line with Engiborg.
-	plasteel.recharge_rate = 100
+	plasteel.recharge_rate = 250
 	plasteel.max_energy = 20000
 	plasteel.energy = 10000
 	var/datum/matter_synth/water = new /datum/matter_synth(500)
@@ -819,6 +941,8 @@
 	R.wideborg = TRUE
 	R.verbs |= /mob/living/silicon/robot/proc/ex_reserve_refill
 	R.verbs |= /mob/living/silicon/robot/proc/robot_mount
+	R.verbs |= /mob/living/proc/toggle_rider_reins
+	R.verbs |= /mob/living/proc/shred_limb
 	R.verbs |= /mob/living/silicon/robot/proc/rest_style
 	..()
 
@@ -833,6 +957,7 @@
 	channels = list("Supply" = 1)
 	pto_type = PTO_CARGO
 	can_be_pushed = 0
+	supported_upgrades = list(/obj/item/borg/upgrade/pka, /obj/item/borg/upgrade/diamonddrill)
 
 /obj/item/weapon/robot_module/robot/kmine/New(var/mob/living/silicon/robot/R)
 	src.modules += new /obj/item/borg/sight/material(src)
@@ -844,8 +969,12 @@
 	src.modules += new /obj/item/weapon/gripper/miner(src)
 	src.modules += new /obj/item/weapon/mining_scanner(src)
 	src.modules += new /obj/item/weapon/dogborg/jaws/small(src)
-	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
-	src.emag = new /obj/item/weapon/pickaxe/diamonddrill(src)
+	// New Emag gear for the minebots!
+	src.emag = new /obj/item/weapon/kinetic_crusher/machete/dagger(src)
+
+	// No reason for these, upgrade modules replace them.
+	//src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+	//src.emag = new /obj/item/weapon/pickaxe/diamonddrill(src)
 
 	var/datum/matter_synth/water = new /datum/matter_synth(500)
 	water.name = "Water reserves"
@@ -949,7 +1078,7 @@
 	N.add_reagent("beer2", 50)
 	src.emag.name = "Mickey Finn's Special Brew"
 	R.icon 		 = 'icons/mob/widerobot_colors_yw.dmi' //YW edit
-	R.wideborg_dept = 'icons/mob/widerobot_colors_yw.dmi'
+	R.wideborg_dept = 'icons/mob/widerobot_colors_yw.dmi' //YW edit
 	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
 	R.ui_style_vr = TRUE
 	R.pixel_x 	 = -16

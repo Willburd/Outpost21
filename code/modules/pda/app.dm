@@ -36,7 +36,7 @@
 		*/
 
 		if(L)
-			to_chat(L, "[bicon(pda)] [message]")
+			to_chat(L, "\icon[pda][bicon(pda)] [message]")
 			SStgui.update_user_uis(L, pda) // Update the receiving user's PDA UI so that they can see the new message
 
 	if(!notify_silent)

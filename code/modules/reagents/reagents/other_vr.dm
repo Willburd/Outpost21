@@ -48,7 +48,7 @@
 			var/obj/item/device/nif/nif = H.nif //L o c a l
 			if(nif.stat == NIF_TEMPFAIL)
 				nif.stat = NIF_INSTALLING
-			nif.durability = min(nif.durability + removed, initial(nif.durability))
+			nif.repair(removed)
 */
 
 /datum/reagent/firefighting_foam
@@ -117,15 +117,15 @@
 		M.heal_organ_damage(0.5 * removed, 0.5 * removed * chem_effective)
 		M.adjustToxLoss(-0.5 * removed * chem_effective)
 
-	/* outpost 21  edit - nif removal
+	// outpost 21  edit - nif removal
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.nif)
 			var/obj/item/device/nif/nif = H.nif //L o c a l
 			if(nif.stat == NIF_TEMPFAIL)
 				nif.stat = NIF_INSTALLING
-			nif.durability = min(nif.durability + removed*0.1, initial(nif.durability))
-	*/
+			nif.repair(removed*0.1)
+	
 */
 
 //Special toxins for solargrubs

@@ -36,6 +36,7 @@ List of things solar grubs should be able to do:
 	movement_cooldown = 8
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat
+	meat_amount = 6
 
 	response_help = "pokes"
 	response_disarm = "pushes"
@@ -50,6 +51,7 @@ List of things solar grubs should be able to do:
 	var/datum/powernet/PN            // Our powernet
 	var/obj/structure/cable/attached        // the attached cable
 	var/shock_chance = 10 // Beware
+	var/tracked = FALSE
 
 /datum/say_list/solargrub
 	emote_see = list("squelches", "squishes")

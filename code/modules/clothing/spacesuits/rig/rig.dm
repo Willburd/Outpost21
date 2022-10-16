@@ -177,7 +177,7 @@
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
 				continue
-			. += "[bicon(piece)] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
+			. += "\icon[piece][bicon(piece)] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
 
 	if(src.loc == usr)
 		. += "The access panel is [locked? "locked" : "unlocked"]."
@@ -482,6 +482,12 @@
 	var/efficiency = 1 - H.get_pressure_weakness(environment.return_pressure())	// You need to have a good seal for effective cooling
 	var/env_temp = get_environment_temperature()						//wont save you from a fire
 	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
+	var/thermal_protection = H.get_heat_protection(env_temp)	// ... unless you've got a good suit.
+
+	if(thermal_protection < 0.99)		//For some reason, < 1 returns false if the value is 1.
+		temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
+	else
+		temp_adj = min(H.bodytemperature - thermostat, max_cooling)
 
 	if (temp_adj < 0.5)	//only cools, doesn't heat, also we don't need extreme precision
 		return

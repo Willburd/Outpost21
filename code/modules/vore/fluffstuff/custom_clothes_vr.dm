@@ -208,6 +208,20 @@
 	item_state = "greatcoat_mob"
 
 //For general use
+/obj/item/clothing/suit/storage/vest/hoscoat/russofurcoat
+	name = "long fur coat"
+	desc = "A sophisticated long coat made of fur."
+
+	icon = 'icons/inventory/suit/mob_vr.dmi'
+	icon_state = "russofurcoat"
+
+	icon_override = 'icons/inventory/suit/mob_vr.dmi'
+	item_state = "russofurcoat"
+
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	flags_inv = HIDETIE|HIDEHOLSTER
+
+//For general use
 /obj/item/clothing/suit/storage/fluff/fedcoat
 	name = "Federation Uniform Jacket (Red)"
 	desc = "A uniform jacket from the United Federation. Starfleet still uses this uniform and there are variations of it. Set phasers to awesome."
@@ -625,6 +639,40 @@
 		else
 			return 1
 
+//scree:Avida
+/obj/item/clothing/under/skirt/outfit/fluff/avida
+	name = "purple dress"
+	desc = "A clingy purple dress with red lacework, with a hole at the back for a tail."
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "avidadress"
+	item_state = "avidadress"
+	item_icons = list(
+		slot_l_hand_str = 'icons/vore/custom_clothes_left_hand_vr.dmi',
+		slot_r_hand_str = 'icons/vore/custom_clothes_right_hand_vr.dmi',
+		slot_w_uniform_str = 'icons/vore/custom_onmob_vr.dmi'
+		)
+
+//scree:Avida
+/obj/item/clothing/head/fluff/avida
+	name = "purple witch hat"
+	desc = "A pointy purple hat with a wide brim, with a red hatband. It appears to have ear-holes in it."
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "avidahat"
+	item_state = "avidahat"
+	item_icons = list(
+		slot_l_hand_str = 'icons/vore/custom_clothes_left_hand_vr.dmi',
+		slot_r_hand_str = 'icons/vore/custom_clothes_right_hand_vr.dmi',
+		slot_head_str = 'icons/vore/custom_onmob_32x48_vr.dmi'
+		)
+
+/obj/item/clothing/head/fluff/avida/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
+	if(..())
+		if(H.ear_style && (H.ear_style.name == "Bnnuy Ears" || H.ear_style.name == "Bnnuy Ears 2")) //check if wearer's ear sprite is compatible with trimmed icon
+			item_state = initial(src.item_state)
+		else //if not, just use a generic icon
+			item_state = "avidahatnoears"
+		return TRUE
+
 //natje:Pumila
 /obj/item/clothing/under/fluff/aluranevines
 	name = "Pumila's vines"
@@ -644,27 +692,6 @@
 			return 0
 		else
 			return 1
-
-/obj/item/clothing/under/fluff/screesuit
-	name = "Scree's feathers"
-	desc = "A mop of fluffy blue feathers, the honkmother only knows what kind of bird they originally came from."
-
-	icon = 'icons/vore/custom_clothes_vr.dmi'
-	icon_state = "screesuit"
-
-	icon_override = 'icons/vore/custom_clothes_vr.dmi'
-	item_state = "screesuit_mob"
-
-/obj/item/clothing/under/fluff/screesuit/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-	if(..())
-		if(H.ckey != "scree")
-			to_chat(H, "<span class='warning'>Are you just going to tape them on or what? This isn't gonna work.</span>")
-			return 0
-		else
-			return 1
-
-/obj/item/clothing/under/fluff/screesuit/digest_act(var/atom/movable/item_storage = null)
-	return FALSE
 
 //HOS Hardsuit
 /obj/item/clothing/suit/space/void/security/fluff/hos // ToDo: Rig version.
@@ -2069,14 +2096,14 @@ Departamental Swimsuits, for general use
 		translocator_unequip(translocator, user)
 		T.forceMove(src)
 		translocator = T
-		user.show_message("[bicon(src)]*click!*")
+		user.show_message("\icon[src][bicon(src)]*click!*")
 		playsound(src, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/clothing/head/fluff/nikki/proc/translocator_unequip(var/obj/item/device/perfect_tele/T, var/mob/living/carbon/human/user)
 	if (translocator)
 		if (user)
 			user.put_in_hands(T)
-			user.show_message("[bicon(src)]*click!*")
+			user.show_message("\icon[src][bicon(src)]*click!*")
 		else
 			translocator.forceMove(get_turf(src))
 		translocator = null
@@ -2296,14 +2323,71 @@ Departamental Swimsuits, for general use
 
 	colorswap(usr)
 
-//PastelPrinceDan: Masumi Maki
-/obj/item/clothing/under/fluff/masumi_overalls
-	name = "white and blue overalls"
+//PastelPrinceDan: Masumi Maki & Hatterhat: Harold Robinson
+/obj/item/clothing/under/fluff/mechanic_overalls
+	name = "mechanic overalls"
 	desc = "A set of white and blue overalls, paired with a yellow shirt."
 	icon = 'icons/vore/custom_clothes_vr.dmi'
-	icon_state = "masumioveralls"
-	item_state = "masumioveralls"
+	icon_state = "mechaoveralls"
+	item_state = "mechaoveralls"
 	icon_override = 'icons/vore/custom_onmob_vr.dmi'
+
+//PastelPrinceDan: Masumi Maki & Hatterhat: Harold Robinson
+/obj/item/clothing/suit/storage/hooded/wintercoat/fluff/mechanic
+	name = "mechanic winter coat"
+	desc = "A blue and yellow winter coat, worn only by overachievers."
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "mechacoat"
+
+	icon_override = 'icons/vore/custom_onmob_vr.dmi'
+	item_state = "mechacoat_mob"
+	hoodtype = /obj/item/clothing/head/hood/winter/fluff/mechanic
+
+/obj/item/clothing/head/hood/winter/fluff/mechanic
+	name = "mechanic winter hood"
+	desc = "A blue and yellow winter coat's hood."
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "mechahood"
+
+	icon_override = 'icons/vore/custom_onmob_vr.dmi'
+	item_state = "mechahood_mob"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fluff/mechanic/ui_action_click()
+	ToggleHood_mechacoat()
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fluff/mechanic/equipped(mob/user, slot)
+	if(slot != slot_wear_suit)
+		RemoveHood_mechacoat()
+	..()
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fluff/mechanic/proc/RemoveHood_mechacoat()
+	icon_state = "mechacoat"
+	item_state = "mechacoat_mob"
+	hood_up = 0
+	if(ishuman(hood.loc))
+		var/mob/living/carbon/H = hood.loc
+		H.unEquip(hood, 1)
+		H.update_inv_wear_suit()
+	hood.loc = src
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fluff/mechanic/proc/ToggleHood_mechacoat()
+	if(!hood_up)
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			if(H.wear_suit != src)
+				to_chat(H, "<span class='warning'>You must be wearing [src] to put up the hood!</span>")
+				return
+			if(H.head)
+				to_chat(H, "<span class='warning'>You're already wearing something on your head!</span>")
+				return
+			else
+				H.equip_to_slot_if_possible(hood,slot_head,0,0,1)
+				hood_up = 1
+				icon_state = "mechacoat_t"
+				item_state = "mechacoat_mob_t"
+				H.update_inv_wear_suit()
+	else
+		RemoveHood_mechacoat()
 
 //Pandora029 : Evelyn Tareen
 /obj/item/clothing/suit/storage/hooded/wintercoat/security/fluff/evelyn
@@ -2362,3 +2446,66 @@ Departamental Swimsuits, for general use
 				H.update_inv_wear_suit()
 	else
 		RemoveHood_evelyn()
+
+//Allweek:Fifi the Magnificent
+/obj/item/clothing/head/fluff/fifi_hat
+	name = "fifi's hat"
+	desc = "It's a colorful hat for an eccentric entertaining cat."
+
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "fifi_hat"
+
+	icon_override = 'icons/vore/custom_clothes_vr.dmi'
+	item_state = "fifi_hat"
+
+/obj/item/clothing/under/fluff/fifi_jumpsuit
+	name = "fifi's jumpsuit"
+	desc = "It's a colorful outfit for an eccentric entertaining cat."
+
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "fifi_jumpsuit"
+
+	icon_override = 'icons/vore/custom_clothes_vr.dmi'
+	item_state = "fifi_jumpsuit"
+
+/obj/item/clothing/shoes/fluff/fifi_socks
+	name = "fifi's socks"
+	desc = "A pair of colorful socks for an eccentric entertaining cat."
+
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "fifi_socks"
+
+	icon_override = 'icons/vore/custom_clothes_vr.dmi'
+	item_state = "fifi_socks"
+
+
+
+//Uncle_Fruit_VEVO - Bradley Khatibi
+/obj/item/clothing/shoes/fluff/airjordans
+    name = "A pair of Air Jordan 1 Mid 'Black Gym Red's"
+    desc = "Appearing in a classic Jordan Brand colorway, the Air Jordan 1 Mid 'Black Gym Red' released in May 2021. Built with leather, the shoe's upper sports a white base, contrasted by black on the overlays and highlighted by Gym Red on the padded collar, 'Wings' logo and Swoosh branding. A breathable nylon tongue and perforated toe box support the fit, while underfoot, a standard rubber cupsole with Air in the heel anchors the build."
+    icon_state = "airjordans"
+    icon = 'icons/vore/custom_clothes_vr.dmi'
+    icon_override = 'icons/vore/custom_onmob_vr.dmi'
+
+//Pandora029:Seona Young
+/obj/item/clothing/under/fluff/foxoflightsuit
+	name = "padded flightsui"
+	desc = "A ruddy-orange combination immersion-and-flight suit, fitted with extra padding across the front of its legs. Warm, waterproof and practical, seveal patches are scattered across it alongside a hard-wearing harness."
+
+	icon = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "foxflightsuit"
+	worn_state = "foxflightsuit_mob"
+	rolled_sleeves = 0
+	rolled_down = 0
+
+	icon_override = 'icons/vore/custom_clothes_vr.dmi'
+	item_state = "foxflightsuit_mob"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
+//Shalax: Cerise Duelliste
+/obj/item/weapon/storage/belt/security/fluff/cerise
+	name = "champion's belt"
+	desc = "Cerise's hard-won belt from her glory days. Her skill might have waned since then, but her renown lives on."
+	icon_state = "champion"
+	item_state = null // i swear to god this works - hatterhat

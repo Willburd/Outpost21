@@ -20,6 +20,8 @@
 					/obj/item/clothing/glasses/omnihud/med = 4, /obj/item/device/glasses_kit = 1,  /obj/item/weapon/storage/quickdraw/syringe_case = 4)
 	..()
 
+// Food Machines (for event/away maps)
+
 //I want this not just as part of the zoo. ;v
 /obj/machinery/vending/food
 	name = "Food-O-Mat"
@@ -213,7 +215,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/sliceable/peanutcake = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/icecreamsandwich = 15,
-					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 15,
+					/obj/item/weapon/reagent_containers/food/snacks/cookie = 15,
 					/obj/item/weapon/reagent_containers/food/snacks/sliceable/brownies = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/chocolatebar = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece = 20
@@ -231,20 +233,7 @@
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/tofurkey = 10)
 	vend_delay = 10
 
-//End of food event machines
-
-/* For later, then
-/obj/machinery/vending/weapon_machine
-	name = "Frozen Star Guns&Ammo"
-	desc = "A self-defense equipment vending machine. When you need to take care of that clown."
-	product_slogans = "The best defense is good offense!;Buy for your whole family today!;Nobody can outsmart bullet!;God created man - Frozen Star made them EQUAL!;Nobody can outsmart bullet!;Stupidity can be cured! By LEAD.;Dead kids can't bully your children!"
-	product_ads = "Stunning!;Take justice in your own hands!;LEADearship!"
-	icon = 'icons/obj/vending_vr.dmi'
-	icon_state = "weapon"
-	products = list(/obj/item/device/flash = 6,/obj/item/weapon/reagent_containers/spray/pepper = 6, /obj/item/weapon/gun/projectile/olivaw = 5, /obj/item/weapon/gun/projectile/giskard = 5, /obj/item/ammo_magazine/mg/cl32/rubber = 20)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
-	prices = list(/obj/item/device/flash = 600,/obj/item/weapon/reagent_containers/spray/pepper = 800,  /obj/item/weapon/gun/projectile/olivaw = 1600, /obj/item/weapon/gun/projectile/giskard = 1200, /obj/item/ammo_magazine/mg/cl32/rubber = 200)
-*/
+// Food Machines (for event/away maps)
 
 /obj/machinery/vending/fitness/New()
 	products += list(/obj/item/weapon/reagent_containers/food/snacks/liquidprotein = 8)
@@ -1460,6 +1449,17 @@
 	contraband = list(/obj/item/clothing/head/syndicatefake = 1,
 					/obj/item/clothing/suit/syndicatefake = 1)
 
+//Airlock antitox vendor
+/obj/machinery/vending/wallmed_airlock
+	name = "Airlock NanoMed"
+	desc = "Wall-mounted Medical Equipment dispenser. This limited-use version dispenses antitoxins with mild painkillers for surface EVAs."
+	icon_state = "wallmed"
+	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
+	products = list(/obj/item/weapon/reagent_containers/pill/airlock = 20)
+	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 2)
+	req_log_access = access_cmo
+	has_logs = 1
+
 /obj/machinery/seed_storage/brig
 	name = "Prisoners' food seed storage"
 	starting_seeds = list(
@@ -1539,6 +1539,8 @@
 					)
 	vend_delay = 15
 
+// Loadout Vending Machines Start
+
 /obj/machinery/vending/loadout
 	name = "Fingers and Toes"
 	desc = "A special vendor for gloves and shoes!"
@@ -1602,7 +1604,10 @@
 					/obj/item/clothing/shoes/boots/workboots/toeless = 5,
 					/obj/item/clothing/shoes/boots/winter = 5,
 					/obj/item/clothing/shoes/boots/workboots = 5,
-					/obj/item/clothing/shoes/footwraps = 5)
+					/obj/item/clothing/shoes/footwraps = 5,
+					/obj/item/clothing/shoes/sneakerspurple = 5,
+					/obj/item/clothing/shoes/sneakersblue = 5,
+					/obj/item/clothing/shoes/sneakersred = 5)
 	prices = list(/obj/item/clothing/gloves/evening = 50,
 					/obj/item/clothing/gloves/fingerless = 50,
 					/obj/item/clothing/gloves/black = 50,
@@ -1660,7 +1665,10 @@
 					/obj/item/clothing/shoes/boots/workboots/toeless = 50,
 					/obj/item/clothing/shoes/boots/winter = 50,
 					/obj/item/clothing/shoes/boots/workboots = 50,
-					/obj/item/clothing/shoes/footwraps = 50)
+					/obj/item/clothing/shoes/footwraps = 50,
+					/obj/item/clothing/shoes/sneakerspurple = 50,
+					/obj/item/clothing/shoes/sneakersblue = 50,
+					/obj/item/clothing/shoes/sneakersred = 50)
 	premium = list(/obj/item/clothing/gloves/rainbow = 1,
 					/obj/item/clothing/shoes/rainbow = 1,)
 	contraband = list(/obj/item/clothing/shoes/syndigaloshes = 1,
@@ -1726,6 +1734,10 @@
 					/obj/item/clothing/accessory/hawaiian/pink = 5,
 					/obj/item/clothing/accessory/hawaiian/red = 5,
 					/obj/item/clothing/accessory/hawaiian/yellow = 5,
+					/obj/item/clothing/accessory/tropical = 5,
+					/obj/item/clothing/accessory/tropical/green = 5,
+					/obj/item/clothing/accessory/tropical/pink = 5,
+					/obj/item/clothing/accessory/tropical/blue = 5,
 					/obj/item/clothing/accessory/locket = 5,
 					/obj/item/weapon/storage/backpack/purse = 1,
 					/obj/item/clothing/accessory/sash = 5,
@@ -1812,7 +1824,15 @@
 					/obj/item/clothing/mask/bandana/gold = 5,
 					/obj/item/clothing/mask/bandana/green = 5,
 					/obj/item/clothing/mask/bandana/red = 5,
-					/obj/item/clothing/mask/surgical = 5)
+					/obj/item/clothing/mask/surgical = 5,
+					/obj/item/clothing/accessory/pride/bi = 5,
+					/obj/item/clothing/accessory/pride/trans = 5,
+					/obj/item/clothing/accessory/pride/ace = 5,
+					/obj/item/clothing/accessory/pride/enby = 5,
+					/obj/item/clothing/accessory/pride/pan = 5,
+					/obj/item/clothing/accessory/pride/lesbian = 5,
+					/obj/item/clothing/accessory/pride/intersex = 5,
+					/obj/item/clothing/accessory/pride/vore = 5)
 	prices = list(/obj/item/clothing/accessory = 50,
 					/obj/item/clothing/accessory/armband/med/color = 50,
 					/obj/item/clothing/accessory/asymmetric = 50,
@@ -1834,11 +1854,15 @@
 					/obj/item/weapon/storage/belt/fannypack/white = 50,
 					/obj/item/clothing/accessory/fullcape = 50,
 					/obj/item/clothing/accessory/halfcape = 50,
-					/obj/item/clothing/accessory/hawaiian = 5,
-					/obj/item/clothing/accessory/hawaiian/blue = 5,
-					/obj/item/clothing/accessory/hawaiian/pink = 5,
-					/obj/item/clothing/accessory/hawaiian/red = 5,
-					/obj/item/clothing/accessory/hawaiian/yellow = 5,
+					/obj/item/clothing/accessory/hawaiian = 50,
+					/obj/item/clothing/accessory/hawaiian/blue = 50,
+					/obj/item/clothing/accessory/hawaiian/pink = 50,
+					/obj/item/clothing/accessory/hawaiian/red = 50,
+					/obj/item/clothing/accessory/hawaiian/yellow = 50,
+					/obj/item/clothing/accessory/tropical = 50,
+					/obj/item/clothing/accessory/tropical/green = 50,
+					/obj/item/clothing/accessory/tropical/pink = 50,
+					/obj/item/clothing/accessory/tropical/blue = 50,
 					/obj/item/clothing/accessory/locket = 50,
 					/obj/item/weapon/storage/backpack/purse = 50,
 					/obj/item/clothing/accessory/sash = 50,
@@ -1925,9 +1949,18 @@
 					/obj/item/clothing/mask/bandana/gold = 50,
 					/obj/item/clothing/mask/bandana/green = 50,
 					/obj/item/clothing/mask/bandana/red = 50,
-					/obj/item/clothing/mask/surgical = 50)
+					/obj/item/clothing/mask/surgical = 50,
+					/obj/item/clothing/accessory/pride/bi = 50,
+					/obj/item/clothing/accessory/pride/trans = 50,
+					/obj/item/clothing/accessory/pride/ace = 50,
+					/obj/item/clothing/accessory/pride/enby = 50,
+					/obj/item/clothing/accessory/pride/pan = 50,
+					/obj/item/clothing/accessory/pride/lesbian = 50,
+					/obj/item/clothing/accessory/pride/intersex = 50,
+					/obj/item/clothing/accessory/pride/vore = 50)
 	premium = list(/obj/item/weapon/bedsheet/rainbow = 1)
-	contraband = list(/obj/item/clothing/mask/gas/clown_hat = 1)
+	contraband = list(/obj/item/clothing/mask/gas/clown_hat = 1,
+	                   /obj/item/clothing/accessory/collar/collarplanet_earth = 5)
 
 /obj/machinery/vending/loadout/clothing
 	name = "General Jump"
@@ -2105,7 +2138,11 @@
 					/obj/item/clothing/under/wedding/bride_white = 5,
 					/obj/item/weapon/storage/backpack/ = 5,
 					/obj/item/weapon/storage/backpack/messenger = 5,
-					/obj/item/weapon/storage/backpack/satchel = 5)
+					/obj/item/weapon/storage/backpack/satchel = 5,
+					/obj/item/clothing/under/tropical = 5,
+					/obj/item/clothing/under/tropical/green = 5,
+					/obj/item/clothing/under/tropical/pink = 5,
+					/obj/item/clothing/under/tropical/blue = 5)
 	prices = list(/obj/item/clothing/under/bathrobe = 50,
 					/obj/item/clothing/under/dress/black_corset = 50,
 					/obj/item/clothing/under/blazer = 50,
@@ -2276,7 +2313,11 @@
 					/obj/item/clothing/under/wedding/bride_white = 50,
 					/obj/item/weapon/storage/backpack/ = 50,
 					/obj/item/weapon/storage/backpack/messenger = 50,
-					/obj/item/weapon/storage/backpack/satchel = 50)
+					/obj/item/weapon/storage/backpack/satchel = 50,
+					/obj/item/clothing/under/tropical = 50,
+					/obj/item/clothing/under/tropical/green = 50,
+					/obj/item/clothing/under/tropical/pink = 50,
+					/obj/item/clothing/under/tropical/blue = 50)
 	premium = list(/obj/item/clothing/under/color/rainbow = 1)
 	contraband = list(/obj/item/clothing/under/rank/clown = 1)
 
@@ -2295,7 +2336,9 @@
 					/obj/item/weapon/pack/spaceball = 10,
 					/obj/item/weapon/storage/pill_bottle/dice = 5,
 					/obj/item/weapon/storage/pill_bottle/dice_nerd = 5,
-					/obj/item/weapon/melee/umbrella/random = 10)
+					/obj/item/weapon/melee/umbrella/random = 10,
+					/obj/item/weapon/deck/schnapsen = 5,
+					/obj/item/weapon/deck/egy = 5)
 	prices = list(/obj/item/weapon/cane = 100,
 					/obj/item/weapon/pack/cardemon = 100,
 					/obj/item/weapon/deck/holder = 100,
@@ -2306,7 +2349,9 @@
 					/obj/item/weapon/pack/spaceball = 100,
 					/obj/item/weapon/storage/pill_bottle/dice = 100,
 					/obj/item/weapon/storage/pill_bottle/dice_nerd = 100,
-					/obj/item/weapon/melee/umbrella/random = 100)
+					/obj/item/weapon/melee/umbrella/random = 100,
+					/obj/item/weapon/deck/schnapsen = 100,
+					/obj/item/weapon/deck/egy = 100)
 	premium = list(/obj/item/toy/bosunwhistle = 1)
 	contraband = list(/obj/item/toy/katana = 1)
 
@@ -2359,6 +2404,7 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/pink = 5,
 					/obj/item/clothing/suit/storage/toggle/labcoat/red = 5,
 					/obj/item/clothing/suit/storage/toggle/labcoat/yellow = 5,
+					/obj/item/clothing/suit/storage/toggle/labcoat/old = 5,
 					/obj/item/clothing/suit/leathercoat = 5,
 					/obj/item/clothing/suit/storage/toggle/leather_jacket = 5,
 					/obj/item/clothing/suit/storage/leather_jacket_alt = 5,
@@ -2403,7 +2449,10 @@
 					/obj/item/clothing/suit/varsity/brown = 5,
 					/obj/item/clothing/suit/storage/hooded/wintercoat = 5,
 					/obj/item/clothing/suit/storage/hooded/wintercoat/aformal = 5,
-					/obj/item/clothing/suit/storage/teshari/cloak/standard/white_grey = 5)
+					/obj/item/clothing/suit/storage/teshari/cloak/standard/white_grey = 5,
+					/obj/item/clothing/suit/storage/puffyred = 5,
+					/obj/item/clothing/suit/storage/puffypurple = 5,
+					/obj/item/clothing/suit/storage/puffyblue = 5)
 	prices = list(/obj/item/clothing/suit/storage/apron = 100,
 					/obj/item/clothing/suit/storage/flannel/aqua = 100,
 					/obj/item/clothing/suit/storage/toggle/bomber = 100,
@@ -2447,6 +2496,7 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/pink = 100,
 					/obj/item/clothing/suit/storage/toggle/labcoat/red = 100,
 					/obj/item/clothing/suit/storage/toggle/labcoat/yellow = 100,
+					/obj/item/clothing/suit/storage/toggle/labcoat/old = 100,
 					/obj/item/clothing/suit/leathercoat = 100,
 					/obj/item/clothing/suit/storage/toggle/leather_jacket = 100,
 					/obj/item/clothing/suit/storage/leather_jacket_alt = 100,
@@ -2491,7 +2541,10 @@
 					/obj/item/clothing/suit/varsity/brown = 100,
 					/obj/item/clothing/suit/storage/hooded/wintercoat = 100,
 					/obj/item/clothing/suit/storage/hooded/wintercoat/aformal = 100,
-					/obj/item/clothing/suit/storage/teshari/cloak/standard/white_grey = 100)
+					/obj/item/clothing/suit/storage/teshari/cloak/standard/white_grey = 100,
+					/obj/item/clothing/suit/storage/puffyred = 100,
+					/obj/item/clothing/suit/storage/puffypurple = 100,
+					/obj/item/clothing/suit/storage/puffyblue = 100)
 	premium = list(/obj/item/clothing/suit/imperium_monk = 3,
 					/obj/item/clothing/suit/storage/hooded/wintercoat/cosmic = 1)
 	contraband = list(/obj/item/toy/katana = 1)
@@ -2640,6 +2693,67 @@
 	contraband = list(/obj/item/clothing/head/syndicatefake = 1,
 					/obj/item/clothing/suit/syndicatefake = 1)
 
+/obj/machinery/vending/loadout/gadget
+	name = "Chips Co."
+	desc = "A special vendor for devices and gadgets."
+	product_ads = "You can't RESIST our great deals!;Feeling disconnected? We have a gadget for you!;You know you have the capacity to buy our capacitors!;FILL THAT HOLE IN YOUR HEART WITH OUR PLASTIC DISTRACTIONS!!!;Devices for everyone! Chips Co.!;ROBUST INVENTORY, GREAT PRICES! ;DON'T FORGET THE oyPAD 13s PRO! ON SALE NOW, ONLY ONE THOUSAND THALERS!"
+	icon_state = "gadgets"
+	vend_delay = 11
+	products = list(/obj/item/clothing/suit/circuitry = 1,
+					/obj/item/clothing/head/circuitry = 1,
+					/obj/item/clothing/shoes/circuitry = 1,
+					/obj/item/clothing/gloves/circuitry = 1,
+					/obj/item/clothing/under/circuitry = 1,
+					/obj/item/clothing/glasses/circuitry = 1,
+					/obj/item/clothing/ears/circuitry = 1,
+					/obj/item/device/text_to_speech = 5,
+					/obj/item/device/paicard = 5,
+					/obj/item/device/communicator = 10,
+					/obj/item/device/communicator/watch = 10,
+					/obj/item/device/radio = 10,
+					/obj/item/device/camera = 5,
+					/obj/item/device/taperecorder = 5,
+					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					/obj/item/device/pda = 10,
+					/obj/item/device/radio/headset = 10,
+					/obj/item/device/flashlight = 5,
+					/obj/item/device/laser_pointer = 3,
+					/obj/item/clothing/glasses/omnihud = 10,
+					/obj/item/device/walkpod = 5,
+					/obj/item/device/juke_remote = 1,
+					/obj/item/instrument/piano_synth/headphones = 2, // You're making a subsystem do work, I don't want it TOO busy
+					/obj/item/instrument/piano_synth/headphones/spacepods = 2,
+					/obj/item/clothing/gloves/bluespace = 5)
+	prices = list(/obj/item/clothing/suit/circuitry = 100,
+					/obj/item/clothing/head/circuitry = 100,
+					/obj/item/clothing/shoes/circuitry = 100,
+					/obj/item/clothing/gloves/circuitry = 100,
+					/obj/item/clothing/under/circuitry = 100,
+					/obj/item/clothing/glasses/circuitry = 100,
+					/obj/item/clothing/ears/circuitry = 100,
+					/obj/item/device/text_to_speech = 300,
+					/obj/item/device/paicard = 100,
+					/obj/item/device/communicator = 100,
+					/obj/item/device/communicator/watch = 100,
+					/obj/item/device/radio = 100,
+					/obj/item/device/camera = 100,
+					/obj/item/device/taperecorder = 100,
+					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 1000,
+					/obj/item/device/pda = 50,
+					/obj/item/device/radio/headset = 50,
+					/obj/item/device/flashlight = 100,
+					/obj/item/device/laser_pointer = 200,
+					/obj/item/clothing/glasses/omnihud = 100,
+					/obj/item/device/walkpod = 300,
+					/obj/item/device/juke_remote = 1000,
+					/obj/item/instrument/piano_synth/headphones = 200,
+					/obj/item/instrument/piano_synth/headphones/spacepods = 600,
+					/obj/item/clothing/gloves/bluespace = 500)
+	premium = list(/obj/item/device/perfect_tele/one_beacon = 1)
+	contraband = list(/obj/item/weapon/disk/nifsoft/compliance = 1)
+
+// Loadout Vending Machines End
+
 /obj/machinery/vending/entertainer
 	name = "Thespian's Delight"
 	desc = "Sometimes nerds need costumes!"
@@ -2731,6 +2845,7 @@
 					/obj/item/clothing/shoes/knight_costume = 3,
 					/obj/item/clothing/shoes/knight_costume/black = 3)
 
+// Event Loadout Vending Machines Start
 
 /obj/machinery/vending/event //FOR FACILITATING AND EQUIPPING EVENTS, DO NOT PLACE ON THE NORMAL MAP//
 	name = "Fingers and Toes"
@@ -3246,7 +3361,9 @@
 					/obj/item/weapon/storage/belt/utility/chief/full = 5,
 					/obj/item/weapon/storage/belt/utility/alien/full = 5,
 					/obj/item/weapon/storage/bible = 5,
+					/obj/item/weapon/pickaxe = 5,
 					/obj/item/weapon/pickaxe/drill = 5,
+					/obj/item/weapon/pickaxe/advdrill = 5,
 					/obj/item/weapon/pickaxe/diamonddrill = 5,
 					/obj/item/weapon/pickaxe/gold = 5,
 					/obj/item/weapon/pickaxe/diamond = 5,
@@ -3402,6 +3519,36 @@
 					/obj/item/clothing/suit/space/rig/military = 5
 					)
 
+/obj/machinery/vending/event/gadget //FOR FACILITATING AND EQUIPPING EVENTS, DO NOT PLACE ON THE NORMAL MAP//
+	name = "Chips Co."
+	desc = "A special vendor for devices and gadgets."
+	product_ads = "You can't RESIST our great deals!;Feeling disconnected? We have a gadget for you!;You know you have the capacity to buy our capacitors!;FILL THAT HOLE IN YOUR HEART WITH OUR PLASTIC DISTRACTIONS!!!;Devices for everyone! Chips Co.!;ROBUST INVENTORY, GREAT PRICES! ;DON'T FORGET THE oyPAD 13s PRO! ON SALE NOW, ONLY ONE THOUSAND THALERS!"
+	icon_state = "gadgets"
+	vend_delay = 11
+	products = list(/obj/item/clothing/suit/circuitry = 1,
+					/obj/item/clothing/head/circuitry = 1,
+					/obj/item/clothing/shoes/circuitry = 1,
+					/obj/item/clothing/gloves/circuitry = 1,
+					/obj/item/clothing/under/circuitry = 1,
+					/obj/item/clothing/glasses/circuitry = 1,
+					/obj/item/clothing/ears/circuitry = 1,
+					/obj/item/device/text_to_speech = 5,
+					/obj/item/device/paicard = 5,
+					/obj/item/device/communicator = 10,
+					/obj/item/device/communicator/watch = 10,
+					/obj/item/device/radio = 10,
+					/obj/item/device/camera = 5,
+					/obj/item/device/taperecorder = 5,
+					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					/obj/item/device/pda = 10,
+					/obj/item/device/radio/headset = 10,
+					/obj/item/device/flashlight = 5,
+					/obj/item/device/laser_pointer = 3,
+					/obj/item/clothing/glasses/omnihud = 10,
+					/obj/item/device/perfect_tele/one_beacon = 1,
+					/obj/item/weapon/disk/nifsoft/compliance = 1,
+					/obj/item/device/perfect_tele/alien = 10)
+
 /obj/machinery/vending/event/costume //FOR FACILITATING AND EQUIPPING EVENTS, DO NOT PLACE ON THE NORMAL MAP//
 	name = "Thespian's Delight"
 	desc = "Sometimes nerds need costumes!"
@@ -3482,13 +3629,16 @@
 					/obj/item/clothing/suit/syndicatefake = 1
 					)
 
+// Event Loadout Vending Machines End
+
+// Event Food Vending Machines Start
 
 /obj/machinery/vending/event/food //FOR FACILITATING/OUTFITTING EVENTS, DO NOT PUT THESE ON THE MAP//
 	name = "Dog Food"
 	desc = "Food made by dogs!"
 	product_ads = "EAT FOOD!!!;Awooooooooooooooo!~;Made by actual dogs!;Now with twenty percent more taste!!!"
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "fridge_food"
+	icon_state = "hotfood"
 	products = list(/obj/item/weapon/tray = 50,
 					/obj/item/weapon/material/kitchen/utensil/fork = 50,
 					/obj/item/weapon/material/knife/plastic = 50,
@@ -3606,6 +3756,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/clownstears = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/coldchili = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/cookie = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/corn_dog = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cosmicbrowniesslice = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cosmicbrowniesslice/filled = 10,
@@ -3935,7 +4086,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/chicken = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/corgi = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/meat/crab = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/crabmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/fox = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/human = 10,
@@ -3975,7 +4126,7 @@
 	desc = "Food made by dogs!"
 	product_ads = "EAT FOOD!!!;Awooooooooooooooo!~;Made by actual dogs!;Now with twenty percent more taste!!!"
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "fridge_food"
+	icon_state = "hotfood"
 	products = list(/obj/item/weapon/tray = 50,
 					/obj/item/weapon/material/kitchen/utensil/fork = 50,
 					/obj/item/weapon/material/knife/plastic = 50,
@@ -4090,6 +4241,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/clownstears = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/coldchili = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/cookie = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/corn_dog = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cosmicbrowniesslice = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/cosmicbrowniesslice/filled = 10,
@@ -4370,7 +4522,7 @@
 	desc = "Food made by dogs!"
 	product_ads = "EAT FOOD!!!;Awooooooooooooooo!~;Made by actual dogs!;Now with twenty percent more taste!!!"
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "fridge_food"
+	icon_state = "hotfood"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/bearmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/carpmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/carpmeat/fish = 10,
@@ -4391,7 +4543,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/chicken = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/corgi = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/meat/crab = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/crabmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/fox = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/meat/human = 10,
@@ -4423,6 +4575,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/xenomeat/spidermeat = 10)
 	vend_delay = 15
 
+// Event Food Vending Machines End
+
 /obj/machinery/vending/emergencyfood
 	name = "Food Cube Dispenser"
 	desc = "An ominous machine dispensing food cubes. It will keep you fed, but at what cost?"
@@ -4438,6 +4592,8 @@
 	contraband = list(/obj/item/weapon/storage/box/wings/tray = 20)
 
 /obj/machinery/vending/cola/soft
+	name = "Soft Robustdrinks"
+	desc = "A different vendor brand for soft drinks, taking off very successfully with its unique imagery and equal stock."
 	icon = 'icons/obj/vending_vr.dmi'
 	icon_state = "Cola_Machine"
 
@@ -4473,3 +4629,18 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/root_beer = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
+
+/obj/machinery/vending/altevian
+	name = "Altevian Imported Meals"
+	desc = "A vending machine containing imported foods from Altevian Hegemony. Delicious and nutritious. No natural ingridients guaranteed!"
+	icon = 'icons/obj/vending_vr.dmi'
+	icon_state = "rattevendor"
+	product_slogans = "Spacer's choice!;Voidborn food for voidborn people!;Most processed foods ever!"
+	product_ads = "Perfectly edible!;Squeaky clean foods!;Cheesed to meet you!;Made for spacers, by spacers, of spacers!"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/ratprotein = 15,
+					/obj/item/weapon/reagent_containers/food/snacks/ratveggies = 15,
+					/obj/item/weapon/reagent_containers/food/snacks/ratliquid = 15)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/ratprotein = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/ratveggies = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/ratliquid = 8)

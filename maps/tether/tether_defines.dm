@@ -21,6 +21,7 @@
 #define Z_LEVEL_DEBRISFIELD					19
 #define Z_LEVEL_FUELDEPOT					20
 #define Z_LEVEL_GATEWAY						21
+#define Z_LEVEL_OM_ADVENTURE				22
 
 //Camera networks
 #define NETWORK_TETHER "Tether"
@@ -139,18 +140,36 @@
 		/area/crew_quarters/sleep/Dorm_5/holo,
 		/area/crew_quarters/sleep/Dorm_7/holo,
 		/area/looking_glass/lg_1,
-		/area/rnd/miscellaneous_lab
+		/area/rnd/miscellaneous_lab,
+		/area/tether/transit, // Tether Debug Transit
+		/area/tether/surfacebase/outside/outside2, // Very Outside
+		/area/tether/surfacebase/outside/outside3 // Very Outside
 		)
 
 	unit_test_exempt_from_atmos = list(
 		/area/engineering/atmos_intake, // Outside,
+		/area/engineering/engine_gas,
 		/area/rnd/external, //  Outside,
+		/area/rnd/outpost/xenobiology/outpost_stairs,
+		/area/tether/surfacebase/entertainment/stage, // Connected to entertainment area
+		/area/tether/surfacebase/emergency_storage/atmos,
 		/area/tether/surfacebase/emergency_storage/rnd,
 		/area/tether/surfacebase/emergency_storage/atrium,
 		/area/tether/surfacebase/lowernortheva, // it airlock
 		/area/tether/surfacebase/lowernortheva/external, //it outside
-		/area/tether/surfacebase/security/gasstorage) //it maint
+		/area/tether/surfacebase/security/gasstorage, // Maint
+		/area/tcommsat/chamber,
+		/area/tether/outpost/solars_outside, // Outside
+		/area/vacant/vacant_bar_upper // Maint
+		)
 
+	unit_test_z_levels = list(
+		Z_LEVEL_SURFACE_LOW,
+		Z_LEVEL_SURFACE_MID,
+		Z_LEVEL_SURFACE_HIGH,
+		Z_LEVEL_TRANSIT,
+		Z_LEVEL_SPACE_LOW
+	)
 
 	lateload_z_levels = list(
 		list("Tether - Centcom","Tether - Misc","Tether - Underdark","Tether - Plains"), //Stock Tether lateload maps
@@ -162,7 +181,7 @@
 		list("Fuel Depot - Z1 Space")
 		)
 
-	lateload_single_pick = list(
+	lateload_gateway = list(
 		list("Carp Farm"),
 		list("Snow Field"),
 		list("Listening Post"),
@@ -171,6 +190,10 @@
 		list("Arynthi Lake Underground B","Arynthi Lake B"),
 		list("Eggnog Town Underground","Eggnog Town"),
 		list("Wild West")
+		)
+
+	lateload_overmap = list(
+		list("Grass Cave")
 		)
 
 	ai_shell_restricted = TRUE
@@ -193,8 +216,6 @@
 
 	mining_station_z =		list(Z_LEVEL_SPACE_LOW)
 	mining_outpost_z =		list(Z_LEVEL_SURFACE_MINE)
-
-	lateload_single_pick = null //Nothing right now.
 
 	planet_datums_to_make = list(/datum/planet/virgo3b,
 								/datum/planet/virgo4)
@@ -360,6 +381,7 @@
 	name = "Asteroid 1"
 	base_turf = /turf/space
 	transit_chance = 33
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_PERSIST|MAP_LEVEL_BELOW_BLOCKED
 	holomap_offset_x = TETHER_HOLOMAP_MARGIN_X + TETHER_HOLOMAP_CENTER_GUTTER + TETHER_MAP_SIZE
 	holomap_offset_y = TETHER_HOLOMAP_MARGIN_Y + TETHER_MAP_SIZE
 

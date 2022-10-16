@@ -16,12 +16,15 @@
 	desc = "It's a belly! You're in it!"	// Flavor text description of inside sight/sound/smells/feels.
 	var/vore_sound = "Gulp"					// Sound when ingesting someone
 	var/vore_verb = "ingest"				// Verb for eating with this in messages
+	var/release_verb = "expels"				// Verb for releasing something from a stomach
 	var/human_prey_swallow_time = 100		// Time in deciseconds to swallow /mob/living/carbon/human
 	var/nonhuman_prey_swallow_time = 30		// Time in deciseconds to swallow anything else
 	var/nutrition_percent = 100				// Nutritional percentage per tick in digestion mode
 	var/digest_brute = 0.5					// Brute damage per tick in digestion mode
 	var/digest_burn = 0.5					// Burn damage per tick in digestion mode
 	var/digest_oxy = 0						// Oxy damage per tick in digestion mode
+	var/digest_tox = 0						// Toxins damage per tick in digestion mode
+	var/digest_clone = 0					// Clone damage per tick in digestion mode
 	var/immutable = FALSE					// Prevents this belly from being deleted
 	var/escapable = FALSE					// Belly can be resisted out of at any time
 	var/escapetime = 20 SECONDS				// Deciseconds, how long to escape this belly
@@ -30,9 +33,11 @@
 	var/escapechance = 0 					// % Chance of prey beginning to escape if prey struggles.
 	var/transferchance = 0 					// % Chance of prey being trasnsfered, goes from 0-100%
 	var/transferchance_secondary = 0 		// % Chance of prey being transfered to transferchance_secondary, also goes 0-100%
+	var/save_digest_mode = TRUE				// Whether this belly's digest mode persists across rounds
 	var/can_taste = FALSE					// If this belly prints the flavor of prey when it eats someone.
 	var/bulge_size = 0.25					// The minimum size the prey has to be in order to show up on examine.
 	var/display_absorbed_examine = FALSE	// Do we display absorption examine messages for this belly at all?
+	var/absorbed_desc						// Desc shown to absorbed prey. Defaults to regular if left empty.
 	var/shrink_grow_size = 1				// This horribly named variable determines the minimum/maximum size it will shrink/grow prey to.
 	var/transferlocation					// Location that the prey is released if they struggle and get dropped off.
 	var/transferlocation_secondary			// Secondary location that prey is released to.
@@ -48,6 +53,7 @@
 	var/emote_time = 60						// How long between stomach emotes at prey (in seconds)
 	var/emote_active = TRUE					// Are we even giving emotes out at all or not?
 	var/next_emote = 0						// When we're supposed to print our next emote, as a world.time
+	var/selective_preference = DM_DIGEST	// Which type of selective bellymode do we default to?
 
 	// Generally just used by AI
 	var/autotransferchance = 0 				// % Chance of prey being autotransferred to transfer location
@@ -56,9 +62,9 @@
 
 	//I don't think we've ever altered these lists. making them static until someone actually overrides them somewhere.
 	//Actual full digest modes
-	var/tmp/static/list/digest_modes = list(DM_HOLD,DM_DIGEST,DM_ABSORB,DM_DRAIN,DM_UNABSORB,DM_HEAL,DM_SHRINK,DM_GROW,DM_SIZE_STEAL,DM_EGG)
+	var/tmp/static/list/digest_modes = list(DM_HOLD,DM_DIGEST,DM_ABSORB,DM_DRAIN,DM_SELECT,DM_UNABSORB,DM_HEAL,DM_SHRINK,DM_GROW,DM_SIZE_STEAL,DM_EGG)
 	//Digest mode addon flags
-	var/tmp/static/list/mode_flag_list = list("Numbing" = DM_FLAG_NUMBING, "Stripping" = DM_FLAG_STRIPPING, "Leave Remains" = DM_FLAG_LEAVEREMAINS, "Muffles" = DM_FLAG_THICKBELLY, "Affect Worn Items" = DM_FLAG_AFFECTWORN, "Jams Sensors" = DM_FLAG_JAMSENSORS)
+	var/tmp/static/list/mode_flag_list = list("Numbing" = DM_FLAG_NUMBING, "Stripping" = DM_FLAG_STRIPPING, "Leave Remains" = DM_FLAG_LEAVEREMAINS, "Muffles" = DM_FLAG_THICKBELLY, "Affect Worn Items" = DM_FLAG_AFFECTWORN, "Jams Sensors" = DM_FLAG_JAMSENSORS, "Complete Absorb" = DM_FLAG_FORCEPSAY)
 	//Item related modes
 	var/tmp/static/list/item_digest_modes = list(IM_HOLD,IM_DIGEST_FOOD,IM_DIGEST)
 
@@ -91,6 +97,16 @@
 		"You jostle %pred's %belly with movement.",
 		"You squirm inside of %pred's %belly, making it wobble around.")
 
+	var/list/absorbed_struggle_messages_outside = list(
+		"%pred's %belly wobbles, seemingly on its own.",
+		"%pred's %belly jiggles without apparent cause.",
+		"%pred's %belly seems to shake for a second without an obvious reason.")
+
+	var/list/absorbed_struggle_messages_inside = list(
+		"You try and resist %pred's %belly, but only cause it to jiggle slightly.",
+		"Your fruitless mental struggles only shift %pred's %belly a tiny bit.",
+		"You can't make any progress freeing yourself from %pred's %belly.")
+
 	var/list/digest_messages_owner = list(
 		"You feel %prey's body succumb to your digestive system, which breaks it apart into soft slurry.",
 		"You hear a lewd glorp as your %belly muscles grind %prey into a warm pulp.",
@@ -115,6 +131,18 @@
 		"%pred's %belly kneads on every fiber of your body, softening you down into mush to fuel their next hunt.",
 		"%pred's %belly churns you down into a hot slush. Your nutrient-rich remains course through their digestive track with a series of long, wet glorps.")
 
+	var/list/absorb_messages_owner = list(
+		"You feel %prey becoming part of you.")
+
+	var/list/absorb_messages_prey = list(
+		"You feel yourself becoming part of %pred's %belly!")
+
+	var/list/unabsorb_messages_owner = list(
+		"You feel %prey reform into a recognizable state again.")
+
+	var/list/unabsorb_messages_prey = list(
+		"You are released from being part of %pred's %belly.")
+
 	var/list/examine_messages = list(
 		"They have something solid in their %belly!",
 		"It looks like they have something in their %belly!")
@@ -124,64 +152,87 @@
 		"Their %belly looks larger than usual.")
 
 	var/item_digest_mode = IM_DIGEST_FOOD	// Current item-related mode from item_digest_modes
-	var/contaminates = TRUE					// Whether the belly will contaminate stuff
+	var/contaminates = FALSE					// Whether the belly will contaminate stuff
 	var/contamination_flavor = "Generic"	// Determines descriptions of contaminated items
 	var/contamination_color = "green"		// Color of contamination overlay
 
 	// Lets you do a fullscreen overlay. Set to an icon_state string.
 	var/belly_fullscreen = "base" // outpost 21 edit - base vore belly is blind!
 	var/disable_hud = FALSE
+	var/colorization_enabled = FALSE
+	var/belly_fullscreen_color = "#823232"
+
+
 
 //For serialization, keep this updated, required for bellies to save correctly.
 /obj/belly/vars_to_save()
-	return ..() + list(
-		"name",
-		"desc",
-		"vore_sound",
-		"vore_verb",
-		"human_prey_swallow_time",
-		"nonhuman_prey_swallow_time",
-		"emote_time",
-		"nutrition_percent",
-		"digest_brute",
-		"digest_burn",
-		"digest_oxy",
-		"immutable",
-		"can_taste",
-		"escapable",
-		"escapetime",
-		"digestchance",
-		"absorbchance",
-		"escapechance",
-		"transferchance",
-		"transferchance_secondary",
-		"transferlocation",
-		"transferlocation_secondary",
-		"bulge_size",
-		"display_absorbed_examine",
-		"shrink_grow_size",
-		"struggle_messages_outside",
-		"struggle_messages_inside",
-		"digest_messages_owner",
-		"digest_messages_prey",
-		"examine_messages",
-		"examine_messages_absorbed",
-		"emote_lists",
-		"emote_time",
-		"emote_active",
-		"mode_flags",
-		"item_digest_mode",
-		"contaminates",
-		"contamination_flavor",
-		"contamination_color",
-		"release_sound",
-		"fancy_vore",
-		"is_wet",
-		"wet_loop",
-		"belly_fullscreen",
-		"disable_hud",
-		"egg_type"
-		)
+	var/list/saving = list(
+	"name",
+	"desc",
+	"absorbed_desc",
+	"vore_sound",
+	"vore_verb",
+	"release_verb",
+	"human_prey_swallow_time",
+	"nonhuman_prey_swallow_time",
+	"emote_time",
+	"nutrition_percent",
+	"digest_brute",
+	"digest_burn",
+	"digest_oxy",
+	"digest_tox",
+	"digest_clone",
+	"immutable",
+	"can_taste",
+	"escapable",
+	"escapetime",
+	"digestchance",
+	"absorbchance",
+	"escapechance",
+	"transferchance",
+	"transferchance_secondary",
+	"transferlocation",
+	"transferlocation_secondary",
+	"bulge_size",
+	"display_absorbed_examine",
+	"shrink_grow_size",
+	"struggle_messages_outside",
+	"struggle_messages_inside",
+	"absorbed_struggle_messages_outside",
+	"absorbed_struggle_messages_inside",
+	"digest_messages_owner",
+	"digest_messages_prey",
+	"absorb_messages_owner",
+	"absorb_messages_prey",
+	"unabsorb_messages_owner",
+	"unabsorb_messages_prey",
+	"examine_messages",
+	"examine_messages_absorbed",
+	"emote_lists",
+	"emote_time",
+	"emote_active",
+	"selective_preference",
+	"mode_flags",
+	"item_digest_mode",
+	"contaminates",
+	"contamination_flavor",
+	"contamination_color",
+	"release_sound",
+	"fancy_vore",
+	"is_wet",
+	"wet_loop",
+	"belly_fullscreen",
+	"disable_hud",
+	"belly_fullscreen_color",
+	"colorization_enabled",
+	"egg_type",
+	"save_digest_mode"
+	)
+
+	if (save_digest_mode == 1)
+		return ..() + saving + list("digest_mode")
+
+	return ..() + saving
 
 /obj/belly/Initialize()
 	. = ..()
@@ -220,8 +271,21 @@
 	if(isliving(thing))
 		var/mob/living/M = thing
 		M.updateVRPanel()
-		if(desc)
-			to_chat(M, "<span class='notice'><B>[desc]</B></span>")
+		var/raw_desc //Let's use this to avoid needing to write the reformat code twice
+		if(absorbed_desc && M.absorbed)
+			raw_desc = absorbed_desc
+		else if(desc)
+			raw_desc = desc
+
+		//Was there a description text? If so, it's time to format it!
+		if(raw_desc)
+			//Replace placeholder vars
+			var/formatted_desc
+			formatted_desc = replacetext(raw_desc, "%belly", lowertext(name)) //replace with this belly's name
+			formatted_desc = replacetext(formatted_desc, "%pred", owner) //replace with this belly's owner
+			formatted_desc = replacetext(formatted_desc, "%prey", M) //replace with whatever mob entered into this belly
+			to_chat(M, "<span class='notice'><B>[formatted_desc]</B></span>")
+
 		var/taste
 		if(can_taste && (taste = M.get_taste_message(FALSE)))
 			to_chat(owner, "<span class='notice'>[M] tastes of [taste].</span>")
@@ -256,16 +320,52 @@
 		return
 
 	if(belly_fullscreen)
-		var/obj/screen/fullscreen/F = L.overlay_fullscreen("belly", /obj/screen/fullscreen/belly)
-		F.icon_state = belly_fullscreen
-		// F.color = belly_fullscreen_color
+		if(colorization_enabled)
+			var/obj/screen/fullscreen/F = L.overlay_fullscreen("belly", /obj/screen/fullscreen/belly/colorized)
+			F.icon_state = belly_fullscreen
+			F.color = belly_fullscreen_color
+			/* //Allows for 'multilayered' stomachs. Currently not implemented.
+			if(b_multilayered)
+				var/obj/screen/fullscreen/F2 = L.overlay_fullscreen("belly2", /obj/screen/fullscreen/belly)
+			*/
+		else
+			var/obj/screen/fullscreen/F = L.overlay_fullscreen("belly", /obj/screen/fullscreen/belly)
+			F.icon_state = belly_fullscreen
 	else
 		L.clear_fullscreen("belly")
+		//L.clear_fullscreen("belly2") //Allows for 'multilayered' stomachs. Currently not implemented.
 
 	if(disable_hud)
 		if(L?.hud_used?.hud_shown)
 			to_chat(L, "<span class='notice'>((Your pred has disabled huds in their belly. Turn off vore FX and hit F12 to get it back; or relax, and enjoy the serenity.))</span>")
 			L.toggle_hud_vis(TRUE)
+
+/obj/belly/proc/vore_preview(mob/living/L)
+	if(!istype(L))
+		return
+	if(!L.client)
+		return
+
+	if(belly_fullscreen)
+		if(colorization_enabled)
+			var/obj/screen/fullscreen/F = L.overlay_fullscreen("belly", /obj/screen/fullscreen/belly/colorized)
+			F.icon_state = belly_fullscreen
+			F.color = belly_fullscreen_color
+			/* //Allows for 'multilayered' stomachs. Currently not implemented.
+			if(b_multilayered)
+				var/obj/screen/fullscreen/F2 = L.overlay_fullscreen("belly2", /obj/screen/fullscreen/belly)
+			*/
+		else
+			var/obj/screen/fullscreen/F = L.overlay_fullscreen("belly", /obj/screen/fullscreen/belly)
+			F.icon_state = belly_fullscreen
+	else
+		L.clear_fullscreen("belly")
+		//L.clear_fullscreen("belly2") //Allows for 'multilayered' stomachs. Currently not implemented.
+
+/obj/belly/proc/clear_preview(mob/living/L)
+	L.clear_fullscreen("belly")
+
+
 
 // Release all contents of this belly into the owning mob's location.
 // If that location is another mob, contents are transferred into whichever of its bellies the owning mob is in.
@@ -292,8 +392,8 @@
 		owner.update_icons()
 
 	//Print notifications/sound if necessary
-	if(!silent)
-		owner.visible_message("<font color='green'><b>[owner] expels everything from their [lowertext(name)]!</b></font>")
+	if(!silent && count)
+		owner.visible_message("<font color='green'><b>[owner] [release_verb] everything from their [lowertext(name)]!</b></font>")
 		var/soundfile
 		if(!fancy_vore)
 			soundfile = classic_release_sounds[release_sound]
@@ -311,14 +411,26 @@
 	if (!(M in contents))
 		return 0 // They weren't in this belly anyway
 
+	if(istype(M, /mob/living/simple_mob/vore/hostile/morph/dominated_prey))
+		var/mob/living/simple_mob/vore/hostile/morph/dominated_prey/p = M
+		p.undo_prey_takeover(FALSE)
+		return 0
 	for(var/mob/living/L in M.contents)
-		L.muffled = 0
-	for(var/obj/item/weapon/holder/H in M.contents)
-		H.held_mob.muffled = 0
+		L.muffled = FALSE
+		L.forced_psay = FALSE
 
+	for(var/obj/item/weapon/holder/H in M.contents)
+		H.held_mob.muffled = FALSE
+		H.held_mob.forced_psay = FALSE
+
+	if(isliving(M))
+		var/mob/living/slip = M
+		slip.slip_protect = world.time + 25 // This is to prevent slipping back into your pred if they stand on soap or something.
 	//Place them into our drop_location
 	M.forceMove(drop_location())
-
+	if(ismob(M))
+		var/mob/ourmob = M
+		ourmob.reset_view(null)
 	items_preserved -= M
 
 	//Special treatment for absorbed prey
@@ -328,9 +440,12 @@
 		if(ML.client)
 			ML.stop_sound_channel(CHANNEL_PREYLOOP) //Stop the internal loop, it'll restart if the isbelly check on next tick anyway
 		if(ML.muffled)
-			ML.muffled = 0
+			ML.muffled = FALSE
+		if(ML.forced_psay)
+			ML.forced_psay = FALSE
 		if(ML.absorbed)
 			ML.absorbed = FALSE
+			handle_absorb_langs(ML, owner)
 			if(ishuman(M) && ishuman(OW))
 				var/mob/living/carbon/human/Prey = M
 				var/mob/living/carbon/human/Pred = OW
@@ -346,7 +461,7 @@
 
 	//Print notifications/sound if necessary
 	if(!silent)
-		owner.visible_message("<font color='green'><b>[owner] expels [M] from their [lowertext(name)]!</b></font>")
+		owner.visible_message("<font color='green'><b>[owner] [release_verb] [M] from their [lowertext(name)]!</b></font>")
 		var/soundfile
 		if(!fancy_vore)
 			soundfile = classic_release_sounds[release_sound]
@@ -354,6 +469,10 @@
 			soundfile = fancy_release_sounds[release_sound]
 		if(soundfile)
 			playsound(src, soundfile, vol = 100, vary = 1, falloff = VORE_SOUND_FALLOFF, preference = /datum/client_preference/eating_noises, volume_channel = VOLUME_CHANNEL_VORE)
+	//Should fix your view not following you out of mobs sometimes!
+	if(ismob(M))
+		var/mob/ourmob = M
+		ourmob.reset_view(null)
 
 	return 1
 
@@ -367,12 +486,18 @@
 		prey.buckled.unbuckle_mob()
 
 	prey.forceMove(src)
+	if(ismob(prey))
+		var/mob/ourmob = prey
+		ourmob.reset_view(owner)
 	owner.updateVRPanel()
 	if(isanimal(owner))
 		owner.update_icon()
 
 	for(var/mob/living/M in contents)
 		M.updateVRPanel()
+
+	if(prey.ckey)
+		GLOB.prey_eaten_roundstat++
 
 // Get the line that should show up in Examine message if the owner of this belly
 // is examined.   By making this a proc, we not only take advantage of polymorphism,
@@ -433,7 +558,7 @@
 // This is useful in customization boxes and such. The delimiter right now is \n\n so
 // in message boxes, this looks nice and is easily delimited.
 /obj/belly/proc/get_messages(type, delim = "\n\n")
-	ASSERT(type == "smo" || type == "smi" || type == "dmo" || type == "dmp" || type == "em" || type == "ema" || type == "im_digest" || type == "im_hold" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")
+	ASSERT(type == "smo" || type == "smi" || type == "asmo" || type == "asmi" || type == "dmo" || type == "dmp" || type == "amo" || type == "amp" || type == "uamo" || type == "uamp" || type == "em" || type == "ema" || type == "im_digest" || type == "im_hold" || type == "im_holdabsorbed" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")
 
 	var/list/raw_messages
 	switch(type)
@@ -441,6 +566,10 @@
 			raw_messages = struggle_messages_outside
 		if("smi")
 			raw_messages = struggle_messages_inside
+		if("asmo")
+			raw_messages = absorbed_struggle_messages_outside
+		if("asmi")
+			raw_messages = absorbed_struggle_messages_inside
 		if("dmo")
 			raw_messages = digest_messages_owner
 		if("dmp")
@@ -449,10 +578,20 @@
 			raw_messages = examine_messages
 		if("ema")
 			raw_messages = examine_messages_absorbed
+		if("amo")
+			raw_messages = absorb_messages_owner
+		if("amp")
+			raw_messages = absorb_messages_prey
+		if("uamo")
+			raw_messages = unabsorb_messages_owner
+		if("uamp")
+			raw_messages = unabsorb_messages_prey
 		if("im_digest")
 			raw_messages = emote_lists[DM_DIGEST]
 		if("im_hold")
 			raw_messages = emote_lists[DM_HOLD]
+		if("im_holdabsorbed")
+			raw_messages = emote_lists[DM_HOLD_ABSORBED]
 		if("im_absorb")
 			raw_messages = emote_lists[DM_ABSORB]
 		if("im_heal")
@@ -478,7 +617,7 @@
 // replacement strings and linebreaks as delimiters (two \n\n by default).
 // They also sanitize the messages.
 /obj/belly/proc/set_messages(raw_text, type, delim = "\n\n")
-	ASSERT(type == "smo" || type == "smi" || type == "dmo" || type == "dmp" || type == "em" || type == "ema" || type == "im_digest" || type == "im_hold" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")
+	ASSERT(type == "smo" || type == "smi" || type == "asmo" || type == "asmi" || type == "dmo" || type == "dmp" || type == "amo" || type == "amp" || type == "uamo" || type == "uamp" || type == "em" || type == "ema" || type == "im_digest" || type == "im_hold" || type == "im_holdabsorbed" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")
 
 	var/list/raw_list = splittext(html_encode(raw_text),delim)
 	if(raw_list.len > 10)
@@ -486,12 +625,15 @@
 		log_debug("[owner] tried to set [lowertext(name)] with 11+ messages")
 
 	for(var/i = 1, i <= raw_list.len, i++)
-		if((length(raw_list[i]) > 160 || length(raw_list[i]) < 10) && !(type == "im_digest" || type == "im_hold" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")) //160 is fudged value due to htmlencoding increasing the size
+		if((length(raw_list[i]) > 160 || length(raw_list[i]) < 10) && !(type == "im_digest" || type == "im_hold" || type == "im_holdabsorbed" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb")) //160 is fudged value due to htmlencoding increasing the size
 			raw_list.Cut(i,i)
 			log_debug("[owner] tried to set [lowertext(name)] with >121 or <10 char message")
-		else if((type == "im_digest" || type == "im_hold" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb") && (length(raw_list[i]) > 510 || length(raw_list[i]) < 10))
+		else if((type == "im_digest" || type == "im_hold" || type == "im_holdabsorbed" || type == "im_absorb" || type == "im_heal" || type == "im_drain" || type == "im_steal" || type == "im_egg" || type == "im_shrink" || type == "im_grow" || type == "im_unabsorb") && (length(raw_list[i]) > 510 || length(raw_list[i]) < 10))
 			raw_list.Cut(i,i)
 			log_debug("[owner] tried to set [lowertext(name)] idle message with >501 or <10 char message")
+		else if((type == "em" || type == "ema") && (length(raw_list[i]) > 260 || length(raw_list[i]) < 10))
+			raw_list.Cut(i,i)
+			log_debug("[owner] tried to set [lowertext(name)] examine message with >260 or <10 char message")
 		else
 			raw_list[i] = readd_quotes(raw_list[i])
 			//Also fix % sign for var replacement
@@ -504,10 +646,22 @@
 			struggle_messages_outside = raw_list
 		if("smi")
 			struggle_messages_inside = raw_list
+		if("asmo")
+			absorbed_struggle_messages_outside = raw_list
+		if("asmi")
+			absorbed_struggle_messages_inside = raw_list
 		if("dmo")
 			digest_messages_owner = raw_list
 		if("dmp")
 			digest_messages_prey = raw_list
+		if("amo")
+			absorb_messages_owner = raw_list
+		if("amp")
+			absorb_messages_prey = raw_list
+		if("uamo")
+			unabsorb_messages_owner = raw_list
+		if("uamp")
+			unabsorb_messages_prey = raw_list
 		if("em")
 			examine_messages = raw_list
 		if("ema")
@@ -516,6 +670,8 @@
 			emote_lists[DM_DIGEST] = raw_list
 		if("im_hold")
 			emote_lists[DM_HOLD] = raw_list
+		if("im_holdabsorbed")
+			emote_lists[DM_HOLD_ABSORBED] = raw_list
 		if("im_absorb")
 			emote_lists[DM_ABSORB] = raw_list
 		if("im_heal")
@@ -585,9 +741,33 @@
 
 // Handle a mob being absorbed
 /obj/belly/proc/absorb_living(mob/living/M)
-	M.absorbed = 1
-	to_chat(M, "<span class='notice'>[owner]'s [lowertext(name)] absorbs your body, making you part of them.</span>")
-	to_chat(owner, "<span class='notice'>Your [lowertext(name)] absorbs [M]'s body, making them part of you.</span>")
+	var/absorb_alert_owner = pick(absorb_messages_owner)
+	var/absorb_alert_prey = pick(absorb_messages_prey)
+
+	var/absorbed_count = 0
+	for(var/mob/living/L in contents)
+		if(L.absorbed)
+			absorbed_count++
+
+	//Replace placeholder vars
+	absorb_alert_owner = replacetext(absorb_alert_owner, "%pred", owner)
+	absorb_alert_owner = replacetext(absorb_alert_owner, "%prey", M)
+	absorb_alert_owner = replacetext(absorb_alert_owner, "%belly", lowertext(name))
+	absorb_alert_owner = replacetext(absorb_alert_owner, "%countprey", absorbed_count)
+
+	absorb_alert_prey = replacetext(absorb_alert_prey, "%pred", owner)
+	absorb_alert_prey = replacetext(absorb_alert_prey, "%prey", M)
+	absorb_alert_prey = replacetext(absorb_alert_prey, "%belly", lowertext(name))
+	absorb_alert_prey = replacetext(absorb_alert_prey, "%countprey", absorbed_count)
+
+	M.absorbed = TRUE
+	if(M.ckey)
+		handle_absorb_langs(M, owner)
+
+		GLOB.prey_absorbed_roundstat++
+
+	to_chat(M, "<span class='notice'>[absorb_alert_prey]</span>")
+	to_chat(owner, "<span class='notice'>[absorb_alert_owner]</span>")
 	if(M.noisy) //Mute drained absorbee hunger if enabled.
 		M.noisy = FALSE
 
@@ -606,6 +786,10 @@
 	if(M.loc != src)
 		M.forceMove(src)
 
+	if(ismob(M))
+		var/mob/ourmob = M
+		ourmob.reset_view(owner)
+
 	//Seek out absorbed prey of the prey, absorb them too.
 	//This in particular will recurse oddly because if there is absorbed prey of prey of prey...
 	//it will just move them up one belly. This should never happen though since... when they were
@@ -615,10 +799,60 @@
 			if(Mm.absorbed)
 				absorb_living(Mm)
 
+
+	if(absorbed_desc)
+		//Replace placeholder vars
+		var/formatted_abs_desc
+		formatted_abs_desc = replacetext(absorbed_desc, "%belly", lowertext(name)) //replace with this belly's name
+		formatted_abs_desc = replacetext(formatted_abs_desc, "%pred", owner) //replace with this belly's owner
+		formatted_abs_desc = replacetext(formatted_abs_desc, "%prey", M) //replace with whatever mob entered into this belly
+		to_chat(M, "<span class='notice'><B>[formatted_abs_desc]</B></span>")
+
 	//Update owner
 	owner.updateVRPanel()
 	if(isanimal(owner))
 		owner.update_icon()
+
+// Handle a mob being unabsorbed
+/obj/belly/proc/unabsorb_living(mob/living/M)
+	var/unabsorb_alert_owner = pick(unabsorb_messages_owner)
+	var/unabsorb_alert_prey = pick(unabsorb_messages_prey)
+
+	var/absorbed_count = 0
+	for(var/mob/living/L in contents)
+		if(L.absorbed)
+			absorbed_count++
+
+	//Replace placeholder vars
+	unabsorb_alert_owner = replacetext(unabsorb_alert_owner, "%pred", owner)
+	unabsorb_alert_owner = replacetext(unabsorb_alert_owner, "%prey", M)
+	unabsorb_alert_owner = replacetext(unabsorb_alert_owner, "%belly", lowertext(name))
+	unabsorb_alert_owner = replacetext(unabsorb_alert_owner, "%countprey", absorbed_count)
+
+	unabsorb_alert_prey = replacetext(unabsorb_alert_prey, "%pred", owner)
+	unabsorb_alert_prey = replacetext(unabsorb_alert_prey, "%prey", M)
+	unabsorb_alert_prey = replacetext(unabsorb_alert_prey, "%belly", lowertext(name))
+	unabsorb_alert_prey = replacetext(unabsorb_alert_prey, "%countprey", absorbed_count)
+
+	M.absorbed = FALSE
+	handle_absorb_langs(M, owner)
+	to_chat(M, "<span class='notice'>[unabsorb_alert_prey]</span>")
+	to_chat(owner, "<span class='notice'>[unabsorb_alert_owner]</span>")
+
+	if(desc)
+		to_chat(M, "<span class='notice'><B>[desc]</B></span>")
+
+	//Update owner
+	owner.updateVRPanel()
+	if(isanimal(owner))
+		owner.update_icon()
+
+/////////////////////////////////////////////////////////////////////////
+/obj/belly/proc/handle_absorb_langs()
+	owner.absorb_langs()
+
+////////////////////////////////////////////////////////////////////////
+
 
 //Digest a single item
 //Receives a return value from digest_act that's how much nutrition
@@ -731,7 +965,7 @@
 					for(var/mob/M in hearers(4, owner))
 						M.show_message("<span class='warning'>[C] suddenly slips out of [owner]'s [lowertext(name)]!</span>", 2)
 					return
-				if((escapable) && (R.loc == src) && !R.absorbed) //Does the owner still have escapable enabled?
+				if(escapable && (R.loc == src) && !R.absorbed) //Does the owner still have escapable enabled?
 					release_specific_contents(R)
 					to_chat(R,"<span class='warning'>You climb out of \the [lowertext(name)].</span>")
 					to_chat(owner,"<span class='warning'>[R] climbs out of your [lowertext(name)]!</span>")
@@ -804,6 +1038,50 @@
 			to_chat(owner, "<span class='warning'>Your prey appears to be unable to make any progress in escaping your [lowertext(name)].</span>")
 			return
 
+
+/obj/belly/proc/relay_absorbed_resist(mob/living/R)
+	if (!(R in contents) || !R.absorbed)
+		return  // User is not in this belly or isn't actually absorbed
+
+	R.setClickCooldown(50)
+
+	var/struggle_outer_message = pick(absorbed_struggle_messages_outside)
+	var/struggle_user_message = pick(absorbed_struggle_messages_inside)
+
+	var/absorbed_count = 0
+	for(var/mob/living/L in contents)
+		if(L.absorbed)
+			absorbed_count++
+
+	struggle_outer_message = replacetext(struggle_outer_message, "%pred", owner)
+	struggle_outer_message = replacetext(struggle_outer_message, "%prey", R)
+	struggle_outer_message = replacetext(struggle_outer_message, "%belly", lowertext(name))
+	struggle_outer_message = replacetext(struggle_outer_message, "%countprey", absorbed_count)
+
+	struggle_user_message = replacetext(struggle_user_message, "%pred", owner)
+	struggle_user_message = replacetext(struggle_user_message, "%prey", R)
+	struggle_user_message = replacetext(struggle_user_message, "%belly", lowertext(name))
+	struggle_user_message = replacetext(struggle_user_message, "%countprey", absorbed_count)
+
+	struggle_outer_message = "<span class='alert'>[struggle_outer_message]</span>"
+	struggle_user_message = "<span class='alert'>[struggle_user_message]</span>"
+
+	for(var/mob/M in hearers(4, owner))
+		M.show_message(struggle_outer_message, 2) // hearable
+	to_chat(R, struggle_user_message)
+
+	var/sound/struggle_snuggle
+	var/sound/struggle_rustle = sound(get_sfx("rustle"))
+
+	if(is_wet)
+		if(!fancy_vore)
+			struggle_snuggle = sound(get_sfx("classic_struggle_sounds"))
+		else
+			struggle_snuggle = sound(get_sfx("fancy_prey_struggle"))
+		playsound(src, struggle_snuggle, vary = 1, vol = 75, falloff = VORE_SOUND_FALLOFF, preference = /datum/client_preference/digestion_noises, volume_channel = VOLUME_CHANNEL_VORE)
+	else
+		playsound(src, struggle_rustle, vary = 1, vol = 75, falloff = VORE_SOUND_FALLOFF, preference = /datum/client_preference/digestion_noises, volume_channel = VOLUME_CHANNEL_VORE)
+
 /obj/belly/proc/get_mobs_and_objs_in_belly()
 	var/list/see = list()
 	var/list/belly_mobs = list()
@@ -822,6 +1100,9 @@
 	if(!(content in src) || !istype(target))
 		return
 	content.forceMove(target)
+	if(ismob(content))
+		var/mob/ourmob = content
+		ourmob.reset_view(owner)
 	if(isitem(content))
 		var/obj/item/I = content
 		if(istype(I,/obj/item/weapon/card/id))
@@ -860,8 +1141,10 @@
 	//// Non-object variables
 	dupe.name = name
 	dupe.desc = desc
+	dupe.absorbed_desc = absorbed_desc
 	dupe.vore_sound = vore_sound
 	dupe.vore_verb = vore_verb
+	dupe.release_verb = release_verb
 	dupe.human_prey_swallow_time = human_prey_swallow_time
 	dupe.nonhuman_prey_swallow_time = nonhuman_prey_swallow_time
 	dupe.emote_time = emote_time
@@ -869,6 +1152,8 @@
 	dupe.digest_brute = digest_brute
 	dupe.digest_burn = digest_burn
 	dupe.digest_oxy = digest_oxy
+	dupe.digest_tox = digest_tox
+	dupe.digest_clone = digest_clone
 	dupe.immutable = immutable
 	dupe.can_taste = can_taste
 	dupe.escapable = escapable
@@ -893,9 +1178,13 @@
 	dupe.wet_loop = wet_loop
 	dupe.belly_fullscreen = belly_fullscreen
 	dupe.disable_hud = disable_hud
+	dupe.belly_fullscreen_color = belly_fullscreen_color
+	dupe.colorization_enabled = colorization_enabled
 	dupe.egg_type = egg_type
 	dupe.emote_time = emote_time
 	dupe.emote_active = emote_active
+	dupe.selective_preference = selective_preference
+	dupe.save_digest_mode = save_digest_mode
 
 	//// Object-holding variables
 	//struggle_messages_outside - strings
@@ -908,6 +1197,16 @@
 	for(var/I in struggle_messages_inside)
 		dupe.struggle_messages_inside += I
 
+	//absorbed_struggle_messages_outside - strings
+	dupe.absorbed_struggle_messages_outside.Cut()
+	for(var/I in absorbed_struggle_messages_outside)
+		dupe.absorbed_struggle_messages_outside += I
+
+	//absorbed_struggle_messages_inside - strings
+	dupe.absorbed_struggle_messages_inside.Cut()
+	for(var/I in absorbed_struggle_messages_inside)
+		dupe.absorbed_struggle_messages_inside += I
+
 	//digest_messages_owner - strings
 	dupe.digest_messages_owner.Cut()
 	for(var/I in digest_messages_owner)
@@ -918,12 +1217,32 @@
 	for(var/I in digest_messages_prey)
 		dupe.digest_messages_prey += I
 
+	//absorb_messages_owner - strings
+	dupe.absorb_messages_owner.Cut()
+	for(var/I in absorb_messages_owner)
+		dupe.absorb_messages_owner += I
+
+	//absorb_messages_prey - strings
+	dupe.absorb_messages_prey.Cut()
+	for(var/I in absorb_messages_prey)
+		dupe.absorb_messages_prey += I
+
+	//unabsorb_messages_owner - strings
+	dupe.unabsorb_messages_owner.Cut()
+	for(var/I in unabsorb_messages_owner)
+		dupe.unabsorb_messages_owner += I
+
+	//unabsorb_messages_prey - strings
+	dupe.unabsorb_messages_prey.Cut()
+	for(var/I in unabsorb_messages_prey)
+		dupe.unabsorb_messages_prey += I
+
 	//examine_messages - strings
 	dupe.examine_messages.Cut()
 	for(var/I in examine_messages)
 		dupe.examine_messages += I
 
-	//examine_messages - strings
+	//examine_messages_absorbed - strings
 	dupe.examine_messages_absorbed.Cut()
 	for(var/I in examine_messages_absorbed)
 		dupe.examine_messages_absorbed += I

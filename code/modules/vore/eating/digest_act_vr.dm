@@ -9,6 +9,9 @@
 			var/obj/item/device/pda/P = src
 			if(P.id)
 				P.id = null
+
+		for(var/mob/living/voice/V in possessed_voice) // Delete voices.
+			V.Destroy() //Destroy the voice.
 		for(var/mob/living/M in contents)//Drop mobs from objects(shoes) before deletion
 			M.forceMove(item_storage)
 		for(var/obj/item/O in contents)
@@ -19,6 +22,7 @@
 					qdel(O)
 			else if(item_storage)
 				O.forceMove(item_storage)
+		GLOB.items_digested_roundstat++
 		qdel(src)
 		return w_class
 
@@ -39,6 +43,8 @@
 			var/obj/item/device/pda/P = src
 			if(P.id)
 				P.id = null
+		for(var/mob/living/voice/V in possessed_voice) // Delete voices.
+			V.Destroy() //Destroy the voice.
 		for(var/mob/living/M in contents)//Drop mobs from objects(shoes) before deletion
 			M.forceMove(item_storage)
 		for(var/obj/item/O in contents)
@@ -49,7 +55,16 @@
 					qdel(O)
 			else if(item_storage)
 				O.forceMove(item_storage)
-		qdel(src)
+		if(istype(src,/obj/item/stack))
+			var/obj/item/stack/S = src
+			if(S.get_amount() <= 1)
+				qdel(src)
+			else
+				S.use(1)
+				digest_stage = w_class
+		else
+			GLOB.items_digested_roundstat++
+			qdel(src)
 	if(g_damage > w_class)
 		return w_class
 	return g_damage
@@ -88,7 +103,8 @@
 		icon = 'icons/obj/card_vr.dmi'
 		icon_state = "[initial(icon_state)]_digested"
 	else
-		sprite_stack += "digested"
+		if(!sprite_stack.Find("digested"))
+			sprite_stack += "digested"
 	update_icon()
 	return FALSE
 
@@ -131,6 +147,10 @@
 /////////////
 /obj/item/device/mmi/digital/posibrain/digest_act(atom/movable/item_storage = null)
 	//Replace this with a VORE setting so all types of posibrains can/can't be digested on a whim
+	return FALSE
+
+/obj/item/organ/internal/nano/digest_act(atom/movable/item_storage = null)
+	//Make proteans recoverable too
 	return FALSE
 
 // Gradual damage measurement

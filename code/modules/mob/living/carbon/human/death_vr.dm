@@ -1,6 +1,5 @@
-/* outpost 21  edit - nif removal
 /mob/living/carbon/human/gib()
-
+	/* outpost 21  edit - nif removal
 	//Drop the NIF, they're expensive, why not recover them? Also important for prometheans.
 	if(nif)
 		var/obj/item/device/nif/deadnif = nif //Unimplant removes the reference on the mob
@@ -8,9 +7,9 @@
 		deadnif.forceMove(drop_location())
 		deadnif.throw_at(get_edge_target_turf(src,pick(alldirs)), rand(1,3), round(30/deadnif.w_class))
 		deadnif.wear(10) //Presumably it's gone through some shit if they got gibbed?
-
+	*/
+	release_vore_contents(silent = TRUE)
 	. = ..()
-*/
 
 //Surprisingly this is only called for humans, but whatever!
 /hook/death/proc/digestion_check(var/mob/living/carbon/human/H, var/gibbed)

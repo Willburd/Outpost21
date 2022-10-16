@@ -71,9 +71,9 @@
 		"rad" = 100
 		)
 
-	speak_emote = list("rumbles")
+	loot_list = list(/obj/item/weapon/ore/diamond = 100, /obj/item/weapon/ectoplasm = 3)
 
-	loot_list = list(/obj/item/weapon/ore/diamond)
+	speak_emote = list("rumbles")
 
 	vore_active = 0
 
@@ -101,14 +101,14 @@
 
 /mob/living/simple_mob/vore/alienanimals/space_ghost/shoot(atom/A) //We're shooting ghosts at people and need them to have the same faction as their parent, okay?
 	if(!projectiletype)
-		return	
+		return
 	if(A == get_turf(src))
 		return
 	face_atom(A)
 	if(reload_count >= reload_max)
 		return
 	var/mob/living/simple_mob/P = new projectiletype(loc, src)
-	
+
 	if(!P)
 		return
 	if(needs_reload)
@@ -192,7 +192,7 @@
 	. = ..()
 	icon_living = "spookyghost-[rand(1,2)]"
 	icon_state = icon_living
-	addtimer(CALLBACK(src, .proc/death), 2 MINUTES)
+	addtimer(CALLBACK(src, .proc/death), 35 SECONDS)
 	update_icon()
 
 /datum/ai_holder/simple_mob/melee/space_ghost

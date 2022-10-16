@@ -191,7 +191,7 @@
 /obj/item/weapon/gun/energy/kinetic_accelerator/proc/empty()
 	if(power_supply)
 		power_supply.use(power_supply.charge)
-	update_icon()
+		update_icon()
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/proc/attempt_reload(recharge_time)
 	if(!power_supply)
@@ -223,7 +223,7 @@
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/update_icon()
 	cut_overlays()
-	if(overheat || (power_supply.charge == 0))
+	if(overheat || !power_supply || (power_supply.charge == 0))
 		add_overlay(emptystate)
 
 #define KA_ENVIRO_TYPE_COLD 0
@@ -382,13 +382,6 @@
 	. = TRUE
 	if(src in KA.modkits) // Sanity check to prevent installing the same modkit twice thanks to occasional click/lag delays.
 		return FALSE
-	// if(minebot_upgrade)
-	// 	if(minebot_exclusive && !istype(KA.loc, /mob/living/simple_animal/hostile/mining_drone))
-	// 		to_chat(user, "<span class='notice'>The modkit you're trying to install is only rated for minebot use.</span>")
-	// 		return FALSE
-	// else if(istype(KA.loc, /mob/living/simple_animal/hostile/mining_drone))
-	// 	to_chat(user, "<span class='notice'>The modkit you're trying to install is not rated for minebot use.</span>")
-	// 	return FALSE
 	if(denied_type)
 		var/number_of_denied = 0
 		for(var/A in KA.get_modkits())
@@ -661,7 +654,7 @@
 	maximum_of_type = 1
 	cost = 35
 
-/obj/item/borg/upgrade/modkit/indoors/offsite/modify_projectile(obj/item/projectile/kinetic/K)
+/obj/item/borg/upgrade/modkit/offsite/modify_projectile(obj/item/projectile/kinetic/K)
 	K.environment = KA_ENVIRO_TYPE_OFFSITE
 
 // Atmospheric

@@ -145,6 +145,7 @@
 	desc = "Magnetic levitation tram tracks. Caution! Electrified!"
 	icon = 'icons/turf/flooring/maglevs.dmi'
 	icon_state = "maglevup"
+	can_be_plated = FALSE
 
 	var/area/shock_area = /area/tether/surfacebase/tram
 
@@ -211,7 +212,7 @@
 
 	var/mob/living/carbon/human/user = AM
 
-	var/choice = tgui_alert(user, "Do you want to depart via the tram? Your character will leave the round.","Departure",list("Yes","No"))
+	var/choice = tgui_alert(usr, "Do you want to depart via the tram? Your character will leave the round.","Departure",list("Yes","No"))
 	if(user && Adjacent(user) && choice == "Yes")
 		var/mob/observer/dead/newghost = user.ghostize()
 		newghost.timeofdeath = world.time
@@ -263,27 +264,6 @@
 // Our map is small, if the supermatter is ejected lets not have it just blow up somewhere else
 /obj/machinery/power/supermatter/touch_map_edge()
 	qdel(src)
-
-//Airlock antitox vendor
-/obj/machinery/vending/wallmed_airlock
-	name = "Airlock NanoMed"
-	desc = "Wall-mounted Medical Equipment dispenser. This limited-use version dispenses antitoxins with mild painkillers for surface EVAs."
-	icon_state = "wallmed"
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/weapon/reagent_containers/pill/airlock = 20)
-	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 2)
-	req_log_access = access_cmo
-	has_logs = 1
-
-/obj/item/weapon/reagent_containers/pill/airlock
-	name = "\'Airlock\' Pill"
-	desc = "Neutralizes toxins and provides a mild analgesic effect."
-	icon_state = "pill2"
-
-/obj/item/weapon/reagent_containers/pill/airlock/New()
-	..()
-	reagents.add_reagent("anti_toxin", 15)
-	reagents.add_reagent("paracetamol", 5)
 
 //"Red" Armory Door
 /obj/machinery/door/airlock/security/armory
@@ -350,7 +330,7 @@
 	layer = ABOVE_WINDOW_LAYER
 /obj/machinery/vending/wallmed2
 	layer = ABOVE_WINDOW_LAYER
-/obj/structure/closet/fireaxecabinet
+/obj/structure/fireaxecabinet
 	layer = ABOVE_WINDOW_LAYER
 /obj/structure/extinguisher_cabinet
 	layer = ABOVE_WINDOW_LAYER

@@ -57,6 +57,9 @@
 /datum/alt_title/cargo_supervisor
 	title = "Cargo Supervisor"
 
+/datum/job/qm/get_request_reasons()
+	return list("Training crew")
+
 
 /datum/job/cargo_tech
 	total_positions = 3
@@ -196,6 +199,7 @@
 	title = "Monk"
 
 /* outpost 21 - job removals
+
 
 //////////////////////////////////
 //			Entertainer

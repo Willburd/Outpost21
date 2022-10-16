@@ -190,7 +190,12 @@
 				var/clr
 				if(get_trait(TRAIT_BIOLUM_COLOUR))
 					clr = get_trait(TRAIT_BIOLUM_COLOUR)
-				splat.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
+				//VOREStation Edit Start - Tons of super bright super long range lights everywhere is annoying and laggy, so let's limit it a bit.
+				var/blight = get_trait(TRAIT_BIOLUM)
+				if(blight >= 5)
+					blight = 5
+				splat.set_light(blight, 0.5, l_color = clr)
+				//VOREStation Edit End
 			var/flesh_colour = get_trait(TRAIT_FLESH_COLOUR)
 			if(!flesh_colour) flesh_colour = get_trait(TRAIT_PRODUCT_COLOUR)
 			if(flesh_colour) splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
@@ -414,8 +419,8 @@
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(SSplants.accessible_product_sprites))
 	set_trait(TRAIT_PLANT_ICON,pick(SSplants.accessible_plant_sprites))
-	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
+	set_trait(TRAIT_PLANT_COLOUR,get_random_colour(0,75,190))
+	set_trait(TRAIT_PRODUCT_COLOUR,get_random_colour(0,75,190))
 	update_growth_stages()
 
 	if(prob(20))
@@ -543,7 +548,7 @@
 
 	if(prob(5))
 		set_trait(TRAIT_BIOLUM,1)
-		set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+		set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 
 	if(prob(3))
 		set_trait(TRAIT_SPORING,1)
@@ -649,7 +654,7 @@
 					if(get_trait(TRAIT_BIOLUM))
 						source_turf.visible_message("<b>\The [display_name]</b> begins to glow!")
 						if(prob(degree*2))
-							set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+							set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
@@ -740,9 +745,9 @@
 		if(GENE_BIOCHEMISTRY)
 			P.values["[TRAIT_CHEMS]"] =        chems
 			P.values["[TRAIT_EXUDE_GASSES]"] = exude_gasses
-			traits_to_copy = list(TRAIT_POTENCY, TRAIT_SPORING, TRAIT_BENEFICIAL_REAG, TRAIT_MUTAGENIC_REAG, TRAIT_TOXIC_REAG)
+			traits_to_copy = list(TRAIT_POTENCY, TRAIT_BENEFICIAL_REAG, TRAIT_MUTAGENIC_REAG, TRAIT_TOXIC_REAG)
 		if(GENE_OUTPUT)
-			traits_to_copy = list(TRAIT_PRODUCES_POWER,TRAIT_BIOLUM)
+			traits_to_copy = list(TRAIT_PRODUCES_POWER,TRAIT_BIOLUM,TRAIT_SPORING)
 		if(GENE_ATMOSPHERE)
 			traits_to_copy = list(TRAIT_HEAT_TOLERANCE,TRAIT_LOWKPA_TOLERANCE,TRAIT_HIGHKPA_TOLERANCE)
 		if(GENE_HARDINESS)
@@ -839,8 +844,12 @@
 				var/clr
 				if(get_trait(TRAIT_BIOLUM_COLOUR))
 					clr = get_trait(TRAIT_BIOLUM_COLOUR)
-				product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
-
+				//VOREStation Edit Start - Tons of super bright super long range lights everywhere is annoying and laggy, so let's limit it a bit.
+				var/blight = get_trait(TRAIT_BIOLUM)
+				if(blight >= 5)
+					blight = 5
+				product.set_light(blight, 0.5, l_color = clr)
+				//VOREStation Edit End
 			if(get_trait(TRAIT_STINGS))
 				product.force = 1
 

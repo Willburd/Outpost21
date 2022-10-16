@@ -82,7 +82,7 @@
 	name_language = LANGUAGE_SKRELLIAN
 	color_mult = 1
 	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
-	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair, /mob/living/carbon/human/proc/water_stealth, /mob/living/carbon/human/proc/underwater_devour)
 	min_age = 18
 	max_age = 110
 
@@ -106,6 +106,7 @@
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	water_breather = TRUE
+	water_movement = -4 //Negates shallow. Halves deep.
 
 	flesh_color = "#AFA59E"
 	base_color = "#777777"
@@ -131,6 +132,7 @@
 	name_language = LANGUAGE_BIRDSONG
 	color_mult = 1
 	inherent_verbs = list(/mob/living/proc/flying_toggle,
+		/mob/living/proc/flying_vore_toggle,
 		/mob/living/proc/start_wings_hovering,
 		/mob/living/carbon/human/proc/tie_hair)
 	min_age = 18
@@ -213,6 +215,10 @@
 /datum/species/vulpkanin
 	name = SPECIES_VULPKANIN
 	name_plural = "Vulpkanin"
+	blurb = "Vulpkanin are a species of sapient canine bipeds, who are the descendants of a lost colony during the waning days of a Precursor species, \
+	from which their distant cousins, the Zorren, also originate from. Independent and iconoclast, they have abandoned the ideals of their forefathers \
+	largely and prefer to look outwards as explorers and scientists to forge their own identity. They speak a guttural language known as 'Canilunzt' \
+	which has a heavy emphasis on utilizing tail positioning and ear twitches to communicate intent."
 	icobase = 'icons/mob/human_races/r_vulpkanin.dmi'
 	deform = 'icons/mob/human_races/r_vulpkanin.dmi'
 //	path = /mob/living/carbon/human/vulpkanin
@@ -230,13 +236,7 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/lick_wounds,
 		/mob/living/carbon/human/proc/tie_hair)
 
-	blurb = "Vulpkanin are a species of sharp-witted canine-pideds residing on the planet Altam just barely within the \
-	dual-star Vazzend system. Their politically de-centralized society and independent natures have led them to become a species and \
-	culture both feared and respected for their scientific breakthroughs. Discovery, loyalty, and utilitarianism dominates their lifestyles \
-	to the degree it can cause conflict with more rigorous and strict authorities. They speak a guttural language known as 'Canilunzt' \
-	which has a heavy emphasis on utilizing tail positioning and ear twitches to communicate intent."
-
-	wikilink="https://yawn.izac.live/Vulpkanin"
+	wikilink="https://yawn.izac.live/Vulpkanin" //YW EDIT: Wiki
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/vulpkanin)
 
@@ -289,12 +289,14 @@
 	deform = 'icons/mob/human_races/r_def_skrell_vr.dmi'
 	color_mult = 1
 	min_age = 18
-	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair, /mob/living/carbon/human/proc/water_stealth, /mob/living/carbon/human/proc/underwater_devour)
 	reagent_tag = null
 	allergens = null
 	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL)
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	wikilink="https://yawn.izac.live/Skrell"
+	water_breather = TRUE
+	water_movement = -4 //Negates shallow. Halves deep.
 
 /* outpost 21 race removal
 /datum/species/zaddat
@@ -365,7 +367,7 @@
 	name_language = null
 	color_mult = 1
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
-	inherent_verbs = list(/mob/living/proc/flying_toggle,/mob/living/proc/start_wings_hovering,/mob/living/carbon/human/proc/tie_hair)
+	inherent_verbs = list(/mob/living/proc/flying_toggle,/mob/living/proc/flying_vore_toggle,/mob/living/proc/start_wings_hovering,/mob/living/carbon/human/proc/tie_hair)
 
 	min_age = 18
 	max_age = 80
@@ -544,7 +546,7 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 4 //Better hunters in the dark.
 	hunger_factor = 0.1 //In exchange, they get hungry a tad faster.
-	num_alternate_languages = 2
+	num_alternate_languages = 3
 
 	min_age = 18
 	max_age = 80
@@ -570,4 +572,61 @@
 		"Your chitin feels extremely warm.",
 		"You feel uncomfortably warm.",
 		"Your chitin feels hot."
+		)
+
+/datum/species/altevian
+	name = SPECIES_ALTEVIAN
+	name_plural = "Altevians"
+	icobase = 'icons/mob/human_races/r_altevian.dmi'
+	deform = 'icons/mob/human_races/r_def_altevian.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	language = LANGUAGE_TAVAN
+	num_alternate_languages = 3
+	secondary_langs = list(LANGUAGE_TAVAN)
+	name_language = null
+	color_mult = 1
+	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+
+	min_age = 18
+	max_age = 80
+
+	blurb = "The Altevian are a species of tall, rodent humanoids that are akin to rats for their features. \
+	The Altevian, unlike most species, do not have a home planet, nor system, adopting a fully nomadic lifestyle \
+	for their survival across the stars. Instead, they have opted to live in massive super capital-class colony-ships \
+	with a flagship as their place they would call home."
+
+	wikilink="https://wiki.vore-station.net/Altevian"
+
+	catalogue_data = list(/datum/category_item/catalogue/fauna/altevian)
+
+	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#777777"
+
+	genders = list(MALE, FEMALE, PLURAL, NEUTER)
+
+	burn_mod =  1.15
+	hunger_factor = 0.04
+	can_zero_g_move = TRUE
+
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+
+	has_limbs = list(
+		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)

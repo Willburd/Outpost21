@@ -20,7 +20,7 @@
 	var/list/neg_traits = list()
 
 	var/traits_cheating = 0 //Varedit by admins allows saving new maximums on people who apply/etc
-	var/starting_trait_points = STARTING_SPECIES_POINTS
+	var/starting_trait_points = 0
 	var/max_traits = MAX_SPECIES_TRAITS
 	var/dirty_synth = 0		//Are you a synth
 	var/gross_meatbag = 0		//Where'd I leave my Voight-Kampff test kit?
@@ -72,15 +72,26 @@
 	pref.blood_color = sanitize_hexcolor(pref.blood_color, default="#A10808")
 
 	if(!pref.traits_cheating)
-		pref.starting_trait_points = STARTING_SPECIES_POINTS
+		var/datum/species/S = GLOB.all_species[pref.species]
+		if(S)
+			pref.starting_trait_points = S.trait_points
+		else
+			pref.starting_trait_points = 0
 		pref.max_traits = MAX_SPECIES_TRAITS
 
-	// if(pref.species != SPECIES_CUSTOM) outpost 21 - custom race removal
-	pref.pos_traits.Cut()
-	pref.neg_traits.Cut()
+	if(pref.organ_data[O_BRAIN])	//Checking if we have a synth on our hands, boys.
+		pref.dirty_synth = 1
+		pref.gross_meatbag = 0
+	else
+		pref.gross_meatbag = 1
+		pref.dirty_synth = 0
+
 	// Clean up positive traits
 	for(var/datum/trait/path as anything in pref.pos_traits)
 		if(!(path in positive_traits))
+			pref.pos_traits -= path
+			continue
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits_positive))
 			pref.pos_traits -= path
 			continue
 		var/take_flags = initial(path.can_take)
@@ -91,7 +102,7 @@
 		if(!(path in neutral_traits))
 			pref.neu_traits -= path
 			continue
-		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits)) // outpost 21 - custom race removal
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits_neutral)) // outpost 21 - custom race removal
 			pref.neu_traits -= path
 			continue
 		var/take_flags = initial(path.can_take)
@@ -102,10 +113,13 @@
 		if(!(path in negative_traits))
 			pref.neg_traits -= path
 			continue
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits_negative))
+			pref.neg_traits -= path
+			continue
 		var/take_flags = initial(path.can_take)
 		if((pref.dirty_synth && !(take_flags & SYNTHETICS)) || (pref.gross_meatbag && !(take_flags & ORGANICS)))
 			pref.neg_traits -= path
-	
+
 	var/datum/species/selected_species = GLOB.all_species[pref.species]
 	if(selected_species.selects_bodytype)
 		// Allowed!
@@ -134,6 +148,9 @@
 	var/datum/species/S = character.species
 	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, pref.custom_base)
 
+	for(var/datum/trait/T in new_S.traits)
+		T.apply_pref(src)
+
 	//Any additional non-trait settings can be applied here
 	new_S.blood_color = pref.blood_color
 
@@ -157,23 +174,23 @@
 
 	var/traits_left = pref.max_traits
 
-	if(pref.species == SPECIES_CUSTOM)
-		var/points_left = pref.starting_trait_points
 
-		for(var/T in pref.pos_traits + pref.neg_traits)
-			points_left -= traits_costs[T]
-			traits_left--
-		. += "<b>Traits Left:</b> [traits_left]<br>"
-		. += "<b>Points Left:</b> [points_left]<br>"
-		if(points_left < 0 || traits_left < 0 || !pref.custom_species)
-			. += "<span style='color:red;'><b>^ Fix things! ^</b></span><br>"
+	var/points_left = pref.starting_trait_points
 
-		. += "<a href='?src=\ref[src];add_trait=[POSITIVE_MODE]'>Positive Trait +</a><br>"
-		. += "<ul>"
-		for(var/T in pref.pos_traits)
-			var/datum/trait/trait = positive_traits[T]
-			. += "<li>- <a href='?src=\ref[src];clicked_pos_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
-		. += "</ul>"
+	for(var/T in pref.pos_traits + pref.neg_traits)
+		points_left -= traits_costs[T]
+		traits_left--
+	. += "<b>Traits Left:</b> [traits_left]<br>"
+	. += "<b>Points Left:</b> [points_left]<br>"
+	if(points_left < 0 || traits_left < 0 || (!pref.custom_species && pref.species == SPECIES_CUSTOM))
+		. += "<span style='color:red;'><b>^ Fix things! ^</b></span><br>"
+
+	. += "<a href='?src=\ref[src];add_trait=[POSITIVE_MODE]'>Positive Trait +</a><br>"
+	. += "<ul>"
+	for(var/T in pref.pos_traits)
+		var/datum/trait/trait = positive_traits[T]
+		. += "<li>- <a href='?src=\ref[src];clicked_pos_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
+	. += "</ul>"
 
 		. += "<a href='?src=\ref[src];add_trait=[NEGATIVE_MODE]'>Negative Trait +</a><br>"
 		. += "<ul>"
@@ -182,26 +199,43 @@
 			. += "<li>- <a href='?src=\ref[src];clicked_neg_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
 		. += "</ul>"
 	*/
+
 	. += "<a href='?src=\ref[src];add_trait=[NEUTRAL_MODE]'>Neutral Trait +</a><br>"
 	. += "<ul>"
-	
+
 	for(var/T in pref.neu_traits)
 		var/datum/trait/trait = neutral_traits[T]
 		. += "<li>- <a href='?src=\ref[src];clicked_neu_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
 	. += "</ul>"
+
+	. += "<a href='?src=\ref[src];add_trait=[NEGATIVE_MODE]'>Negative Trait +</a><br>"
+	. += "<ul>"
+	for(var/T in pref.neg_traits)
+		var/datum/trait/trait = negative_traits[T]
+		. += "<li>- <a href='?src=\ref[src];clicked_neg_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
+	. += "</ul>"
+
 	. += "<b>Blood Color: </b>" //People that want to use a certain species to have that species traits (xenochimera/promethean/spider) should be able to set their own blood color.
 	. += "<a href='?src=\ref[src];blood_color=1'>Set Color</a>"
 	. += "<a href='?src=\ref[src];blood_reset=1'>R</a><br>"
 	. += "<br>"
 
 	. += "<b>Custom Say: </b>"
-	. += "<a href='?src=\ref[src];custom_say=1'>Set Say Verb</a><br>"
+	. += "<a href='?src=\ref[src];custom_say=1'>Set Say Verb</a>"
+	. += "(<a href='?src=\ref[src];reset_say=1'>Reset</A>)"
+	. += "<br>"
 	. += "<b>Custom Whisper: </b>"
-	. += "<a href='?src=\ref[src];custom_whisper=1'>Set Whisper Verb</a><br>"
+	. += "<a href='?src=\ref[src];custom_whisper=1'>Set Whisper Verb</a>"
+	. += "(<a href='?src=\ref[src];reset_whisper=1'>Reset</A>)"
+	. += "<br>"
 	. += "<b>Custom Ask: </b>"
-	. += "<a href='?src=\ref[src];custom_ask=1'>Set Ask Verb</a><br>"
+	. += "<a href='?src=\ref[src];custom_ask=1'>Set Ask Verb</a>"
+	. += "(<a href='?src=\ref[src];reset_ask=1'>Reset</A>)"
+	. += "<br>"
 	. += "<b>Custom Exclaim: </b>"
-	. += "<a href='?src=\ref[src];custom_exclaim=1'>Set Exclaim Verb</a><br>"
+	. += "<a href='?src=\ref[src];custom_exclaim=1'>Set Exclaim Verb</a>"
+	. += "(<a href='?src=\ref[src];reset_exclaim=1'>Reset</A>)"
+	. += "<br>"
 
 /datum/category_item/player_setup_item/vore/traits/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(!CanUseTopic(user))
@@ -209,8 +243,8 @@
 
 	/*  outpost 21 - custom race removal
 	else if(href_list["custom_species"])
-		var/raw_choice = sanitize(input(user, "Input your custom species name:",
-			"Character Preference", pref.custom_species) as null|text, MAX_NAME_LEN)
+		var/raw_choice = sanitize(tgui_input_text(user, "Input your custom species name:",
+			"Character Preference", pref.custom_species, MAX_NAME_LEN), MAX_NAME_LEN)
 		if (CanUseTopic(user))
 			pref.custom_species = raw_choice
 		return TOPIC_REFRESH
@@ -242,6 +276,8 @@
 		var/choice = tgui_alert(usr, "Remove [initial(trait.name)] and regain [initial(trait.cost)] points?","Remove Trait",list("Remove","Cancel"))
 		if(choice == "Remove")
 			pref.pos_traits -= trait
+			var/datum/trait/instance = all_traits[trait]
+			instance.remove_pref(pref)
 		return TOPIC_REFRESH
 
 	else if(href_list["clicked_neu_trait"])
@@ -249,6 +285,8 @@
 		var/choice = tgui_alert(usr, "Remove [initial(trait.name)]?","Remove Trait",list("Remove","Cancel"))
 		if(choice == "Remove")
 			pref.neu_traits -= trait
+			var/datum/trait/instance = all_traits[trait]
+			instance.remove_pref(pref)
 		return TOPIC_REFRESH
 
 	else if(href_list["clicked_neg_trait"])
@@ -256,30 +294,56 @@
 		var/choice = tgui_alert(usr, "Remove [initial(trait.name)] and lose [initial(trait.cost)] points?","Remove Trait",list("Remove","Cancel"))
 		if(choice == "Remove")
 			pref.neg_traits -= trait
+			var/datum/trait/instance = all_traits[trait]
+			instance.remove_pref(pref)
 		return TOPIC_REFRESH
 
 	else if(href_list["custom_say"])
-		var/say_choice = sanitize(input(usr, "This word or phrase will appear instead of 'says': [pref.real_name] says, \"Hi.\"", "Custom Say", pref.custom_say) as null|text, 12)
+		var/say_choice = sanitize(tgui_input_text(usr, "This word or phrase will appear instead of 'says': [pref.real_name] says, \"Hi.\"", "Custom Say", pref.custom_say, 12), 12)
 		if(say_choice)
 			pref.custom_say = say_choice
 		return TOPIC_REFRESH
 
 	else if(href_list["custom_whisper"])
-		var/whisper_choice = sanitize(input(usr, "This word or phrase will appear instead of 'whispers': [pref.real_name] whispers, \"Hi...\"", "Custom Whisper", pref.custom_whisper) as null|text, 12)
+		var/whisper_choice = sanitize(tgui_input_text(usr, "This word or phrase will appear instead of 'whispers': [pref.real_name] whispers, \"Hi...\"", "Custom Whisper", pref.custom_whisper, 12), 12)
 		if(whisper_choice)
 			pref.custom_whisper = whisper_choice
 		return TOPIC_REFRESH
 
 	else if(href_list["custom_ask"])
-		var/ask_choice = sanitize(input(usr, "This word or phrase will appear instead of 'asks': [pref.real_name] asks, \"Hi?\"", "Custom Ask", pref.custom_ask) as null|text, 12)
+		var/ask_choice = sanitize(tgui_input_text(usr, "This word or phrase will appear instead of 'asks': [pref.real_name] asks, \"Hi?\"", "Custom Ask", pref.custom_ask, 12), 12)
 		if(ask_choice)
 			pref.custom_ask = ask_choice
 		return TOPIC_REFRESH
 
 	else if(href_list["custom_exclaim"])
-		var/exclaim_choice = sanitize(input(usr, "This word or phrase will appear instead of 'exclaims', 'shouts' or 'yells': [pref.real_name] exclaims, \"Hi!\"", "Custom Exclaim", pref.custom_exclaim) as null|text, 12)
+		var/exclaim_choice = sanitize(tgui_input_text(usr, "This word or phrase will appear instead of 'exclaims', 'shouts' or 'yells': [pref.real_name] exclaims, \"Hi!\"", "Custom Exclaim", pref.custom_exclaim, 12), 12)
 		if(exclaim_choice)
 			pref.custom_exclaim = exclaim_choice
+		return TOPIC_REFRESH
+
+	else if(href_list["reset_say"])
+		var/say_choice = tgui_alert(usr, "Reset your Custom Say Verb?","Reset Verb",list("Yes","No"))
+		if(say_choice == "Yes")
+			pref.custom_say = null
+		return TOPIC_REFRESH
+
+	else if(href_list["reset_whisper"])
+		var/whisper_choice = tgui_alert(usr, "Reset your Custom Whisper Verb?","Reset Verb",list("Yes","No"))
+		if(whisper_choice == "Yes")
+			pref.custom_whisper = null
+		return TOPIC_REFRESH
+
+	else if(href_list["reset_ask"])
+		var/ask_choice = tgui_alert(usr, "Reset your Custom Ask Verb?","Reset Verb",list("Yes","No"))
+		if(ask_choice == "Yes")
+			pref.custom_ask = null
+		return TOPIC_REFRESH
+
+	else if(href_list["reset_exclaim"])
+		var/exclaim_choice = tgui_alert(usr, "Reset your Custom Exclaim Verb?","Reset Verb",list("Yes","No"))
+		if(exclaim_choice == "Yes")
+			pref.custom_exclaim = null
 		return TOPIC_REFRESH
 
 	else if(href_list["add_trait"])
@@ -288,7 +352,13 @@
 		var/list/mylist
 		switch(mode)
 			if(POSITIVE_MODE)
-				picklist = positive_traits.Copy() - pref.pos_traits
+				/* outpost 21 - custom race removal
+				if(pref.species == SPECIES_CUSTOM)
+					picklist = positive_traits.Copy() - pref.pos_traits
+					mylist = pref.pos_traits
+				else
+				*/
+				picklist = everyone_traits_positive.Copy() - pref.pos_traits
 				mylist = pref.pos_traits
 			if(NEUTRAL_MODE)
 				/* outpost 21 - custom race removal
@@ -297,10 +367,16 @@
 					mylist = pref.neu_traits
 				else
 				*/
-				picklist = everyone_traits.Copy() - pref.neu_traits
+				picklist = everyone_traits_neutral.Copy() - pref.neu_traits
 				mylist = pref.neu_traits
 			if(NEGATIVE_MODE)
-				picklist = negative_traits.Copy() - pref.neg_traits
+				/* outpost 21 - custom race removal
+				if(pref.species == SPECIES_CUSTOM)
+					picklist = negative_traits.Copy() - pref.neg_traits
+					mylist = pref.neg_traits
+				else
+				*/
+				picklist = everyone_traits_negative.Copy() - pref.neg_traits
 				mylist = pref.neg_traits
 			else
 
@@ -386,10 +462,16 @@
 							conflict = instance_test.name
 							break varconflict
 
+					for(var/V in instance.var_changes_pref)
+						if(V in instance_test.var_changes_pref)
+							conflict = instance_test.name
+							break varconflict
+
 			if(conflict)
 				tgui_alert_async(usr, "You cannot take this trait and [conflict] at the same time. Please remove that trait, or pick another trait to add.", "Error")
 				return TOPIC_REFRESH
 
+			instance.apply_pref(pref)
 			mylist += path
 			return TOPIC_REFRESH
 

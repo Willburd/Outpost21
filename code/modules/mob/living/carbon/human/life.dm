@@ -21,6 +21,16 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
+#define COLD_ALERT_SEVERITY_LOW         1 // Constants passed to the cold and heat alerts.
+#define COLD_ALERT_SEVERITY_MODERATE    2
+#define COLD_ALERT_SEVERITY_MAX         3
+#define ENVIRONMENT_COMFORT_MARKER_COLD 1
+
+#define HOT_ALERT_SEVERITY_LOW          1
+#define HOT_ALERT_SEVERITY_MODERATE     2
+#define HOT_ALERT_SEVERITY_MAX          3
+#define ENVIRONMENT_COMFORT_MARKER_HOT  2
+
 #define RADIATION_SPEED_COEFFICIENT 0.1
 #define HUMAN_COMBUSTION_TEMP 524 //524k is the sustained combustion temperature of human fat
 
@@ -74,6 +84,8 @@
 		handle_shock()
 
 		handle_pain()
+
+		handle_allergens()
 
 		handle_medical_side_effects()
 
@@ -566,7 +578,7 @@
 
 
 	// Hot air hurts :(
-	if((breath.temperature < species.breath_cold_level_1 || breath.temperature > species.breath_heat_level_1) && !(COLD_RESISTANCE in mutations))
+	if((breath.temperature <= species.cold_discomfort_level || breath.temperature >= species.heat_discomfort_level) && !(COLD_RESISTANCE in mutations))
 
 		if(breath.temperature <= species.breath_cold_level_1)
 			if(prob(20))
@@ -575,27 +587,37 @@
 			if(prob(20))
 				to_chat(src, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-		if(breath.temperature >= species.breath_heat_level_1)
-			if(breath.temperature < species.breath_heat_level_2)
-				apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 1)
-			else if(breath.temperature < species.breath_heat_level_3)
-				apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 2)
-			else
-				apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 3)
+		if(breath.temperature >= species.heat_discomfort_level)
 
-		else if(breath.temperature <= species.breath_cold_level_1)
-			if(breath.temperature > species.breath_cold_level_2)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 1)
-			else if(breath.temperature > species.breath_cold_level_3)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 2)
+			if(breath.temperature >= species.breath_heat_level_3)
+				apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MAX)
+			else if(breath.temperature >= species.breath_heat_level_2)
+				apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MODERATE)
+			else if(breath.temperature >= species.breath_heat_level_1)
+				apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_LOW)
+			else if(species.get_environment_discomfort(src, ENVIRONMENT_COMFORT_MARKER_HOT))
+				throw_alert("temp", /obj/screen/alert/warm, HOT_ALERT_SEVERITY_LOW)
 			else
+				clear_alert("temp")
+
+		else if(breath.temperature <= species.cold_discomfort_level)
+
+			if(breath.temperature <= species.breath_cold_level_3)
 				apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 3)
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_MAX)
+			else if(breath.temperature <= species.breath_cold_level_2)
+				apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_MODERATE)
+			else if(breath.temperature <= species.breath_cold_level_1)
+				apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_LOW)
+			else if(species.get_environment_discomfort(src, ENVIRONMENT_COMFORT_MARKER_COLD))
+				throw_alert("temp", /obj/screen/alert/chilly, COLD_ALERT_SEVERITY_LOW)
+			else
+				clear_alert("temp")
 
 		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - bodytemperature
@@ -607,21 +629,47 @@
 		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * BREATH_PERCENTAGE)
 		temp_adj *= relative_density
 
-		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
-		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-		//to_world("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
-		bodytemperature += temp_adj
+		if(temp_adj > BODYTEMP_HEATING_MAX)
+			temp_adj = BODYTEMP_HEATING_MAX
+		if(temp_adj < BODYTEMP_COOLING_MAX)
+			temp_adj = BODYTEMP_COOLING_MAX
 
-	else if(breath.temperature >= species.heat_discomfort_level)
-		species.get_environment_discomfort(src,"heat")
-	else if(breath.temperature <= species.cold_discomfort_level)
-		species.get_environment_discomfort(src,"cold")
+		bodytemperature += temp_adj
 
 	else
 		clear_alert("temp")
 
 	breath.update_values()
 	return 1
+
+/mob/living/carbon/human/proc/handle_allergens()
+	if(chem_effects[CE_ALLERGEN])
+		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
+		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
+		var/disable_severity = species.allergen_disable_severity * chem_effects[CE_ALLERGEN]
+		if(species.allergen_reaction & AG_PHYS_DMG)
+			adjustBruteLoss(damage_severity)
+		if(species.allergen_reaction & AG_BURN_DMG)
+			adjustFireLoss(damage_severity)
+		if(species.allergen_reaction & AG_TOX_DMG)
+			adjustToxLoss(damage_severity)
+		if(species.allergen_reaction & AG_OXY_DMG)
+			adjustOxyLoss(damage_severity)
+			if(prob(disable_severity/2))
+				emote(pick("cough","gasp","choke"))
+		if(species.allergen_reaction & AG_EMOTE)
+			if(prob(disable_severity/2))
+				emote(pick("pale","shiver","twitch"))
+		if(species.allergen_reaction & AG_PAIN)
+			adjustHalLoss(disable_severity)
+		if(species.allergen_reaction & AG_WEAKEN)
+			Weaken(disable_severity)
+		if(species.allergen_reaction & AG_BLURRY)
+			eye_blurry = max(eye_blurry, disable_severity)
+		if(species.allergen_reaction & AG_SLEEPY)
+			drowsyness = max(drowsyness, disable_severity)
+		if(species.allergen_reaction & AG_CONFUSE)
+			Confuse(disable_severity/4)
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
@@ -692,13 +740,13 @@
 			if(bodytemperature >= species.heat_level_2)
 				if(bodytemperature >= species.heat_level_3)
 					burn_dam = HEAT_DAMAGE_LEVEL_3
-					throw_alert("temp", /obj/screen/alert/hot, 3)
+					throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MAX)
 				else
 					burn_dam = HEAT_DAMAGE_LEVEL_2
-					throw_alert("temp", /obj/screen/alert/hot, 2)
+					throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MODERATE)
 			else
 				burn_dam = HEAT_DAMAGE_LEVEL_1
-				throw_alert("temp", /obj/screen/alert/hot, 1)
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_LOW)
 
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
 
@@ -731,6 +779,8 @@
 
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
+		if(stat==DEAD)
+			pressure_damage = pressure_damage/2
 		take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
 		throw_alert("pressure", /obj/screen/alert/highpressure, 2)
 	else if(adjusted_pressure >= species.warning_high_pressure)
@@ -745,7 +795,10 @@
 			if(!isSynthetic() || !nif || !nif.flag_check(NIF_O_PRESSURESEAL,NIF_FLAGS_OTHER)) //VOREStation Edit - NIF pressure seals
 			*/
 			if(!isSynthetic())
-				take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+				var/pressure_damage = LOW_PRESSURE_DAMAGE
+				if(stat==DEAD)
+					pressure_damage = pressure_damage/2
+				take_overall_damage(brute=pressure_damage, used_weapon = "Low Pressure")
 
 			if(getOxyLoss() < 55) 		// 12 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 				var/pressure_dam = 3	// 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
@@ -1277,7 +1330,7 @@
 			fat_alert = /obj/screen/alert/fat/synth
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth
-		
+
 		/* outpost 21 - custom race removal
 		//VOREStation Add - Vampire hunger alert
 		else if(get_species() == SPECIES_CUSTOM)
@@ -1331,7 +1384,9 @@
 		else
 			clear_alert("high")
 
-		if(!isbelly(loc)) clear_fullscreen("belly") //VOREStation Add - Belly fullscreens safety
+		if(!isbelly(loc)) //VOREStation Add - Belly fullscreens safety
+			clear_fullscreen("belly")
+			//clear_fullscreen("belly2") //For multilayered stomachs. Not currently implemented.
 
 		if(config.welder_vision)
 			var/found_welder
@@ -1413,12 +1468,10 @@
 		if(istype(rig) && rig.visor && !looking_elsewhere)
 			if(!rig.helmet || (head && rig.helmet == head))
 				if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-					glasses_processed = 1
-					process_glasses(rig.visor.vision.glasses)
+					glasses_processed = process_glasses(rig.visor.vision.glasses)
 
 		if(glasses && !glasses_processed && !looking_elsewhere)
-			glasses_processed = 1
-			process_glasses(glasses)
+			glasses_processed = process_glasses(glasses)
 		if(XRAY in mutations)
 			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 			see_in_dark = 8
@@ -1427,6 +1480,17 @@
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.vision_flags))
 				sight |= M.vision_flags
+
+		/* outpost 21 - nif removal
+		if(!glasses_processed && nif)
+			var/datum/nifsoft/vision_soft
+			for(var/datum/nifsoft/NS in nif.nifsofts)
+				if(NS.vision_exclusive && NS.active)
+					vision_soft = NS
+					break
+			if(vision_soft)
+				glasses_processed = process_nifsoft_vision(vision_soft)		//not really glasses but equitable
+		*/
 
 		if(!glasses_processed && (species.get_vision_flags(src) > 0))
 			sight |= species.get_vision_flags(src)
@@ -1456,19 +1520,36 @@
 	return 1
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+	. = FALSE
 	if(G && G.active)
-		see_in_dark += G.darkness_view
+		if(G.darkness_view)
+			see_in_dark += G.darkness_view
+			. = TRUE
 		if(G.overlay && client)
 			client.screen |= G.overlay
 		if(G.vision_flags)
 			sight |= G.vision_flags
+			. = TRUE
 		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 			see_invisible = SEE_INVISIBLE_MINIMUM
 
 		if(G.see_invisible >= 0)
 			see_invisible = G.see_invisible
+			. = TRUE
 		else if(!druggy && !seer)
 			see_invisible = see_invisible_default
+
+/* outpost 21 - nif removal
+/mob/living/carbon/human/proc/process_nifsoft_vision(var/datum/nifsoft/NS)
+	. = FALSE
+	if(NS && NS.active)
+		if(NS.darkness_view)
+			see_in_dark += NS.darkness_view
+			. = TRUE
+		if(NS.vision_flags_mob)
+			sight |= NS.vision_flags_mob
+			. = TRUE
+*/
 
 /mob/living/carbon/human/handle_random_events()
 	if(inStasisNow())
@@ -1476,9 +1557,9 @@
 
 	// outpost 21 edit - lots more random effects happen, such as hallucinations from oxygen loss, and darkness causing hallucinations on it's own from spooky sounds.
 	// do random body effects if alive and not synthetic
-	if(!stat && !isSynthetic())
-		// Puke if toxloss is too high
-		if (getToxLoss() >= 30)
+	// Puke if toxloss is too high
+	if(!stat && !isbelly(loc))
+		if (getToxLoss() >= 30 && !isSynthetic())
 			if(!confused)
 				if(prob(5))
 					to_chat(src, "<span class='danger'>You lose directional control!</span>")
@@ -1486,7 +1567,6 @@
 		if (getToxLoss() >= 45)
 			spawn vomit()
 
-		
 		if(!(species.flags & NO_HALLUCINATION))
 			// oxygen loss can result in seeing some crazy stuff
 			if(getOxyLoss() >= 50 && rand(1,15) <= 1)
@@ -1610,32 +1690,39 @@
 		return 0
 
 	if(shock_stage == 10)
-		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
+		if(traumatic_shock >= 80)
+			custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 40)
 
 	if(shock_stage >= 30)
 		if(shock_stage == 30 && !isbelly(loc)) //VOREStation Edit
 			custom_emote(VISIBLE_MESSAGE, "is having trouble keeping their eyes open.")
 		eye_blurry = max(2, eye_blurry)
-		stuttering = max(stuttering, 5)
+		if(traumatic_shock >= 80)
+			stuttering = max(stuttering, 5)
+
 
 	if(shock_stage == 40)
-		to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
+		if(traumatic_shock >= 80)
+			to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
 
 	if (shock_stage >= 60)
 		if(shock_stage == 60 && !isbelly(loc)) //VOREStation Edit
 			custom_emote(VISIBLE_MESSAGE, "'s body becomes limp.")
 		if (prob(2))
-			to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
+			if(traumatic_shock >= 80)
+				to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
 			Weaken(20)
 
 	if(shock_stage >= 80)
 		if (prob(5))
-			to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
+			if(traumatic_shock >= 80)
+				to_chat(src, "<span class='danger'>[pick("The pain is excruciating", "Please&#44; just end the pain", "Your whole body is going numb")]!</span>")
 			Weaken(20)
 
 	if(shock_stage >= 120)
 		if (prob(2))
-			to_chat(src, "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You are about to lose consciousness")]!</span>")
+			if(traumatic_shock >= 80)
+				to_chat(src, "<span class='danger'>[pick("You black out", "You feel like you could die any moment now", "You are about to lose consciousness")]!</span>")
 			Paralyse(5)
 
 	if(shock_stage == 150)
@@ -1908,8 +1995,10 @@
 		//   increase your body temperature beyond 250C, but it's possible something else (atmos) has heated us up beyond it,
 		//   so don't worry about the firestacks at that point. Really, we should be cooling the room down, because it has
 		//   to expend energy to heat our body up! But let's not worry about that.
-		if((bodytemperature + fire_temp_add) > HUMAN_COMBUSTION_TEMP)
-			return
+
+		// This whole section above is ABSOLUTELY STUPID and makes no sense and this would prevent too-high-heat from even being able to hurt someone. No. We will heat up for as long as needed.
+		//if((bodytemperature + fire_temp_add) > HUMAN_COMBUSTION_TEMP)
+		//	return
 
 		bodytemperature += fire_temp_add
 

@@ -36,7 +36,7 @@
 	var/vore_stomach_flavor				// The flavortext for the first belly if not the default
 
 	var/vore_default_item_mode = IM_DIGEST_FOOD			//How belly will interact with items
-	var/vore_default_contaminates = TRUE				//Will it contaminate?
+	var/vore_default_contaminates = FALSE				//Will it contaminate?
 	var/vore_default_contamination_flavor = "Generic"	//Contamination descriptors
 	var/vore_default_contamination_color = "green"		//Contamination color
 
@@ -50,11 +50,15 @@
 
 	var/obj/item/device/radio/headset/mob_headset/mob_radio		//Adminbus headset for simplemob shenanigans.
 	does_spin = FALSE
+	can_be_drop_pred = TRUE				// Mobs are pred by default.
+	var/damage_threshold  = 0 //For some mobs, they have a damage threshold required to deal damage to them.
+
 
 // Release belly contents before being gc'd!
 /mob/living/simple_mob/Destroy()
 	release_vore_contents()
-	prey_excludes.Cut()
+	if(prey_excludes)
+		prey_excludes.Cut()
 	return ..()
 
 //For all those ID-having mobs
@@ -80,6 +84,7 @@
 			voremob_awake = TRUE
 		update_fullness()
 		if(!vore_fullness)
+			update_transform()
 			return 0
 		else if((stat == CONSCIOUS) && (!icon_rest || !resting || !incapacitated(INCAPACITATION_DISABLED)) && (vore_icons & SA_ICON_LIVING))
 			icon_state = "[icon_living]-[vore_fullness]"
@@ -211,6 +216,7 @@
 	// Since they have bellies, add verbs to toggle settings on them.
 	verbs |= /mob/living/simple_mob/proc/toggle_digestion
 	verbs |= /mob/living/simple_mob/proc/toggle_fancygurgle
+	verbs |= /mob/living/proc/vertical_nom
 
 	//A much more detailed version of the default /living implementation
 	var/obj/belly/B = new /obj/belly(src)
@@ -278,13 +284,6 @@
 		return MOVEMENT_FAILED //Mobs aren't that stupid, probably
 	return ..() // Procede as normal.
 
-//Grab = Nomf
-/mob/living/simple_mob/UnarmedAttack(var/atom/A, var/proximity)
-	. = ..()
-
-	if(a_intent == I_GRAB && isliving(A) && !has_hands)
-		animal_nom(A)
-
 // Riding
 /datum/riding/simple_mob
 	keytype = /obj/item/weapon/material/twohanded/riding_crop // Crack!
@@ -309,12 +308,13 @@
 /datum/riding/simple_mob/get_offsets(pass_index) // list(dir = x, y, layer)
 	var/mob/living/simple_mob/L = ridden
 	var/scale = L.size_multiplier
+	var/scale_difference = (L.size_multiplier - rider_size) * 10
 
 	var/list/values = list(
-		"[NORTH]" = list(0, L.mount_offset_y*scale, ABOVE_MOB_LAYER),
-		"[SOUTH]" = list(0, L.mount_offset_y*scale, BELOW_MOB_LAYER),
-		"[EAST]" = list(-L.mount_offset_x*scale, L.mount_offset_y*scale, ABOVE_MOB_LAYER),
-		"[WEST]" = list(L.mount_offset_x*scale, L.mount_offset_y*scale, ABOVE_MOB_LAYER))
+		"[NORTH]" = list(0, L.mount_offset_y*scale + scale_difference, ABOVE_MOB_LAYER),
+		"[SOUTH]" = list(0, L.mount_offset_y*scale + scale_difference, BELOW_MOB_LAYER),
+		"[EAST]" = list(-L.mount_offset_x*scale, L.mount_offset_y*scale + scale_difference, ABOVE_MOB_LAYER),
+		"[WEST]" = list(L.mount_offset_x*scale, L.mount_offset_y*scale + scale_difference, ABOVE_MOB_LAYER))
 
 	return values
 
@@ -341,6 +341,7 @@
 
 	. = ..()
 	if(.)
+		riding_datum.rider_size = H.size_multiplier
 		buckled_mobs[H] = "riding"
 
 /mob/living/simple_mob/attack_hand(mob/user as mob)
@@ -371,7 +372,7 @@
 	if(buckle_mob(M))
 		visible_message("<span class='notice'>[M] starts riding [name]!</span>")
 
-/mob/living/simple_mob/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/simple_mob/handle_message_mode(message_mode, message, verb, used_radios, speaking, alt_name)
 	if(mob_radio)
 		switch(message_mode)
 			if("intercom")

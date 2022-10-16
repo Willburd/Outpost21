@@ -105,11 +105,16 @@
 	return
 
 
-/obj/item/weapon/paper/Initialize(mapload)
-	. = ..()
+/obj/item/weapon/paper/Initialize(mapload, var/text, var/title)
+    . = ..()
 
-	if(mapload) // Jank, but we do this to prevent maploaded papers from somehow stacking across rounds if re-added to the board by a player.
-		was_maploaded = TRUE
+    if(istext(title))
+        name = title
+    if(istext(text))
+        info = text
+
+    if(mapload) // Jank, but we do this to prevent maploaded papers from somehow stacking across rounds if re-added to the board by a player.
+        was_maploaded = TRUE
 
 /obj/item/weapon/paper/New(var/newloc, var/text, var/title)
 	..()
@@ -159,7 +164,7 @@
 		. += "<span class='notice'>You have to go closer if you want to read it.</span>"
 
 /obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/observer/dead) || istype(user, /mob/living/silicon)) && !forceshow)
+	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/observer/dead) || istype(user, /mob/living/silicon) || user.universal_understand) && !forceshow)
 		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
 		onclose(user, "[name]")
 	else
@@ -174,7 +179,7 @@
 	if((CLUMSY in usr.mutations) && prob(50))
 		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
 		return
-	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
+	var/n_name = sanitizeSafe(tgui_input_text(usr, "What would you like to label the paper?", "Paper Labelling", null, MAX_NAME_LEN), MAX_NAME_LEN)
 
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
 	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0 && n_name)
@@ -341,6 +346,7 @@
 	t = replacetext(t, "\[/u\]", "</U>")
 	t = replacetext(t, "\[time\]", "[stationtime2text()]")
 	t = replacetext(t, "\[date\]", "[stationdate2text()]")
+	t = replacetext(t, "\[station\]", "[station_name()]")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
 	if(findtext(t, "\[sign\]"))
@@ -442,7 +448,7 @@
 			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
 			return
 
-		var/raw = input(usr, "Enter what you want to write:", "Write") as null|message
+		var/raw = tgui_input_text(usr, "Enter what you want to write:", "Write", multiline = TRUE, prevent_enter = TRUE)
 		if(!raw)
 			return
 		
@@ -597,11 +603,20 @@
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp) || istype(P, /obj/item/clothing/gloves/ring/seal))
+		if(istype(P, /obj/item/weapon/stamp))
+			var/obj/item/weapon/stamp/the_stamp = P
+			if(the_stamp.stamptext)
+				stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>[the_stamp.stamptext]</i>"
+			else
+				stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [the_stamp.name].</i>"
+		else
+			var/obj/item/clothing/gloves/ring/seal/the_stamp = P
+			if(the_stamp.stamptext)
+				stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>[the_stamp.stamptext]</i>"
+			else
+				stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [the_stamp.name].</i>"
 		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
 			return
-
-		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
-
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 		var/x, y
 		if(istype(P, /obj/item/weapon/stamp/captain) || istype(P, /obj/item/weapon/stamp/centcomm))

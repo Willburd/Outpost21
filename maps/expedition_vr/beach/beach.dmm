@@ -148,7 +148,7 @@
 	},
 /area/tether_away/beach/resort)
 "aI" = (
-/obj/structure/closet/athletic_mixed,
+/obj/structure/closet/athletic_swimwear,
 /turf/simulated/floor/tiled/asteroid_steel{
 	outdoors = 1
 	},
@@ -240,7 +240,7 @@
 /turf/simulated/floor/wood,
 /area/tether_away/beach)
 "ba" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach)
 "bb" = (
 /obj/structure/bed/chair,
@@ -262,7 +262,7 @@
 /turf/simulated/floor/water/ocean,
 /area/tether_away/beach/water)
 "bg" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/coast)
 "bh" = (
 /obj/effect/overlay/coconut,
@@ -309,7 +309,7 @@
 /turf/simulated/floor/beach/sand/outdoors,
 /area/tether_away/beach/jungle)
 "bq" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/jungle)
 "br" = (
 /obj/effect/map_effect/portal/line/side_a,
@@ -500,6 +500,13 @@
 /obj/structure/simple_door/sandstone,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/tether_away/beach/resort/janibar)
+"gq" = (
+/obj/move_trader_landmark{
+	dir = 8;
+	trader_type = /obj/trader/general
+	},
+/turf/simulated/floor/outdoors/grass,
+/area/tether_away/beach/cavebase)
 "gw" = (
 /obj/structure/bonfire,
 /turf/simulated/mineral/floor/cave{
@@ -864,8 +871,12 @@
 	},
 /area/tether_away/beach/resort)
 "nD" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/water)
+"nP" = (
+/mob/living/simple_mob/animal/passive/fennec/faux,
+/turf/simulated/floor/wood,
+/area/tether_away/beach/resort/kitchen)
 "of" = (
 /obj/structure/table/woodentable,
 /obj/random/drinkbottle,
@@ -1187,7 +1198,7 @@
 /area/tether_away/beach)
 "wv" = (
 /obj/effect/overlay/coconut,
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/jungle)
 "wJ" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -1244,6 +1255,10 @@
 "yg" = (
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/move_trader_landmark{
+	dir = 4;
+	trader_type = /obj/trader/general
 	},
 /turf/simulated/floor/outdoors/grass,
 /area/tether_away/beach/resort/janibar)
@@ -1334,16 +1349,16 @@
 /turf/simulated/floor/beach/sand/outdoors,
 /area/tether_away/beach/resort)
 "Bk" = (
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
@@ -1352,10 +1367,10 @@
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
 /obj/item/weapon/material/knife/butch,
 /obj/item/weapon/material/minihoe,
 /obj/item/weapon/material/knife/machete/hatchet,
@@ -1377,6 +1392,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
 /obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
 /obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
+/obj/random/donkpocketbox,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/tether_away/beach/resort/kitchen)
 "By" = (
@@ -1384,6 +1400,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/lino,
+/area/tether_away/beach/resort/kitchen)
+"BC" = (
+/obj/structure/table/bench/sifwooden/padded,
+/obj/move_trader_landmark{
+	dir = 4;
+	trader_type = /obj/trader/general
+	},
+/turf/simulated/floor/wood,
 /area/tether_away/beach/resort/kitchen)
 "BF" = (
 /turf/simulated/wall/sandstone,
@@ -1526,6 +1550,13 @@
 "EU" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/simulated/floor/outdoors/grass,
+/area/tether_away/beach/resort)
+"Ff" = (
+/obj/move_trader_landmark{
+	dir = 4;
+	trader_type = /obj/trader/general
+	},
+/turf/simulated/floor/beach/sand/outdoors,
 /area/tether_away/beach/resort)
 "Fm" = (
 /obj/structure/cable{
@@ -1683,7 +1714,7 @@
 /turf/simulated/wall/wood,
 /area/tether_away/beach/coast)
 "KU" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/resort)
 "Le" = (
 /obj/structure/bookcase,
@@ -2249,7 +2280,7 @@
 	},
 /area/tether_away/beach/resort)
 "ZC" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/ignore_mapgen/cave,
 /area/tether_away/beach/cavebase)
 "ZX" = (
 /obj/structure/cable/cyan{
@@ -5447,7 +5478,7 @@ Xd
 Xd
 Xd
 Xd
-LQ
+gq
 Xd
 Xd
 xy
@@ -10595,7 +10626,7 @@ zV
 yf
 as
 ad
-as
+BC
 yf
 as
 ad
@@ -11021,7 +11052,7 @@ ad
 ad
 ad
 ad
-ad
+nP
 ad
 ad
 ad
@@ -15524,7 +15555,7 @@ lI
 lI
 Nv
 Fm
-Nv
+Ff
 lI
 pP
 lI

@@ -11,7 +11,7 @@
 /obj/item/slimepotion/enhancer
 	name = "extract enhancer agent"
 	desc = "A potent chemical mix that will give a slime extract an additional two uses."
-	icon_state = "potpurple"
+	icon_state = "potcyan"
 	description_info = "This will even work on inert slime extracts, if it wasn't enhanced before.  Extracts enhanced cannot be enhanced again."
 
 // Makes slimes less likely to mutate.
@@ -64,7 +64,7 @@
 
 // Makes the slime friendly forever.
 /obj/item/slimepotion/docility
-	name = "docility agent"
+	name = "slime docility agent"
 	desc = "A potent chemical mix that nullifies a slime's hunger, causing it to become docile and tame.  It might also work on other creatures?"
 	icon_state = "potlightpink"
 	description_info = "The target needs to be alive, not already passive, and be an animal or slime type entity."
@@ -110,7 +110,7 @@
 
 	playsound(src, 'sound/effects/bubbles.ogg', 50, 1)
 	AI.remove_target() // So hostile things stop attacking people even if not hostile anymore.
-	var/newname = copytext(sanitize(input(user, "Would you like to give \the [M] a name?", "Name your new pet", M.name) as null|text),1,MAX_NAME_LEN)
+	var/newname = copytext(sanitize(tgui_input_text(user, "Would you like to give \the [M] a name?", "Name your new pet", M.name, MAX_NAME_LEN)),1,MAX_NAME_LEN)
 
 	if(newname)
 		M.name = newname
@@ -178,7 +178,7 @@
 	desc = "A potent chemical mix that makes an animal deeply loyal to the species of whoever applies this, and will attack threats to them."
 	description_info = "The slime or other animal needs to be alive for this to work.  The slime this is applied to will have their 'faction' change to \
 	the user's faction, which means the slime will attack things that are hostile to the user's faction, such as carp, spiders, and other slimes."
-	icon_state = "potred"
+	icon_state = "potlightpink"
 
 /obj/item/slimepotion/loyalty/attack(mob/living/simple_mob/M, mob/user)
 	if(!istype(M))
@@ -247,7 +247,7 @@
 	name = "slime feeding agent"
 	desc = "A potent chemical mix that will instantly sediate the slime."
 	description_info = "The slime needs to be alive for this to work.  It will instantly grow the slime enough to reproduce."
-	icon_state = "potyellow"
+	icon_state = "potorange"
 
 /obj/item/slimepotion/feeding/attack(mob/living/simple_mob/slime/xenobio/M, mob/user)
 	if(!istype(M))

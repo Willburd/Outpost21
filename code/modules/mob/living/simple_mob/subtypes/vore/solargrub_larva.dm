@@ -16,8 +16,9 @@ var/global/list/grub_machine_overlays = list()
 	melee_damage_lower = 1	// This is a tiny worm. It will nibble and thats about it.
 	melee_damage_upper = 1
 
-	meat_amount = 2
+	meat_amount = 1
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat
+	butchery_loot = list()		// No hides
 
 	faction = "grubs"
 
@@ -45,6 +46,8 @@ var/global/list/grub_machine_overlays = list()
 
 	var/obj/machinery/abstract_grub_machine/powermachine
 	var/power_drained = 0
+
+	var/tracked = FALSE
 
 	ai_holder_type = /datum/ai_holder/simple_mob/solargrub_larva
 
@@ -172,7 +175,8 @@ var/global/list/grub_machine_overlays = list()
 /mob/living/simple_mob/animal/solargrub_larva/proc/expand_grub()
 	eject_from_machine()
 	visible_message("<span class='warning'>\The [src] suddenly balloons in size!</span>")
-	new /mob/living/simple_mob/vore/solargrub(get_turf(src))
+	var/mob/living/simple_mob/vore/solargrub/adult = new(get_turf(src))
+	adult.tracked = tracked
 //	grub.power_drained = power_drained //TODO
 	qdel(src)
 

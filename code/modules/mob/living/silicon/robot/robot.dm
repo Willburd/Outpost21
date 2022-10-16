@@ -363,7 +363,7 @@
 
 	spawn(0)
 		var/newname
-		newname = sanitizeSafe(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+		newname = sanitizeSafe(tgui_input_text(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","", MAX_NAME_LEN), MAX_NAME_LEN)
 		if (newname)
 			custom_name = newname
 			sprite_name = newname
@@ -795,6 +795,26 @@
 				playsound(src.loc, 'sound/effects/clang2.ogg', 10, 1)
 				visible_message("<span class='warning'>[H] taps [src].</span>")
 				return
+			if(I_GRAB)
+				if(is_vore_predator(H) && H.devourable && src.feeding && src.devourable)
+					var/switchy = tgui_alert(H, "Do you wish to eat [src] or feed yourself to them?", "Feed or Eat",list("Nevermind!", "Eat","Feed"))
+					switch(switchy)
+						if("Nevermind!")
+							return
+						if("Eat")
+							feed_grabbed_to_self(H, src)
+							return
+						if("Feed")
+							H.feed_self_to_grabbed(H, src)
+							return
+				if(is_vore_predator(H) && src.devourable)
+					if(tgui_alert(H, "Do you wish to eat [src]?", "Eat?",list("Nevermind!", "Yes!")) == "Yes!")
+						feed_grabbed_to_self(H, src)
+						return
+				if(H.devourable && src.feeding)
+					if(tgui_alert(H, "Do you wish to feed yourself to [src]?", "Feed?",list("Nevermind!", "Yes!")) == "Yes!")
+						H.feed_self_to_grabbed(H, src)
+						return
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
@@ -1041,6 +1061,8 @@
 			icontype = module_sprites[1]
 	else
 		icontype = tgui_input_list(usr, "Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot Icon", module_sprites)
+		if(!icontype)
+			icontype = module_sprites[1]
 		if(notransform)				//VOREStation edit start: sprite animation
 			to_chat(src, "Your current transformation has not finished yet!")
 			choose_icon(icon_selection_tries, module_sprites)
@@ -1067,9 +1089,11 @@
 	to_chat(src, "Your icon has been set. You now require a module reset to change it.")
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
-	set name = "Set Sensor Augmentation"
+	set name = "Toggle Sensor Augmentation" //VOREStation Add
 	set category = "Robot Commands"
 	set desc = "Augment visual feed with internal sensor overlays."
+	sensor_type = !sensor_type //VOREStation Add
+	to_chat(usr, "You [sensor_type ? "enable" : "disable"] your sensors.") //VOREStation Add
 	toggle_sensor_mode()
 
 /mob/living/silicon/robot/proc/add_robot_verbs()

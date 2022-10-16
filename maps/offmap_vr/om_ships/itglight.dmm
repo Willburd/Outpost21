@@ -1148,7 +1148,7 @@
 /turf/simulated/floor/carpet/sblucarpet,
 /area/itglight/captain)
 "gS" = (
-/obj/structure/bed/chair/sofa/brown/right,
+/obj/structure/bed/chair/sofa/right/brown,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = 25
@@ -1177,7 +1177,7 @@
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/itglight/metingroom)
 "gX" = (
-/obj/structure/bed/chair/sofa/brown/left,
+/obj/structure/bed/chair/sofa/left/brown,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm/angled/hidden{
 	dir = 8;
@@ -1985,16 +1985,16 @@
 /turf/simulated/floor,
 /area/itglight/portengi)
 "lO" = (
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
@@ -2003,10 +2003,10 @@
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
 /obj/item/weapon/reagent_containers/food/condiment/spacespice,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
+/obj/item/weapon/reagent_containers/food/condiment/carton/flour,
 /obj/item/weapon/material/knife/butch,
 /obj/item/weapon/material/minihoe,
 /obj/item/weapon/material/knife/machete/hatchet,
@@ -6353,7 +6353,7 @@
 /area/itglight/common)
 "MF" = (
 /obj/structure/table/wooden_reinforced,
-/obj/item/device/paicard,
+/obj/random/paicard,
 /turf/simulated/floor/glass/reinforced,
 /area/itglight/common)
 "MG" = (
@@ -6391,7 +6391,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/itglight/lockers)
 "MY" = (
-/obj/structure/bed/chair/sofa/brown/right{
+/obj/structure/bed/chair/sofa/right/brown{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6623,7 +6623,7 @@
 /turf/simulated/floor/airless,
 /area/itglight/portsolars)
 "Ol" = (
-/obj/structure/bed/chair/sofa/brown/corner{
+/obj/structure/bed/chair/sofa/corner/brown{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -8501,7 +8501,7 @@
 	},
 /area/itglight/shuttlebay)
 "Zs" = (
-/obj/structure/bed/chair/sofa/brown/left,
+/obj/structure/bed/chair/sofa/left/brown,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 8
 	},

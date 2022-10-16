@@ -9,6 +9,8 @@
 		return
 
 	for(var/obj/item/W in M)
+		if(istype(W, /obj/item/weapon/implant/backup)/* || istype(W, /obj/item/device/nif) */)	//VOREStation Edit - There's basically no reason to remove either of these
+			continue	//VOREStation Edit
 		M.drop_from_inventory(W)
 
 	log_admin("[key_name(usr)] made [key_name(M)] drop everything!")
@@ -84,7 +86,7 @@
 	if (!holder)
 		return
 
-	var/msg = sanitize(input(usr, "Message:", text("Subtle PM to [M.key]")) as text)
+	var/msg = sanitize(tgui_input_text(usr, "Message:", text("Subtle PM to [M.key]")))
 
 	if (!msg)
 		return
@@ -106,7 +108,7 @@
 	if (!holder)
 		return
 
-	var/msg = input(usr, "Message:", text("Enter the text you wish to appear to everyone:")) as text
+	var/msg = tgui_input_text(usr, "Message:", text("Enter the text you wish to appear to everyone:"))
 	if(!(msg[1] == "<" && msg[length(msg)] == ">")) //You can use HTML but only if the whole thing is HTML. Tries to prevent admin 'accidents'.
 		msg = sanitize(msg)
 
@@ -130,7 +132,7 @@
 	if(!M)
 		return
 
-	var/msg = input(usr, "Message:", text("Enter the text you wish to appear to your target:")) as text
+	var/msg = tgui_input_text(usr, "Message:", text("Enter the text you wish to appear to your target:"))
 	if(msg && !(msg[1] == "<" && msg[length(msg)] == ">")) //You can use HTML but only if the whole thing is HTML. Tries to prevent admin 'accidents'.
 		msg = sanitize(msg)
 
@@ -548,10 +550,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	log_admin("[admin] has spawned [player_key]'s character [new_character.real_name].")
 	message_admins("[admin] has spawned [player_key]'s character [new_character.real_name].", 1)
 
-	
+
 
 	feedback_add_details("admin_verb","RSPCH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	
+
 	// Drop pods
 	if(showy == "Polite")
 		var/turf/T = get_turf(new_character)
@@ -573,7 +575,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		return
 
-	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
+	var/input = sanitize(tgui_input_text(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", ""))
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in mob_list)
@@ -625,8 +627,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		return
 
-	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null, extra = 0)
-	var/customname = sanitizeSafe(input(usr, "Pick a title for the report.", "Title") as text|null)
+	var/input = sanitize(tgui_input_text(usr, "Please enter anything you want. Anything. Serious.", "What?", "", multiline = TRUE, prevent_enter = TRUE), extra = 0)
+	var/customname = sanitizeSafe(tgui_input_text(usr, "Pick a title for the report.", "Title"))
 	if(!input)
 		return
 	if(!customname)
@@ -673,13 +675,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(!check_rights(R_DEBUG|R_FUN))	return //VOREStation Edit
 
-	var/devastation = input(usr, "Range of total devastation. -1 to none", text("Input"))  as num|null
+	var/devastation = tgui_input_number(usr, "Range of total devastation. -1 to none", text("Input"))
 	if(devastation == null) return
-	var/heavy = input(usr, "Range of heavy impact. -1 to none", text("Input"))  as num|null
+	var/heavy = tgui_input_number(usr, "Range of heavy impact. -1 to none", text("Input"))
 	if(heavy == null) return
-	var/light = input(usr, "Range of light impact. -1 to none", text("Input"))  as num|null
+	var/light = tgui_input_number(usr, "Range of light impact. -1 to none", text("Input"))
 	if(light == null) return
-	var/flash = input(usr, "Range of flash. -1 to none", text("Input"))  as num|null
+	var/flash = tgui_input_number(usr, "Range of flash. -1 to none", text("Input"))
 	if(flash == null) return
 
 	if ((devastation != -1) || (heavy != -1) || (light != -1) || (flash != -1))
@@ -701,13 +703,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	if(!check_rights(R_DEBUG|R_FUN))	return //VOREStation Edit
 
-	var/heavy = input(usr, "Range of heavy pulse.", text("Input"))  as num|null
+	var/heavy = tgui_input_number(usr, "Range of heavy pulse.", text("Input"))
 	if(heavy == null) return
-	var/med = input(usr, "Range of medium pulse.", text("Input"))  as num|null
+	var/med = tgui_input_number(usr, "Range of medium pulse.", text("Input"))
 	if(med == null) return
-	var/light = input(usr, "Range of light pulse.", text("Input"))  as num|null
+	var/light = tgui_input_number(usr, "Range of light pulse.", text("Input"))
 	if(light == null) return
-	var/long = input(usr, "Range of long pulse.", text("Input"))  as num|null
+	var/long = tgui_input_number(usr, "Range of long pulse.", text("Input"))
 	if(long == null) return
 
 	if (heavy || med || light || long)
@@ -1076,7 +1078,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Drop Pod Atom"
 	set desc = "Spawn a new atom/movable in a drop pod where you are."
 	set category = "Fun"
-	
+
 	if(!check_rights(R_SPAWN))
 		return
 
@@ -1097,7 +1099,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		chosen = tgui_input_list(usr, "Select a movable type:", "Spawn in Drop Pod", matches)
 		if(!chosen)
 			return
-	
+
 	var/podtype = tgui_alert(src,"Destructive drop pods cause damage in a 3x3 and may break turfs. Polite drop pods lightly damage the turfs but won't break through.", "Drop Pod", list("Polite", "Destructive", "Cancel"))
 	if(podtype == "Cancel")
 		return
@@ -1118,14 +1120,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Drop Pod Deploy"
 	set desc = "Drop an existing mob where you are in a drop pod."
 	set category = "Fun"
-	
+
 	if(!check_rights(R_SPAWN))
 		return
 
 	var/mob/living/L = tgui_input_list(usr, "Select the mob to drop:", "Mob Picker", living_mob_list)
 	if(!L)
 		return
-	
+
 	var/podtype = tgui_alert(src,"Destructive drop pods cause damage in a 3x3 and may break turfs. Polite drop pods lightly damage the turfs but won't break through.", "Drop Pod", list("Polite", "Destructive", "Cancel"))
 	if(podtype == "Cancel")
 		return

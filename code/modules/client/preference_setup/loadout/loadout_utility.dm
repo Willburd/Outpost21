@@ -75,10 +75,15 @@
 
 /* outpost 21  edit - nif removal
 /datum/gear/utility/paicard
-	display_name = "personal AI device"
+	display_name = "personal AI device (classic)"
 	path = /obj/item/device/paicard
 */
 
+/* outpost 21 edit - PAI removal
+/datum/gear/utility/paicard_b
+	display_name = "personal AI device (new)"
+	path = /obj/item/device/paicard/typeb
+*/
 /datum/gear/utility/securecase
 	display_name = "secure briefcase"
 	path =/obj/item/weapon/storage/secure/briefcase

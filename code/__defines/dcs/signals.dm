@@ -42,8 +42,10 @@
 #define COMSIG_PARENT_QDELETING "parent_qdeleting"
 /// generic topic handler (usr, href_list)
 #define COMSIG_TOPIC "handle_topic"
-/// from datum ui_act (usr, action)
+/// from datum tgui_act (usr, action)
 #define COMSIG_UI_ACT "COMSIG_UI_ACT"
+/// from datum tgui_fallback (payload)
+#define COMSIG_UI_FALLBACK "COMSIG_UI_FALLBACK"
 
 
 /// fires on the target datum when an element is attached to it (/datum/element)
@@ -58,8 +60,8 @@
 #define COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE "atom_init_success"
 ///from base of atom/attackby(): (/obj/item, /mob/living, params)
 #define COMSIG_PARENT_ATTACKBY "atom_attackby"
-///Return this in response if you don't want afterattack to be called
-	#define COMPONENT_NO_AFTERATTACK (1<<0)
+///Return this in response if you don't want later item attack procs to be called.
+	#define COMPONENT_CANCEL_ATTACK_CHAIN (1<<0)
 ///from base of atom/attack_hulk(): (/mob/living/carbon/human)
 #define COMSIG_ATOM_HULK_ATTACK "hulk_attack"
 ///from base of atom/animal_attack(): (/mob/user)
@@ -94,6 +96,7 @@
 #define COMSIG_ATOM_BUMPED "atom_bumped"
 ///from base of atom/ex_act(): (severity, target)
 #define COMSIG_ATOM_EX_ACT "atom_ex_act"
+	#define COMPONENT_IGNORE_EXPLOSION (1<<0)
 ///from base of atom/emp_act(): (severity)
 #define COMSIG_ATOM_EMP_ACT "atom_emp_act"
 ///from base of atom/fire_act(): (exposed_temperature, exposed_volume)
@@ -225,7 +228,7 @@
 
 // /atom/movable signals
 
-///from base of atom/movable/Moved(): (/atom)
+///from base of atom/movable/Move(): (atom/newloc, dir, movetime)
 #define COMSIG_MOVABLE_PRE_MOVE "movable_pre_move"
 	#define COMPONENT_MOVABLE_BLOCK_PRE_MOVE (1<<0)
 ///from base of atom/movable/Moved(): (/atom, dir)
@@ -396,10 +399,6 @@
 #define COMSIG_CARBON_EMBED_RIP "item_embed_start_rip"
 ///called when removing a given item from a mob, from mob/living/carbon/remove_embedded_object(mob/living/carbon/target, /obj/item)
 #define COMSIG_CARBON_EMBED_REMOVAL "item_embed_remove_safe"
-
-// /mob/living/simple_animal/hostile signals
-#define COMSIG_HOSTILE_ATTACKINGTARGET "hostile_attackingtarget"
-	#define COMPONENT_HOSTILE_NO_ATTACK (1<<0)
 
 // /obj signals
 
@@ -778,3 +777,5 @@
 #define COMSIG_CONFLICT_ELEMENT_CHECK "conflict_element_check"
 	/// A conflict was found
 	#define ELEMENT_CONFLICT_FOUND	(1<<0)
+//From reagents touch_x.
+#define COMSIG_REAGENTS_TOUCH "reagent_touch"

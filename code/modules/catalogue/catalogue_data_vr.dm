@@ -64,8 +64,8 @@
 	desc = "The Vulpkanin are the remnants of an ancient precursor which resided in the Coreward Periphery \
 	3000 to 4000 years ago, residing on a planet called “Altam”. Vulpkanin diverged from the precursors due \
 	to heavy isolation after the fall, presumably due to being a freshly found colony. A lack of material support \
-	regressed their technology to pre-industrial standards until being found again by Humanity. At this point \
-	they have formed an early spacefaring society and accession into the Diaspora went over relatively smoothly. \
+	regressed their technology to pre-industrial standards, from which they had to recover from in long and hard years. At the point \
+	of discovery by human explorers, they have formed an early interplanetary society and accession into the Diaspora went over relatively smoothly. \
 	Vulpkanin are the closest successor to the precursors, genetically, although genelocked devices still do not \
 	recognize them due to genetic drift."
 	value = CATALOGUER_REWARD_TRIVIAL
@@ -102,6 +102,14 @@
 	comparable conditions as wealthy members of the Diaspora."
 	value = CATALOGUER_REWARD_TRIVIAL
 */ 
+
+/datum/category_item/catalogue/fauna/altevian
+	name = "Sapients - Altevian"
+	desc = "The Altevian are a species of tall, rodent humanoids that are akin to rats for their features. \
+	The Altevian, unlike most species, do not have a home planet, nor system, adopting a fully nomadic lifestyle \
+	for their survival across the stars. Instead, they have opted to live in massive super capital-class colony-ships \
+	with a flagship as their place they would call home."
+	value = CATALOGUER_REWARD_TRIVIAL
 
 /datum/category_item/catalogue/fauna/shadekin
 	name = "Sapients - Shadekin"

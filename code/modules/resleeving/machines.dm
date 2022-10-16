@@ -494,17 +494,6 @@
 			qdel(G)
 			src.updateUsrDialog()
 			return //Don't call up else we'll get attack messsages
-	/* outpost 21  edit - nif removal
-	if(istype(W, /obj/item/device/sleevecard))
-		var/obj/item/device/sleevecard/C = W
-		user.unEquip(C)
-		C.removePersonality()
-		qdel(C)
-		sleevecards++
-		to_chat(user, "<span class='notice'>You store \the [C] in \the [src].</span>")
-		return
-	*/
-
 	return ..()
 
 /obj/machinery/transhuman/resleever/MouseDrop_T(mob/living/carbon/O, mob/user as mob)
@@ -544,7 +533,7 @@
 
 	/* outpost 21  edit - nif removal
 	if(mode == 2 && sleevecards) //Card sleeving
-		var/obj/item/device/sleevecard/card = new /obj/item/device/sleevecard(get_turf(src))
+		var/obj/item/device/paicard/sleevecard/card = new /obj/item/device/paicard/sleevecard(get_turf(src))
 		card.sleeveInto(MR, db_key = db_key)
 		sleevecards--
 		return 1
@@ -579,8 +568,9 @@
 	//Re-supply a NIF if one was backed up with them.
 	if(MR.nif_path)
 		var/obj/item/device/nif/nif = new MR.nif_path(occupant,null,MR.nif_savedata)
-		for(var/path in MR.nif_software)
-			new path(nif)
+		spawn(0)			//Delay to not install software before NIF is fully installed
+			for(var/path in MR.nif_software)
+				new path(nif)
 		nif.durability = MR.nif_durability //Restore backed up durability after restoring the softs.
 	*/
 

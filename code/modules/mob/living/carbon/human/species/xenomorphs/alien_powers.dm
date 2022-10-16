@@ -67,7 +67,7 @@
 		to_chat(src, "<span class='alium'>Their plasma vessel is missing.</span>")
 		return
 
-	var/amount = input(usr, "Amount:", "Transfer Plasma to [M]") as num
+	var/amount = tgui_input_number(usr, "Amount:", "Transfer Plasma to [M]")
 	if (amount)
 		amount = abs(round(amount))
 		if(check_alien_ability(amount,0,O_PLASMA))
@@ -101,7 +101,7 @@
 // Drone verbs.
 /mob/living/carbon/human/proc/evolve()
 	set name = "Evolve (500)"
-	set desc = "Produce an interal egg sac capable of spawning children. Only one queen can exist at a time."
+	set desc = "Produce an internal egg sac capable of spawning children. Only one queen can exist at a time."
 	set category = "Abilities"
 
 	if(alien_queen_exists())

@@ -66,7 +66,7 @@
 		else
 			data["status"] = "OK"
 		var/list/contacts = list()
-		for(var/obj/effect/overmap/O in view(7,linked))
+		for(var/obj/effect/overmap/O in range(7,linked))
 			if(linked == O)
 				continue
 			if(!O.scannable)
@@ -106,7 +106,7 @@
 	if(sensors)
 		switch(action)
 			if("range")
-				var/nrange = input(usr, "Set new sensors range", "Sensor range", sensors.range) as num|null
+				var/nrange = tgui_input_number(usr, "Set new sensors range", "Sensor range", sensors.range)
 				if(tgui_status(usr, state) != STATUS_INTERACTIVE)
 					return FALSE
 				if(nrange)
@@ -125,10 +125,9 @@
 		return
 	if(sensors && sensors.use_power && sensors.powered())
 		var/sensor_range = round(sensors.range*1.5) + 1
-		linked.set_light_range(sensor_range + 0.5)
-		linked.set_light_on(TRUE)
+		linked.set_light(sensor_range + 0.5)
 	else
-		linked.set_light_on(FALSE)
+		linked.set_light(0)
 
 /obj/machinery/shipsensors
 	name = "sensors suite"

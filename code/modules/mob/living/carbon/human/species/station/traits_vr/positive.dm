@@ -1,5 +1,5 @@
 /datum/trait/positive
-	category = 1
+	category = TRAIT_TYPE_POSITIVE
 
 /datum/trait/positive/speed_fast
 	name = "Haste"
@@ -91,19 +91,19 @@
 	var_changes = list("darksight" = 8, "flash_mod" = 1.2)
 
 /datum/trait/positive/melee_attack
-	name = "Sharp Melee"
+	name = "Special Attack: Sharp Melee" // Trait Organization for easier browsing. TODO: Proper categorization of 'health/ability/resist/etc'
 	desc = "Provides sharp melee attacks that do slightly more damage."
 	cost = 1
 	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp))
 
 /datum/trait/positive/melee_attack_fangs
-	name = "Sharp Melee & Numbing Fangs"
+	name = "Special Attack: Sharp Melee & Numbing Fangs" // Trait Organization for easier browsing. TODO: Proper categorization of 'health/ability/resist/etc'
 	desc = "Provides sharp melee attacks that do slightly more damage, along with fangs that makes the person bit unable to feel their body or pain."
 	cost = 2
 	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp, /datum/unarmed_attack/bite/sharp/numbing))
 
 /datum/trait/positive/fangs
-	name = "Numbing Fangs"
+	name = "Special Attack: Numbing Fangs" // Trait Organization for easier browsing. TODO: Proper categorization of 'health/ability/resist/etc'
 	desc = "Provides fangs that makes the person bit unable to feel their body or pain."
 	cost = 1
 	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp/numbing))
@@ -164,13 +164,13 @@
 	desc = "You've drunk so much that most booze doesn't even faze you. It takes something like a Pan-Galactic or a pint of Deathbell for you to even get slightly buzzed. You may wish to note this down in your medical records."
 	cost = 2
 	var_changes = list("alcohol_mod" = 0.25)
-	
+
 /datum/trait/positive/pain_tolerance_basic
 	name = "Pain Tolerant"
 	desc = "You're a little more resistant to pain than most, and experience 10% less pain from from all sources."
 	cost = 1
 	var_changes = list("pain_mod" = 0.9)
-	
+
 /datum/trait/positive/pain_tolerance_advanced
 	name = "Pain Tolerance, High "
 	desc = "You are noticeably more resistant to pain than most, and experience 20% less pain from all sources."
@@ -200,6 +200,7 @@
 /datum/trait/positive/winged_flight/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
 	H.verbs |= /mob/living/proc/flying_toggle
+	H.verbs |= /mob/living/proc/flying_vore_toggle
 	H.verbs |= /mob/living/proc/start_wings_hovering
 
 /datum/trait/positive/soft_landing
@@ -207,6 +208,7 @@
 	desc = "You can fall from certain heights without suffering any injuries, be it via wings, lightness of frame or general dexterity."
 	cost = 1
 	var_changes = list("soft_landing" = TRUE)
+	custom_only = FALSE
 
 /datum/trait/positive/hardfeet
 	name = "Hard Feet"
@@ -228,13 +230,15 @@
 	desc = "You're capable of parkour and can *flip over low objects (most of the time)."
 	cost = 2
 	var_changes = list("agility" = 90)
+	custom_only = FALSE
+	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 //YW ADDITIONS: START
 /datum/trait/positive/bloodsucker_plus
 	name = "Evolved Bloodsucker"
 	desc = "Makes you able to gain nutrition by draining blood as well as eating food. To compensate, you get fangs that can be used to drain blood from prey."
 	cost = 1
-	var_changes = list("organic_food_coeff" = 0.5) // Hopefully this works???
+	var_changes = list("organic_food_coeff" = 0.5, "bloodsucker" = TRUE)
 	excludes = list(/datum/trait/neutral/bloodsucker)
 
 /datum/trait/positive/bloodsucker_plus/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -257,7 +261,7 @@
 	var_changes = list("cold_level_1" = 200,  "cold_level_2" = 150, "cold_level_3" = 90, "breath_cold_level_1" = 180, "breath_cold_level_2" = 100, "breath_cold_level_3" = 60, "cold_discomfort_level" = 210, "heat_level_1" = 305, "heat_level_2" = 360, "heat_level_3" = 700, "breath_heat_level_1" = 345, "breath_heat_level_2" = 380, "breath_heat_level_3" = 780, "heat_discomfort_level" = 295)
 	excludes = list(/datum/trait/positive/hotadapt)
 	can_take = ORGANICS
-	
+
 /datum/trait/positive/hotadapt
 	name = "Heat-Adapted"
 	desc = "You are able to withstand much hotter temperatures than other species, and can even be comfortable in extremely hot environments. You are also more vulnerable to cold environments as a consequence of these adaptations."
@@ -287,8 +291,47 @@
 	H.verbs |= /mob/living/carbon/human/proc/weave_item
 	H.verbs |= /mob/living/carbon/human/proc/set_silk_color
 
-/datum/trait/positive/water_breather
-	name = "Water Breather"
-	desc = "You can breathe under water."
+/datum/trait/positive/aquatic
+	name = "Aquatic"
+	desc = "You can breathe under water and can traverse water more efficiently. Additionally, you can eat others in the water."
 	cost = 1
-	var_changes = list("water_breather" = 1)
+	var_changes = list("water_breather" = 1, "water_movement" = -4) //Negate shallow water. Half the speed in deep water.
+
+/datum/trait/positive/aquatic/apply(var/datum/species/S,var/mob/living/carbon/human/H)
+	..(S,H)
+	H.verbs |= /mob/living/carbon/human/proc/water_stealth
+	H.verbs |= /mob/living/carbon/human/proc/underwater_devour
+
+/datum/trait/positive/cocoon_tf
+	name = "Cocoon Spinner"
+	desc = "Allows you to build a cocoon around yourself, using it to transform your body if you desire."
+	cost = 1
+
+/datum/trait/positive/cocoon_tf/apply(var/datum/species/S,var/mob/living/carbon/human/H)
+	..(S,H)
+	H.verbs |= /mob/living/carbon/human/proc/enter_cocoon
+
+/datum/trait/positive/linguist
+	name = "Linguist"
+	desc = "Allows you to have more languages."
+	cost = 1
+	var_changes = list("num_alternate_languages" = 6)
+	var_changes_pref = list("extra_languages" = 3)
+	custom_only = FALSE
+	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
+
+/datum/trait/positive/good_shooter
+	name = "Eagle Eye"
+	desc = "You are better at aiming than most."
+	cost = 2
+	var_changes = list("gun_accuracy_mod" = 25)
+	custom_only = FALSE
+	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
+
+/datum/trait/positive/pain_tolerance
+	name = "Grit"
+	desc = "You can keep going a little longer, a little harder when you get hurt, Injuries only inflict 85% as much pain, and slowdown from pain is 85% as effective."
+	cost = 2
+	var_changes = list("trauma_mod" = 0.85)
+	excludes = list(/datum/trait/negative/neural_hypersensitivity)
+	can_take = ORGANICS

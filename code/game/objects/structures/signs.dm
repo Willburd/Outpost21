@@ -1255,6 +1255,13 @@
 	name = "CHAPEL"
 	icon_state = "chapel"
 
+//YW addition start
+/obj/structure/sign/department/janitor
+	name = "JANITOR"
+	icon_state = "janitor"
+	icon = 'icons/obj/decals_yw.dmi'
+//YW addition end
+
 /obj/structure/sign/department/bridge
 	name = "BRIDGE"
 	icon_state = "bridge"

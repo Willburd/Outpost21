@@ -173,7 +173,7 @@
 /obj/machinery/mining/drill/attackby(obj/item/O as obj, mob/user as mob)
 	if(!active)
 		if(istype(O, /obj/item/device/multitool))
-			var/newtag = text2num(sanitizeSafe(input(user, "Enter new ID number or leave empty to cancel.", "Assign ID number") as text, 4))
+			var/newtag = text2num(sanitizeSafe(tgui_input_text(user, "Enter new ID number or leave empty to cancel.", "Assign ID number", null, 4), 4))
 			if(newtag)
 				name = "[initial(name)] #[newtag]"
 				to_chat(user, "<span class='notice'>You changed the drill ID to: [newtag]</span>")
@@ -295,7 +295,7 @@
 		if(supports.len >= braces_needed)
 			supported = 1
 		else for(var/obj/machinery/mining/brace/check in supports)
-			if(check.brace_tier > 3)
+			if(check.brace_tier >= 3)
 				supported = 1
 		for(var/obj/machinery/mining/brace/check in supports)
 			total_brace_tier += check.brace_tier

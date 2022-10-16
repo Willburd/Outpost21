@@ -2,6 +2,10 @@
 	display_name = "nudity permit"
 	path = /obj/item/clothing/under/permit
 
+/datum/gear/uniform/suit/natureist_talisman
+	display_name = "naturist talisman"
+	path = /obj/item/clothing/under/permit/natureist_talisman
+
 //Polaris overrides
 /datum/gear/uniform/solgov/pt/sifguard
 	display_name = "pt uniform, planetside sec"
@@ -32,7 +36,7 @@
 /datum/gear/uniform/job_khi/med
 	display_name = "khi uniform, med"
 	path = /obj/item/clothing/under/rank/khi/med
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Field Medic","Psychiatrist")
 
 /datum/gear/uniform/job_khi/eng
 	display_name = "khi uniform, eng"
@@ -237,3 +241,54 @@ Talon jumpsuit
 		"red and white" = /obj/item/clothing/under/summerdress/red
 	)
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
+
+// undersuits
+/datum/gear/uniform/undersuit
+	display_name = "undersuit selection"
+	path = /obj/item/clothing/under/undersuit/
+
+/datum/gear/uniform/undersuit/New()
+	..()
+	var/list/suits = list()
+	var/list/blacklisted_types = list(/obj/item/clothing/under/undersuit/sec,
+									  /obj/item/clothing/under/undersuit/sec/hos,
+									  /obj/item/clothing/under/undersuit/hazard,
+									  /obj/item/clothing/under/undersuit/command,
+									  /obj/item/clothing/under/undersuit/centcom)
+	for(var/obj/item/clothing/under/undersuit/undersuit_type as anything in typesof(/obj/item/clothing/under/undersuit))
+		if(undersuit_type in blacklisted_types)
+			continue
+		suits[initial(undersuit_type.name)] = undersuit_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(suits))
+
+/datum/gear/uniform/undersuit_haz
+	display_name = "undersuit, hazard (Engineering)"
+	allowed_roles = list("Chief Engineer", "Atmospheric Technician", "Engineer")
+	path = /obj/item/clothing/under/undersuit/hazard
+
+/datum/gear/uniform/undersuit_sec
+	display_name = "undersuit, security (Security)"
+	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
+	path = /obj/item/clothing/under/undersuit/sec
+
+/datum/gear/uniform/undersuit_hos
+	display_name = "undersuit, security command (HoS)"
+	allowed_roles = list("Head of Security")
+	path = /obj/item/clothing/under/undersuit/sec/hos
+
+/datum/gear/uniform/undersuit_com
+	display_name = "undersuit, command (SM/HoP)"
+	allowed_roles = list("Site Manager", "Head of Personnel")
+	path = /obj/item/clothing/under/undersuit/command
+
+//Altevian Uniforms
+/datum/gear/uniform/altevian
+	description = "An extremely comfortable set of clothing that's made to help people handle their day to day work around the fleets with little to no discomfort."
+	display_name = "altevian uniform selection"
+
+/datum/gear/uniform/altevian/New()
+	..()
+	var/list/pants = list()
+	for(var/obj/item/clothing/under/pants/altevian/pants_type as anything in typesof(/obj/item/clothing/under/pants/altevian))
+		pants[initial(pants_type.name)] = pants_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))

@@ -42,6 +42,10 @@
 	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
 	/// Set automatically, enables pricing
 	var/has_prices = FALSE
+	// This one is used for refill cartridge use.
+	var/list/refill	= list() // For each, use the following pattern:
+	// Enables refilling with appropriate cartridges
+	var/refillable = TRUE
 
 	// List of vending_product items available.
 	var/list/product_records = list()
@@ -126,11 +130,30 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(LAZYLEN(premium))
 		has_premium = TRUE
 
+
+	if(!LAZYLEN(refill) && refillable)			// Manually setting refill list prevents the automatic population. By default filled with all entries from normal product.
+		refill += products
+
 	LAZYCLEARLIST(products)
 	LAZYCLEARLIST(contraband)
 	LAZYCLEARLIST(premium)
 	LAZYCLEARLIST(prices)
 	all_products.Cut()
+
+/obj/machinery/vending/proc/refill_inventory()
+	if(!(LAZYLEN(refill)))		//This shouldn't happen, but just in case...
+		return
+
+	for(var/entry in refill)
+		var/datum/stored_item/vending_product/current_product
+		for(var/datum/stored_item/vending_product/product in product_records)
+			if(product.item_path == entry)
+				current_product = product
+				break
+		if(!current_product)
+			continue
+		else
+			current_product.refill_products(refill[entry])
 
 /obj/machinery/vending/Destroy()
 	qdel(wires)
@@ -170,6 +193,29 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
 		return
+	else if(istype(W, /obj/item/weapon/refill_cartridge))
+		if(stat & (BROKEN|NOPOWER))
+			to_chat(user, "<span class='notice'>You cannot refill [src] while it is not functioning.</span>")
+			return
+		if(!anchored)
+			to_chat(user, "<span class='notice'>You cannot refill [src] while it is not secured.</span>")
+			return
+		if(panel_open)
+			to_chat(user, "<span class='notice'>You cannot refill [src] while it's panel is open.</span>")
+			return
+		if(!refillable)
+			to_chat(user, "<span class='notice'>\the [src] does not have a refill port.</span>")
+			return
+		var/obj/item/weapon/refill_cartridge/RC = W
+		if(RC.can_refill(src))
+			to_chat(user, "<span class='notice'>You refill [src] using [RC].</span>")
+			user.drop_from_inventory(RC)
+			qdel(RC)
+			refill_inventory()
+			return
+		else
+			to_chat(user, "<span class='notice'>You cannot refill [src] with [RC].</span>")
+			return
 	else if(W.is_screwdriver())
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
@@ -224,7 +270,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
+		to_chat(usr, "\icon[cashmoney][bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
 		return 0
 
 	if(istype(cashmoney, /obj/item/weapon/spacecash))
@@ -281,7 +327,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
 	// empty at high security levels
 	if(customer_account.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-		var/attempt_pin = input(usr, "Enter pin code", "Vendor transaction") as num
+		var/attempt_pin = tgui_input_number(usr, "Enter pin code", "Vendor transaction")
 		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
 
 		if(!customer_account)

@@ -8,14 +8,16 @@ var/list/mining_overlay_cache = list()
 	density = TRUE
 	opacity = 1 // YW edit. Stops all my unsimulated tiles from being seethrough.
 
+/*
 /turf/unsimulated/mineral/ice
 	name = "Ice wall"
 	desc = "Frigid Ice that seems to be stronger then most manmade structures"
 	icon = 'icons/turf/snow_new.dmi'
 	icon_state = "Icerock"
+*/
 
 
-
+	
 /turf/simulated/mineral //wall piece
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
@@ -26,7 +28,6 @@ var/list/mining_overlay_cache = list()
 	density = TRUE
 	blocks_air = 1
 	temperature = T0C
-	
 	can_dirty = FALSE
 
 	var/floor_name = "sand"
@@ -371,7 +372,7 @@ var/list/mining_overlay_cache = list()
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 
@@ -422,30 +423,14 @@ var/list/mining_overlay_cache = list()
 					F.attackby(W,user)
 					return
 
-		else if(istype(W, /obj/item/stack/rods))
-			var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-			if(L)
-				return
-			var/obj/item/stack/rods/R = W
-			if (R.use(1))
-				to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
-				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-				new /obj/structure/lattice(get_turf(src))
-
 		else if(istype(W, /obj/item/stack/tile/floor))
-			var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-			if(L)
-				var/obj/item/stack/tile/floor/S = W
-				if (S.get_amount() < 1)
-					return
-				qdel(L)
-				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-				ChangeTurf(/turf/simulated/floor)
-				S.use(1)
+			var/obj/item/stack/tile/floor/S = W
+			if (S.get_amount() < 1)
 				return
-			else
-				to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
-				return
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			ChangeTurf(/turf/simulated/floor)
+			S.use(1)
+			return
 
 
 	else

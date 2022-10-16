@@ -10,7 +10,8 @@
 		'sound/effects/footstep/mud4.ogg'))
 
 /decl/flooring/grass/outdoors
-	flags = TURF_REMOVE_SHOVEL
+	flags = 0
+	build_type = null
 
 /decl/flooring/grass/outdoors/forest
 	icon = 'icons/turf/outdoors.dmi'

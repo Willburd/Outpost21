@@ -30,7 +30,7 @@
 	. = ..()
 	// outpost 21 edit - add gibber from above detection
 	var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_zstep(src, UP))
-	if(!input_obj)	
+	if(!input_obj)
 		for(var/i in cardinal)
 			input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
 			if(input_obj)
@@ -209,7 +209,7 @@
 	update_icon()
 
 	var/slab_name = occupant.name
-	var/slab_count = 2 + occupant.meat_amount
+	var/slab_count = occupant.meat_amount
 	var/slab_type = occupant.meat_type ? occupant.meat_type : /obj/item/weapon/reagent_containers/food/snacks/meat
 	var/slab_nutrition = src.occupant.nutrition / 15
 
@@ -227,7 +227,6 @@
 		slab_count = 1 // no div by 0
 	slab_nutrition /= slab_count
 
-	var/original_slab_count = slab_count
 	while(slab_count)
 		slab_count--
 		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
@@ -235,7 +234,7 @@
 			new_meat.name = "[slab_name] [new_meat.name]"
 			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/original_slab_count,1))
+				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/(2 + occupant.meat_amount),1))
 
 	add_attack_logs(user,occupant,"Used [src] to gib")
 

@@ -454,7 +454,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/part_b_extra = ""
 		if(data == DATA_ANTAG) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'>[bicon(radio)]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[frequency_span_class(display_freq)]'>\icon[radio][bicon(radio)]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
@@ -511,27 +511,37 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(length(heard_masked))
 			for (var/mob/R in heard_masked)
 				R.hear_radio(message_pieces, verbage, part_a, part_b, part_c, M, 0, name)
+				if(R.is_preference_enabled(/datum/client_preference/radio_sounds))
+					R << 'sound/effects/radio_common_quieter.ogg'
 
 		/* --- Process all the mobs that heard the voice normally (understood) --- */
 		if(length(heard_normal))
 			for (var/mob/R in heard_normal)
 				R.hear_radio(message_pieces, verbage, part_a, part_b, part_c, M, 0, realname)
+				if(R.is_preference_enabled(/datum/client_preference/radio_sounds))
+					R << 'sound/effects/radio_common_quieter.ogg'
 
 		/* --- Process all the mobs that heard the voice normally (did not understand) --- */
 		if(length(heard_voice))
 			for (var/mob/R in heard_voice)
 				R.hear_radio(message_pieces, verbage, part_a, part_b, part_c, M,0, vname)
+				if(R.is_preference_enabled(/datum/client_preference/radio_sounds))
+					R << 'sound/effects/radio_common_quieter.ogg'
 
 		/* --- Process all the mobs that heard a garbled voice (did not understand) --- */
 			// Displays garbled message (ie "f*c* **u, **i*er!")
 		if(length(heard_garbled))
 			for (var/mob/R in heard_garbled)
 				R.hear_radio(message_pieces, verbage, part_a, part_b, part_c, M, 1, vname)
+				if(R.is_preference_enabled(/datum/client_preference/radio_sounds))
+					R << 'sound/effects/radio_common_quieter.ogg'
 
 		/* --- Complete gibberish. Usually happens when there's a compressed message --- */
 		if(length(heard_gibberish))
 			for (var/mob/R in heard_gibberish)
 				R.hear_radio(message_pieces, verbage, part_a, part_b, part_c, M, 1)
+				if(R.is_preference_enabled(/datum/client_preference/radio_sounds))
+					R << 'sound/effects/radio_common_quieter.ogg'
 
 	return 1
 
@@ -646,7 +656,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		// Create a radio headset for the sole purpose of using its icon
 		var/obj/item/device/radio/headset/radio = new
 
-		var/part_b = "</span><b> [bicon(radio)]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
+		var/part_b = "</span><b>\icon[radio][bicon(radio)]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
 

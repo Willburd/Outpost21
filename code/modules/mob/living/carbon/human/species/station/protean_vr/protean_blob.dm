@@ -14,7 +14,6 @@
 	health = 200
 	say_list_type = /datum/say_list/protean_blob
 
-	// ai_inactive = TRUE //Always off //VORESTATION AI TEMPORARY REMOVAL
 	show_stat_health = FALSE //We will do it ourselves
 
 	response_help = "pets"
@@ -36,7 +35,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 	maxbodytemp = 900
-	movement_cooldown = 4
+	movement_cooldown = 2
 
 	var/mob/living/carbon/human/humanform
 	var/obj/item/organ/internal/nano/refactory/refactory
@@ -382,6 +381,7 @@ var/global/list/disallowed_protean_accessories = list(
 
 	//Put our owner in it (don't transfer var/mind)
 	blob.ckey = ckey
+	blob.ooc_notes = ooc_notes
 	temporary_form = blob
 
 	//Mail them to nullspace
@@ -411,12 +411,14 @@ var/global/list/disallowed_protean_accessories = list(
 	//Return our blob in case someone wants it
 	return blob
 
+/* outpost 21 edit - race removal, moved to living.dm
 //For some reason, there's no way to force drop all the mobs grabbed. This ought to fix that. And be moved elsewhere. Call with caution, doesn't handle cycles.
 /proc/remove_micros(var/src, var/mob/root)
 	for(var/obj/item/I in src)
 		remove_micros(I, root) //Recursion. I'm honestly depending on there being no containment loop, but at the cost of performance that can be fixed too.
 		if(istype(I, /obj/item/weapon/holder))
 			root.remove_from_mob(I)
+*/
 
 /mob/living/carbon/human/proc/nano_outofblob(var/mob/living/simple_mob/protean_blob/blob, force)
 	if(!istype(blob))
@@ -463,6 +465,7 @@ var/global/list/disallowed_protean_accessories = list(
 
 	//Put our owner in it (don't transfer var/mind)
 	ckey = blob.ckey
+	ooc_notes = blob.ooc_notes // Lets give the protean any updated notes from blob form.
 	temporary_form = null
 
 	//Transfer vore organs
@@ -485,3 +488,20 @@ var/global/list/disallowed_protean_accessories = list(
 
 	//Return ourselves in case someone wants it
 	return src
+
+/mob/living/simple_mob/protean_blob/CanStumbleVore(mob/living/target)
+	if(target == humanform)
+		return FALSE
+	return ..()
+
+/mob/living/simple_mob/protean_blob/CanStumbleVore(mob/living/target)
+	if(target == humanform)
+		return FALSE
+	return ..()
+
+/mob/living/carbon/human/CanStumbleVore(mob/living/target)
+	if(istype(target, /mob/living/simple_mob/protean_blob))
+		var/mob/living/simple_mob/protean_blob/PB = target
+		if(PB.humanform == src)
+			return FALSE
+	return ..()

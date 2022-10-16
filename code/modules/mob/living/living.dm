@@ -1140,8 +1140,8 @@
 		// if not selecting the head, treat it like a body throw into the wall instead! otherwise a headslam
 		var/hit_zone = zone_sel.selecting
 		if(zone_sel.selecting != BP_HEAD)
-			zone_sel.selecting = BP_TORSO 
-	
+			zone_sel.selecting = BP_TORSO
+
 		// check if not on same turf (nearby check!)
 		if(loc != throw_mob.loc)
 			to_chat(src, "<span class='danger'>Couldn't slam [throw_mob] into the wall! They are too far away!</span>")
@@ -1301,13 +1301,15 @@
 	if(!screen_icon)
 		screen_icon = new()
 		RegisterSignal(screen_icon, COMSIG_CLICK, .proc/character_setup_click)
+	/* Outpost 21 - PAI removal
 	if(ispAI(user))
 		screen_icon.icon = 'icons/mob/pai_hud.dmi'
 		screen_icon.screen_loc = ui_acti
 	else
-		screen_icon.icon = HUD.ui_style
-		screen_icon.color = HUD.ui_color
-		screen_icon.alpha = HUD.ui_alpha
+	*/
+	screen_icon.icon = HUD.ui_style
+	screen_icon.color = HUD.ui_color
+	screen_icon.alpha = HUD.ui_alpha
 	LAZYADD(HUD.other_important, screen_icon)
 	user.client?.screen += screen_icon
 

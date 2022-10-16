@@ -55,6 +55,7 @@
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK,LANGUAGE_AKHANI,LANGUAGE_ALAI)
 
+/* outpost 21 - race removal
 /datum/species/zaddat
 	autohiss_basic_map = list(
 			"f" = list("v","vh"),
@@ -67,6 +68,7 @@
 			"v" = list("vv", "vvv")
 		)
 	autohiss_exempt = list(LANGUAGE_ZADDAT,LANGUAGE_VESPINAE)
+*/
 
 //Yawn Wider Edit.
 /datum/species/spider

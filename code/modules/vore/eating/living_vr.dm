@@ -766,12 +766,14 @@
 		to_chat(src, "<span class='warning'>You can't eat that so casually!</span>")
 		return
 
+	/* outpost 21 - PAI removal
 	if(istype(I, /obj/item/device/paicard))
 		var/obj/item/device/paicard/palcard = I
 		var/mob/living/silicon/pai/pocketpal = palcard.pai
 		if(!pocketpal.devourable)
 			to_chat(src, "<span class='warning'>\The [pocketpal] doesn't allow you to eat it.</span>")
 			return
+	*/
 
 	if(is_type_in_list(I,edible_trash) | adminbus_trash)
 		if(I.hidden_uplink)
@@ -859,6 +861,7 @@
 		else if(istype(I,/obj/item/device/mmi/digital/posibrain) || istype(I,/obj/item/device/aicard))
 			visible_message("<span class='warning'>[src] demonstrates their voracious capabilities by swallowing [I] whole!</span>")
 			to_chat(src, "<span class='notice'>You can taste the sweet flavor of digital friendship. Or maybe it is something else.</span>")
+		/* outpost 21 - nif removal
 		else if(istype(I,/obj/item/device/paicard))
 			visible_message("<span class='warning'>[src] demonstrates their voracious capabilities by swallowing [I] whole!</span>")
 			to_chat(src, "<span class='notice'>You can taste the sweet flavor of digital friendship.</span>")
@@ -866,6 +869,7 @@
 			if(ourcard.pai && ourcard.pai.client && isbelly(ourcard.loc))
 				var/obj/belly/B = ourcard.loc
 				to_chat(ourcard.pai, "<span class= 'notice'><B>[B.desc]</B></span>")
+		*/
 		else if(istype(I,/obj/item/weapon/reagent_containers/food))
 			var/obj/item/weapon/reagent_containers/food/F = I
 			if(!F.reagents.total_volume)
@@ -1180,13 +1184,15 @@
 	if(!screen_icon)
 		screen_icon = new()
 		RegisterSignal(screen_icon, COMSIG_CLICK, .proc/vore_panel_click)
+	/* Outpost21 - PAI removal
 	if(ispAI(user))
 		screen_icon.icon = 'icons/mob/pai_hud.dmi'
 		screen_icon.screen_loc = ui_acti
 	else
-		screen_icon.icon = HUD.ui_style
-		screen_icon.color = HUD.ui_color
-		screen_icon.alpha = HUD.ui_alpha
+	*/
+	screen_icon.icon = HUD.ui_style
+	screen_icon.color = HUD.ui_color
+	screen_icon.alpha = HUD.ui_alpha
 	LAZYADD(HUD.other_important, screen_icon)
 	user.client?.screen += screen_icon
 

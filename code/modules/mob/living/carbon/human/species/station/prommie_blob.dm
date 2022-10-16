@@ -348,7 +348,7 @@
 
 	//Drop all our things
 	var/list/things_to_drop = contents.Copy()
-	var/list/things_to_not_drop = list(w_uniform,nif,l_store,r_store,wear_id,l_ear,r_ear) //And whatever else we decide for balancing.
+	var/list/things_to_not_drop = list( /*w_uniform,nif,*/l_store,r_store,wear_id,l_ear,r_ear) //And whatever else we decide for balancing.
 	var/obj/item/clothing/head/new_hat
 	var/has_hat = FALSE
 	things_to_drop -= things_to_not_drop //Crunch the lists
@@ -365,12 +365,14 @@
 	for(var/obj/item/I in things_to_drop) //rip hoarders
 		drop_from_inventory(I)
 
+	/* outpost 21 - race removal
 	if(w_uniform && istype(w_uniform,/obj/item/clothing)) //No webbings tho. We do this after in case a suit was in the way
 		var/obj/item/clothing/uniform = w_uniform
 		if(LAZYLEN(uniform.accessories))
 			for(var/obj/item/clothing/accessory/A in uniform.accessories)
 				if(is_type_in_list(A, disallowed_protean_accessories))
 					uniform.remove_accessory(null,A) //First param is user, but adds fingerprints and messages
+	*/
 
 	//Size update
 	blob.transform = matrix()*size_multiplier

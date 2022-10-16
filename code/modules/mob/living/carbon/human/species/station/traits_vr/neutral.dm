@@ -96,7 +96,7 @@ YW change end */
 			"x" = list("ks", "kss", "ksss")
 		),
 	autohiss_exempt = list(LANGUAGE_UNATHI))
-	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat)
+	excludes = list(/datum/trait/neutral/autohiss_tajaran/*, /datum/trait/neutral/autohiss_zaddat*/)
 
 /datum/trait/neutral/autohiss_tajaran
 	name = "Autohiss (Tajaran)"
@@ -107,8 +107,9 @@ YW change end */
 			"r" = list("rr", "rrr", "rrrr")
 		),
 	autohiss_exempt = list(LANGUAGE_SIIK,LANGUAGE_AKHANI,LANGUAGE_ALAI))
-	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_zaddat)
+	excludes = list(/datum/trait/neutral/autohiss_unathi/*, /datum/trait/neutral/autohiss_zaddat*/)
 
+/* outpost 21 - race removal
 /datum/trait/neutral/autohiss_zaddat
 	name = "Autohiss (Zaddat)"
 	desc = "You buzz your S's and F's."
@@ -126,6 +127,7 @@ YW change end */
 		),
 	autohiss_exempt = list(LANGUAGE_ZADDAT,LANGUAGE_VESPINAE))
 	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi)
+*/
 
 ///YW ADDITION: START
 /datum/trait/neutral/autohiss_vassilian

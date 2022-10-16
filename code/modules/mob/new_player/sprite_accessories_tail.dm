@@ -24,6 +24,7 @@
 	var/icon/clip_mask_icon = null //Icon file used for clip mask.
 	var/clip_mask_state = null //Icon state to generate clip mask. Clip mask is used to 'clip' off the lower part of clothing such as jumpsuits & full suits.
 	var/icon/clip_mask = null //Instantiated clip mask of given icon and state
+	var/list/lower_layer_dirs = list(); // lost variable while updating outpost21, probably in an unused include... outpost21 TODO, find where this was meant to be defined...
 
 	// VOREStation Edit: Taur Loafing
 	var/can_loaf = FALSE

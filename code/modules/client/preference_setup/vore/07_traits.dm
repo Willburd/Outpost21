@@ -91,7 +91,7 @@
 		if(!(path in positive_traits))
 			pref.pos_traits -= path
 			continue
-		if(!(pref.species == SPECIES_CUSTOM) && !(path in everyone_traits_positive))
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits_positive))
 			pref.pos_traits -= path
 			continue
 		var/take_flags = initial(path.can_take)
@@ -113,7 +113,7 @@
 		if(!(path in negative_traits))
 			pref.neg_traits -= path
 			continue
-		if(!(pref.species == SPECIES_CUSTOM) && !(path in everyone_traits_negative))
+		if(/*!(pref.species == SPECIES_CUSTOM) &&*/ !(path in everyone_traits_negative))
 			pref.neg_traits -= path
 			continue
 		var/take_flags = initial(path.can_take)
@@ -202,7 +202,7 @@
 
 	. += "<a href='?src=\ref[src];add_trait=[NEUTRAL_MODE]'>Neutral Trait +</a><br>"
 	. += "<ul>"
-	
+
 	for(var/T in pref.neu_traits)
 		var/datum/trait/trait = neutral_traits[T]
 		. += "<li>- <a href='?src=\ref[src];clicked_neu_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
@@ -352,12 +352,14 @@
 		var/list/mylist
 		switch(mode)
 			if(POSITIVE_MODE)
+				/* outpost 21 - custom race removal
 				if(pref.species == SPECIES_CUSTOM)
 					picklist = positive_traits.Copy() - pref.pos_traits
 					mylist = pref.pos_traits
 				else
-					picklist = everyone_traits_positive.Copy() - pref.pos_traits
-					mylist = pref.pos_traits
+				*/
+				picklist = everyone_traits_positive.Copy() - pref.pos_traits
+				mylist = pref.pos_traits
 			if(NEUTRAL_MODE)
 				/* outpost 21 - custom race removal
 				if(pref.species == SPECIES_CUSTOM)
@@ -365,15 +367,17 @@
 					mylist = pref.neu_traits
 				else
 				*/
-				picklist = everyone_traits.Copy() - pref.neu_traits
+				picklist = everyone_traits_neutral.Copy() - pref.neu_traits
 				mylist = pref.neu_traits
 			if(NEGATIVE_MODE)
+				/* outpost 21 - custom race removal
 				if(pref.species == SPECIES_CUSTOM)
 					picklist = negative_traits.Copy() - pref.neg_traits
 					mylist = pref.neg_traits
 				else
-					picklist = everyone_traits_negative.Copy() - pref.neg_traits
-					mylist = pref.neg_traits
+				*/
+				picklist = everyone_traits_negative.Copy() - pref.neg_traits
+				mylist = pref.neg_traits
 			else
 
 		if(isnull(picklist))

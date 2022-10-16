@@ -22,7 +22,6 @@
 	materials = list(MAT_STEEL = 3000, MAT_GLASS = 2000)
 	build_path = /obj/item/weapon/gun/energy/sizegun
 	sort_string = "TAVBA"
-*/
 
 /datum/design/item/general/sizegun_gradual
 	name = "Gradual size gun"
@@ -31,6 +30,7 @@
 	materials = list(MAT_STEEL = 3000, MAT_GLASS = 2000)
 	build_path = /obj/item/device/slow_sizegun
 	sort_string = "TAVBB"
+*/
 
 /datum/design/item/general/bodysnatcher
 	name = "Body Snatcher"

@@ -2709,7 +2709,7 @@
 					/obj/item/device/text_to_speech = 5,
 					/obj/item/device/paicard = 5,
 					/obj/item/device/communicator = 10,
-					/obj/item/device/communicator/watch = 10,
+					///obj/item/device/communicator/watch = 10,
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
@@ -2734,7 +2734,7 @@
 					/obj/item/device/text_to_speech = 300,
 					/obj/item/device/paicard = 100,
 					/obj/item/device/communicator = 100,
-					/obj/item/device/communicator/watch = 100,
+					///obj/item/device/communicator/watch = 100,
 					/obj/item/device/radio = 100,
 					/obj/item/device/camera = 100,
 					/obj/item/device/taperecorder = 100,
@@ -2750,7 +2750,7 @@
 					/obj/item/instrument/piano_synth/headphones/spacepods = 600,
 					/obj/item/clothing/gloves/bluespace = 500)
 	premium = list(/obj/item/device/perfect_tele/one_beacon = 1)
-	contraband = list(/obj/item/weapon/disk/nifsoft/compliance = 1)
+	contraband = list(/*/obj/item/weapon/disk/nifsoft/compliance = 1*/)
 
 // Loadout Vending Machines End
 
@@ -3535,7 +3535,7 @@
 					/obj/item/device/text_to_speech = 5,
 					/obj/item/device/paicard = 5,
 					/obj/item/device/communicator = 10,
-					/obj/item/device/communicator/watch = 10,
+					///obj/item/device/communicator/watch = 10,
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
@@ -3546,7 +3546,7 @@
 					/obj/item/device/laser_pointer = 3,
 					/obj/item/clothing/glasses/omnihud = 10,
 					/obj/item/device/perfect_tele/one_beacon = 1,
-					/obj/item/weapon/disk/nifsoft/compliance = 1,
+					///obj/item/weapon/disk/nifsoft/compliance = 1,
 					/obj/item/device/perfect_tele/alien = 10)
 
 /obj/machinery/vending/event/costume //FOR FACILITATING AND EQUIPPING EVENTS, DO NOT PLACE ON THE NORMAL MAP//

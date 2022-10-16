@@ -71,6 +71,7 @@
 		if(!G.get_cell() && !istype(G, /obj/item/ammo_casing/microbattery) && !istype(G, /obj/item/device/paicard))	//VOREStation Edit: NSFW charging
 			to_chat(user, "\The [G] does not have a battery installed.")
 			return
+		/* outpost 21 - PAI removal
 		if(istype(G, /obj/item/device/paicard))
 			var/obj/item/device/paicard/ourcard = G
 			if(ourcard.panel_open)
@@ -83,6 +84,7 @@
 			else
 				to_chat(user, "<span class='warning'>\The [ourcard] doesn't have a personality!</span>")
 				return
+		*/
 
 		user.drop_item()
 		G.loc = src
@@ -134,6 +136,7 @@
 	if(!charging)
 		update_use_power(USE_POWER_IDLE)
 		icon_state = icon_state_idle
+	/* outpost 21 edit - PAI removal
 	//VOREStation Edit Start - pAI revival!
 	else if(istype(charging, /obj/item/device/paicard))
 		var/obj/item/device/paicard/pcard = charging
@@ -153,6 +156,7 @@
 			pcard.forceMove(get_turf(src))
 			pcard.pai.full_restore()
 	//VOREStation Edit End
+	*/
 	else
 		var/obj/item/weapon/cell/C = charging.get_cell()
 		if(istype(C))

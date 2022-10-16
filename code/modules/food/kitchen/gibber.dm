@@ -30,7 +30,7 @@
 	. = ..()
 	// outpost 21 edit - add gibber from above detection
 	var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_zstep(src, UP))
-	if(!input_obj)	
+	if(!input_obj)
 		for(var/i in cardinal)
 			input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )
 			if(input_obj)
@@ -227,7 +227,6 @@
 		slab_count = 1 // no div by 0
 	slab_nutrition /= slab_count
 
-	var/original_slab_count = slab_count
 	while(slab_count)
 		slab_count--
 		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))

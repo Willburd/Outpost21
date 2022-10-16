@@ -23,5 +23,5 @@
 	new_voice.real_name = "[new_voice.real_name]" 	//We still know their real name though!
 	possessed_voice.Add(new_voice)
 	listening_objects |= src
-	new_voice.verbs -= /mob/living/voice/verb/change_name //No changing your name! Bad!
-	new_voice.verbs -= /mob/living/voice/verb/hang_up //Also you can't hang up. You are the item!
+	// new_voice.verbs -= /mob/living/voice/verb/change_name //No changing your name! Bad!				- outpost21 edit, nifs removed anyway... impossible to happen
+	// new_voice.verbs -= /mob/living/voice/verb/hang_up //Also you can't hang up. You are the item!	- outpost21 edit, nifs removed anyway... impossible to happen

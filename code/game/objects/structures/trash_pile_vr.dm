@@ -25,7 +25,7 @@
 		/obj/item/weapon/gun/projectile/pirate,
 		/obj/item/clothing/accessory/permit/gun,
 		/obj/item/weapon/gun/projectile/dartgun,
-		/obj/item/clothing/gloves/black/bloodletter,
+		///obj/item/clothing/gloves/black/bloodletter,
 		/obj/item/weapon/gun/energy/mouseray/metamorphosis
 		)
 

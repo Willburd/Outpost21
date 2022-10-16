@@ -272,7 +272,6 @@
 	projectile_type = /obj/item/projectile/beam/lasertag/blue
 	cell_type = /obj/item/weapon/cell/device/weapon/recharge
 	battery_lock = 1
-	var/required_vest
 
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))

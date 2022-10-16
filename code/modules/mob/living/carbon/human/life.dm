@@ -1330,7 +1330,7 @@
 			fat_alert = /obj/screen/alert/fat/synth
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth
-		
+
 		/* outpost 21 - custom race removal
 		//VOREStation Add - Vampire hunger alert
 		else if(get_species() == SPECIES_CUSTOM)
@@ -1481,6 +1481,7 @@
 			if(!isnull(M.vision_flags))
 				sight |= M.vision_flags
 
+		/* outpost 21 - nif removal
 		if(!glasses_processed && nif)
 			var/datum/nifsoft/vision_soft
 			for(var/datum/nifsoft/NS in nif.nifsofts)
@@ -1489,6 +1490,7 @@
 					break
 			if(vision_soft)
 				glasses_processed = process_nifsoft_vision(vision_soft)		//not really glasses but equitable
+		*/
 
 		if(!glasses_processed && (species.get_vision_flags(src) > 0))
 			sight |= species.get_vision_flags(src)
@@ -1537,6 +1539,7 @@
 		else if(!druggy && !seer)
 			see_invisible = see_invisible_default
 
+/* outpost 21 - nif removal
 /mob/living/carbon/human/proc/process_nifsoft_vision(var/datum/nifsoft/NS)
 	. = FALSE
 	if(NS && NS.active)
@@ -1546,6 +1549,7 @@
 		if(NS.vision_flags_mob)
 			sight |= NS.vision_flags_mob
 			. = TRUE
+*/
 
 /mob/living/carbon/human/handle_random_events()
 	if(inStasisNow())
@@ -1562,7 +1566,7 @@
 					Confuse(10)
 		if (getToxLoss() >= 45)
 			spawn vomit()
-		
+
 		if(!(species.flags & NO_HALLUCINATION))
 			// oxygen loss can result in seeing some crazy stuff
 			if(getOxyLoss() >= 50 && rand(1,15) <= 1)

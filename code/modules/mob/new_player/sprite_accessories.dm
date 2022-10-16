@@ -2243,7 +2243,7 @@ shaved
 	name = "Color Bands (Face)"
 	icon_state = "bandshumanface"
 	body_parts = list(BP_HEAD)
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_SKRELL)
+	species_allowed = list(SPECIES_HUMAN/*,SPECIES_HUMAN_VATBORN*/,SPECIES_SKRELL)
 
 /datum/sprite_accessory/marking/tiger_stripes
 	name = "Tiger Stripes"
@@ -2331,7 +2331,7 @@ shaved
 	name = "Full Face Paint"
 	icon_state = "fullface"
 	body_parts = list(BP_HEAD)
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_SKRELL)
+	species_allowed = list(SPECIES_HUMAN/*,SPECIES_HUMAN_VATBORN*/,SPECIES_SKRELL)
 
 /datum/sprite_accessory/marking/lips
 	name = "Lips"
@@ -2625,7 +2625,7 @@ shaved
 	icon_state = "aug_backports"
 	genetic = FALSE
 	body_parts = list(BP_TORSO)
-	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJ,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_ZADDAT)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJ/*,SPECIES_HUMAN_VATBORN*/,SPECIES_UNATHI/*,SPECIES_ZADDAT*/)
 
 /datum/sprite_accessory/marking/aug/diode
 	name = "Augment (Backports Diode, Back)"
@@ -2663,7 +2663,7 @@ shaved
 	name = "Augment (Lower Jaw, Head)"
 	icon_state = "aug_lowerjaw"
 	body_parts = list(BP_HEAD)
-	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_HUMAN_VATBORN,SPECIES_ZADDAT)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL/*,SPECIES_HUMAN_VATBORN,SPECIES_ZADDAT*/)
 
 /datum/sprite_accessory/marking/aug/scalpports
 	name = "Augment (Scalp Ports)"

@@ -1436,7 +1436,7 @@
 	M.add_language(LANGUAGE_SIIK)
 	M.add_language(LANGUAGE_EAL)
 	M.add_language(LANGUAGE_SCHECHI)
-	M.add_language(LANGUAGE_ZADDAT)
+	//M.add_language(LANGUAGE_ZADDAT)
 	M.add_language(LANGUAGE_BIRDSONG)
 	M.add_language(LANGUAGE_SAGARU)
 	M.add_language(LANGUAGE_DAEMON)

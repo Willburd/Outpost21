@@ -66,8 +66,10 @@
 	soundloop = new(list(src), FALSE)
 
 /obj/machinery/microwave/Destroy()
+	/* outpost 21 - remove PAI
 	if(paicard)
 		ejectpai() // Lets not delete the pAI.
+	*/
 	QDEL_NULL(soundloop)
 	return ..()
 
@@ -211,11 +213,13 @@
 				to_chat(user, "<span class='notice'>You decide not to do that.</span>")
 	else if(default_part_replacement(user, O))
 		return
+	/* outpost 21 - remove PAI
 	else if(istype(O, /obj/item/device/paicard))
 		if(!paicard)
 			insertpai(user, O)
 	else
-		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
+	*/
+	to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
 	..()
 	SStgui.update_uis(src)
 
@@ -226,10 +230,12 @@
 	attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
+	/* outpost 21 - PAI removal
 	if(user.a_intent == I_GRAB)
 		if(paicard)
 			ejectpai(user)
 			return
+	*/
 	user.set_machine(src)
 	tgui_interact(user)
 
@@ -566,7 +572,7 @@
 	src.operating = 0 // Turn it off again aferwards
 	SStgui.update_uis(src)
 	soundloop.stop()
-	src.ejectpai() // If it broke, time to yeet the PAI.
+	// src.ejectpai() // If it broke, time to yeet the PAI. // outpost 21 edit - PAI removal
 
 /obj/machinery/microwave/proc/fail()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
@@ -662,8 +668,10 @@
 	var/list/workingList = contents.Copy() // Using the copy proc because otherwise the two lists seem to become soul bonded.
 	workingList -= component_parts
 	workingList -= circuit
+	/* outpost 21 - pai removal
 	if(paicard)
 		workingList -= paicard
+	*/
 	for(var/M in workingList)
 		if(istype(M, circuit)) // Yes, we remove circuit twice. Yes, it's necessary. Yes, it's stupid.
 			workingList -= M

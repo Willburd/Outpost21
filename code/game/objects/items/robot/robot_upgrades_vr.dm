@@ -12,6 +12,7 @@
 	else
 		return 0
 
+/* outpost 21 - remove size guns
 //Robot resizing module
 
 /obj/item/borg/upgrade/sizeshift
@@ -53,6 +54,7 @@
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
+*/
 
 /obj/item/borg/upgrade/bellysizeupgrade
 	name = "robohound capacity expansion module"

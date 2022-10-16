@@ -1,5 +1,5 @@
 //Prosfab stuff for borgs and such
-
+/* outpost 21 - size gun removal
 /datum/design/item/prosfab/robot_upgrade/sizeshift
 	name = "Size Alteration Module"
 	id = "borg_sizeshift_module"
@@ -20,7 +20,7 @@
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 2)
 	materials = list(MAT_STEEL = 4000, MAT_GLASS = 4000)
 	build_path = /obj/item/borg/upgrade/bellysizeupgrade
-
+*/
 
 /*
 	Some job related borg upgrade modules, adding useful items for puppers.
@@ -50,6 +50,7 @@
 	materials = list(MAT_PLASTEEL = 5000, MAT_GLASS = 1000, MAT_URANIUM = 500, MAT_PLATINUM = 350)
 	build_path = /obj/item/borg/upgrade/pka
 
+/* outpost 21 - PAI removal
 ///// pAI parts!!!
 
 //////////////////// Cyborg Parts ////////////////////
@@ -92,3 +93,4 @@
 	name = "pAI Speech Synthesizer"
 	id = "pai_speech_synthesizer"
 	build_path = /obj/item/paiparts/speech_synthesizer
+*/

@@ -155,6 +155,7 @@
 			qdel(O)
 		else
 			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
+	/* outpost 21 - PAI removal
 	else if(istype(O, /obj/item/device/paicard))
 		if(open)
 			insertpai(user, O)
@@ -166,6 +167,7 @@
 			to_chat(user, span_notice("You are attempting to remove the pAI.."))
 			if(do_after(user,10 * O.toolspeed))
 				ejectpai(user)
+	*/
 	else
 		..()
 
@@ -388,14 +390,18 @@
 	update_canmove()
 
 /mob/living/bot/proc/explode()
+	/* outpost 21 - PAI removal
 	if(paicard)
 		ejectpai()
+	*/
 	release_vore_contents()
 	qdel(src)
 
 /mob/living/bot/is_sentient()
+	/* outpost 21 - PAI removal
 	if(paicard)
 		return TRUE
+	*/
 	return FALSE
 
 /******************************************************************/
@@ -491,6 +497,7 @@
 	canmove = on
 	return canmove
 
+/* outpost 21 - PAI removal
 /mob/living/bot/proc/insertpai(mob/user, obj/item/device/paicard/card)
 	//var/obj/item/paicard/card = I
 	var/mob/living/silicon/pai/AI = card.pai
@@ -528,6 +535,7 @@
 
 		if(user)
 			to_chat(user, span_notice("You eject the card from \the [initial(src.name)]."))
+*/
 
 /mob/living/bot/verb/bot_nom(var/mob/living/T in oview(1))
 	set name = "Bot Nom"
@@ -538,12 +546,14 @@
 		return
 	return feed_grabbed_to_self(src,T)
 
+/* outpost 21 - PAI removal
 /mob/living/bot/verb/ejectself()
 	set name = "Eject pAI"
 	set category = "Bot Commands"
 	set desc = "Eject your card, return to smole."
 
 	return ejectpai()
+*/
 
 /mob/living/bot/Login()
 	no_vore = FALSE // ROBOT VORE

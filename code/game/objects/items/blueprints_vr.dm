@@ -411,7 +411,6 @@
 		return
 	for(var/obj/machinery/alarm/airpanel in area)
 		airpanel.name = replacetext(airpanel.name,oldtitle,title)
-		airpanel.update_area()
 	for(var/obj/machinery/power/apc/apcpanel in area)
 		apcpanel.name = replacetext(apcpanel.name,oldtitle,title)
 		apcpanel.update_area() //DECIDE IF THIS IS WANTED OR NOT. This can mean that the APC will overwrite the current APC the area being expanded has since areas cant have multiple APCs.

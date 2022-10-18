@@ -478,7 +478,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /datum/robolimb/wooden/teshari
 	company = "Morgan Trading Co - Teshari"
 	icon = 'icons/mob/human_races/cyberlimbs/prosthesis/wooden_teshari.dmi'
-	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX/*, SPECIES_HUMAN_VATBORN*/, SPECIES_TAJ, SPECIES_SKRELL/*, SPECIES_ZADDAT*/)
 	species_alternates = list(SPECIES_HUMAN = "Morgan Trading Co")
 	suggested_species = SPECIES_TESHARI
 
@@ -490,7 +490,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /datum/robolimb/wooden/sif/teshari
 	company = "Morgan Trading Co - Sif wood - Teshari"
 	icon = 'icons/mob/human_races/cyberlimbs/prosthesis/wooden_sif_teshari.dmi'
-	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX/*, SPECIES_HUMAN_VATBORN*/, SPECIES_TAJ, SPECIES_SKRELL/*, SPECIES_ZADDAT*/)
 	species_alternates = list(SPECIES_HUMAN = "Morgan Trading Co")
 	suggested_species = SPECIES_TESHARI
 

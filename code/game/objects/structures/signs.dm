@@ -23,7 +23,6 @@
 	S.desc = desc
 	S.icon_state = icon_state
 	S.sign_state = icon_state
-	S.original_type = type
 	qdel(src)
 
 /obj/item/sign
@@ -37,7 +36,7 @@
 	if(tool.is_screwdriver() && isturf(user.loc))
 		var/direction = tgui_input_list(usr, "In which direction?", "Select direction.", list("North", "East", "South", "West", "Cancel"))
 		if(direction == "Cancel") return
-		var/target_type = original_type || /obj/structure/sign
+		var/target_type = /obj/structure/sign
 		var/obj/structure/sign/S = new target_type(user.loc)
 		switch(direction)
 			if("North")

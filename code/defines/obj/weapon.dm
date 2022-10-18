@@ -41,7 +41,7 @@
 	throw_range = 20
 	var/randomize = TRUE
 	var/square_chance = 10
-	
+
 /obj/item/weapon/soap/Initialize()
 	if(randomize && prob(square_chance))
 		icon_state = "[icon_state]-alt"
@@ -135,7 +135,7 @@
 
 /obj/item/weapon/soap/golden_soap
 	desc = "Smells like honey."
-	icon_state = "golden_soap
+	icon_state = "golden_soap"
 
 /obj/item/weapon/bikehorn
 	name = "bike horn"

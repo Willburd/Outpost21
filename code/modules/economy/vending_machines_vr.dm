@@ -4,7 +4,7 @@
 	products += list(/obj/item/weapon/gun/energy/taser = 8,/obj/item/weapon/gun/energy/stunrevolver = 4,
 					/obj/item/weapon/reagent_containers/spray/pepper = 6,/obj/item/taperoll/police = 6,
 					/obj/item/clothing/glasses/omnihud/sec = 6)
-	contraband += list(/obj/item/weapon/implanter/compliance = 1)
+	//contraband += list(/obj/item/weapon/implanter/compliance = 1) outpost21 - nif removal
 	..()
 
 /obj/machinery/vending/tool/New()

@@ -84,15 +84,17 @@
 			R.adjustBruteLoss(-weld_rate)
 		if(wire_rate && R.getFireLoss() && cell.checked_use(wire_power_use * wire_rate * CELLRATE))
 			R.adjustFireLoss(-wire_rate)
-	
+
+	/* outpost 21 edit - removed PAI
 	//VOREStation Add Start
 	else if(ispAI(occupant))
 		var/mob/living/silicon/pai/P = occupant
-			
+
 		if(P.nutrition < 400)
 			P.nutrition = min(P.nutrition+10, 400)
 			cell.use(7000/450*10)
 	//VOREStation Add End
+	*/
 
 	else if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
@@ -268,7 +270,7 @@
 		occupant = R
 		update_icon()
 		return 1
-		
+
 	//VOREStation Add Start
 	else if(istype(L, /mob/living/silicon/pai))
 		var/mob/living/silicon/pai/P = L

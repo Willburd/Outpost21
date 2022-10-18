@@ -4,8 +4,9 @@
 /obj/item/weapon/lasertagknife
 	name = "universal laser tag dagger"
 	desc = "Rubber knife with a glowing fancy edge. It has no team allegiance!"
+	icon = 'icons/obj/weapons_op.dmi'
 	icon_state = "tagknifeomni"
-	item_icons = list(slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',)
+	item_icons = list(slot_l_hand_str = 'icons/mob/items/lefthand_melee_op.dmi',slot_r_hand_str = 'icons/mob/items/righthand_melee_op.dmi',)
 	item_state_slots = list(slot_r_hand_str = "tagknifeomni", slot_l_hand_str = "tagknifeomni")
 	item_state = null
 	hitsound = null

@@ -8,16 +8,18 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/red
 
 	starts_with = list(
-		/obj/item/clothing/under/rank/security = 2,
-		/obj/item/clothing/under/rank/security2 = 2,
-		/obj/item/clothing/under/rank/security/turtleneck = 2,
-		/obj/item/clothing/under/rank/security/skirt = 1,
-		/obj/item/clothing/shoes/boots/jackboots = 2,
-		/obj/item/clothing/head/soft/sec = 2,
-		/obj/item/clothing/head/beret/sec = 2,
-		/obj/item/clothing/head/beret/sec/corporate/officer = 2,
-		/obj/item/clothing/accessory/armband = 2,
-		/obj/item/clothing/accessory/holster/waist = 2)
+		/obj/item/clothing/under/rank/security = 3,
+		/obj/item/clothing/under/rank/security2 = 3,
+		/obj/item/clothing/under/rank/security/turtleneck = 3,
+		/obj/item/clothing/under/rank/security/skirt = 2,
+		/obj/item/clothing/shoes/boots/jackboots = 3,
+		/obj/item/clothing/head/soft/sec = 3,
+		/obj/item/clothing/head/beret/sec = 3,
+		/obj/item/clothing/head/beret/sec/corporate/officer = 3,
+		/obj/item/clothing/mask/bandana/red = 3,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/security = 3,
+		/obj/item/clothing/accessory/armband = 3,
+		/obj/item/clothing/accessory/holster/waist = 3)
 
 /obj/structure/closet/wardrobe/red/Initialize()
 	if(prob(50))
@@ -248,6 +250,7 @@
 	starts_with = list(
 		/obj/item/clothing/under/rank/roboticist = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science/robotics,
 		/obj/item/clothing/shoes/black = 2,
 		/obj/item/clothing/gloves/black = 2,
 		/obj/item/weapon/storage/backpack/toxins,
@@ -271,6 +274,7 @@
 		/obj/item/clothing/under/rank/chemist/skirt = 2,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/chemist = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/chemist,
 		/obj/item/weapon/storage/backpack/chemistry = 2,
 		/obj/item/weapon/storage/backpack/satchel/chem = 2,
 		/obj/item/weapon/storage/bag/chemistry = 2,)
@@ -298,6 +302,7 @@
 		/obj/item/clothing/under/rank/virologist/skirt = 2,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/viro,
 		/obj/item/clothing/mask/surgical = 2,
 		/obj/item/weapon/storage/backpack/virology = 2,
 		/obj/item/weapon/storage/backpack/satchel/vir = 2)

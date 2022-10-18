@@ -609,9 +609,9 @@
 
 	var/list/list/environment_data = list()
 	data["environment_data"] = environment_data
-	
+
 	DECLARE_TLV_VALUES
-	
+
 	var/pressure = environment.return_pressure()
 	LOAD_TLV_VALUES(TLV["pressure"], pressure)
 	environment_data.Add(list(list(
@@ -620,7 +620,7 @@
 		"unit" = "kPa",
 		"danger_level" = TEST_TLV_VALUES
 	)))
-	
+
 	var/temperature = environment.temperature
 	LOAD_TLV_VALUES(TLV["temperature"], temperature)
 	environment_data.Add(list(list(
@@ -642,7 +642,7 @@
 			"unit" = "%",
 			"danger_level" = TEST_TLV_VALUES
 		)))
-	
+
 	if(!locked || issilicon(user) || data["remoteUser"])
 		var/list/list/vents = list()
 		data["vents"] = vents
@@ -664,7 +664,7 @@
 				"extdefault"= (info["external"] == ONE_ATMOSPHERE),
 				"intdefault"= (info["internal"] == 0),
 			)))
-		
+
 
 		var/list/list/scrubbers = list()
 		data["scrubbers"] = scrubbers
@@ -691,7 +691,7 @@
 		data["scrubbers"] = scrubbers
 
 		data["mode"] = mode
-		
+
 		var/list/list/modes = list()
 		data["modes"] = modes
 		modes[++modes.len] = list("name" = "Filtering - Scrubs out contaminants", 			"mode" = AALARM_MODE_SCRUBBING,		"selected" = mode == AALARM_MODE_SCRUBBING, 	"danger" = 0)
@@ -761,7 +761,7 @@
 				else
 					target_temperature = input_temperature + T0C
 		return TRUE
-	
+
 	// Account for remote users here.
 	// Yes, this is kinda snowflaky; however, I would argue it would be far more snowflakey
 	// to include "custom hrefs" and all the other bullshit that nano states have just for the

@@ -34,3 +34,6 @@
 
 /mob/living/carbon/human/shadekin/New(var/new_loc)
 	..(new_loc, SPECIES_SHADEKIN)
+
+/mob/living/carbon/human/altevian/New(var/new_loc)
+	..(new_loc, SPECIES_ALTEVIAN)

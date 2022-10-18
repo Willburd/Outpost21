@@ -25,7 +25,7 @@
 	S.sign_state = icon_state
 	S.original_type = type
 	qdel(src)
-		
+
 /obj/item/sign
 	name = "sign"
 	desc = ""
@@ -38,7 +38,7 @@
 		var/direction = tgui_input_list(usr, "In which direction?", "Select direction.", list("North", "East", "South", "West", "Cancel"))
 		if(direction == "Cancel") return
 		var/target_type = original_type || /obj/structure/sign
-		var/obj/structure/sign/S = new target_type(user.loc)	  
+		var/obj/structure/sign/S = new target_type(user.loc)
 		switch(direction)
 			if("North")
 				S.pixel_y = 32
@@ -65,12 +65,6 @@
 
 /obj/structure/sign/scenery/map/right
 	icon_state = "map-right"
-
-/obj/structure/sign/scenery/map/left_outpost21
-	icon_state = "map-left-outpost"
-
-/obj/structure/sign/scenery/map/right_outpost21
-	icon_state = "map-right-outpost"
 
 /obj/structure/sign/securearea
 	name = "\improper SECURE AREA"
@@ -121,16 +115,11 @@
 	name = "\improper NO SMOKING"
 	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking2"
-	
+
 /obj/structure/sign/nosmoking_2/burnt
 	name = "\improper NO SMOKING"
 	desc = "A warning sign which reads 'NO SMOKING'. It looks like someone didn't follow its advice..."
 	icon_state = "nosmoking2_burnt"
-
-/obj/structure/sign/yessmoking_1
-	name = "\improper SMOKING ROOM"
-	desc = "A warning sign which reads 'SMOKING ROOM'."
-	icon_state = "yessmoking"
 
 /obj/structure/sign/warning
 	name = "\improper WARNING"
@@ -162,10 +151,6 @@
 /obj/structure/sign/warning/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
 	icon_state = "deathsposal"
-
-/obj/structure/sign/warning/incinerator
-	name = "\improper DISPOSAL LEADS TO INCINERATOR"
-	icon_state = "incinerator"
 
 /obj/structure/sign/warning/docking_area
 	name = "\improper KEEP CLEAR: DOCKING AREA"

@@ -32,6 +32,9 @@
 	var/lighting_alpha = 255
 	incorporeal_move = 1
 
+	airflow_dest = null //fixes airflow data continually pushing ghosts to edge of maps forever after death of host
+	airflow_speed = 0
+
 	var/is_manifest = 0 //If set to 1, the ghost is able to whisper. Usually only set if a cultist drags them through the veil.
 	var/ghost_sprite = null
 	var/global/list/possible_ghost_sprites = list(
@@ -1049,4 +1052,4 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.add_ventcrawl(vent_found)
-		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
+		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")

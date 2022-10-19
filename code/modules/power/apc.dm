@@ -145,7 +145,7 @@ GLOBAL_LIST_EMPTY(apcs)
 	var/alarms_hidden = FALSE //If power alarms from this APC are visible on consoles
 
 	var/nightshift_lights = FALSE
-	var/nightshift_setting = NIGHTSHIFT_AUTO
+	var/nightshift_setting = NIGHTSHIFT_NEVER
 	var/last_nightshift_switch = 0
 
 /obj/machinery/power/apc/updateDialog()
@@ -1371,4 +1371,4 @@ GLOBAL_LIST_EMPTY(apcs)
 
 #undef APC_HAS_ELECTRONICS_NONE
 #undef APC_HAS_ELECTRONICS_WIRED
-#undef APC_HAS_ELECTRONICS_SECURED
+#undef APC_HAS_ELECTRONICS_SECURED#undef APC_HAS_ELECTRONICS_SECURED

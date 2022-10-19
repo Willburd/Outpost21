@@ -26,6 +26,7 @@
 	sound_env = SPACE
 	ambience = AMBIENCE_MEATZONE
 	music = 'sound/ambience/approaching_planet.ogg'
+	requires_power = FALSE
 
 /area/muriki/processor/euth
 	name = "\improper Processor Euthanization"

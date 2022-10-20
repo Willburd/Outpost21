@@ -239,6 +239,7 @@
 //////////////////////////////////////////////////////////////
 // RogueMiner "Belter: Shuttle
 
+/* TODO
 /datum/shuttle/autodock/ferry/belter
 	name = "Belter"
 	location = FERRY_LOCATION_STATION
@@ -254,3 +255,4 @@
 /datum/shuttle/autodock/ferry/belter/New()
 	move_time = move_time + rand(-5 SECONDS, 5 SECONDS)
 	..()
+*/

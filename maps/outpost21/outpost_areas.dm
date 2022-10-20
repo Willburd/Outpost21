@@ -1240,6 +1240,10 @@
 	sound_env = LARGE_ENCLOSED
 	ambience = list(AMBIENCE_ARRIVALS, AMBIENCE_HANGAR)
 
+/area/muriki/tramstation/shed
+	name = "\improper Tram Station - Shed"
+	icon_state = "dark128"
+
 /area/muriki/tramstation/waste
 	name = "\improper Tram Station - Waste"
 	icon_state = "dark128"

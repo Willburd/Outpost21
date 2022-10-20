@@ -58,7 +58,8 @@
 	name = "Station Tram"
 	warmup_time = 10
 	shuttle_area = /area/shuttle/tram
-	current_location = "tram_waste"
+	docking_controller_tag = "Tram"
+	current_location = "tram_shed"
 //	landmark_transition = "tram_transit"
 	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
 
@@ -68,23 +69,33 @@
 		"tram_civ"
 	)
 
+/obj/effect/shuttle_landmark/premade/tram/shed
+	name = "Tram Station - Shed"
+	landmark_tag = "tram_shed"
+	base_area = /area/muriki/tramstation/shed
+	base_turf = /turf/simulated/open
+
+
 /obj/effect/shuttle_landmark/premade/tram/base
 	name = "Tram Station - Waste and Maintenance"
 	landmark_tag = "tram_waste"
-	base_area = /area/muriki/tramstation/waste
-	base_turf = /turf/simulated/floor/reinforced
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/transit
 	name = "Tram Station - Transit"
 	landmark_tag = "tram_transit"
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/eng
 	name = "Tram Station - Engineering Cargo"
 	landmark_tag = "tram_eng"
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/civ
 	name = "Tram Station - Civilian"
 	landmark_tag = "tram_civ"
+	base_turf = /turf/simulated/open
+
 
 //////////////////////////////////////////////////////////////
 // Trade Ship

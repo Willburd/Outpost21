@@ -43,6 +43,8 @@
 	shuttle_tag = "Medical Rescue"
 	req_one_access = list(access_medical)
 
+
+// station tram
 /obj/effect/shuttle_landmark/premade/mining/muriki
 	name = "ES Outpost 21 (Landing Pad)"
 	landmark_tag = "outpost_landing_pad"

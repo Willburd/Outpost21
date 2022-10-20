@@ -448,7 +448,7 @@
 /area/turbolift/secupper
 	name = "Security Second Floor"
 	lift_floor_label = "Security High Level"
-	lift_floor_name = "AI, Telecoms, Solar Backup, Evac shuttle."
+	lift_floor_name = "AI, Telecoms, Evac shuttle."
 	lift_announce_str = "Arriving at Security Upper Floor."
 
 //MEDICAL

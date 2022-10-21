@@ -11,8 +11,8 @@
 	full_name = "ESHUI Atmospheric Terraforming Outpost 21"
 	path = "outpost"
 
-	lobby_icon = 'icons/misc/title_yw.dmi'
-	lobby_screens = list("cryogaia2")
+	lobby_icon = 'icons/misc/title_op.dmi'
+	lobby_screens = list()
 
 	zlevel_datum_type = /datum/map_z_level/outpost
 

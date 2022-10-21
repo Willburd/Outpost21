@@ -1,2 +1,2 @@
 /obj/effect/lobby_image
-	name = "Yawn Wider Station" // YW EDIT
+	name = "Outpost 21" // outpost 21 edit

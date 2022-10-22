@@ -4444,7 +4444,7 @@
 "artist": "BG Ollie",
 "genre": "Video Game",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {

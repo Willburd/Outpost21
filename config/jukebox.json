@@ -5,7 +5,7 @@
 "duration": 1500,
 "artist": "X-CEED",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true,
 "genre": "Jazz"
 },
@@ -55,7 +55,7 @@
 "duration": 3150,
 "artist": "Leslie Fish",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -85,7 +85,7 @@
 "duration": 2250,
 "artist": "A Day to Remember",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true,
 "genre": "Rock"
 },
@@ -515,7 +515,7 @@
 "duration": 1340,
 "artist": "Leslie Fish",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -525,7 +525,7 @@
 "duration": 2660,
 "artist": "Duane Elms",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -535,7 +535,7 @@
 "duration": 1700,
 "artist": "Leslie Fish",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -555,7 +555,7 @@
 "duration": 4070,
 "artist": "Leslie Fish",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -605,7 +605,7 @@
 "duration": 5090,
 "artist": "Leslie Fish",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true,
 "genre": "Folk and Indie"
 },
@@ -2255,7 +2255,7 @@
 "duration": 3180,
 "artist": "David Bowie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Rock"
 },
@@ -2285,7 +2285,7 @@
 "duration": 3330,
 "artist": "Chris Hadfield",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Pop"
 },
@@ -2895,7 +2895,7 @@
 "duration": 2730,
 "artist": "Hall & Oates",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Pop"
 },
@@ -4103,7 +4103,7 @@
 "artist": "Goat",
 "genre": "Space",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4113,7 +4113,7 @@
 "artist": "Goat",
 "genre": "Space",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4123,7 +4123,7 @@
 "artist": "Goat",
 "genre": "Space",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4143,7 +4143,7 @@
 "artist": "Dadbot5000",
 "genre": "Space",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4303,7 +4303,7 @@
 "artist": "Heropoint",
 "genre": "Rock",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4364,7 +4364,7 @@
 "artist": "Network Music Ensemble",
 "genre": "Rock",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4424,7 +4424,7 @@
 "artist": "Fiona Apple",
 "genre": "Electronic",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4434,7 +4434,7 @@
 "artist": "Kamil Hala, Slovak Philharmonic Orchestra, Libor Pešek",
 "genre": "Classical and Orchestral",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4444,7 +4444,7 @@
 "artist": "BG Ollie",
 "genre": "Video Game",
 "secret": false,
-"lobby": false,
+"lobby": true,
 "jukebox": true
 },
 {
@@ -4574,7 +4574,7 @@
 "artist": "Julia Ecklar & Anne Prather",
 "genre": "Folk and Indie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4624,7 +4624,7 @@
 "artist": "Free Fall & Other Delights",
 "genre": "Folk and Indie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4644,7 +4644,7 @@
 "artist": "Duane Elms",
 "genre": "Folk and Indie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4654,7 +4654,7 @@
 "artist": "Duane Elms",
 "genre": "Folk and Indie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {
@@ -4664,7 +4664,7 @@
 "artist": "Duane Elms",
 "genre": "Folk and Indie",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true
 },
 {

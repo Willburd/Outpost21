@@ -84,6 +84,12 @@
 		Z_LEVEL_OUTPOST_UPPER
 	)
 
+// For making the 6-in-1 holomap, we calculate some offsets
+#define OUTPOST21_MAP_SIZEX 400
+#define OUTPOST21_MAP_SIZEY 200
+#define OUTPOST21_HOLOMAP_MARGIN_X (HOLOMAP_ICON_SIZE - (2*OUTPOST21_MAP_SIZEX))
+#define OUTPOST21_HOLOMAP_MARGIN_Y (HOLOMAP_ICON_SIZE - (2*OUTPOST21_MAP_SIZEY))
+
 /datum/map_z_level/outpost/centcom
 	z = Z_LEVEL_OUTPOST_CENTCOM
 	name = "CentCom"
@@ -95,6 +101,8 @@
 	name = "Basement"
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
 	base_turf = /turf/simulated/open
+	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
 
 /datum/map_z_level/outpost/main
 	z = Z_LEVEL_OUTPOST_SURFACE
@@ -102,6 +110,8 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
 	base_turf = /turf/simulated/open
 	transit_chance = 5
+	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
 
 /datum/map_z_level/outpost/upper
 	z = Z_LEVEL_OUTPOST_UPPER
@@ -109,6 +119,9 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
 	base_turf = /turf/simulated/open
 	transit_chance = 5
+	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
+
 /*
 /datum/map_z_level/outpost/misc
 	z = Z_LEVEL_OUTPOST_MISC

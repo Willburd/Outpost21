@@ -85,7 +85,7 @@
 "duration": 2250,
 "artist": "A Day to Remember",
 "secret": false,
-"lobby": true,
+"lobby": false,
 "jukebox": true,
 "genre": "Rock"
 },

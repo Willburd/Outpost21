@@ -336,7 +336,7 @@
 "cBx" = (/obj/effect/floor_decal/borderfloor,/obj/effect/floor_decal/corner/lightgrey/border,/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/machinery/light,/turf/simulated/floor/tiled,/area/hallway/muriki/civup)
 "cBE" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora2)
 "cDD" = (/obj/structure/bed/chair/sofa/corp/right{dir = 8},/obj/effect/floor_decal/spline/fancy/wood{dir = 4},/turf/simulated/floor/wood,/area/ai)
-"cEc" = (/obj/machinery/power/smes/buildable{RCon_tag = "Power - Solar"; charge = 10000; input_level = 1000000; input_level_max = 1000000; output_level = 1000000; output_level_max = 1000000},/obj/machinery/light/small{dir = 1},/obj/structure/cable/orange{d2 = 8; icon_state = "0-8"},/turf/simulated/floor,/area/muriki/rooftop/engineering)
+"cEc" = (/obj/machinery/power/smes/buildable{RCon_tag = "Power - Solar"; charge = 25000000; cur_coils = 4; inputting = 1; output_level = 100000},/obj/machinery/light/small{dir = 1},/obj/structure/cable/orange{d2 = 8; icon_state = "0-8"},/turf/simulated/floor,/area/muriki/rooftop/engineering)
 "cEi" = (/turf/simulated/wall/r_wall,/area/hallway/security/upper)
 "cFn" = (/obj/machinery/telecomms/server/presets/engineering,/turf/simulated/floor/tiled/dark{nitrogen = 100; oxygen = 0; temperature = 80},/area/comms)
 "cFt" = (/obj/structure/grille,/obj/machinery/door/firedoor/glass,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/ai)

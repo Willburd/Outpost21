@@ -14,6 +14,8 @@ MURIKI_TURF_CREATE(/turf/simulated/floor)
 /turf/simulated/floor/muriki_indoors/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	return 0
 
+// needed to avoid active edges over outdoor pits
+MURIKI_TURF_CREATE(/turf/simulated/open)
 // make varients of all outdoor tiles with muriki atmosphere on it, this feels dumb and excessive, but it's the way it's done...
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt_nograss)

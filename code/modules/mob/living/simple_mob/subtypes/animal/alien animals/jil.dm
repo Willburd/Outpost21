@@ -308,15 +308,20 @@
 
 /datum/ai_holder/simple_mob/intentional/jil/post_melee_attack(atom/A)
 	if(istype(A, /obj/item) && !holder.get_active_hand() && holder.Adjacent(A))
-		if(!I.anchored)
+		if(istype(A, /obj/item/device))
+			var/obj/item/device/D = A
+			if(!D.anchored)
+				// attempt grab of target!
+				D.attack_hand(holder)
+			else
+				// interact with anchored items
+				if(istype(A, /obj/item/device/radio/intercom))
+					var/obj/item/device/radio/intercom/Ic = D
+					Ic.listening = !Ic.listening
+		else
 			// attempt grab of target!
 			var/obj/item/I = A
 			I.attack_hand(holder)
-		else
-			// interact with anchored items
-			if(istype(A, /obj/item/device/radio/intercom))
-				var/obj/item/device/radio/intercom/Ic = A
-				Ic.listening = !Ic.listening
 
 	else if(istype(A, /obj/structure/closet))
 		// attempt to open!

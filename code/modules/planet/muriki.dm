@@ -460,13 +460,13 @@ var/datum/planet/muriki/planet_muriki = null
 	if(burn_eyes)
 		var/obj/item/organ/internal/eyes/O = L.internal_organs_by_name[O_EYES]
 		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
-			O.damage += 6
+			O.damage += 8
 			to_chat(L,  "<span class='danger'>Your eyes burn!</span>")
 	//burn their lungs!
 	if(burn_lungs)
 		var/obj/item/organ/internal/lungs/O = L.internal_organs_by_name[O_LUNGS]
 		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
-			O.damage += 9
+			O.damage += 12
 			to_chat(L,  "<span class='danger'>Your lungs burn!</span>")
 
 
@@ -519,7 +519,7 @@ var/datum/planet/muriki/planet_muriki = null
 		else if(prob(65))
 			if(!istype(H) || !protection) // no protection!
 				to_chat(L, "<span class='danger'>The acidic pool is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
-				L.apply_damage( 1.2 * multiplier,  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
+				L.apply_damage( 1.8 * multiplier,  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
 				org.wounds +=  new /datum/wound/cut/small(6)
 			else
 				var/obj/item/weapon/rig/R = H.back

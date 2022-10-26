@@ -11,7 +11,7 @@
 	sent_spiders_to_station = 0
 
 /datum/event/jil_infestation/announce()
-	command_announcement.Announce("A Jil hoard has been detected in [station_name()]'s vent system.Ensure station property is not stolen.", "Jil Alert", new_sound = 'sound/AI/aliens.ogg')
+	command_announcement.Announce("A Jil hoard has been detected in [station_name()]'s vent system. Ensure station property is not stolen.", "Jil Alert", new_sound = 'sound/AI/aliens.ogg')
 
 
 /datum/event/jil_infestation/start()

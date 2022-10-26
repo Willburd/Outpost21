@@ -18,6 +18,7 @@
 	anchored = TRUE
 	density = TRUE
 
+	var/msgcooldown = 0
 	var/mob/living/active_user
 	var/db_key
 	var/datum/transcore_db/our_db
@@ -108,22 +109,7 @@
 
 	// halucination replies
 	if(user.hallucination > 20 && prob(30))
-		if(prob(2))
-			return "<br><span class='notice'>Your body is wrong.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>You're not who you say you are.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>I know you are lying about what you are.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>Your insides are whispering.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>Cut the bad things inside of you out.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>Stop lying to everyone, they know what is inside you.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>Everyone wants to cut you open, and take the things inside you for themselves.</span>"
-		if(prob(2))
-			return "<br><span class='notice'>You are not really a [user.get_species()] are you?</span>"
+		return "<br><span class='notice'>[halu_text(user)]</span>" // normal insanity
 
 	var/problems = 0
 	for(var/obj/item/organ/external/E in user)
@@ -202,6 +188,65 @@
 		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Backup scan erased. Body scan erased. You deserve to die forever."
 
 	return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Please ensure your suit's sensors are properly configured to alert medical and security personal to your current status."
+
+
+/obj/machinery/medical_kiosk/process()
+	if(msgcooldown > 0)
+		msgcooldown--
+		return
+
+	if(prob(2))
+		for(var/atom/A in view(src, 4))
+			if(istype(A, /mob/living/carbon))
+				msgcooldown = 130
+
+				var/mob/living/carbon/C = A
+				if(C.hallucination > 20 && prob(5))
+					// halucination replies
+					visible_message(halu_text(C))
+				else
+					// tease people to backup
+					visible_message(advert_text(C))
+	return
+
+
+/obj/machinery/medical_kiosk/proc/halu_text(mob/living/target)
+	if(prob(15))
+		return "You're not who you say you are."
+	if(prob(15))
+		return "I know you are lying about what you are."
+	if(prob(15))
+		return "Your insides are whispering."
+	if(prob(15))
+		return "Cut the bad things inside of you out."
+	if(prob(15))
+		return "Stop lying to everyone, they know what is inside you."
+	if(prob(15))
+		return "Everyone wants to cut you open, and take the things inside you for themselves."
+	if(prob(15))
+		return "You are not really a [target.get_species()] are you?" // super special message
+	return "Your body is wrong."
+
+
+/obj/machinery/medical_kiosk/proc/advert_text(mob/living/target)
+	if(prob(15))
+		return "Cherish the memories you have, save the ones you could lose"
+	if(prob(15))
+		return "Have you had your scan today?"
+	if(prob(15))
+		return "Having your backup done regularly can save you from years of legal trouble!"
+	if(prob(15))
+		return "Having regular backups is statistically linked to happier life outcomes!"
+	if(prob(15))
+		return "Going out that airlock without a backup?"
+	if(prob(15))
+		return "Are you sure you want to lose those memories? Backups take only a few seconds!"
+	if(prob(15))
+		return "A few second backup here, could save you hours in lost memories!"
+	if(prob(15))
+		return "You almost dropped those life long memories! Back them up while you can!"
+	return "Are you in compliance?"
+
 
 #undef BROKEN_BONES
 #undef INTERNAL_BLEEDING

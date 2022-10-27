@@ -10,7 +10,7 @@
 	landmark_station = "escape_station"
 	landmark_transition = "escape_transit"
 	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
 
 /obj/effect/shuttle_landmark/premade/escape/centcom
 	name = "ESCC Bunker"
@@ -39,7 +39,7 @@
 	landmark_station = "supply_station"
 	docking_controller_tag = "supply_shuttle"
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
-	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
 
 /obj/effect/shuttle_landmark/premade/supply/centcom
 	name = "ESCC Bunker"
@@ -61,7 +61,7 @@
 	docking_controller_tag = "Tram"
 	current_location = "tram_shed"
 //	landmark_transition = "tram_transit"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
 
 	destination_tags = list(
 		"tram_waste",
@@ -246,24 +246,3 @@
 	landmark_tag = "specops_station"
 	docking_controller = "specops_dock_airlock"
 	special_dock_targets = list("Special Operations" = "specops_shuttle_fore")
-
-//////////////////////////////////////////////////////////////
-// RogueMiner "Belter: Shuttle
-
-/* TODO
-/datum/shuttle/autodock/ferry/belter
-	name = "Belter"
-	location = FERRY_LOCATION_STATION
-	warmup_time = 5
-	move_time = 30
-	shuttle_area = /area/shuttle/belter
-	landmark_station = "belter_colony"
-	landmark_offsite = "belter_zone1"
-	landmark_transition = "belter_transit"
-	docking_controller_tag = "belter_docking"
-	move_direction = EAST
-
-/datum/shuttle/autodock/ferry/belter/New()
-	move_time = move_time + rand(-5 SECONDS, 5 SECONDS)
-	..()
-*/

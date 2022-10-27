@@ -187,6 +187,15 @@ var/datum/planet/muriki/planet_muriki = null
 			// digest living things
 			muriki_enzyme_affect_mob(L,2,TRUE,FALSE)
 
+	for(var/mob/living/L as anything in dead_mob_list)
+		if(L.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(L)
+			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+				continue // They're indoors, so no need to rain on them.
+
+			// digest dead things
+			muriki_enzyme_affect_mob(L,3,FALSE,FALSE)
+
 
 /datum/weather/muriki/acid_rain
 	name = "rain"
@@ -216,8 +225,8 @@ var/datum/planet/muriki/planet_muriki = null
 	for(var/mob/living/L as anything in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
-			if(L.stat >= DEAD || !T.is_outdoors())
-				continue // They're indoors or dead, so no need to rain on them.
+			if(!T.is_outdoors())
+				continue // They're indoors, so no need to rain on them.
 
 			// If they have an open umbrella, it'll guard from rain
 			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
@@ -234,6 +243,15 @@ var/datum/planet/muriki/planet_muriki = null
 				to_chat(L, effect_message)
 
 			// digest living things
+			muriki_enzyme_affect_mob(L,2,FALSE,FALSE)
+
+	for(var/mob/living/L as anything in dead_mob_list)
+		if(L.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(L)
+			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+				continue // They're indoors, so no need to rain on them.
+
+			// digest dead things
 			muriki_enzyme_affect_mob(L,3,FALSE,FALSE)
 
 
@@ -273,8 +291,8 @@ var/datum/planet/muriki/planet_muriki = null
 	for(var/mob/living/L as anything in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
-			if(L.stat >= DEAD || !T.is_outdoors())
-				continue // They're indoors or dead, so no need to rain on them.
+			if(!T.is_outdoors())
+				continue // They're indoors so no need to rain on them.
 
 			// If they have an open umbrella, it'll guard from rain
 			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
@@ -292,6 +310,15 @@ var/datum/planet/muriki/planet_muriki = null
 
 			// digest living things
 			muriki_enzyme_affect_mob(L,4,FALSE,FALSE)
+
+	for(var/mob/living/L as anything in dead_mob_list)
+		if(L.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(L)
+			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+				continue // They're indoors, so no need to rain on them.
+
+			// digest dead things
+			muriki_enzyme_affect_mob(L,5,FALSE,FALSE)
 	handle_lightning()
 
 
@@ -390,7 +417,7 @@ var/datum/planet/muriki/planet_muriki = null
 		return
 
 	// no phased out or observer
-	if(!L || L.is_incorporeal() )
+	if(!L || L.is_incorporeal())
 		return
 
 	// no synth damage
@@ -473,13 +500,15 @@ var/datum/planet/muriki/planet_muriki = null
 	// find damaging zones to burn mobs skin!
 	var/obj/item/protection = null
 
+
+	var/applied_damage = FALSE
 	var/pick_zone = ran_zone()
 	var/obj/item/organ/external/org = L.get_organ(pick_zone)
 	if(org)
 		if(pick_zone == BP_HEAD)
 			if(istype(H))
 				protection = H.head
-		else if(pick_zone == BP_GROIN || BP_TORSO)
+		else if(pick_zone == BP_GROIN || pick_zone == BP_TORSO)
 			if(istype(H))
 				protection = H.wear_suit
 				if(protection == null)
@@ -508,19 +537,22 @@ var/datum/planet/muriki/planet_muriki = null
 				// full damage, what are you doing!?
 				to_chat(L, "<span class='danger'>The acidic environment burns your [L.get_bodypart_name(pick_zone)]!</span>")
 				L.apply_damage( 3 * multiplier, BURN, pick_zone)
-				org.wounds +=  new /datum/wound/cut/small(mist ? 8 : 6)
+				org.wounds +=  new /datum/wound/cut/small(mist ? 5 : 3)
+				applied_damage = TRUE
 
 			else if(protection.permeability_coefficient > min_permeability)
 				// only show the message if the permeability selection actually did any damage at all
 				to_chat(H, "<span class='danger'>The acidic environment leaks through \The [protection], and is burning your [L.get_bodypart_name(pick_zone)]!</span>")
 				L.apply_damage( 2 * (protection.permeability_coefficient * multiplier), BURN, pick_zone)
-				org.wounds +=  new /datum/wound/cut/small(mist ? 8 : 6)
+				org.wounds +=  new /datum/wound/cut/small(mist ? 5 : 3)
+				applied_damage = TRUE
 
 		else if(prob(65))
 			if(!istype(H) || !protection) // no protection!
 				to_chat(L, "<span class='danger'>The acidic pool is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
 				L.apply_damage( 1.8 * multiplier,  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
-				org.wounds +=  new /datum/wound/cut/small(6)
+				org.wounds +=  new /datum/wound/cut/small(4)
+				applied_damage = TRUE
 			else
 				var/obj/item/weapon/rig/R = H.back
 				if(istype(H.back,/obj/item/weapon/rig) && R.suit_is_deployed())
@@ -528,10 +560,16 @@ var/datum/planet/muriki/planet_muriki = null
 				else if(protection.permeability_coefficient > min_permeability) // leaky protection
 					to_chat(L, "<span class='danger'>The acidic pool leaks through \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
 					L.apply_damage( 1.1 * (protection.permeability_coefficient * multiplier),  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
-					org.wounds +=  new /datum/wound/cut/small(6)
+					org.wounds +=  new /datum/wound/cut/small(4)
+					applied_damage = TRUE
 				else
 					var/liquidbreach = H.get_pressure_weakness( 0) // spacesuit are watertight
 					if(liquidbreach > 0) // unprotected!
 						to_chat(L, "<span class='danger'>The acidic pool splashes into \The [protection], and is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
 						L.apply_damage( 1 * (protection.permeability_coefficient * multiplier),  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!
-						org.wounds +=  new /datum/wound/cut/small(6)
+						org.wounds +=  new /datum/wound/cut/small(4)
+						applied_damage = TRUE
+
+	if(applied_damage && ((org.damage >= 10 && prob(5)) || (org.damage >= 30 && prob(15)) || org.damage >= 80))
+		if(!(pick_zone == BP_GROIN || pick_zone == BP_TORSO))
+			org.droplimb(TRUE, DROPLIMB_ACID)

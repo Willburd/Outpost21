@@ -51,7 +51,7 @@
 	var/module_state_3 = null
 
 	var/obj/item/device/radio/borg/radio = null
-	var/obj/item/device/communicator/integrated/communicator = null
+	//var/obj/item/device/communicator/integrated/communicator = null
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
@@ -856,7 +856,7 @@
 		/* outpost 21  edit - nif removal
 		if(!shell || deployed) // Shell borgs that are not deployed will have no eyes.
 		*/
-		if(deployed) 
+		if(deployed)
 			add_overlay("eyes-[module_sprites[icontype]]")
 
 	if(opened)

@@ -1220,8 +1220,7 @@
 		if(M.bruteloss >= 60 && M.toxloss >= 60 && M.brainloss >= 30) //Total Structural Failure. Limbs start splattering.
 			var/obj/item/organ/external/O = pick(H.organs)
 			if(prob(20) && !istype(O, /obj/item/organ/external/chest/unbreakable/slime) && !istype(O, /obj/item/organ/external/groin/unbreakable/slime))
-				to_chat(M, "<span class='critical'>You feel your [O] begin to dissolve, before it sloughs from your body.</span>")
-				O.droplimb() //Splat.
+				O.droplimb(TRUE, DROPLIMB_ACID) //Splat.
 		return
 
 	//Based roughly on Levofloxacin's rather severe side-effects

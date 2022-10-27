@@ -7,8 +7,8 @@
 
 /datum/event/jil_infestation/setup()
 	announceWhen = rand(announceWhen, announceWhen + 60)
-	spawncount = rand(4 * severity, 6 * severity)	//spiderlings only have a 50% chance to grow big and strong
-	sent_spiders_to_station = 0
+	spawncount = rand(4 * severity, 6 * severity)
+	sent_jils_to_station = 0
 
 /datum/event/jil_infestation/announce()
 	command_announcement.Announce("A Jil hoard has been detected in [station_name()]'s vent system. Ensure station property is not stolen.", "Jil Alert", new_sound = 'sound/AI/aliens.ogg')

@@ -1,42 +1,15 @@
-////////////////////////////////////////
-//////// Excursion Shuttle /////////////
-////////////////////////////////////////
-// The 'shuttle' of the excursion shuttle
-/datum/shuttle/autodock/overmap/dig
-	name = "Mining Trawler"
-	warmup_time = 0
-	current_location = "outpost_landing_pad"
-	docking_controller_tag = "digshuttle_docker"
-	shuttle_area = list(/area/shuttle/mining)
-	fuel_consumption = 3
-
-/obj/effect/overmap/visitable/ship/landable/mining
+/obj/effect/overmap/visitable/ship/landable/trawler
 	name = "Mining Trawler"
 	desc = "A hefty beast for making the station rich. Supposedly in compliance."
-	vessel_mass = 10000
+	vessel_mass = 4500
 	vessel_size = SHIP_SIZE_SMALL
-	shuttle = "Mining Shuttle"
+	shuttle = "Mining Trawler"
+	known = TRUE // we own this lol
 
-/obj/effect/shuttle_landmark/premade/mining/muriki
-	name = "ES Outpost 21 (Landing Pad)"
-	landmark_tag = "outpost_landing_pad"
-	base_turf = /turf/simulated/floor/plating/external/muriki
-	base_area = /area/muriki/station/mining_dock
-
-/obj/machinery/computer/shuttle_control/explore/mining
+/obj/machinery/computer/shuttle_control/explore/trawler
 	name = "short jump console"
 	shuttle_tag = "Mining Trawler"
-	req_one_access = list(access_pilot)
-
-
-
-/datum/shuttle/autodock/overmap/medical
-	name = "Medical Rescue"
-	warmup_time = 0
-	current_location = "outpost_medical_hangar"
-	docking_controller_tag = "secshuttle_docker"
-	shuttle_area = list(/area/shuttle/medical)
-	fuel_consumption = 1 //much less, due to being teeny
+	req_one_access = list(access_mining)
 
 /obj/effect/overmap/visitable/ship/landable/medical
 	name = "Medical Rescue"
@@ -44,12 +17,7 @@
 	vessel_mass = 2500
 	vessel_size = SHIP_SIZE_SMALL
 	shuttle = "Medical Rescue"
-
-/obj/effect/shuttle_landmark/premade/medical/muriki
-	name = "ES Outpost 21 (Medical Dock)"
-	landmark_tag = "outpost_medical_hangar"
-	base_turf = /turf/simulated/floor/reinforced
-	base_area = /area/medical/hangar
+	known = TRUE // we own this lol
 
 /obj/machinery/computer/shuttle_control/explore/medical
 	name = "short jump console"

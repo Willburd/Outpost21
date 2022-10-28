@@ -18,7 +18,6 @@
 	listening_level =Z_LEVEL_OUTPOST_UPPER
 	autolinkers = list("s_relay")
 
-
 /obj/machinery/telecomms/hub/preset/outpost
 	id = "Hub"
 	network = "tcommsat"

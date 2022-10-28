@@ -10,7 +10,7 @@
 	landmark_station = "escape_station"
 	landmark_transition = "escape_transit"
 	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/escape/centcom
 	name = "ESCC Bunker"
@@ -39,7 +39,7 @@
 	landmark_station = "supply_station"
 	docking_controller_tag = "supply_shuttle"
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/supply/centcom
 	name = "ESCC Bunker"
@@ -61,7 +61,7 @@
 	docking_controller_tag = "Tram"
 	current_location = "tram_shed"
 //	landmark_transition = "tram_transit"
-	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
 
 	destination_tags = list(
 		"tram_waste",
@@ -107,7 +107,7 @@
 	landmark_offsite = "trade_away"
 	landmark_station = "trade_station"
 	docking_controller_tag = "trade_shuttle"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/trade/away
 	name = "Deep Space"
@@ -136,7 +136,7 @@
 	announcer = "Automated Traffic Control"
 	arrival_message = "Attention.  A vessel is approaching the colony."
 	departure_message = "Attention.  A vessel is now leaving from the colony."
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 	destination_tags = list(
 		"mercenary_base",
@@ -186,7 +186,7 @@
 	announcer = "Automated Traffic Control"
 	arrival_message = "Attention.  Unidentified object approaching the colony."
 	departure_message = "Attention.  Unidentified object exiting local space.  Unidentified object expected to escape Borealis gravity well with current velocity."
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 	destination_tags = list(
 		"skipjack_base",
@@ -232,7 +232,7 @@
 	landmark_station = "specops_cc"
 	landmark_offsite = "specops_station"
 	docking_controller_tag = "specops_shuttle_port"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/specops/centcom
 	name = "ESCC Bunker"
@@ -246,3 +246,43 @@
 	landmark_tag = "specops_station"
 	docking_controller = "specops_dock_airlock"
 	special_dock_targets = list("Special Operations" = "specops_shuttle_fore")
+
+//////////////////////////////////////////////////////////////
+// Medical shuttle
+/datum/shuttle/autodock/overmap/medical
+	name = "Medical Rescue"
+	warmup_time = 0
+	current_location = "outpost_medical_hangar"
+	docking_controller_tag = "secshuttle_docker"
+	shuttle_area = list(/area/shuttle/medical)
+	fuel_consumption = 1 //much less, due to being teeny
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
+
+/obj/effect/shuttle_landmark/premade/medical/muriki
+	name = "ES Outpost 21 (Medical Dock)"
+	landmark_tag = "outpost_medical_hangar"
+	base_turf = /turf/simulated/floor/reinforced
+	base_area = /area/medical/hangar
+
+//////////////////////////////////////////////////////////////
+// Trawler Shuttle
+/datum/shuttle/autodock/overmap/trawler
+	name = "Mining Trawler"
+	warmup_time = 0
+	current_location = "outpost_landing_pad"
+	docking_controller_tag = "expshuttle_docker"
+	shuttle_area = list(/area/shuttle/trawler)
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
+	fuel_consumption = 1
+
+/obj/effect/shuttle_landmark/premade/trawler/muriki
+	name = "ES Outpost 21 (Landing Pad)"
+	landmark_tag = "outpost_landing_pad"
+	base_turf = /turf/simulated/floor/plating/external/muriki
+	base_area = /area/muriki/station/trawler_dock
+
+/obj/effect/shuttle_landmark/premade/trawler/beltmine
+	name = "Debris Reclaimation Yard"
+	landmark_tag = "trawler_yard"
+	base_turf = /turf/simulated/floor
+	base_area = /area/offworld/asteroidyard/station/dockingbay

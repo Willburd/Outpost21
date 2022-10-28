@@ -1,4 +1,4 @@
-#define SKYBOX_PADDING	4	// How much larger we want the skybox image to be than client's screen (in turfs)
+#define SKYBOX_PADDING	6	// How much larger we want the skybox image to be than client's screen (in turfs)
 #define SKYBOX_PIXELS	736	// Size of skybox image in pixels
 #define SKYBOX_TURFS	(SKYBOX_PIXELS/WORLD_ICON_SIZE)
 

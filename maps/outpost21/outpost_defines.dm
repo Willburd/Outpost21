@@ -4,6 +4,7 @@
 #define Z_LEVEL_OUTPOST_SURFACE						3
 #define Z_LEVEL_OUTPOST_UPPER						4
 #define Z_LEVEL_OUTPOST_MISC 						5
+#define Z_LEVEL_OUTPOST_ASTEROID 					6
 //Ensure these stay updated with map and z-level changes - Ignus
 
 /datum/map/outpost
@@ -15,6 +16,11 @@
 	lobby_screens = list()
 
 	zlevel_datum_type = /datum/map_z_level/outpost
+
+	use_overmap = TRUE
+	overmap_z = Z_LEVEL_OUTPOST_MISC
+	overmap_size = 25
+	overmap_event_areas = 18
 
 	station_name  = "ESHUI Atmospheric Terraforming Outpost 21"
 	station_short = "Outpost 21"
@@ -75,6 +81,8 @@
 
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, 64, 64)         // Create the mining ore distribution map.
+
+	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_ASTEROID, 64, 64)         // Create the mining ore distribution map.
 	return 1
 
 /datum/planet/muriki
@@ -83,6 +91,60 @@
 		Z_LEVEL_OUTPOST_SURFACE,
 		Z_LEVEL_OUTPOST_UPPER
 	)
+
+
+// Overmap represetation of muriki
+/obj/effect/overmap/visitable/sector/muriki
+	name = "Muriki"
+	desc = "What a terrible place to call home."
+	scanner_desc = @{"[i]Registration[/i]: ES Outpost 21-00
+[i]Class[/i]: Planetary Installation
+[i]Transponder[/i]: Transmitting (CIV), ESHUI IFF
+[b]Notice[/b]: ESHUI Terraforming Outpost, authorized personnel only"}
+
+	base = TRUE
+	icon_state = "globe"
+	color = "#7be313"
+	//initial_generic_waypoints = list()
+	initial_restricted_waypoints = list( "Mining Trawler" = list("outpost_landing_pad"))
+	//Despite not being in the multi-z complex, these levels are part of the overmap sector
+	extra_z_levels = list()
+
+/obj/effect/overmap/visitable/sector/muriki/Crossed(var/atom/movable/AM)
+	. = ..()
+	announce_atc(AM,going = FALSE)
+
+/obj/effect/overmap/visitable/sector/muriki/Uncrossed(var/atom/movable/AM)
+	. = ..()
+	announce_atc(AM,going = TRUE)
+
+/obj/effect/overmap/visitable/sector/muriki/proc/announce_atc(var/atom/movable/AM, var/going = FALSE)
+	var/message = "Sensor contact for vessel '[AM.name]' has [going ? "left" : "entered"] ATC control area."
+	//For landables, we need to see if their shuttle is cloaked
+	if(istype(AM, /obj/effect/overmap/visitable/ship/landable))
+		var/obj/effect/overmap/visitable/ship/landable/SL = AM //Phew
+		var/datum/shuttle/autodock/multi/shuttle = SSshuttles.shuttles[SL.shuttle]
+		if(!istype(shuttle) || !shuttle.cloaked) //Not a multishuttle (the only kind that can cloak) or not cloaked
+			atc.msg(message)
+
+	//For ships, it's safe to assume they're big enough to not be sneaky
+	else if(istype(AM, /obj/effect/overmap/visitable/ship))
+		atc.msg(message)
+
+/obj/effect/overmap/visitable/sector/muriki/get_space_zlevels()
+	return list() //None!
+
+
+
+/obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard
+	//initial_generic_waypoints = list()
+	initial_restricted_waypoints = list("Mining Trawler" = list("trawler_yard"))
+	name = "Orbital Reclamation Yard"
+	scanner_desc = @{"[i]Registration[/i]: ES Orbital 21-03
+[i]Class[/i]: Installation
+[i]Transponder[/i]: Transmitting (CIV), ESHUI IFF
+[b]Notice[/b]: ESHUI Base, authorized personnel only"}
+
 
 // For making the 6-in-1 holomap, we calculate some offsets
 #define OUTPOST21_MAP_SIZEX 400
@@ -122,35 +184,17 @@
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
 	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
 
-/*
 /datum/map_z_level/outpost/misc
 	z = Z_LEVEL_OUTPOST_MISC
 	name = "Misc"
 	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED
-	base_turf = /turf/simulated/space
-*/
 
-/*
-/datum/map_z_level/northern_star/abandoned_asteroid
-	z = Z_LEVEL_ABANDONED_ASTEROID_NORTHERN_STAR
-	name = "Abandoned Asteroid"
-	flags = MAP_LEVEL_PLAYER
-	transit_chance = 15
-	base_turf = /turf/simulated/mineral/floor
+/datum/map_z_level/outpost/misc
+	z = Z_LEVEL_OUTPOST_ASTEROID
+	name = "Asteroid"
+	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
 
-/datum/map_z_level/northern_star/mining
-	z = Z_LEVEL_MINING_NORTHERN_STAR
-	name = "Mining"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER
-	transit_chance = 10
-	base_turf = /turf/simulated/mineral/floor
 
-/datum/map_z_level/northern_star/empty
-	z = Z_LEVEL_EMPTY_NORTHERN_STAR
-	name = "Empty"
-	flags = MAP_LEVEL_PLAYER
-	transit_chance = 60
-*/
 
 //Unit test stuff.
 

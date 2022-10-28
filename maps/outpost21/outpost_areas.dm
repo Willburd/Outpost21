@@ -1200,16 +1200,30 @@
 
 //
 //-----------------------------------------------------------------------
+//Offworld
+
+/area/offworld/asteroidyard/station/halls
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "purple"
+
+/area/offworld/asteroidyard/station/dockingbay
+	name = "\improper Reclamation Yard Hanger"
+	icon_state = "decontamination"
+
+
+
+//
+//-----------------------------------------------------------------------
 //Shuttles
-/area/muriki/station/mining_dock
-	name = "\improper Mining Shuttle Landing Pad"
+/area/muriki/station/trawler_dock
+	name = "\improper Mining trawler Landing Pad"
 	icon_state = "orablasqu"
 
-/area/shuttle/mining
+/area/shuttle/trawler
 	name = "\improper Mining Trawler"
 	icon_state = "shuttle2"
 	requires_power = 1
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/plating/external/muriki
 
 /area/medical/hangar
 	name = "\improper Medevac Shuttle Hangar"
@@ -1233,6 +1247,7 @@
 	name = "\improper Station Tram"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "shuttlegrn"
+	base_turf = /turf/simulated/floor
 
 /area/muriki/tramstation
 	name = "\improper Tram Station"

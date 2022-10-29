@@ -270,7 +270,7 @@
 	name = "Mining Trawler"
 	warmup_time = 0
 	current_location = "outpost_landing_pad"
-	docking_controller_tag = "expshuttle_docker"
+	docking_controller_tag = "trawler_docker"
 	shuttle_area = list(/area/shuttle/trawler)
 	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 	fuel_consumption = 1

@@ -1202,15 +1202,73 @@
 //-----------------------------------------------------------------------
 //Offworld
 
+/area/offworld/asteroidyard/station/
+	sound_env = SMALL_ENCLOSED
+	ambience = AMBIENCE_MAINTENANCE
+
+/area/offworld/asteroidyard/external
+	name = "\improper Reclamation Yard Exterior"
+	icon_state = "red2"
+	has_gravity = 0
+	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg','sound/ambience/space/space_serithi.ogg','sound/music/freefallin.mid')
+	base_turf = /turf/space
+	ambience = AMBIENCE_SPACE
+
 /area/offworld/asteroidyard/station/halls
 	name = "\improper Reclamation Yard Hallway"
 	icon_state = "purple"
 
+/area/offworld/asteroidyard/station/halls_storage
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "green"
+
+/area/offworld/asteroidyard/station/halls_bar
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "orange"
+
+/area/offworld/asteroidyard/station/access_shaft
+	name = "\improper Reclamation Yard Access Shaft"
+	icon_state = "red"
+
+/area/offworld/asteroidyard/station/washing
+	name = "\improper Reclamation Yard Cleaning Room"
+	icon_state = "red"
+
 /area/offworld/asteroidyard/station/dockingbay
 	name = "\improper Reclamation Yard Hanger"
 	icon_state = "decontamination"
+	sound_env = LARGE_ENCLOSED
+	ambience = AMBIENCE_HANGAR
 
+/area/offworld/asteroidyard/station/cave
+	name = "\improper Reclamation Yard Caverns"
+	icon_state = "construction"
+	sound_env = ASTEROID
 
+/area/offworld/asteroidyard/station/storage
+	name = "\improper Reclamation Yard Storage"
+	icon_state = "locker"
+	sound_env = ASTEROID
+
+/area/offworld/asteroidyard/station/bar
+	name = "\improper Reclamation Yard Bar"
+	icon_state = "green"
+
+/area/offworld/asteroidyard/station/engineering
+	name = "\improper Reclamation Yard Engineering"
+	icon_state = "orange"
+	ambience = AMBIENCE_SUBSTATION
+
+/area/offworld/asteroidyard/station/solarControl
+	name = "\improper Reclamation Yard Solar Control"
+	icon_state = "orange"
+	ambience = AMBIENCE_SUBSTATION
+
+/area/offworld/asteroidyard/station/observation
+	name = "\improper Reclamation Yard Observation"
+	icon_state = "blue"
+	sound_env = LARGE_ENCLOSED
+	ambience = AMBIENCE_FOREBODING
 
 //
 //-----------------------------------------------------------------------

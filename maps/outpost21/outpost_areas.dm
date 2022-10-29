@@ -206,6 +206,10 @@
 	name = "\improper The Yard"
 	icon_state = "yelwhicir"
 
+/area/muriki/station/trawler_dock
+	name = "\improper Mining trawler Landing Pad"
+	icon_state = "orablasqu"
+
 //
 // Civilian ---------------------------------------------------------
 //
@@ -983,6 +987,10 @@
 	name = "\improper Vox Lab Breakroom"
 	icon_state = "bar"
 
+/area/medical/hangar
+	name = "\improper Medevac Shuttle Hangar"
+	icon_state = "medical"
+
 //
 // Rooftops-----------------------------------------------------------------------
 //
@@ -1273,34 +1281,27 @@
 //
 //-----------------------------------------------------------------------
 //Shuttles
-/area/muriki/station/trawler_dock
-	name = "\improper Mining trawler Landing Pad"
-	icon_state = "orablasqu"
-
 /area/shuttle/trawler
 	name = "\improper Mining Trawler"
 	icon_state = "shuttle2"
 	requires_power = 1
 	base_turf = /turf/simulated/floor/plating/external/muriki
 
-/area/medical/hangar
-	name = "\improper Medevac Shuttle Hangar"
-	icon_state = "medical"
-
 /area/shuttle/medical
 	name = "\improper Medevac Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
+	base_turf = /turf/simulated/floor
 
 /area/shuttle/security
-	name = "\improper Security Escape Shuttle"
+	name = "\improper Security Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
+	base_turf = /turf/simulated/floor
 
 //
 // Tramline --------------------------------------------------
 //
-
 /area/shuttle/tram
 	name = "\improper Station Tram"
 	icon = 'icons/turf/areas.dmi'

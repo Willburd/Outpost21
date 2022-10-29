@@ -253,7 +253,7 @@
 	name = "Medical Rescue"
 	warmup_time = 0
 	current_location = "outpost_medical_hangar"
-	docking_controller_tag = "secshuttle_docker"
+	docking_controller_tag = "med_docker"
 	shuttle_area = list(/area/shuttle/medical)
 	fuel_consumption = 1 //much less, due to being teeny
 	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
@@ -261,8 +261,25 @@
 /obj/effect/shuttle_landmark/premade/medical/muriki
 	name = "ES Outpost 21 (Medical Dock)"
 	landmark_tag = "outpost_medical_hangar"
-	base_turf = /turf/simulated/floor/reinforced
+	base_turf = /turf/simulated/floor
 	base_area = /area/medical/hangar
+
+//////////////////////////////////////////////////////////////
+// Security shuttle
+/datum/shuttle/autodock/overmap/security
+	name = "Security Carrier"
+	warmup_time = 0
+	current_location = "outpost_security_hangar"
+	docking_controller_tag = "sec_docker"
+	shuttle_area = list(/area/shuttle/security)
+	fuel_consumption = 1 //much less, due to being teeny
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
+
+/obj/effect/shuttle_landmark/premade/security/muriki
+	name = "ES Outpost 21 (Security Dock)"
+	landmark_tag = "outpost_security_hangar"
+	base_turf = /turf/simulated/floor
+	base_area = /area/security/hangar
 
 //////////////////////////////////////////////////////////////
 // Trawler Shuttle
@@ -273,16 +290,22 @@
 	docking_controller_tag = "trawler_docker"
 	shuttle_area = list(/area/shuttle/trawler)
 	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
-	fuel_consumption = 1
+	fuel_consumption = 2 // chonky
 
 /obj/effect/shuttle_landmark/premade/trawler/muriki
-	name = "ES Outpost 21 (Landing Pad)"
+	name = "ES Outpost 21 (Trawler Pad)"
 	landmark_tag = "outpost_landing_pad"
 	base_turf = /turf/simulated/floor/plating/external/muriki
 	base_area = /area/muriki/station/trawler_dock
 
 /obj/effect/shuttle_landmark/premade/trawler/beltmine
-	name = "Debris Reclaimation Yard"
+	name = "Debris Reclaimation Yard (Trawler bay)"
 	landmark_tag = "trawler_yard"
 	base_turf = /turf/simulated/floor
 	base_area = /area/offworld/asteroidyard/station/dockingbay
+
+obj/effect/shuttle_landmark/premade/trawler/beltmine_generic
+	name = "Debris Reclaimation Yard (Civilian Dock)"
+	landmark_tag = "orbitalyard_civ"
+	base_turf = /turf/space
+	base_area = /area/space

@@ -106,7 +106,7 @@
 	icon_state = "globe"
 	color = "#7be313"
 	//initial_generic_waypoints = list()
-	initial_restricted_waypoints = list( "Mining Trawler" = list("outpost_landing_pad"))
+	initial_restricted_waypoints = list( "Mining Trawler" = list("outpost_landing_pad"), "Security Carrier" = list("outpost_security_hangar"), "Medical Rescue" = list("outpost_medical_hangar"))
 	//Despite not being in the multi-z complex, these levels are part of the overmap sector
 	extra_z_levels = list()
 
@@ -137,7 +137,7 @@
 
 
 /obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard
-	//initial_generic_waypoints = list()
+	initial_generic_waypoints = list("orbitalyard_civ")
 	initial_restricted_waypoints = list("Mining Trawler" = list("trawler_yard"))
 	name = "Orbital Reclamation Yard"
 	scanner_desc = @{"[i]Registration[/i]: ES Orbital 21-03

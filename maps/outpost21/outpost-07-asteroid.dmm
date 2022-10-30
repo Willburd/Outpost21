@@ -345,7 +345,7 @@
 "Be" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 4},/turf/simulated/floor/tiled/milspec,/area/offworld/asteroidyard/station/halls)
 "Bm" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/sign/botany{desc = "Space Bathroom"; icon_state = "restroom"; name = "\improper SPACE BATHROOM"; pixel_y = 32},/turf/simulated/floor/tiled/milspec,/area/offworld/asteroidyard/station/halls_storage)
 "Bp" = (/obj/structure/grille,/obj/machinery/door/firedoor/border_only,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/offworld/asteroidyard/station/halls)
-"Bq" = (/obj/effect/shuttle_landmark/premade/trawler/beltmine_generic{docking_controller = "yardciv_bay_controller"},/turf/space,/area/space)
+"Bq" = (/obj/effect/shuttle_landmark/premade/generic/beltmine{docking_controller = "yardciv_bay_controller"},/turf/space,/area/space)
 "Br" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/milspec,/area/offworld/asteroidyard/station/halls_storage)
 "Bs" = (/obj/machinery/alarm{dir = 4; pixel_x = -26},/turf/simulated/floor/tiled/milspec,/area/offworld/asteroidyard/station/dockingbay)
 "Bt" = (/obj/structure/sign/calendar,/turf/simulated/mineral,/area/offworld/asteroidyard/station/washing)

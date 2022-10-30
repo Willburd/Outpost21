@@ -286,7 +286,7 @@
 /datum/shuttle/autodock/overmap/trawler
 	name = "Mining Trawler"
 	warmup_time = 0
-	current_location = "outpost_landing_pad"
+	current_location = "outpost_trawler_pad"
 	docking_controller_tag = "trawler_docker"
 	shuttle_area = list(/area/shuttle/trawler)
 	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
@@ -294,7 +294,7 @@
 
 /obj/effect/shuttle_landmark/premade/trawler/muriki
 	name = "ES Outpost 21 (Trawler Pad)"
-	landmark_tag = "outpost_landing_pad"
+	landmark_tag = "outpost_trawler_pad"
 	base_turf = /turf/simulated/floor/plating/external/muriki
 	base_area = /area/muriki/station/trawler_dock
 
@@ -304,8 +304,22 @@
 	base_turf = /turf/simulated/floor
 	base_area = /area/offworld/asteroidyard/station/dockingbay
 
-obj/effect/shuttle_landmark/premade/trawler/beltmine_generic
+obj/effect/shuttle_landmark/premade/generic/beltmine
 	name = "Debris Reclaimation Yard (Civilian Dock)"
 	landmark_tag = "orbitalyard_civ"
 	base_turf = /turf/space
 	base_area = /area/space
+
+//////////////////////////////////////////////////////////////
+// Generic landings
+/obj/effect/shuttle_landmark/premade/generic/arrivals
+	name = "ES Outpost 21 (Near Arrivals)"
+	landmark_tag = "outpost_landing_pad"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
+	base_area = /area/muriki/grounds/shutt
+
+/obj/effect/shuttle_landmark/premade/generic/engineering
+	name = "ES Outpost 21 (Near Engineering)"
+	landmark_tag = "outpost_engineering_pad"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
+	base_area = /area/mine/explored/muriki/surface

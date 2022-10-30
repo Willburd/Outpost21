@@ -105,8 +105,8 @@
 	base = TRUE
 	icon_state = "globe"
 	color = "#7be313"
-	//initial_generic_waypoints = list()
-	initial_restricted_waypoints = list( "Mining Trawler" = list("outpost_landing_pad"), "Security Carrier" = list("outpost_security_hangar"), "Medical Rescue" = list("outpost_medical_hangar"))
+	initial_generic_waypoints = list("outpost_landing_pad","outpost_engineering_pad")
+	initial_restricted_waypoints = list( "Mining Trawler" = list("outpost_trawler_pad"), "Security Carrier" = list("outpost_security_hangar"), "Medical Rescue" = list("outpost_medical_hangar"))
 	//Despite not being in the multi-z complex, these levels are part of the overmap sector
 	extra_z_levels = list()
 

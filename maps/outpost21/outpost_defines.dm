@@ -20,7 +20,7 @@
 	use_overmap = TRUE
 	overmap_z = Z_LEVEL_OUTPOST_MISC
 	overmap_size = 25
-	overmap_event_areas = 18
+	overmap_event_areas = 9
 
 	station_name  = "ESHUI Atmospheric Terraforming Outpost 21"
 	station_short = "Outpost 21"

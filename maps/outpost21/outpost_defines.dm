@@ -73,6 +73,9 @@
 	planet_datums_to_make = list(/datum/planet/muriki)
 
 /datum/map/outpost/perform_map_generation()
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge)
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard)
+
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, 64, 64)         // Create the mining ore distribution map.
 
@@ -82,6 +85,7 @@
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_UPPER, 64, 64)         // Create the mining ore distribution map.
 
+	new /datum/random_map/automata/cave_system(null, 1, 1,  Z_LEVEL_OUTPOST_ASTEROID, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_ASTEROID, 64, 64)         // Create the mining ore distribution map.
 	return 1
 

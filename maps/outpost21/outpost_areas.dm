@@ -1222,6 +1222,9 @@
 	base_turf = /turf/space
 	ambience = AMBIENCE_SPACE
 
+/area/offworld/asteroidyard/external/yardzone
+	icon_state = "construction"
+
 /area/offworld/asteroidyard/station/halls
 	name = "\improper Reclamation Yard Hallway"
 	icon_state = "purple"

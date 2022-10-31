@@ -308,7 +308,7 @@ obj/effect/shuttle_landmark/premade/generic/beltmine
 	name = "Debris Reclaimation Yard (Civilian Dock)"
 	landmark_tag = "orbitalyard_civ"
 	base_turf = /turf/space
-	base_area = /area/space
+	base_area = /area/offworld/asteroidyard
 
 //////////////////////////////////////////////////////////////
 // Generic landings

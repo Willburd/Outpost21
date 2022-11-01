@@ -6,7 +6,6 @@
 #define Z_LEVEL_OUTPOST_MISC 						5
 #define Z_LEVEL_OUTPOST_ASTEROID 					6
 //Ensure these stay updated with map and z-level changes - Ignus
-
 /datum/map/outpost
 	name = "Outpost 21"
 	full_name = "ESHUI Atmospheric Terraforming Outpost 21"

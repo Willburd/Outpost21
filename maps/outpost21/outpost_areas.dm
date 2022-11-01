@@ -1218,7 +1218,7 @@
 	name = "\improper Reclamation Yard Exterior"
 	icon_state = "red2"
 	has_gravity = 0
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg','sound/ambience/space/space_serithi.ogg','sound/music/freefallin.mid')
+	ambience = AMBIENCE_OUTPOST21_SPACE
 	base_turf = /turf/space
 	ambience = AMBIENCE_SPACE
 

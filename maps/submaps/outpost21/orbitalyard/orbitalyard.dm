@@ -8,7 +8,9 @@
 #include "scaff_A.dmm"
 #include "scaff_B.dmm"
 #include "scaff_C.dmm"
-#include "giant_asteroid_A"
+#include "structure_A.dmm"
+#include "giant_asteroid_A.dmm"
+#include "structure_A.dmm"
 #endif
 
 /datum/map_template/outpost21/space/orbitalyard
@@ -76,13 +78,13 @@
 	allow_duplicates = TRUE
 	cost = 40
 
-/*/datum/map_template/outpost21/space/orbitalyard_huge/engine_ruins
-	name = "Engine Ruins"
-	desc = "Destroyed ruins of a reactor and engines."
-	mappath = 'maps/submaps/outpost21/orbitalyard/scaff_C.dmm'
+/datum/map_template/outpost21/space/orbitalyard_huge/structure_A
+	name = "Structure Variant A"
+	desc = "Destroyed ruins of a facility."
+	mappath = 'maps/submaps/outpost21/orbitalyard/structure_A.dmm'
 	allow_duplicates = FALSE
-	cost = 25
-*/
+	fixed_orientation = TRUE
+	cost = 55
 
 
 //////////////////////////////////////////////////////////////
@@ -92,5 +94,13 @@
 	ambience = AMBIENCE_SPACE
 	icon_state = "red2"
 	has_gravity = 0
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg','sound/ambience/space/space_serithi.ogg','sound/music/freefallin.mid')
+	ambience = AMBIENCE_OUTPOST21_SPACE
+	base_turf = /turf/space
+
+/area/submap/outpost21/structure_generic
+	name = "\improper Ruined Facility"
+	ambience = AMBIENCE_FOREBODING
+	icon_state = "red2"
+	has_gravity = 0
+	ambience = AMBIENCE_OUTPOST21_SPACE
 	base_turf = /turf/space

@@ -4248,7 +4248,6 @@
 #include "maps\submaps\engine_submaps_vr\tether\_engine_submaps.dm"
 #include "maps\submaps\outpost21\base.dm"
 #include "maps\submaps\outpost21\orbitalyard\orbitalyard.dm"
-#include "maps\submaps\outpost21\orbitalyard\structure_A.dmm"
 #include "maps\yw\items\encryptionkey_sc.dm"
 #include "maps\yw\items\encryptionkey_vr.dm"
 #include "maps\yw\items\headset_sc.dm"

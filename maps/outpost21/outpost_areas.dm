@@ -233,6 +233,11 @@
 	icon_state = "cyablasqu"
 	sound_env = SMALL_ENCLOSED
 
+/area/muriki/cybstorage
+	name = "\improper Cyborg Storage"
+	icon_state = "shuttle"
+	ambience = AMBIENCE_GENERIC
+
 /area/muriki/crew/
 	name = "\improper Crew Area"
 	icon_state = "cyawhicir"

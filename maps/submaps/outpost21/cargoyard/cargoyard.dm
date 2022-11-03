@@ -85,3 +85,11 @@
 	music = 'sound/ambience/ambiatm1.ogg'
 	ambience = AMBIENCE_FOREBODING
 	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
+
+/area/submap/outpost21/yard_cargocontainer
+	name = "\improper Inside Cargo Container"
+	icon_state = "red"
+	sound_env = SOUND_ENVIRONMENT_BATHROOM
+	music = 'sound/ambience/ambiatm1.ogg'
+	ambience = AMBIENCE_FOREBODING
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki

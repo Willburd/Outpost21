@@ -17,7 +17,7 @@
 	var/emagged = 0
 	var/light_strength = 3
 	var/busy = 0
-	var/obj/item/device/paicard/paicard = null
+	//var/obj/item/device/paicard/paicard = null
 	var/obj/access_scanner = null
 	var/list/req_access = list()
 	var/list/req_one_access = list()
@@ -72,7 +72,7 @@
 	SetStunned(0)
 	SetParalysis(0)
 
-	if(on && !client && !busy && !paicard)
+	if(on && !client && !busy)// && !paicard) outpost21 - pai removal
 		spawn(0)
 			handleAI()
 /*

@@ -857,7 +857,7 @@ var/global/list/BUILDABLE_AREA_TYPES = list(
 	/area/groundbase/mining,
 	/area/offmap/aerostat/surface,
 	/area/tether_away/beach,
-	/area/tether_away/cave,
+	/area/tether_away/cave
 )
 
 var/static/list/blacklisted_areas = typecacheof(list(

@@ -9,8 +9,8 @@
 	var/annihilate = FALSE // If true, all (movable) atoms at the location where the map is loaded will be deleted before the map is loaded in.
 	var/fixed_orientation = FALSE // If true, the submap will not be rotated randomly when loaded.
 
-	var/cost = null /* The map generator has a set 'budget' it spends to place down different submaps. It will pick available submaps randomly until 
-	it runs out. The cost of a submap should roughly corrispond with several factors such as size, loot, difficulty, desired scarcity, etc. 
+	var/cost = null /* The map generator has a set 'budget' it spends to place down different submaps. It will pick available submaps randomly until
+	it runs out. The cost of a submap should roughly corrispond with several factors such as size, loot, difficulty, desired scarcity, etc.
 	Set to -1 to force the submap to always be made. */
 	var/allow_duplicates = FALSE // If false, only one map template will be spawned by the game. Doesn't affect admins spawning then manually.
 	var/discard_prob = 0 // If non-zero, there is a chance that the map seeding algorithm will skip this template when selecting potential templates to use.
@@ -74,7 +74,7 @@
 		A.power_change()
 
 	if(machinery_was_awake)
-		SSmachines.wake() // Wake only if it was awake before we tried to suspended it. 
+		SSmachines.wake() // Wake only if it was awake before we tried to suspended it.
 	SSshuttles.block_init_queue = prev_shuttle_queue_state
 	SSshuttles.process_init_queues() // We will flush the queue unless there were other blockers, in which case they will do it.
 
@@ -155,7 +155,7 @@
 	template.load_new_z(orientation)
 
 // Very similar to the /tg/ version.
-/proc/seed_submaps(var/list/z_levels, var/budget = 0, var/whitelist = /area/space, var/desired_map_template_type = null)
+/proc/seed_submaps(var/list/z_levels, var/budget = 0, var/whitelist = /area/space, var/desired_map_template_type = null, var/abitrarystartx = 0, var/abitrarystarty = 0, var/abitraryendx = 0, var/abitraryendy = 0)
 	set background = TRUE
 
 	if(!z_levels || !z_levels.len)
@@ -235,7 +235,25 @@
 			var/width_border = SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.height : chosen_template.width) / 2) // %180 catches East/West (90,270) rotations on true, North/South (0,180) rotations on false		//VOREStation Edit
 			var/height_border = SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.width : chosen_template.height) / 2)																									//VOREStation Edit
 			var/z_level = pick(z_levels)
-			var/turf/T = locate(rand(width_border, world.maxx - width_border), rand(height_border, world.maxy - height_border), z_level)
+
+			// fix for failing gen in small sections of maps that have partially randomized areas
+			var/startx = width_border
+			if(abitrarystartx > 0)
+				startx = abitrarystartx
+
+			var/endx   = height_border
+			if(abitraryendx > 0)
+				endx = abitraryendx
+
+			var/starty = world.maxx - width_border
+			if(abitrarystarty > 0)
+				starty = abitrarystarty
+
+			var/endy   = world.maxy - height_border
+			if(abitraryendy > 0)
+				endy = abitraryendy
+
+			var/turf/T = locate(rand(startx, endx), rand(starty, endy), z_level)
 			var/valid = TRUE
 
 			for(var/turf/check in chosen_template.get_affected_turfs(T,TRUE,orientation))
@@ -243,6 +261,7 @@
 				if(!(istype(new_area, whitelist)))
 					valid = FALSE // Probably overlapping something important.
 			//		to_world("Invalid due to overlapping with area [new_area.type] at ([check.x], [check.y], [check.z]), when attempting to place at ([T.x], [T.y], [T.z]).")
+
 					break
 				CHECK_TICK
 

@@ -82,6 +82,10 @@ var/list/event_last_fired = list()
 	if(active_with_role["Security"] > 0)
 		if(!sent_spiders_to_station)
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
+		if(!sent_jils_to_station)
+			possibleEvents[/datum/event/jil_infestation] = max(active_with_role["Security"], 10) + 8
+		if(!sent_clunes_to_station)
+			possibleEvents[/datum/event/clune_infestation] = max(active_with_role["Security"], 2) + 1
 		possibleEvents[/datum/event/random_antag] = max(active_with_role["Security"], 5) + 2.5
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])

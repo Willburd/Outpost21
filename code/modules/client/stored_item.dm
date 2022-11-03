@@ -172,8 +172,10 @@
 
 /obj/item/device/pda
 	persist_storable = FALSE
+/* outpost 21 edit - PAI removal
 /obj/item/device/communicator
 	persist_storable = FALSE
+*/
 /obj/item/weapon/card
 	persist_storable = FALSE
 /obj/item/weapon/holder
@@ -232,8 +234,10 @@
 	persist_storable = FALSE
 /obj/item/weapon/circuitboard/mecha/imperion
 	persist_storable = FALSE
+/*
 /obj/item/device/paicard
 	persist_storable = FALSE
+*/
 /obj/item/organ
 	persist_storable = FALSE
 /obj/item/device/soulstone

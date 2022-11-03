@@ -5,8 +5,8 @@
 	opacity = 0
 
 	always_run = TRUE
-	interval_lower_bound = 5 SECONDS
-	interval_upper_bound = 14 SECONDS
+	interval_lower_bound = 3 SECONDS
+	interval_upper_bound = 8 SECONDS
 
 	light_color = "#eccb0d"
 
@@ -40,24 +40,23 @@
 			T.make_air()
 			air_contents = T.return_air()
 		if(!air_contents.check_combustability())
-			if(prob(5))
+			if(prob(15))
 				T.make_air()
 				air_contents = T.return_air()
 
 		// force fuel on tile to continue burning forever
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate(/obj/effect/decal/cleanable/liquid_fuel) in T
-		if(!fuel) 
+		if(!fuel)
 			if(T.return_air().temperature < PHORON_MINIMUM_BURN_TEMPERATURE )
 				new /obj/effect/decal/cleanable/liquid_fuel( T, rand(6,12), TRUE)
 			else
 				if(prob(5) && T.return_air().temperature < PHORON_MINIMUM_BURN_TEMPERATURE*1.2) // if we go above, we're on a player burn!
-					// try to stagnate, only player added fuel should boost it beyond this point
 					T.make_air()
 					air_contents = T.return_air()
 					new /obj/effect/decal/cleanable/liquid_fuel( T, 1, TRUE)
-				
+
 		// praise zorg
-		T.hotspot_expose( PHORON_MINIMUM_BURN_TEMPERATURE, 500)
+		T.hotspot_expose( PHORON_MINIMUM_BURN_TEMPERATURE * 1,1, 500)
 		T.create_fire( air_contents.calculate_firelevel() ) // lingering fires
 
 		// random updates to the space above

@@ -10,7 +10,7 @@
 	landmark_station = "escape_station"
 	landmark_transition = "escape_transit"
 	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/escape/centcom
 	name = "ESCC Bunker"
@@ -39,7 +39,7 @@
 	landmark_station = "supply_station"
 	docking_controller_tag = "supply_shuttle"
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
-	ceiling_type = /turf/simulated/shuttle/floor/white/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/supply/centcom
 	name = "ESCC Bunker"
@@ -58,9 +58,10 @@
 	name = "Station Tram"
 	warmup_time = 10
 	shuttle_area = /area/shuttle/tram
-	current_location = "tram_waste"
+	docking_controller_tag = "Tram"
+	current_location = "tram_shed"
 //	landmark_transition = "tram_transit"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
 
 	destination_tags = list(
 		"tram_waste",
@@ -68,23 +69,33 @@
 		"tram_civ"
 	)
 
+/obj/effect/shuttle_landmark/premade/tram/shed
+	name = "Tram Station - Shed"
+	landmark_tag = "tram_shed"
+	base_area = /area/muriki/tramstation/shed
+	base_turf = /turf/simulated/open
+
+
 /obj/effect/shuttle_landmark/premade/tram/base
 	name = "Tram Station - Waste and Maintenance"
 	landmark_tag = "tram_waste"
-	base_area = /area/muriki/tramstation/waste
-	base_turf = /turf/simulated/floor/reinforced
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/transit
 	name = "Tram Station - Transit"
 	landmark_tag = "tram_transit"
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/eng
 	name = "Tram Station - Engineering Cargo"
 	landmark_tag = "tram_eng"
+	base_turf = /turf/simulated/open
 
 /obj/effect/shuttle_landmark/premade/tram/civ
 	name = "Tram Station - Civilian"
 	landmark_tag = "tram_civ"
+	base_turf = /turf/simulated/open
+
 
 //////////////////////////////////////////////////////////////
 // Trade Ship
@@ -96,7 +107,7 @@
 	landmark_offsite = "trade_away"
 	landmark_station = "trade_station"
 	docking_controller_tag = "trade_shuttle"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/trade/away
 	name = "Deep Space"
@@ -125,7 +136,7 @@
 	announcer = "Automated Traffic Control"
 	arrival_message = "Attention.  A vessel is approaching the colony."
 	departure_message = "Attention.  A vessel is now leaving from the colony."
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 	destination_tags = list(
 		"mercenary_base",
@@ -175,7 +186,7 @@
 	announcer = "Automated Traffic Control"
 	arrival_message = "Attention.  Unidentified object approaching the colony."
 	departure_message = "Attention.  Unidentified object exiting local space.  Unidentified object expected to escape Borealis gravity well with current velocity."
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 	destination_tags = list(
 		"skipjack_base",
@@ -221,7 +232,7 @@
 	landmark_station = "specops_cc"
 	landmark_offsite = "specops_station"
 	docking_controller_tag = "specops_shuttle_port"
-	ceiling_type = /turf/simulated/shuttle/floor/black/cryogaia
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
 
 /obj/effect/shuttle_landmark/premade/specops/centcom
 	name = "ESCC Bunker"
@@ -237,20 +248,78 @@
 	special_dock_targets = list("Special Operations" = "specops_shuttle_fore")
 
 //////////////////////////////////////////////////////////////
-// RogueMiner "Belter: Shuttle
+// Medical shuttle
+/datum/shuttle/autodock/overmap/medical
+	name = "Medical Rescue"
+	warmup_time = 0
+	current_location = "outpost_medical_hangar"
+	docking_controller_tag = "med_docker"
+	shuttle_area = list(/area/shuttle/medical)
+	fuel_consumption = 1 //much less, due to being teeny
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
 
-/datum/shuttle/autodock/ferry/belter
-	name = "Belter"
-	location = FERRY_LOCATION_STATION
-	warmup_time = 5
-	move_time = 30
-	shuttle_area = /area/shuttle/belter
-	landmark_station = "belter_colony"
-	landmark_offsite = "belter_zone1"
-	landmark_transition = "belter_transit"
-	docking_controller_tag = "belter_docking"
-	move_direction = EAST
+/obj/effect/shuttle_landmark/premade/medical/muriki
+	name = "ES Outpost 21 (Medical Dock)"
+	landmark_tag = "outpost_medical_hangar"
+	base_turf = /turf/simulated/floor
+	base_area = /area/medical/hangar
 
-/datum/shuttle/autodock/ferry/belter/New()
-	move_time = move_time + rand(-5 SECONDS, 5 SECONDS)
-	..()
+//////////////////////////////////////////////////////////////
+// Security shuttle
+/datum/shuttle/autodock/overmap/security
+	name = "Security Carrier"
+	warmup_time = 0
+	current_location = "outpost_security_hangar"
+	docking_controller_tag = "sec_docker"
+	shuttle_area = list(/area/shuttle/security)
+	fuel_consumption = 1 //much less, due to being teeny
+	ceiling_type = /turf/simulated/shuttle/floor/white/muriki
+
+/obj/effect/shuttle_landmark/premade/security/muriki
+	name = "ES Outpost 21 (Security Dock)"
+	landmark_tag = "outpost_security_hangar"
+	base_turf = /turf/simulated/floor
+	base_area = /area/security/hangar
+
+//////////////////////////////////////////////////////////////
+// Trawler Shuttle
+/datum/shuttle/autodock/overmap/trawler
+	name = "Mining Trawler"
+	warmup_time = 0
+	current_location = "outpost_trawler_pad"
+	docking_controller_tag = "trawler_docker"
+	shuttle_area = list(/area/shuttle/trawler)
+	ceiling_type = /turf/simulated/shuttle/floor/black/muriki
+	fuel_consumption = 2 // chonky
+
+/obj/effect/shuttle_landmark/premade/trawler/muriki
+	name = "ES Outpost 21 (Trawler Pad)"
+	landmark_tag = "outpost_trawler_pad"
+	base_turf = /turf/simulated/floor/plating/external/muriki
+	base_area = /area/muriki/station/trawler_dock
+
+/obj/effect/shuttle_landmark/premade/trawler/beltmine
+	name = "Debris Reclaimation Yard (Trawler bay)"
+	landmark_tag = "trawler_yard"
+	base_turf = /turf/simulated/floor
+	base_area = /area/offworld/asteroidyard/station/dockingbay
+
+obj/effect/shuttle_landmark/premade/generic/beltmine
+	name = "Debris Reclaimation Yard (Civilian Dock)"
+	landmark_tag = "orbitalyard_civ"
+	base_turf = /turf/space
+	base_area = /area/offworld/asteroidyard
+
+//////////////////////////////////////////////////////////////
+// Generic landings
+/obj/effect/shuttle_landmark/premade/generic/arrivals
+	name = "ES Outpost 21 (Near Arrivals)"
+	landmark_tag = "outpost_landing_pad"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
+	base_area = /area/muriki/grounds/shutt
+
+/obj/effect/shuttle_landmark/premade/generic/engineering
+	name = "ES Outpost 21 (Near Engineering)"
+	landmark_tag = "outpost_engineering_pad"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
+	base_area = /area/mine/explored/muriki/surface

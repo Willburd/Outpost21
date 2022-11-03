@@ -26,6 +26,7 @@
 	sound_env = SPACE
 	ambience = AMBIENCE_MEATZONE
 	music = 'sound/ambience/approaching_planet.ogg'
+	requires_power = FALSE
 
 /area/muriki/processor/euth
 	name = "\improper Processor Euthanization"
@@ -205,6 +206,10 @@
 	name = "\improper The Yard"
 	icon_state = "yelwhicir"
 
+/area/muriki/station/trawler_dock
+	name = "\improper Mining trawler Landing Pad"
+	icon_state = "orablasqu"
+
 //
 // Civilian ---------------------------------------------------------
 //
@@ -227,6 +232,11 @@
 	name = "\improper Overflow Janitorial Closet"
 	icon_state = "cyablasqu"
 	sound_env = SMALL_ENCLOSED
+
+/area/muriki/cybstorage
+	name = "\improper Cyborg Storage"
+	icon_state = "shuttle"
+	ambience = AMBIENCE_GENERIC
 
 /area/muriki/crew/
 	name = "\improper Crew Area"
@@ -447,7 +457,7 @@
 /area/turbolift/secupper
 	name = "Security Second Floor"
 	lift_floor_label = "Security High Level"
-	lift_floor_name = "AI, Telecoms, Solar Backup, Evac shuttle."
+	lift_floor_name = "AI, Telecoms, Evac shuttle."
 	lift_announce_str = "Arriving at Security Upper Floor."
 
 //MEDICAL
@@ -982,6 +992,10 @@
 	name = "\improper Vox Lab Breakroom"
 	icon_state = "bar"
 
+/area/medical/hangar
+	name = "\improper Medevac Shuttle Hangar"
+	icon_state = "medical"
+
 //
 // Rooftops-----------------------------------------------------------------------
 //
@@ -1199,45 +1213,118 @@
 
 //
 //-----------------------------------------------------------------------
-//Shuttles
-/area/muriki/station/mining_dock
-	name = "\improper Mining Shuttle Landing Pad"
-	icon_state = "orablasqu"
+//Offworld
 
-/area/shuttle/mining
+/area/offworld/asteroidyard/station/
+	sound_env = SMALL_ENCLOSED
+	ambience = AMBIENCE_MAINTENANCE
+
+/area/offworld/asteroidyard/external
+	name = "\improper Reclamation Yard Exterior"
+	icon_state = "red2"
+	has_gravity = 0
+	ambience = AMBIENCE_OUTPOST21_SPACE
+	base_turf = /turf/space
+	ambience = AMBIENCE_SPACE
+
+/area/offworld/asteroidyard/external/yardzone
+	icon_state = "construction"
+
+/area/offworld/asteroidyard/station/halls
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "purple"
+
+/area/offworld/asteroidyard/station/halls_storage
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "green"
+
+/area/offworld/asteroidyard/station/halls_bar
+	name = "\improper Reclamation Yard Hallway"
+	icon_state = "orange"
+
+/area/offworld/asteroidyard/station/access_shaft
+	name = "\improper Reclamation Yard Access Shaft"
+	icon_state = "red"
+
+/area/offworld/asteroidyard/station/washing
+	name = "\improper Reclamation Yard Cleaning Room"
+	icon_state = "red"
+
+/area/offworld/asteroidyard/station/dockingbay
+	name = "\improper Reclamation Yard Hanger"
+	icon_state = "decontamination"
+	sound_env = LARGE_ENCLOSED
+	ambience = AMBIENCE_HANGAR
+
+/area/offworld/asteroidyard/station/cave
+	name = "\improper Reclamation Yard Caverns"
+	icon_state = "construction"
+	sound_env = ASTEROID
+
+/area/offworld/asteroidyard/station/storage
+	name = "\improper Reclamation Yard Storage"
+	icon_state = "locker"
+	sound_env = ASTEROID
+
+/area/offworld/asteroidyard/station/bar
+	name = "\improper Reclamation Yard Bar"
+	icon_state = "green"
+
+/area/offworld/asteroidyard/station/engineering
+	name = "\improper Reclamation Yard Engineering"
+	icon_state = "orange"
+	ambience = AMBIENCE_SUBSTATION
+
+/area/offworld/asteroidyard/station/solarControl
+	name = "\improper Reclamation Yard Solar Control"
+	icon_state = "orange"
+	ambience = AMBIENCE_SUBSTATION
+
+/area/offworld/asteroidyard/station/observation
+	name = "\improper Reclamation Yard Observation"
+	icon_state = "blue"
+	sound_env = LARGE_ENCLOSED
+	ambience = AMBIENCE_FOREBODING
+
+//
+//-----------------------------------------------------------------------
+//Shuttles
+/area/shuttle/trawler
 	name = "\improper Mining Trawler"
 	icon_state = "shuttle2"
 	requires_power = 1
-	base_turf = /turf/space
-
-/area/medical/hangar
-	name = "\improper Medevac Shuttle Hangar"
-	icon_state = "medical"
+	base_turf = /turf/simulated/floor/plating/external/muriki
 
 /area/shuttle/medical
 	name = "\improper Medevac Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
+	base_turf = /turf/simulated/floor
 
 /area/shuttle/security
-	name = "\improper Security Escape Shuttle"
+	name = "\improper Security Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
+	base_turf = /turf/simulated/floor
 
 //
 // Tramline --------------------------------------------------
 //
-
 /area/shuttle/tram
 	name = "\improper Station Tram"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "shuttlegrn"
+	base_turf = /turf/simulated/floor
 
 /area/muriki/tramstation
 	name = "\improper Tram Station"
 	icon_state = "dark128"
 	sound_env = LARGE_ENCLOSED
 	ambience = list(AMBIENCE_ARRIVALS, AMBIENCE_HANGAR)
+
+/area/muriki/tramstation/shed
+	name = "\improper Tram Station - Shed"
+	icon_state = "dark128"
 
 /area/muriki/tramstation/waste
 	name = "\improper Tram Station - Waste"

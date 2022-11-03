@@ -3,11 +3,11 @@
 var/obj/effect/lobby_image = new /obj/effect/lobby_image
 
 /obj/effect/lobby_image
-	name = "Yawn Wider"
+	name = "Outpost 21"
 	desc = "How are you reading this?"
 	screen_loc = "1,1"
 	icon = 'icons/misc/loading.dmi' //VOREStation Add - Loading Screen
-	icon_state = "loading" //VOREStation Add - Loading Screen
+	icon_state = "loading(old)" //VOREStation Add - Loading Screen
 
 /obj/effect/lobby_image/Initialize()
 	icon = using_map.lobby_icon
@@ -53,7 +53,7 @@ var/obj/effect/lobby_image = new /obj/effect/lobby_image
 
 /mob/new_player/proc/version_warnings()
 	var/problems // string to store message to present to player as a problem
-	
+
 	// TODO: Move this to a config file at some point maybe? What would the structure of that look like?
 	switch(client.byond_build)
 		// http://www.byond.com/forum/post/2711510
@@ -62,7 +62,7 @@ var/obj/effect/lobby_image = new /obj/effect/lobby_image
 		// http://www.byond.com/forum/post/2711748
 		if(1562 to 1563)
 			problems = "frequent known crashes related to animations"
-		
+
 		// Don't have a thread, just a lot of player reports.
 		if(1564 to 1565) // Fixed in 1566 which isn't released as of this commit
 			if(world.byond_build == 1564)

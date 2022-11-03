@@ -32,6 +32,9 @@
 	var/lighting_alpha = 255
 	incorporeal_move = 1
 
+	airflow_dest = null //fixes airflow data continually pushing ghosts to edge of maps forever after death of host
+	airflow_speed = 0
+
 	var/is_manifest = 0 //If set to 1, the ghost is able to whisper. Usually only set if a cultist drags them through the veil.
 	var/ghost_sprite = null
 	var/global/list/possible_ghost_sprites = list(

@@ -9,11 +9,16 @@ MURIKI_TURF_CREATE(/turf/simulated/open)
 
 MURIKI_TURF_CREATE(/turf/simulated/floor)
 
+/turf/simulated/open
+	dynamic_lighting = 1 //I don't care if there's no true multiz lighting, this looks so much nicer it's not even funny -KK (from turf_yw)
+
 /turf/simulated/floor/muriki_indoors
 	MURIKI_SET_ATMOS
 /turf/simulated/floor/muriki_indoors/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	return 0
 
+// needed to avoid active edges over outdoor pits
+MURIKI_TURF_CREATE(/turf/simulated/open)
 // make varients of all outdoor tiles with muriki atmosphere on it, this feels dumb and excessive, but it's the way it's done...
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outdoors/newdirt_nograss)
@@ -25,6 +30,10 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outpost_roof)
 MURIKI_TURF_CREATE(/turf/simulated/floor/solarpanel)
 MURIKI_TURF_CREATE(/turf/simulated/floor/maglev) // for outdoor track, use normal ones indoors
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/indoorrocks)
+// for shuttles
+MURIKI_TURF_CREATE(/turf/simulated/shuttle/floor/black)
+MURIKI_TURF_CREATE(/turf/simulated/shuttle/floor/white)
 // wow this sucks... I've never hated looking at code like this more than I have now!
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic)
 MURIKI_TURF_CREATE(/turf/simulated/floor/water/acidic/deep)

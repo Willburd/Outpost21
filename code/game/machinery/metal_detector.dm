@@ -75,12 +75,19 @@
 			var/alert_lev = 0
 			if(istype(AM,/obj/))
 				// push in a raw object?
-				alert_lev = slot_scan(AM)
+				var/obj/O = AM
+				alert_lev = slot_scan(O)
+				// if a mob is on a buckled object, detect it!
+				if(O.buckled_mobs.len)
+					for(var/mob/M in O.buckled_mobs)
+						for(var/obj/item/I in M.contents)
+							alert_lev = max( alert_lev, slot_scan(I))
+
 			else if(istype(AM,/mob/))
 				// inventory check... Surprisingly this easily finds stuff even in pockets on vests!
 				for(var/obj/item/I in AM.contents)
 					alert_lev = max( alert_lev, slot_scan(I))
-					
+
 			// boop!
 			switch(alert_lev)
 				if(0)
@@ -179,7 +186,7 @@
 		istype(thing,/obj/item/weapon/rcd) || \
 		istype(thing,/obj/item/weapon/shield) || \
 		istype(thing,/obj/item/weapon/weldpack) \
-	) 
+	)
 		return 1
 	else
 		// backup for all others, safe...

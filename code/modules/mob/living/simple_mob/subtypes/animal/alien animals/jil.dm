@@ -13,7 +13,7 @@
 	real_name = "jil"
 	desc = "A fluffy thieving creature that wanders maintenance."
 	tt_desc = "Crinitus Latrunculus"
-	
+
 	icon = 'icons/mob/animal_op.dmi'
 	icon_state = "jil"
 	icon_living = "jil"
@@ -308,9 +308,21 @@
 
 /datum/ai_holder/simple_mob/intentional/jil/post_melee_attack(atom/A)
 	if(istype(A, /obj/item) && !holder.get_active_hand() && holder.Adjacent(A))
-		// attempt grab of target!
-		var/obj/item/I = A
-		I.attack_hand(holder)
+		if(istype(A, /obj/item/device))
+			var/obj/item/device/D = A
+			if(!D.anchored)
+				// attempt grab of target!
+				D.attack_hand(holder)
+			else
+				// interact with anchored items
+				if(istype(A, /obj/item/device/radio/intercom))
+					var/obj/item/device/radio/intercom/Ic = D
+					Ic.listening = !Ic.listening
+		else
+			// attempt grab of target!
+			var/obj/item/I = A
+			I.attack_hand(holder)
+
 	else if(istype(A, /obj/structure/closet))
 		// attempt to open!
 		var/obj/structure/closet/C = A

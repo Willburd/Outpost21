@@ -4,10 +4,10 @@
 		This is the core of the vehicle's code. It handles multi-tile movement,
 		running things over, etc. Players that click the vehicle can enter it
 		from whatever tile is specific as the entrance tile. They will be teleported
-		to the 'interior_area_mapset' specified, at the 'vehicle_interior/entrypos' landmark
+		to the 'interior_area' specified, at the 'vehicle_interior/entrypos' landmark
 		in that area.
 
-		This 'interior_area_mapset' also scans for certain seats and consoles defined
+		This 'interior_area' also scans for certain seats and consoles defined
 		in this file. Each child object of this controller can have different
 		seat and console requirements, such as driver, gunner, maingun, loader, etc.
 		For example, an APC wouldn't have a maingun, but instead multiple gunners.
@@ -30,17 +30,17 @@
 	load_offset_x = 0
 	mob_offset_y = 7
 
-	// area needed for each unique vehicle interior! 
+	// area needed for each unique vehicle interior!
 	// Cannot share map locations either.
 	// DO NOT SET IN CHILD OBJECTS, this is for MAPPERS to set!
 	var/interior_area = null
-	
+
 	// set AUTOMAGICALLY by init! DO NOT SET
 	var/area/intarea = null
 	var/camera_network = "armored vehicles"
 	var/turf/entrypos = null // where to place atoms that enter the interior
 	var/turf/exitpos = null // where to place atoms that enter the interior
-	
+
 	var/driver_seat = null // should only be one
 	var/gunner_seats = list() // dakkas
 	var/maingun_seats = list() // guns that are fed by...

@@ -1,7 +1,6 @@
 /area/submap
 	name = "Submap Area"
 	icon_state = "submap"
-	flags = RAD_SHIELDED
 	ambience = AMBIENCE_RUINS
 	secret_name = TRUE
 	forbid_events = TRUE

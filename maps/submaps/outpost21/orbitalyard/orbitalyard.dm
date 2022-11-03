@@ -91,7 +91,6 @@
 // Area definitions
 /area/submap/outpost21/asteroid_generic
 	name = "\improper Asteroids"
-	ambience = AMBIENCE_SPACE
 	icon_state = "red2"
 	has_gravity = 0
 	ambience = AMBIENCE_OUTPOST21_SPACE
@@ -99,7 +98,6 @@
 
 /area/submap/outpost21/structure_generic
 	name = "\improper Ruined Facility"
-	ambience = AMBIENCE_FOREBODING
 	icon_state = "red2"
 	has_gravity = 0
 	ambience = AMBIENCE_OUTPOST21_SPACE

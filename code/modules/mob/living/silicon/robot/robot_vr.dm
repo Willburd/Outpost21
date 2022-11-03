@@ -157,10 +157,11 @@
 	if(wideborg == TRUE)
 		if(icontype == "Drake") // Why, Why can't we have normal nice things
 			icon = 'icons/mob/drakeborg/drakeborg_vr.dmi'
-		/*YW EDIT
 		else
-			icon = icon = wideborg_dept
-		return*/
+			icon = wideborg_dept // why was this broken on YW code? - outpost21
+	else
+		icon = original_icon // drakes break borg icons otherwise... - outpost21
+
 	if((!(original_icon == icon)) && (!(icon == 'icons/mob/robots_vr.dmi')))
 		original_icon = icon
 	if((icon_state in vr_icons) && (icon == 'icons/mob/robots.dmi'))

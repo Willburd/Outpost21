@@ -1,8 +1,8 @@
 //Outpost map defs
-#define Z_LEVEL_OUTPOST_CENTCOM						1
-#define Z_LEVEL_OUTPOST_BASEMENT					2
-#define Z_LEVEL_OUTPOST_SURFACE						3
-#define Z_LEVEL_OUTPOST_UPPER						4
+#define Z_LEVEL_OUTPOST_BASEMENT					1
+#define Z_LEVEL_OUTPOST_SURFACE						2
+#define Z_LEVEL_OUTPOST_UPPER						3
+#define Z_LEVEL_OUTPOST_CENTCOM						4
 #define Z_LEVEL_OUTPOST_MISC 						5
 #define Z_LEVEL_OUTPOST_ASTEROID 					6
 //Ensure these stay updated with map and z-level changes - Ignus
@@ -39,7 +39,7 @@
 	emergency_shuttle_called_message = "An emergency evacuation elevator has been called. It will arrive at the departure bay in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency elevator has been recalled."
 
-	unit_test_z_levels = list(2,3,4)
+	unit_test_z_levels = list(Z_LEVEL_OUTPOST_BASEMENT,Z_LEVEL_OUTPOST_SURFACE,Z_LEVEL_OUTPOST_UPPER,Z_LEVEL_OUTPOST_ASTEROID)
 
 	station_networks = list(
 							NETWORK_CARGO,
@@ -72,8 +72,11 @@
 	planet_datums_to_make = list(/datum/planet/muriki)
 
 /datum/map/outpost/perform_map_generation()
-	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge)
-	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard)
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge, 100, 20, 370, 180)
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard, 100, 20, 370, 180)
+
+	//seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 150, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard_huge)
+	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 200, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard, 60, 15, 190, 60)
 
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, 64, 64)         // Create the mining ore distribution map.
@@ -192,7 +195,7 @@
 	name = "Misc"
 	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED
 
-/datum/map_z_level/outpost/misc
+/datum/map_z_level/outpost/asteroid_mine
 	z = Z_LEVEL_OUTPOST_ASTEROID
 	name = "Asteroid"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST

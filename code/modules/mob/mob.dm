@@ -741,7 +741,8 @@
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
-		buckled.set_dir(ndir)
+		if(!istype(buckled,/obj/structure/bed/chair/vehicle_interior_pilot)) // pilot seat holds you in place
+			buckled.set_dir(ndir)
 	setMoveCooldown(movement_delay())
 	return 1
 

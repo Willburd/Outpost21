@@ -22,13 +22,11 @@
 	icon = 'icons/obj/vehicles_vr.dmi'	//VOREStation Edit
 	description_info = "Use ctrl-click to quickly toggle the engine if you're adjacent (only when vehicle is stationary). Alt-click will grab the keys, if present."
 	icon_state = "cargo_engine"
-	on = 0
-	powered = 1
+
+	mechanical = FALSE // disabled because we do a lot of weird stuff
 	locked = 0
 
-	load_item_visible = 1
-	load_offset_x = 0
-	mob_offset_y = 7
+	load_item_visible = FALSE
 
 	// area needed for each unique vehicle interior!
 	// Cannot share map locations either.
@@ -37,13 +35,13 @@
 
 	// set AUTOMAGICALLY by init! DO NOT SET
 	var/area/intarea = null
-	var/camera_network = "armored vehicles"
 	var/turf/entrypos = null // where to place atoms that enter the interior
 	var/turf/exitpos = null // where to place atoms that enter the interior
-
-	var/driver_seat = null // should only be one
-	var/gunner_seats = list() // dakkas
-	var/maingun_seats = list() // guns that are fed by...
+	var/obj/machinery/door/vehicle_interior_hatch/entrance_hatch = null
+	var/obj/structure/bed/chair/vehicle_interior_pilot/driver_seat = null // should only be one
+	var/obj/machinery/computer/vehicle_interior_console/driver_console = null
+	var/gunner_seat = null // dakka
+	var/maingun_seat = null // gun that is fed by...
 	var/feed_machine = null // ammo is put into this and used up by mainguns
 
 //-------------------------------------------
@@ -59,12 +57,26 @@
 			intarea = A // become reference...
 			for(var/turf/T in intarea.get_contents())
 				if(istype(T))
+					// TODO - make all one typechecking loop instead of 10 lol
+
 					// scan for interior drop location
 					if(istype( locate(/obj/effect/landmark/vehicle_interior/entrypos) in T.contents, /obj/effect/landmark/vehicle_interior/entrypos))
 						entrypos = T
-					// scan for exit triggers
-					for(var/obj/effect/step_trigger/vehicle_interior/exit_trigger/R in T.contents)
+					// scan for exit door
+					for(var/obj/machinery/door/vehicle_interior_hatch/R in T.contents)
 						R.interior_controller = src // set controller so we can leave this vehicle!
+						entrance_hatch = R
+					// scan for consoles
+					for(var/obj/machinery/computer/C in T.contents)
+						if(istype( C, /obj/machinery/computer/vehicle_interior_console))
+							driver_console = C
+							driver_console.name = "[name]'s Helm"
+							driver_console.desc = "Used to pilot the [name]."
+							driver_console.interior_controller = src
+					// scan for pilot seat
+					for(var/obj/structure/bed/chair/vehicle_interior_pilot/S in T.contents)
+						driver_seat = S
+						driver_seat.interior_controller = src
 
 
 	if(!istype(intarea))
@@ -75,7 +87,7 @@
 
 	. = ..()
 
-/obj/vehicle/has_interior/controller/Move()
+/obj/vehicle/has_interior/controller/Move(var/newloc, var/direction, var/movetime)
 	. = ..()
 	// update location
 	exitpos = src.loc
@@ -105,10 +117,6 @@
 		visible_message("<font color='red'>[src] knocks over [M]!</font>")
 		M.apply_effects(5, 5)				//knock people down if you hit them
 		M.apply_damages(22 / move_delay)	// and do damage according to how fast the train is going
-		if(istype(load, /mob/living/carbon/human))
-			var/mob/living/D = load
-			to_chat(D, "<font color='red'>You hit [M]!</font>")
-			add_attack_logs(D,M,"Ran over with [src.name]")
 
 //trains are commonly open topped, so there is a chance the projectile will hit the mob riding the train instead
 /obj/vehicle/has_interior/controller/bullet_act(var/obj/item/projectile/Proj)
@@ -127,35 +135,23 @@
 // Interaction procs
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
-	if(user != load)
-		return 0
-	if(Move(get_step(src, direction)))
-		return 1
+	if(LAZYLEN(driver_console.viewers) > 0) // only if driver is looking!
+		return Move(get_step(src, direction), direction)
 	return 0
 
 /obj/vehicle/has_interior/controller/MouseDrop_T(var/atom/movable/C, mob/user as mob)
-	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
-		return
-	enter_interior(user)
-	/*
-	if(!load(C, user))
-		to_chat(user, "<font color='red'>You were unable to load [C] on [src].</font>")
-	*/
+	// nothing
 
 /obj/vehicle/has_interior/controller/attack_hand(mob/user as mob)
 	if(user.stat || user.restrained() || !Adjacent(user))
 		return 0
-	enter_interior(user)
-	/*
-	if(user != load && (user in src))
-		user.forceMove(loc)			//for handling players stuck in src
-	else if(load)
-		unload(user)			//unload if loaded
-	else if(!load && !user.buckled)
-		load(user, user)				//else try climbing on board
+	if(entrance_hatch == null || !entrance_hatch.locked)
+		user.visible_message("<span class='notice'>[user] begins to climb into \the [src].</span>", "<span class='notice'>You begin to climb into \the [src].</span>")
+		if(do_after(user, 20))
+			enter_interior(user)
 	else
-		return 0
-	*/
+		entrance_hatch.do_animate("deny")
+		playsound(src, entrance_hatch.denied_sound, 50, 0, 3)
 
 /obj/vehicle/has_interior/controller/proc/enter_interior(var/atom/movable/C)
 	// moves atom to interior access point of tank
@@ -178,14 +174,246 @@
 	return ..()
 
 
+////////////////////////////////////////////////////////////////////////////////
 // interior area objects
-/obj/effect/landmark/vehicle_interior/entrypos // where mobs are placed on entering the tank
+/obj/effect/landmark/vehicle_interior/entrypos 	// where mobs are placed on entering the tank
 	name = "interior entrypos"
 
-/obj/effect/step_trigger/vehicle_interior/exit_trigger // exit the vehicle through any means! NEEDS TO BE INSIDE THE VEHICLES INTERIOR AREA!
+
+/obj/machinery/door/vehicle_interior_hatch			// click door to exit vehicle
 	name = "vehicle exit"
-	affect_ghosts = TRUE // bad ectoplasms
+	desc = "Hatch that leaves the vehicle."
+	icon = 'icons/obj/doors/Doorele.dmi'
+	icon_state = "door_closed"
+	var/obj/vehicle/has_interior/controller/interior_controller = null
+	var/denied_sound = 'sound/machines/deniedbeep.ogg'
+	var/bolt_up_sound = 'sound/machines/door/boltsup.ogg'
+	var/bolt_down_sound = 'sound/machines/door/boltsdown.ogg'
+	var/locked = FALSE
+
+/obj/machinery/door/vehicle_interior_hatch/inoperable(var/additional_flags = 0)
+    // always works
+    return FALSE
+
+/obj/machinery/door/vehicle_interior_hatch/Bumped(atom/AM)
+    // do nothing
+
+/obj/machinery/door/vehicle_interior_hatch/bullet_act(var/obj/item/projectile/Proj)
+    // no damage
+
+/obj/machinery/door/vehicle_interior_hatch/hitby(AM as mob|obj, var/speed=5)
+    // no damage
+    visible_message("<span class='danger'>[src.name] was hit by [AM], with no visible effect.</span>")
+
+/obj/machinery/door/vehicle_interior_hatch/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+	attackby( null, user)
+
+/obj/machinery/door/vehicle_interior_hatch/attackby(obj/item/I as obj, mob/user as mob)
+	if(locked)
+		do_animate("deny")
+		return
+
+	// successful, begin exit!
+	user.visible_message("<span class='notice'>[user] starts leaving the [interior_controller].</span>", "<span class='notice'>You start leaving the [interior_controller].</span>")
+	if(do_after(user, 20))
+		interior_controller.exit_interior(user)
+
+/obj/machinery/door/vehicle_interior_hatch/attack_ai(mob/user)
+	// no behavior
+
+/obj/machinery/door/vehicle_interior_hatch/emag_act(var/remaining_charges)
+    // no behavior
+
+/obj/machinery/door/vehicle_interior_hatch/emp_act(severity)
+    // immune to
+
+/obj/machinery/door/vehicle_interior_hatch/ex_act(severity)
+    // immune to
+
+/obj/machinery/door/vehicle_interior_hatch/blob_act()
+    // even you bob
+
+/obj/machinery/door/vehicle_interior_hatch/requiresID()
+    return FALSE
+
+/obj/machinery/door/vehicle_interior_hatch/examine(mob/user)
+    src.health = src.maxhealth // force heal, never show status
+    . = ..()
+
+/obj/machinery/door/vehicle_interior_hatch/process()
+	return PROCESS_KILL
+
+/obj/machinery/door/vehicle_interior_hatch/update_icon()
+	if(density)
+		if(locked)
+			icon_state = "door_locked"
+		else
+			icon_state = "door_closed"
+	else
+		icon_state = "door_open"
+	return
+
+/obj/machinery/door/vehicle_interior_hatch/do_animate(animation)
+	switch(animation)
+		if("deny")
+			if(density)
+				flick("door_deny", src)
+				playsound(src, denied_sound, 50, 0, 3)
+	return
+
+/obj/machinery/door/vehicle_interior_hatch/proc/lock()
+	if(locked)
+		return 0
+
+	src.locked = 1
+	playsound(src, bolt_down_sound, 30, 0, 3, volume_channel = VOLUME_CHANNEL_DOORS)
+	for(var/mob/M in range(1,src))
+		M.show_message("You hear a click from the bottom of the door.", 2)
+	update_icon()
+	return 1
+
+/obj/machinery/door/vehicle_interior_hatch/proc/unlock()
+	if(!src.locked)
+		return
+
+	src.locked = 0
+	playsound(src, bolt_up_sound, 30, 0, 3, volume_channel = VOLUME_CHANNEL_DOORS)
+	for(var/mob/M in range(1,src))
+		M.show_message("You hear a click from the bottom of the door.", 2)
+	update_icon()
+	return 1
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Helm console
+
+/obj/machinery/computer/vehicle_interior_console
+	name = "Vehicle Helm"
+	desc = "Used to pilot the vehicle."
+
+	icon_keyboard = "security_key"
+	icon_screen = "cameras"
+	light_color = "#a91515"
+	circuit = /obj/item/weapon/circuitboard/security
+
+	var/list/viewers // Weakrefs to mobs in direct-view mode.
+	var/extra_view = 0 // how much the view is increased by when the mob is in tank view
 	var/obj/vehicle/has_interior/controller/interior_controller = null
 
-/obj/effect/step_trigger/vehicle_interior/exit_trigger/Trigger(var/atom/movable/A)
-	interior_controller.exit_interior(A)
+
+/obj/machinery/computer/vehicle_interior_console/Initialize()
+	. = ..()
+
+/obj/machinery/computer/vehicle_interior_console/Destroy()
+	if(LAZYLEN(viewers))
+		for(var/weakref/W in viewers)
+			var/M = W.resolve()
+			if(M)
+				unlook(M)
+	return ..()
+
+/obj/machinery/computer/vehicle_interior_console/tgui_interact(mob/user, datum/tgui/ui = null)
+	// nothing
+
+/obj/machinery/computer/vehicle_interior_console/attack_robot(mob/user)
+	if(isrobot(user))
+		var/mob/living/silicon/robot/R = user
+		if(!R.shell)
+			return attack_hand(user)
+	..()
+
+/obj/machinery/computer/vehicle_interior_console/attack_ai(mob/user)
+	if(isAI(user))
+		to_chat(user, "<span class='notice'>This system in inaccessible to AI units.</span>")
+		return
+	attack_hand(user)
+
+/obj/machinery/computer/vehicle_interior_console/attack_hand(mob/user)
+	add_fingerprint(user)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	if(!interior_controller || !interior_controller.driver_seat || !interior_controller.driver_seat.has_buckled_mobs() || interior_controller.driver_seat.buckled_mobs[1] != user)
+		to_chat(user, "<span class='notice'>You need to sit in the seat to pilot the [interior_controller.name].</span>")
+		return
+	if(user.blinded)
+		to_chat(user, "<span class='notice'>You cannot see!</span>")
+		return
+	// remove all others...
+	if(LAZYLEN(viewers))
+		for(var/weakref/W in viewers)
+			var/M = W.resolve()
+			if(M)
+				unlook(M)
+	look(user)
+
+/obj/machinery/computer/vehicle_interior_console/check_eye(var/mob/user)
+	if(!get_dist(user, src) > 1 || user.blinded)
+		unlook(user)
+		return -1
+	else
+		return 0
+
+/obj/machinery/computer/vehicle_interior_console/proc/look(var/mob/user)
+	if(interior_controller)
+		apply_visual(user)
+		user.reset_view(interior_controller)
+	user.set_machine(src)
+	if(isliving(user))
+		var/mob/living/L = user
+		L.looking_elsewhere = 1
+		L.handle_vision()
+	user.set_viewsize(world.view + extra_view)
+	GLOB.moved_event.register(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
+	// TODO GLOB.stat_set_event.register(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
+	LAZYDISTINCTADD(viewers, weakref(user))
+
+/obj/machinery/computer/vehicle_interior_console/proc/unlook(var/mob/user)
+	user.reset_view()
+	if(isliving(user))
+		var/mob/living/L = user
+		L.looking_elsewhere = 0
+		L.handle_vision()
+	user.set_viewsize() // reset to default
+	GLOB.moved_event.unregister(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
+	// TODO GLOB.stat_set_event.unregister(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
+	LAZYREMOVE(viewers, weakref(user))
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Pilot seat
+
+/obj/structure/bed/chair/vehicle_interior_pilot
+	name = "shuttle seat"
+	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
+	base_icon = "shuttle_chair"
+	icon_state = "shuttle_chair_preview"
+	buckle_movable = TRUE // we do some silly stuff though
+	var/buckling_sound = 'sound/effects/metal_close.ogg'
+	var/padding = "blue"
+	var/obj/vehicle/has_interior/controller/interior_controller = null
+
+/obj/structure/bed/chair/vehicle_interior_pilot/New(var/newloc, var/new_material, var/new_padding_material)
+	..(newloc, MAT_STEEL, padding)
+
+/obj/structure/bed/chair/vehicle_interior_pilot/post_buckle_mob()
+	playsound(src,buckling_sound,75,1)
+	if(has_buckled_mobs())
+		base_icon = "shuttle_chair-b"
+	else
+		base_icon = "shuttle_chair"
+	..()
+
+/obj/structure/bed/chair/vehicle_interior_pilot/update_icon()
+	..()
+	if(!has_buckled_mobs())
+		var/image/I = image(icon, "[base_icon]_special")
+		I.plane = MOB_PLANE
+		I.layer = ABOVE_MOB_LAYER
+		if(applies_material_colour)
+			I.color = material.icon_colour
+		add_overlay(I)
+
+/obj/structure/bed/chair/vehicle_interior_pilot/unbuckle_mob(mob/living/buckled_mob, force = FALSE)
+	if(LAZYLEN(interior_controller.driver_console.viewers) > 0)
+		interior_controller.driver_console.unlook(buckled_mob)
+	. = ..()

@@ -214,7 +214,7 @@ default behaviour is:
 		now_pushing = 0
 
 /mob/living/CanPass(atom/movable/mover, turf/target)
-	if(src.is_incorporeal() || mover.is_incorporeal()) 
+	if(src.is_incorporeal() || mover.is_incorporeal())
 		return TRUE
 	if(istype(mover, /obj/structure/blob) && faction == "blob") //Blobs should ignore things on their faction.
 		return TRUE
@@ -237,7 +237,10 @@ default behaviour is:
 // Almost all of this handles pulling movables behind us
 /mob/living/Move(atom/newloc, direct, movetime)
 	if(buckled && buckled.loc != newloc) //not updating position
-		if(!buckled.anchored && buckled.buckle_movable)
+		if(istype(buckled,/obj/structure/bed/chair/vehicle_interior_pilot))
+			var/obj/structure/bed/chair/vehicle_interior_pilot/P = buckled
+			return P.interior_controller.relaymove(src, direct) // for controlling vehicles with interiors
+		else if(!buckled.anchored && buckled.buckle_movable)
 			return buckled.Move(newloc, direct)
 		else
 			return 0

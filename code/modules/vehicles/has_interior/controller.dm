@@ -33,6 +33,8 @@
 	load_item_visible = FALSE
 	var/obj/item/weapon/key/key
 	var/key_type = /obj/item/weapon/key/cargo_train // override me
+	var/breakwalls = FALSE
+	var/has_breaking_speed = TRUE // if becomes stopped by a wall, this becomes false, until we are able to free move again (including reversing)
 
 	// area needed for each unique vehicle interior!
 	// Cannot share map locations either.
@@ -98,9 +100,75 @@
 
 	. = ..()
 
+/obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
+	if(LAZYLEN(driver_console.viewers) > 0 && on) // only if driver is looking!
+		var/hold_direction = dir
+		var/could_move = FALSE
+
+		if(user.stat || !user.canmove)
+			// knocked out controller
+		else
+			// attempt destination
+			var/canpass = TRUE
+			var/turf/newloc = get_step(src, direction)
+			var/turf/checka = get_step(newloc, NORTH)
+			var/turf/checkb = get_step(newloc, SOUTH)
+			if(direction == NORTH || direction == SOUTH)
+				checka = get_step(newloc, EAST)
+				checkb = get_step(newloc, WEST)
+
+			// break things we run over, IS A WIDE BOY
+			smash_at_loc(newloc) // at destination
+			smash_at_loc(checka) // and at --
+			smash_at_loc(checkb) // -- each side
+
+			// blocked by side walls
+			if(checka.density)
+				canpass = FALSE
+			else
+				for(var/atom/movable/A in checka.contents)
+					if(A.density)
+						canpass = FALSE
+						break
+			if(checkb.density)
+				canpass = FALSE
+			else
+				for(var/atom/movable/A in checkb.contents)
+					if(A.density)
+						canpass = FALSE
+						break
+
+			// bypass for stairs, cause they are weird
+			if(istype(newloc,/turf/simulated/open))
+				// weeee
+				canpass = TRUE
+			else
+				for(var/atom/movable/A in newloc.contents)
+					if(istype(A, /obj/structure/stairs))
+						canpass = TRUE
+						break
+
+			// move vehicle!
+			if(canpass)
+				could_move = Move(newloc, direction)
+				// tank only likes to turn if able to move, cannot 180!
+				if(direction == reverse_direction(hold_direction) || !could_move)
+					dir = hold_direction
+			else
+				smash_at_loc(src.loc) // right under us
+				dir = hold_direction
+			return could_move
+	return 0
+
 /obj/vehicle/has_interior/controller/Move(var/newloc, var/direction, var/movetime)
+	// update location
 	. = ..()
-	// shakey inside
+	// resert breaking flag if we moved
+	has_breaking_speed = TRUE
+	// update location
+	exitpos = src.loc
+
+/obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
 		if(M.buckled)
 			if(driver_seat.has_buckled_mobs() && driver_seat.buckled_mobs[1] == M)
@@ -109,8 +177,6 @@
 				shake_camera(M, 0.5, 0.1)
 		else
 			shake_camera(M, 0.5, 0.2)
-	// update location
-	exitpos = src.loc
 
 /obj/vehicle/has_interior/controller/Bump(atom/Obstacle)
 	if(!istype(Obstacle, /atom/movable))
@@ -130,13 +196,7 @@
 			if(A.anchored)
 				A.Bumped(src) //bonk
 			else
-				A.Move(T)	//bump things away when hit
-
-	if(istype(A, /mob/living))
-		var/mob/living/M = A
-		visible_message("<font color='red'>[src] knocks over [M]!</font>")
-		M.apply_effects(5, 5)				//knock people down if you hit them
-		M.apply_damages(22 / move_delay)	// and do damage according to how fast the train is going
+				A.Move(T)	  //bump things away when hit
 
 //trains are commonly open topped, so there is a chance the projectile will hit the mob riding the train instead
 /obj/vehicle/has_interior/controller/bullet_act(var/obj/item/projectile/Proj)
@@ -144,6 +204,116 @@
 
 /obj/vehicle/has_interior/controller/update_icon()
 	. = ..()
+
+//-------------------------------------------
+// Violence!
+//-------------------------------------------
+/obj/vehicle/has_interior/controller/proc/smash_at_loc(var/newloc)
+	if(istype(newloc,/turf/))
+		var/turf/T = newloc
+		for(var/atom/A in T.contents)
+			smash_things(A) // what is in the turf
+		smash_things(T) // turf itself
+
+/obj/vehicle/has_interior/controller/proc/smash_things(var/target)
+	var/move_damage = 33 / move_delay
+	var/severity = pick(2,2,3,3,3)
+	if(has_breaking_speed)
+		severity = 2 // first smash always best
+
+	// shielded
+	if(istype(target, /obj/effect/energy_field))
+		if(has_breaking_speed)
+			var/obj/effect/energy_field/EF = target
+			if(EF.opacity)
+				EF.visible_message("<span class='danger'>Something begins forcing itself through \the [EF]!</span>")
+			else
+				EF.visible_message("<span class='danger'>\The [src] begins forcing itself through \the [EF]!</span>")
+
+			if(do_after(src, EF.strength * 5))
+				EF.adjust_strength(rand(-8, -10))
+				EF.visible_message("<span class='danger'>\The [src] crashes through \the [EF]!</span>")
+			else
+				EF.visible_message("<span class='danger'>\The [EF] reverberates as it returns to normal.</span>")
+
+			// shakey time
+			shake_cab()
+			return 1
+
+	// BREAK
+	if(istype(target,/turf/simulated/wall))
+		if(has_breaking_speed)
+			var/turf/simulated/wall/W = target
+			if(W.density)
+				// stopped speed!
+				has_breaking_speed = FALSE
+				W.visible_message("<span class='danger'>Something crashes against \the [W]!</span>")
+				W.ex_act(severity)
+
+				// breaking stuff
+				var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+				sparks.set_up(5, 0, W.loc)
+				sparks.attach(W)
+				sparks.start()
+
+				// cab sounds
+				playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
+
+				// shakey time
+				shake_cab()
+				return 1
+
+	else if(istype(target,/atom/movable))
+		if(istype(target, /obj/structure))
+			var/obj/structure/S = target
+			if(!S.unacidable)
+				if(S.density || prob(1))
+					S.visible_message("<span class='danger'>Something crashes against \the [S]!</span>")
+					S.ex_act(severity)
+
+					// breaking stuff
+					var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+					sparks.set_up(5, 0, S.loc)
+					sparks.attach(S)
+					sparks.start()
+
+					// cab sounds
+					playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
+
+					// shakey time
+					shake_cab()
+					return 1
+
+		if(istype(target, /obj/machinery/))
+			var/obj/machinery/M = target
+			if(M.density || prob(3))
+				M.visible_message("<span class='danger'>Something crashes against \the [M]!</span>")
+				M.ex_act(severity)
+
+				// breaking stuff
+				var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+				sparks.set_up(5, 0, M.loc)
+				sparks.attach(M)
+				sparks.start()
+
+				// cab sounds
+				playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
+
+				// shakey time
+				shake_cab()
+				return 1
+
+		if(istype(target, /mob/living))
+			var/mob/living/M = target
+			if(!M.is_incorporeal())
+				visible_message("<font color='red'>[src] runs over [M]!</font>")
+				M.apply_effects(5, 5)				//knock people down if you hit them
+				M.apply_damages(move_damage)	// and do damage according to how fast the train is going
+
+				// cab sounds
+				playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
+				return 1
+	return 0
 
 //-------------------------------------------
 // Vehicle procs
@@ -154,14 +324,6 @@
 //-------------------------------------------
 // Interaction procs
 //-------------------------------------------
-/obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
-	if(LAZYLEN(driver_console.viewers) > 0 && on) // only if driver is looking!
-		if(user.stat || !user.canmove)
-			// incompas
-		else
-			return Move(get_step(src, direction), direction)
-	return 0
-
 /obj/vehicle/has_interior/controller/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
 		return 0

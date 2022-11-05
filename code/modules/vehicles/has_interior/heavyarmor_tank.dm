@@ -10,6 +10,7 @@
 	maxhealth = 2500
 	fire_dam_coeff = 0.5
 	brute_dam_coeff = 0.4
+	breakwalls = TRUE
 
 /obj/item/weapon/key/heavyarmor_tank
 	name = "key"

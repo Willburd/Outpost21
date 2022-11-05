@@ -9,6 +9,7 @@
 	maxhealth = 800
 	fire_dam_coeff = 0.5
 	brute_dam_coeff = 0.4
+	breakwalls = FALSE
 
 /obj/item/weapon/key/heavyarmor_carrier
 	name = "key"

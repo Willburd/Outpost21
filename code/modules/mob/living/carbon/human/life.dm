@@ -1590,6 +1590,10 @@
 					if(item.zoom)
 						item.zoom()
 						break
+				if(istype(buckled,/obj/structure/bed/chair/vehicle_interior_pilot))
+					// drop vehicle views
+					var/obj/structure/bed/chair/vehicle_interior_pilot/VC = buckled
+					VC.interior_controller.driver_console.clean_all_viewers()
 
 	else //We aren't dead
 		sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)

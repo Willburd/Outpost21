@@ -36,12 +36,15 @@
 	pixel_x = -64
 	pixel_y = -64
 
+	layer = ABOVE_JUNK_LAYER
+
 	locked = 0
 	load_item_visible = FALSE
 	var/obj/item/weapon/key/key
 	var/key_type = /obj/item/weapon/key/cargo_train // override me
 	var/breakwalls = FALSE
 	var/has_breaking_speed = TRUE // if becomes stopped by a wall, this becomes false, until we are able to free move again (including reversing)
+	var/headlights_enabled = FALSE
 
 	// area needed for each unique vehicle interior!
 	// Cannot share map locations either.
@@ -109,12 +112,23 @@
 
 /obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
 	if(LAZYLEN(driver_console.viewers) > 0 && on) // only if driver is looking!
+		// attempt destination
 		var/hold_direction = dir
+		var/could_move = FALSE
+		var/turf/newloc = get_step(src, direction)
+
 		if(user.stat || !user.canmove)
 			// knocked out controller
 		else
-			// attempt destination
-			var/turf/newloc = get_step(src, direction)
+			// stairs check
+			for(var/obj/structure/stairs/S in newloc)
+				could_move = Move(newloc, direction) // move to pos,
+				if(!could_move && dir == direction) // bumped back step...
+					S.use_stairs(src, newloc) // ... so use stairs!
+					return TRUE
+				return could_move // stop movement here, do not break walls
+
+			// standard move
 			var/turf/checkm = get_step(newloc, direction)
 			var/turf/checka = get_step(checkm, NORTH)
 			var/turf/checkb = get_step(checkm, SOUTH)
@@ -122,20 +136,20 @@
 				checka = get_step(checkm, EAST)
 				checkb = get_step(checkm, WEST)
 
-			// break things we run over, IS A WIDE BOY
-			smash_at_loc(checkm) // at destination
-			smash_at_loc(checka) // and at --
-			smash_at_loc(checkb) // -- each side
-
 			// tank only likes to turn if able to move, cannot 180!
-			var/could_move = Move(newloc, direction)
+			could_move = Move(newloc, direction)
 			if(direction == reverse_direction(hold_direction) || !could_move)
 				dir = hold_direction
-			// resert breaking flag if we moved
 			if(could_move)
+				// restore breaking speed
 				has_breaking_speed = TRUE
+			else
+				// break things we run over, IS A WIDE BOY
+				smash_at_loc(checkm) // at destination
+				smash_at_loc(checka) // and at --
+				smash_at_loc(checkb) // -- each side
 			return could_move
-	return 0
+	return FALSE
 
 /obj/vehicle/has_interior/controller/Move(var/newloc, var/direction, var/movetime)
 	// update location
@@ -217,7 +231,7 @@
 
 	// BREAK
 	if(istype(target,/turf/simulated/wall))
-		if(has_breaking_speed)
+		if(has_breaking_speed && breakwalls)
 			var/turf/simulated/wall/W = target
 			if(W.density)
 				// stopped speed!
@@ -337,7 +351,6 @@
 // Verb control, these are all responses to the verbs from the pilot seat!
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/turn_on()
-	intarea.lightswitch = FALSE
 	if(!key)
 		return
 	if(!cell)
@@ -348,31 +361,48 @@
 
 		driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/stop_engine
 		driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/start_engine
+		driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on
+		driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off
 
 		if(on)
 			driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/stop_engine
 		else
 			driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/start_engine
+
+		if(headlights_enabled)
+			driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off
+		else
+			driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on
 	light_set()
 
 /obj/vehicle/has_interior/controller/turn_off()
 	..()
-	intarea.lightswitch = FALSE
-
 	driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/stop_engine
 	driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/start_engine
+	driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on
+	driver_seat.verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off
 
 	if(!on)
 		driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/start_engine
 	else
 		driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/stop_engine
+
+	if(!headlights_enabled)
+		driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on
+	else
+		driver_seat.verbs += /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off
 	light_set()
 
 /obj/vehicle/has_interior/controller/proc/light_set()
+	playsound(src, 'sound/machines/button.ogg', 100, 1, 0) // VOREStation Edit
 	intarea.lightswitch = on
 	intarea.updateicon()
-	playsound(src, 'sound/machines/button.ogg', 100, 1, 0) // VOREStation Edit
-
+	if(!on)
+		light_range = 0
+	if(!headlights_enabled)
+		light_range = 3
+	else
+		light_range = 6
 	intarea.power_change()
 	GLOB.lights_switched_on_roundstat++
 
@@ -542,6 +572,7 @@
 		return
 	// remove all others...
 	interior_controller.driver_console.clean_all_viewers()
+	playsound(src, "keyboard", 40) // into console
 	look(user)
 
 /obj/machinery/computer/vehicle_interior_console/check_eye(var/mob/user)
@@ -653,15 +684,21 @@
 		add_overlay(I)
 
 /obj/structure/bed/chair/vehicle_interior_pilot/unbuckle_mob(mob/living/buckled_mob, force = FALSE)
-	interior_controller.driver_console.clean_all_viewers()
-	. = ..()
+	if(LAZYLEN(interior_controller.driver_console.viewers))
+		playsound(src, "keyboard", 40) // out of console
+		interior_controller.driver_console.clean_all_viewers()
+	else
+		. = ..()
 
 /obj/structure/bed/chair/vehicle_interior_pilot/Destroy()
-	interior_controller.driver_console.clean_all_viewers()
+	if(LAZYLEN(interior_controller.driver_console.viewers))
+		interior_controller.driver_console.clean_all_viewers()
 	return ..()
 
 /obj/structure/bed/chair/vehicle_interior_pilot/ex_act(severity)
-	// nothing
+	// knock out of camera view
+	if(LAZYLEN(interior_controller.driver_console.viewers))
+		interior_controller.driver_console.clean_all_viewers()
 
 //-------------------------------------------
 // Verb control
@@ -725,3 +762,23 @@
 	interior_controller.key = null
 
 	verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/remove_key
+
+/obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on()
+	set name = "Headlights on"
+	set category = "Vehicle"
+	set src in view(0)
+
+	interior_controller.headlights_enabled = TRUE
+	playsound(src, "switch", 40)
+
+	verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off
+
+/obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_off()
+	set name = "Headlights off"
+	set category = "Vehicle"
+	set src in view(0)
+
+	interior_controller.headlights_enabled = FALSE
+	playsound(src, "switch", 40)
+
+	verbs -= /obj/structure/bed/chair/vehicle_interior_pilot/verb/headlights_on

@@ -2,7 +2,6 @@
 	name = "K72-4"
 	desc = "Kylos model 72 varient 4, heavy asset reclaimation vehicle. For when lesser force has failed."
 	move_delay = 4
-	light_range = 5
 
 	key_type = /obj/item/weapon/key/heavyarmor_tank
 

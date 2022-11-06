@@ -1,7 +1,6 @@
 /obj/vehicle/has_interior/controller/heavyarmor_carrier
 	name = "armored personal carrier"
 	move_delay = 2
-	light_range = 4
 
 	key_type = /obj/item/weapon/key/heavyarmor_carrier
 

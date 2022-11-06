@@ -19,15 +19,22 @@
 	name = "interior capable vehicle controller"
 
 	desc = "If you can read this, something is wrong."
-	description_info = "Use ctrl-click to quickly toggle the engine if you're adjacent (only when vehicle is stationary). Alt-click will grab the keys, if present."
+	description_info = "..."
 
-	icon = 'icons/mob/vore64x64.dmi'
-	icon_state = "reddragon"
+	icon = 'icons/obj/vehicles_160x160.dmi'
+	icon_state = "sec_apc"
 
-	old_x = -16
-	old_y = 0
-	pixel_x = -16
-	pixel_y = 0
+	// lorge boi
+	bound_width = 96
+	bound_height = 96
+	bound_x = -32
+	bound_y = -32
+
+	// graphics offset of lorge boi
+	old_x = -64
+	old_y = -64
+	pixel_x = -64
+	pixel_y = -64
 
 	locked = 0
 	load_item_visible = FALSE
@@ -84,7 +91,7 @@
 						if(istype( C, /obj/machinery/computer/vehicle_interior_console))
 							driver_console = C
 							driver_console.name = "[name]'s Helm"
-							driver_console.desc = "Used to pilot the [name]."
+							driver_console.desc = "Used to pilot the [name]. Use ctrl-click to quickly toggle the engine if you're adjacent. Alt-click will grab the keys, if present."
 							driver_console.interior_controller = src
 					// scan for pilot seat
 					for(var/obj/structure/bed/chair/vehicle_interior_pilot/S in T.contents)
@@ -103,70 +110,38 @@
 /obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
 	if(LAZYLEN(driver_console.viewers) > 0 && on) // only if driver is looking!
 		var/hold_direction = dir
-		var/could_move = FALSE
-
 		if(user.stat || !user.canmove)
 			// knocked out controller
 		else
 			// attempt destination
-			var/canpass = TRUE
 			var/turf/newloc = get_step(src, direction)
-			var/turf/checka = get_step(newloc, NORTH)
-			var/turf/checkb = get_step(newloc, SOUTH)
+			var/turf/checkm = get_step(newloc, direction)
+			var/turf/checka = get_step(checkm, NORTH)
+			var/turf/checkb = get_step(checkm, SOUTH)
 			if(direction == NORTH || direction == SOUTH)
-				checka = get_step(newloc, EAST)
-				checkb = get_step(newloc, WEST)
+				checka = get_step(checkm, EAST)
+				checkb = get_step(checkm, WEST)
 
 			// break things we run over, IS A WIDE BOY
-			smash_at_loc(newloc) // at destination
+			smash_at_loc(checkm) // at destination
 			smash_at_loc(checka) // and at --
 			smash_at_loc(checkb) // -- each side
 
-			// blocked by side walls
-			if(checka.density)
-				canpass = FALSE
-			else
-				for(var/atom/movable/A in checka.contents)
-					if(A.density)
-						canpass = FALSE
-						break
-			if(checkb.density)
-				canpass = FALSE
-			else
-				for(var/atom/movable/A in checkb.contents)
-					if(A.density)
-						canpass = FALSE
-						break
-
-			// bypass for stairs, cause they are weird
-			if(istype(newloc,/turf/simulated/open))
-				// weeee
-				canpass = TRUE
-			else
-				for(var/atom/movable/A in newloc.contents)
-					if(istype(A, /obj/structure/stairs))
-						canpass = TRUE
-						break
-
-			// move vehicle!
-			if(canpass)
-				could_move = Move(newloc, direction)
-				// tank only likes to turn if able to move, cannot 180!
-				if(direction == reverse_direction(hold_direction) || !could_move)
-					dir = hold_direction
-			else
-				smash_at_loc(src.loc) // right under us
+			// tank only likes to turn if able to move, cannot 180!
+			var/could_move = Move(newloc, direction)
+			if(direction == reverse_direction(hold_direction) || !could_move)
 				dir = hold_direction
+			// resert breaking flag if we moved
+			if(could_move)
+				has_breaking_speed = TRUE
 			return could_move
 	return 0
 
 /obj/vehicle/has_interior/controller/Move(var/newloc, var/direction, var/movetime)
 	// update location
 	. = ..()
-	// resert breaking flag if we moved
-	has_breaking_speed = TRUE
 	// update location
-	exitpos = src.loc
+	exitpos = loc
 
 /obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
@@ -520,7 +495,7 @@
 
 /obj/machinery/computer/vehicle_interior_console
 	name = "Vehicle Helm"
-	desc = "Used to pilot the vehicle."
+	desc = "Use ctrl-click to quickly toggle the engine if you're adjacent (only when vehicle is stationary). Alt-click will grab the keys, if present."
 
 	icon_keyboard = "security_key"
 	icon_screen = "cameras"

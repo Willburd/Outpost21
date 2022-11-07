@@ -146,11 +146,11 @@
 
 			// break things we run over, IS A WIDE BOY
 			smash_at_loc(checkm) // at destination
-			if(could_move) crush_mobs_at_loc(checkm)
+			if(!could_move) crush_mobs_at_loc(checkm)
 			smash_at_loc(checka) // and at --
-			if(could_move) crush_mobs_at_loc(checka)
+			if(!could_move) crush_mobs_at_loc(checka)
 			smash_at_loc(checkb) // -- each side
-			if(could_move) crush_mobs_at_loc(checkb)
+			if(!could_move) crush_mobs_at_loc(checkb)
 
 			// update facing
 			if(direction == reverse_direction(hold_direction))

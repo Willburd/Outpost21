@@ -51,6 +51,7 @@
 	// Cannot share map locations either.
 	// DO NOT SET IN CHILD OBJECTS, this is for MAPPERS to set!
 	var/interior_area = null
+	var/exit_door_direction = SOUTH // if vehicle is facing north, what direction do things leaving it go in? They appear outside the collision box, and only if they can stand there.
 
 	// set AUTOMAGICALLY by init! DO NOT SET
 	var/area/intarea = null
@@ -73,7 +74,7 @@
 
 /obj/vehicle/has_interior/controller/Initialize()
 	// set exit pos
-	exitpos = src.loc
+	update_exit_pos()
 
 	// find interior entrypos
 	for(var/area/A)
@@ -123,7 +124,7 @@
 		else
 			// stairs check
 			for(var/obj/structure/stairs/S in newloc)
-				could_move = Move(newloc, direction) // move to pos,
+				could_move = vehicle_move(newloc, direction) // move to pos,
 				if(!could_move && dir == direction) // bumped back step...
 					S.use_stairs(src, newloc) // ... so use stairs!
 					return TRUE
@@ -138,25 +139,29 @@
 				checkb = get_step(checkm, WEST)
 
 			// tank only likes to turn if able to move, cannot 180!
-			could_move = Move(newloc, direction)
-			if(direction == reverse_direction(hold_direction) || !could_move)
-				dir = hold_direction
+			could_move = vehicle_move(newloc, direction)
 			if(could_move)
 				// restore breaking speed
 				has_breaking_speed = TRUE
-			else
-				// break things we run over, IS A WIDE BOY
-				smash_at_loc(checkm) // at destination
-				smash_at_loc(checka) // and at --
-				smash_at_loc(checkb) // -- each side
+
+			// break things we run over, IS A WIDE BOY
+			smash_at_loc(checkm) // at destination
+			if(could_move) crush_mobs_at_loc(checkm)
+			smash_at_loc(checka) // and at --
+			if(could_move) crush_mobs_at_loc(checka)
+			smash_at_loc(checkb) // -- each side
+			if(could_move) crush_mobs_at_loc(checkb)
+
+			// update facing
+			if(direction == reverse_direction(hold_direction))
+				dir = hold_direction
+
+			// UNRELENTING VIOLENCE
+			for(var/turf/T in locs)
+				crush_mobs_at_loc(T)
+
 			return could_move
 	return FALSE
-
-/obj/vehicle/has_interior/controller/Move(var/newloc, var/direction, var/movetime)
-	// update location
-	. = ..()
-	// update location
-	exitpos = loc
 
 /obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
@@ -206,7 +211,6 @@
 		smash_things(T) // turf itself
 
 /obj/vehicle/has_interior/controller/proc/smash_things(var/target)
-	var/move_damage = 33 / move_delay
 	var/severity = pick(2,2,3,3,3)
 	if(has_breaking_speed)
 		severity = 2 // first smash always best
@@ -292,18 +296,26 @@
 				// shakey time
 				shake_cab()
 				return 1
-
-		if(istype(target, /mob/living))
-			var/mob/living/M = target
-			if(!M.is_incorporeal())
-				visible_message("<font color='red'>[src] runs over [M]!</font>")
-				M.apply_effects(5, 5)				//knock people down if you hit them
-				M.apply_damages(move_damage)	// and do damage according to how fast the train is going
-
-				// cab sounds
-				playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
-				return 1
 	return 0
+
+/obj/vehicle/has_interior/controller/proc/crush_mobs_at_loc(var/newloc)
+	if(istype(newloc,/turf/))
+		var/turf/T = newloc
+		for(var/mob/M in T.contents)
+			crush_mobs(M)
+
+/obj/vehicle/has_interior/controller/proc/crush_mobs(var/target)
+	var/move_damage = 33 / move_delay
+	if(istype(target, /mob/living))
+		var/mob/living/M = target
+		if(!M.is_incorporeal())
+			visible_message("<font color='red'>[src] runs over [M]!</font>")
+			M.apply_effects(5, 5)				//knock people down if you hit them
+			M.apply_damages(move_damage)	// and do damage according to how fast the train is going
+
+			// cab sounds
+			playsound(driver_seat, get_sfx("vehicle_crush"), 50, 1)
+			return 1
 
 //-------------------------------------------
 // Vehicle procs
@@ -335,9 +347,25 @@
 	else
 		C.visible_message("<span class='notice'>Interior inaccessible...</span>")
 
+/obj/vehicle/has_interior/controller/proc/update_exit_pos()
+	var/ang = dir2angle(dir)
+	ang += dir2angle(exit_door_direction)
+	var/direx = angle2dir(ang)
+	exitpos = get_step(get_step(loc,direx),direx)
+
 /obj/vehicle/has_interior/controller/proc/exit_interior(var/atom/movable/C)
+	// update location
+	update_exit_pos()
 	// moves atom to interior access point of tank
 	if(istype(exitpos,/turf/))
+		var/turf/T = exitpos
+		if(!T.CanPass( C, exitpos))
+			to_chat(C, "<span class='notice'>Exit is blocked!</span>")
+			return
+		for(var/atom/A in T.contents)
+			if(!A.CanPass( C, exitpos))
+				to_chat(C, "<span class='notice'>Exit is blocked!</span>")
+				return
 		C.forceMove(exitpos)
 	else
 		C.visible_message("<span class='notice'>Exterior inaccessible...</span>")

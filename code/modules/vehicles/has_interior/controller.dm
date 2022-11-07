@@ -36,7 +36,8 @@
 	pixel_x = -64
 	pixel_y = -64
 
-	layer = ABOVE_JUNK_LAYER
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 
 	locked = 0
 	load_item_visible = FALSE

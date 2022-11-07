@@ -301,6 +301,10 @@
 /obj/mecha/can_fall()
 	return TRUE
 
+// same as above, but vehicles!
+/obj/vehicle/can_fall()
+	return TRUE
+
 /obj/item/pipe/can_fall()
 	. = ..()
 

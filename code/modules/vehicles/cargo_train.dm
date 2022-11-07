@@ -188,7 +188,7 @@
 	if(is_train_head())
 		if(direction == reverse_direction(dir) && tow)
 			return 0
-		if(Move(get_step(src, direction)))
+		if(vehicle_move(get_step(src, direction)))
 			return 1
 		return 0
 	else

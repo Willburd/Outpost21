@@ -237,9 +237,9 @@ default behaviour is:
 // Almost all of this handles pulling movables behind us
 /mob/living/Move(atom/newloc, direct, movetime)
 	if(buckled && buckled.loc != newloc) //not updating position
-		if(istype(buckled,/obj/structure/bed/chair/vehicle_interior_pilot))
-			var/obj/structure/bed/chair/vehicle_interior_pilot/P = buckled
-			return P.interior_controller.relaymove(src, direct) // for controlling vehicles with interiors
+		if(istype(buckled,/obj/structure/bed/chair/vehicle_interior_seat/pilot))
+			var/obj/structure/bed/chair/vehicle_interior_seat/pilot/P = buckled
+			return P.relaymove(src, direct) // for controlling vehicles with interiors
 		else if(!buckled.anchored && buckled.buckle_movable)
 			return buckled.Move(newloc, direct)
 		else

@@ -89,6 +89,11 @@
 		throw_mode_off()
 		return TRUE
 
+	if(buckled && istype(buckled,/obj/structure/bed/chair/vehicle_interior_seat))
+		var/obj/structure/bed/chair/vehicle_interior_seat/S = buckled
+		if(LAZYLEN(S.paired_console.viewers))
+			return S.click_action(A, src, params)
+
 	var/obj/item/W = get_active_hand()
 
 	if(W == A) // Handle attack_self

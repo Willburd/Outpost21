@@ -51,6 +51,7 @@
 	// Cannot share map locations either.
 	// DO NOT SET IN CHILD OBJECTS, this is for MAPPERS to set!
 	var/interior_area = null
+	var/list/weapons_equiped = null
 	var/exit_door_direction = SOUTH // if vehicle is facing north, what direction do things leaving it go in? They appear outside the collision box, and only if they can stand there.
 
 	// set AUTOMAGICALLY by init! DO NOT SET
@@ -58,9 +59,8 @@
 	var/turf/entrypos = null // where to place atoms that enter the interior
 	var/turf/exitpos = null // where to place atoms that enter the interior
 	var/obj/machinery/door/vehicle_interior_hatch/entrance_hatch = null
-	var/gunner_seat = null // dakka
-	var/maingun_seat = null // gun that is fed by...
 	var/feed_machine = null // ammo is put into this and used up by mainguns
+	var/list/internal_weapons_list = list()
 
 //-------------------------------------------
 // Standard procs
@@ -69,6 +69,8 @@
 	..()
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new key_type(src)
+	for(var/weapon_type in weapons_equiped)
+		internal_weapons_list.Add( new weapon_type(loc))
 
 /obj/vehicle/has_interior/controller/Initialize()
 	// set exit pos
@@ -101,7 +103,9 @@
 								var/obj/structure/bed/chair/vehicle_interior_seat/pilot/PS = S
 								PS.remote_turn_off()	//so engine verbs are correctly set
 							break
-
+						if(C.controls_weapon_index > 0)
+							var/obj/item/vehicle_interior_weapon/W = internal_weapons_list[C.controls_weapon_index]
+							W.control_console = C // link weapon to console
 
 	if(!istype(intarea))
 		log_debug("Interior vehicle [name] was missing a defined area! Could not init...")
@@ -515,6 +519,7 @@
 	var/extra_view = 0 // how much the view is increased by when the mob is in tank view
 	var/obj/vehicle/has_interior/controller/interior_controller = null
 	var/obj/structure/bed/chair/vehicle_interior_seat/paired_seat = null
+	var/controls_weapon_index = 0 // if above 0, controls weapons in interior_controller.internal_weapon_list
 
 
 /obj/machinery/computer/vehicle_interior_console/Initialize()
@@ -697,6 +702,7 @@
 	if(LAZYLEN(paired_console.viewers))
 		playsound(src, "keyboard", 40) // out of console
 		paired_console.clean_all_viewers()
+		buckled_mob.setClickCooldown(3) // lower cooldown than normal, but still have one
 	else
 		. = ..()
 
@@ -845,3 +851,111 @@
 	else
 		verbs += /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/headlights_off
 	paired_console.interior_controller.light_set()
+
+//-------------------------------------------
+// Click through procs, for when you click in vehicle view!
+//-------------------------------------------
+
+/obj/structure/bed/chair/vehicle_interior_seat/proc/click_action(atom/target,mob/user, params)
+	if(paired_console.controls_weapon_index > 0)
+		var/obj/item/vehicle_interior_weapon/W = paired_console.interior_controller.internal_weapons_list[paired_console.controls_weapon_index]
+		if(W.action_checks(target))
+			W.action(target, params, user)
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Vehicle weaponry
+
+/obj/item/vehicle_interior_weapon
+	name = "vehicle weapon"
+	var/projectile //Type of projectile fired.
+	var/projectiles = 1 //Amount of projectiles loaded.
+	var/projectiles_per_shot = 1 //Amount of projectiles fired per single shot.
+	var/deviation = 0 //Inaccuracy of shots.
+	var/fire_cooldown = 0 //Duration of sleep between firing projectiles in single shot.
+	var/fire_sound //Sound played while firing.
+	var/fire_volume = 50 //How loud it is played.
+	var/obj/machinery/computer/vehicle_interior_console/control_console = null
+
+/obj/item/vehicle_interior_weapon/proc/action_checks(var/atom/target)
+	if(projectiles <= 0)
+		return FALSE
+	return TRUE
+
+/obj/item/vehicle_interior_weapon/proc/action(var/atom/target, var/params, var/mob/user_calling)
+	if(!action_checks(target))
+		return
+	var/turf/curloc = control_console.interior_controller.loc
+	var/turf/targloc = get_turf(target)
+	if(!curloc || !targloc)
+		return
+	control_console.interior_controller.visible_message("<span class='warning'>[user_calling] fires [src]!</span>")
+	to_chat(user_calling,"<span class='warning'>You fire [src]!</span>")
+	var/target_for_log = "unknown"
+	if(ismob(target))
+		target_for_log = target
+	else if(target)
+		target_for_log = "[target.name]"
+	add_attack_logs(user_calling,target_for_log,"Fired exosuit weapon [src.name] (MANUAL)")
+
+	for(var/i = 1 to min(projectiles, projectiles_per_shot))
+		var/turf/aimloc = targloc
+		if(deviation)
+			aimloc = locate(targloc.x+GaussRandRound(deviation,1),targloc.y+GaussRandRound(deviation,1),targloc.z)
+		if(!aimloc || aimloc == curloc || (locs && (aimloc in locs)))
+			break
+		playsound(control_console.interior_controller, fire_sound, fire_volume, 0.85) // interior
+		playsound(control_console, fire_sound, fire_volume, 1) // exterior
+		projectiles--
+		var/turf/projectile_turf
+		if(control_console.interior_controller.locs && control_console.interior_controller.locs.len)	// Multi tile.
+			for(var/turf/Tloc in control_console.interior_controller.locs)
+				if(get_dist(Tloc, aimloc) < get_dist(loc, aimloc))
+					projectile_turf = get_turf(Tloc)
+		if(!projectile_turf)
+			projectile_turf = get_turf(curloc)
+		var/P = new projectile(projectile_turf)
+		Fire(P, target, params, user_calling)
+		if(fire_cooldown)
+			sleep(fire_cooldown)
+
+	// reload
+	projectiles = projectiles_per_shot
+
+	return
+
+/obj/item/vehicle_interior_weapon/proc/get_pilot_zone_sel(var/mob/user)
+	if(!control_console.paired_seat.has_buckled_mobs() || !user.zone_sel || user.stat)
+		return BP_TORSO
+
+	return user.zone_sel.selecting
+
+/obj/item/vehicle_interior_weapon/proc/Fire(var/atom/A, var/atom/target, var/params, var/mob/user)
+	if(istype(A, /obj/item/projectile))	// Sanity.
+		var/obj/item/projectile/P = A
+		P.dispersion = deviation
+		process_accuracy(P, user, target)
+		P.launch_projectile_from_turf(target, get_pilot_zone_sel(user), user, params)
+	else if(istype(A, /atom/movable))
+		var/atom/movable/AM = A
+		AM.throw_at(target, 7, 1, control_console.interior_controller)
+
+/obj/item/vehicle_interior_weapon/proc/process_accuracy(var/obj/projectile, var/mob/living/user, var/atom/target)
+	var/obj/item/projectile/P = projectile
+	if(!istype(P))
+		return
+
+	P.accuracy -= user.get_accuracy_penalty()
+
+	// Some modifiers make it harder or easier to hit things.
+	for(var/datum/modifier/M in user.modifiers)
+		if(!isnull(M.accuracy))
+			P.accuracy += M.accuracy
+		if(!isnull(M.accuracy_dispersion))
+			P.dispersion = max(P.dispersion + M.accuracy_dispersion, 0)
+
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.species)
+			P.accuracy += H.species.gun_accuracy_mod
+			P.dispersion = max(P.dispersion + H.species.gun_accuracy_dispersion_mod, 0)

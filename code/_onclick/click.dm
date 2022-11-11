@@ -89,7 +89,7 @@
 		throw_mode_off()
 		return TRUE
 
-	if(buckled && istype(buckled,/obj/structure/bed/chair/vehicle_interior_seat))
+	if(!is_incorporeal() && buckled && istype(buckled,/obj/structure/bed/chair/vehicle_interior_seat) && (isturf(A) || isturf(A.loc)))
 		var/obj/structure/bed/chair/vehicle_interior_seat/S = buckled
 		if(LAZYLEN(S.paired_console.viewers))
 			return S.click_action(A, src, params)

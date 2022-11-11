@@ -11,6 +11,8 @@
 	breakwalls = FALSE
 
 	weapons_equiped = list(/obj/item/vehicle_interior_weapon/scattershot)
+	weapons_draw_offset = list(list("1" = list(20,20),"2" = list(-20,10),"4" = list(12,20),"8" = list(-12,34)) )
+
 
 /obj/item/weapon/key/heavyarmor_carrier
 	name = "key"
@@ -22,7 +24,10 @@
 /obj/item/vehicle_interior_weapon/scattershot
 	name = "\improper LBX AC 10 \"Scattershot\""
 	desc = "A massive shotgun designed to fill a large area with pellets."
-	icon_state = "mecha_scatter"
+
+	icon = 'icons/obj/pointdefense.dmi'
+	icon_state = "pointdefense2"
+
 	projectile = /obj/item/projectile/bullet/pellet/shotgun/flak
 	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	fire_volume = 80

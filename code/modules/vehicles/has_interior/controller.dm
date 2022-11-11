@@ -51,7 +51,9 @@
 	// Cannot share map locations either.
 	// DO NOT SET IN CHILD OBJECTS, this is for MAPPERS to set!
 	var/interior_area = null
-	var/list/weapons_equiped = null
+	var/list/weapons_equiped = null // /obj/item/vehicle_interior_weapon type list that populates internal_weapons_list
+	var/list/weapons_draw_offset = null // format is weaponarray[ DIR[x,y] ]
+
 	var/exit_door_direction = SOUTH // if vehicle is facing north, what direction do things leaving it go in? They appear outside the collision box, and only if they can stand there.
 
 	// set AUTOMAGICALLY by init! DO NOT SET
@@ -61,6 +63,7 @@
 	var/obj/machinery/door/vehicle_interior_hatch/entrance_hatch = null
 	var/feed_machine = null // ammo is put into this and used up by mainguns
 	var/list/internal_weapons_list = list()
+	var/cached_dir // used for weapon position being retained in moved()
 
 //-------------------------------------------
 // Standard procs
@@ -73,9 +76,6 @@
 		internal_weapons_list.Add( new weapon_type(loc))
 
 /obj/vehicle/has_interior/controller/Initialize()
-	// set exit pos
-	update_exit_pos()
-
 	// find interior entrypos
 	for(var/area/A)
 		if(istype( A, interior_area))
@@ -105,7 +105,15 @@
 							break
 						if(C.controls_weapon_index > 0)
 							var/obj/item/vehicle_interior_weapon/W = internal_weapons_list[C.controls_weapon_index]
+							W.weapon_index = C.controls_weapon_index
 							W.control_console = C // link weapon to console
+
+	// set exit pos
+	update_exit_pos()
+
+	// update weapon draw location
+	cached_dir = dir
+	update_weapons_location(loc)
 
 	if(!istype(intarea))
 		log_debug("Interior vehicle [name] was missing a defined area! Could not init...")
@@ -118,7 +126,7 @@
 /obj/vehicle/has_interior/controller/relaymove(mob/user, direction)
 	if(on)
 		// attempt destination
-		var/hold_direction = dir
+		cached_dir = dir // update cached dir
 		var/could_move = FALSE
 		var/turf/newloc = get_step(src, direction)
 
@@ -129,7 +137,7 @@
 		// stairs check
 		for(var/obj/structure/stairs/S in newloc)
 			could_move = vehicle_move(newloc, direction) // move to pos,
-			if(!could_move && dir == direction) // bumped back step...
+			if(!could_move && S.dir == direction) // bumped back step...
 				S.use_stairs(src, newloc) // ... so use stairs!
 				return TRUE
 			return could_move // stop movement here, do not break walls
@@ -144,9 +152,11 @@
 
 		// tank only likes to turn if able to move, cannot 180!
 		could_move = vehicle_move(newloc, direction)
-		if(could_move)
-			// restore breaking speed
-			has_breaking_speed = TRUE
+		if(!could_move)
+			// normally called from Moved()!
+			if(dir == reverse_direction(cached_dir))
+				dir = cached_dir // hold direction...
+			update_weapons_location(loc)
 
 		// break things we run over, IS A WIDE BOY
 		smash_at_loc(checkm) // at destination
@@ -156,16 +166,29 @@
 		smash_at_loc(checkb) // -- each side
 		if(!could_move) crush_mobs_at_loc(checkb)
 
-		// update facing
-		if(direction == reverse_direction(hold_direction))
-			dir = hold_direction
-
 		// UNRELENTING VIOLENCE
 		for(var/turf/T in locs)
 			crush_mobs_at_loc(T)
-
 		return could_move
 	return FALSE
+
+/obj/vehicle/has_interior/controller/Moved(atom/old_loc, direction, forced = FALSE, movetime)
+	. = ..()
+	// restore breaking speed
+	has_breaking_speed = TRUE
+	if(dir == reverse_direction(cached_dir))
+		dir = cached_dir // hold direction...
+	update_weapons_location(loc)
+
+/obj/vehicle/has_interior/controller/GotoAirflowDest(n)
+	. = ..()
+	shake_cab()
+	update_weapons_location(loc)
+
+/obj/vehicle/has_interior/controller/RepelAirflowDest(n)
+	. = ..()
+	shake_cab()
+	update_weapons_location(loc)
 
 /obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
@@ -198,6 +221,15 @@
 
 /obj/vehicle/has_interior/controller/update_icon()
 	. = ..()
+	update_weapons_location(loc)
+
+/obj/vehicle/has_interior/controller/proc/update_weapons_location(var/newloc)
+	for(var/obj/item/vehicle_interior_weapon/W in internal_weapons_list)
+		W.loc = newloc
+		var/list/dirlist = weapons_draw_offset[W.weapon_index] // get sublist, sorted by directions
+		var/list/offsetxylist = dirlist["[dir]"] // get subsublist with x and y inside
+		W.pixel_x = offsetxylist[1]
+		W.pixel_y = offsetxylist[2]
 
 //-------------------------------------------
 // Violence!
@@ -599,6 +631,11 @@
 /obj/machinery/computer/vehicle_interior_console/ex_act(severity)
 	// nothing
 
+/obj/machinery/computer/vehicle_interior_console/update_icon()
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Pilot console
@@ -859,8 +896,7 @@
 /obj/structure/bed/chair/vehicle_interior_seat/proc/click_action(atom/target,mob/user, params)
 	if(paired_console.controls_weapon_index > 0)
 		var/obj/item/vehicle_interior_weapon/W = paired_console.interior_controller.internal_weapons_list[paired_console.controls_weapon_index]
-		if(W.action_checks(target))
-			W.action(target, params, user)
+		W.action(target, params, user)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -868,6 +904,11 @@
 
 /obj/item/vehicle_interior_weapon
 	name = "vehicle weapon"
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER+0.1
+	w_class = ITEMSIZE_COST_NO_CONTAINER
+
+	var/weapon_index = -1 // set by the init!
 	var/projectile //Type of projectile fired.
 	var/projectiles = 1 //Amount of projectiles loaded.
 	var/projectiles_per_shot = 1 //Amount of projectiles fired per single shot.
@@ -876,6 +917,12 @@
 	var/fire_sound //Sound played while firing.
 	var/fire_volume = 50 //How loud it is played.
 	var/obj/machinery/computer/vehicle_interior_console/control_console = null
+
+/obj/item/vehicle_interior_weapon/GotoAirflowDest(n) // weapon is rooted to tank...
+	return
+
+/obj/item/vehicle_interior_weapon/RepelAirflowDest(n) // airflow does not push it around!
+	return
 
 /obj/item/vehicle_interior_weapon/proc/action_checks(var/atom/target)
 	if(projectiles <= 0)
@@ -896,32 +943,25 @@
 		target_for_log = target
 	else if(target)
 		target_for_log = "[target.name]"
-	add_attack_logs(user_calling,target_for_log,"Fired exosuit weapon [src.name] (MANUAL)")
+	add_attack_logs(user_calling,target_for_log,"Fired vehicle [control_console.interior_controller.name] weapon [src.name] (MANUAL)")
 
 	for(var/i = 1 to min(projectiles, projectiles_per_shot))
 		var/turf/aimloc = targloc
 		if(deviation)
 			aimloc = locate(targloc.x+GaussRandRound(deviation,1),targloc.y+GaussRandRound(deviation,1),targloc.z)
-		if(!aimloc || aimloc == curloc || (locs && (aimloc in locs)))
+		if(!aimloc || aimloc == curloc)
 			break
+
 		playsound(control_console.interior_controller, fire_sound, fire_volume, 0.85) // interior
 		playsound(control_console, fire_sound, fire_volume, 1) // exterior
 		projectiles--
-		var/turf/projectile_turf
-		if(control_console.interior_controller.locs && control_console.interior_controller.locs.len)	// Multi tile.
-			for(var/turf/Tloc in control_console.interior_controller.locs)
-				if(get_dist(Tloc, aimloc) < get_dist(loc, aimloc))
-					projectile_turf = get_turf(Tloc)
-		if(!projectile_turf)
-			projectile_turf = get_turf(curloc)
-		var/P = new projectile(projectile_turf)
-		Fire(P, target, params, user_calling)
+
+		Fire(new projectile( get_turf(curloc)), target, params, user_calling)
 		if(fire_cooldown)
 			sleep(fire_cooldown)
 
 	// reload
 	projectiles = projectiles_per_shot
-
 	return
 
 /obj/item/vehicle_interior_weapon/proc/get_pilot_zone_sel(var/mob/user)
@@ -933,6 +973,8 @@
 /obj/item/vehicle_interior_weapon/proc/Fire(var/atom/A, var/atom/target, var/params, var/mob/user)
 	if(istype(A, /obj/item/projectile))	// Sanity.
 		var/obj/item/projectile/P = A
+		P.plane = MOB_PLANE
+		P.layer = ABOVE_MOB_LAYER+0.05
 		P.dispersion = deviation
 		process_accuracy(P, user, target)
 		P.launch_projectile_from_turf(target, get_pilot_zone_sel(user), user, params)
@@ -959,3 +1001,6 @@
 		if(H.species)
 			P.accuracy += H.species.gun_accuracy_mod
 			P.dispersion = max(P.dispersion + H.species.gun_accuracy_dispersion_mod, 0)
+
+/obj/item/vehicle_interior_weapon/attack_hand(mob/user)
+	// ignore

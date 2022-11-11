@@ -12,6 +12,8 @@
 	breakwalls = TRUE
 
 	weapons_equiped = list(/obj/item/vehicle_interior_weapon/lmg)
+	// list of weapons, with a sublist containing directions, with a subsub list of x and ys
+	weapons_draw_offset = list(list("1" = list(20,20),"2" = list(-20,10),"4" = list(12,20),"8" = list(-12,34)) )
 
 
 /obj/item/weapon/key/heavyarmor_tank
@@ -24,7 +26,10 @@
 /obj/item/vehicle_interior_weapon/lmg
 	name = "\improper Ultra AC 2"
 	desc = "A superior version of the standard Solgov Autocannon MK2 design."
-	icon_state = "mecha_uac2"
+
+	icon = 'icons/obj/pointdefense.dmi'
+	icon_state = "pointdefense2"
+
 	projectile = /obj/item/projectile/bullet/pistol/medium
 	fire_sound = 'sound/weapons/Gunshot_machinegun.ogg'
 	projectiles = 30 //10 bursts, matching the Scattershot's 10. Also, conveniently, doesn't eat your powercell when reloading like 300 bullets does.

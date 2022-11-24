@@ -107,6 +107,8 @@
 							var/obj/item/vehicle_interior_weapon/W = internal_weapons_list[C.controls_weapon_index]
 							W.weapon_index = C.controls_weapon_index
 							W.control_console = C // link weapon to console
+							// rotate weapon to facing angle of vehicle
+							W.dir = dir
 
 	// set exit pos
 	update_exit_pos()
@@ -631,11 +633,14 @@
 /obj/machinery/computer/vehicle_interior_console/ex_act(severity)
 	// nothing
 
-/obj/machinery/computer/vehicle_interior_console/update_icon()
-
-
-
-
+/obj/machinery/computer/vehicle_interior_console/computer/update_icon()
+	if(!interior_controller.on)
+		// power off in vehicle
+		cut_overlays()
+		if(icon_keyboard)
+			return add_overlay("[icon_keyboard]_off")
+	else
+		. = ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Pilot console
@@ -870,6 +875,7 @@
 		else
 			verbs += /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/headlights_on
 	paired_console.interior_controller.light_set()
+	paired_console.update_icon()
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/proc/remote_turn_off()
 	paired_console.interior_controller.turn_off()
@@ -888,6 +894,7 @@
 	else
 		verbs += /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/headlights_off
 	paired_console.interior_controller.light_set()
+	paired_console.update_icon()
 
 //-------------------------------------------
 // Click through procs, for when you click in vehicle view!
@@ -933,8 +940,16 @@
 	if(!action_checks(target))
 		return
 	var/turf/curloc = control_console.interior_controller.loc
+	var/angledir = angle2dir( 360 + (round(Get_Angle(curloc, target) / 45) * 45 ))
+	if(dir != angledir)
+		// turn toward!
+		update_weapon_turn( angledir)
+		return
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
+		return
+	if(targloc.x == 0 && targloc.y == 0)
+		// stop thinking darkness is bottom left of the map, just don't allow firing...
 		return
 	control_console.interior_controller.visible_message("<span class='warning'>[user_calling] fires [src]!</span>")
 	to_chat(user_calling,"<span class='warning'>You fire [src]!</span>")
@@ -1004,3 +1019,8 @@
 
 /obj/item/vehicle_interior_weapon/attack_hand(mob/user)
 	// ignore
+
+/obj/item/vehicle_interior_weapon/proc/update_weapon_turn(var/goaldir)
+	// find current direction's angle, find rotation direction, add 45+1 to it, then return the new dir we want to be!
+	var/startdir = dir2angle(dir)
+	dir = angle2dir(360 + startdir + (SIGN(closer_angle_difference(startdir,dir2angle(goaldir))) * 46))

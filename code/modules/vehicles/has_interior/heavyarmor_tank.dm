@@ -11,9 +11,9 @@
 	brute_dam_coeff = 0.4
 	breakwalls = TRUE
 
-	weapons_equiped = list(/obj/item/vehicle_interior_weapon/lmg)
+	weapons_equiped = list(/obj/item/vehicle_interior_weapon/mainturret)
 	// list of weapons, with a sublist containing directions, with a subsub list of x and ys
-	weapons_draw_offset = list(list("1" = list(20,20),"2" = list(-20,10),"4" = list(12,20),"8" = list(-12,34)) )
+	weapons_draw_offset = list(list("1" = list(-64,-64),"2" = list(-64,-64),"4" = list(-64,-64),"8" = list(-64,-64)) )
 
 
 /obj/item/weapon/key/heavyarmor_tank
@@ -36,3 +36,58 @@
 	projectiles_per_shot = 3
 	deviation = 0.3
 	fire_cooldown = 2
+
+
+/obj/item/vehicle_interior_weapon/mainturret
+	name = "\improper TD Type-L Accelerator"
+	desc = "Tandem Logistics Linear-Type Heavy-Ordinance Magnetic Accelerator."
+
+	icon = 'icons/obj/vehicles_160x160.dmi'
+	icon_state = "tank_turret"
+
+	// graphics offset of lorge boi
+	old_x = -64
+	old_y = -64
+	pixel_x = -64
+	pixel_y = -64
+
+	projectile = /obj/item/projectile/bullet/kyshell
+	fire_sound = 'sound/weapons/railgun.ogg'
+	projectiles = 1
+	projectiles_per_shot = 1
+	deviation = 0.1
+	fire_cooldown = 6
+
+
+// basically just meaner /obj/item/projectile/bullet/srmrocket
+/obj/item/projectile/bullet/kyshell
+	name ="TD Type-L \"Reclaimer\" Shell"
+	desc = "Boom"
+	icon = 'icons/obj/grenade.dmi'
+	icon_state = "missile"
+	damage = 35 // Bonk
+	does_spin = 0
+	hud_state = "rocket_he"
+	hud_state_empty = "rocket_empty"
+
+/obj/item/projectile/bullet/kyshell/on_hit(atom/target, blocked=0)
+	if(!isliving(target)) //if the target isn't alive, so is a wall or something
+		explosion(target, 1, 2, 3, 8)
+	else
+		explosion(target, 0, 0, 3, 8)
+	return 1
+
+/obj/item/projectile/bullet/kyshell/throw_impact(atom/target, var/speed)
+	if(!isliving(target)) //if the target isn't alive, so is a wall or something
+		explosion(target, 1, 2, 3, 8)
+	else
+		explosion(target, 0, 0, 3, 8)
+	qdel(src)
+
+/obj/item/ammo_casing/kyshell
+	name = "TD Type-L \"Reclaimer\" Shell"
+	desc = "High explosive, self propelled, shell."
+	icon_state = "rocketshell"
+	projectile_type = /obj/item/projectile/bullet/kyshell
+	caliber = "rocket"
+	matter = list(MAT_STEEL = 10000)

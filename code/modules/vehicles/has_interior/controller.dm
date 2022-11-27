@@ -941,15 +941,15 @@
 		return
 	var/turf/curloc = control_console.interior_controller.loc
 	var/angledir = angle2dir( 360 + (round(Get_Angle(curloc, target) / 45) * 45 ))
-	if(dir != angledir)
-		// turn toward!
-		update_weapon_turn( angledir)
-		return
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return
 	if(targloc.x == 0 && targloc.y == 0)
 		// stop thinking darkness is bottom left of the map, just don't allow firing...
+		return
+	if(dir != angledir)
+		// turn toward!
+		update_weapon_turn( angledir)
 		return
 	control_console.interior_controller.visible_message("<span class='warning'>[user_calling] fires [src]!</span>")
 	to_chat(user_calling,"<span class='warning'>You fire [src]!</span>")
@@ -971,7 +971,8 @@
 		playsound(control_console, fire_sound, fire_volume, 1) // exterior
 		projectiles--
 
-		Fire(new projectile( get_turf(curloc)), target, params, user_calling)
+		var/obj/item/projectile/P = new projectile( get_turf(curloc))
+		Fire(P, target, params, user_calling, dir2angle(dir) )
 		if(fire_cooldown)
 			sleep(fire_cooldown)
 
@@ -985,14 +986,15 @@
 
 	return user.zone_sel.selecting
 
-/obj/item/vehicle_interior_weapon/proc/Fire(var/atom/A, var/atom/target, var/params, var/mob/user)
+/obj/item/vehicle_interior_weapon/proc/Fire(var/atom/A, var/atom/target, var/params, var/mob/user, var/angle_override)
 	if(istype(A, /obj/item/projectile))	// Sanity.
 		var/obj/item/projectile/P = A
 		P.plane = MOB_PLANE
 		P.layer = ABOVE_MOB_LAYER+0.05
 		P.dispersion = deviation
 		process_accuracy(P, user, target)
-		P.launch_projectile_from_turf(target, get_pilot_zone_sel(user), user, params)
+		P.launch_projectile_from_turf(target, get_pilot_zone_sel(user), user, params, angle_override)
+		P.does_spin = FALSE //weird bug...
 	else if(istype(A, /atom/movable))
 		var/atom/movable/AM = A
 		AM.throw_at(target, 7, 1, control_console.interior_controller)

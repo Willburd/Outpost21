@@ -63,30 +63,31 @@
 /obj/item/projectile/bullet/kyshell
 	name ="TD Type-L \"Reclaimer\" Shell"
 	desc = "Boom"
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "missile"
+	icon = 'icons/obj/grenade_op.dmi'
+	icon_state = "shell"
 	damage = 35 // Bonk
-	does_spin = 0
+	sharp = FALSE
+	does_spin = FALSE
 	hud_state = "rocket_he"
 	hud_state_empty = "rocket_empty"
 
 /obj/item/projectile/bullet/kyshell/on_hit(atom/target, blocked=0)
 	if(!isliving(target)) //if the target isn't alive, so is a wall or something
-		explosion(target, 1, 2, 3, 8)
+		explosion(target, 1, 2, 2, 4)
 	else
-		explosion(target, 0, 0, 3, 8)
+		explosion(target, 0, 0, 2, 4)
 	return 1
 
 /obj/item/projectile/bullet/kyshell/throw_impact(atom/target, var/speed)
 	if(!isliving(target)) //if the target isn't alive, so is a wall or something
-		explosion(target, 1, 2, 3, 8)
+		explosion(target, 1, 2, 2, 4)
 	else
-		explosion(target, 0, 0, 3, 8)
+		explosion(target, 0, 0, 2, 4)
 	qdel(src)
 
 /obj/item/ammo_casing/kyshell
 	name = "TD Type-L \"Reclaimer\" Shell"
-	desc = "High explosive, self propelled, shell."
+	desc = "High explosive shell."
 	icon_state = "rocketshell"
 	projectile_type = /obj/item/projectile/bullet/kyshell
 	caliber = "rocket"

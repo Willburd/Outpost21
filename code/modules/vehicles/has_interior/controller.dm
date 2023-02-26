@@ -61,6 +61,7 @@
 	var/turf/entrypos = null // where to place atoms that enter the interior
 	var/turf/exitpos = null // where to place atoms that enter the interior
 	var/obj/machinery/door/vehicle_interior_hatch/entrance_hatch = null
+	var/obj/machinery/computer/vehicle_interior_console/interior_helm = null // driving console
 	var/feed_machine = null // ammo is put into this and used up by mainguns
 	var/list/internal_weapons_list = list()
 	var/cached_dir // used for weapon position being retained in moved()
@@ -96,13 +97,16 @@
 						C.name = "[name]'s Helm"
 						C.desc = "Used to pilot the [name]. Use ctrl-click to quickly toggle the engine if you're adjacent. Alt-click will grab the keys, if present."
 						C.interior_controller = src
+
 						for(var/obj/structure/bed/chair/vehicle_interior_seat/S in get_step(C.loc,C.dir))
 							S.paired_console = C
 							C.paired_seat = S
 							if(istype(S,/obj/structure/bed/chair/vehicle_interior_seat/pilot))
 								var/obj/structure/bed/chair/vehicle_interior_seat/pilot/PS = S
 								PS.remote_turn_off()	//so engine verbs are correctly set
+								interior_helm = C 		// update vehicle, we found the pilot seat, so we know which console is the drivers!
 							break
+
 						if(C.controls_weapon_index > 0)
 							var/obj/item/vehicle_interior_weapon/W = internal_weapons_list[C.controls_weapon_index]
 							W.weapon_index = C.controls_weapon_index
@@ -159,6 +163,7 @@
 			if(dir == reverse_direction(cached_dir))
 				dir = cached_dir // hold direction...
 			update_weapons_location(loc)
+			update_exit_pos()
 
 		// break things we run over, IS A WIDE BOY
 		smash_at_loc(checkm) // at destination
@@ -181,16 +186,19 @@
 	if(dir == reverse_direction(cached_dir))
 		dir = cached_dir // hold direction...
 	update_weapons_location(loc)
+	update_exit_pos()
 
 /obj/vehicle/has_interior/controller/GotoAirflowDest(n)
 	. = ..()
 	shake_cab()
 	update_weapons_location(loc)
+	update_exit_pos()
 
 /obj/vehicle/has_interior/controller/RepelAirflowDest(n)
 	. = ..()
 	shake_cab()
 	update_weapons_location(loc)
+	update_exit_pos()
 
 /obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
@@ -355,6 +363,46 @@
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/explode()
 	. = ..()
+	// unbucker riders and camera viewers
+	if(istype(interior_helm,/obj/machinery/computer/vehicle_interior_console))
+		interior_helm.clean_all_viewers()
+	for(var/obj/item/vehicle_interior_weapon/W in internal_weapons_list)
+		if(istype(W))
+			var/obj/machinery/computer/vehicle_interior_console/CC = W.control_console
+			if(istype(CC,/obj/machinery/computer/vehicle_interior_console))
+				CC.clean_all_viewers()
+
+
+	// throw all things that are NOT internal hardware out!
+	for(var/turf/T in intarea.get_contents())
+		if(prob(30) && istype(T))
+			for(var/atom/A in T.contents)
+				//if(istype(A,/obj))
+					// TODO - throw objects out!
+					//A.forceMove(exitpos)
+				if(istype(A,/mob))
+					// throw riders out!
+					var/mob/M = A
+					M.forceMove(exitpos)
+
+
+/obj/vehicle/has_interior/controller/ex_act(severity)
+	// sparking!
+	for(var/turf/T in intarea.get_contents())
+		if(prob(30) && istype(T))
+			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+			sparks.set_up(3, 0, T)
+			sparks.attach(T)
+			sparks.start()
+
+	// noise!
+	playsound(entrance_hatch, get_sfx("vehicle_crush"), 50, 1)
+
+	// make a smaller explosion inside
+	explosion(entrance_hatch, 0, 0, 6, 8)
+
+    // disable ex_act destruction, would lead to gamebreaking behaviors
+
 
 //-------------------------------------------
 // Interaction procs
@@ -387,8 +435,6 @@
 	exitpos = get_step(get_step(loc,direx),direx)
 
 /obj/vehicle/has_interior/controller/proc/exit_interior(var/atom/movable/C)
-	// update location
-	update_exit_pos()
 	// moves atom to interior access point of tank
 	if(istype(exitpos,/turf/))
 		var/turf/T = exitpos
@@ -534,7 +580,7 @@
 	return 1
 
 /obj/machinery/door/vehicle_interior_hatch/ex_act(severity)
-	// nothing
+	// nothing, because it would cause some gamebreaking behaviors
 
 
 ////////////////////////////////////////////////////////////////////////////////

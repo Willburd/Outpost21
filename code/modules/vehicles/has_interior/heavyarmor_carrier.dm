@@ -4,6 +4,9 @@
 
 	key_type = /obj/item/weapon/key/heavyarmor_carrier
 
+	icon = 'icons/obj/vehicles_160x160.dmi'
+	icon_state = "sec_apc"
+
 	health = 800
 	maxhealth = 800
 	fire_dam_coeff = 0.5
@@ -16,7 +19,7 @@
 
 /obj/item/weapon/key/heavyarmor_carrier
 	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	desc = "A keyring with a small steel key, and a yellow fob reading \"Band wagon\"."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
 	w_class = ITEMSIZE_TINY

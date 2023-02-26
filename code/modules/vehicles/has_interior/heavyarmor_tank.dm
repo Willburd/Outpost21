@@ -5,6 +5,9 @@
 
 	key_type = /obj/item/weapon/key/heavyarmor_tank
 
+	icon = 'icons/obj/vehicles_160x160.dmi'
+	icon_state = "sec_tank"
+
 	health = 2500
 	maxhealth = 2500
 	fire_dam_coeff = 0.5
@@ -13,12 +16,12 @@
 
 	weapons_equiped = list(/obj/item/vehicle_interior_weapon/mainturret)
 	// list of weapons, with a sublist containing directions, with a subsub list of x and ys
-	weapons_draw_offset = list(list("1" = list(-64,-64),"2" = list(-64,-64),"4" = list(-64,-64),"8" = list(-64,-64)) )
+	weapons_draw_offset = list(list("1" = list(-64,-48),"2" = list(-64,-48),"4" = list(-64,-48),"8" = list(-64,-48)) )
 
 
 /obj/item/weapon/key/heavyarmor_tank
 	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	desc = "A keyring with a small steel key, and a yellow fob reading \"Greater force\"."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "train_keys"
 	w_class = ITEMSIZE_TINY

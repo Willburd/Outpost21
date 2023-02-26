@@ -235,11 +235,12 @@
 
 /obj/vehicle/has_interior/controller/proc/update_weapons_location(var/newloc)
 	for(var/obj/item/vehicle_interior_weapon/W in internal_weapons_list)
-		W.loc = newloc
-		var/list/dirlist = weapons_draw_offset[W.weapon_index] // get sublist, sorted by directions
-		var/list/offsetxylist = dirlist["[dir]"] // get subsublist with x and y inside
-		W.pixel_x = offsetxylist[1]
-		W.pixel_y = offsetxylist[2]
+		if(istype(W,/obj/item/vehicle_interior_weapon) && W.weapon_index != -1)
+			W.loc = newloc
+			var/list/dirlist = weapons_draw_offset[W.weapon_index] // get sublist, sorted by directions
+			var/list/offsetxylist = dirlist["[dir]"] // get subsublist with x and y inside
+			W.pixel_x = offsetxylist[1]
+			W.pixel_y = offsetxylist[2]
 
 //-------------------------------------------
 // Violence!

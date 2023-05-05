@@ -16,7 +16,7 @@
 
 	weapons_equiped = list(/obj/item/vehicle_interior_weapon/mainturret)
 	// list of weapons, with a sublist containing directions, with a subsub list of x and ys
-	weapons_draw_offset = list(list("1" = list(-64,-48),"2" = list(-64,-48),"4" = list(-64,-48),"8" = list(-64,-48)) )
+	weapons_draw_offset = list(list("1" = list(-96,-96),"2" = list(-96,-96),"4" = list(-96,-96),"8" = list(-96,-96)) )
 
 
 /obj/item/weapon/key/heavyarmor_tank
@@ -45,7 +45,7 @@
 	name = "\improper TD Type-L Accelerator"
 	desc = "Tandem Logistics Linear-Type Heavy-Ordinance Magnetic Accelerator."
 
-	icon = 'icons/obj/vehicles_160x160.dmi'
+	icon = 'icons/obj/vehicles_224x224.dmi'
 	icon_state = "tank_turret"
 
 	// graphics offset of lorge boi

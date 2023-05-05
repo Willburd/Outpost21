@@ -744,7 +744,7 @@
 // Gunner console
 
 /obj/machinery/computer/vehicle_interior_console/gunner
-	name = "Gunner Pericope"
+	name = "Gunner Periscope"
 	desc = "Targeting cameras for onboard weaponry."
 
 /obj/machinery/computer/vehicle_interior_console/gunner/examine(mob/user)

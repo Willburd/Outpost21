@@ -287,6 +287,15 @@
 					'sound/items/pickup/generic1.ogg',
 					'sound/items/pickup/generic2.ogg',
 					'sound/items/pickup/generic3.ogg')
+			if("vehicle_crush")
+				soundin = pick(
+					'sound/effects/grillehit.ogg',
+					'sound/effects/metalscrape1.ogg',
+					'sound/effects/metalscrape2.ogg',
+					'sound/effects/metalscrape3.ogg',
+					'sound/effects/locker_close.ogg',
+					'sound/effects/metal_close.ogg',
+					'sound/effects/meteorimpact.ogg')
 	return soundin
 
 //Are these even used?	//Yes

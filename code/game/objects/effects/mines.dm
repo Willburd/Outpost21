@@ -95,6 +95,9 @@
 	if(istype(M, /obj/mecha))
 		explode(M)
 
+	if(istype(M, /obj/vehicle))
+		explode(M)
+
 	if(istype(M, /mob/living/))
 		var/mob/living/mob = M
 		if(!mob.hovering || !mob.flying)

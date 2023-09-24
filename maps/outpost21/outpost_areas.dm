@@ -444,6 +444,7 @@
 //SECURITY
 /area/turbolift/secbase
 	name = "Security Sublevel 1"
+	base_turf = /turf/simulated/floor/plating
 	lift_floor_label = "Security Basement"
 	lift_floor_name = "Brig."
 	lift_announce_str = "Arriving at Security Basement."
@@ -463,6 +464,7 @@
 //MEDICAL
 /area/turbolift/medibasement
 	name = "Medbay Sublevel 1"
+	base_turf = /turf/simulated/floor/plating
 	lift_floor_label = "Medical Basement"
 	lift_floor_name = "Vox Treatment, Morgue, Surgery Training, Cavern Access."
 	lift_announce_str = "Arriving at Medical Basement."
@@ -482,6 +484,7 @@
 //Civilian
 /area/turbolift/civbase
 	name = "Civilian Sublevel 1"
+	base_turf = /turf/simulated/floor/plating
 	lift_floor_label = "Basement"
 	lift_floor_name = "Cafe, Pool, Dorms, Arcade, Cavern Access."
 	lift_announce_str = "Arriving at Basement."
@@ -501,6 +504,7 @@
 //Science
 /area/turbolift/scibase
 	name = "Science Sublevel 1"
+	base_turf = /turf/simulated/floor/plating
 	lift_floor_label = "Research Basement"
 	lift_floor_name = "Xenobio, Particle lab, Xenoarch, Cavern Access"
 	lift_announce_str = "Arriving at Basement."

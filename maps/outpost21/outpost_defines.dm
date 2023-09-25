@@ -21,6 +21,11 @@
 	overmap_size = 25
 	overmap_event_areas = 9
 
+	holomap_smoosh = list(list(
+		Z_LEVEL_OUTPOST_BASEMENT,
+		Z_LEVEL_OUTPOST_SURFACE,
+		Z_LEVEL_OUTPOST_UPPER))
+
 	station_name  = "ESHUI Atmospheric Terraforming Outpost 21"
 	station_short = "Outpost 21"
 	dock_name     = "Central Command Bunker"
@@ -170,7 +175,9 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
 	base_turf = /turf/simulated/open
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
-	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 20) - 32 // hidden
+	holomap_legend_x = 220
+	holomap_legend_y = 1160 //hidden
 
 /datum/map_z_level/outpost/main
 	z = Z_LEVEL_OUTPOST_SURFACE
@@ -179,7 +186,9 @@
 	base_turf = /turf/simulated/open
 	transit_chance = 5
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
-	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 0)
+	holomap_legend_x = 140
+	holomap_legend_y = 240
 
 /datum/map_z_level/outpost/upper
 	z = Z_LEVEL_OUTPOST_UPPER
@@ -188,7 +197,9 @@
 	base_turf = /turf/simulated/open
 	transit_chance = 5
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
-	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 1.1)
+	holomap_legend_x = 220
+	holomap_legend_y = 1160 //hidden
 
 /datum/map_z_level/outpost/misc
 	z = Z_LEVEL_OUTPOST_MISC

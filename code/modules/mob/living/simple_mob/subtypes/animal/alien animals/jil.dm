@@ -141,7 +141,7 @@
 /mob/living/simple_mob/vore/alienanimals/jil/proc/scream(var/mob/M, var/sound_play)
 	// screaming noise
 	if(sound_play)
-		M.say("Squee!","Squeee!","Squeak!","Eeeee!")
+		to_chat(M, pick("Squee!","Squeee!","Squeak!","Eeeee!"))
 		playsound(M, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
 
 /mob/living/simple_mob/vore/alienanimals/jil/update_icons()

@@ -294,6 +294,11 @@
 	icon_state = "medbay2"
 	sound_env = SMALL_ENCLOSED
 
+/area/muriki/crew/engyaid
+	name = "\improper Public Cargo First Aid Station"
+	icon_state = "medbay2"
+	sound_env = SMALL_ENCLOSED
+
 /area/chapel/chapel_music
 	name = "\improper Music Room"
 	icon_state = "yellow"
@@ -1273,6 +1278,14 @@
 /area/offworld/asteroidyard/station/bar
 	name = "\improper Reclamation Yard Bar"
 	icon_state = "green"
+
+/area/offworld/asteroidyard/station/medbox
+	name = "\improper Reclamation Medical Station"
+	icon_state = "medbay2"
+
+/area/offworld/asteroidyard/station/spelunker
+	name = "\improper Reclamation Spelunker"
+	icon_state = "toilet"
 
 /area/offworld/asteroidyard/station/engineering
 	name = "\improper Reclamation Yard Engineering"

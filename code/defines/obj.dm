@@ -104,6 +104,19 @@
 	icon_state = "on_8"
 	desc = "A massive, specialized machine for assisting an even more massive freight elevator in its ascent."
 
+/obj/structure/showcase/muriki/plaque //op edit
+	name = "Commerative Plaque"
+	icon = 'icons/obj/structures_op32x32.dmi'
+	icon_state = "plaque"
+	desc = "A plaque commerating the finalization of the Outpost 21 terraforming station. Site of a future paradise world."
+	density = 0
+
+/obj/structure/showcase/sign/enzyme
+	name = "WARNING: ENZYMATIC ATMOSPHERE"
+	icon = 'icons/obj/stationobjs_op.dmi'
+	icon_state = "enzyme"
+	desc = "The sign states: 'This planet is undergoing intense terraforming. As a result, the atmosphere outside is acidic, enzymatic, and highly fatal. You will be painfully digested outside without proper protection!'"
+
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 /obj/item/weapon/beach_ball

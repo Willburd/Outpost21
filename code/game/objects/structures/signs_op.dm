@@ -16,3 +16,9 @@
 /obj/structure/sign/scenery/map/right_outpost21
 	icon = 'icons/obj/decals_op.dmi'
 	icon_state = "map-right-outpost"
+
+/obj/structure/sign/warning/enzyme
+	icon = 'icons/obj/stationobjs_op.dmi'
+	name = "WARNING: ENZYMATIC ATMOSPHERE"
+	desc = "The sign states: 'This planet is undergoing intense terraforming. As a result, the atmosphere outside is acidic, enzymatic, and highly fatal. You will be painfully digested outside without proper protection!'"
+	icon_state = "enzyme_nl"

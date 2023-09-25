@@ -476,9 +476,15 @@
 		if(target)
 			lose_target()
 
-		holder.IMove(get_step(holder, pick(alldirs)))
 		var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
 		J.scream(J,prob(30))
+
+		// don't run if grabbed
+		if(holder.grabbed_by.len)
+			if(fear_run <= 0)
+				fear_run = 10 // screw it
+			return
+		holder.IMove(get_step(holder, pick(alldirs)))
 	else
 		// rejuvinate nest!
 		if(home_turf_previous)

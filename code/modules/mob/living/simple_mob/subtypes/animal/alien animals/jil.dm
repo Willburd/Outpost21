@@ -154,8 +154,8 @@
 		icon_state = icon_living
 
 /mob/living/simple_mob/vore/alienanimals/jil/Life()
-	..()
-	if(stat != DEAD)
+	. = ..()
+	if(stat != DEAD && !istype(loc,/obj/belly))
 		if((!mind || !mind.active) && client == null)
 			if(istype(loc,/obj/structure/closet))
 				// sleep in locker
@@ -390,7 +390,7 @@
 	if(!hoard_items)
 		return
 
-	if(holder.is_ventcrawling)
+	if(holder.is_ventcrawling || !istype(holder.loc,/turf))
 		return
 
 	. = list()
@@ -465,7 +465,8 @@
 		return
 
 	// vent crawler handling
-	if(holder.is_ventcrawling)
+	if(holder.is_ventcrawling || !istype(holder.loc,/turf))
+		fear_run = 0
 		return
 
 	if(fear_run > 0)
@@ -580,22 +581,15 @@
 	return holder.get_active_hand() || fear_run > 0
 
 /datum/ai_holder/simple_mob/intentional/jil/react_to_attack(atom/movable/attacker, ignore_timers = FALSE)
-	if(holder.is_ventcrawling)
-		return FALSE
-	// not allowed to retaliate!
-	if(holder.stat) // We're dead.
-		ai_log("react_to_attack() : Was attacked by [attacker], but we are dead/unconscious.", AI_LOG_TRACE)
-		return FALSE
-	if(holder.resting)	// I can't kill someone while I'm laying down!
-		ai_log("react_to_attack() : AI is resting. Getting up.", AI_LOG_TRACE)
-		holder.lay_down()
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
 		var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
 		J.Sleeping(0)
 		J.resting = FALSE
 		J.update_icons()
-		go_wake()
+
+	if(holder.is_ventcrawling || !istype(holder.loc,/turf))
+		return FALSE
 
 	// drop item
 	if(holder.get_active_hand())
@@ -603,33 +597,18 @@
 		greed = 0
 		holder.drop_from_inventory(holder.get_active_hand(), get_turf(holder))
 
-	if(istype(holder,/mob/living/simple_mob/vore/alienanimals/jil/jillioth))
-		if(!hostile && !retaliate) // Not allowed to defend ourselves.
-			ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
-			return FALSE
-		if(holder.IIsAlly(attacker)) // I'll overlook it THIS time...
-			ai_log("react_to_attack() : Was attacked by [attacker], but they were an ally.", AI_LOG_TRACE)
-			return FALSE
-		if(target && !ignore_timers && (world.time < last_target_time + 8 SECONDS)) // Already fighting someone. Switching every time we get hit would impact our combat performance.
-			ai_log("react_to_attack() : Was attacked by [attacker], but we switched targets too recently to change.", AI_LOG_TRACE)
-			on_attacked(attacker)
-			return FALSE
-		// fear the jillioth
-		on_attacked(attacker) // So we attack immediately and not threaten.
-		return give_target(attacker, urgent = TRUE) // Also handles setting the appropiate stance.
-	else
-		ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
-		var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
-		J.scream(J,TRUE)
+	if(holder.stat) // We're dead.
+		return ..(attacker)
+
+	// scream, but only retaliate if jillioth
+	var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
+	J.scream(J,TRUE)
+	if(!istype(holder,/mob/living/simple_mob/vore/alienanimals/jil/jillioth))
 		fear_run = 10 + rand(30)
 		if(target)
 			// lose target...
 			if(target && istype(target.loc, /turf))
 				unreachable_locs += target.loc // if not inside something!
-			if(holder.get_active_hand())
-				holder.drop_from_inventory(holder.get_active_hand(), get_turf(holder))
 			last_pickup_turf = null // clear last pickup, we freaked out
-			give_up_movement()
 			lose_target()
-		holder.IMove(get_step(holder, pick(alldirs)))
-		return FALSE
+	return ..(attacker)

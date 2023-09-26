@@ -196,17 +196,21 @@
 		return
 
 	if(prob(2))
+		var/mob/living/carbon/halucinateTarget = null
+		var/count = 0
 		for(var/atom/A in view(src, 4))
 			if(istype(A, /mob/living/carbon))
-				msgcooldown = 130
-
+				count += 1
 				var/mob/living/carbon/C = A
 				if(C.hallucination > 20 && prob(5))
-					// halucination replies
-					visible_message(halu_text(C))
-				else
-					// tease people to backup
-					visible_message(advert_text(C))
+					halucinateTarget = C
+
+		if(count == 1 && halucinateTarget)
+			// halucination replies
+			visible_message(halu_text(halucinateTarget))
+		else
+			// tease people to backup
+			visible_message(advert_text())
 	return
 
 
@@ -218,9 +222,17 @@
 	if(prob(15))
 		return "Your insides are whispering."
 	if(prob(15))
+		return "Your flesh is whispering, it says to peel it off."
+	if(prob(15))
+		return "Your eyes are lying to you. Wake up [target.real_name]."
+	if(prob(15))
 		return "Cut the bad things inside of you out."
 	if(prob(15))
-		return "Stop lying to everyone, they know what is inside you."
+		return "Your not alone, it's inside you."
+	if(prob(15))
+		return "[target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]."
+	if(prob(15))
+		return "Stop lying to everyone, they know what is inside your body."
 	if(prob(15))
 		return "Everyone wants to cut you open, and take the things inside you for themselves."
 	if(prob(15))
@@ -228,7 +240,7 @@
 	return "Your body is wrong."
 
 
-/obj/machinery/medical_kiosk/proc/advert_text(mob/living/target)
+/obj/machinery/medical_kiosk/proc/advert_text()
 	if(prob(15))
 		return "Cherish the memories you have, save the ones you could lose"
 	if(prob(15))
@@ -245,7 +257,7 @@
 		return "A few second backup here, could save you hours in lost memories!"
 	if(prob(15))
 		return "You almost dropped those life long memories! Back them up while you can!"
-	return "Are you in compliance?"
+	return "Are you in compliance? Get backed up today!"
 
 
 #undef BROKEN_BONES

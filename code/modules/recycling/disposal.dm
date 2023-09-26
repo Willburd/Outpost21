@@ -657,8 +657,6 @@
 			for(var/mob/living/H in src)
 				if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
 					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
-					if(H.stat == DEAD && H.getBruteLoss() > 150)
-						H.gib() // SPLOOT
 
 		var/obj/structure/disposalpipe/curr = loc
 		last = curr
@@ -885,6 +883,10 @@
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 100, 1)
+						if(istype(AM,/mob/living)) // same ignore as above
+							var/mob/living/L = AM
+							if(L.stat == DEAD && L.getBruteLoss() > 150)
+								L.gib() // SPLOOT out of tubes violently in a shower of gore
 			H.vent_gas(T)
 			qdel(H)
 
@@ -900,6 +902,10 @@
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 5, 1)
+						if(istype(AM,/mob/living)) // same ignore as above
+							var/mob/living/L = AM
+							if(L.stat == DEAD && L.getBruteLoss() > 150)
+								L.gib() // SPLOOT out of tubes violently in a shower of gore
 
 			H.vent_gas(T)	// all gas vent to turf
 			qdel(H)
@@ -1556,6 +1562,10 @@
 			if(!istype(AM,/mob/living/silicon/robot/drone)) //Drones keep smashing windows from being fired out of chutes. Bad for the station. ~Z
 				spawn(5)
 					AM.throw_at(target, 3, 1)
+				if(istype(AM,/mob/living)) // same ignore as above
+					var/mob/living/L = AM
+					if(L.stat == DEAD && L.getBruteLoss() > 150)
+						L.gib() // SPLOOT out of tubes violently in a shower of gore
 		H.vent_gas(src.loc)
 		qdel(H)
 

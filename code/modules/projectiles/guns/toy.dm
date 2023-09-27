@@ -305,4 +305,7 @@
 	item_state = "retro"
 
 /obj/item/weapon/gun/energy/lasertag/omni
+	icon_state = "omnitag"
+	item_state = "omnitag"
 	projectile_type = /obj/item/projectile/beam/lasertag/omni
+	required_vest = /obj/item/clothing/suit/omnitag

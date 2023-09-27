@@ -530,7 +530,9 @@ var/datum/planet/muriki/planet_muriki = null
 					protection = H.shoes
 		else if(pick_zone == BP_L_FOOT || pick_zone == BP_R_FOOT)
 			if(istype(H))
-				protection = H.shoes
+				protection = H.wear_suit // suit will protect feet in most cases, otherwise try shoes?
+				if(protection == null)
+					protection = H.shoes
 
 		if(!submerged)
 			if(protection == null)

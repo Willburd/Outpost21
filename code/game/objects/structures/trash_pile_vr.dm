@@ -294,7 +294,7 @@
 					prob(2);/obj/item/weapon/storage/box/syndie_kit/spy,
 					prob(2);/obj/item/weapon/grenade/anti_photon,
 					prob(2);/obj/item/clothing/under/hyperfiber/bluespace,
-					prob(2);/obj/item/selectable_item/chemistrykit/size,
+					//prob(2);/obj/item/selectable_item/chemistrykit/size, // outpost21 edit - removed size change
 					prob(2);/obj/item/selectable_item/chemistrykit/gender,
 					prob(1);/obj/item/clothing/suit/storage/vest/heavy/merc,
 					//prob(1);/obj/item/device/nif/bad,

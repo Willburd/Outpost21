@@ -29,6 +29,7 @@
 	selection_string = "Select a chemical:"
 	selection_title = "Chemical Selection"
 
+/* outpost 21 size change removal
 /obj/item/selectable_item/chemistrykit/size
 	name = "size chemistry kit"
 	desc = "A pre-arranged home chemistry kit. This one is for rather specific set of size-altering chemicals."
@@ -37,6 +38,7 @@
 	item_options = list("Macrocillin" = /obj/item/weapon/reagent_containers/glass/beaker/vial/macrocillin,
 						"Microcillin" = /obj/item/weapon/reagent_containers/glass/beaker/vial/microcillin,
 						"Normalcillin" = /obj/item/weapon/reagent_containers/glass/beaker/vial/normalcillin)
+*/
 
 /obj/item/selectable_item/chemistrykit/gender
 	name = "gender chemistry kit"

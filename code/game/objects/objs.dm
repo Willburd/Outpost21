@@ -24,6 +24,7 @@
 /obj/Destroy()
 	STOP_PROCESSING(SSobj, src)
 
+	/*  outpost 21 removal - smollworld
 	//VOREStation Add Start - I really am an idiot why did I make it this way
 	if(micro_target)
 		for(var/thing in src.contents)
@@ -36,6 +37,7 @@
 				m.forceMove(get_turf(src.loc))
 			m.visible_message("<span class = 'notice'>\The [m] tumbles out of \the [src]!</span>")
 	//VOREStation Add End
+	*/
 
 	return ..()
 

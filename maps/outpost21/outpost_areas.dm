@@ -16,6 +16,7 @@
 	name = "\improper Hazardous Gas Filtration Substation"
 	icon_state = "yelblacir"
 	ambience = AMBIENCE_ATMOS
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 //Processor. Our station is cool enough to have a giant vore eldrich horror for a terraforming station.
 /area/muriki/processor
@@ -312,6 +313,7 @@
 
 /area/hallway/muriki/dorm
 	name = "\improper Dorm Hallway"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "bluewnew"
 
 /area/hallway/muriki/civup
@@ -532,6 +534,7 @@
 /area/muriki/grounds //Non dangerous variant, for inside the fence
 	name = "\improper Facility Grounds"
 	icon_state = "dark"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 	music = 'sound/ambience/ambiatm1.ogg'
 
@@ -587,27 +590,37 @@
 /area/mine/explored/muriki/surface
 	name = "\improper Facility Grounds"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
+	base_turf = /turf/simulated/mineral/floor/muriki
 	music = 'sound/ambience/ambiatm1.ogg'
 
 /area/mine/unexplored/muriki/surface
 	name = "\improper Facility Grounds"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 	music = 'sound/ambience/ambiatm1.ogg'
 
 /area/mine/explored/muriki/cave
 	name = "\improper Facility Tunnels"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 
 /area/mine/unexplored/muriki/cave
 	name = "\improper Muriki Caverns"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 
 //Subdivided areas because holy crap zas hates our map.
 //Basement. Dept.
+/area/mine/explored/muriki
+	base_turf = /turf/simulated/mineral/floor/muriki
+/area/mine/unexplored/muriki
+	base_turf = /turf/simulated/mineral/floor/muriki
+
 /area/mine/explored/muriki/cave/eng
 	name = "\improper Facility Engineering Tunnels"
 	sound_env = TUNNEL_ENCLOSED
 	icon_state = "orange"
+	base_turf = /turf/simulated/mineral/floor/muriki
 /area/mine/unexplored/muriki/cave/eng
 	name = "\improper Muriki Caverns Near Engineering"
 	sound_env = TUNNEL_ENCLOSED
@@ -697,16 +710,19 @@
 /area/mine/explored/muriki/mountainbase
 	name = "\improper Facility Mountain Caves"
 	icon_state = "center"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 
 /area/mine/unexplored/muriki/mountainbase
 	name = "\improper Muriki Easstern Mountain Caverns"
 	icon_state = "east"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 
 /area/mine/unexplored/muriki/mountainbasenorth
 	name = "\improper Muriki Northern Mountain Caverns"
 	icon_state = "north"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 
 //------second floor------
@@ -801,6 +817,7 @@
 //Other areas in the caves
 /area/mine/explored/muriki/tuggrave
 	name = "\improper Tug Graveyard"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = TUNNEL_ENCLOSED
 	icon_state = "dk_yellow"
 
@@ -832,6 +849,9 @@
 //
 // Maintenance ------------------------------------------------------------
 //
+/area/maintenance
+	base_turf = /turf/simulated/mineral/floor/muriki
+
 /area/maintenance/medicelev
 	name = "\improper Medical Elevator Maintenance Shaft"
 	icon_state = "maint_medbay"
@@ -928,6 +948,7 @@
 /area/medical/mail
 	name = "\improper Medical Mailing Room"
 	icon_state = "quartdelivery"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = SMALL_SOFTFLOOR
 
 /area/medical/locker
@@ -953,6 +974,7 @@
 
 /area/medical/surgtrain
 	name = "\improper Medical Surgery Training Theater"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "medbay4"
 
 /area/hallway/secondary/secmedbridge
@@ -965,6 +987,7 @@
 	name = "\improper Vox Treatment Lab"
 	icon_state = "purple"
 	sound_env = SMALL_ENCLOSED
+	base_turf = /turf/simulated/mineral/floor/muriki
 	ambience = list(AMBIENCE_OTHERWORLDLY, AMBIENCE_OUTPOST)
 
 /area/medical/voxlab/airgap
@@ -1048,6 +1071,7 @@
 //
 /area/security/brig/low
 	name = "\improper Security Low Security Brig"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "brig"
 
 /area/security/brig/drunk
@@ -1056,6 +1080,7 @@
 
 /area/security/brig/isolate
 	name = "\improper Security Solitary Confinement"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "brig"
 
 /area/security/tankstore
@@ -1120,14 +1145,20 @@
 /area/rnd/otherlab
 	name = "\improper RnD Auxillary Laboratory"
 	icon_state = "outpost_research"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/telesci
 	name = "\improper Research Telescience"
 	icon_state = "teleporter"
+	base_turf = /turf/simulated/mineral/floor/muriki
+
+/area/rnd/xenobiology
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/xenobiology/xenoflora2
 	name = "\improper Xenoflora Hazard Lab"
 	icon_state = "xeno_f_lab"
+	base_turf = /turf/simulated/open/muriki
 
 /area/rnd/xenobiology/xenobioh
 	name = "\improper Hazardous Xenobiology Lab"
@@ -1139,50 +1170,64 @@
 
 /area/rnd/xenobiology/lost
 	name = "\improper Abandoned Xenobiology Lab"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "blue"
 
 /area/rnd/xenobiology/burn
 	name = "\improper Xenobiology Threat Supression"
+	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "red2"
 
 /area/rnd/research/atmosia
 	name = "\improper Research Scrubber Filtration"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/analysis
 	name = "\improper Research Sample Analysis"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/anomaly
 	name = "\improper Anomalous Materials Lab"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/medical
 	name = "\improper Xenolab First aid"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/isolation_a
 	name = "\improper Research Isolation 1"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/isolation_b
 	name = "\improper Research Isolation 2"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/isolation_c
 	name = "\improper Research Isolation 3"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/longtermstorage
 	name = "\improper Xenolab Long-Term Storage"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/anomaly_storage
 	name = "\improper Xenolab Anomalous Storage"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/anomaly_analysis
 	name = "\improper Xenolab Anomaly Analysis"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/exp_prep
 	name = "\improper Xenolabt Expedition Preperation"
 
 /area/rnd/research/mailing
 	name = "\improper Research Mailing"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/laundry
 	name = "\improper Xenolab Laundry"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/research/breakroom
 	name = "\improper Research Break Room"
@@ -1204,14 +1249,17 @@
 /area/rnd/hallway/lowmain
 	name = "\improper Lower Main Research hallway"
 	icon_state = "hallC"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/hallway/xeno
 	name = "\improper Xenoarch hallway"
 	icon_state = "hallC"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/hallway/hazard
 	name = "\improper Hazardous Research hallway"
 	icon_state = "hallC"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/rnd/hallway/staircase
 	name = "\improper Research Stairwell"
@@ -1219,6 +1267,7 @@
 
 /area/muriki/research/isolation_hall
 	name = "Research Isolation Hall"
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 //
 //-----------------------------------------------------------------------

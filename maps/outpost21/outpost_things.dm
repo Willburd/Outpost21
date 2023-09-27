@@ -349,3 +349,10 @@
 	layer = ABOVE_WINDOW_LAYER
 /obj/structure/noticeboard
 	layer = ABOVE_WINDOW_LAYER
+
+
+//I know this should be somewhere else but I can't think of where to put it right now. I'll move it later. Todo
+/obj/item/weapon/paper/armorguide
+	name = "Guide to Armor Choice"
+	desc = "Also titled: how to not die to a spider, and become slightly more robust."
+	info = "TEST"

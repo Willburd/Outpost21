@@ -32,7 +32,7 @@ MURIKI_TURF_CREATE(/turf/simulated/floor/plating/external)
 MURIKI_TURF_CREATE(/turf/simulated/floor/outpost_roof)
 MURIKI_TURF_CREATE(/turf/simulated/floor/solarpanel)
 MURIKI_TURF_CREATE(/turf/simulated/floor/glass/reinforced)
-MURIKI_TURF_CREATE_UN(/turf/simulated/floor/plating)
+MURIKI_TURF_CREATE_UN(/turf/simulated/floor/plating) //UN ones are outdoors adjacent. Same atmo, same temp, no rain.
 MURIKI_TURF_CREATE_UN(/turf/simulated/floor/tiled/techfloor)
 MURIKI_TURF_CREATE_UN(/turf/simulated/floor/tiled/techfloor/grid)
 MURIKI_TURF_CREATE_UN(/turf/simulated/floor/tiled/dark)

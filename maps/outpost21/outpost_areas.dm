@@ -11,12 +11,14 @@
 /area/engineering/atmoshall
 	name = "\improper Atmospherics Hallway"
 	icon_state = "atmos"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/muriki/atmos/voxdump
 	name = "\improper Hazardous Gas Filtration Substation"
 	icon_state = "yelblacir"
 	ambience = AMBIENCE_ATMOS
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 //Processor. Our station is cool enough to have a giant vore eldrich horror for a terraforming station.
 /area/muriki/processor
@@ -109,66 +111,87 @@
 
 /area/muriki/bathroom/atmospherics
 	name = "\improper Atmospherics Latrine"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/muriki/bathroom/bar
 	name = "\improper Bar Head"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/bridge
 	name = "\improper Privy"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/muriki/bathroom/captain
 	name = "\improper Oval Office"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/muriki/bathroom/cargo
 	name = "\improper Main Cargo Bog"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/muriki/bathroom/cargopub
 	name = "\improper Cargo Public Restroom"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/cargolower
 	name = "\improper Lower Cargo Bog"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/muriki/bathroom/chapel
 	name = "\improper Chapel Pilgrimage"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/courthouse
 	name = "\improper Dreadbox"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/muriki/bathroom/dorm
 	name = "\improper Pool Restroom"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/engineering
 	name = "\improper Engineering Latrine"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/muriki/bathroom/engsingle
 	name = "\improper Engineering Lobby Latrine"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/muriki/bathroom/kitchen
 	name = "\improper Kitchen Comode"
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
 
 /area/muriki/bathroom/medical
 	name = "\improper Medical Depository"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/muriki/bathroom/medupper
 	name = "\improper Recovery Depository"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/muriki/bathroom/sanitorium
 	name = "\improper Sanitorium"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/sciupper
 	name = "\improper Science Lavatory"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/muriki/bathroom/scilower
 	name = "\improper Lower Science Lavatory"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/muriki/bathroom/security
 	name = "\improper Security Thunderbox"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/muriki/bathroom/securitypub
 	name = "\improper Arrivals Restroom"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/bathroom/vox
 	name = "\improper Vomit Closet"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //
 // Cargo ---------------------------------------------------------
@@ -198,6 +221,7 @@
 /area/quartermaster/mining/firstaid
 	name = "\improper Mining First Aid"
 	icon_state = "medbay2"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/muriki/septic
 	name = "\improper Septic Tank"
@@ -218,26 +242,31 @@
 	name = "\improper Arrivals Elevators"
 	icon_state = "shuttle"
 	ambience = AMBIENCE_GENERIC
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
 
 /area/muriki/arriveproc
 	name = "\improper Arrivals Processing"
 	icon_state = "blublacir"
 	ambience = AMBIENCE_GENERIC
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
 
 /area/muriki/arrivejani
 	name = "\improper Arrivals Janitorial Closet"
 	icon_state = "cyablasqu"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_JANITOR
 
 /area/muriki/janiextra
 	name = "\improper Overflow Janitorial Closet"
 	icon_state = "cyablasqu"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_JANITOR
 
 /area/muriki/cybstorage
 	name = "\improper Cyborg Storage"
 	icon_state = "shuttle"
 	ambience = AMBIENCE_GENERIC
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
 
 /area/muriki/crew/
 	name = "\improper Crew Area"
@@ -247,62 +276,75 @@
 /area/muriki/crew/arcade
 	name = "\improper Arcade"
 	icon_state = "cyawhicir"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/barback
 	name = "\improper Bartender Backroom"
 	icon_state = "cyawhicir"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/arcade/lasertag
 	name = "\improper Laser Tag Arena"
 	icon_state = "purwhitri"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/arcade/lasertagstore
 	name = "\improper Laser Tag Storage"
 	icon_state = "purwhicir"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/sauna1
 	name = "\improper Sauna Room One"
 	icon_state = "bluewnew"
 	sound_env = SMALL_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/sauna2
 	name = "\improper Sauna Room Two"
 	icon_state = "bluewnew"
 	sound_env = SMALL_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/poollocker
 	name = "\improper Pool Showers"
 	icon_state = "locker"
 	sound_env = MEDIUM_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/judge
 	name = "\improper Judge's Office"
 	icon_state = "bluenew"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/glass
 	name = "\improper Dorm Dayroom"
 	icon_state = "recreation_area"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/muriki/crew/dormaid
 	name = "\improper Dorm First Aid Station"
 	icon_state = "medbay2"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/muriki/crew/baraid
 	name = "\improper Public First Aid Station"
 	icon_state = "medbay2"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/muriki/crew/engyaid
 	name = "\improper Public Cargo First Aid Station"
 	icon_state = "medbay2"
 	sound_env = SMALL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/chapel/chapel_music
 	name = "\improper Music Room"
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 //Hallways-------
 /area/muriki/crewstairwell
@@ -310,48 +352,59 @@
 	icon_state = "bluenew"
 	music = 'sound/ambience/signal.ogg'
 	sound_env = TUNNEL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/muriki/dorm
 	name = "\improper Dorm Hallway"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "bluewnew"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/muriki/civup
 	name = "\improper Civilian Upper Hallway"
 	icon_state = "bluenew"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/hallway/security/main
 	name = "\improper Security Main Hallway"
 	icon_state = "blue"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/hallway/security/armor
 	name = "\improper Security Armory Hallway"
 	icon_state = "red2"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/hallway/security/upper
 	name = "\improper Security Upper Hallway"
 	icon_state = "blue"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //Hydro-------
 /area/muriki/crew/kitchenfreezer
 	name = "\improper Kitchen Freezer"
 	icon_state = "bluewnew"
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
 
 /area/hydroponics/publicgarden
 	name = "\improper Public Garden"
 	icon_state = "cafe_garden"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/hydroponics/apiary
 	name = "\improper Hydroponics Aipiary"
 	icon_state = "hydro"
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
 
 /area/hydroponics/hallway
 	name = "\improper Hydroponics Hallway"
 	icon_state = "center"
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
 
 /area/hydroponics/gibber //Watch your step~
 	name = "\improper Hydroponics Gibber Deposit"
 	icon_state = "red2"
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
 
 //
 // Engineering -----------------------------------------------------
@@ -360,30 +413,37 @@
 	name = "\improper Tram Maintenance Room"
 	icon_state = "engineering"
 	sound_env = LARGE_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/hardsuitstore
 	name = "\improper Engineering Hardsuit Storage"
 	icon_state = "eva"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/enginestorage
 	name = "\improper Engine Storage"
 	icon_state = "primarystorage"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/auxstore
 	name = "\improper Engineering Aux Storage"
 	icon_state = "auxstorage"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/corepower
 	name = "\improper Engine Generator"
 	icon_state = "engine"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/eva
 	name = "\improper Engineering Exterior Access"
 	icon_state = "eva"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/gravgen
 	name = "\improper Elevator Gravity Assist"
 	icon_state = "maint_pumpstation"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/engineering/coreproctunnel
 	name = "\improper Core Processor Atmo Tunnel"
@@ -391,13 +451,16 @@
 	sound_env = TUNNEL_ENCLOSED
 	ambience = AMBIENCE_FOREBODING
 	music = 'sound/ambience/ambimine.ogg'
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 //them dat der bluespezz warpy magic
 /area/teleporter/engineering
 	name = "\improper Engineering Teleporter"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/teleporter/bridge
 	name = "\improper Bridge Teleporter"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 
 //
@@ -455,18 +518,21 @@
 	lift_floor_label = "Security Basement"
 	lift_floor_name = "Brig."
 	lift_announce_str = "Arriving at Security Basement."
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/turbolift/secmain
 	name = "Security First Floor"
 	lift_floor_label = "Security Main"
 	lift_floor_name = "Primary Security."
 	lift_announce_str = "Arriving at Security Primary."
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/turbolift/secupper
 	name = "Security Second Floor"
 	lift_floor_label = "Security High Level"
 	lift_floor_name = "AI, Telecoms, Evac shuttle."
 	lift_announce_str = "Arriving at Security Upper Floor."
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //MEDICAL
 /area/turbolift/medibasement
@@ -475,18 +541,21 @@
 	lift_floor_label = "Medical Basement"
 	lift_floor_name = "Vox Treatment, Morgue, Surgery Training, Cavern Access."
 	lift_announce_str = "Arriving at Medical Basement."
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/turbolift/medical
 	name = "Medbay First Floor"
 	lift_floor_label = "Medbay"
 	lift_floor_name = "Lobby, Surgery, Primary Treatment, Psychology."
 	lift_announce_str = "Arriving at Medbay Primary."
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/turbolift/mediupper
 	name = "Medbay Second Floor"
 	lift_floor_label = "Medical Recovery"
 	lift_floor_name = "Resleeving, CMO, Checkup, Recovery ward, Hangar."
 	lift_announce_str = "Arriving at Medical Loft."
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //Civilian
 /area/turbolift/civbase
@@ -495,18 +564,21 @@
 	lift_floor_label = "Basement"
 	lift_floor_name = "Cafe, Pool, Dorms, Arcade, Cavern Access."
 	lift_announce_str = "Arriving at Basement."
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/turbolift/civmain
 	name = "Civilian First Floor"
 	lift_floor_label = "First Floor"
 	lift_floor_name = "Bar, Bridge, Evac Hallway."
 	lift_announce_str = "Arriving at First Floor."
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/turbolift/civupper
 	name = "Civilian Second Floor"
 	lift_floor_label = "Second Floor"
 	lift_floor_name = "Chapel, Library, Garden."
 	lift_announce_str = "Arriving at Second Floor."
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 //Science
 /area/turbolift/scibase
@@ -515,18 +587,21 @@
 	lift_floor_label = "Research Basement"
 	lift_floor_name = "Xenobio, Particle lab, Xenoarch, Cavern Access"
 	lift_announce_str = "Arriving at Basement."
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/turbolift/scimain
 	name = "Science First Floor"
 	lift_floor_label = "Research First Floor"
 	lift_floor_name = "RnD, Robotics, RD."
 	lift_announce_str = "Arriving at First Floor."
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/turbolift/sciupper
 	name = "Science Second Floor"
 	lift_floor_label = "Research Second Floor"
 	lift_floor_name = "Telesci, Xenoflora."
 	lift_announce_str = "Arriving at Second Floor."
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 //
 //----------------- Exterior / hazard areas / mine ---------------------------------
@@ -879,6 +954,7 @@
 /area/maintenance/wastedisposal
 	name = "\improper Waste Disposal Maintenance"
 	icon_state = "maint_medbay"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/maintenance/wastenear
 	name = "\improper Near Waste Maintenance"
@@ -939,47 +1015,57 @@
 	icon_state = "bluenew"
 	music = 'sound/ambience/signal.ogg'
 	sound_env = TUNNEL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/laundry
 	name = "\improper Medical Laundry Room"
 	icon_state = "locker"
 	sound_env = SMALL_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/mail
 	name = "\improper Medical Mailing Room"
 	icon_state = "quartdelivery"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	sound_env = SMALL_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/locker
 	name = "\improper Medical Locker Room"
 	icon_state = "locker"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/recovlaund
 	name = "\improper Medical Recovery Laundry"
 	icon_state = "locker"
 	flags = RAD_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/evastore
 	name = "\improper Medical Hazop And Hardsuit Storage"
 	icon_state = "locker"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/sleevecheck
 	name = "\improper Medical Resleeving Verification"
 	icon_state = "medbay3"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/checkup
 	name = "\improper Medical Examination Room"
 	icon_state = "medbay3"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/surgtrain
 	name = "\improper Medical Surgery Training Theater"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "medbay4"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/hallway/secondary/secmedbridge
 	name = "\improper Medical Security Transfer Bridge"
 	icon_state = "blue-red2"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 //vox treatment: In compliance with....
 
@@ -989,44 +1075,55 @@
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/simulated/mineral/floor/muriki
 	ambience = list(AMBIENCE_OTHERWORLDLY, AMBIENCE_OUTPOST)
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/airgap
 	name = "\improper Vox Treatment Airgap"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/airlock
 	name = "\improper Vox Treatment Airlock"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/lobby
 	name = "\improper Vox Treatment Lobby"
 	icon_state = "decontamination"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/main
 	name = "\improper Vox Treatment Lab"
 	icon_state = "medbay_triage"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/storage
 	name = "\improper Vox Treatment Storage"
 	icon_state = "storage"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/surgery
 	name = "\improper Vox Surgery"
 	icon_state = "surgery"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/chem
 	name = "\improper Vox Chemistry Lab"
 	icon_state = "chem"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/recov
 	name = "\improper Vox Recovery"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/voxlab/breakroom
 	name = "\improper Vox Lab Breakroom"
 	icon_state = "bar"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/hangar
 	name = "\improper Medevac Shuttle Hangar"
 	icon_state = "medical"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //
 // Rooftops-----------------------------------------------------------------------
@@ -1073,41 +1170,50 @@
 	name = "\improper Security Low Security Brig"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "brig"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/brig/drunk
 	name = "\improper Security Drunktank"
 	icon_state = "brig"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/brig/isolate
 	name = "\improper Security Solitary Confinement"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "brig"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/tankstore
 	name = "\improper Security Heavy Armor Storage"
 	icon_state = "security_sub"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/mechent
 	name = "\improper Security Mech Entrance"
 	icon_state = "security_sub"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/kennels
 	name = "\improper Security Kennels"
 	icon_state = "red2"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/eva
 	name = "\improper Security External Access"
 	icon_state = "red2"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/stairwell
 	name = "\improper Security Stairwell"
 	icon_state = "red2"
 	sound_env = TUNNEL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/security/hangar
 	name = "\improper Security hangar"
 	icon_state = "red2"
 	sound_env = LARGE_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //
 // Science-----------------------------------------------------------------------
@@ -1115,58 +1221,71 @@
 /area/constructionsite/science2
 	name = "\improper Research Construction Site"
 	icon_state = "construction"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd
 	name = "\improper Research"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "purple"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/chemistry
 	name = "\improper Research Backup Chemistry"
 	icon_state = "chem"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/breakroom
 	name = "\improper Research Breakroom"
 	icon_state = "locker"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/lockers
 	name = "\improper Research Locker Room"
 	icon_state = "locker"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/entry
 	name = "\improper Research Entryway Decontamination"
 	icon_state = "decontamination"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/stairwell
 	name = "\improper Science Stairwell"
 	icon_state = "purple"
 	sound_env = TUNNEL_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/otherlab
 	name = "\improper RnD Auxillary Laboratory"
 	icon_state = "outpost_research"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/telesci
 	name = "\improper Research Telescience"
 	icon_state = "teleporter"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology/xenoflora2
 	name = "\improper Xenoflora Hazard Lab"
 	icon_state = "xeno_f_lab"
 	base_turf = /turf/simulated/open/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology/xenobioh
 	name = "\improper Hazardous Xenobiology Lab"
 	icon_state = "xeno_f_lab"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology/xenobiohstore
 	name = "\improper Hazardous Xenobiology Storage"
 	icon_state = "research_storage"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology/lost
 	name = "\improper Abandoned Xenobiology Lab"
@@ -1177,97 +1296,120 @@
 	name = "\improper Xenobiology Threat Supression"
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "red2"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/rnd/research/atmosia
 	name = "\improper Research Scrubber Filtration"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/rnd/research/analysis
 	name = "\improper Research Sample Analysis"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/anomaly
 	name = "\improper Anomalous Materials Lab"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/medical
 	name = "\improper Xenolab First aid"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/rnd/research/isolation_a
 	name = "\improper Research Isolation 1"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/isolation_b
 	name = "\improper Research Isolation 2"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/isolation_c
 	name = "\improper Research Isolation 3"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/longtermstorage
 	name = "\improper Xenolab Long-Term Storage"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/anomaly_storage
 	name = "\improper Xenolab Anomalous Storage"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/anomaly_analysis
 	name = "\improper Xenolab Anomaly Analysis"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/exp_prep
 	name = "\improper Xenolabt Expedition Preperation"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/mailing
 	name = "\improper Research Mailing"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/rnd/research/laundry
 	name = "\improper Xenolab Laundry"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/breakroom
 	name = "\improper Research Break Room"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 //----------------
 /area/rnd/hallway
 	name = "\improper Research hallway"
 	icon_state = "hallC"
 	sound_env = LARGE_ENCLOSED
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/main
 	name = "\improper Primary Research hallway"
 	icon_state = "hallC"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/upper
 	name = "\improper Upper Research hallway"
 	icon_state = "hallC"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/lowmain
 	name = "\improper Lower Main Research hallway"
 	icon_state = "hallC"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/xeno
 	name = "\improper Xenoarch hallway"
 	icon_state = "hallC"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/hazard
 	name = "\improper Hazardous Research hallway"
 	icon_state = "hallC"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/hallway/staircase
 	name = "\improper Research Stairwell"
 	icon_state = "purple"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/muriki/research/isolation_hall
 	name = "Research Isolation Hall"
 	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 //
 //-----------------------------------------------------------------------
@@ -1276,6 +1418,7 @@
 /area/offworld/asteroidyard/station/
 	sound_env = SMALL_ENCLOSED
 	ambience = AMBIENCE_MAINTENANCE
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/offworld/asteroidyard/external
 	name = "\improper Reclamation Yard Exterior"
@@ -1291,66 +1434,80 @@
 /area/offworld/asteroidyard/station/halls
 	name = "\improper Reclamation Yard Hallway"
 	icon_state = "purple"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/offworld/asteroidyard/station/halls_storage
 	name = "\improper Reclamation Yard Hallway"
 	icon_state = "green"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/offworld/asteroidyard/station/halls_bar
 	name = "\improper Reclamation Yard Hallway"
 	icon_state = "orange"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/offworld/asteroidyard/station/access_shaft
 	name = "\improper Reclamation Yard Access Shaft"
 	icon_state = "red"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/offworld/asteroidyard/station/washing
 	name = "\improper Reclamation Yard Cleaning Room"
 	icon_state = "red"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/offworld/asteroidyard/station/dockingbay
 	name = "\improper Reclamation Yard Hanger"
 	icon_state = "decontamination"
 	sound_env = LARGE_ENCLOSED
 	ambience = AMBIENCE_HANGAR
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/offworld/asteroidyard/station/cave
 	name = "\improper Reclamation Yard Caverns"
 	icon_state = "construction"
 	sound_env = ASTEROID
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/offworld/asteroidyard/station/storage
 	name = "\improper Reclamation Yard Storage"
 	icon_state = "locker"
 	sound_env = ASTEROID
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/offworld/asteroidyard/station/bar
 	name = "\improper Reclamation Yard Bar"
 	icon_state = "green"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/offworld/asteroidyard/station/medbox
 	name = "\improper Reclamation Medical Station"
 	icon_state = "medbay2"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/offworld/asteroidyard/station/spelunker
 	name = "\improper Reclamation Spelunker"
 	icon_state = "toilet"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 /area/offworld/asteroidyard/station/engineering
 	name = "\improper Reclamation Yard Engineering"
 	icon_state = "orange"
 	ambience = AMBIENCE_SUBSTATION
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/offworld/asteroidyard/station/solarControl
 	name = "\improper Reclamation Yard Solar Control"
 	icon_state = "orange"
 	ambience = AMBIENCE_SUBSTATION
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/offworld/asteroidyard/station/observation
 	name = "\improper Reclamation Yard Observation"
 	icon_state = "blue"
 	sound_env = LARGE_ENCLOSED
 	ambience = AMBIENCE_FOREBODING
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 //
 //-----------------------------------------------------------------------
@@ -1360,18 +1517,21 @@
 	icon_state = "shuttle2"
 	requires_power = 1
 	base_turf = /turf/simulated/floor/plating/external/muriki
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/shuttle/medical
 	name = "\improper Medevac Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/shuttle/security
 	name = "\improper Security Shuttle"
 	icon_state = "shuttle2"
 	requires_power = 1
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //
 // Tramline --------------------------------------------------
@@ -1387,6 +1547,7 @@
 	icon_state = "dark128"
 	sound_env = LARGE_ENCLOSED
 	ambience = list(AMBIENCE_ARRIVALS, AMBIENCE_HANGAR)
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/muriki/tramstation/shed
 	name = "\improper Tram Station - Shed"
@@ -1395,14 +1556,17 @@
 /area/muriki/tramstation/waste
 	name = "\improper Tram Station - Waste"
 	icon_state = "dark128"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/muriki/tramstation/cargeng
 	name = "\improper Tram Station - Cargo Engineering"
 	icon_state = "dark128"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/muriki/tramstation/civ
 	name = "\improper Tram Station - Civilian"
 	icon_state = "dark128"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 
 // Bad guys
@@ -1434,3 +1598,260 @@
 
 /area/vehicle_interior/heavyarmor_tank_A
 	name = "\improper Tank A"
+
+
+
+//
+// Outpost holomap modifications ONLY ---------------------------------------------------------------------
+//
+/area/maintenance/disposal
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
+
+/area/maintenance/incinerator
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/maintenance/tool_storage
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/hallway/secondary/entry/docking_lounge
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
+
+/area/hallway/secondary/engineering_hallway
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/bridge
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/bridge_hallway
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/bridge/hallway
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/bridge/meeting_room
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/captain
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/heads/hop
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/heads/hor
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/heads/chief
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/heads/hos
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/heads/cmo
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/crew_quarters/courtroom
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/mint
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
+
+/area/comms
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/server
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/crew_quarters
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/sleep/engi_wash
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/crew_quarters/sleep/cryo
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/sleep/elevator
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/locker
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/locker/locker_toilet
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/fitness
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/pool
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/cafeteria
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/coffee_shop
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/crew_quarters/kitchen
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
+
+/area/crew_quarters/bar
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/library
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/library_conference_room
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/library_office
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/chapel
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/lawoffice
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/medical/psych
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/crew_quarters/medbreak
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/crew_quarters/medical_restroom
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/patients_rooms
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/ward
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/patient_wing
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/cmostore
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/robotics
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/medical/virology
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/virologyaccess
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/morgue
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/chemistry
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgery
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgery2
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgeryobs
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgeryprep
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgery_hallway
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/surgery_storage
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/cryo
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/exam_room
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/genetics
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/medical/genetics_cloning
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/medical/first_aid_station_starboard
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/first_aid_station
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/storage/tools
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/janitor/
+	holomap_color = HOLOMAP_AREACOLOR_JANITOR
+
+/area/djstation
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/rnd/rdoffice
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/hydroponics
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
+
+/area/hydroponics/cafegarden
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
+
+/area/hydroponics/garden
+	holomap_color = HOLOMAP_AREACOLOR_HYDROPONICS
+
+/area/quartermaster
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
+
+/area/quartermaster/foyer
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
+
+/area/quartermaster/qm
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/construction/solars
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/construction/solarscontrol
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
+
+/area/ai_upload
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/ai_upload_foyer
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/ai_server_room
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/ai
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/ai_cyborg_station
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/security/tactical
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
+
+/area/tcommsat/
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/tcomsat
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/tcomfoyer
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/tcommsat/computer
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/tcommsat/lounge
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
+/area/tcommsat/powercontrol
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND

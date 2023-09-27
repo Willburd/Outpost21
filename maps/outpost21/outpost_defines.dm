@@ -176,8 +176,8 @@
 	base_turf = /turf/simulated/open
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
 	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 20) - 32 // hidden
-	holomap_legend_x = 220
-	holomap_legend_y = 1160 //hidden
+	holomap_legend_x = 140
+	holomap_legend_y = 240
 
 /datum/map_z_level/outpost/main
 	z = Z_LEVEL_OUTPOST_SURFACE

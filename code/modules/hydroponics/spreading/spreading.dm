@@ -103,7 +103,7 @@
 		return
 
 	name = seed.display_name
-	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
+	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/3)
 	if(seed.get_trait(TRAIT_SPREAD)==2)
 		sense_proximity(callback = /atom/proc/HasProximity) // Grabby
 		max_growth = VINE_GROWTH_STAGES

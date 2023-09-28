@@ -20,8 +20,8 @@
 /obj/item/weapon/key/heavyarmor_carrier
 	name = "key"
 	desc = "A keyring with a small steel key, and a yellow fob reading \"Band wagon\"."
-	icon = 'icons/obj/vehicles.dmi'
-	icon_state = "train_keys"
+	icon = 'icons/obj/vehicles_op.dmi'
+	icon_state = "sec_apc"
 	w_class = ITEMSIZE_TINY
 
 /obj/item/vehicle_interior_weapon/scattershot

@@ -900,6 +900,7 @@
 /area/mine/explored/muriki/river
 	name = "\improper Muriki River"
 	icon_state = "blue2"
+	base_turf = /turf/simulated/floor/water/acidic/deep/muriki
 	sound_env = SOUND_ENVIRONMENT_SEWER_PIPE
 	music = 'sound/ambience/ruins/ruins3.ogg'
 
@@ -1123,6 +1124,11 @@
 /area/medical/hangar
 	name = "\improper Medevac Shuttle Hangar"
 	icon_state = "medical"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
+/area/medical/tankstore
+	name = "\improper Nurse Bradley's Office"
+	icon_state = "blue"
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //
@@ -1599,7 +1605,8 @@
 /area/vehicle_interior/heavyarmor_tank_A
 	name = "\improper Tank A"
 
-
+/area/vehicle_interior/heavyarmor_medic_recovery
+	name = "\improper Medic Recovery Vehicle"
 
 //
 // Outpost holomap modifications ONLY ---------------------------------------------------------------------

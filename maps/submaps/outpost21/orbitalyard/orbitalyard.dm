@@ -11,6 +11,8 @@
 #include "structure_A.dmm"
 #include "giant_asteroid_A.dmm"
 #include "structure_A.dmm"
+#include "platform_A.dmm"
+#include "container_LOST.dmm"
 #endif
 
 /datum/map_template/outpost21/space/orbitalyard
@@ -68,6 +70,21 @@
 	allow_duplicates = TRUE
 	cost = 5
 
+
+/datum/map_template/outpost21/space/orbitalyard/platform_A
+	name = "Platform Variant A"
+	desc = "Random platform."
+	mappath = 'maps/submaps/outpost21/orbitalyard/platform_A.dmm'
+	allow_duplicates = TRUE
+	cost = 2
+
+
+/datum/map_template/outpost21/space/orbitalyard/container_LOST
+	name = "Lost Container"
+	desc = "Random platform."
+	mappath = 'maps/submaps/outpost21/orbitalyard/container_LOST.dmm'
+	allow_duplicates = TRUE
+	cost = 2
 
 //////////////////////////////////////////////////////////////
 // Huge structures in the yard (usually one at a time...)

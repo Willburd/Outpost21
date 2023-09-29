@@ -17,9 +17,9 @@
 	..()
 
 /obj/machinery/vending/medical/New()
-	products += list(/obj/item/weapon/storage/box/khcrystal = 4,/obj/item/weapon/backup_implanter = 3,
+	products += list(/obj/item/weapon/storage/box/khcrystal = 4,/*/obj/item/weapon/backup_implanter = 3,*/
 					/obj/item/clothing/glasses/omnihud/med = 4, /obj/item/device/glasses_kit = 1,  /obj/item/weapon/storage/quickdraw/syringe_case = 4)
-	..()
+	..() // outpost 21 edit - removed backup implanter's easy access
 
 // Food Machines (for event/away maps)
 

@@ -125,7 +125,7 @@
 	default_apply_parts()
 	if(anchored)
 		connect_to_network()
-		
+
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
 	return ..()
@@ -310,7 +310,7 @@
 	if(!ui)
 		ui = new(user, src, "PortableGenerator", name)
 		ui.open()
-	
+
 /obj/machinery/power/port_gen/pacman/tgui_data(mob/user)
 	var/list/data = list()
 
@@ -322,7 +322,7 @@
 		data["is_ai"] = TRUE
 	else
 		data["is_ai"] = FALSE
-	
+
 	data["sheet_name"] = capitalize(sheet_name)
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
@@ -403,6 +403,7 @@
 	max_power_output = 10
 	max_safe_output = 8
 	time_per_sheet = 576
+	max_sheets = 200 //Trying to bump it up, because at 100 it can still only hold 50 sheets.
 	max_temperature = 800
 	temperature_gain = 90
 	circuit = /obj/item/weapon/circuitboard/pacman/mrs

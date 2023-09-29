@@ -290,7 +290,7 @@ Protectiveness | Armor %
 	unbreakable = FALSE
 	name = "plate insert"
 	desc = "used to craft armor plates for a plate carrier. Trim with a welder for light armor or add a second for heavy armor"
-	
+
 /obj/item/weapon/material/armor_plating/attackby(var/obj/O, mob/user)
 	if(istype(O, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/S = O
@@ -381,6 +381,7 @@ Protectiveness | Armor %
 
 /obj/item/clothing/head/helmet/bucket/wood
 	name = "wooden bucket"
+	desc = "A wooden bucket. Please don't start a war over it."
 	icon_state = "woodbucket"
 
 /obj/item/clothing/head/helmet/bucket/attackby(var/obj/O, mob/user)

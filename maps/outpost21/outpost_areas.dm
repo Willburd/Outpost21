@@ -655,10 +655,12 @@
 
 /area/muriki/grounds/tramlineeast
 	name = "\improper Eastern Tram Line"
+	base_turf = /turf/simulated/floor/outdoors/mud/muriki
 	icon_state = "redblasqu"
 
 /area/muriki/grounds/tramlinewest
 	name = "\improper Western Tram Line"
+	base_turf = /turf/simulated/floor/outdoors/mud/muriki
 	icon_state = "redblatri"
 
 //Mine variants for mob spawns.
@@ -1168,6 +1170,39 @@
 /area/muriki/rooftop/civilian
 	name = "\improper Civilian Roof"
 	icon_state = "away"
+
+//
+//Backup Generators
+//
+/area/muriki/rooftop/medgen
+	name = "\improper Medical Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
+
+/area/muriki/rooftop/scigen
+	name = "\improper Research Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
+
+/area/muriki/rooftop/civgen
+	name = "\improper Civilian Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
+
+/area/muriki/rooftop/secgen
+	name = "\improper Security Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
+
+/area/muriki/rooftop/comgen
+	name = "\improper Command Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
+
+/area/muriki/rooftop/cargen
+	name = "\improper Cargo Backup Generator"
+	sound_env = SMALL_ENCLOSED
+	icon_state = "blue"
 
 //
 // Security-----------------------------------------------------------------------

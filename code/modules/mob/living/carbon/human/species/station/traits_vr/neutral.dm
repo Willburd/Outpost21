@@ -358,6 +358,13 @@ YW change end */
 	var_changes = list("allergen_damage_severity" = 5, "allergen_disable_severity" = 20)
 	excludes = list(/datum/trait/neutral/allergen_reduced_effect)
 
+/datum/trait/neutral/allergen_gibbing
+	name = "Gibbing Allergen Reaction"
+	desc = "This trait causes spontanious gibbing as an allergen reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	var_changes = list("allergen_explosive" = TRUE)
+
 // Spicy Food Traits, from negative to positive.
 /datum/trait/neutral/spice_intolerance_extreme
 	name = "Spice Intolerance, Extreme"

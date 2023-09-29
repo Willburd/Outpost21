@@ -56,6 +56,7 @@
 	var/allergen_reaction = AG_TOX_DMG|AG_OXY_DMG|AG_EMOTE|AG_PAIN|AG_BLURRY|AG_CONFUSE	// What type of reactions will you have? These the 'main' options and are intended to approximate anaphylactic shock at high doses.
 	var/allergen_damage_severity = 2.5							// How bad are reactions to the allergen? Touch with extreme caution.
 	var/allergen_disable_severity = 10							// Whilst this determines how long nonlethal effects last and how common emotes are.
+	var/allergen_explosive = FALSE								// If we explode from  our allergy
 
 	var/min_age = 17
 	var/max_age = 70
@@ -563,4 +564,3 @@
 
 /datum/species/proc/post_spawn_special(mob/living/carbon/human/H)
 	return
-

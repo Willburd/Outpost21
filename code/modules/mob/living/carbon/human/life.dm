@@ -830,6 +830,13 @@
 			drowsyness = max(drowsyness, disable_severity)
 		if(species.allergen_reaction & AG_CONFUSE)
 			Confuse(disable_severity/4)
+		if(species.allergen_explosive) // outpost 21 addition
+			if(prob(disable_severity / 3))
+				gib()
+			else
+				emote(pick("blech","choke","shiver"))
+				Weaken(disable_severity)
+
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)

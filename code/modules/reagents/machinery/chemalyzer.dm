@@ -50,7 +50,25 @@
 			for(var/datum/reagent/R in I.reagents.reagent_list)
 				if(!R.name)
 					continue
-				to_chat(user, span("notice", "Contains [R.volume]u of <b>[R.name]</b>.<br>[R.description]<br>"))
+				to_chat(user, span("notice", "Contains [R.volume]u of <b>[R.name]</b>.<br>[R.description]<br><br>"))
+				if(SSchemistry.chemical_reactions_by_product[R.id] != null && SSchemistry.chemical_reactions_by_product[R.id].len > 0)
+					var/segment = 1
+					for(var/decl/chemical_reaction/CR in SSchemistry.chemical_reactions_by_product[R.id])
+						if(SSchemistry.chemical_reactions_by_product[R.id].len == 1)
+							to_chat(user, span("notice", "Potential Chemical breakdown: <br>"))
+						else
+							to_chat(user, span("notice", "Potential Chemical breakdown [segment]: <br>"))
+						segment += 1
+
+						for(var/RQ in CR.required_reagents)
+							to_chat(user, span("notice", " -parts [SSchemistry.chemical_reagents[RQ].name]<br>"))
+						for(var/IH in CR.inhibitors)
+							to_chat(user, span("notice", " -inhbi [SSchemistry.chemical_reagents[IH].name]<br>"))
+						for(var/CL in CR.catalysts)
+							to_chat(user, span("notice", " -catyl [SSchemistry.chemical_reagents[CL].name]<br>"))
+						to_chat(user, span("notice", "<br>"))
+				else
+					to_chat(user, span("notice", "Potential Chemical breakdown: UNKNOWN OR BASE-REAGENT<br><br>"))
 
 		// Last, unseal it if it's an autoinjector.
 		if(istype(I,/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector) && !(I.flags & OPENCONTAINER))

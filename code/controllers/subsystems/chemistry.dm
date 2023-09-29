@@ -5,6 +5,7 @@ SUBSYSTEM_DEF(chemistry)
 	init_order = INIT_ORDER_CHEMISTRY
 
 	var/list/chemical_reactions = list()
+	var/list/chemical_reactions_by_product = list() // outpost 21 addition - for chemalynzer improvement
 	var/list/instant_reactions_by_reagent = list()
 	var/list/distilled_reactions_by_reagent = list()
 //	var/list/fusion_reactions_by_reagent = list() // TODO: Fusion reactions as chemical reactions
@@ -43,9 +44,15 @@ SUBSYSTEM_DEF(chemistry)
 //				add_to = fusion_reactions_by_reagent
 			if(istype(D, /decl/chemical_reaction/distilling))
 				add_to = distilled_reactions_by_reagent
-			
+
 			LAZYINITLIST(add_to[reagent_id])
 			add_to[reagent_id] += D
+
+			// begin outpost 21 addition
+			LAZYINITLIST(chemical_reactions_by_product[D.id])
+			chemical_reactions_by_product[D.id] += D // for reverse lookup
+			// end outpost 21 addition
+
 
 //Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
 /datum/controller/subsystem/chemistry/proc/initialize_chemical_reagents()

@@ -81,6 +81,7 @@
 
 	starts_with = list(
 		/obj/item/weapon/gun/energy/lasertag/red = 5,
+		/obj/item/weapon/lasertagknife/red = 5,
 		/obj/item/clothing/suit/redtag = 5)
 
 
@@ -91,4 +92,16 @@
 
 	starts_with = list(
 		/obj/item/weapon/gun/energy/lasertag/blue = 5,
+		/obj/item/weapon/lasertagknife/blue = 5,
 		/obj/item/clothing/suit/bluetag = 5)
+
+
+/obj/structure/closet/lasertag/omni
+	name = "omni laser tag equipment"
+	desc = "It's a storage unit for laser tag equipment."
+	closet_appearance = /decl/closet_appearance/wardrobe/purple
+
+	starts_with = list(
+		/obj/item/weapon/gun/energy/lasertag/omni = 5,
+		/obj/item/weapon/lasertagknife/omni = 5,
+		/obj/item/clothing/suit/omni = 5)

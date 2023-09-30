@@ -80,9 +80,10 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/red
 
 	starts_with = list(
-		/obj/item/weapon/gun/energy/lasertag/red = 5,
-		/obj/item/weapon/lasertagknife/red = 5,
-		/obj/item/clothing/suit/redtag = 5)
+		/obj/item/weapon/gun/energy/lasertag/red = 4,
+		/obj/item/weapon/lasertagknife/red = 4,
+		/obj/item/clothing/suit/redtag = 4,
+		/obj/item/clothing/head/helmet/lasertag = 4)
 
 
 /obj/structure/closet/lasertag/blue
@@ -91,9 +92,10 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/blue
 
 	starts_with = list(
-		/obj/item/weapon/gun/energy/lasertag/blue = 5,
-		/obj/item/weapon/lasertagknife/blue = 5,
-		/obj/item/clothing/suit/bluetag = 5)
+		/obj/item/weapon/gun/energy/lasertag/blue = 4,
+		/obj/item/weapon/lasertagknife/blue = 4,
+		/obj/item/clothing/suit/bluetag = 4,
+		/obj/item/clothing/head/helmet/lasertag = 4)
 
 
 /obj/structure/closet/lasertag/omni
@@ -102,6 +104,7 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/purple
 
 	starts_with = list(
-		/obj/item/weapon/gun/energy/lasertag/omni = 5,
-		/obj/item/weapon/lasertagknife = 5,
-		/obj/item/clothing/suit/omnitag = 5)
+		/obj/item/weapon/gun/energy/lasertag/omni = 4,
+		/obj/item/weapon/lasertagknife = 4,
+		/obj/item/clothing/suit/omnitag = 4,
+		/obj/item/clothing/head/helmet/lasertag = 4)

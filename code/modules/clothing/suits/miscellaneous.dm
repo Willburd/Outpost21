@@ -14,12 +14,13 @@
 
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armor"
-	desc = "Blue Pride, Station Wide."
+	desc = "Laser tag armor for the Blue team. Minor padding can prevent accidental smacks with a laser tag weapon."
 	icon_state = "bluetag"
 	item_state_slots = list(slot_r_hand_str = "tdblue", slot_l_hand_str = "tdblue")
 	blood_overlay_type = "armor"
-	body_parts_covered = UPPER_TORSO
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/blue)
+	armor = list(melee = 10, bullet = 0, laser = 5 ,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 3.0
 
 /obj/item/clothing/suit/bluetag/sub
@@ -29,17 +30,18 @@
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armor"
-	desc = "Reputed to go faster."
+	desc = "Laser tag armor for the Red team. Minor padding can prevent accidental smacks with a laser tag weapon."
 	icon_state = "redtag"
 	item_state_slots = list(slot_r_hand_str = "tdred", slot_l_hand_str = "tdred")
 	blood_overlay_type = "armor"
-	body_parts_covered = UPPER_TORSO
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/red)
+	armor = list(melee = 10, bullet = 0, laser = 5 ,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 3.0
 
 /obj/item/clothing/suit/redtag/dom
-	name = "Mu'tu'bi Armor"
-	desc = "Replica armor commonly worn by Dominion Of Mu'tu'bi soldiers from the hit series Spacer Trail. Modified for Laser Tag (Red Team)."
+	name = "Ma'bu'tol Armor"
+	desc = "Replica armor commonly worn by Dominion Of Ma'bu'tol soldiers from the hit series Spacer Trail. Modified for Laser Tag (Red Team)."
 	icon_state = "redtag2"
 
 /*

@@ -104,4 +104,4 @@
 	starts_with = list(
 		/obj/item/weapon/gun/energy/lasertag/omni = 5,
 		/obj/item/weapon/lasertagknife = 5,
-		/obj/item/clothing/suit/omni = 5)
+		/obj/item/clothing/suit/omnitag = 5)

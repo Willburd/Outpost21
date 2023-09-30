@@ -16,6 +16,42 @@
 /obj/item/toy/plushie/jil/proc/cooldownreset()
 	cooldown = 0
 
+/obj/item/toy/plushie/tinytin
+	name = "tiny tin plushie"
+	desc = "A tiny fluffy nevrean plush with the label 'Tiny-Tin.' Press his belly to hear a sound!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_tin"
+	var/cooldown = 0
+
+/obj/item/toy/plushie/tinytin/attack_self(mob/user as mob)
+	if(!cooldown)
+		playsound(user, 'sound/voice/peep.ogg', 10, 0)
+		src.visible_message("<span class='danger'>Peep peep!</span>")
+		cooldown = 1
+		addtimer(CALLBACK(src, .proc/cooldownreset), 50)
+	return ..()
+
+/obj/item/toy/plushie/tinytin/proc/cooldownreset()
+	cooldown = 0
+
+
+/obj/item/toy/plushie/tinytin/sec
+	name = "tiny tin plushie"
+	desc = "Officer tiny-Tin, now with rooty-tooty-shooty action! Press his belly to hear a sound!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_tinsec"
+
+
+/obj/item/toy/plushie/tinytin/sec/attack_self(mob/user as mob)
+	if(!cooldown)
+		playsound(user, 'sound/misc/tinytin_fuckedup.ogg', 10, 0)
+		src.visible_message("<span class='danger'>That means you fucked up!</span>")
+		cooldown = 1
+		addtimer(CALLBACK(src, .proc/cooldownreset), 50)
+	return ..()
+
+
+
 
 //Large plushies.
 /obj/structure/plushie/tesh/taaa

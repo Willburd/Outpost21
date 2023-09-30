@@ -774,6 +774,9 @@
 					/obj/item/toy/plushie/deer = 1,
 					/obj/item/toy/plushie/tabby_cat = 1,
 					/obj/item/device/threadneedle = 3,
+					//Outpost 21 add start
+					/obj/item/toy/plushie/tinytin,
+					//Outpost 21 add end
 					//VOREStation Add Start
 					/obj/item/toy/plushie/lizardplushie/kobold = 1,
 					/obj/item/toy/plushie/slimeplushie = 1,

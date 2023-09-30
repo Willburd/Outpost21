@@ -758,6 +758,7 @@
 				/obj/item/toy/plushie/teshari/y_yw,
 				//YawnWider Add End
 				//Outpost Add Start
+				/obj/item/toy/plushie/tinytin,
 				/obj/item/toy/plushie/jil)
 				//Outpost Add End
 

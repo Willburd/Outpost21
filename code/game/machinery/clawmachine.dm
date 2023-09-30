@@ -60,7 +60,11 @@
 						/obj/item/toy/plushie/borgplushie/scrubpuppy,
 						/obj/item/toy/plushie/borgplushie/drakiesec,
 						/obj/item/toy/plushie/borgplushie/drakiemed,
-						/obj/item/toy/plushie/otter
+						/obj/item/toy/plushie/otter,
+						//Outpost 21 add start
+						/obj/item/toy/plushie/tinytin,
+						/obj/item/toy/plushie/jil
+						//Outpost 21 add end
 						)
 
 /obj/machinery/clawmachine/update_icon()

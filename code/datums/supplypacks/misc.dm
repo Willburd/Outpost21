@@ -75,6 +75,9 @@
 			/obj/item/toy/plushie/squid/orange,
 			/obj/item/toy/plushie/squid/yellow,
 			/obj/item/toy/plushie/squid/pink,
+			//Outpost 21 add start
+			/obj/item/toy/plushie/tinytin,
+			//Outpost 21 add end
 			//VOREStation Add Start
 			/obj/item/toy/plushie/lizardplushie/kobold,
 			/obj/item/toy/plushie/slimeplushie,

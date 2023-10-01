@@ -36,8 +36,8 @@
 
 
 /obj/item/toy/plushie/tinytin/sec
-	name = "tiny tin plushie"
-	desc = "Officer tiny-Tin, now with rooty-tooty-shooty action! Press his belly to hear a sound!"
+	name = "officer tiny tin plushie"
+	desc = "Officer Tiny-Tin, now with rooty-tooty-shooty action! Press his belly to hear a sound!"
 	icon = 'icons/obj/toy_op.dmi'
 	icon_state = "plushie_tinsec"
 

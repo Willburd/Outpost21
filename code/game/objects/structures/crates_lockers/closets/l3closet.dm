@@ -8,6 +8,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/general,
+		/obj/item/clothing/gloves/sterile/nitrile, //Outpost edit. Adds sterile gloves to every closet.
 		/obj/item/clothing/head/bio_hood/general)
 
 
@@ -18,6 +19,7 @@
 		/obj/item/clothing/suit/bio_suit/virology,
 		/obj/item/clothing/head/bio_hood/virology,
 		/obj/item/clothing/mask/gas,
+		/obj/item/clothing/gloves/sterile/nitrile,
 		/obj/item/weapon/tank/oxygen)
 
 
@@ -26,6 +28,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/security,
+		/obj/item/clothing/gloves/sterile/nitrile,
 		/obj/item/clothing/head/bio_hood/security)
 		///obj/item/weapon/gun/energy/taser/xeno/sec) //VOREStation Removal
 
@@ -36,6 +39,7 @@
 		/obj/item/clothing/suit/bio_suit/janitor = 2,
 		/obj/item/clothing/head/bio_hood/janitor = 2,
 		/obj/item/clothing/mask/gas = 2,
+		/obj/item/clothing/gloves/sterile/nitrile = 2,
 		/obj/item/weapon/tank/emergency/oxygen/engi = 2)
 
 
@@ -44,11 +48,13 @@
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/scientist,
+		/obj/item/clothing/gloves/sterile/nitrile,
 		/obj/item/clothing/head/bio_hood/scientist)
 
 /obj/structure/closet/l3closet/scientist/double
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
+		/obj/item/clothing/gloves/sterile/nitrile = 2,
 		/obj/item/clothing/head/bio_hood/scientist = 2,
 		/obj/item/weapon/storage/bag/xeno = 2) // VOREEdit, adding the xenobag to xenobio.
 
@@ -59,4 +65,5 @@
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/general = 3,
 		/obj/item/clothing/head/bio_hood/general = 3,
+		/obj/item/clothing/gloves/sterile/nitrile = 3,
 		/obj/item/clothing/mask/gas = 3)

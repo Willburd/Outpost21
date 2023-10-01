@@ -96,6 +96,8 @@
 	var/timeout = 10		// When a turret pops up, then finds nothing to shoot at, this number decrements until 0, when it pops down.
 	var/can_salvage = TRUE	// If false, salvaging doesn't give you anything.
 
+	var/stuncounter = 0		// really only lasertag
+
 /obj/machinery/porta_turret/crescent
 	req_one_access = list(access_cent_specops)
 	enabled = FALSE
@@ -552,6 +554,10 @@
 		else
 			to_chat(user, "<span class='notice'>Access denied.</span>")
 
+	else if(istype(src,/obj/machinery/porta_turret/lasertag) && istype(I, /obj/item/weapon/lasertagknife))
+		if(stuncounter <= 0)
+			spark_system.start()	//creates some sparks because they look cool
+			stuncounter = 12 SECONDS
 	else
 		//if the turret was attacked with the intention of harming it:
 		user.setClickCooldown(user.get_attack_speed(I))
@@ -602,8 +608,13 @@
 		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
-	var/damage = Proj.get_structure_damage()
+	if(enabled && istype(src,/obj/machinery/porta_turret/lasertag) && istype(Proj, /obj/item/projectile/beam/lasertag))
+		if(stuncounter <= 0)
+			spark_system.start()	//creates some sparks because they look cool
+			stuncounter = 12 SECONDS
+		return
 
+	var/damage = Proj.get_structure_damage()
 	if(!damage)
 		return
 
@@ -699,7 +710,13 @@
 		assess_and_assign(M, targets, secondarytargets)
 	*/
 
-	if(!tryToShootAt(targets))
+	if(stuncounter > 0) // lasertag stun cooldown
+		stuncounter -= 1 SECOND
+		if(stuncounter == 0)
+			// reset
+			spark_system.start()	//creates some sparks because they look cool
+			playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
+	else if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			timeout--
 			if(timeout <= 0)

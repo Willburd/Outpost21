@@ -487,6 +487,16 @@
 	block = NERVOUSBLOCK
 	..()
 
+/obj/item/weapon/dnainjector/vertmut
+	name = "\improper DNA injector (Stutt.)"
+	desc = "Makes the world feel spinny"
+	datatype = DNA2_BUF_SE
+	value = 0xFFF
+
+/obj/item/weapon/dnainjector/vertmut/New()
+	block = VERTIGOBLOCK
+	..()
+
 /obj/item/weapon/dnainjector/antistutt
 	name = "\improper DNA injector (Anti-Stutt.)"
 	desc = "Fixes that speaking impairment."

@@ -509,6 +509,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(new_character.dna)
 		new_character.dna.ResetUIFrom(new_character)
 		new_character.sync_organ_dna()
+		// outpost 21 edit begin - sync diseases on respawn
+		new_character.sync_dna_block_diseases_from_client_setup(picked_client);
+		// outpost 21 edit end
+
 	if(inhabit)
 		new_character.key = player_key
 		//Were they any particular special role? If so, copy.

@@ -199,35 +199,44 @@
 	if(stat != CONSCIOUS) //Let's not worry about tourettes if you're not conscious.
 		return
 
+	// outpost 21 edit begin - tweaked disabilities chances
 	if (disabilities & EPILEPSY)
-		if ((prob(1) && paralysis < 1))
+		if ((prob(2) && prob(4) && paralysis < 1))
 			to_chat(src, "<font color='red'>You have a seizure!</font>")
 			for(var/mob/O in viewers(src, null))
 				if(O == src)
 					continue
 				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 			Paralyse(10)
-			make_jittery(1000)
+			make_jittery(200)
 	if (disabilities & COUGHING)
-		if ((prob(5) && paralysis <= 1))
-			drop_item()
+		if ((prob(10) && prob(8) && paralysis <= 1))
+			if(prob(23)) drop_item()
 			spawn( 0 )
 				emote("cough")
 				return
 	if (disabilities & TOURETTES)
-		if ((prob(10) && paralysis <= 1))
-			Stun(10)
+		if ((prob(5) && prob(8) && paralysis <= 1))
+			Stun(2)
 			spawn( 0 )
 				switch(rand(1, 3))
 					if(1)
 						emote("twitch")
 					if(2 to 3)
 						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				make_jittery(100)
+				make_jittery(20)
 				return
 	if (disabilities & NERVOUS)
-		if (prob(10))
-			stuttering = max(10, stuttering)
+		if (prob(15) && prob(8))
+			stuttering = max(15, stuttering)
+	if (disabilities & VERTIGO)
+		if ((prob(5) && prob(4) && paralysis < 1))
+			to_chat(src, "<font color='red'>You feel the world spinning!</font>")
+			make_dizzy(9)
+			Confuse(12)
+			make_jittery(15)
+
+	// outpost 21 edit end
 
 	var/rn = rand(0, 200)
 	if(getBrainLoss() >= 5)

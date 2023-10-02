@@ -100,6 +100,14 @@
 /datum/dna/gene/disability/nervousness/New()
 	block=NERVOUSBLOCK
 
+/datum/dna/gene/disability/vertigo
+	name="Vertigo"
+	activation_message="You feel like the world could start spinning."
+	disability=VERTIGO
+
+/datum/dna/gene/disability/vertigo/New()
+	block=VERTIGOBLOCK
+
 /datum/dna/gene/disability/blindness
 	name="Blindness"
 	activation_message="You can't seem to see anything."

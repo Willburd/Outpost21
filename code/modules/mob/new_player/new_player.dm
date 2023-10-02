@@ -182,13 +182,13 @@
 				observer.verbs -= /mob/observer/dead/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 			observer.key = key
 			observer.set_respawn_timer(time_till_respawn()) // Will keep their existing time if any, or return 0 and pass 0 into set_respawn_timer which will use the defaults
-			
+
 			// outpost 21 change, find a wild animal, and if one exists, possess it!
 			if( !admin_mode )
 				observer.inhabit_mouse() // skip menus from the verb, and go right to the possession!
 
 			qdel(src)
-			
+
 			return 1
 
 
@@ -609,10 +609,10 @@
 	new_character.dna.ready_dna(new_character)
 	new_character.dna.b_type = client.prefs.b_type
 	new_character.sync_organ_dna()
-	if(client.prefs.disabilities)
-		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(GLASSESBLOCK,1,0)
-		new_character.disabilities |= NEARSIGHTED
+
+	// outpost 21 edit begin - restored old disabilities, and gene flags
+	new_character.sync_dna_block_diseases_from_client_setup(client);
+	// outpost 21 edit end
 
 	for(var/lang in client.prefs.alternate_languages)
 		var/datum/language/chosen_language = GLOB.all_languages[lang]
@@ -624,8 +624,6 @@
 			var/datum/language/keylang = GLOB.all_languages[client.prefs.language_custom_keys[key]]
 			if(keylang)
 				new_character.language_keys[key] = keylang
-	// And uncomment this, too.
-	//new_character.dna.UpdateSE()
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
@@ -647,6 +645,42 @@
 
 /mob/new_player/Move()
 	return 0
+
+/mob/living/carbon/human/proc/sync_dna_block_diseases_from_client_setup(var/client/cli) // this is where bad code is born
+	// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
+	if(cli.prefs.sdisabilities & BLIND)
+		dna.SetSEState(BLINDBLOCK,1,1)
+		sdisabilities |= BLIND
+
+	if(cli.prefs.sdisabilities & DEAF)
+		dna.SetSEState(DEAFBLOCK,1,1)
+		sdisabilities |= DEAF
+
+	if(cli.prefs.disabilities & NEARSIGHTED)
+		dna.SetSEState(GLASSESBLOCK,1,1)
+		disabilities |= NEARSIGHTED
+
+	if(cli.prefs.disabilities & EPILEPSY)
+		dna.SetSEState(EPILEPSYBLOCK,1,1)
+		disabilities |= EPILEPSY
+
+	if(cli.prefs.disabilities & COUGHING)
+		dna.SetSEState(COUGHBLOCK,1,1)
+		disabilities |= COUGHING
+
+	if(cli.prefs.disabilities & TOURETTES)
+		dna.SetSEState(TWITCHBLOCK,1,1)
+		disabilities |= TOURETTES
+
+	if(cli.prefs.disabilities & NERVOUS)
+		dna.SetSEState(NERVOUSBLOCK,1,1)
+		disabilities |= NERVOUS
+
+	if(cli.prefs.disabilities & VERTIGO)
+		dna.SetSEState(VERTIGOBLOCK,1,1)
+		disabilities |= VERTIGO
+
+	dna.UpdateSE()
 
 /mob/new_player/proc/close_spawn_windows()
 

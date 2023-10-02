@@ -36,6 +36,7 @@
 #define COUGHING    0x4
 #define TOURETTES   0x8
 #define NERVOUS     0x10
+#define VERTIGO     0x20
 
 // sdisabilities
 #define BLIND 0x1
@@ -57,6 +58,7 @@ var/GLASSESBLOCK  = 0
 var/EPILEPSYBLOCK = 0
 var/TWITCHBLOCK   = 0
 var/NERVOUSBLOCK  = 0
+var/VERTIGOBLOCK  = 0
 var/MONKEYBLOCK   = STRUCDNASIZE
 
 var/BLOCKADD = 0

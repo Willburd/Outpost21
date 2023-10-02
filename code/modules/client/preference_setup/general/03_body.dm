@@ -144,8 +144,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["Wingdings"]			>> pref.wingdings //YWadd start
 	S["colorblind_mono"]	>> pref.colorblind_mono
 	S["colorblind_vulp"]	>> pref.colorblind_vulp
-	S["colorblind_taj"] 	>> pref.colorblind_taj 
+	S["colorblind_taj"] 	>> pref.colorblind_taj
 	S["haemophilia"]        >> pref.haemophilia //YWadd end
+	S["blind"]				>> pref.blind //OP21 start
+	S["mute"]				>> pref.mute
+	S["deaf"] 				>> pref.deaf //OP21 end
 
 /datum/category_item/player_setup_item/general/body/save_character(var/savefile/S)
 	S["species"]			<< pref.species
@@ -213,8 +216,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["Wingdings"]          << pref.wingdings //YWadd start
 	S["colorblind_mono"]	<< pref.colorblind_mono
 	S["colorblind_vulp"]	<< pref.colorblind_vulp
-	S["colorblind_taj"] 	<< pref.colorblind_taj 
+	S["colorblind_taj"] 	<< pref.colorblind_taj
 	S["haemophilia"]        << pref.haemophilia //YWadd end
+	S["blind"]				<< pref.blind //OP21 start
+	S["mute"]				<< pref.mute
+	S["deaf"] 				<< pref.deaf //OP21 end
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in GLOB.playable_species))
@@ -1108,6 +1114,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.disabilities ^= disability_flag
 		Disabilities_YW(usr) //YW Edit
 
+	else if(href_list["sdisabilities"])
+		var/disability_flag = text2num(href_list["sdisabilities"])
+		pref.sdisabilities ^= disability_flag
+		Disabilities_YW(usr) //YW Edit
+
 	else if(href_list["toggle_preview_value"])
 		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
 		return TOPIC_REFRESH_UPDATE_PREVIEW
@@ -1260,6 +1271,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.colorblind_taj = 0
 		pref.colorblind_vulp = 0
 		pref.haemophilia = 0
+		pref.blind = 0
+		pref.mute = 0
+		pref.deaf = 0
 		Disabilities_YW(usr)
 
 	//YW Add End
@@ -1358,4 +1372,3 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	dat += "</center></body>"
 
 	user << browse(dat, "window=species;size=700x400")
-

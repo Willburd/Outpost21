@@ -25,7 +25,7 @@
 	if(!M || !(M.dna)) return
 	M.dna.check_integrity()
 	//var/block = pick(GLASSESBLOCK,COUGHBLOCK,FAKEBLOCK,NERVOUSBLOCK,CLUMSYBLOCK,TWITCHBLOCK,HEADACHEBLOCK,BLINDBLOCK,DEAFBLOCK,HALLUCINATIONBLOCK) // Most of these are disabled anyway.
-	var/block = pick(FAKEBLOCK,CLUMSYBLOCK,BLINDBLOCK,DEAFBLOCK)
+	var/block = pick(FAKEBLOCK,CLUMSYBLOCK,BLINDBLOCK,DEAFBLOCK,VERTIGOBLOCK)
 	M.dna.SetSEState(block, 1)
 
 // Give Random Good Mutation to M

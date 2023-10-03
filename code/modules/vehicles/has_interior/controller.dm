@@ -425,7 +425,7 @@
 /obj/vehicle/has_interior/controller/proc/enter_interior(var/atom/movable/C)
 	// moves atom to interior access point of tank
 	if(istype(entrypos,/turf/))
-		C.forceMove(entrypos)
+		transfer_to( C, entrypos)
 	else
 		C.visible_message("<span class='notice'>Interior inaccessible...</span>")
 
@@ -446,9 +446,28 @@
 			if(!A.CanPass( C, exitpos))
 				to_chat(C, "<span class='notice'>Exit is blocked!</span>")
 				return
-		C.forceMove(exitpos)
+		transfer_to( C, exitpos)
 	else
 		C.visible_message("<span class='notice'>Exterior inaccessible...</span>")
+
+/obj/vehicle/has_interior/controller/proc/transfer_to(var/atom/movable/C,var/turf/dest)
+	// handles pulling code too
+	if(istype(C,/mob))
+		var/atom/movable/pulledobj = null
+		var/mob/M = C
+		if(M.pulling)
+			pulledobj = M.pulling;
+			M.pulling.forceMove(dest)
+			M.stop_pulling() // sanity...
+
+		M.forceMove(dest)
+
+		if(pulledobj != null)
+			M.stop_pulling() // sanity...
+			M.start_pulling(pulledobj)
+	else
+		C.forceMove(dest)
+
 
 /obj/vehicle/has_interior/controller/load(var/atom/movable/C, var/mob/user)
 	if(!istype(C, /mob/living/carbon/human))

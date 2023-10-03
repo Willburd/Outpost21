@@ -1643,6 +1643,21 @@
 /area/vehicle_interior/heavyarmor_medic_recovery
 	name = "\improper Medic Recovery Vehicle"
 
+
+//
+// Specialtiy -------------------------------------------------------------------------------
+//
+
+/area/specialty/redspace
+	name = "\improper Unknown"
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "blue"
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	sound_env = SPACE
+	ambience = AMBIENCE_MEATZONE
+	music = 'sound/ambience/approaching_planet.ogg'
+	requires_power = FALSE
+
 //
 // Outpost holomap modifications ONLY ---------------------------------------------------------------------
 //

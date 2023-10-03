@@ -435,6 +435,15 @@
 	to_chat(src, "You harmlessly spark.")
 	spark_system.start()
 
+// outpost 21 addition begin - technically the crew monitor exists, but this helps you learn the station easier
+/mob/living/silicon/robot/verb/current_location() //So you can still sparkle on demand without violence.
+	set category = "Robot Commands"
+	set name = "Display Location Name"
+	var/area/A = get_area(src)
+	if(A)
+		to_chat(src, "Current Location: [sanitize(A.get_name())]")
+// outpost 21 addition end
+
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()
 	// if you have a jetpack, show the internal tank pressure

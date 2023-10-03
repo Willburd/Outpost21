@@ -1754,6 +1754,9 @@
 /area/lawoffice
 	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
+/area/security/security_aid_station
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
 /area/medical/psych
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 

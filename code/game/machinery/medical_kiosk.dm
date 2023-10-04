@@ -184,7 +184,7 @@
 	BR.init_from_mob(user, TRUE, TRUE, database_key = db_key)
 
 	// what a mean halucination
-	if(user.hallucination > 20 && prob(5))
+	if((user.hallucination > 20 && prob(5)) || istype(get_area(src), /area/specialty/redspace))
 		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Backup scan erased. Body scan erased. You deserve to die forever."
 
 	return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Please ensure your suit's sensors are properly configured to alert medical and security personal to your current status."
@@ -205,7 +205,7 @@
 				if(C.hallucination > 20 && prob(5))
 					halucinateTarget = C
 
-		if(count == 1 && halucinateTarget)
+		if(count == 1 && halucinateTarget || istype(get_area(src), /area/specialty/redspace))
 			// halucination replies
 			visible_message(halu_text(halucinateTarget))
 		else

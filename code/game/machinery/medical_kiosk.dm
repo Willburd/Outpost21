@@ -202,10 +202,10 @@
 			if(istype(A, /mob/living/carbon))
 				count += 1
 				var/mob/living/carbon/C = A
-				if(C.hallucination > 20 && prob(5))
+				if((C.hallucination > 20 && prob(5)) || istype(get_area(src), /area/specialty/redspace))
 					halucinateTarget = C
 
-		if(count == 1 && halucinateTarget || istype(get_area(src), /area/specialty/redspace))
+		if((count == 1 && istype(halucinateTarget,/mob/living/carbon)) || istype(get_area(src), /area/specialty/redspace))
 			// halucination replies
 			visible_message(halu_text(halucinateTarget))
 		else
@@ -223,19 +223,19 @@
 		return "Your insides are whispering."
 	if(prob(15))
 		return "Your flesh is whispering, it says to peel it off."
-	if(prob(15))
+	if(prob(15) && target)
 		return "Your eyes are lying to you. Wake up [target.real_name]."
 	if(prob(15))
 		return "Cut the bad things inside of you out."
 	if(prob(15))
 		return "Your not alone, it's inside you."
-	if(prob(15))
+	if(prob(15) && target)
 		return "[target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]. [target.real_name]."
 	if(prob(15))
 		return "Stop lying to everyone, they know what is inside your body."
 	if(prob(15))
 		return "Everyone wants to cut you open, and take the things inside you for themselves."
-	if(prob(15))
+	if(prob(15) && target)
 		return "You are not really a [target.get_species()] are you?" // super special message
 	return "Your body is wrong."
 

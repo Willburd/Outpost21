@@ -5,7 +5,6 @@
 #define Z_LEVEL_OUTPOST_CENTCOM						4
 #define Z_LEVEL_OUTPOST_MISC 						5
 #define Z_LEVEL_OUTPOST_ASTEROID 					6
-#define Z_LEVEL_OUTPOST_REDSPACE 					10
 //Ensure these stay updated with map and z-level changes - Ignus
 /datum/map/outpost
 	name = "Outpost 21"
@@ -211,12 +210,6 @@
 	z = Z_LEVEL_OUTPOST_ASTEROID
 	name = "Asteroid"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
-
-/datum/map_z_level/outpost/redspace
-	z = Z_LEVEL_OUTPOST_REDSPACE
-	name = "Unknown"
-	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED
-
 
 
 //Unit test stuff.

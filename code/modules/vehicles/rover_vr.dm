@@ -65,7 +65,7 @@
 	key = new(src)
 	turn_off()	//so engine verbs are correctly set
 
-/obj/vehicle/train/rover/engine/Move(var/turf/destination)
+/obj/vehicle/train/rover/engine/vehicle_move(var/turf/destination)
 	if(on && cell.charge < charge_use)
 		turn_off()
 		update_stats()
@@ -198,7 +198,7 @@
 	if(is_train_head())
 		if(direction == reverse_direction(dir) && tow)
 			return 0
-		if(Move(get_step(src, direction)))
+		if(vehicle_move(get_step(src, direction)))
 			return 1
 		return 0
 	else

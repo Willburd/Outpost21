@@ -129,11 +129,11 @@
 /obj/vehicle/bike/relaymove(mob/user, direction)
 	if(user != load || !on)
 		return 0
-	if(vehicle_move(get_step(src, direction)))
+	if(vehicle_move(get_step(src, direction),direction))
 		return 1
 	return 0
 
-/obj/vehicle/bike/Move(var/turf/destination)
+/obj/vehicle/bike/vehicle_move(var/turf/destination)
 	if(kickstand) return 0
 
 	if(on && (!cell || cell.charge < charge_use))

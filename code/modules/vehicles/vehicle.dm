@@ -69,7 +69,7 @@
 		riding_datum.restore_position(buckled_mob)
 		riding_datum.handle_vehicle_offsets() // So the person in back goes to the front.
 
-/obj/vehicle/proc/vehicle_move(var/newloc, var/direction, var/movetime)
+/obj/vehicle/proc/vehicle_move(var/newloc, var/direction, var/movetime = 0)
 	if(world.time < l_move_time + move_delay) //This AND the riding datum move speed limit?
 		return
 

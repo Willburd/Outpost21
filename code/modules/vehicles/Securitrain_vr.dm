@@ -67,7 +67,7 @@
 	add_overlay(I)
 	turn_off()	//so engine verbs are correctly set
 
-/obj/vehicle/train/security/engine/Move(var/turf/destination)
+/obj/vehicle/train/security/engine/vehicle_move(var/turf/destination)
 	if(on && cell.charge < charge_use)
 		turn_off()
 		update_stats()

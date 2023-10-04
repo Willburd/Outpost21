@@ -27,11 +27,11 @@
 	for(var/obj/vehicle/train/T in orange(1, src))
 		latch(T, null)
 
-/obj/vehicle/train/Move()
+/obj/vehicle/train/vehicle_move()
 	var/old_loc = get_turf(src)
 	if((. = ..()))
 		if(tow)
-			tow.Move(old_loc)
+			tow.vehicle_move(old_loc)
 	else if(lead)
 		unattach()
 
@@ -166,7 +166,7 @@
 		return
 
 	if (T.tow)
-		if(user)	
+		if(user)
 			to_chat(user, "<font color='red'>[T] is already towing something.</font>")
 		return
 

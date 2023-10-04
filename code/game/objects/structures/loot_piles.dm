@@ -592,15 +592,12 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	loot_left = 9
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/random/tool,
-		/obj/random/tool,
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
-		/obj/random/tech_supply/component,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
 		/obj/effect/decal/remains/lizard,
 		/obj/effect/decal/remains/mouse,
 		/obj/effect/decal/remains/robot,
@@ -628,10 +625,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_state = "ripley-broken"
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},
@@ -671,10 +669,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_state = "deathripley-broken"
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 40},
 		/obj/item/stack/material/glass{amount = 20},
 		/obj/item/stack/material/plasteel{amount = 10},
@@ -706,10 +705,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_state = "odysseus-broken"
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},
@@ -749,10 +749,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_state = "gygax-broken"
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},
@@ -802,10 +803,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_state = "durand-broken"
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},
@@ -893,10 +895,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 // Since the actual drone loot is a bit stupid in how it is handled, this is a sparse and empty list with items I don't exactly want in it. But until we can get the proper items in . . .
 
 	common_loot = list(
-		/obj/random/tool,
-		/obj/item/stack/cable_coil/random,
-		/obj/random/tank,
-		/obj/random/tech_supply/component,
+		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/device,
+		/obj/item/weapon/card/emag_broken,
+		/obj/item/weapon/cell/super,
+		/obj/item/broken_device/random,
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},

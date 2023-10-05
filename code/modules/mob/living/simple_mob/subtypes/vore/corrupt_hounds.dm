@@ -63,6 +63,7 @@
 	can_buckle = TRUE
 	buckle_movable = TRUE
 	buckle_lying = FALSE
+	enzyme_affect = FALSE
 
 	vore_active = TRUE
 	vore_capacity = 1

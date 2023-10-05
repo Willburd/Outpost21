@@ -85,6 +85,7 @@
 
 	organ_names = /decl/mob_organ_names/spider
 
+	enzyme_affect = FALSE
 
 	melee_damage_lower = 18
 	melee_damage_upper = 30

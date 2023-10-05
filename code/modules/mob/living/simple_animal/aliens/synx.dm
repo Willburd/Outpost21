@@ -15,6 +15,7 @@
 	icon_dead = "synx_dead"
 	mob_bump_flag = SIMPLE_ANIMAL //This not existing was breaking vore bump for some reason.
 	parasitic = TRUE //Digestion immunity var
+	enzyme_affect = FALSE
 
 	var/list/speak = list()
 	var/speak_chance = 1 //MAy have forgotten to readd that.
@@ -353,11 +354,11 @@
 
 	var/list/combined = combine_message(message_pieces, verb, speaker)
 	var/message = combined["raw"]
-	if(!message || !speaker)    
+	if(!message || !speaker)
 		return
 	if(message == "")
 		return
-	if (speaker == src) 
+	if (speaker == src)
 		return
 
 	speaker = speaker.GetVoice()

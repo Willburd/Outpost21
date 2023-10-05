@@ -46,6 +46,7 @@
 	buckle_movable = TRUE
 	buckle_lying = FALSE
 	mount_offset_y = 20
+	enzyme_affect = FALSE
 
 	say_list_type = /datum/say_list/hippo
 	ai_holder_type = /datum/ai_holder/simple_mob/retaliate

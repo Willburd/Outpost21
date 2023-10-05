@@ -61,7 +61,7 @@ GLOBAL_LIST_INIT(pitcher_plant_lure_messages, list(
 	var/last_lifechecks = 0 //Timing variable to limit vore/hungry proc calls
 	var/list/pitcher_plant_lure_messages = null
 
-
+	enzyme_affect = FALSE
 
 
 /mob/living/simple_mob/vore/pitcher_plant //Putting vore variables separately because apparently that's tradition.

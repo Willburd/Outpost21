@@ -30,6 +30,7 @@
 	humanoid_hands = TRUE
 	minbodytemp = 175
 	pass_flags = PASSTABLE
+	enzyme_affect = FALSE
 
 	universal_understand = 1
 

@@ -38,6 +38,7 @@
 	glow_color = "#33ccff" //Same glow color as Sif trees.
 	glow_intensity = 1
 
+	enzyme_affect = FALSE
 
 	var/list/my_slime = list()
 	var/slime_max = 35 //With a slug which moves once every 10 seconds and a 5 minute delete timer, this should never exceed 30.

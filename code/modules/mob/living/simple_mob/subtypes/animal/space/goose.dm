@@ -28,6 +28,8 @@
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
 	meat_amount = 3
 
+	enzyme_affect = FALSE
+
 /datum/say_list/goose
 	speak = list("HONK!")
 	emote_hear = list("honks loudly!")

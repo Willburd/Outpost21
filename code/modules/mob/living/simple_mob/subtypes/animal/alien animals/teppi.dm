@@ -89,6 +89,8 @@ GLOBAL_VAR_INIT(teppi_count, 0)	// How mant teppi DO we have?
 	catalogue_data = list(/datum/category_item/catalogue/fauna/teppi)
 	vis_height = 64
 
+	enzyme_affect = FALSE
+
 	var/affinity = list()
 	var/allergen_preference
 	var/allergen_unpreference

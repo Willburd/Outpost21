@@ -51,6 +51,8 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	attacktext = list("bitten")
 
+	enzyme_affect = FALSE
+
 	organ_names = /decl/mob_organ_names/fish
 
 	meat_amount = 5
@@ -155,5 +157,3 @@
 /mob/living/simple_mob/animal/space/carp/holographic/death()
 	..()
 	derez()
-
-

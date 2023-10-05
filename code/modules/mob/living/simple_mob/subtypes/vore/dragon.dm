@@ -46,6 +46,7 @@
 	can_buckle = TRUE
 	buckle_movable = TRUE
 	buckle_lying = FALSE
+	enzyme_affect = FALSE
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee
 	say_list_type = /datum/say_list/dragonboss

@@ -103,6 +103,7 @@ I think I covered everything.
 	universal_understand = 1 //So they can hear synth speach
 	max_tox = 0 // for virgo3b survivability
 	max_co2 = 0 // Also needed for 3b Survivability otherwise it chokes to death
+	enzyme_affect = FALSE
 
 	special_attack_min_range = 1
 	special_attack_max_range = 10

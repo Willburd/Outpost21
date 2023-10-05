@@ -412,6 +412,10 @@ var/datum/planet/muriki/planet_muriki = null
 		)
 
 
+/mob/living/
+	var/enzyme_affect = TRUE
+
+
 /proc/muriki_enzyme_affect_mob( var/mob/living/L, var/multiplier, var/mist, var/submerged)
 	// drop out early if no damage anyway
 	if(multiplier <= 0)
@@ -425,33 +429,7 @@ var/datum/planet/muriki/planet_muriki = null
 	if(istype(L,/mob/living/silicon))
 		return
 	// check for excluded wildlife
-	if(istype(L,/mob/living/simple_mob/vore/aggressive/corrupthound))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/aggressive/dragon))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/bigdragon))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/hippo))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/leopardmander))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/alienanimals/jil))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/alienanimals/teppi))
-		return
-	if(istype(L,/mob/living/simple_mob/animal/giant_spider))
-		return
-	if(istype(L,/mob/living/simple_mob/animal/synx))
-		return
-	if(istype(L,/mob/living/simple_mob/animal/space/carp))
-		return
-	if(istype(L,/mob/living/simple_mob/animal/space/goose))
-		return
-	if(istype(L,/mob/living/simple_mob/animal/thrumbo))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/slug))
-		return
-	if(istype(L,/mob/living/simple_mob/vore/pitcher_plant))
+	if(!L.enzyme_affect)
 		return
 
 	// acid burn time!

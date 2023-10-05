@@ -35,6 +35,7 @@
 	meat_amount = 20
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	butchery_loot = list(/obj/item/stack/animalhide = 6)
+	enzyme_affect = FALSE
 
 	ai_holder_type = /datum/ai_holder/simple_mob/thrumbo
 
@@ -230,6 +231,3 @@
 				holder.ISay(safepick(holder.say_list.say_stand_down))
 				playsound(holder, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 				playsound(target, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
-
-
-

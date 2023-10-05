@@ -453,7 +453,7 @@
 /mob/living/simple_mob/animal/synx/proc/handle_mimic()
 	name = pick(voices)
 	spawn(2)
-		src.say(pick(speak))
+		src.say("![html_decode(pick(speak))]") // noise language
 	spawn(5)
 		name = realname
 

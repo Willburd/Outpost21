@@ -1,4 +1,4 @@
-/proc/wormhole_event(var/set_duration = 5 MINUTES, var/wormhole_duration_modifier = 1)
+/proc/wormhole_event(var/set_duration = 5 MINUTES, var/wormhole_duration_modifier = 1, var/redspace = FALSE)
 	spawn()
 		var/list/pick_turfs = list()
 		var/list/Z_choices = list()
@@ -13,8 +13,12 @@
 			var/wormhole_max_duration = round((5 MINUTES) * wormhole_duration_modifier)
 			var/wormhole_min_duration = round((30 SECONDS) * wormhole_duration_modifier)
 
-			//All ready. Announce that bad juju is afoot.
-			command_announcement.Announce("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert", new_sound = 'sound/AI/spanomalies.ogg')
+			if(!redspace)
+				//All ready. Announce that bad juju is afoot.
+				command_announcement.Announce("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert", new_sound = 'sound/AI/spanomalies.ogg')
+			else
+				//All ready. Announce that bad bad bad things are happening
+				command_announcement.Announce("%&(£&%@%(*$&£/{}detected near the [station_name()]. Please£&?*(%RUN&(*RUN$%RUN&({}AI-controlled equipment£%@%(*RUN$%&RUN(£&?RUN*(%&£/{}errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 			//prob(20) can be approximated to 1 wormhole every 5 turfs!
 			//admittedly less random but totally worth it >_<
@@ -51,13 +55,13 @@
 //				pick_turfs -= exit
 				if( !exit || !istype(exit) )	continue	//sanity
 
-				create_wormhole(enter,exit,wormhole_min_duration,wormhole_max_duration)
+				create_wormhole(enter,exit,wormhole_min_duration,wormhole_max_duration,redspace)
 
 				sleep(sleep_duration)						//have a well deserved nap!
 
 
 //maybe this proc can even be used as an admin tool for teleporting players without ruining immulsions?
-/proc/create_wormhole(var/turf/enter as turf, var/turf/exit as turf, var/min_duration = 30 SECONDS, var/max_duration = 60 SECONDS)
+/proc/create_wormhole(var/turf/enter as turf, var/turf/exit as turf, var/min_duration = 30 SECONDS, var/max_duration = 60 SECONDS, var/redspace = FALSE)
 	set waitfor = FALSE
 	var/obj/effect/portal/P = new /obj/effect/portal( enter )
 	P.target = exit
@@ -66,5 +70,7 @@
 	P.failchance = 0
 	P.icon_state = "anom"
 	P.name = "wormhole"
+	if(redspace) // outpost 21 addition - redspace storms
+		P.redchance = 100
 	spawn(rand(min_duration,max_duration))
 		qdel(P)

@@ -10,6 +10,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 	var/failchance = 5
 	var/obj/item/target = null
 	var/creator = null
+	var/redchance = 1 //outpost 21 edit - what have you done... default 1%
 	anchored = TRUE
 
 /obj/effect/portal/Bumped(mob/M as mob|obj)
@@ -61,9 +62,22 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 				for(var/rider in L.buckled_mobs)
 					R.force_dismount(rider)
 		//VOREStation Addition End: Prevent taurriding abuse
+
+		// outpost 21 addition begin - OH NO
+		if(prob(redchance))
+			var/list/redlist = list()
+			for(var/obj/effect/landmark/R in landmarks_list)
+				if(R.name == "redentrance")
+					redlist += R
+
+			if(redlist.len > 0)
+				// if teleport worked, drop out... otherwise just teleport normally, it means there was no redspace spawns!
+				do_teleport(M,pick( redlist).loc, 0,local = FALSE)
+				return
+		// outpost 21 addition end
+
 		if(prob(failchance)) //oh dear a problem, put em in deep space
 			src.icon_state = "portal1"
 			do_teleport(M, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), 3), 0)
 		else
 			do_teleport(M, target, 1) ///You will appear adjacent to the beacon
-

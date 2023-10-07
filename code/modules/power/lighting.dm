@@ -350,7 +350,11 @@ var/global/list/light_type_cache = list()
 			cell = new/obj/item/weapon/cell/emergency_light(src)
 		var/obj/item/weapon/light/L = get_light_type_instance(light_type) //This is fine, but old code.
 		update_from_bulb(L)
-		if(prob(L.broken_chance))
+		// outpost 21 addition begin - redspace hell lights have a fixed broken chance, ignoring default breaking chance... also reduces lighting lag...
+		if(istype(get_area(src), /area/specialty/redspace) && prob(75))
+			broken(1)
+		// outpost 21 addition end
+		else if(prob(L.broken_chance))
 			broken(1)
 
 	on = powered()

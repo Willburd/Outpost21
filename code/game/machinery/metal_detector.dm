@@ -73,7 +73,13 @@
 			use_power_oneoff(active_power_usage)
 			// detect threats in player inventory, and do an alert!
 			var/alert_lev = 0
-			if(istype(AM,/obj/))
+			var/mob/living/zapmob = null
+
+			if(istype(AM,/obj/mecha) || istype(AM,/mob/living/silicon))
+				// pretty much always is
+				alert_lev = 2
+
+			else if(istype(AM,/obj/))
 				// push in a raw object?
 				var/obj/O = AM
 				alert_lev = slot_scan(O)
@@ -88,6 +94,9 @@
 				for(var/obj/item/I in AM.contents)
 					alert_lev = max( alert_lev, slot_scan(I))
 
+				if(istype(AM,/mob/living))
+					zapmob = AM
+
 			// boop!
 			switch(alert_lev)
 				if(0)
@@ -96,8 +105,12 @@
 					yellow_alert()
 				if(2)
 					red_alert()
-					// TODO
-					//emagged zaps people on red alarm
+					if(zapmob && emagged)
+						//emagged zaps people on red alarm
+						if(electrocute_mob( zapmob, get_area(src), src, 0.7))
+							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+							s.set_up(5, 1, src)
+							s.start()
 
 /obj/machinery/metal_detector/proc/slot_scan(var/atom/thing)
 	if(!thing)

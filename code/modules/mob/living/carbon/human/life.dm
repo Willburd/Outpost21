@@ -199,43 +199,79 @@
 	if(stat != CONSCIOUS) //Let's not worry about tourettes if you're not conscious.
 		return
 
-	// outpost 21 edit begin - tweaked disabilities chances
-	if (disabilities & EPILEPSY)
-		if ((prob(2) && prob(4) && paralysis < 1))
-			to_chat(src, "<font color='red'>You have a seizure!</font>")
-			for(var/mob/O in viewers(src, null))
-				if(O == src)
-					continue
-				O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
-			Paralyse(10)
-			make_jittery(200)
+	// outpost 21 edit begin - tweaked disabilities chances, made anxiety meds actually work
+	var/anxietymedcount = 0 // DO NOT MIX THESE MEDS
+	var/seizuremedcount = 0
+	if( bloodstr.get_reagent_amount("qerr_quem") > 0)
+		anxietymedcount += 1;
+	if( bloodstr.get_reagent_amount("paroxetine") > 0)
+		anxietymedcount += 1;
+		seizuremedcount += 1;
+	if( bloodstr.get_reagent_amount("citalopram") > 0)
+		anxietymedcount += 1;
+		seizuremedcount += 1;
+	if( bloodstr.get_reagent_amount("methylphenidate") > 0)
+		anxietymedcount += 1;
+		seizuremedcount += 1;
+
+	// if no hazardous meds are mixed... just let any of the other ones work...
+	if( anxietymedcount == 0)
+		if( bloodstr.get_reagent_amount("nicotine") > 0)
+			anxietymedcount = 1;
+		if( ingested.get_reagent_amount("tea") > 0)
+			anxietymedcount = 1;
+
+
+	// alright, we need to see if we've mixed our meds... which is really bad.
+	if(anxietymedcount > 1)
+		if(prob(15) && prob(20))
+			stuttering = max(35, stuttering)
+			adjustHalLoss(2)
+			make_jittery(6)
+			if(3)
+				to_chat(src, "<font color='red'>Everything feels wrong.</font>")
+				hallucination = 25
+				emote("twitch")
+				make_jittery(22)
+				adjustHalLoss(10)
+	// anxiety meds handled here
+	else if(anxietymedcount == 0)
+		if (disabilities & NERVOUS)
+			if (prob(15) && prob(8))
+				stuttering = max(15, stuttering)
+		if (disabilities & TOURETTES)
+			if ((prob(5) && prob(8) && paralysis <= 1))
+				Stun(2)
+				spawn( 0 )
+					switch(rand(1, 3))
+						if(1)
+							emote("twitch")
+						if(2 to 3)
+							say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
+					make_jittery(20)
+	// seizure meds handled here
+	if(seizuremedcount == 0)
+		if (disabilities & EPILEPSY)
+			if ((prob(2) && prob(4) && paralysis < 1))
+				to_chat(src, "<font color='red'>You have a seizure!</font>")
+				for(var/mob/O in viewers(src, null))
+					if(O == src)
+						continue
+					O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
+				Paralyse(10)
+				make_jittery(200)
+	// not fixed by meds
 	if (disabilities & COUGHING)
 		if ((prob(10) && prob(8) && paralysis <= 1))
 			if(prob(23)) drop_item()
 			spawn( 0 )
 				emote("cough")
-				return
-	if (disabilities & TOURETTES)
-		if ((prob(5) && prob(8) && paralysis <= 1))
-			Stun(2)
-			spawn( 0 )
-				switch(rand(1, 3))
-					if(1)
-						emote("twitch")
-					if(2 to 3)
-						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				make_jittery(20)
-				return
-	if (disabilities & NERVOUS)
-		if (prob(15) && prob(8))
-			stuttering = max(15, stuttering)
 	if (disabilities & VERTIGO)
 		if ((prob(5) && prob(4) && paralysis < 1))
 			to_chat(src, "<font color='red'>You feel the world spinning!</font>")
 			make_dizzy(9)
 			Confuse(12)
 			make_jittery(15)
-
 	// outpost 21 edit end
 
 	var/rn = rand(0, 200)

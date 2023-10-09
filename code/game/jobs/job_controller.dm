@@ -575,6 +575,19 @@ var/global/datum/controller/occupations/job_master
 			var/obj/item/clothing/glasses/G = H.glasses
 			G.prescription = 1
 
+	//Gives medications for neurological disabilities
+	if(H.disabilities & NERVOUS || H.disabilities & EPILEPSY || H.disabilities & TOURETTES)
+		var/obj/item/weapon/storage/Bag
+		for(var/obj/item/weapon/storage/S in H.contents)
+			Bag = S
+			break
+		if(!isnull(Bag))
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/citalopram() //currently the only reasonable med, also one of the few with an actual pill bottle
+			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
+			Bag.contents += perscrip
+		else
+			to_chat(H, "<span class='danger'>Failed to locate a storage object for your medication on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
+
 	BITSET(H.hud_updateflag, ID_HUD)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 	BITSET(H.hud_updateflag, SPECIALROLE_HUD)

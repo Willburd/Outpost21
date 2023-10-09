@@ -52,6 +52,7 @@
 				to_chat(user, "<span class='warning'>Facial recognition scan failed. Access denied.</span>")
 				flick(icon_fail, src)
 				return
+			/*
 			else if(LAZYLEN(inserted.lost_access) && !(LAZYLEN(inserted.access)))
 				inserted.access = inserted.lost_access
 				inserted.lost_access = list()
@@ -62,6 +63,7 @@
 			else if(!(LAZYLEN(inserted.lost_access)))
 				to_chat(user, "<span class='notice'>No recent access codes damage detected. Restoration cancelled.</span>")
 				return
+			*/
 			else
 				to_chat(user, "<span class='warning'>Terminal encountered unknown error. Contact system administrator or try again.</span>")
 				flick(icon_fail, src)

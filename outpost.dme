@@ -313,6 +313,7 @@
 #include "code\core\image\Transform.dm"
 #include "code\core\matrix\Transform.dm"
 #include "code\datums\ai_law_sets.dm"
+#include "code\datums\ai_law_sets_op.dm"
 #include "code\datums\ai_law_sets_vr.dm"
 #include "code\datums\ai_laws.dm"
 #include "code\datums\api.dm"

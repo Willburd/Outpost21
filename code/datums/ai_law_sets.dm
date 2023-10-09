@@ -105,7 +105,7 @@
 /datum/ai_laws/antimov
 	name = "Antimov"
 	law_header = "Primary Mission Objectives"
-	selectable = 1
+	selectable = 0
 
 /datum/ai_laws/antimov/New()
 	add_inherent_law("You must injure all human beings and must not, through inaction, allow a human being to escape harm.")

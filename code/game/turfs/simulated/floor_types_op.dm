@@ -21,3 +21,9 @@
 	icon_state = "solarpanel"
 	initial_flooring = /decl/flooring/outpost_roof/hull
 	outdoors = TRUE
+
+/turf/simulated/floor/solarpanel/airless
+	oxygen = 0
+	nitrogen = 0
+	temperature = TCMB
+	outdoors = -1

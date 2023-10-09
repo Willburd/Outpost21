@@ -1390,7 +1390,7 @@
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/exp_prep
-	name = "\improper Xenolabt Expedition Preperation"
+	name = "\improper Xenolab Expedition Preperation"
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/mailing

@@ -28,7 +28,7 @@
 	log_debug("Stopping all playing media...")
 	// Stop all music.
 	for(var/mob/M in mob_list)
-		if(M && M.client)
+		if(!isnull(M) && !isnull(M.client))
 			M.stop_all_music()
 	//  SHITTY HACK TO AVOID RACE CONDITION WITH SERVER REBOOT.
 	sleep(10)  // TODO - Leshana - see if this is needed

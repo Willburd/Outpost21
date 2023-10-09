@@ -216,6 +216,8 @@
 
 	// if no hazardous meds are mixed... just let any of the other ones work...
 	if( anxietymedcount == 0)
+		if( bloodstr.get_reagent_amount("adranol") > 0)
+			anxietymedcount = 1;
 		if( bloodstr.get_reagent_amount("nicotine") > 0)
 			anxietymedcount = 1;
 		if( ingested.get_reagent_amount("tea") > 0)

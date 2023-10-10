@@ -483,7 +483,7 @@ var/datum/planet/muriki/planet_muriki = null
 	var/applied_damage = FALSE
 	var/pick_zone = ran_zone()
 	var/obj/item/organ/external/org = L.get_organ(pick_zone)
-	if(org)
+	if(org && !org.robotic)
 		if(pick_zone == BP_HEAD)
 			if(istype(H))
 				protection = H.head

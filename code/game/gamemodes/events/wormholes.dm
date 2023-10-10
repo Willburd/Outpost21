@@ -61,7 +61,7 @@
 
 
 //maybe this proc can even be used as an admin tool for teleporting players without ruining immulsions?
-/proc/create_wormhole(var/turf/enter as turf, var/turf/exit as turf, var/min_duration = 30 SECONDS, var/max_duration = 60 SECONDS, var/redspace = FALSE)
+/proc/create_wormhole(var/turf/enter as turf, var/turf/exit as turf, var/min_duration = 30 SECONDS, var/max_duration = 60 SECONDS, var/redspace = FALSE, var/redspacereturner = FALSE)
 	set waitfor = FALSE
 	var/obj/effect/portal/P = new /obj/effect/portal( enter )
 	P.target = exit
@@ -70,7 +70,9 @@
 	P.failchance = 0
 	P.icon_state = "anom"
 	P.name = "wormhole"
-	if(redspace) // outpost 21 addition - redspace storms
+	if(redspacereturner) // outpost 21 addition - redspace storms
+		P.redchance = -1
+	else if(redspace)
 		P.redchance = 100
 	spawn(rand(min_duration,max_duration))
 		qdel(P)

@@ -64,7 +64,20 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 		//VOREStation Addition End: Prevent taurriding abuse
 
 		// outpost 21 addition begin - OH NO
-		if(prob(redchance))
+		if(redchance < 0)
+			// lazy magic number return portal if -1
+			var/list/redexitlist = list()
+			for(var/obj/effect/landmark/R in landmarks_list)
+				if(R.name == "redexit")
+					redexitlist += R
+
+			if(redexitlist.len > 0)
+				do_teleport(M,pick( redexitlist).loc, 0,local = FALSE)
+			else
+				do_teleport(M, target, 1)  // fail...
+			return
+
+		else if(prob(redchance))
 			var/list/redlist = list()
 			for(var/obj/effect/landmark/R in landmarks_list)
 				if(R.name == "redentrance")
@@ -72,6 +85,10 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 
 			if(redlist.len > 0)
 				// if teleport worked, drop out... otherwise just teleport normally, it means there was no redspace spawns!
+				if(istype(M,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = M
+					H.AdjustWeakened(50)
+					H.adjustHalLoss(-10)
 				do_teleport(M,pick( redlist).loc, 0,local = FALSE)
 				return
 		// outpost 21 addition end
@@ -81,3 +98,9 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 			do_teleport(M, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), 3), 0)
 		else
 			do_teleport(M, target, 1) ///You will appear adjacent to the beacon
+
+
+
+
+/obj/effect/portal/redspace_returner
+	redchance = -1 // lazy flag

@@ -271,6 +271,7 @@
 		update_icon()
 		return 1
 
+	/* outpost 21 - PAI removal
 	//VOREStation Add Start
 	else if(istype(L, /mob/living/silicon/pai))
 		var/mob/living/silicon/pai/P = L
@@ -285,6 +286,7 @@
 		update_icon()
 		return 1
 	//VOREStation Add End
+	*/
 
 	else if(istype(L,  /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = L

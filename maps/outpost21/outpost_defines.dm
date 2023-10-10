@@ -155,6 +155,39 @@
 [i]Class[/i]: Installation
 [i]Transponder[/i]: Transmitting (CIV), ESHUI IFF
 [b]Notice[/b]: ESHUI Base, authorized personnel only"}
+	map_z = list(Z_LEVEL_OUTPOST_ASTEROID)
+	extra_z_levels = list()
+
+/obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard/Crossed(var/atom/movable/AM)
+	. = ..()
+	announce_atc(AM,going = FALSE)
+
+/obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard/Uncrossed(var/atom/movable/AM)
+	. = ..()
+	announce_atc(AM,going = TRUE)
+
+/obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard/proc/announce_atc(var/atom/movable/AM, var/going = FALSE)
+	var/message = "Sensor contact for vessel '[AM.name]' has [going ? "left" : "entered"] ATC control area."
+	//For landables, we need to see if their shuttle is cloaked
+	if(istype(AM, /obj/effect/overmap/visitable/ship/landable))
+		var/obj/effect/overmap/visitable/ship/landable/SL = AM //Phew
+		var/datum/shuttle/autodock/multi/shuttle = SSshuttles.shuttles[SL.shuttle]
+		if(!istype(shuttle) || !shuttle.cloaked) //Not a multishuttle (the only kind that can cloak) or not cloaked
+			atc.msg(message)
+
+	//For ships, it's safe to assume they're big enough to not be sneaky
+	else if(istype(AM, /obj/effect/overmap/visitable/ship))
+		atc.msg(message)
+
+/obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard/get_space_zlevels()
+	return list(Z_LEVEL_OUTPOST_ASTEROID)
+
+
+
+
+
+
+
 
 
 // For making the 6-in-1 holomap, we calculate some offsets
@@ -166,13 +199,13 @@
 /datum/map_z_level/outpost/centcom
 	z = Z_LEVEL_OUTPOST_CENTCOM
 	name = "CentCom"
-	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED
+	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_BELOW_BLOCKED
 	base_turf = /turf/simulated/open //TODO: Set to lava when I remember the damn object path
 
 /datum/map_z_level/outpost/basement
 	z = Z_LEVEL_OUTPOST_BASEMENT
 	name = "Basement"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST|MAP_LEVEL_BELOW_BLOCKED|MAP_LEVEL_MAPPABLE
 	base_turf = /turf/simulated/open
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
 	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 20) - 32 // hidden
@@ -182,9 +215,8 @@
 /datum/map_z_level/outpost/main
 	z = Z_LEVEL_OUTPOST_SURFACE
 	name = "Main"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST|MAP_LEVEL_MAPPABLE
 	base_turf = /turf/simulated/open
-	transit_chance = 5
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
 	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 0)
 	holomap_legend_x = 140
@@ -193,9 +225,8 @@
 /datum/map_z_level/outpost/upper
 	z = Z_LEVEL_OUTPOST_UPPER
 	name = "Upper"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
+	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST|MAP_LEVEL_MAPPABLE
 	base_turf = /turf/simulated/open
-	transit_chance = 5
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
 	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 1.1)
 	holomap_legend_x = 140
@@ -204,12 +235,13 @@
 /datum/map_z_level/outpost/misc
 	z = Z_LEVEL_OUTPOST_MISC
 	name = "Misc"
-	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED
+	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_BELOW_BLOCKED
 
 /datum/map_z_level/outpost/asteroid_mine
 	z = Z_LEVEL_OUTPOST_ASTEROID
 	name = "Asteroid"
-	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST
+	transit_chance = 100 // temp just loop through space
+	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_XENOARCH_EXEMPT|MAP_LEVEL_PERSIST|MAP_LEVEL_BELOW_BLOCKED|MAP_LEVEL_MAPPABLE
 
 
 //Unit test stuff.

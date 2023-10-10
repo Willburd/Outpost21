@@ -831,7 +831,7 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/start_engine()
 	set name = "Start engine"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -860,7 +860,7 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/stop_engine()
 	set name = "Stop engine"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -876,7 +876,7 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/remove_key()
 	set name = "Remove key"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -897,7 +897,7 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/headlights_on()
 	set name = "Headlights on"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	paired_console.interior_controller.headlights_enabled = TRUE
@@ -908,7 +908,7 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/pilot/verb/headlights_off()
 	set name = "Headlights off"
-	set category = "Vehicle"
+	set category = "Object"
 	set src in view(0)
 
 	paired_console.interior_controller.headlights_enabled = FALSE

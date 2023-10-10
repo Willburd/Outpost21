@@ -1883,7 +1883,7 @@
 "iKs" = (/obj/item/clothing/accessory/holster/armpit,/obj/item/clothing/accessory/holster/armpit,/obj/item/clothing/accessory/holster/armpit,/obj/item/clothing/accessory/holster/armpit,/obj/item/clothing/accessory/holster/armpit,/obj/item/clothing/accessory/holster/armpit,/obj/structure/table/reinforced,/turf/simulated/floor/tiled{icon_state = "dark"},/area/centcom/specops)
 "iKt" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/device/retail_scanner/science,/turf/simulated/floor/tiled/milspec,/area/specialty/redspace)
 "iKv" = (/obj/structure/table/reinforced,/obj/item/device/binoculars,/obj/item/device/survivalcapsule,/obj/item/device/survivalcapsule,/turf/simulated/floor/tiled{icon_state = "dark"},/area/centcom/specops)
-"iLC" = (/obj/machinery/telecomms/relay/preset/station,/turf/unsimulated/floor/steel,/area/centcom/control)
+"iLC" = (/obj/machinery/telecomms/relay/preset/centcom,/turf/unsimulated/floor/steel,/area/centcom/control)
 "iLV" = (/obj/structure/bed{desc = "This is a bed..It says something close to the bottom 'I fuck the cat here too'."},/obj/item/weapon/bedsheet/orange,/obj/item/weapon/handcuffs/legcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled/dark,/area/centcom/holding)
 "iMg" = (/obj/structure/artilleryplaceholder/decorative{icon_state = "25"},/turf/unsimulated/floor/techfloor_grid,/area/centcom/security)
 "iMu" = (/obj/structure/artilleryplaceholder/decorative{icon_state = "27"},/turf/unsimulated/floor/techfloor_grid,/area/centcom/security)

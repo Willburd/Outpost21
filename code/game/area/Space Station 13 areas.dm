@@ -1779,6 +1779,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/security/brig
 	name = "\improper Security - Brig"
+	base_turf = /turf/simulated/mineral/floor/cave //Outpost edit, because our prison is underground.
 	icon_state = "brig"
 	flags = RAD_SHIELDED //Outpost edit: So prisoners don't MELT if a radiation storm comes... even if that's hilarious.
 
@@ -1793,6 +1794,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+	base_turf = /turf/simulated/mineral/floor/cave //Outpost edit, because our prison is underground.
 	flags = RAD_SHIELDED
 
 /area/security/prison/prison_break()
@@ -1830,6 +1832,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/security/riot_control
 	name = "\improper Security - Riot Control"
+	base_turf = /turf/simulated/mineral/floor/cave //Outpost edit, because our prison is underground.
 	icon_state = "riot_control"
 
 /area/security/detectives_office

@@ -71,6 +71,13 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 				if(R.name == "redexit")
 					redexitlist += R
 
+			// passout on return to reality
+			if(istype(M,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				H.AdjustSleeping(15)
+				H.AdjustWeakened(3)
+				H.adjustHalLoss(-9)
+
 			if(redexitlist.len > 0)
 				do_teleport(M,pick( redexitlist).loc, 0,local = FALSE)
 			else
@@ -85,10 +92,6 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 
 			if(redlist.len > 0)
 				// if teleport worked, drop out... otherwise just teleport normally, it means there was no redspace spawns!
-				if(istype(M,/mob/living/carbon/human))
-					var/mob/living/carbon/human/H = M
-					H.AdjustWeakened(50)
-					H.adjustHalLoss(-10)
 				do_teleport(M,pick( redlist).loc, 0,local = FALSE)
 				return
 		// outpost 21 addition end

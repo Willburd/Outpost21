@@ -215,6 +215,17 @@
 	gauge_icon = "indicator_emergency_double"
 	volume = 10
 
+/obj/item/weapon/tank/emergency/carbon_dioxide
+	name = "emergency carbon dioxide tank"
+	desc = "An emergency air tank hastily painted yellow."
+	icon_state = "emergency_tst"
+	gauge_icon = "indicator_emergency"
+
+/obj/item/weapon/tank/emergency/carbon_dioxide/Initialize()
+	. = ..()
+	src.air_contents.adjust_gas("carbon_dioxide", (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+
+
 /*
  * Nitrogen
  */
@@ -244,3 +255,22 @@
 /obj/item/weapon/tank/stasis/nitro_cryo/Initialize()
 	. = ..()
 	src.air_contents.adjust_gas_temp("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*TN60C), TN60C)
+
+/*
+ * Carbon Dioxide
+ */
+/obj/item/weapon/tank/carbon_dioxide
+	name = "carbon dioxide tank"
+	desc = "A tank of carbon dioxide."
+	icon_state = "oxygen_f"
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+
+/obj/item/weapon/tank/carbon_dioxide/Initialize()
+	. = ..()
+	src.air_contents.adjust_gas("carbon_dioxide", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/weapon/tank/carbon_dioxide/examine(mob/user)
+	. = ..()
+	if(loc == user && (air_contents.gas["carbon_dioxide"] < 10))
+		. += "<span class='danger'>The meter on \the [src] indicates you are almost out of carbon dioxide!</span>"
+		//playsound(user, 'sound/effects/alert.ogg', 50, 1)

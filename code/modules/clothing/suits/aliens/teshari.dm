@@ -258,7 +258,7 @@
 	flags_inv = HIDEHOLSTER|HIDETIE
 	action_button_name = "Toggle Cloak Hood"
 	hoodtype = /obj/item/clothing/head/tesh_hood
-	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/nitrogen,/obj/item/weapon/tank/emergency/phoron,/obj/item/weapon/tank/emergency/carbon_dioxide, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
 
 /obj/item/clothing/head/tesh_hood
 	name = "Cloak Hood"
@@ -706,4 +706,3 @@
 	name = "janitor belted cloak"
 	desc = "A soft Teshari cloak made for the Janitor"
 	icon_state = "tesh_beltcloak_jani"
-

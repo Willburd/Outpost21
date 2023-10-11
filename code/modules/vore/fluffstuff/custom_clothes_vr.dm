@@ -218,7 +218,7 @@
 	icon_override = 'icons/inventory/suit/mob_vr.dmi'
 	item_state = "russofurcoat"
 
-	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/nitrogen,/obj/item/weapon/tank/emergency/phoron,/obj/item/weapon/tank/emergency/carbon_dioxide, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
 	flags_inv = HIDETIE|HIDEHOLSTER
 
 //For general use
@@ -235,7 +235,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	allowed = list(
-				/obj/item/weapon/tank/emergency/oxygen,
+				/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/nitrogen,/obj/item/weapon/tank/emergency/phoron,/obj/item/weapon/tank/emergency/carbon_dioxide,
 				/obj/item/device/flashlight,
 				/obj/item/weapon/gun/energy,
 				/obj/item/weapon/gun/projectile,
@@ -305,7 +305,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	allowed = list(
-				/obj/item/weapon/tank/emergency/oxygen,
+				/obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/nitrogen,/obj/item/weapon/tank/emergency/phoron,/obj/item/weapon/tank/emergency/carbon_dioxide,
 				/obj/item/device/flashlight,
 				/obj/item/weapon/gun/energy,
 				/obj/item/weapon/gun/projectile,
@@ -1269,7 +1269,7 @@ Departamental Swimsuits, for general use
 	permeability_coefficient = 0.50
 	allowed = list(
 		/obj/item/device/flashlight, /obj/item/device/analyzer,
-		/obj/item/device/radio, /obj/item/weapon/tank/emergency/oxygen,
+		/obj/item/device/radio, /obj/item/weapon/tank/emergency/oxygen,/obj/item/weapon/tank/emergency/nitrogen,/obj/item/weapon/tank/emergency/phoron,/obj/item/weapon/tank/emergency/carbon_dioxide,
 		/obj/item/weapon/reagent_containers/hypospray, /obj/item/device/healthanalyzer,
 		/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,
@@ -2535,5 +2535,3 @@ Departamental Swimsuits, for general use
     item_state = "freyrmask_mob"
     item_state_slots = null
     body_parts_covered = FACE
-
-

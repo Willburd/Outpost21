@@ -184,6 +184,7 @@
 /datum/trait/negative/breathes
 	cost = -2
 	can_take = ORGANICS
+	custom_only = FALSE
 
 /datum/trait/negative/breathes/phoron
 	name = "Phoron Breather"
@@ -194,6 +195,11 @@
 	name = "Nitrogen Breather"
 	desc = "You breathe nitrogen instead of oxygen (which is poisonous to you). Incidentally, phoron isn't poisonous to breathe to you."
 	var_changes = list("breath_type" = "nitrogen", "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/nitrogen_breather)
+
+/datum/trait/negative/breathes/carbon
+	name = "Carbon Dioxide Breather"
+	desc = "You breathe carbon dioxide instead of oxygen (which is poisonous to you). Incidentally, phoron isn't poisonous to breathe to you."
+	var_changes = list("breath_type" = "carbon_dioxide", "exhale_type" = null, "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/carbon_breather)
 
 /datum/trait/negative/monolingual
 	name = "Monolingual"
@@ -226,10 +232,12 @@
 	desc = "You have trouble dealing with sudden flashes of light, taking some time for you to recover. The effects of flashes from cameras and security equipment leaves you stunned for some time."
 	cost = -1
 	var_changes = list("flash_mod" = 1.5)
+	custom_only = FALSE
 
 /datum/trait/negative/light_sensitivity_plus
 	name = "Photosensitivity Extreme"
 	desc = "You have trouble dealing with sudden flashes of light, taking quite a long time for you to be able to recover. The effects of flashes from cameras and security equipment leave you stunned for some time."
 	cost = -2
 	var_changes = list("flash_mod" = 2.0)
+	custom_only = FALSE
 //YW ADDITIONS: END

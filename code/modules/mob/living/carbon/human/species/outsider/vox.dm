@@ -99,7 +99,7 @@
 
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 0,var/comprehensive = 0)
 	. = ..()
-
+	/* outpost 21 edit - moved into base species to allow negative traits to also handle this in the same way
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/vox(H), slot_back)
@@ -110,3 +110,4 @@
 	H.internal = locate(/obj/item/weapon/tank) in H.contents
 	if(istype(H.internal,/obj/item/weapon/tank) && H.internals)
 		H.internals.icon_state = "internal1"
+	*/

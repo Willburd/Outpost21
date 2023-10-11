@@ -963,6 +963,7 @@
 #include "code\game\machinery\doors\airlock_angled_tgmc.dm"
 #include "code\game\machinery\doors\airlock_control.dm"
 #include "code\game\machinery\doors\airlock_electronics.dm"
+#include "code\game\machinery\doors\airlock_op.dm"
 #include "code\game\machinery\doors\airlock_vr.dm"
 #include "code\game\machinery\doors\airlock_yw.dm"
 #include "code\game\machinery\doors\alarmlock.dm"

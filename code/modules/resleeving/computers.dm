@@ -139,7 +139,7 @@
 /obj/machinery/computer/transhuman/resleeving/tgui_data(mob/user)
 	var/data[0]
 	data["menu"] = menu
-	
+
 	var/list/temppods[0]
 	for(var/obj/machinery/clonepod/transhuman/pod in pods)
 		var/status = "idle"
@@ -184,7 +184,7 @@
 	data["selected_pod"] = "\ref[selected_pod]"
 	data["selected_printer"] = "\ref[selected_printer]"
 	data["selected_sleever"] = "\ref[selected_sleever]"
-	
+
 	var/bodyrecords_list_ui[0]
 	for(var/N in our_db.body_scans)
 		var/datum/transhuman/body_record/BR = our_db.body_scans[N]
@@ -505,7 +505,7 @@
 		else if(!synthetic_capable && !organic_capable) //What have you done??
 			can_grow_active = 0
 			set_temp("Error: Cannot grow [active_br.mydna.name] due to lack of synthfabs and cloners.", "danger")
-		else if(active_br.toocomplex)
+		else if(active_br.toocomplex && !istype(selected_pod,/obj/machinery/clonepod/transhuman/vox) && active_br.speciesname == "Vox")
 			can_grow_active = 0
 			set_temp("Error: Cannot grow [active_br.mydna.name] due to species complexity.", "danger")
 		var/list/payload = list(

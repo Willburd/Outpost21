@@ -56,8 +56,9 @@ var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
 /* outpost 21 - job removals
 var/const/PILOT 			=(1<<13) //VOREStation Add
-var/const/ENTERTAINER		=(1<<14) //VOREStation Add
 */
+var/const/ENTERTAINER		=(1<<14) //VOREStation Add
+
 
 /* outpost 21 - job removals
 //YAWN Add START

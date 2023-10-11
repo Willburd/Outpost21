@@ -161,7 +161,8 @@
 	disallow_jobhop = TRUE
 	pto_type = PTO_CIVILIAN
 	alt_titles = list("Internal Affairs Liaison" = /datum/alt_title/ia_liaison, "Internal Affairs Delegate" = /datum/alt_title/ia_delegate,
-						"Internal Affairs Investigator" = /datum/alt_title/ia_investigator)
+						"Internal Affairs Investigator" = /datum/alt_title/ia_investigator, "Lawyer" = /datum/alt_title/ia_lawyer,
+						"Lawyer" = /datum/alt_title/ia_lawyer, "Station Attorney" = /datum/alt_title/ia_attorney)
 
 /datum/alt_title/ia_liaison
 	title = "Internal Affairs Liaison"
@@ -171,6 +172,12 @@
 
 /datum/alt_title/ia_investigator
 	title = "Internal Affairs Investigator"
+
+/datum/alt_title/ia_lawyer
+	title = "Lawyer"
+
+/datum/alt_title/ia_attorney
+	title = "Station Attorney"
 
 
 /datum/job/chaplain

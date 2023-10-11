@@ -62,6 +62,8 @@
 	name = "Clown"
 /obj/effect/landmark/start/entertainer
 	name = "Entertainer"
+/obj/effect/landmark/start/radiohost
+	name = "Radio Host"
 /obj/effect/landmark/start/intern
 	name = "Intern"
 /obj/effect/landmark/start/iaa

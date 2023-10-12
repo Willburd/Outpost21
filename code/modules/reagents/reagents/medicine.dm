@@ -256,7 +256,7 @@
 	metabolism = REM * 0.25 //VOREStation Edit
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
+	if(M.species.poison_type == "oxygen") // outpost 21 edit, changed form alien == IS_VOX to be consistant with poison oxygen behavior
 		M.adjustToxLoss(removed * 24) //VOREStation Edit
 	else if(alien == IS_SLIME && dose >= 15)
 		M.add_chemical_effect(CE_PAINKILLER, 15 * M.species.chem_strength_pain)
@@ -281,7 +281,7 @@
 	scannable = 1
 
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
+	if(M.species.poison_type == "oxygen") // outpost 21 edit, changed form alien == IS_VOX to be consistant with poison oxygen behavior
 		M.adjustToxLoss(removed * 9)
 	else if(alien == IS_SLIME && dose >= 10)
 		M.add_chemical_effect(CE_PAINKILLER, 25 * M.species.chem_strength_pain)

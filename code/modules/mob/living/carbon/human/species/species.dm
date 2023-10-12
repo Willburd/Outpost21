@@ -367,30 +367,6 @@
 	else
 		H.equip_to_slot_or_del(box, slot_in_backpack)
 
-	// initialize internal tanks
-	if(!isnull(breath_type) && breath_type != "oxygen")
-		// configure tank
-		var/obj/item/weapon/tank/gastank = null
-		if(breath_type == "phoron")
-			gastank = new /obj/item/weapon/tank/vox(H)
-		if(breath_type == "nitrogen")
-			gastank = new /obj/item/weapon/tank/nitrogen(H)
-		if(breath_type == "carbon_dioxide")
-			gastank = new /obj/item/weapon/tank/carbon_dioxide(H)
-
-		// loadout
-		H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(gastank, slot_back)
-			H.internal = H.back
-		else
-			H.equip_to_slot_or_del(gastank, slot_r_hand)
-			H.internal = H.r_hand
-		H.internal = locate(/obj/item/weapon/tank) in H.contents
-		if(istype(H.internal,/obj/item/weapon/tank) && H.internals)
-			H.internals.icon_state = "internal1"
-
-
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	H.mob_size = mob_size

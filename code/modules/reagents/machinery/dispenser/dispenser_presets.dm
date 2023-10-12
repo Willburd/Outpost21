@@ -39,6 +39,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dermaline,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin_p,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hemocyanin,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tricord,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dylovene,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/synaptizine,

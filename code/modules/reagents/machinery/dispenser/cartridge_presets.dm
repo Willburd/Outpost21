@@ -169,6 +169,8 @@
 	volume = CARTRIDGE_VOLUME_SMALL // For the medicine cartridge crate, so it's not too easy to get large amounts of dexalin
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin_p
 	spawn_reagent = "dexalinp"
+/obj/item/weapon/reagent_containers/chem_disp_cartridge/hemocyanin
+	spawn_reagent = "hemocyanin"
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/tricord
 	spawn_reagent = "tricordrazine"
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/dylovene

@@ -17,11 +17,11 @@
 	item_state_slots = list(slot_r_hand_str = "firstaid-vox", slot_l_hand_str = "firstaid-vox")
 	starts_with = list(
 		/obj/item/weapon/reagent_containers/syringe/voxkit,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/hemocyanin,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/hemocyanin,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
 		/obj/item/weapon/storage/pill_bottle/dylovene,
-		/obj/item/weapon/storage/pill_bottle/iron,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/device/healthanalyzer

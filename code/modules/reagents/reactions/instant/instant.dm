@@ -513,6 +513,7 @@
 	id = "lexorin"
 	result = "lexorin"
 	required_reagents = list("phoron" = 1, "hydrogen" = 1, "nitrogen" = 1)
+	inhibitors = list("copper" = 1) // Messes with hemocyanin
 	result_amount = 3
 
 /decl/chemical_reaction/instant/methylphenidate
@@ -1179,7 +1180,7 @@
 	id = "hydrophoron"
 	result = "hydrophoron"
 	required_reagents = list("hydrogen" = 1, "phoron" = 1)
-	inhibitors = list("nitrogen" = 1) //So it doesn't mess with lexorin
+	inhibitors = list("nitrogen" = 1,"copper" = 1) //So it doesn't mess with lexorin and hemocyanin
 	result_amount = 2
 
 /decl/chemical_reaction/instant/deuterium

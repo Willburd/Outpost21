@@ -3,6 +3,7 @@
 	xenoChemList += "bicaridine"
 	xenoChemList += "dylovene"
 	xenoChemList += "dexalinp"
+	xenoChemList += "hemocyanin"	// outpost 21 addition
 	xenoChemList += "tricordrazine"
 	xenoChemList += "cryoxadone"
 	xenoChemList += "clonexadone"

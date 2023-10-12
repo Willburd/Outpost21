@@ -68,8 +68,8 @@
 	job_description = "A Scientist is a generalist working in the Research department, with general knowledge of the scientific process, as well as \
 						the principles and requirements of Research and Development. They may also formulate experiments of their own devising, if \
 						they find an appropriate topic."
-	alt_titles = list("Xenoarchaeologist" = /datum/alt_title/xenoarch, "Anomalist" = /datum/alt_title/anomalist, \
-						"Phoron Researcher" = /datum/alt_title/phoron_research)
+	alt_titles = list("Xenoarchaeologist" = /datum/alt_title/xenoarch, "Anomalist" = /datum/alt_title/anomalist /*, \
+						"Phoron Researcher" = /datum/alt_title/phoron_research*/) // outpost 21 edit - disabled phoron research
 
 // Scientist Alt Titles
 /datum/alt_title/xenoarch
@@ -82,11 +82,13 @@
 	title_blurb = "An Anomalist is a Scientist whose expertise is analyzing alien artifacts. They are familar with the most common methods of testing artifact \
 					function. They work closely with Xenoarchaeologists, or Miners, if either role is present."
 
+/* outpost 21 edit - disabled phoron research
 /datum/alt_title/phoron_research
 	title = "Phoron Researcher"
 	title_blurb = "A Phoron Researcher is a specialist in the practical applications of phoron, and has knowledge of its practical uses and dangers. \
 					Many Phoron Researchers are interested in the combustability and explosive properties of gaseous phoron, as well as the specific hazards \
 					of working with the substance in that state."
+*/
 
 //////////////////////////////////
 //			Xenobiologist

@@ -602,7 +602,7 @@
 		suiciding--
 		return 0
 
-	if(does_not_breathe)
+	if(does_not_breathe || istype(loc,/obj/machinery/clonepod)) // outpost 21 edit - clonepod ignores breathing so we can sanely grow bodies that alternate breath types
 		failed_last_breath = 0
 		adjustOxyLoss(-5)
 		return

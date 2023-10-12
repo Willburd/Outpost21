@@ -112,16 +112,16 @@ var/list/lunchables_drink_reagents_ = list(/datum/reagent/drink/nothing,
 var/list/lunchables_ethanol_reagents_ = list(/datum/reagent/ethanol/acid_spit,
                                              /datum/reagent/ethanol/atomicbomb,
                                              /datum/reagent/ethanol/beepsky_smash,
-                                             /datum/reagent/ethanol/coffee,
+                                             /*/datum/reagent/ethanol/coffee,*/
                                              /datum/reagent/ethanol/hippies_delight,
                                              /datum/reagent/ethanol/hooch,
                                              /datum/reagent/ethanol/thirteenloko,
                                              /datum/reagent/ethanol/manhattan_proj,
                                              /datum/reagent/ethanol/neurotoxin,
                                              /datum/reagent/ethanol/pwine,
-                                             /datum/reagent/ethanol/threemileisland,
+                                             /*/datum/reagent/ethanol/threemileisland,*/
                                              /datum/reagent/ethanol/toxins_special,
-											 /datum/reagent/ethanol/voxdelight,
+											 /*/datum/reagent/ethanol/voxdelight,*/ // outpost 21 edit - allow more booze in starting flash
 											 /datum/reagent/ethanol/soemmerfire,
 											 /datum/reagent/ethanol/slimeshot)
 

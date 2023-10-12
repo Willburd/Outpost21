@@ -106,4 +106,6 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 
 
 /obj/effect/portal/redspace_returner
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "rift"
 	redchance = -1 // lazy flag

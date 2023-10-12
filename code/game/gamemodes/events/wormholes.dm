@@ -71,6 +71,8 @@
 	P.icon_state = "anom"
 	P.name = "wormhole"
 	if(redspacereturner) // outpost 21 addition - redspace storms
+		P.icon = 'icons/effects/effects.dmi'
+		P.icon_state = "rift"
 		P.redchance = -1
 	else if(redspace)
 		P.redchance = 100

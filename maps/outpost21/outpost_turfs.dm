@@ -253,15 +253,57 @@ MURIKI_TURF_CREATE_UN(/turf/simulated/mineral/crystal_shiny/ignore_mapgen)
 	icon = 'icons/turf/transit_yw.dmi'
 	icon_state = "snow_ns"
 
-
 /turf/simulated/sky/snowscroll/Initialize()
 	SSplanets.addTurf(src)
 	set_light(2, 2, "#E0FFFF")
 
+// TRAM USE  - TODO: Compare with existing maglev tracks on the virgo maps. I sense redundant code. Also needs to be moved to a higher level.
+// The tram's electrified maglev tracks
+/turf/simulated/floor/maglev
+	name = "maglev track"
+	desc = "Magnetic levitation tram tracks. Caution! Electrified!"
+	icon = 'icons/turf/flooring/maglevs.dmi'
+	icon_state = "maglevup"
 
-// Misc
-/area/mine/explored/muriki_wilds
-	name = "\improper muriki Wilderness Outer Perimeter"
+	var/area/shock_area = /area/engineering/engine_smes // engine power hue hue hue
 
-/area/mine/unexplored/muriki_wilds
-	name = "\improper muriki Wilderness Inner Perimeter"
+/turf/simulated/floor/maglev/Initialize()
+	. = ..()
+	shock_area = locate(shock_area)
+
+// Walking on maglev tracks will shock you! Horray!
+/turf/simulated/floor/maglev/Entered(var/atom/movable/AM, var/atom/old_loc)
+	if(locate(/obj/structure/catwalk) in AM.loc)
+		// safe to walk over!
+		return
+	if(isliving(AM) && prob(80))
+		track_zap(AM)
+/turf/simulated/floor/maglev/attack_hand(var/mob/user)
+	if(prob(95))
+		track_zap(user)
+/turf/simulated/floor/maglev/proc/track_zap(var/mob/living/user)
+	if (!istype(user)) return
+	if (electrocute_mob(user, shock_area, src))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+
+// override of newly added unsimulated deathdrop tile with black darkness appearance!
+/turf/unsimulated/deathdrop/elevator_shaft
+	death_message = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
+
+/turf/simulated/deathdrop/elevator_shaft
+	death_message = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
+
+/turf/unsimulated/deathdrop/waterfall
+	death_message = "The increasing speed and current of the river swiftly drags you into the rapids, destoying any boat you had and cracking your body against the rocks. The harsh acids of the water then make short work at dissolving your corpse, lost to the river forever."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_state = "searapids" // So it shows up in the map editor as water.
+
+/turf/simulated/deathdrop/waterfall
+	death_message = "The increasing speed and current of the river swiftly drags you into the rapids, destoying any boat you had and cracking your body against the rocks. The harsh acids of the water then make short work at dissolving your corpse, lost to the river forever."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_state = "searapids" // So it shows up in the map editor as water.
+
+MURIKI_TURF_CREATE_UN(/turf/simulated/deathdrop/waterfall)
+MURIKI_TURF_CREATE_UN(/turf/simulated/deathdrop/elevator_shaft) // probably not needed?

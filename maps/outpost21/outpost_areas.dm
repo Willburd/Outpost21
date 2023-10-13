@@ -4,6 +4,14 @@
 	icon_state = "deck1"
 	sound_env = STANDARD_STATION
 
+// Misc
+/area/mine/explored/muriki_wilds
+	name = "\improper muriki Wilderness Outer Perimeter"
+
+/area/mine/unexplored/muriki_wilds
+	name = "\improper muriki Wilderness Inner Perimeter"
+
+
 //Station! Y'know, the important stuff.
 //
 // Atmospherics ---------------------------------------------------------------------

@@ -27,3 +27,22 @@
 	nitrogen = 0
 	temperature = TCMB
 	outdoors = -1
+
+/turf/simulated/deathdrop
+	// overridable, instantkill floors, same as /turf/unsimulated/deathdrop
+	name = "floor"
+	icon = 'icons/turf/open_space.dmi'
+	icon_state = "black_open"
+	var/death_message = "You fall to an unavoidable death."
+
+/turf/simulated/deathdrop/Entered(atom/A)
+	spawn(0)
+		if(A.is_incorporeal())
+			return
+		if(istype( A, /atom/movable))
+			var/atom/movable/AM = A
+			if(!AM.can_fall()) // flying checks
+				return
+		if(ismob( A))
+			to_chat( A, "<span class='danger'>[death_message]</span>")
+		qdel(A)

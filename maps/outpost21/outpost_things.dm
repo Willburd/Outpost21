@@ -8,37 +8,6 @@
 	icon_state = "fwindow"
 	maxhealth = 80
 
-// TRAM USE  - TODO: Compare with existing maglev tracks on the virgo maps. I sense redundant code. Also needs to be moved to a higher level.
-// The tram's electrified maglev tracks
-/turf/simulated/floor/maglev
-	name = "maglev track"
-	desc = "Magnetic levitation tram tracks. Caution! Electrified!"
-	icon = 'icons/turf/flooring/maglevs.dmi'
-	icon_state = "maglevup"
-
-	var/area/shock_area = /area/engineering/engine_smes // engine power hue hue hue
-
-/turf/simulated/floor/maglev/Initialize()
-	. = ..()
-	shock_area = locate(shock_area)
-
-// Walking on maglev tracks will shock you! Horray!
-/turf/simulated/floor/maglev/Entered(var/atom/movable/AM, var/atom/old_loc)
-	if(locate(/obj/structure/catwalk) in AM.loc)
-		// safe to walk over!
-		return
-	if(isliving(AM) && prob(80))
-		track_zap(AM)
-/turf/simulated/floor/maglev/attack_hand(var/mob/user)
-	if(prob(95))
-		track_zap(user)
-/turf/simulated/floor/maglev/proc/track_zap(var/mob/living/user)
-	if (!istype(user)) return
-	if (electrocute_mob(user, shock_area, src))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, src)
-		s.start()
-
 /obj/machinery/smartfridge/plantvator
 	name = "\improper Smart plantavator - Upper"
 	desc = "A refrigerated storage unit for Food and plant storage. With a nice set of hydraulic racks to move items up and down."
@@ -238,14 +207,6 @@
 /obj/effect/landmark/map_data/muriki
     height = 3 //Height marker. Provides the map with knowledge of how many z levels connecting below.
 
-// override of newly added unsimulated deathdrop tile with black darkness appearance!
-/turf/unsimulated/deathdrop/elevator_shaft
-	death_message = "You fall into the elevator shaft, the thin atmosphere inside does little to slow you down and by the time you hit the bottom there is nothing more than a bloody smear. The damage you did to the elevator and the cost of your potential resleeve will be deducted from your pay."
-
-/turf/unsimulated/deathdrop/waterfall
-	death_message = "The increasing speed and current of the river swiftly drags you into the rapids, destoying any boat you had and cracking your body against the rocks. The harsh acids of the water then make short work at dissolving your corpse, lost to the river forever."
-	icon = 'icons/turf/outdoors.dmi'
-	icon_state = "searapids" // So it shows up in the map editor as water.
 
 //These 'lost in space' ones should be moved to a higher level file, not map specific. Taken from YW
 /obj/effect/step_trigger/lost_in_space

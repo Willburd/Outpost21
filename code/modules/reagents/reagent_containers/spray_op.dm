@@ -4,10 +4,10 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cleaner-industrial"
 	item_state = "cleaner-industrial"
-	amount_per_transfer_from_this = 1
+	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null
-	volume = 20
+	volume = 50
 
 /obj/item/weapon/reagent_containers/spray/xenowatergun/Initialize()
 	. = ..()
-	reagents.add_reagent("water", 20)
+	reagents.add_reagent("water", 50)

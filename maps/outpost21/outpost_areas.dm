@@ -11,6 +11,23 @@
 /area/mine/unexplored/muriki_wilds
 	name = "\improper muriki Wilderness Inner Perimeter"
 
+/area/muriki/lowerelev
+	name = "\improper Arrivals Elevator Shaft"
+	icon_state = "dark128"
+	ambience = AMBIENCE_FOREBODING
+	sound_env = TUNNEL_ENCLOSED
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
+
+/area/muriki/lowerevac
+	name = "\improper Evac Elevator Shaft"
+	icon_state = "dark128"
+	ambience = AMBIENCE_FOREBODING
+	sound_env = TUNNEL_ENCLOSED
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
+
+
 
 //Station! Y'know, the important stuff.
 //
@@ -953,14 +970,6 @@
 /area/maintenance/crewelev
 	name = "\improper Civilian Elevator Maintenance Shaft"
 	icon_state = "pmaint"
-
-/area/maintenance/lowerelev
-	name = "\improper Arrivals Elevator Shaft"
-	icon_state = "dark128"
-
-/area/maintenance/lowerevac
-	name = "\improper Evac Elevator Shaft"
-	icon_state = "dark128"
 
 /area/maintenance/wastedisposal
 	name = "\improper Waste Disposal Maintenance"

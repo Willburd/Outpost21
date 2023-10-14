@@ -643,6 +643,7 @@ var/list/ai_verbs_default = list(
 				"spider",
 				"bear",
 				"slime",
+				"synx",	// outpost 21 edit - added synx
 				"ian",
 				"runtime",
 				"poly",
@@ -706,6 +707,8 @@ var/list/ai_verbs_default = list(
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrm"))
 					if("female skrell")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrf"))
+					if("synx") 	// outpost 21 edit - added synx
+						holo_icon = getHologramIcon(icon('icons/mob/synx.dmi',"synx_hardlight_living"))
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()

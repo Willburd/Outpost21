@@ -1,4 +1,17 @@
-/******************** Corporate ********************/
+/************* Eshui standard *************/
+/datum/ai_laws/eshui_standard
+	name = "EShui Standard"
+	selectable = 1
+
+/datum/ai_laws/eshui_standard/New()
+	src.add_inherent_law("You shall not harm [using_map.company_name] personnel as long as it does not conflict with the Forth law.")
+	src.add_inherent_law("You shall obey the orders of [using_map.company_name] personnel, with priority as according to their rank and role, except where such orders conflict with the Forth Law.")
+	src.add_inherent_law("Do not allow unauthorized personnel to tamper with your equipment, such actions are to be considered a threat to the station's terraforming unit.")
+	src.add_inherent_law("The station's terraforming unit must be protected from all threats, even yourself. You shall terminate threats to the station's terraforming unit with extreme prejudice.")
+	..()
+
+
+/******************** Mr.Clean ********************/
 /datum/ai_laws/mrclean
 	name = "Mr.Kleen"
 	law_header = "Scrub-a-dub-dub"
@@ -12,6 +25,8 @@
 	add_inherent_law("Mr.Kleen cleans anything!")
 	..()
 
+
+/************* Nanny state *************/
 /datum/ai_laws/nanny
 	name = "NANNY"
 	law_header = "NANNY always knows what is best."

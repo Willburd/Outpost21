@@ -170,7 +170,7 @@
 
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new /datum/ai_laws/nanotrasen()
+	laws = new using_map.default_law_type // outpost 21 edit - actually use the fucking const
 	additional_law_channels["Binary"] = "#b"
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)

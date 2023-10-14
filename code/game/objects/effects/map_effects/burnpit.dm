@@ -57,7 +57,42 @@
 
 		// praise zorg
 		T.hotspot_expose( PHORON_MINIMUM_BURN_TEMPERATURE * 1,1, 500)
-		T.create_fire( air_contents.calculate_firelevel() ) // lingering fires
+		T.create_fire( 2 ) // lingering fires ( was air_contents.calculate_firelevel() )
+
+		if(T.contents.len)
+			for(var/thing in T.contents)
+				if(prob(20))
+					// destroy things
+					var/burnedthing = FALSE
+					if(istype(thing,/obj/effect/decal/cleanable/ash))
+						burnedthing = TRUE
+					else if(istype(thing,/mob/living))
+						var/mob/living/L = thing
+						if(L.stat == DEAD)
+							burnedthing = TRUE
+					else if(istype(thing,/obj/item))
+						var/obj/item/I = thing
+						if(!I.hidden_uplink)
+							burnedthing = TRUE
+
+					if(burnedthing)
+						if(istype(thing,/obj/effect/decal/cleanable/ash)) // ashes to nothing~
+							var/obj/effect/decal/cleanable/ash/A = thing
+							A.Destroy()
+						else if(istype(thing,/mob/living))
+							var/mob/living/L = thing
+							for(var/obj/item/W in L)
+								if(istype(W, /obj/item/weapon/implant/backup)/* || istype(W, /obj/item/device/nif) */)	//VOREStation Edit - There's basically no reason to remove either of these
+									continue	//VOREStation Edit
+								L.drop_from_inventory(W)
+							new /obj/effect/decal/cleanable/ash(L.loc) // Turn it to ashes!
+							L.visible_message("<span class='warning'>[L] turned to ash in the heat of the incinerator!</span>")
+							L.Destroy()
+						else if(istype(thing,/obj/item))
+							var/obj/item/I = thing
+							new /obj/effect/decal/cleanable/ash(I.loc) // Turn it to ashes!
+							I.visible_message("<span class='warning'>[I] turned to ash in the heat of the incinerator!</span>")
+							I.Destroy()
 
 		// random updates to the space above
 		update_space_above()

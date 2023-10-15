@@ -191,6 +191,9 @@
 
 
 /obj/machinery/medical_kiosk/process()
+	if(inoperable() || panel_open)
+		return
+
 	if(msgcooldown > 0)
 		msgcooldown--
 		return

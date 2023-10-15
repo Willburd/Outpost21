@@ -96,7 +96,7 @@
 
 	//grabbing people
 	if(!victim.anchored && Adjacent(victim) && victim.loc != src.loc)
-		var/can_grab = prob(10) // outpost 21 edit - make less infurating
+		var/can_grab = prob(5) && is_mature() // outpost 21 edit - make less infurating
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
 			if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))

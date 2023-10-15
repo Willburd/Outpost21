@@ -66,22 +66,23 @@
 				command_announcement.Announce("Attention [station_name()]. Commencing final volley, brace for impact.", "Bluespace Shelling")
 		else
 			// end it
+			boom(3)
 			boom(2)
 			boom(2)
-			boom(1)
 			boom(1)
 			boom(1)
 			boom(1)
 			endWhen = 0 // Now
+			command_announcement.Announce("Cease Fire. Cease Fire. Bluespace artillery shelling has finalized. All clear. Assess damage, and begin repair operations.", "Bluespace Shelling")
 		spawncount--
 
 /datum/event/bluespace_shelling/proc/boom(var/mult)
 	var/area/bombarea = pick(finalareas)
 	var/turf/picked = pick(get_area_turfs(bombarea))
 
-	var/hitsize = rand(2,4) * mult
+	var/hitsize = rand(1,3) * mult
 	if(spawncount <= 0)
-		hitsize = rand(4,8) * mult // final shots
+		hitsize = rand(3,7) * mult // final shots
 
 	if(picked.x >= left_x && picked.x < right_x && picked.y >= bottom_y && picked.y < top_y)
 		explosion(picked, 2, hitsize,hitsize * 1.5)

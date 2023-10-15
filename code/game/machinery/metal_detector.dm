@@ -63,7 +63,7 @@
 		return
 
 /obj/machinery/metal_detector/Crossed(atom/movable/AM as mob|obj)
-	if(AM.is_incorporeal()) // ectoplasm begone
+	if(AM.is_incorporeal() || istype(AM,/mob/observer)) // ectoplasm begone
 		return
 	if(stat & (NOPOWER|BROKEN) || !anchored)
 		return

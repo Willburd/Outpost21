@@ -124,7 +124,7 @@
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
 
-	mature_time = world.time + seed.get_trait(TRAIT_MATURATION) + 15 //prevent vines from maturing until at least a few seconds after they've been created.
+	mature_time = world.time + (seed.get_trait(TRAIT_MATURATION) + 6) SECONDS //prevent vines from maturing until at least a few seconds after they've been created. // outpost 21 edit - seconds to nerf it
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()

@@ -51,6 +51,29 @@
 	return ..()
 
 
+/obj/item/toy/plushie/pillow
+	name = "plush pillow"
+	desc = "A fluffy soft pillow!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_pillow"
+
+/obj/item/toy/plushie/pillow/red
+	name = "red plush pillow"
+	desc = "A red fluffy soft pillow!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_pillowr"
+
+/obj/item/toy/plushie/pillow/green
+	name = "green plush pillow"
+	desc = "A green fluffy soft pillow!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_pillowg"
+
+/obj/item/toy/plushie/pillow/blue
+	name = "blue plush pillow"
+	desc = "A blue fluffy soft pillow!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_pillowb"
 
 
 //Large plushies.

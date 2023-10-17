@@ -19,29 +19,38 @@
 		//	switch(DD)
 		//		if(1)
 		//			return new /obj/item/toy/figure/clown(here)
+
+		if(3)   //April
+			switch(DD)
+				if(11)
+					var/pillow = pick(/obj/item/toy/plushie/pillow,/obj/item/toy/plushie/pillow/red,/obj/item/toy/plushie/pillow/green,/obj/item/toy/plushie/pillow/blue)
+					new pillow(here)
+					var/randomplush = call(/obj/random/plushie/item_to_spawn)()
+					return new randomplush(here)						// hug a friend day
+
 		if(4)   //April
 			switch(DD)
 				if(1)
-					return new /obj/item/toy/figure/clown(here)
+					return new /obj/item/toy/figure/clown(here)					// april fools
 				if(22)
-					return new /obj/random/pottedplant(here)
+					return new /obj/random/pottedplant(here)					// Earth day
 
 		if(5)	//May
 			switch(DD)
 				if(18)
-					return new /obj/structure/flora/pottedplant/small(here)
+					return new /obj/structure/flora/pottedplant/small(here)		// Armistice Day
 
 		if(9)	//Sep
 			switch(DD)
 				if(19)
-					return new /obj/item/flag/pirate(here)
+					return new /obj/item/flag/pirate(here)						// talk like a pirate date
 
 		if(10)	//Oct
-			return new /obj/effect/landmark/carved_pumpkin_spawn(here)
+			return new /obj/effect/landmark/carved_pumpkin_spawn(here)			// SPOOKYMONTH
 
 		if(12)	//Dec
 			if(DD < 26)
-				return new /obj/item/toy/xmastree(here)
+				return new /obj/item/toy/xmastree(here)							// CRIMBO
 
 	// default plant spawn
 	return new /obj/machinery/holoplant(here)

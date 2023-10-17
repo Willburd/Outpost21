@@ -36,10 +36,10 @@
 	grand_list_of_areas = get_station_areas(excluded)
 	for(var/area/A in grand_list_of_areas)
 		if(istype(src,/datum/event/bluespace_shelling/civilian))
-			if(A.holomap_color == HOLOMAP_AREACOLOR_CIV || A.holomap_color == HOLOMAP_AREACOLOR_HALLWAYS ||  A.holomap_color == HOLOMAP_AREACOLOR_DORMS || A.holomap_color == HOLOMAP_AREACOLOR_COMMAND || A.holomap_color == HOLOMAP_AREACOLOR_HYDROPONICS || A.holomap_color == HOLOMAP_AREACOLOR_DORMS)
+			if(A.holomap_color == HOLOMAP_AREACOLOR_CIV || A.holomap_color == HOLOMAP_AREACOLOR_HALLWAYS ||  A.holomap_color == HOLOMAP_AREACOLOR_DORMS || A.holomap_color == HOLOMAP_AREACOLOR_COMMAND || A.holomap_color == HOLOMAP_AREACOLOR_HYDROPONICS || A.holomap_color == HOLOMAP_AREACOLOR_ENGINEERING || A.holomap_color == HOLOMAP_AREACOLOR_CARGO || A.holomap_color == HOLOMAP_AREACOLOR_MEDICAL)
 				finalareas += A
 		else
-			if(department == -1 || A.holomap_color == department)
+			if(department == -1 || A.holomap_color == department || A.holomap_color == HOLOMAP_AREACOLOR_MEDICAL || A.holomap_color == HOLOMAP_AREACOLOR_COMMAND || A.holomap_color == HOLOMAP_AREACOLOR_CARGO)
 				finalareas += A
 
 /datum/event/bluespace_shelling/announce()
@@ -53,10 +53,9 @@
 	if(world.time > shotdelaytime && spawncount >= 0)
 		if(spawncount > 0)
 			boom(2)
+			boom(2)
 			if(prob(20))
-				boom(1)
-			if(prob(20))
-				boom(1)
+				boom(2)
 			if(prob(20))
 				boom(1)
 			if(prob(20))
@@ -77,15 +76,18 @@
 		spawncount--
 
 /datum/event/bluespace_shelling/proc/boom(var/mult)
-	var/area/bombarea = pick(finalareas)
-	var/turf/picked = pick(get_area_turfs(bombarea))
-
 	var/hitsize = rand(1,3) * mult
 	if(spawncount <= 0)
 		hitsize = rand(3,7) * mult // final shots
 
-	if(picked.x >= left_x && picked.x < right_x && picked.y >= bottom_y && picked.y < top_y)
-		explosion(picked, 2, hitsize,hitsize * 1.5)
+	var/escape = 20
+	while(escape > 0) // reattempt
+		var/area/bombarea = pick(finalareas)
+		var/turf/picked = pick(get_area_turfs(bombarea))
+		if(picked.x >= left_x && picked.x < right_x && picked.y >= bottom_y && picked.y < top_y)
+			explosion(picked, 2, hitsize,hitsize * 1.5)
+			break
+		escape--
 
 	shotdelaytime = world.time + (rand(hitsize,hitsize * 3) SECONDS)
 
@@ -103,7 +105,7 @@
 	department = HOLOMAP_AREACOLOR_SCIENCE
 	department_name = "research and development department"
 	seclevel = SEC_LEVEL_RED
-	left_x = 270
+	left_x = 220
 	bottom_y = 100
 	right_x = 400
 	top_y = 200
@@ -116,6 +118,15 @@
 	bottom_y = 0
 	right_x = 280
 	top_y = 75
+
+/datum/event/bluespace_shelling/medical
+	department = HOLOMAP_AREACOLOR_SECURITY
+	department_name = "medical facility"
+	seclevel = SEC_LEVEL_RED
+	left_x = 175
+	bottom_y = 75
+	right_x = 280
+	top_y = 400
 
 /datum/event/bluespace_shelling/cargo
 	department = HOLOMAP_AREACOLOR_CARGO
@@ -134,3 +145,13 @@
 	bottom_y = 0
 	right_x = 400
 	top_y = 100
+
+
+/datum/event/bluespace_shelling/waste
+	department = -1
+	department_name = "waste processing facility"
+	seclevel = SEC_LEVEL_RED
+	left_x = 0
+	bottom_y = 15
+	right_x = 80
+	top_y = 70

@@ -66,11 +66,12 @@
 	if(target)
 		user.loc = get_turf(target)
 
-// VOREStation Edit Begin
 
-/obj/machinery/gateway/centerstation/attack_ghost(mob/user as mob) 
-	if(awaygate) 
-		if(user.client.holder) 
+/* outpost 21 edit begin - removed away mission stuff
+// VOREStation Edit Begin
+/obj/machinery/gateway/centerstation/attack_ghost(mob/user as mob)
+	if(awaygate)
+		if(user.client.holder)
 			user.loc = awaygate.loc
 		else if(active)
 			user.loc = awaygate.loc
@@ -86,7 +87,7 @@
 		user.loc = stationgate.loc
 	else
 		to_chat(user, "[src] has no destination.")
-
+*/ // outpost 21 edit end - removed away mission stuff
 // -------------------------------------------
 // This was supposed to be used by adminghosts
 // I think it is a *terrible* idea

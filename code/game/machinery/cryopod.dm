@@ -367,10 +367,12 @@
 
 	return ..()
 
+/*  // outpost 21 edit - removing away mission stuff
 /obj/machinery/cryopod/robot/door/gateway/despawn_occupant()
 	for(var/obj/machinery/gateway/G in range(1,src))
 		G.icon_state = "off"
 	..()
+*/
 
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
@@ -646,6 +648,7 @@
 
 	return
 
+/* outpost 21 edit - removing away mission stuff
 /obj/machinery/cryopod/robot/door/gateway/move_inside()
 	..()
 	//locate(/obj/machinery/computer/cryopod) in range(6,src)
@@ -656,6 +659,7 @@
 	..()
 	for(var/obj/machinery/gateway/G in range(1,src))
 		G.icon_state = "off"
+*/
 
 /obj/machinery/cryopod/proc/go_out()
 

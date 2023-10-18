@@ -25,7 +25,7 @@
 	var/decl/flooring/F = get_flooring_data(/decl/flooring/water)
 	footstep_sounds = F?.footstep_sounds
 	update_icon()
-	handle_fish()
+	//handle_fish() // outpost 21 edit - disable fishing
 
 /turf/simulated/floor/water/update_icon()
 	..() // To get the edges.

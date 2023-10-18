@@ -258,8 +258,8 @@
 		severity = 2 // first smash always best
 
 	// blob grinding
-	if(istype(target, /obj/effect/blob))
-		var/obj/effect/blob/B = target
+	if(istype(target, /obj/structure/blob/))
+		var/obj/structure/blob/B = target
 		if(has_breaking_speed)
 			B.ex_act(1)
 		else

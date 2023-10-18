@@ -90,7 +90,7 @@
 					   /obj/machinery/vending/dinnerware,
 					   /obj/machinery/vending/engivend,
 					   /obj/machinery/vending/robotics,
-					   /obj/machinery/vending/fishing,
+					   ///obj/machinery/vending/fishing, // outpost 21 edit - disable fishing
 					   /obj/machinery/vending/blood,
 					   /obj/machinery/vending/entertainer)
 

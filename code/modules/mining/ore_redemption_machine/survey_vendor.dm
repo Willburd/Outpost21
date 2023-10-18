@@ -23,8 +23,8 @@
 		new /datum/data/mining_equipment("Extraction Equipment - Fulton Beacon",	/obj/item/fulton_core,									100),
 		new /datum/data/mining_equipment("Extraction Equipment - Fulton Pack",		/obj/item/extraction_pack,								50),
 		new /datum/data/mining_equipment("Point Transfer Card",			/obj/item/weapon/card/mining_point_card/survey,						50),
-		new /datum/data/mining_equipment("Fishing Net",					/obj/item/weapon/material/fishing_net,								50),
-		new /datum/data/mining_equipment("Titanium Fishing Rod",		/obj/item/weapon/material/fishing_rod/modern,						50),
+		//new /datum/data/mining_equipment("Fishing Net",					/obj/item/weapon/material/fishing_net,								50), // outpost 21 edit - disable fishing
+		//new /datum/data/mining_equipment("Titanium Fishing Rod",		/obj/item/weapon/material/fishing_rod/modern,						50), // outpost 21 edit - disable fishing
 		new /datum/data/mining_equipment("Direct Payment - 1000",		/obj/item/weapon/spacecash/c1000,									500),
 		new /datum/data/mining_equipment("Industrial Equipment - Phoron Bore",	/obj/item/weapon/gun/magnetic/matfed/phoronbore/loaded,		500),
 		new /datum/data/mining_equipment("Survey Tools - Mapping Unit",	/obj/item/device/mapping_unit,										150),
@@ -57,9 +57,9 @@
 		EQUIPMENT("Defense Equipment - Frontier Carbine",		/obj/item/weapon/gun/energy/locked/frontier/carbine,				750),
 		EQUIPMENT("Hybrid Equipment - Proto-Kinetic Dagger",	/obj/item/weapon/kinetic_crusher/machete/dagger,					75),
 		EQUIPMENT("Hybrid Equipment - Proto-Kinetic Machete",	/obj/item/weapon/kinetic_crusher/machete,							250),
-		EQUIPMENT("Fishing Net",								/obj/item/weapon/material/fishing_net,								50),
-		EQUIPMENT("Titanium Fishing Rod",						/obj/item/weapon/material/fishing_rod/modern,						100),
-		EQUIPMENT("Durasteel Fishing Rod",						/obj/item/weapon/material/fishing_rod/modern/strong,				750),
+		//EQUIPMENT("Fishing Net",								/obj/item/weapon/material/fishing_net,								50), // outpost 21 edit - disable fishing
+		//EQUIPMENT("Titanium Fishing Rod",						/obj/item/weapon/material/fishing_rod/modern,						100), // outpost 21 edit - disable fishing
+		//EQUIPMENT("Durasteel Fishing Rod",						/obj/item/weapon/material/fishing_rod/modern/strong,				750), // outpost 21 edit - disable fishing
 		EQUIPMENT("Fulton Beacon",								/obj/item/fulton_core,												300),
 		EQUIPMENT("Geiger Counter",								/obj/item/device/geiger,											75),
 		EQUIPMENT("GPS Device",									/obj/item/device/gps/mining,										10),

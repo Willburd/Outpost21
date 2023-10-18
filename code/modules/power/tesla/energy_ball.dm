@@ -192,7 +192,7 @@
 										/obj/machinery/containment_field,
 										/obj/structure/disposalpipe,
 										/obj/structure/sign,
-										/obj/machinery/gateway,
+//										/obj/machinery/gateway, // outpost 21 edit - removing away mission stuff
 										/obj/structure/lattice,
 										/obj/structure/grille,
 										/obj/machinery/the_singularitygen/tesla))

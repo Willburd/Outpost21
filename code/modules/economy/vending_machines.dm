@@ -848,7 +848,7 @@
 					/obj/item/toy/plushie/teshari/y_yw = 150)
 					//YawnWider Add End
 
-
+ /* outpost 21 edit - disable fishing
 /obj/machinery/vending/fishing
 	name = "Loot Trawler"
 	desc = "A special vendor for fishing equipment."
@@ -870,7 +870,7 @@
 					/obj/item/clothing/head/fishing = 15)
 	premium = list(/obj/item/weapon/storage/box/wormcan/deluxe = 1)
 	contraband = list(/obj/item/weapon/storage/box/wormcan/deluxe = 1)
-
+*/
 
 /obj/machinery/vending/virtual_autodrobe
 	name = "Virtual AutoDrobe"

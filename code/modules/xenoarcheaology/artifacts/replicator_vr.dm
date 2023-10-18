@@ -379,7 +379,7 @@
 	/obj/item/clothing/shoes/footwraps,
 	///obj/item/weapon/storage/smolebrickcase, // outpost 21 removal - smollworld
 	/obj/item/weapon/lipstick,
-	/obj/item/weapon/material/fishing_rod/modern,
+	///obj/item/weapon/material/fishing_rod/modern, // outpost 21 edit - disable fishing
 	/obj/item/weapon/inflatable_duck,
 	/obj/item/toy/syndicateballoon,
 	/obj/item/weapon/towel,

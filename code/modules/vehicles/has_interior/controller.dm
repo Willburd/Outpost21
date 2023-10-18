@@ -257,8 +257,40 @@
 	if(has_breaking_speed)
 		severity = 2 // first smash always best
 
+	// blob grinding
+	if(istype(target, /obj/effect/blob))
+		var/obj/effect/blob/B = target
+		if(has_breaking_speed)
+			B.ex_act(1)
+		else
+			B.ex_act(2)
+
+		// cab sounds
+		if(prob(40))
+			playsound(entrance_hatch, get_sfx("vehicle_crush"), 50, 1)
+
+			// shakey time
+			shake_cab()
+		return 1
+
+	// vine grinding
+	if(istype(target, /obj/effect/plant))
+		var/obj/effect/plant/P = target
+		if(has_breaking_speed)
+			P.ex_act(1)
+		else
+			P.ex_act(2)
+
+		// cab sounds
+		if(prob(40))
+			playsound(entrance_hatch, get_sfx("vehicle_crush"), 50, 1)
+
+			// shakey time
+			shake_cab()
+		return 1
+
 	// shielded
-	if(istype(target, /obj/effect/energy_field))
+	else if(istype(target, /obj/effect/energy_field))
 		if(has_breaking_speed)
 			var/obj/effect/energy_field/EF = target
 			if(EF.opacity)
@@ -277,7 +309,7 @@
 			return 1
 
 	// BREAK
-	if(istype(target,/turf/simulated/wall))
+	else if(istype(target,/turf/simulated/wall))
 		if(has_breaking_speed && breakwalls)
 			var/turf/simulated/wall/W = target
 			if(W.density)

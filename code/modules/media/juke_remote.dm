@@ -11,19 +11,35 @@
 	var/obj/machinery/media/jukebox/paired_juke
 	var/area/our_area
 
-/*
+	var/area/autolinkareajuke_onspawn = null // mostly for the radiohost
+
+
 /obj/item/device/juke_remote/Initialize()
-	. = ..()
-	flags |= NOBLUDGEON
-*/
+	..()
+	// flags |= NOBLUDGEON
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/device/juke_remote/LateInitialize()
+	// autopair if uses a area link
+	if(!isnull(autolinkareajuke_onspawn))
+		for(var/obj/machinery/M in global.machines)
+			if(istype(M,/obj/machinery/media/jukebox) && istype( get_area(M.loc), autolinkareajuke_onspawn))
+				pair_juke( M, null)
+				break
+	unanchor()
+	anchor()
+	return ..()
+
 // Pairing
 /obj/item/device/juke_remote/proc/pair_juke(obj/machinery/media/jukebox/juke, mob/user)
 	if(paired_juke)
-		to_chat(user, "<span class='warning'>The [src] is already paired to [paired_juke == juke ? "that" : "a different"] jukebox.</span>")
+		if(!isnull(user))
+			to_chat(user, "<span class='warning'>The [src] is already paired to [paired_juke == juke ? "that" : "a different"] jukebox.</span>")
 		return
 	paired_juke = juke
 	LAZYDISTINCTADD(paired_juke.remotes, src)
-	to_chat(user, "<span class='notice'>You pair the [src] to the [juke].</span>")
+	if(!isnull(user))
+		to_chat(user, "<span class='notice'>You pair the [src] to the [juke].</span>")
 	icon_state = "[initial(icon_state)]_ready"
 
 /obj/item/device/juke_remote/proc/unpair_juke(mob/user)
@@ -93,7 +109,7 @@
 	A.media_source = paired_juke
 	update_music()
 	return TRUE
-	
+
 /obj/item/device/juke_remote/proc/detach_area()
 	if(!our_area || (paired_juke && our_area.media_source != paired_juke))
 		return

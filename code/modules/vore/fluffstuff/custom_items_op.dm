@@ -213,9 +213,27 @@
 	item_state = "flag_fifteen"
 
 
-// TEMP DEFINITIONS
+// TEMP DEFINITIONS SOME NOT MEANT FOR HERE! These exist purely to placate loadout code's typechecks
 /obj/item/toy/plushie/fluff
 	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A PLUSH"
 	desc = "DELETE ME YOU FOOL"
-	icon = 'icons/vore/custom_items_op.dmi'
-	icon_state = "flag_fifteen"
+
+/obj/item/clothing/accessory/sweater/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A SWEATER"
+	desc = "DELETE ME YOU FOOL"
+
+/obj/item/clothing/suit/storage/hazardvest/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A HAZARDVEST"
+	desc = "DELETE ME YOU FOOL"
+
+/obj/item/clothing/under/skirt/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A SKIRT"
+	desc = "DELETE ME YOU FOOL"
+
+/obj/item/clothing/under/skirt/outfit/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A SKIRT?"
+	desc = "DELETE ME YOU FOOL"
+
+/obj/item/clothing/under/suit_jacket/female/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A FEMALE SUIT JACKET"
+	desc = "DELETE ME YOU FOOL"

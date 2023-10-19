@@ -222,7 +222,6 @@
 		/obj/item/clothing/under/fluff/wolfgirl,
 		/obj/item/weapon/melee/fluffstuff/wolfgirlsword,
 		/obj/item/weapon/shield/fluff/wolfgirlshield)
-*/
 
 // Ryumi: Nikki Yumeno
 /obj/item/weapon/storage/box/fluff
@@ -241,6 +240,7 @@
 	starts_with = list(
 		/obj/item/weapon/spacecasinocash/c1000 = 3,
 		/obj/item/weapon/storage/dicecup/loaded = 3)
+*/
 
 /*
 Swimsuits, for general use, to avoid arriving to work with your swimsuit.

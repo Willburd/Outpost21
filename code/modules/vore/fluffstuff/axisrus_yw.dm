@@ -1,5 +1,5 @@
 //head
-
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/head/axiscap
 	name = "Feldmütze"
 	desc = "Despite being designed for use in an armoured vehicle, this cap sports a remarkable lack of armor of any sort. Mind your Kopf."
@@ -68,7 +68,7 @@
 	icon_state = "officersuit"
 	icon_override = 'icons/vore/axisrus_yw.dmi'
 	item_state = "officersuit_mob"
-
+*/
 
 //place holders (WIP)
 

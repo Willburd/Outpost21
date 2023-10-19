@@ -1342,7 +1342,7 @@
 					/obj/item/clothing/head/bowler = 3,
 					/obj/item/clothing/head/plaguedoctorhat = 3,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 3,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,
+					///obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,// outpost 21 edit - fluff item removal
 					/obj/item/clothing/under/owl = 3,
 					/obj/item/clothing/mask/gas/owl_mask = 3,
 					/obj/item/clothing/under/waiter = 3,
@@ -1407,7 +1407,7 @@
 					/obj/item/clothing/head/bowler = 200,
 					/obj/item/clothing/head/plaguedoctorhat = 300,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 300,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 600,
+					///obj/item/clothing/mask/gas/plaguedoctor/fluff = 600, // outpost 21 edit - fluff item removal
 					/obj/item/clothing/under/owl = 400,
 					/obj/item/clothing/mask/gas/owl_mask = 400,
 					/obj/item/clothing/under/waiter = 100,
@@ -2586,7 +2586,7 @@
 					/obj/item/clothing/head/bowler = 3,
 					/obj/item/clothing/head/plaguedoctorhat = 3,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 3,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,
+//					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 3, // outpost 21 edit - fluff item removal
 					/obj/item/clothing/under/owl = 3,
 					/obj/item/clothing/mask/gas/owl_mask = 3,
 					/obj/item/clothing/under/waiter = 3,
@@ -2653,7 +2653,7 @@
 					/obj/item/clothing/head/bowler = 200,
 					/obj/item/clothing/head/plaguedoctorhat = 300,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 300,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 600,
+					///obj/item/clothing/mask/gas/plaguedoctor/fluff = 600, // outpost 21 edit - fluff item removal
 					/obj/item/clothing/under/owl = 400,
 					/obj/item/clothing/mask/gas/owl_mask = 400,
 					/obj/item/clothing/under/waiter = 100,
@@ -2814,7 +2814,7 @@
 					/obj/item/clothing/head/bowler = 3,
 					/obj/item/clothing/head/plaguedoctorhat = 3,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 3,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,
+					///obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,// outpost 21 edit - fluff removal
 					/obj/item/clothing/under/owl = 3,
 					/obj/item/clothing/mask/gas/owl_mask = 3,
 					/obj/item/clothing/under/waiter = 3,
@@ -3590,7 +3590,7 @@
 					/obj/item/clothing/head/bowler = 3,
 					/obj/item/clothing/head/plaguedoctorhat = 3,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 3,
-					/obj/item/clothing/mask/gas/plaguedoctor/fluff = 3,
+					///obj/item/clothing/mask/gas/plaguedoctor/fluff = 3, // outpost 21 edit - fluff removal
 					/obj/item/clothing/under/owl = 3,
 					/obj/item/clothing/mask/gas/owl_mask = 3,
 					/obj/item/clothing/under/waiter = 3,

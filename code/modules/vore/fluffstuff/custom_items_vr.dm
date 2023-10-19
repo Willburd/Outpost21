@@ -645,7 +645,6 @@
 	name = "Ornate Walking Cane"
 	desc = "An elaborately made custom walking stick with a dark wooding core, a crimson red gemstone on its head and a steel cover around the bottom. you'd probably hear someone using this down the hall."
 	icon = 'icons/vore/custom_items_vr.dmi'
-*/
 
 /obj/item/device/fluff/id_kit_ivy
 	name = "Holo-ID reprinter"
@@ -671,7 +670,6 @@
 		to_chat(user, "<span class='warning'>This isn't even an ID card you idiot.</span>")
 		return
 
-/* outpost 21 - fluff removal
 //WickedTempest: Chakat Tempest
 /obj/item/weapon/reagent_containers/hypospray/vial/tempest
 	name = "Tempest's Hypospray"

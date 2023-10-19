@@ -24,6 +24,7 @@
 
 */
 
+/* outpost 21 edit - fluff removal
 //Natje: Awen Henry
 /obj/item/clothing/head/fluff/wolfgirl
     name = "Wolfgirl Hat"
@@ -184,6 +185,7 @@
 
 	icon_override = 'icons/inventory/uniform/mob.dmi'
 	item_state = "solara_dress"
+*/
 
 //For general use
 /obj/item/clothing/suit/storage/vest/hoscoat/fluff/brittrenchcoat
@@ -196,6 +198,7 @@
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "brittrenchcoat"
 
+/* outpost 21 edit - why?
 //For general use
 /obj/item/clothing/suit/storage/vest/hoscoat/nazi_greatcoat
 	name = "Greatcoat"
@@ -206,6 +209,7 @@
 
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "greatcoat_mob"
+*/
 
 //For general use
 /obj/item/clothing/suit/storage/vest/hoscoat/russofurcoat
@@ -412,7 +416,6 @@
 
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "gogblue"
-*/
 
 //wickedtemp:chakat tempest
 /obj/item/clothing/glasses/omnihud/med/fluff/wickedtemphud
@@ -515,6 +518,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
+*/
 
 //Event Costumes Below
 /obj/item/clothing/head/helmet/fluff/freddy
@@ -591,6 +595,7 @@
 
 //End event costumes
 
+/* outpost 21 edit - fluff removal
 //scree:Scree
 /obj/item/clothing/head/helmet/space/void/engineering/hazmat/fluff/screehelm
 	name = "Modified Tajara Helmet"
@@ -692,6 +697,7 @@
 			return 0
 		else
 			return 1
+*/
 
 //HOS Hardsuit
 /obj/item/clothing/suit/space/void/security/fluff/hos // ToDo: Rig version.
@@ -719,6 +725,7 @@
 
 	species_restricted = null
 
+/* outpost 21 edit - fluff removal
 //adk09:Lethe
 /obj/item/clothing/head/helmet/hos/fluff/lethe
 	name = "Lethe's Hat"
@@ -765,6 +772,7 @@
 	item_state = "molenar"
 	var/item_open = "molenar_open"
 	var/item_closed = "molenar"
+*/
 
 //scree:Scree
 /obj/item/clothing/head/fluff/pompom
@@ -814,6 +822,7 @@
 		if(H.head == src)
 			H.update_inv_head()
 
+/* outpost 21 edit - fluff removal
 /obj/item/weapon/rig/light/hacker/fluff/aronai
 	name = "KHI-99-AAR suit module"
 	suit_type = "nano"
@@ -906,6 +915,7 @@
 	icon_state = "kamina"
 	desc = "ROW ROW, FIGHT THE POWER."
 	flash_prot = 1 //Why not.
+*/
 
 //Kitsuhana Uniforms
 /obj/item/clothing/under/rank/khi
@@ -960,6 +970,7 @@
 	icon_state = "khi_uniform_civ"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/under/rank/khi/fluff/aronai //Aro fluff version
 	name = "KHI meditech suit"
 	desc = "Kitsuhana Heavy Industries uniform. This one has the colors of a resleeving or mnemonics engineer. It has 'Aronai' written inside the top."
@@ -1036,7 +1047,7 @@
 	item_state = "clockworkgoggle_l_mob"
 	item_state_slots = null
 	body_parts_covered = 0
-
+*/
 
 /obj/item/clothing/shoes/black/cuffs
 	name = "gilded leg wraps"
@@ -1076,6 +1087,7 @@
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "jemli_hat_mob"
 
+/* outpost 21 edit - fluff removal
 //virgo113:Verin Raharra
 /obj/item/clothing/suit/storage/hazardvest/fluff/verin
 	name = "Green Haz-coat"
@@ -1149,6 +1161,8 @@
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "taigaff_on"
 	icon_state = "taigaff" //Went ahead and made the det_corporate sprite fit.
+*/
+
 /*
 Departamental Swimsuits, for general use
 */
@@ -1182,12 +1196,14 @@ Departamental Swimsuits, for general use
 	icon_state = "swimsuit_medical"
 	item_state = "swimsuit_medical_mob"
 
+/* outpost 21 edit - fluff removal
 //Xsdew:Penelope Allen
 /obj/item/clothing/under/swimsuit/fluff/penelope
 	name = "Penelope's Swimsuit"
 	desc = "It's made of a special fiber that provides no protection whatsoever, but its elastic. This one was custom made for Penelope."
 	icon_state = "swimsuit_penelope"
 	item_state = "swimsuit_penelope_mob"
+*/
 
 //Just some alt-uniforms themed around Star Trek - Pls don't sue, Mr Roddenberry ;_;
 // PS. <3 Nienhaus
@@ -1322,6 +1338,7 @@ Departamental Swimsuits, for general use
 			to_chat(H, "<span class='warning'>You need to have a wolf-taur half to wear this.</span>")
 			return 0
 
+/* outpost 21 edit - fluff removal
 //samanthafyre:Kateryna Petrovitch
 /obj/item/clothing/suit/armor/vest/wolftaur/kate
 	name = "Kat's Fox Taur Armor"
@@ -1405,6 +1422,7 @@ Departamental Swimsuits, for general use
 	icon_state = "morthighs"
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "morthighs_mob"
+*/
 
 //Jackets For General Use. Sprited by Joji.
 /obj/item/clothing/suit/storage/fluff/jacket //Not the toggle version since it uses custom toggle code to update the on-mob icon.
@@ -1528,6 +1546,7 @@ Departamental Swimsuits, for general use
 	icon_override = 'icons/vore/custom_clothes_vr.dmi'
 	item_state = "loincloth_mob"
 
+/* outpost 21 edit - fluff removal
 //BeyondMyLife: Ne'tra Ky'ram
 /obj/item/clothing/suit/storage/hooded/wintercoat/kilanocoat
 	name = "black and gold armoured coat."
@@ -1694,7 +1713,7 @@ Departamental Swimsuits, for general use
 /obj/item/clothing/gloves/ring/seal/signet/fluff/phi/change_name(var/signet_name = "Unknown")
 	name = "[signet_name]'s Bone Signet Ring"
 	desc = "A signet ring belonging to [signet_name], carved from the bones of something long extinct, as a ward against bad luck."
-
+*/
 //KotetsuRedwood:Latex Maid Dresses, for everyone to 'enjoy'. :3c
 /obj/item/clothing/under/fluff/latexmaid
 	name = "latex maid dress"
@@ -1709,6 +1728,7 @@ Departamental Swimsuits, for general use
 			SPECIES_TESHARI = 'icons/vore/custom_clothes_tesh_vr.dmi'
 			)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
 
 //Aztectornado:Tron inspired Siren outfit
 /obj/item/clothing/under/fluff/siren
@@ -1742,6 +1762,7 @@ Departamental Swimsuits, for general use
 	icon = 'icons/vore/custom_clothes_vr.dmi'
 	icon_override = 'icons/vore/custom_onmob_vr.dmi'
 
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/head/helmet/space/void/security/hasd
 	name = "HASD EVA faceplate"
 	desc = "It's a faceplate that slots into the HASD EVA bodyplate assembly. Functionally useless alone."
@@ -2535,3 +2556,4 @@ Departamental Swimsuits, for general use
     item_state = "freyrmask_mob"
     item_state_slots = null
     body_parts_covered = FACE
+*/

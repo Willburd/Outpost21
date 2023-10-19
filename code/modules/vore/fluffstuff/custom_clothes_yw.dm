@@ -1,6 +1,7 @@
 // **************
 // Unleashed_Mana
 // **************
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/suit/storage/labcoat/fluff/eioni_1
 	name = "Eio'ni Co. labcoat"
 	desc = "The official labcoat of the Eio'ni Corporation."
@@ -489,7 +490,7 @@
 	icon_override = 'icons/vore/custom_onmob_yw.dmi'
 	icon_badge = "lcplvest_badge"
 	icon_nobadge = "lcplvest_nobadge"
-
+*/
 // *******
 // Izac112
 // *******
@@ -507,6 +508,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 */
 
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/under/rank/security/corp/fluff/ally_2
 	name = "Security uniform"
 	desc = "A black Dark red security uniform with a tag on it that says Ally_F"
@@ -898,7 +900,7 @@
 // ********
 // lukevale
 // ********
-
+*/
 //For use in jackets with hoods. Doesn't have any sprites assigned but feel free to use it ~ Luke
 
 /obj/item/clothing/suit/storage/toggle/hoodiebuttoned
@@ -1002,7 +1004,7 @@
 //end of hoodiebuttoned
 
 //Lena Shaw
-
+/* outpost 21 edit - fluff removal
 /obj/item/clothing/accessory/fluff/lena_collar
 	name = "Ruby Embedded Collar"
 	desc = "A gold and platinum collar, with a embedded ruby gem. On the back is a engraving. 'The only one for me, Quanah Hastings', encompassing the engraving is a heart."
@@ -1752,3 +1754,4 @@
 	icon_override = 'icons/vore/custom_onmob_yw.dmi'
 	item_state = "gear_harness_white"
 	body_parts_covered = 0
+*/

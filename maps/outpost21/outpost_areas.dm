@@ -1781,6 +1781,7 @@
 
 /area/specialty/redspace
 	name = "\improper Unknown"
+	base_turf = /turf/simulated/floor/flesh
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "blue"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT

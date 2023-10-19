@@ -49,6 +49,7 @@
 //Processor. Our station is cool enough to have a giant vore eldrich horror for a terraforming station.
 /area/muriki/processor
 	name = "\improper Core Terraformer Processing"
+	base_turf = /turf/simulated/floor/flesh
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "blue"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
@@ -1083,6 +1084,7 @@
 
 /area/maintenance/kennel
 	name = "\improper Kennels Maintenance"
+	base_turf = /turf/simulated/open
 	icon_state = "blue"
 
 /area/maintenance/gravgen
@@ -1324,6 +1326,7 @@
 
 /area/security/brig/drunk
 	name = "\improper Security Drunktank"
+	base_turf = /turf/simulated/open
 	icon_state = "brig"
 	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
@@ -1416,7 +1419,7 @@
 /area/rnd/telesci
 	name = "\improper Research Telescience"
 	icon_state = "teleporter"
-	base_turf = /turf/simulated/mineral/floor/muriki
+	base_turf = /turf/simulated/open
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/xenobiology
@@ -1507,7 +1510,7 @@
 
 /area/rnd/research/mailing
 	name = "\improper Research Mailing"
-	base_turf = /turf/simulated/mineral/floor/muriki
+	base_turf = /turf/simulated/open
 	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/rnd/research/laundry
@@ -1802,7 +1805,7 @@
 
 /area/maintenance/incinerator
 	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
-	base_turf = /turf/simulated/open
+	base_turf = /turf/simulated/mineral/floor/muriki
 
 /area/maintenance/substation/mining
 	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
@@ -2155,4 +2158,28 @@
 	base_turf = /turf/simulated/open
 
 /area/maintenance/substation/medical
+	base_turf = /turf/simulated/open
+
+/area/rnd/xenobiology/xenoflora_storage
+	base_turf = /turf/simulated/open
+
+/area/rnd/xenobiology/xenoflora
+	base_turf = /turf/simulated/open
+
+/area/maintenance/substation/research
+	base_turf = /turf/simulated/open
+
+/area/maintenance/substation/civilian
+	base_turf = /turf/simulated/open
+
+/area/maintenance/substation/command
+	base_turf = /turf/simulated/open
+
+/area/maintenance/substation/virology
+	base_turf = /turf/simulated/open
+
+/area/maintenance/security_port
+	base_turf = /turf/simulated/open
+
+/area/maintenance/security_starboard
 	base_turf = /turf/simulated/open

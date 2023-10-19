@@ -213,7 +213,7 @@ var/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 	I.desc = metadata
 
 //end of custom description
-
+/* outpost 21 - disable modular computers
 /datum/gear_tweak/tablet
 	var/list/ValidProcessors = list(/obj/item/weapon/computer_hardware/processor_unit/small)
 	var/list/ValidBatteries = list(/obj/item/weapon/computer_hardware/battery_module/nano, /obj/item/weapon/computer_hardware/battery_module/micro, /obj/item/weapon/computer_hardware/battery_module)
@@ -511,6 +511,7 @@ var/datum/gear_tweak/custom_desc/gear_tweak_free_desc = new()
 		var/t = ValidTeslaLinks[metadata[7]]
 		I.tesla_link = new t(I)
 	I.update_verbs()
+*/
 
 /datum/gear_tweak/implant_location
 	var/static/list/bodypart_names_to_tokens = list(

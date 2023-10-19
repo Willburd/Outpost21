@@ -5,6 +5,7 @@
 	icon_state = "impshield" // eshield1 for expanded
 	item_icons = list(slot_l_hand_str = 'icons/mob/items/lefthand_melee_vr.dmi', slot_r_hand_str = 'icons/mob/items/righthand_melee_vr.dmi')
 
+/* outpost 21 - fluff removal
 /obj/item/weapon/shield/fluff/wolfgirlshield
 	name = "Autumn Shield"
 	desc = "A shiny silvery shield with a large red leaf symbol in the center."
@@ -19,7 +20,7 @@
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 	allowed = list(/obj/item/weapon/melee/fluffstuff/wolfgirlsword)
-
+*/
 
 /obj/item/weapon/shield/riot/explorer
 	name = "green explorer shield"

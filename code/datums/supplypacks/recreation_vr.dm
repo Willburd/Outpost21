@@ -19,14 +19,14 @@
 			/obj/item/clothing/accessory/collar/shock,
 			/obj/item/clothing/suit/straight_jacket,
 			/obj/item/weapon/handcuffs/legcuffs/fuzzy,
-			/obj/item/weapon/melee/fluff/holochain/mass,
+			///obj/item/weapon/melee/fluff/holochain/mass,//  outpost 21 - fluff removal
 			/obj/item/weapon/material/twohanded/riding_crop,
 			/obj/item/clothing/under/fluff/latexmaid
 			)
 	containertype = /obj/structure/closet/crate
 	containername = "Restraints crate"
 	cost = 30
-
+/*  // outpost 21 - disable vr fluff
 /datum/supply_pack/recreation/wolfgirl_cosplay_crate
 	name = "Wolfgirl Cosplay Crate"
 	contains = list(
@@ -39,6 +39,7 @@
 	cost = 50
 	containertype = /obj/structure/closet/crate
 	containername = "wolfgirl cosplay crate"
+*/
 
 /datum/supply_pack/randomised/recreation/figures
 	name = "Action figures crate"

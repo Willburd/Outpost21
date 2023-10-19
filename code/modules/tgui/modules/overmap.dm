@@ -92,10 +92,12 @@
 			to_chat(user, "<span class='warning'>You don't appear to be on a spaceship...</span>")
 			if(ui)
 				ui.close(can_be_suspended = FALSE)
+			/* outpost 21 edit - modular computer removal
 			if(ntos)
 				var/obj/item/modular_computer/M = tgui_host()
 				if(istype(M))
 					M.kill_program()
+			*/
 		return
 
 	. = ..()

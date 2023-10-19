@@ -254,8 +254,8 @@
 		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/weapon/gun/projectile/p92x,
 		/obj/item/taperoll,
-		/obj/item/weapon/gun/projectile/colt/detective,
-		/obj/item/device/holowarrant
+		/obj/item/weapon/gun/projectile/colt/detective
+//		/obj/item/device/holowarrant // outpost 21 edit - removed modular computers
 		)
 
 /obj/item/weapon/storage/belt/detective
@@ -297,8 +297,8 @@
 		/obj/item/weapon/flame/lighter,
 		/obj/item/weapon/reagent_containers/food/snacks/donut/,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/gun/projectile/colt/detective,
-		/obj/item/device/holowarrant
+		/obj/item/weapon/gun/projectile/colt/detective
+		///obj/item/device/holowarrant // outpost 21 - disable modular computers
 		)
 
 /obj/item/weapon/storage/belt/soulstone

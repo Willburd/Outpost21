@@ -86,7 +86,7 @@
 		var/message = "The delivery deadline was reached with the following needs outstanding:<hr>"
 		for(var/datum/supply_demand_order/req in required_items)
 			message += req.describe() + "<br>"
-		post_comm_message("'[my_department] Mission Summary'", message)
+		//post_comm_message("'[my_department] Mission Summary'", message) // outpost 21 - disable modular computers
 /**
  * Event Handler for responding to the supply shuttle arriving at centcom.
  */

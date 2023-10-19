@@ -211,3 +211,11 @@
 	icon_state = "flag_fifteen"
 	icon_override = 'icons/vore/custom_items_op.dmi'
 	item_state = "flag_fifteen"
+
+
+// TEMP DEFINITIONS
+/obj/item/toy/plushie/fluff
+	name = "TEMP PLUSH BASE - DELETE ONCE WE ADD A PLUSH"
+	desc = "DELETE ME YOU FOOL"
+	icon = 'icons/vore/custom_items_op.dmi'
+	icon_state = "flag_fifteen"

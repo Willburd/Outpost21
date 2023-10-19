@@ -2,7 +2,7 @@
 GLOBAL_LIST_EMPTY(all_waypoints)
 /datum/computer_file/data/waypoint
 	var/list/fields
-	filetype = "WPT"
+	// filetype = "WPT" outpost 21 - modular computer removal
 
 /datum/computer_file/data/waypoint/New()
 	..()

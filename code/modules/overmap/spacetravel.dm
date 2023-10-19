@@ -66,10 +66,12 @@
 
 	return TRUE
 
+/* outpost 21 - modular computer removal
 /obj/item/device/uav/lost_in_space()
 	if(state == 1)
 		return FALSE
 	return ..()
+*/
 
 /obj/machinery/power/supermatter/lost_in_space()
 	return FALSE

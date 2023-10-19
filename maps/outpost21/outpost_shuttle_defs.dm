@@ -304,7 +304,7 @@
 	base_turf = /turf/simulated/floor
 	base_area = /area/offworld/asteroidyard/station/dockingbay
 
-obj/effect/shuttle_landmark/premade/generic/beltmine
+/obj/effect/shuttle_landmark/premade/generic/beltmine
 	name = "Debris Reclaimation Yard (Civilian Dock)"
 	landmark_tag = "orbitalyard_civ"
 	base_turf = /turf/space

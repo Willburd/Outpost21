@@ -150,7 +150,6 @@
 		istype(thing,/obj/item/weapon/material/harpoon) || \
 		istype(thing,/obj/item/weapon/material/knife) || \
 		istype(thing,/obj/item/weapon/material/star) || \
-		istype(thing,/obj/item/weapon/material/hatchet) || \
 		istype(thing,/obj/item/weapon/mine) || \
 		istype(thing,/obj/item/weapon/reagent_containers/hypospray) || \
 		istype(thing,/obj/item/weapon/reagent_containers/syringe) || \
@@ -172,8 +171,6 @@
 		istype(thing,/obj/item/weapon/bluespace_harpoon) || \
 		istype(thing,/obj/item/weapon/arrow) || \
 		istype(thing,/obj/item/weapon/spike) || \
-		istype(thing,/obj/item/weapon/sword) || \
-		istype(thing,/obj/item/weapon/twohanded) || \
 		istype(thing,/obj/item/weapon/ice_pick) || \
 		istype(thing,/obj/item/mecha_parts) \
 	)

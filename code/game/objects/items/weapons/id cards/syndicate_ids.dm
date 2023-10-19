@@ -6,11 +6,11 @@
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
 
-	var/datum/tgui_module/agentcard/agentcard_module
+	//var/datum/tgui_module/agentcard/agentcard_module outpost 21 edit - modular computer removal
 
 /obj/item/weapon/card/id/syndicate/Initialize()
 	. = ..()
-	agentcard_module = new(src)
+	// agentcard_module = new(src) outpost 21 edit - modular computer removal
 	access = syndicate_access.Copy()
 
 /obj/item/weapon/card/id/syndicate/station_access/Initialize()
@@ -18,7 +18,7 @@
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/syndicate/Destroy()
-	QDEL_NULL(agentcard_module)
+	//QDEL_NULL(agentcard_module) outpost 21 edit - modular computer removal
 	unset_registered_user(registered_user)
 	return ..()
 
@@ -37,14 +37,18 @@
 	// We use the fact that registered_name is not unset should the owner be vaporized, to ensure the id doesn't magically become unlocked.
 	if(!registered_user && register_user(user))
 		to_chat(user, "<span class='notice'>The microscanner marks you as its owner, preventing others from accessing its internals.</span>")
+
+	/* outpost 21 - modular computer removal
 	if(registered_user == user)
 		switch(tgui_alert(usr, "Would you like edit the ID, or show it?","Show or Edit?", list("Edit","Show")))
 			if("Edit")
 				agentcard_module.tgui_interact(user)
 			if("Show")
 				..()
-	else
 		..()
+	else
+	*/
+	..()
 
 
 /obj/item/weapon/card/id/syndicate/proc/register_user(var/mob/user)

@@ -170,9 +170,11 @@
 		menu_state = value
 
 /datum/tgui_module/communications/proc/obtain_message_listener()
+	/* outpost 21 edit - modular computer removal
 	if(istype(host, /datum/computer_file/program/comm))
 		var/datum/computer_file/program/comm/P = host
 		return P.message_core
+	*/
 	return global_message_listener
 
 /proc/post_status(atom/source, command, data1, data2, mob/user = null)
@@ -485,3 +487,44 @@
 		if(M.stat == 0)
 			return 1
 	return 0
+
+
+
+
+
+
+// outpost 21 edit - modular computers removal, copied from code\modules\modular_computers\file_system\programs\command\comm.dm
+// Yes, I hate this too. It was oneof  the few parts that wouldn't work cleanly, TGUI issues, probably need to fix this later
+/*
+General message handling stuff
+*/
+var/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
+var/datum/comm_message_listener/global_message_listener = new //May be used by admins
+var/last_message_id = 0
+
+/proc/get_comm_message_id()
+	last_message_id = last_message_id + 1
+	return last_message_id
+
+/proc/post_comm_message(var/message_title, var/message_text)
+	var/list/message = list()
+	message["id"] = get_comm_message_id()
+	message["title"] = message_title
+	message["contents"] = message_text
+
+	for(var/datum/comm_message_listener/l in comm_message_listeners)
+		l.Add(message)
+
+/datum/comm_message_listener
+	var/list/messages
+
+/datum/comm_message_listener/New()
+	..()
+	messages = list()
+	comm_message_listeners.Add(src)
+
+/datum/comm_message_listener/proc/Add(var/list/message)
+	messages[++messages.len] = message
+
+/datum/comm_message_listener/proc/Remove(var/list/message)
+	messages -= list(message)

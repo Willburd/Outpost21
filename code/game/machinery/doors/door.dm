@@ -123,11 +123,13 @@
 			return																		//VOREStation Edit: unable to open doors
 		else
 			bumpopen(M)
+	/* outpost 21 - modular computer removal
 	if(istype(AM, /obj/item/device/uav))
 		if(check_access(null))
 			open()
 		else
 			do_animate("deny")
+	*/
 
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM

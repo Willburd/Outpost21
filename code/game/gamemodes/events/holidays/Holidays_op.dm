@@ -25,7 +25,60 @@
 				if(11)
 					var/pillow = pick(/obj/item/toy/plushie/pillow,/obj/item/toy/plushie/pillow/red,/obj/item/toy/plushie/pillow/green,/obj/item/toy/plushie/pillow/blue)
 					new pillow(here)
-					var/randomplush = call(/obj/random/plushie/item_to_spawn)()
+					// this is a clone of /obj/random/plushie/item_to_spawn()
+					var/randomplush = pick(/obj/item/toy/plushie/nymph,
+						/obj/item/toy/plushie/mouse,
+						/obj/item/toy/plushie/kitten,
+						/obj/item/toy/plushie/lizard,
+						/obj/item/toy/plushie/black_cat,
+						/obj/item/toy/plushie/black_fox,
+						/obj/item/toy/plushie/blue_fox,
+						/obj/random/carp_plushie,
+						/obj/item/toy/plushie/coffee_fox,
+						/obj/item/toy/plushie/corgi,
+						/obj/item/toy/plushie/crimson_fox,
+						/obj/item/toy/plushie/deer,
+						/obj/item/toy/plushie/girly_corgi,
+						/obj/item/toy/plushie/grey_cat,
+						/obj/item/toy/plushie/marble_fox,
+						/obj/item/toy/plushie/octopus,
+						/obj/item/toy/plushie/orange_cat,
+						/obj/item/toy/plushie/orange_fox,
+						/obj/item/toy/plushie/pink_fox,
+						/obj/item/toy/plushie/purple_fox,
+						/obj/item/toy/plushie/red_fox,
+						/obj/item/toy/plushie/robo_corgi,
+						/obj/item/toy/plushie/siamese_cat,
+						/obj/item/toy/plushie/spider,
+						/obj/item/toy/plushie/tabby_cat,
+						/obj/item/toy/plushie/tuxedo_cat,
+						/obj/item/toy/plushie/white_cat,
+						//VOREStation Add Start
+						/obj/item/toy/plushie/lizardplushie,
+						/obj/item/toy/plushie/lizardplushie/kobold,
+						/obj/item/toy/plushie/lizardplushie/resh,
+						/obj/item/toy/plushie/slimeplushie,
+						/obj/item/toy/plushie/box,
+						/obj/item/toy/plushie/borgplushie,
+						/obj/item/toy/plushie/borgplushie/medihound,
+						/obj/item/toy/plushie/borgplushie/scrubpuppy,
+						/obj/item/toy/plushie/foxbear,
+						/obj/item/toy/plushie/nukeplushie,
+						/obj/item/toy/plushie/otter,
+						/obj/item/toy/plushie/vox,
+						/obj/item/toy/plushie/borgplushie/drakiesec,
+						/obj/item/toy/plushie/borgplushie/drakiemed,
+						//VOREStation Add End
+						//YawnWider Add Start
+						/obj/item/toy/plushie/teshari/_yw,
+						/obj/item/toy/plushie/teshari/w_yw,
+						/obj/item/toy/plushie/teshari/b_yw,
+						/obj/item/toy/plushie/teshari/y_yw,
+						//YawnWider Add End
+						//Outpost Add Start
+						/obj/item/toy/plushie/tinytin,
+						/obj/item/toy/plushie/jil)
+						//Outpost Add End
 					return new randomplush(here)						// hug a friend day
 
 		if(4)   //April

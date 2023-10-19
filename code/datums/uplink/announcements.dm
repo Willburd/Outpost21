@@ -25,9 +25,10 @@
 	return list("title" = title, "message" = message)
 
 /datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
-	post_comm_message(args["title"], replacetext(args["message"], "\n", "<br/>"))
+	//post_comm_message(args["title"], replacetext(args["message"], "\n", "<br/>")) // outpost 21 - disable modular computers
 	command_announcement.Announce(args["message"], args["title"])
 	return 1
+
 
 /datum/uplink_item/abstract/announcements/fake_crew_arrival
 	name = "Crew Arrival Announcement/Records"

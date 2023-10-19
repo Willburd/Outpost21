@@ -1,6 +1,7 @@
 // **************
 // Unleashed_Mana
 // **************
+/* outpost 21 - fluff removal
 /obj/item/weapon/fluff/zekewatch
 	name = "Zeke's pocketwatch"
 	desc = "Looks like it's broken... or is it?"
@@ -138,7 +139,7 @@
 // *******
 // Gozulio
 // *******
-
+*/
 //Glitterpaws
 /obj/item/weapon/melee/goz_whitecane
 	name = "White Cane"
@@ -191,7 +192,7 @@
 		return
 	else
 		..()
-
+/*
 // *******
 // Dawidoe
 // *******
@@ -212,6 +213,7 @@
 	from_suit = /obj/item/weapon/gun/projectile/sec/flash
 	to_suit = /obj/item/weapon/gun/projectile/fluff/m1911
 
+
 // ************
 // championfire
 // ************
@@ -230,6 +232,7 @@
 	empty_message = list("Your lower belly feels smooth and empty. Sorry, we're out of eggs!", "The reduced pressure in your lower belly tells you there are no more eggs.")
 	full_message = list("Your lower belly looks swollen with irregular bumps, and it feels heavy.", "Your lower abdomen feels really heavy, making it a bit hard to walk.")
 	emote_descriptor = list("an egg right out of Yuki's lower belly!", "into Yuki's belly firmly, forcing him to lay an egg!", "Yuki really tight, who promptly lays an egg!")
+
 
 // ********
 // Vitorhks
@@ -371,7 +374,7 @@
 	desc = "A Modified medical scanner, all the main components are compacted into the handle. This one is an advanced unit."
 	icon = 'icons/vore/custom_items_yw.dmi'
 	icon_state = "scanner_mk3"
-
+*/
 // **************
 // VanesaFancyFin
 // **************
@@ -390,6 +393,7 @@
 		slot_r_hand_str = 'icons/vore/custom_items_right_hand_yw.dmi',
 		)
 
+/* outpost 21 edit - removed fluff items
 // **************
 // Belsima
 // **************
@@ -408,6 +412,7 @@
 	random_emote = list("supresses a moan", "gasps sharply", "bites her lower lip")
 	verb_name = "Milk"
 	verb_desc = "Grab Ysaline's breasts and milk her, storing her fresh, warm milk in a container. This will undoubtedly turn her on."
+*/
 
 // **************
 // Trash
@@ -487,6 +492,8 @@
 		return ..()
 	return
 
+
+/* outpost 21 edit - removed fluff items
 // **************
 // SASOperative
 // **************
@@ -529,6 +536,7 @@
 /obj/item/weapon/storage/bible/fluff/amina
 	name = "New Space Pioneer's Bible"
 	desc = "This one says it was printed in 2492. The name \"Eric Hayvers\" is written on the inside of the cover, crossed out. Under it is written \"Kouri, Amina, Marine Unit 14, Fifth Echelon. Service number NTN-5528928522372\""
+*/
 
 // **************
 // DameonOwen
@@ -550,6 +558,7 @@
 		qdel(src)
 
 
+/* outpost 21 edit - removed fluff items
 // **************
 // NESgamer190
 // **************
@@ -683,3 +692,4 @@
 		new P(src)
 	..()
 	return
+*/

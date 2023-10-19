@@ -54,12 +54,14 @@ Code is pretty much ripped verbatim from nano modules, but with un-needed stuff 
 
 	return 0
 
+/* outpost 21 - disable modular computers
 /datum/tgui_module/tgui_static_data()
 	. = ..()
-	
+
 	var/obj/item/modular_computer/host = tgui_host()
 	if(istype(host))
 		. += host.get_header_data()
+
 
 /datum/tgui_module/tgui_act(action, params)
 	if(..())
@@ -76,6 +78,8 @@ Code is pretty much ripped verbatim from nano modules, but with un-needed stuff 
 		if(action == "PC_minimize")
 			host.minimize_program(usr)
 			return TRUE
+
+*/
 
 // Just a nice little default interact in case the subtypes don't need any special behavior here
 /datum/tgui_module/tgui_interact(mob/user, datum/tgui/ui = null, datum/tgui/parent_ui = null)

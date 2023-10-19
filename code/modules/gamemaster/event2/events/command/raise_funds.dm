@@ -91,6 +91,6 @@
 			. += account.money
 
 /datum/event2/event/raise_funds/proc/send_command_report(title, message)
-	post_comm_message(title, message)
+	//post_comm_message(title, message) // outpost 21 - disable modular computers
 	to_world(span("danger", "New [using_map.company_name] Update available at all communication consoles."))
 	SEND_SOUND(world, 'sound/AI/commandreport.ogg')

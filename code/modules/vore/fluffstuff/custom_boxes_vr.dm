@@ -31,6 +31,7 @@
 		/obj/item/clothing/under/thing4)
 */
 
+/*  outpost 21 - remove vr fluff
 // BeyondMyLife:Cassandra Selones Spawn Kit
 /obj/item/weapon/storage/box/fluff/cassandra
 	name = "Cassandra Selone's Spawn Kit"
@@ -107,6 +108,7 @@
 	new /obj/item/weapon/storage/fancy/cigarettes/dromedaryco(src)
 	new /obj/item/weapon/storage/box/matches(src)
 	new /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake(src)
+*/
 
 /* outpost 21 - race removal
 // jemli:Cirra Mayhem
@@ -120,6 +122,7 @@
 		/obj/item/clothing/under/pirate)
 */
 
+/*  // outpost 21 - remove vr fluffs
 // joey4298:Emoticon
 /obj/item/weapon/storage/box/fluff/emoticon
 	name = "Emoticon's Mime Kit"
@@ -129,8 +132,9 @@
 		/obj/item/clothing/gloves/white,
 		/obj/item/clothing/head/beret,
 		/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing,
-		/obj/item/clothing/shoes/black,
-		/*/obj/item/toy/crayon/mime*/) //Need to track down the code for crayons before adding this back in
+		/obj/item/clothing/shoes/black
+		///obj/item/toy/crayon/mime //Need to track down the code for crayons before adding this back in
+		)
 
 //joanrisu:Joan Risu
 /obj/item/weapon/storage/backpack/dufflebag/sec/fluff/joanrisu
@@ -218,6 +222,7 @@
 		/obj/item/clothing/under/fluff/wolfgirl,
 		/obj/item/weapon/melee/fluffstuff/wolfgirlsword,
 		/obj/item/weapon/shield/fluff/wolfgirlshield)
+*/
 
 // Ryumi: Nikki Yumeno
 /obj/item/weapon/storage/box/fluff
@@ -228,7 +233,7 @@
 		/obj/item/clothing/head/fluff/nikki,
 		/obj/item/clothing/under/skirt/outfit/fluff/nikki,
 		/obj/item/clothing/shoes/fluff/nikki)
-		
+
 // DefiintelyNotARock:Aku Zoles
 /obj/item/weapon/storage/secure/briefcase/dealer
 	name = "Aku's Dealer briefcase"

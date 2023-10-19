@@ -71,14 +71,16 @@
 		/obj/item/trash/material/metal = 60,
 		/obj/item/weapon/stock_parts/capacitor = 60,
 		/obj/item/weapon/stock_parts/capacitor = 60,
+		/obj/item/weapon/stock_parts/capacitor/adv = 30
+		/* outpost 21 - disable modular computers
 		/obj/item/weapon/computer_hardware/network_card = 40,
 		/obj/item/weapon/computer_hardware/network_card = 40,
 		/obj/item/weapon/computer_hardware/processor_unit = 40,
 		/obj/item/weapon/computer_hardware/processor_unit = 40,
 		/obj/item/weapon/computer_hardware/card_slot = 40,
 		/obj/item/weapon/computer_hardware/card_slot = 40,
-		/obj/item/weapon/stock_parts/capacitor/adv = 30,
 		/obj/item/weapon/computer_hardware/network_card/advanced = 20
+		*/
 	)
 /obj/structure/salvageable/computer/Initialize()
 	. = ..()
@@ -140,6 +142,7 @@
 	. = ..()
 	icon_state = "implant_container[rand(0,1)]"
 
+/* outpost 21 - disable modular computers
 /obj/structure/salvageable/data
 	name = "broken data storage"
 	icon_state = "data0"
@@ -233,6 +236,7 @@
 		/obj/item/weapon/computer_hardware/processor_unit/photonic = 60,
 		/obj/item/weapon/computer_hardware/hard_drive/cluster = 50
 	)
+*/
 
 /obj/structure/salvageable/bliss/Initialize()
 	. = ..()
@@ -260,7 +264,7 @@
 		/obj/item/weapon/stock_parts/scanning_module = 40
 	)
 
-/obj/structure/salvageable/personal/Initialize()
+/obj/structure/salvageable/console/Initialize()
 	. = ..()
 	icon_state = "console[rand(0,2)]"
 
@@ -308,12 +312,13 @@
 		/obj/item/stack/cable_coil{amount = 5} = 90,
 		/obj/item/stack/material/glass{amount = 5} = 90,
 		/obj/item/weapon/stock_parts/capacitor = 60,
-		/obj/item/weapon/stock_parts/capacitor = 60,
+		/obj/item/weapon/stock_parts/capacitor = 60 /* outpost 21 - disable modular computers
 		/obj/item/weapon/computer_hardware/processor_unit/photonic = 40,
 		/obj/item/weapon/computer_hardware/processor_unit/photonic = 40,
 		/obj/item/weapon/computer_hardware/card_slot = 40,
 		/obj/item/weapon/computer_hardware/card_slot = 40,
 		/obj/item/weapon/computer_hardware/network_card/advanced = 40
+		*/
 	)
 
 /obj/structure/salvageable/implant_container_os
@@ -331,6 +336,8 @@
 		/obj/item/weapon/implanter = 30
 	)
 
+
+/* outpost 21 - disable modular computers
 /obj/structure/salvageable/data_os
 	name = "broken data storage"
 	icon_state = "os-data"
@@ -400,7 +407,7 @@
 		/obj/item/weapon/computer_hardware/card_slot = 40,
 		/obj/item/weapon/computer_hardware/network_card/advanced = 40
 	)
-
+*/
 
 /obj/structure/salvageable/slotmachine1
 	name = "broken slot machine"
@@ -411,8 +418,8 @@
 		/obj/item/stack/cable_coil{amount = 5} = 90,
 		/obj/item/stack/material/glass{amount = 5} = 90,
 		/obj/item/weapon/stock_parts/capacitor = 60,
-		/obj/item/weapon/stock_parts/capacitor = 60,
-		/obj/item/weapon/computer_hardware/network_card/advanced = 40
+		/obj/item/weapon/stock_parts/capacitor = 60
+		// /obj/item/weapon/computer_hardware/network_card/advanced = 40 // outpost 21 - disable modular computers
 	)
 
 /obj/structure/salvageable/slotmachine2
@@ -424,6 +431,6 @@
 		/obj/item/stack/cable_coil{amount = 5} = 90,
 		/obj/item/stack/material/glass{amount = 5} = 90,
 		/obj/item/weapon/stock_parts/capacitor = 60,
-		/obj/item/weapon/stock_parts/capacitor = 60,
-		/obj/item/weapon/computer_hardware/network_card/advanced = 40
+		/obj/item/weapon/stock_parts/capacitor = 60
+		///obj/item/weapon/computer_hardware/network_card/advanced = 40 // outpost 21 - disable modular computers
 	)

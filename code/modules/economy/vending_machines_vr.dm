@@ -1021,7 +1021,7 @@
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5, outpost 21 - modular computer removal
 					/obj/item/device/pda = 10,
 					/obj/item/device/radio/headset = 10,
 					/obj/item/device/flashlight = 5,
@@ -1045,7 +1045,7 @@
 					/obj/item/device/radio = 100,
 					/obj/item/device/camera = 100,
 					/obj/item/device/taperecorder = 100,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 1000,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 1000, // outpost 21 - disable modular computers
 					/obj/item/device/pda = 50,
 					/obj/item/device/radio/headset = 50,
 					/obj/item/device/flashlight = 100,
@@ -1078,7 +1078,7 @@
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5, // outpost 21 - disable modular computers
 					/obj/item/device/pda = 10,
 					/obj/item/device/radio/headset = 10,
 					/obj/item/device/flashlight = 5,
@@ -2718,7 +2718,7 @@
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,// outpost 21 edit - removed modular computers
 					/obj/item/device/pda = 10,
 					/obj/item/device/radio/headset = 10,
 					/obj/item/device/flashlight = 5,
@@ -2743,7 +2743,7 @@
 					/obj/item/device/radio = 100,
 					/obj/item/device/camera = 100,
 					/obj/item/device/taperecorder = 100,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 1000,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 1000, // outpost 21 - disable modular computers
 					/obj/item/device/pda = 50,
 					/obj/item/device/radio/headset = 50,
 					/obj/item/device/flashlight = 100,
@@ -3544,7 +3544,7 @@
 					/obj/item/device/radio = 10,
 					/obj/item/device/camera = 5,
 					/obj/item/device/taperecorder = 5,
-					/obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5,
+					///obj/item/modular_computer/tablet/preset/custom_loadout/cheap = 5, // outpost 21 - disable modular computers
 					/obj/item/device/pda = 10,
 					/obj/item/device/radio/headset = 10,
 					/obj/item/device/flashlight = 5,

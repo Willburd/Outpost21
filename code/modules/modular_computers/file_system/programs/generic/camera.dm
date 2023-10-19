@@ -1,3 +1,4 @@
+/* Outpost 21 edit - moved this to: code\modules\tgui\modules\camera.dm
 // Returns which access is relevant to passed network. Used by the program.
 /proc/get_camera_access(var/network)
 	if(!network)
@@ -28,6 +29,7 @@
 		return access_security // Default for all other station networks
 	else
 		return 999	//Inaccessible if not a station network and not mentioned above
+*/
 
 /datum/computer_file/program/camera_monitor
 	filename = "cammon"

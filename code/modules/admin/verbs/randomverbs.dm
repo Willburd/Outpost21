@@ -644,7 +644,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		customname = "[using_map.company_name] Update"
 
 	//New message handling
-	post_comm_message(customname, replacetext(input, "\n", "<br/>"))
+	//post_comm_message(customname, replacetext(input, "\n", "<br/>")) outpost 21 - modular computer removal
 
 	switch(tgui_alert(usr, "Should this be announced to the general population?","Show world?",list("Yes","No")))
 		if("Yes")

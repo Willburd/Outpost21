@@ -34,7 +34,7 @@
 	cam_screen.assigned_map = map_name
 	cam_screen.del_on_map_removal = FALSE
 	cam_screen.screen_loc = "[map_name]:1,1"
-	
+
 	cam_plane_masters = get_tgui_plane_masters()
 
 	for(var/obj/screen/instance as anything in cam_plane_masters)
@@ -131,7 +131,7 @@
 /datum/tgui_module/camera/tgui_act(action, params)
 	if(..())
 		return TRUE
-	
+
 	if(action && !issilicon(usr))
 		playsound(tgui_host(), "terminal_type", 50, 1)
 
@@ -298,4 +298,36 @@
 
 /datum/tgui_module/camera/bigscreen/tgui_state(mob/user)
 	return GLOB.tgui_physical_state_bigscreen
-	
+
+
+// outpost 21 edit - moved this from: code\modules\modular_computers\file_system\programs\generic\camera.dm
+// Returns which access is relevant to passed network. Used by the program.
+/proc/get_camera_access(var/network)
+	if(!network)
+		return 0
+	. = using_map.get_network_access(network)
+	if(.)
+		return
+
+	switch(network)
+		if(NETWORK_THUNDER)
+			return 0
+		if(NETWORK_ENGINE,NETWORK_ENGINEERING,NETWORK_ALARM_ATMOS,NETWORK_ALARM_FIRE,NETWORK_ALARM_POWER)
+			return access_engine
+		if(NETWORK_CIRCUITS)
+			return access_research
+		if(NETWORK_MINE)
+			return access_qm
+		if(NETWORK_ERT)
+			return access_cent_specops
+		//VOREStation Add Start
+		if(NETWORK_TALON_SHIP)
+			return access_talon
+		if(NETWORK_TALON_HELMETS)
+			return access_talon
+		//VOREStation Add End
+
+	if(network in using_map.station_networks)
+		return access_security // Default for all other station networks
+	else
+		return 999	//Inaccessible if not a station network and not mentioned above

@@ -142,6 +142,7 @@
 		qdel(src)
 //YW EDITS END
 
+/* outpost 21 - fluff removal
 //DEBUG ITEM
 /obj/item/device/modkit_conversion/fluff/debug_gunkit
 	name = "Gun Transformation Kit"
@@ -283,6 +284,7 @@
 	from_suit = /obj/item/clothing/suit/space/void
 	to_helmet = /obj/item/clothing/head/helmet/space/void/engineering/hazmat/fluff/screehelm
 	to_suit = /obj/item/clothing/suit/space/void/engineering/hazmat/fluff/screespess
+*/
 
 //General Use
 /obj/item/weapon/flag
@@ -345,6 +347,7 @@
 	icon = 'icons/vore/custom_items_vr.dmi'
 	icon_override = 'icons/vore/custom_items_vr.dmi'
 
+/*  outpost 21 - fluff removal
 //zodiacshadow: Nehi Maximus
 /obj/item/device/radio/headset/fluff/zodiacshadow
 	name = "Nehi's 'phones"
@@ -388,7 +391,7 @@
 	desc = "A mass produced version of the original. It has faux leather and an aluminium base, but still stings like the original."
 	force = 8
 	attack_verb = list("flogged", "whipped", "lashed", "flayed")
-
+*/
 
 // joey4298:Emoticon
 /obj/item/device/fluff/id_kit_mime
@@ -412,6 +415,7 @@
 		to_chat(user, "<span class='warning'>This isn't even an ID card you idiot.</span>")
 		return
 
+/*  outpost 21 - fluff removal
 //arokha:Aronai Sieyes - Centcom ID (Medical dept)
 /obj/item/weapon/card/id/centcom/station/fluff/aronai
 	registered_name = "CONFIGURE ME"
@@ -497,7 +501,7 @@
 	from_suit = /obj/item/clothing/suit/armor/vest/wolftaur
 	to_helmet = /obj/item/clothing/head/serdyhelmet
 	to_suit = /obj/item/clothing/suit/armor/vest/wolftaur/serdy
-
+*/
 
 //Cameron653: Diana Kuznetsova
 /obj/item/clothing/suit/fluff/purp_robes
@@ -636,10 +640,12 @@
 	matter = list(MAT_STEEL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
+/*  outpost 21 - fluff removal
 /obj/item/weapon/cane/fluff/tasald
 	name = "Ornate Walking Cane"
 	desc = "An elaborately made custom walking stick with a dark wooding core, a crimson red gemstone on its head and a steel cover around the bottom. you'd probably hear someone using this down the hall."
 	icon = 'icons/vore/custom_items_vr.dmi'
+*/
 
 /obj/item/device/fluff/id_kit_ivy
 	name = "Holo-ID reprinter"
@@ -665,6 +671,7 @@
 		to_chat(user, "<span class='warning'>This isn't even an ID card you idiot.</span>")
 		return
 
+/* outpost 21 - fluff removal
 //WickedTempest: Chakat Tempest
 /obj/item/weapon/reagent_containers/hypospray/vial/tempest
 	name = "Tempest's Hypospray"
@@ -774,6 +781,7 @@
 	icon_state = "amayarahlwahID"
 	desc = "A primarily blue ID with a holographic 'WAH' etched onto its back. The letters do not obscure anything important on the card. It is shiny and it feels very bumpy."
 	title_strings = list("Amaya Rahl's Wah-identification card", "Amaya Rahl's Wah-ID card")
+*/
 
 //General use, Verk felt like sharing.
 /obj/item/clothing/glasses/fluff/science_proper
@@ -818,6 +826,7 @@
 	slot_flags = SLOT_TIE
 	slot = ACCESSORY_SLOT_DECOR
 
+/* outpost 21 - fluff removal
 //InterroLouis: Ruda Lizden
 /obj/item/clothing/accessory/badge/holo/detective/ruda
 	name = "Hisstective's Badge"
@@ -1160,24 +1169,23 @@
 
 //RadiantAurora: Tiemli Kroto
 /obj/item/clothing/glasses/welding/tiemgogs
-   name = "custom-fitted welding goggles"
-   desc = "A pair of thick, custom-fitted goggles with LEDs above the lenses. Ruggedly engraved below the lenses is the name 'Tiemli Kroto'."
+	name = "custom-fitted welding goggles"
+	desc = "A pair of thick, custom-fitted goggles with LEDs above the lenses. Ruggedly engraved below the lenses is the name 'Tiemli Kroto'."
 
-   icon = 'icons/vore/custom_items_vr.dmi'
-   icon_state = "tiemgogs"
+	icon = 'icons/vore/custom_items_vr.dmi'
+	icon_state = "tiemgogs"
 
-   icon_override = 'icons/vore/custom_clothes_vr.dmi'
-   icon_state = "tiemgogs"
+	icon_override = 'icons/vore/custom_clothes_vr.dmi'
+	icon_state = "tiemgogs"
 
 /obj/item/clothing/glasses/welding/tiemgogs/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-   if(..())
-      if(H.ckey != "radiantaurora")
-         to_chat(H, "<span class='warning'>These don't look like they were made to fit you...</span>")
-         return 0
-      else
-         return 1
+	if(..())
+		if(H.ckey != "radiantaurora")
+			to_chat(H, "<span class='warning'>These don't look like they were made to fit you...</span>")
+			return 0
+		else
+			return 1
 
-/* outpost 21 removal
 //Ryumi - Nikki Yumeno
 /obj/item/weapon/rig/nikki
 	name = "weird necklace"
@@ -1223,7 +1231,7 @@
 		else if (M.get_active_hand() == src)
 			to_chat(M, "<span class='warning'>For some reason, the necklace seems to never quite get past your head when you try to put it on... Weird, it looked like it would fit.</span>")
 			return 0
-*/
+
 
 //Nickcrazy - Damon Bones Xrim
 /obj/item/clothing/suit/storage/toggle/bomber/bombersec
@@ -1516,3 +1524,4 @@
 	icon = 'icons/vore/custom_items_vr.dmi'
 	item_icons = list(slot_l_hand_str = 'icons/vore/custom_items_left_hand_vr.dmi', slot_r_hand_str = 'icons/vore/custom_items_right_hand_vr.dmi')
 	icon_state = "kyuholotar"
+*/

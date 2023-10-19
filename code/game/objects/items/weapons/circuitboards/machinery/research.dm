@@ -87,6 +87,7 @@
 							/obj/item/weapon/stock_parts/micro_laser = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
+ /* outpost 21 - disable modular computers
 /obj/item/weapon/circuitboard/ntnet_relay
 	name = "Circuit board (NTNet Quantum Relay)"
 	build_path = /obj/machinery/ntnet_relay
@@ -94,3 +95,4 @@
 	origin_tech = list(TECH_DATA = 4)
 	req_components = list(
 							/obj/item/stack/cable_coil = 15)
+*/

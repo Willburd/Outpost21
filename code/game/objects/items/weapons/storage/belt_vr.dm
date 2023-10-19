@@ -2,7 +2,7 @@
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/belt/mob_teshari.dmi')/*,
 		SPECIES_WEREBEAST = 'icons/inventory/belt/mob_vr_werebeast.dmi') outpost 21 - custom race removal*/
-		
+
 
 /obj/item/weapon/storage/belt/explorer
 	name = "explorer's belt"
@@ -78,7 +78,7 @@
 		/obj/item/resonator,
 		/obj/item/stack/marker_beacon,
 		/obj/item/stack/flag,
-		/obj/item/modular_computer/tablet,
+		///obj/item/modular_computer/tablet, // outpost 21 - disable modular computers
 		/obj/item/clothing/glasses,
 		/obj/item/clothing/shoes/bhop,
 		/obj/item/device/multitool,

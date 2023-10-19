@@ -230,7 +230,7 @@
 			stuttering = max(35, stuttering)
 			adjustHalLoss(2)
 			make_jittery(6)
-			if(3)
+			if(prob(3))
 				to_chat(src, "<font color='red'>Everything feels wrong.</font>")
 				hallucination = 25
 				emote("twitch")

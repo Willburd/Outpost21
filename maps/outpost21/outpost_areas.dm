@@ -879,11 +879,13 @@
 //------second floor------
 /area/mine/explored/muriki/mountainnorth
 	name = "\improper North Facility Mountainside"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
 	icon_state = "north"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 
 /area/mine/explored/muriki/mountaineast
 	name = "\improper Eastern Facility Mountainside"
+	base_turf = /turf/simulated/floor/outdoors/newdirt_nograss/muriki
 	icon_state = "east"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 

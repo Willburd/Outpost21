@@ -422,7 +422,7 @@ var/datum/planet/muriki/planet_muriki = null
 		return
 
 	// no phased out or observer
-	if(!L || L.is_incorporeal())
+	if(isnull(L) || L.is_incorporeal() || istype(L,/mob/observer))
 		return
 
 	// no synth damage

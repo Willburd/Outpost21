@@ -11,7 +11,7 @@ var/global/list/allisclean_list = list()
 	contained = 0 // Are we going to move around?
 	dissipate = 0 // Do we lose energy over time?
 	grav_pull = 10 //How many tiles out do we pull?
-	consume_range = 3 //How many tiles out do we eat
+	consume_range = 6 //How many tiles out do we eat
 
 
 /obj/singularity/allisclean/New()

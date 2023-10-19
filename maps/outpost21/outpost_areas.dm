@@ -906,11 +906,13 @@
 
 /area/mine/unexplored/muriki/valleyeast
 	name = "\improper Muriki Lower Valley"
+	base_turf = /turf/simulated/floor/outdoors/mud/muriki
 	icon_state = "east"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 
 /area/mine/unexplored/muriki/valleywest
 	name = "\improper Muriki Lower Valley"
+	base_turf = /turf/simulated/floor/outdoors/mud/muriki
 	icon_state = "west"
 	sound_env = SOUND_ENVIRONMENT_MOUNTAINS
 

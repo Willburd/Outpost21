@@ -26,6 +26,7 @@ var/global/list/citizenship_choices = list(
 	"Virgo 4 NT Compound",
 	"Venus",
 	"Tiamat",
+	"Eshui Residential District",
 	"An-Tahk-Et"
 	)
 
@@ -44,12 +45,13 @@ var/global/list/home_system_choices = list(
 
 
 var/global/list/faction_choices = list(
-	/*YW EDIT: "Commonwealth of Sol-Procyon",*/
+	"Commonwealth of Sol-Procyon",
 	"United Fyrds",
 	"Elysian Colonies",
 	"Ares Confederation",
 	"Vey Med",
 	"Einstein Engines",
+	"Eshui",
 	"Free Trade Union",
 	"NanoTrasen",
 	"Ward-Takahashi GMB",

@@ -173,7 +173,7 @@ const TechDisk = (props, context) => {
 const DataDisk = (props, context) => {
   const { act, data } = useBackend(context);
 
-  const { designs } = data.info;
+  const { designs } = data;
 
   const { disk } = props;
 

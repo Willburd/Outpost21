@@ -9,7 +9,7 @@
 	interval_lower_bound = 35 SECONDS
 	interval_upper_bound = 95 SECONDS
 
-/obj/effect/map_effect/interval/atmogland/trigger()
+/obj/effect/map_effect/interval/redspaceexitcontroller/trigger()
 	var/list/redexitlist = list()
 	for(var/obj/effect/landmark/R in landmarks_list)
 		if(R.name == "redentrance")

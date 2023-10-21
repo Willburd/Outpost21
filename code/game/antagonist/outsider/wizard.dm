@@ -16,6 +16,7 @@ var/datum/antagonist/wizard/wizards
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 
+	id_type = /obj/item/weapon/card/id/syndicate
 
 /datum/antagonist/wizard/New()
 	..()
@@ -88,6 +89,8 @@ var/datum/antagonist/wizard/wizards
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box(wizard_mob), slot_in_backpack)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/spellbook(wizard_mob), slot_r_hand)
+
+	create_id(role_text, wizard_mob)
 	return 1
 
 /datum/antagonist/wizard/check_victory()

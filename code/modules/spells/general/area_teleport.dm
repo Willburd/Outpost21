@@ -54,19 +54,20 @@
 		return
 
 	if(user && user.buckled)
-		user.buckled = null
+		user.buckled.unbuckle_mob( user, TRUE)
 
 	var/attempt = null
 	var/success = 0
 	while(L.len)
 		attempt = pick(L)
-		success = user.Move(attempt)
+		success = user.forceMove(attempt)
 		if(!success)
 			L.Remove(attempt)
 		else
 			break
 
 	if(!success)
+		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination, because the destination area is entirely obstructed. Sorry.")
 		user.loc = pick(L)
 
 	return

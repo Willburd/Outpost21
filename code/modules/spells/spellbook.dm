@@ -291,7 +291,7 @@
 
 /obj/item/weapon/spellbook/oneuse/fireball/recoil(mob/user as mob)
 	..()
-	explosion(user.loc, -1, 0, 2, 3, 0)
+	explosion(user.loc, -1, 1, 3, 4, 6)
 	qdel(src)
 
 /obj/item/weapon/spellbook/oneuse/smoke

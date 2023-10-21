@@ -17,18 +17,16 @@
 		return
 
 	var/turf/T = pick(targets)
-	var/turf/starting = get_turf(user)
 	if(T)
-		if(user.buckled)
-			user.buckled = null
-		user.forceMove(T)
-
 		var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
-		smoke.set_up(3, 0, starting)
+		smoke.set_up(3, 0, T)
 		smoke.start()
+
+		if(user.buckled)
+			user.buckled.unbuckle_mob( user, TRUE)
+		user.forceMove(T)
 
 		smoke = new()
 		smoke.set_up(3, 0, T)
 		smoke.start()
-
 	return

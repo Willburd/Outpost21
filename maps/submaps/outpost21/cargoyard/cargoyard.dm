@@ -78,7 +78,7 @@
 	cost = 5
 
 /datum/map_template/outpost21/muriki/cargoyard/light_B
-	name = "Light Variant A"
+	name = "Light Variant B"
 	desc = "Random light."
 	mappath = 'maps/submaps/outpost21/cargoyard/light_B.dmm'
 	allow_duplicates = TRUE
@@ -86,7 +86,7 @@
 	cost = 5
 
 /datum/map_template/outpost21/muriki/cargoyard/light_C
-	name = "Light Variant A"
+	name = "Light Variant C"
 	desc = "Random light."
 	mappath = 'maps/submaps/outpost21/cargoyard/light_C.dmm'
 	allow_duplicates = TRUE

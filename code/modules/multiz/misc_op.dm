@@ -7,6 +7,7 @@
 
 /obj/effect/auto_roof/Initialize()
 	var/turf/T = get_turf(src)
+	T.outdoors = OUTDOORS_NO
 	if (!T || !roof_type)
 		return
 	if(HasAbove(T.z))

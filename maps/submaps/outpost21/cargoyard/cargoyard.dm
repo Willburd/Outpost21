@@ -16,12 +16,12 @@
 	desc = "Used to fill extra space to explore in the cargo yard."
 	annihilate = TRUE
 
-/*
+
 /datum/map_template/outpost21/muriki/cargoyard_huge
 	name = "Yard Content - Big"
 	desc = "Used to make the cargo yard a FUN place to explore."
 	annihilate = TRUE
-*/
+
 
 //////////////////////////////////////////////////////////////
 // Generic things and structures
@@ -58,6 +58,7 @@
 	desc = "Random path."
 	mappath = 'maps/submaps/outpost21/cargoyard/path_A.dmm'
 	allow_duplicates = TRUE
+	discard_prob = 30
 	cost = 5
 
 /datum/map_template/outpost21/muriki/cargoyard/path_B
@@ -65,6 +66,7 @@
 	desc = "Random path."
 	mappath = 'maps/submaps/outpost21/cargoyard/path_B.dmm'
 	allow_duplicates = TRUE
+	discard_prob = 30
 	cost = 5
 
 /datum/map_template/outpost21/muriki/cargoyard/light_A
@@ -72,11 +74,43 @@
 	desc = "Random light."
 	mappath = 'maps/submaps/outpost21/cargoyard/light_A.dmm'
 	allow_duplicates = TRUE
+	discard_prob = 60
+	cost = 5
+
+/datum/map_template/outpost21/muriki/cargoyard/light_B
+	name = "Light Variant A"
+	desc = "Random light."
+	mappath = 'maps/submaps/outpost21/cargoyard/light_B.dmm'
+	allow_duplicates = TRUE
+	discard_prob = 60
+	cost = 5
+
+/datum/map_template/outpost21/muriki/cargoyard/light_C
+	name = "Light Variant A"
+	desc = "Random light."
+	mappath = 'maps/submaps/outpost21/cargoyard/light_C.dmm'
+	allow_duplicates = TRUE
+	discard_prob = 60
 	cost = 5
 
 //////////////////////////////////////////////////////////////
 // Huge structures in the yard (usually one at a time...)
 
+/datum/map_template/outpost21/muriki/cargoyard_huge/largeruin_A
+	name = "Large Ruins Variant A"
+	desc = "Random large ruins in the yard."
+	mappath = 'maps/submaps/outpost21/cargoyard/largeruin_A.dmm'
+	allow_duplicates = FALSE
+	discard_prob = 30
+	cost = 90
+
+/datum/map_template/outpost21/muriki/cargoyard_huge/simple_A
+	name = "Simple Yard Variant A"
+	desc = "Random place in the yard."
+	mappath = 'maps/submaps/outpost21/cargoyard/simple_A.dmm'
+	allow_duplicates = TRUE
+	discard_prob = 60
+	cost = 30
 
 //////////////////////////////////////////////////////////////
 // Area definitions

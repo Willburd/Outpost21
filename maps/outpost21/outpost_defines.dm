@@ -80,7 +80,7 @@
 	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge, 100, 20, 370, 180)
 	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard, 100, 20, 370, 180)
 
-	//seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 150, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard_huge)
+	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 150, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard_huge, 60, 15, 190, 60)
 	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 200, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard, 60, 15, 190, 60)
 
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, world.maxx, world.maxy) // Create the mining Z-level.

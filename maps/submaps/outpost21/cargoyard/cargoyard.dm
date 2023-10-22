@@ -14,11 +14,13 @@
 /datum/map_template/outpost21/muriki/cargoyard
 	name = "Yard Content - Small"
 	desc = "Used to fill extra space to explore in the cargo yard."
+	annihilate = TRUE
 
 /*
 /datum/map_template/outpost21/muriki/cargoyard_huge
 	name = "Yard Content - Big"
 	desc = "Used to make the cargo yard a FUN place to explore."
+	annihilate = TRUE
 */
 
 //////////////////////////////////////////////////////////////

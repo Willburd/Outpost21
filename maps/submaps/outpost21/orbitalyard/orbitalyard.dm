@@ -18,10 +18,12 @@
 /datum/map_template/outpost21/space/orbitalyard
 	name = "Space Content - Spooce"
 	desc = "Used to fill extra space to explore in the orbital yard."
+	annihilate = TRUE
 
 /datum/map_template/outpost21/space/orbitalyard_huge
 	name = "Space Content - Thats no moon"
 	desc = "Used to make the orbital yard a FUN place to explore."
+	annihilate = TRUE
 
 
 //////////////////////////////////////////////////////////////

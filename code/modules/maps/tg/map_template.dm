@@ -214,6 +214,12 @@
 			potential_submaps -= chosen_template
 			continue
 
+		// Is single use template already placed
+		if(!chosen_template.allow_duplicates && chosen_template.loaded)
+			priority_submaps -= chosen_template
+			potential_submaps -= chosen_template
+			continue
+
 		// Did we already place down a very similar submap?
 		if(chosen_template.template_group && (chosen_template.template_group in template_groups_used))
 			priority_submaps -= chosen_template
@@ -271,6 +277,13 @@
 				continue
 
 			admin_notice("Submap \"[chosen_template.name]\" placed at ([T.x], [T.y], [T.z])\n", R_DEBUG)
+
+			if(specific_sanity < 0)
+				// I have no idea how this function has a race condition for the sanity check, but forcing the inner check loop to end like this fixes it...
+				// If a template doesn't allow duplicates, it tries to double place a template. this fixes that.
+				break
+			if(!chosen_template.allow_duplicates)
+				specific_sanity = -1 // force end the placement loop
 
 			// Do loading here.
 			chosen_template.load(T, centered = TRUE, orientation=orientation) // This is run before the main map's initialization routine, so that can initilize our submaps for us instead.

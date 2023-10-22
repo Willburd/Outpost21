@@ -97,6 +97,14 @@
 	allow_duplicates = TRUE
 	cost = 40
 
+/datum/map_template/outpost21/space/orbitalyard_huge/giant_asteroid_B
+	name = "Giant Asteroid Variant B"
+	desc = "Random Giant asteroid."
+	mappath = 'maps/submaps/outpost21/orbitalyard/giant_asteroid_B.dmm'
+	allow_duplicates = FALSE // has secret in it
+	fixed_orientation = TRUE
+	cost = 50
+
 /datum/map_template/outpost21/space/orbitalyard_huge/structure_A
 	name = "Structure Variant A"
 	desc = "Destroyed ruins of a facility."

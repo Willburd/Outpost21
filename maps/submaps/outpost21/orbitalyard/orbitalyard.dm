@@ -105,6 +105,14 @@
 	fixed_orientation = TRUE
 	cost = 55
 
+/datum/map_template/outpost21/space/orbitalyard_huge/structure_B
+	name = "Structure Variant B"
+	desc = "Destroyed ruins of a facility."
+	mappath = 'maps/submaps/outpost21/orbitalyard/structure_B.dmm'
+	allow_duplicates = FALSE
+	fixed_orientation = TRUE
+	cost = 55
+
 
 //////////////////////////////////////////////////////////////
 // Area definitions

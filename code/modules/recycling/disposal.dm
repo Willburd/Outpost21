@@ -1385,7 +1385,15 @@
 		return posdir
 
 /obj/structure/disposalpipe/sortjunction/transfer(var/obj/structure/disposalholder/H)
-	var/nextdir = nextdir(H.dir, H.destinationTag)
+	// outpost 21 edit begin - bodies are internally tagged for a special sorter!
+	var/detectedtag = H.destinationTag
+	if(detectedtag == "" && H.hasmob)
+		for(var/mob/living/L in H)
+			if(!istype(L,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+				detectedtag = "corpse"
+				break
+	// outpost 21 edit end
+	var/nextdir = nextdir(H.dir, detectedtag)
 	H.set_dir(nextdir)
 	var/turf/T = H.nextloc()
 	var/obj/structure/disposalpipe/P = H.findpipe(T)
@@ -1421,6 +1429,16 @@
 /obj/structure/disposalpipe/sortjunction/untagged/divert_check(var/checkTag)
 	return checkTag == ""
 
+//junction that filters bodies
+/obj/structure/disposalpipe/sortjunction/bodies
+	name = "body recovery junction"
+	desc = "An underfloor disposal pipe which filters out detectable bodies, living or soon to be dead."
+	subtype = 2
+
+/obj/structure/disposalpipe/sortjunction/bodies/divert_check(var/checkTag)
+	return checkTag == "corpse"
+
+
 /obj/structure/disposalpipe/sortjunction/flipped //for easier and cleaner mapping
 	icon_state = "pipe-j2s"
 
@@ -1428,6 +1446,9 @@
 	icon_state = "pipe-j2s"
 
 /obj/structure/disposalpipe/sortjunction/untagged/flipped
+	icon_state = "pipe-j2s"
+
+/obj/structure/disposalpipe/sortjunction/bodies/flipped
 	icon_state = "pipe-j2s"
 
 //a trunk joining to a disposal bin or outlet on the same turf

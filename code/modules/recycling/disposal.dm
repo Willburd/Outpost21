@@ -1387,10 +1387,15 @@
 /obj/structure/disposalpipe/sortjunction/transfer(var/obj/structure/disposalholder/H)
 	// outpost 21 edit begin - bodies are internally tagged for a special sorter!
 	var/detectedtag = H.destinationTag
-	if(detectedtag == "" && H.hasmob)
-		for(var/mob/living/L in H)
-			if(!istype(L,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
-				detectedtag = "corpse"
+	if(detectedtag == "")
+		if(H.hasmob)
+			for(var/mob/living/L in H)
+				if(!istype(L,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+					detectedtag = "corpse"
+					break
+		else
+			for(var/obj/item/weapon/card/id in H)
+				detectedtag = "corpse" // send these to medical body disposal as well
 				break
 	// outpost 21 edit end
 	var/nextdir = nextdir(H.dir, detectedtag)

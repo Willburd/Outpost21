@@ -15,6 +15,8 @@
 	var/gib_time = 40        // Time from starting until meat appears
 	var/gib_throw_dir = WEST // Direction to spit meat and gibs in.
 
+	var/obj/machinery/transhuman/autoresleever/sleevelink // updated before each sleeving check, attempts to see if we have a autosleever ready for biomass injection!
+
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 2
 	active_power_usage = 500
@@ -57,11 +59,22 @@
 	return ..()
 
 /obj/machinery/gibber/autogibber/Bumped(var/atom/A)
-	if(!input_plate || !ismob(A))
+	if(!input_plate)
 		return
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(operating)
+		return
+	if(istype(A,/obj/item))
+		// items move into gibber for processing and ejection
+		var/obj/item/thing = A
+		thing.loc = src
+		// proc sleever if it gets an ID
+		if(istype(A, /obj/item/weapon/card/id))
+			updatesleever()
+			processcontents()
+		return
+	if(!ismob(A))
 		return
 	if(src.occupant)
 		return
@@ -71,6 +84,7 @@
 		victim.loc = src
 		src.occupant = victim
 		src.startgibbing( victim)
+		return
 
 /obj/machinery/gibber/autogibber/process()
 	// auto detect above!
@@ -208,40 +222,58 @@
 	src.operating = 1
 	update_icon()
 
-	var/slab_name = occupant.name
-	var/slab_count = occupant.meat_amount
-	var/slab_type = occupant.meat_type ? occupant.meat_type : /obj/item/weapon/reagent_containers/food/snacks/meat
-	var/slab_nutrition = src.occupant.nutrition / 15
+	// alright, so. Vorecode makes this hellish, as mobs can be nested in mobs endlessly. Because fuck you.
+	// We'll loop through our mob contents, and when the list's length stays the same, we know we've got EVERYTHING out and items dropped.
+	var/list/byproducts = list()
+	var/contentssize = -1
+	var/escape = 300
+	while(escape > 0)
+		contentssize = contents.len
+		for(var/mob/grindable in contents)
+			preprocessmob(grindable)
+		if(contentssize == contents.len)
+			break
+		escape--
 
-	var/list/byproducts = occupant?.butchery_loot?.Copy()
+	for(var/mob/living/grindable in contents)
+		if(isnull(grindable))
+			continue
 
-	if(istype(src.occupant,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = occupant
-		slab_name = src.occupant.real_name
-		slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
+		var/slab_name = grindable.name
+		var/slab_count = grindable.meat_amount
+		var/slab_type = grindable.meat_type ? grindable.meat_type : /obj/item/weapon/reagent_containers/food/snacks/meat
+		var/slab_nutrition = grindable.nutrition / 15
 
-	// Small mobs don't give as much nutrition.
-	if(issmall(src.occupant))
-		slab_nutrition *= 0.5
-	if(slab_count <= 0)
-		slab_count = 1 // no div by 0
-	slab_nutrition /= slab_count
+		// extra loot from butchery!
+		byproducts += grindable?.butchery_loot?.Copy()
 
-	while(slab_count)
-		slab_count--
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
-		if(istype(new_meat))
-			new_meat.name = "[slab_name] [new_meat.name]"
-			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
-			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/(2 + occupant.meat_amount),1))
+		if(istype(grindable,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = grindable
+			slab_name = grindable.real_name
+			slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
 
-	add_attack_logs(user,occupant,"Used [src] to gib")
+		// Small mobs don't give as much nutrition.
+		if(issmall(grindable))
+			slab_nutrition *= 0.5
+		if(slab_count <= 0)
+			slab_count = 1 // no div by 0
+		slab_nutrition /= slab_count
 
-	// process occupant into meaty treaties
-	src.occupant.ghostize()
-	occupant.gib()
-	occupant = null
+		while(slab_count)
+			slab_count--
+			var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
+			if(istype(new_meat))
+				new_meat.name = "[slab_name] [new_meat.name]"
+				new_meat.reagents.add_reagent("nutriment",slab_nutrition)
+				if(grindable.reagents)
+					grindable.reagents.trans_to_obj(new_meat, round(grindable.reagents.total_volume/(2 + grindable.meat_amount),1))
+
+		add_attack_logs(user,grindable,"Used [src] to gib")
+
+		// process grindables into meaty treaties
+		grindable.ghostize()
+		grindable.gib()
+
 	spawn(gib_time)
 		playsound(src, 'sound/effects/splat.ogg', 50, 1)
 		operating = 0
@@ -253,20 +285,73 @@
 
 					byproducts[path] -= 1
 
-		for (var/obj/thing in contents)
-			// There's a chance that the gibber will fail to destroy or butcher some evidence.
-			if(istype(thing,/obj/item/organ) && prob(80))
-				var/obj/item/organ/OR = thing
-				if(OR.can_butcher(src))
-					OR.butcher(src, null, src)	// Butcher it, and add it to our list of things to launch.
-				else
-					qdel(thing)
-				continue
+		// undate sleever here so we can skip organ destruction
+		updatesleever()
+		if(!isnull(sleevelink))
+			for (var/obj/thing in contents)
+				// There's a chance that the gibber will fail to destroy or butcher some evidence.
+				if(istype(thing,/obj/item/organ) && prob(80))
+					var/obj/item/organ/OR = thing
+					if(OR.can_butcher(src))
+						OR.butcher(src, null, src)	// Butcher it, and add it to our list of things to launch.
+					else
+						qdel(thing)
+					continue
 
-		for (var/obj/thing in contents)
-			thing.forceMove(get_turf(thing)) // Drop it onto the turf for throwing.
-			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
-
+		// DIE MONSTER!
+		processcontents()
 		update_icon()
 
+/obj/machinery/gibber/proc/preprocessmob(var/mob/M)
+	// transfer items
+	for(var/obj/item/I in M)
+		M.drop_from_inventory(I,src)
 
+	// release prey
+	if(istype(M,/mob/living))
+		var/mob/living/L = M
+		L.release_vore_contents(silent = TRUE)
+
+/obj/machinery/gibber/proc/processcontents()
+	// don't call this if currently processing something else, be careful!
+	var/obj/item/weapon/card/id/sleevecard // because we can only run one resleeve at a time...
+	for (var/obj/thing in contents)
+		var/processtobiomass = FALSE
+		if(!isnull(sleevelink))
+			// PROCESS ORGANICS INTO SLURRY
+			if(istype(thing, /obj/item/stack/animalhide) || istype(thing, /obj/item/weapon/reagent_containers/food/snacks/meat))
+				processtobiomass = TRUE
+			else if(istype(thing, /obj/item/organ))
+				var/obj/item/organ/O = thing
+				if(!O.robotic < ORGAN_ROBOT)
+					processtobiomass = TRUE
+			else if(istype(thing, /obj/effect/decal/cleanable/blood/gibs))
+				if(prob(70))
+					processtobiomass = TRUE
+			else if(istype(thing, /obj/item/weapon/card/id))
+				sleevecard = thing // this makes it so the last ID detected is the one used...
+			else if(istype(thing, /obj/item/device/pda))
+				var/obj/item/device/pda/P = thing
+				if(!isnull(P.id))
+					sleevecard = P.id // this makes it so the last ID detected is the one used...
+
+		if(processtobiomass)
+			// process and destroy
+			thing.Destroy()
+		else
+			thing.forceMove( src.loc) // Drop it onto the turf for throwing.
+			thing.throw_at( get_edge_target_turf(thing.loc, gib_throw_dir),rand(1,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
+
+	// Pass ID to sleever
+	if(!isnull(sleevecard))
+		sleevelink.autoresleeve(sleevecard)
+
+/obj/machinery/gibber/proc/updatesleever()
+	var/obj/machinery/transhuman/autoresleever/S
+	for(var/i in cardinal)
+		S = locate( /obj/machinery/transhuman/autoresleever, get_step(src.loc, i) )
+		if(!isnull(S) && S.anchored)
+			sleevelink = S
+			sleevelink.releaseturf = get_turf(src)
+			sleevelink.throw_dir = gib_throw_dir
+			break

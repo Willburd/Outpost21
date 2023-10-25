@@ -1236,6 +1236,12 @@
 	icon_state = "blue"
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
+/area/medical/autosleever
+	name = "\improper Automated Resleever"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	icon_state = "blue"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+
 //
 // Rooftops-----------------------------------------------------------------------
 //

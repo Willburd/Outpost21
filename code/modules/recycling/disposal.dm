@@ -1397,6 +1397,10 @@
 			for(var/obj/item/weapon/card/id in H)
 				detectedtag = "corpse" // send these to medical body disposal as well
 				break
+			for(var/obj/item/device/pda/P in H)
+				if(!isnull(P.id))
+					detectedtag = "corpse" // send these to medical body disposal as well
+					break
 	// outpost 21 edit end
 	var/nextdir = nextdir(H.dir, detectedtag)
 	H.set_dir(nextdir)

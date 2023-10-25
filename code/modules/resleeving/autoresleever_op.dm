@@ -149,10 +149,10 @@
 		new_character.add_modifier(/datum/modifier/resleeving_sickness, sickness_duration)
 
 	// intentionally a bit bad to get resleeved in
-	new_character.adjustOxyLoss( rand(5,25))
-	new_character.adjustBruteLoss( rand(5,10), FALSE)
-	new_character.adjustToxLoss( rand(0,20))
-	new_character.adjustFireLoss( rand(0,12), FALSE)
+	new_character.adjustOxyLoss( rand(5,15))
+	new_character.adjustBruteLoss( rand(1,4), FALSE)
+	new_character.adjustToxLoss( rand(0,10))
+	new_character.adjustFireLoss( rand(0,5), FALSE)
 	new_character.adjustCloneLoss( rand(0,6))
 	new_character.sleeping = rand(4,6)
 

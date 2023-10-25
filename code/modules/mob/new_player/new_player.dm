@@ -588,49 +588,12 @@
 	else
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
 
+	// setup initial body and prefs
+	new_character.syncronize_to_client(client, FALSE, null, mind, TRUE, FALSE)
+	new_character.key = client.key // actually tell the client we are ready
+
 	if(client && client.media)
 		client.media.stop_music() // MAD JAMS cant last forever yo
-
-	if(mind)
-		mind.active = 0					//we wish to transfer the key manually
-		// VOREStation edit to disable the destructive forced renaming for our responsible whitelist clowns.
-		//if(mind.assigned_role == "Clown")				//give them a clownname if they are a clown
-		//	new_character.real_name = pick(clown_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
-		//	new_character.rename_self("clown")
-		mind.original = new_character
-		// VOREStation
-		mind.loaded_from_ckey = client.ckey
-		mind.loaded_from_slot = client.prefs.default_slot
-		// VOREStation
-		//mind.traits = client.prefs.traits.Copy() // VOREStation conflict
-		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
-
-	new_character.name = real_name
-	new_character.dna.ready_dna(new_character)
-	new_character.dna.b_type = client.prefs.b_type
-	new_character.sync_organ_dna()
-
-	// outpost 21 edit begin - restored old disabilities, and gene flags
-	new_character.sync_dna_block_diseases_from_client_setup(client);
-	// outpost 21 edit end
-
-	for(var/lang in client.prefs.alternate_languages)
-		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language(lang)
-	for(var/key in client.prefs.language_custom_keys)
-		if(client.prefs.language_custom_keys[key])
-			var/datum/language/keylang = GLOB.all_languages[client.prefs.language_custom_keys[key]]
-			if(keylang)
-				new_character.language_keys[key] = keylang
-
-	// Do the initial caching of the player's body icons.
-	new_character.force_update_limbs()
-	new_character.update_icons_body()
-	new_character.update_transform() //VOREStation Edit
-
-	new_character.key = key		//Manually transfer the key to log them in
 
 	return new_character
 
@@ -645,42 +608,6 @@
 
 /mob/new_player/Move()
 	return 0
-
-/mob/living/carbon/human/proc/sync_dna_block_diseases_from_client_setup(var/client/cli) // this is where bad code is born
-	// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-	if(cli.prefs.sdisabilities & BLIND)
-		dna.SetSEState(BLINDBLOCK,1,1)
-		sdisabilities |= BLIND
-
-	if(cli.prefs.sdisabilities & DEAF)
-		dna.SetSEState(DEAFBLOCK,1,1)
-		sdisabilities |= DEAF
-
-	if(cli.prefs.disabilities & NEARSIGHTED)
-		dna.SetSEState(GLASSESBLOCK,1,1)
-		disabilities |= NEARSIGHTED
-
-	if(cli.prefs.disabilities & EPILEPSY)
-		dna.SetSEState(EPILEPSYBLOCK,1,1)
-		disabilities |= EPILEPSY
-
-	if(cli.prefs.disabilities & COUGHING)
-		dna.SetSEState(COUGHBLOCK,1,1)
-		disabilities |= COUGHING
-
-	if(cli.prefs.disabilities & TOURETTES)
-		dna.SetSEState(TWITCHBLOCK,1,1)
-		disabilities |= TOURETTES
-
-	if(cli.prefs.disabilities & NERVOUS)
-		dna.SetSEState(NERVOUSBLOCK,1,1)
-		disabilities |= NERVOUS
-
-	if(cli.prefs.disabilities & VERTIGO)
-		dna.SetSEState(VERTIGOBLOCK,1,1)
-		disabilities |= VERTIGO
-
-	dna.UpdateSE()
 
 /mob/new_player/proc/close_spawn_windows()
 

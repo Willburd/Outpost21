@@ -455,11 +455,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//For logging later
 	var/admin = key_name_admin(src)
-	var/player_key = picked_client.key
-	//VOREStation Add - Needed for persistence
-	var/picked_ckey = picked_client.ckey
-	var/picked_slot = picked_client.prefs.default_slot
-	//VOREStation Add End
 
 	var/mob/living/carbon/human/new_character
 	var/spawnloc
@@ -506,58 +501,18 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Write the appearance and whatnot out to the character
 	picked_client.prefs.copy_to(new_character)
-	if(new_character.dna)
-		new_character.dna.ResetUIFrom(new_character)
-		new_character.sync_organ_dna()
-		// outpost 21 edit begin - sync diseases on respawn
-		new_character.sync_dna_block_diseases_from_client_setup(picked_client);
-		// outpost 21 edit end
-
-	if(inhabit)
-		new_character.key = player_key
-		//Were they any particular special role? If so, copy.
-		if(new_character.mind)
-			var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
-			if(antag_data)
-				antag_data.add_antagonist(new_character.mind)
-				antag_data.place_mob(new_character)
-
-	//VOREStation Add - Required for persistence
-	if(new_character.mind)
-		new_character.mind.loaded_from_ckey = picked_ckey
-		new_character.mind.loaded_from_slot = picked_slot
-	//VOREStation Add End
-
-	for(var/lang in picked_client.prefs.alternate_languages)
-		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language(lang)
-
-	//If desired, apply equipment.
-	if(equipment)
-		if(charjob)
-			job_master.EquipRank(new_character, charjob, 1)
-			if(new_character.mind)
-				new_character.mind.assigned_role = charjob
-				new_character.mind.role_alt_title = job_master.GetPlayerAltTitle(new_character, charjob)
-		//equip_custom_items(new_character)	//VOREStation Removal
+	new_character.syncronize_to_client(picked_client, equipment, charjob, null, FALSE, inhabit)
 
 	//If desired, add records.
 	if(records)
 		data_core.manifest_inject(new_character)
 
-	//A redraw for good measure
-	new_character.regenerate_icons()
-
-	new_character.update_transform() //VOREStation Edit
-
 	//If we're announcing their arrival
 	if(announce)
 		AnnounceArrival(new_character, new_character.mind.assigned_role, "Common", new_character.z)
 
-	log_admin("[admin] has spawned [player_key]'s character [new_character.real_name].")
-	message_admins("[admin] has spawned [player_key]'s character [new_character.real_name].", 1)
+	log_admin("[admin] has spawned [picked_client.key]'s character [new_character.real_name].")
+	message_admins("[admin] has spawned [picked_client.key]'s character [new_character.real_name].", 1)
 
 
 

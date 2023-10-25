@@ -551,14 +551,41 @@
 		log_and_message_admins("was resleeve-wiped from their body.",occupant.mind)
 		occupant.ghostize()
 
-	//Attach as much stuff as possible to the mob.
-	for(var/datum/language/L in MR.languages)
-		occupant.add_language(L.name)
-	MR.mind_ref.active = 1 //Well, it's about to be.
-	MR.mind_ref.transfer_to(occupant) //Does mind+ckey+client.
-	occupant.identifying_gender = MR.id_gender
-	occupant.ooc_notes = MR.mind_oocnotes
-	occupant.apply_vore_prefs() //Cheap hack for now to give them SOME bellies.
+	if(!occupant.original_player)
+		// If it was a custom sleeve (not owned by anyone), update namification sequences
+		// this is hacky.
+		occupant.real_name = occupant.mind.name
+		occupant.name = occupant.real_name
+		occupant.dna.real_name = occupant.real_name
+
+		//Attach as much stuff as possible to the mob.
+		for(var/datum/language/L in MR.languages)
+			occupant.add_language(L.name)
+		MR.mind_ref.active = 1 //Well, it's about to be.
+		MR.mind_ref.transfer_to(occupant) //Does mind+ckey+client.
+		occupant.identifying_gender = MR.id_gender
+		occupant.ooc_notes = MR.mind_oocnotes
+		occupant.apply_vore_prefs() //Cheap hack for now to give them SOME bellies.
+
+	else
+		var/findclient = null
+		for(var/client/C in GLOB.clients)
+			if(C.ckey == MR.ckey)
+				findclient = C
+				break
+
+		if(!isnull(findclient))
+			// setup initial body and prefs
+			MR.mind_ref.active = 1 //Well, it's about to be.
+			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, FALSE, TRUE)
+			occupant.key = MR.ckey // actually tell the client we are ready
+		else
+			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")
+			return 0
+
+	// MASSIVE TODO - Currently the client has way too much control over what is actually configured in BODY RECORDS. For some reason it was made to be like this
+	// It will require a lot of fixing to unbreak this. Right now you cna load another character to get their disabilities, those should be DNA controlled in body record.
+
 	if(MR.one_time)
 		var/how_long = round((world.time - MR.last_update)/10/60)
 		to_chat(occupant, "<span class='danger'>Your mind backup was a 'one-time' backup. \
@@ -574,24 +601,18 @@
 		nif.durability = MR.nif_durability //Restore backed up durability after restoring the softs.
 	*/
 
-	// If it was a custom sleeve (not owned by anyone), update namification sequences
-	if(!occupant.original_player)
-		occupant.real_name = occupant.mind.name
-		occupant.name = occupant.real_name
-		occupant.dna.real_name = occupant.real_name
-
 	/* //Give them a backup implant
 	var/obj/item/weapon/implant/backup/new_imp = new()
 	if(new_imp.handle_implant(occupant, BP_HEAD))
 		new_imp.post_implant(occupant)
-*/    // OP21 edit, else farming implants- Ignus
+	*/    // OP21 edit, else farming implants- Ignus
 
 	//Inform them and make them a little dizzy.
 	if(confuse_amount + blur_amount <= 16)
 		to_chat(occupant, "<span class='notice'>Your eyes open as you wake up in the tube, remembering only your last scan. Your new body feels comfortable, however.</span>")
 	else
 		to_chat(occupant, "<span class='warning'>Your eyes wince at the light as you try to remember what happened, weren't you just in the lobby? It's disorienting.</span>")
-// Small edits to the flavor text. - Ignus
+	// Small edits to the flavor text. - Ignus
 
 	occupant.confused = max(occupant.confused, confuse_amount)									// Apply immedeate effects
 	occupant.eye_blurry = max(occupant.eye_blurry, blur_amount)

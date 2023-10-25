@@ -910,6 +910,9 @@
 		if(dna)
 			dna.ResetUIFrom(src)
 			sync_organ_dna()
+			// outpost 21 edit begin - sync diseases on respawn
+			sync_dna_block_diseases_from_client_setup(client);
+			// outpost 21 edit end
 	// end vorestation addition
 
 	for (var/ID in virus2)
@@ -1668,3 +1671,108 @@
 
 /mob/living/carbon/human/get_mob_riding_slots()
 	return list(back, head, wear_suit)
+
+/mob/living/carbon/human/proc/syncronize_to_client(var/client/client, var/loadequipment, var/charjob, var/datum/mind/mindinject, var/newplayer, var/antagsetup)
+	// WHY WAS THIS NEVER DONE BEFORE, STOP COPYPASTING AND START THINKING
+
+	// link mind stuff
+	if(newplayer)
+		// new_player handled this weirdly, so I'm letting it be a snowflake still
+		mindinject.active = FALSE
+		mindinject.original = src
+		mindinject.transfer_to(src)
+
+		// then dna
+		name = real_name
+		dna.ready_dna(src)
+		dna.b_type = client.prefs.b_type
+		sync_organ_dna()
+		sync_dna_block_diseases_from_client_setup(client);
+	else
+		// standard link
+		if(!isnull(mindinject))
+			mindinject.transfer_to(src)
+		else
+			key = client.key // alright lets just assume we're force linking anyway, because that's why the code did before
+
+		if(dna)
+			// dna setup
+			dna.ResetUIFrom(src)
+			sync_organ_dna()
+			sync_dna_block_diseases_from_client_setup(client);
+
+	// persistance links and antag setup
+	if(mind)
+		mind.loaded_from_ckey = client.ckey
+		mind.loaded_from_slot = client.prefs.default_slot
+
+		if(antagsetup)
+			var/datum/antagonist/antag_data = get_antag_data(mind.special_role)
+			if(antag_data)
+				antag_data.add_antagonist(mind)
+				antag_data.place_mob(src)
+
+	// setup languages
+	for(var/lang in client.prefs.alternate_languages)
+		var/datum/language/chosen_language = GLOB.all_languages[lang]
+		if(chosen_language)
+			if(is_lang_whitelisted(src,chosen_language) || (species && (chosen_language.name in species.secondary_langs)))
+				add_language(lang)
+	for(var/key in client.prefs.language_custom_keys)
+		if(client.prefs.language_custom_keys[key])
+			var/datum/language/keylang = GLOB.all_languages[client.prefs.language_custom_keys[key]]
+			if(keylang)
+				language_keys[key] = keylang
+
+	//If desired, apply equipment.
+	if(loadequipment)
+		if(charjob)
+			job_master.EquipRank(src, charjob, 1)
+			if(mind)
+				mind.assigned_role = charjob
+				mind.role_alt_title = job_master.GetPlayerAltTitle(src, charjob)
+		//equip_custom_items(src)	//VOREStation Removal
+
+	// Apply belly configs
+	apply_vore_prefs()
+
+	// Do the initial caching of the player's body icons.
+	force_update_limbs()
+	update_icons_body()
+	update_transform() //VOREStation Edit
+
+/mob/living/carbon/human/proc/sync_dna_block_diseases_from_client_setup(var/client/cli)
+	// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
+	if(cli.prefs.sdisabilities & BLIND)
+		dna.SetSEState(BLINDBLOCK,1,1)
+		sdisabilities |= BLIND
+
+	if(cli.prefs.sdisabilities & DEAF)
+		dna.SetSEState(DEAFBLOCK,1,1)
+		sdisabilities |= DEAF
+
+	if(cli.prefs.disabilities & NEARSIGHTED)
+		dna.SetSEState(GLASSESBLOCK,1,1)
+		disabilities |= NEARSIGHTED
+
+	if(cli.prefs.disabilities & EPILEPSY)
+		dna.SetSEState(EPILEPSYBLOCK,1,1)
+		disabilities |= EPILEPSY
+
+	if(cli.prefs.disabilities & COUGHING)
+		dna.SetSEState(COUGHBLOCK,1,1)
+		disabilities |= COUGHING
+
+	if(cli.prefs.disabilities & TOURETTES)
+		dna.SetSEState(TWITCHBLOCK,1,1)
+		disabilities |= TOURETTES
+
+	if(cli.prefs.disabilities & NERVOUS)
+		dna.SetSEState(NERVOUSBLOCK,1,1)
+		disabilities |= NERVOUS
+
+	if(cli.prefs.disabilities & VERTIGO)
+		dna.SetSEState(VERTIGOBLOCK,1,1)
+		disabilities |= VERTIGO
+
+	dna.UpdateSE()

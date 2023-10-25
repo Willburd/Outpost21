@@ -76,11 +76,6 @@
 			ghost = ghost_client.mob
 			break
 
-	//For logging later
-	var/player_key = ghost_client.key
-	var/picked_ckey = ghost_client.ckey
-	var/picked_slot = ghost_client.prefs.default_slot
-
 	//Did we actually get a loc to spawn them?
 	if(isnull(releaseturf))
 		releaseturf = get_turf(src)
@@ -104,6 +99,12 @@
 		if((world.time - recordM.last_notification) < 30 MINUTES)
 			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
+
+	// Write the appearance and whatnot out to the character
+	ghost_client.prefs.copy_to(new_character)
+	new_character.syncronize_to_client(ghost_client, FALSE, null, ghost.mind, FALSE, TRUE)
+
+	// validate if this is legal
 	if(new_character.isSynthetic())
 		to_chat(ghost, "Unable to produce synthetic bodies.")
 		src.visible_message("[src] flashes 'Unable to produce synthetic bodies!', and lets out a loud incorrect sounding beep!")
@@ -112,14 +113,6 @@
 		if((world.time - recordM.last_notification) < 30 MINUTES)
 			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
-
-	// Write the appearance and whatnot out to the character
-	ghost_client.prefs.copy_to(new_character)
-	if(new_character.dna)
-		new_character.dna.ResetUIFrom(new_character)
-		new_character.sync_organ_dna()
-
-	// validate if this is legal
 	if(new_character.name != D.registered_name)
 		to_chat(ghost, "Character slot loaded did not match character being resleeved. Could not resleeve!")
 		src.visible_message("[src] flashes 'Database desyncronization detected! Was unable to resleeve [D.registered_name]. Potential ethical violation detected!', and lets out a loud incorrect sounding beep!")
@@ -129,34 +122,8 @@
 			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
 
-	// Finish off setup!
-	if(ghost.mind)
-		ghost.mind.transfer_to(new_character)
-	new_character.key = player_key
-
-	// Were they any particular special role? If so, copy.
-	if(new_character.mind)
-		new_character.mind.loaded_from_ckey = picked_ckey
-		new_character.mind.loaded_from_slot = picked_slot
-		var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
-		if(antag_data)
-			antag_data.add_antagonist(new_character.mind)
-			antag_data.place_mob(new_character)
-
-	for(var/lang in ghost_client.prefs.alternate_languages)
-		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language(lang)
-	for(var/key in ghost_client.prefs.language_custom_keys)
-		if(ghost_client.prefs.language_custom_keys[key])
-			var/datum/language/keylang = GLOB.all_languages[ghost_client.prefs.language_custom_keys[key]]
-			if(keylang)
-				new_character.language_keys[key] = keylang
-
-	//A redraw for good measure
-	new_character.regenerate_icons()
-	new_character.update_transform()
+	// wait till now to login the character, otherwise we'll get silly flickers from the above code
+	new_character.key = ghost_client.key // actually tell the client we are ready
 
 	var/confuse_amount = rand(8,26)
 	var/blur_amount = rand(8,56)

@@ -131,46 +131,14 @@ Please do not abuse this ability.
 
 /proc/inbelly_spawn(client/prey, mob/living/pred, obj/belly/target_belly, var/absorbed = FALSE)
 	// All this is basically admin late spawn-in, but skipping all parts related to records and equipment and with predteremined location
-	var/player_key = prey.key
-	var/picked_ckey = prey.ckey
-	var/picked_slot = prey.prefs.default_slot
 	var/mob/living/carbon/human/new_character
-
 	new_character = new(null)		// Spawn them in nullspace first. Can't have "Defaultname Defaultnameson slides into your Stomach".
-
 	if(!new_character)
 		return
 
+	// setup initial body and prefs
 	prey.prefs.copy_to(new_character)
-	if(new_character.dna)
-		new_character.dna.ResetUIFrom(new_character)
-		new_character.sync_organ_dna()
-	new_character.key = player_key
-	if(new_character.mind)
-		var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
-		if(antag_data)
-			antag_data.add_antagonist(new_character.mind)
-			antag_data.place_mob(new_character)
-
-	if(new_character.mind)
-		new_character.mind.loaded_from_ckey = picked_ckey
-		new_character.mind.loaded_from_slot = picked_slot
-
-	for(var/lang in prey.prefs.alternate_languages)
-		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(prey,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
-				new_character.add_language(lang)
-	for(var/key in prey.prefs.language_custom_keys)
-		if(prey.prefs.language_custom_keys[key])
-			var/datum/language/keylang = GLOB.all_languages[prey.prefs.language_custom_keys[key]]
-			if(keylang)
-				new_character.language_keys[key] = keylang
-
-	new_character.regenerate_icons()
-
-	new_character.update_transform()
-
+	new_character.syncronize_to_client(prey, FALSE, null, null, FALSE,TRUE)
 	new_character.forceMove(target_belly)		// Now that they're all setup and configured, send them to their destination.
 
 	if(absorbed)

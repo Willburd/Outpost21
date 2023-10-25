@@ -73,6 +73,9 @@
 		if(istype(A, /obj/item/weapon/card/id))
 			updatesleever()
 			processcontents()
+		else if(istype(A, /obj/item/device/pda))
+			updatesleever()
+			processcontents()
 		return
 	if(!ismob(A))
 		return

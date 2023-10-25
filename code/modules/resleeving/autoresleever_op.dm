@@ -150,10 +150,10 @@
 
 	// intentionally a bit bad to get resleeved in
 	new_character.adjustOxyLoss( rand(5,25))
-	new_character.adjustBruteLoss( rand(5,15), FALSE)
+	new_character.adjustBruteLoss( rand(5,10), FALSE)
 	new_character.adjustToxLoss( rand(0,20))
-	new_character.adjustFireLoss( rand(0,20), FALSE)
-	new_character.adjustCloneLoss( rand(4,12))
+	new_character.adjustFireLoss( rand(0,12), FALSE)
+	new_character.adjustCloneLoss( rand(0,6))
 	new_character.sleeping = rand(4,6)
 
 	log_admin("[new_character.ckey]'s character [new_character.real_name] has been auto-resleeved.")

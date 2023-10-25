@@ -38,7 +38,7 @@
 	//Name matching is ugly but mind doesn't persist to look at.
 	var/datum/transcore_db/db = SStranscore.db_by_mind_name(D.registered_name)
 	if(isnull(db))
-		src.visible_message("[src] flashes 'No records detected!', and lets out a loud incorrect sounding beep!")
+		src.visible_message("[src] flashes 'No records detected for [D.registered_name]!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		return
 
@@ -46,18 +46,22 @@
 	var/datum/transhuman/body_record/recordB = db.body_scans[D.registered_name]
 
 	if(isnull(recordM))
-		src.visible_message("[src] flashes 'No mind records detected!', and lets out a loud incorrect sounding beep!")
+		src.visible_message("[src] flashes 'No mind records detected for [D.registered_name]!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved, no records loaded or records are corrupted. Informing [using_map.dock_name].", "TransCore Oversight", "Medical")
 		return
 
 	if(isnull(recordB) || isnull(recordB.mydna) || isnull(recordB.mydna.dna))
-		src.visible_message("[src] flashes 'No body records detected, or dna was corrupted!', and lets out a loud incorrect sounding beep!")
+		src.visible_message("[src] flashes 'No body records for [D.registered_name], or dna was corrupted!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved, no records loaded or records are corrupted. Informing [using_map.dock_name].", "TransCore Oversight", "Medical")
 		return
 
 	var/datum/species/chosen_species = GLOB.all_species[recordB.mydna.dna.species]
 	if(chosen_species.flags && NO_SCAN) // Sanity. Prevents species like Xenochimera, Proteans, etc from rejoining the round via resleeve, as they should have their own methods of doing so already, as agreed to when you whitelist as them.
-		src.visible_message("[src] flashes 'Invalid species!', and lets out a loud incorrect sounding beep!")
+		src.visible_message("[src] flashes 'Could not resleeve [D.registered_name]. Invalid species!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		if((world.time - recordM.last_notification) < 30 MINUTES)
 			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")

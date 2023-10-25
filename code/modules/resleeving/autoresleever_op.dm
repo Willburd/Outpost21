@@ -59,6 +59,8 @@
 	if(chosen_species.flags && NO_SCAN) // Sanity. Prevents species like Xenochimera, Proteans, etc from rejoining the round via resleeve, as they should have their own methods of doing so already, as agreed to when you whitelist as them.
 		src.visible_message("[src] flashes 'Invalid species!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
 
 	// solve the ghost from mind refs
@@ -82,35 +84,53 @@
 	if(!spawnloc)
 		return
 
-	if(tgui_alert(ghost, "Autoresleever has received your ID for processing. Would you like to be resleeved?", "Resleeve", list("No","Yes")) == "No")
+	if(tgui_alert(ghost, "Autoresleever has received the ID of '[D.registered_name]' for processing. Would you like to be resleeved? Remember to have that character loaded, or it will fail! This is your only chance to change slots!", "Resleeve", list("No","Yes")) == "No")
 		if(istype(ghost,/mob/living))
-			src.visible_message("[src] flashes 'Was unable to be resleeved. Potential ethical violation detected!', and lets out a loud incorrect sounding beep!")
+			src.visible_message("[src] flashes 'Was unable to resleeve [D.registered_name]. Potential ethical violation detected!', and lets out a loud incorrect sounding beep!")
 			playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+			if((world.time - recordM.last_notification) < 30 MINUTES)
+				global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system. Resleeving may potentially be in progress at [using_map.dock_name]. Avoiding ethical violation.", "TransCore Oversight", "Medical")
 		return
 
 	//We were able to spawn them, right?
 	var/mob/living/carbon/human/new_character = new(src)
 	if(!new_character)
 		to_chat(ghost, "Something went wrong and spawning failed.")
+		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
 	if(new_character.isSynthetic())
 		to_chat(ghost, "Unable to produce synthetic bodies.")
 		src.visible_message("[src] flashes 'Unable to produce synthetic bodies!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		new_character.Destroy()
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
 		return
 
-	//Write the appearance and whatnot out to the character
+	// Write the appearance and whatnot out to the character
 	ghost_client.prefs.copy_to(new_character)
 	if(new_character.dna)
 		new_character.dna.ResetUIFrom(new_character)
 		new_character.sync_organ_dna()
+
+	// validate if this is legal
+	if(new_character.name != D.registered_name)
+		to_chat(ghost, "Character slot loaded did not match character being resleeved. Could not resleeve!")
+		src.visible_message("[src] flashes 'Database desyncronization detected! Was unable to resleeve [D.registered_name]. Potential ethical violation detected!', and lets out a loud incorrect sounding beep!")
+		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		new_character.Destroy()
+		if((world.time - recordM.last_notification) < 30 MINUTES)
+			global_announcer.autosay("[D.registered_name] was unable to be resleeved by the automatic resleeving system.", "TransCore Oversight", "Medical")
+		return
+
+	// Finish off setup!
 	if(ghost.mind)
 		ghost.mind.transfer_to(new_character)
-
 	new_character.key = player_key
 
-	//Were they any particular special role? If so, copy.
+	// Were they any particular special role? If so, copy.
 	if(new_character.mind)
 		new_character.mind.loaded_from_ckey = picked_ckey
 		new_character.mind.loaded_from_slot = picked_slot
@@ -149,10 +169,10 @@
 		new_character.add_modifier(/datum/modifier/resleeving_sickness, sickness_duration)
 
 	// intentionally a bit bad to get resleeved in
-	new_character.adjustOxyLoss( rand(5,15))
-	new_character.adjustBruteLoss( rand(1,4), FALSE)
-	new_character.adjustToxLoss( rand(0,10))
-	new_character.adjustFireLoss( rand(0,5), FALSE)
+	new_character.adjustOxyLoss( rand(5,25))
+	new_character.adjustBruteLoss( rand(1,8), FALSE)
+	new_character.adjustToxLoss( rand(0,12))
+	new_character.adjustFireLoss( rand(0,8), FALSE)
 	new_character.adjustCloneLoss( rand(0,6))
 	new_character.sleeping = rand(4,6)
 
@@ -175,4 +195,4 @@
 
 	spawn(5 SECONDS)
 		new_character.forceMove(spawnloc)
-		new_character.throw_at( get_edge_target_turf(src.loc, throw_dir), rand(1,2),5)
+		new_character.throw_at( get_edge_target_turf(src.loc, throw_dir), 1,5)

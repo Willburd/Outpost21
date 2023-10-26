@@ -680,7 +680,7 @@
 			for(var/mob/living/H in src)
 				if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
 					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
-					noiseprob = 80
+					noiseprob = 30
 
 		var/obj/structure/disposalpipe/curr = loc
 		last = curr
@@ -693,7 +693,7 @@
 
 		// outpost 21 edit begin - funny vents
 		// make noises to spook people lots, the teshari love it!
-		if(prob(noiseprob))
+		if(prob(40) && prob(noiseprob)) // double probability helps push this down in rarity
 			var/turf/T = get_turf(src)
 			playsound(T, 'sound/machines/ventcrawl.ogg', 50, 1, -3)
 			var/message = pick(

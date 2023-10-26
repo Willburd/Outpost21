@@ -1414,6 +1414,8 @@
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in organs)
 		return 0
+	if(isnull(Target) && istype( src.loc,/obj/structure/disposalholder)) // outpost 21 edit - dropping anything while traveling in disposals, keeps it in the same disposal packet
+		return remove_from_mob(W, src.loc)
 	return ..()
 
 /mob/living/carbon/human/reset_view(atom/A, update_hud = 1)
@@ -1686,10 +1688,10 @@
 		name = real_name
 		dna.ready_dna(src)
 		dna.b_type = client.prefs.b_type
-		if(isnull(forceddna))
-			sync_dna_block_disabilities_from_client_setup(client);
-		else
+		if(!isnull(forceddna))
 			dna = forceddna.Clone()
+		else
+			sync_dna_block_disabilities_from_client_setup(client);
 		sync_organ_dna()
 	else
 		// standard link
@@ -1698,14 +1700,13 @@
 		else
 			key = client.key // alright lets just assume we're force linking anyway, because that's why the code did before
 
-		if(dna)
-			// dna setup
-			if(isnull(forceddna))
-				dna.ResetUIFrom(src)
-				sync_dna_block_disabilities_from_client_setup(client);
-			else
-				dna = forceddna.Clone()
-			sync_organ_dna()
+		// dna setup
+		if(!isnull(forceddna))
+			dna = forceddna.Clone()
+		else
+			dna.ResetUIFrom(src)
+			sync_dna_block_disabilities_from_client_setup(client);
+		sync_organ_dna()
 
 
 	// persistance links and antag setup

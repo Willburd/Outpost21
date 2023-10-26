@@ -794,6 +794,8 @@
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
 		return 0
+	if(isnull(Target) && istype( src.loc,/obj/structure/disposalholder)) // outpost 21 edit - dropping anything while traveling in disposals, keeps it in the same disposal packet
+		return remove_from_mob(W, src.loc)
 	return ..()
 
 /mob/living/touch_map_edge()

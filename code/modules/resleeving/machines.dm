@@ -577,14 +577,11 @@
 		if(!isnull(findclient))
 			// setup initial body and prefs
 			MR.mind_ref.active = 1 //Well, it's about to be.
-			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, occupant.dna, TRUE)
+			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, FALSE, occupant.dna, TRUE)
 			occupant.key = MR.ckey // actually tell the client we are ready
 		else
 			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")
 			return 0
-
-	// MASSIVE TODO - Currently the client has way too much control over what is actually configured in BODY RECORDS. For some reason it was made to be like this
-	// It will require a lot of fixing to unbreak this. Right now you cna load another character to get their disabilities, those should be DNA controlled in body record.
 
 	if(MR.one_time)
 		var/how_long = round((world.time - MR.last_update)/10/60)

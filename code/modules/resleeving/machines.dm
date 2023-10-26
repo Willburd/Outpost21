@@ -29,9 +29,12 @@
 	// Remove biomass when the cloning is started, rather than when the guy pops out
 	remove_biomass(CLONE_BIOMASS)
 
+
 	//Get the DNA and generate a new mob
 	var/datum/dna2/record/R = current_project.mydna
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
+	var/mob/living/carbon/human/H = new(src, R.dna.species)
+	occupant = H
+
 	if(current_project.locked)
 		H.resleeve_lock = current_project.ckey
 
@@ -69,39 +72,37 @@
 		else if(status == 3) //Digital organ
 			I.digitize()
 
-	occupant = H
-
 	//Set the name or generate one
 	if(!R.dna.real_name)
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 
 	//Apply DNA
-	H.dna = R.dna.Clone()
 	H.original_player = current_project.ckey
+	H.dna = R.dna.Clone()
+	H.UpdateAppearance() //Update appearance
+	H.sync_organ_dna()
 
-	//Apply genetic modifiers
-	for(var/modifier_type in R.genetic_modifiers)
-		H.add_modifier(modifier_type)
+	// update icons
+	H.regenerate_icons()
 
 	//Apply damage
 	H.adjustCloneLoss(H.getMaxHealth()*1.5)
 	H.Paralyse(4)
 	H.updatehealth()
 
-	//Update appearance, remake icons
-	H.UpdateAppearance()
-	H.sync_organ_dna()
-	H.regenerate_icons()
-
 	//Basically all the VORE stuff
 	H.ooc_notes = current_project.body_oocnotes
-	H.flavor_texts = current_project.mydna.flavor.Copy()
+	H.flavor_texts = R.flavor.Copy()
 	H.resize(current_project.sizemult, FALSE)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
 	if(current_project.speciesname)
 		H.custom_species = current_project.speciesname
+
+	//Apply genetic modifiers
+	for(var/modifier_type in R.genetic_modifiers)
+		H.add_modifier(modifier_type)
 
 	//Suiciding var
 	H.suiciding = 0
@@ -302,18 +303,18 @@
 	H.real_name = R.dna.real_name
 
 	//Apply DNA
-	H.dna = R.dna.Clone()
 	H.original_player = current_project.ckey
+	H.dna = R.dna.Clone()
+	H.UpdateAppearance() //Update appearance
+	H.sync_organ_dna()
+
+	// update icons
+	H.regenerate_icons()
 
 	//Apply damage
 	H.adjustBruteLoss(brute_value)
 	H.adjustFireLoss(burn_value)
 	H.updatehealth()
-
-	//Update appearance, remake icons
-	H.UpdateAppearance()
-	H.sync_organ_dna()
-	H.regenerate_icons()
 
 	//Basically all the VORE stuff
 	H.ooc_notes = current_project.body_oocnotes
@@ -331,7 +332,6 @@
 	H.mind = null
 
 	//Plonk them here.
-	H.regenerate_icons()
 	H.loc = get_turf(src)
 
 	//Machine specific stuff at the end
@@ -577,7 +577,7 @@
 		if(!isnull(findclient))
 			// setup initial body and prefs
 			MR.mind_ref.active = 1 //Well, it's about to be.
-			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, FALSE, TRUE)
+			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, occupant.dna, TRUE)
 			occupant.key = MR.ckey // actually tell the client we are ready
 		else
 			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")

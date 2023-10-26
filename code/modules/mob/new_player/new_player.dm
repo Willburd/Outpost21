@@ -589,7 +589,7 @@
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
 
 	// setup initial body and prefs
-	new_character.syncronize_to_client(client, FALSE, null, mind, TRUE, FALSE)
+	new_character.syncronize_to_client(client, FALSE, null, mind, TRUE, null, FALSE)
 	new_character.key = client.key // actually tell the client we are ready
 
 	if(client && client.media)

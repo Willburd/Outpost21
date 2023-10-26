@@ -28,6 +28,7 @@
 				return // They might have been deleted during the wait
 			if(pref.resleeve_scan)
 				var/datum/transhuman/body_record/BR = new()
+				character.sync_dna_block_disabilities_from_client_setup(character.client)
 				BR.init_from_mob(character, pref.resleeve_scan, pref.resleeve_lock)
 			if(pref.resleeve_lock)
 				character.resleeve_lock = character.ckey

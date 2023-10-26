@@ -132,7 +132,7 @@
 		H.dna = new /datum/dna()
 		H.dna.real_name = H.real_name
 	else
-		H.dna = R.dna
+		H.dna = R.dna.Clone()
 	H.UpdateAppearance()
 	H.sync_organ_dna()
 	if(heal_level < 60)
@@ -167,6 +167,7 @@
 
 	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
+
 	attempting = 0
 	return 1
 

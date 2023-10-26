@@ -911,7 +911,7 @@
 			dna.ResetUIFrom(src)
 			sync_organ_dna()
 			// outpost 21 edit begin - sync diseases on respawn
-			sync_dna_block_diseases_from_client_setup(client);
+			sync_dna_block_disabilities_from_client_setup(client);
 			// outpost 21 edit end
 	// end vorestation addition
 
@@ -1672,7 +1672,7 @@
 /mob/living/carbon/human/get_mob_riding_slots()
 	return list(back, head, wear_suit)
 
-/mob/living/carbon/human/proc/syncronize_to_client(var/client/client, var/loadequipment, var/charjob, var/datum/mind/mindinject, var/newplayer, var/antagsetup)
+/mob/living/carbon/human/proc/syncronize_to_client(var/client/client, var/loadequipment, var/charjob, var/datum/mind/mindinject, var/newplayer, var/datum/dna/forceddna, var/antagsetup)
 	// WHY WAS THIS NEVER DONE BEFORE, STOP COPYPASTING AND START THINKING
 
 	// link mind stuff
@@ -1686,8 +1686,11 @@
 		name = real_name
 		dna.ready_dna(src)
 		dna.b_type = client.prefs.b_type
+		if(isnull(forceddna))
+			sync_dna_block_disabilities_from_client_setup(client);
+		else
+			dna = forceddna.Clone()
 		sync_organ_dna()
-		sync_dna_block_diseases_from_client_setup(client);
 	else
 		// standard link
 		if(!isnull(mindinject))
@@ -1697,9 +1700,13 @@
 
 		if(dna)
 			// dna setup
-			dna.ResetUIFrom(src)
+			if(isnull(forceddna))
+				dna.ResetUIFrom(src)
+				sync_dna_block_disabilities_from_client_setup(client);
+			else
+				dna = forceddna.Clone()
 			sync_organ_dna()
-			sync_dna_block_diseases_from_client_setup(client);
+
 
 	// persistance links and antag setup
 	if(mind)
@@ -1741,7 +1748,7 @@
 	update_icons_body()
 	update_transform() //VOREStation Edit
 
-/mob/living/carbon/human/proc/sync_dna_block_diseases_from_client_setup(var/client/cli)
+/mob/living/carbon/human/proc/sync_dna_block_disabilities_from_client_setup(var/client/cli)
 	// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 	if(cli.prefs.sdisabilities & BLIND)
 		dna.SetSEState(BLINDBLOCK,1,1)

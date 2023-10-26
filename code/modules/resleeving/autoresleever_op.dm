@@ -23,7 +23,7 @@
 /obj/machinery/transhuman/autoresleever/attack_ghost(mob/observer/dead/user as mob)
 	return
 
-/obj/machinery/transhuman/autoresleever/attackby( var/item/O, var/mob/user)
+/obj/machinery/transhuman/autoresleever/attackby( var/obj/item/O, var/mob/user)
 	return
 
 /obj/machinery/transhuman/autoresleever/proc/autoresleeve(var/obj/item/weapon/card/id/D)
@@ -102,7 +102,7 @@
 
 	// Write the appearance and whatnot out to the character
 	ghost_client.prefs.copy_to(new_character)
-	new_character.syncronize_to_client(ghost_client, FALSE, null, ghost.mind, FALSE, TRUE)
+	new_character.syncronize_to_client(ghost_client, FALSE, null, ghost.mind, FALSE, recordB.mydna.dna, TRUE)
 
 	// validate if this is legal
 	if(new_character.isSynthetic())

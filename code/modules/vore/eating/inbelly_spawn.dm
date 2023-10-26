@@ -138,7 +138,7 @@ Please do not abuse this ability.
 
 	// setup initial body and prefs
 	prey.prefs.copy_to(new_character)
-	new_character.syncronize_to_client(prey, FALSE, null, null, FALSE,TRUE)
+	new_character.syncronize_to_client(prey, FALSE, null, null, FALSE, null, TRUE)
 	new_character.forceMove(target_belly)		// Now that they're all setup and configured, send them to their destination.
 
 	if(absorbed)

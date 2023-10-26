@@ -143,7 +143,7 @@
 
 	//Write the appearance and whatnot out to the character
 	ghost_client.prefs.copy_to(new_character)
-	new_character.syncronize_to_client(ghost_client, FALSE, null, null, TRUE)
+	new_character.syncronize_to_client(ghost_client, FALSE, null, null, FALSE, null, TRUE)
 
 	log_admin("[new_character.ckey]'s character [new_character.real_name] has been auto-resleeved.")
 	message_admins("[new_character.ckey]'s character [new_character.real_name] has been auto-resleeved.")

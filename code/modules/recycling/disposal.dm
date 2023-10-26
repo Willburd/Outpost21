@@ -1407,7 +1407,7 @@
 	if(detectedtag == "")
 		if(H.hasmob)
 			for(var/mob/living/L in H)
-				if(!istype(L,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+				if(istype(L,/mob/living/carbon)) // only living carbons count not silicons
 					detectedtag = "corpse"
 					break
 		else

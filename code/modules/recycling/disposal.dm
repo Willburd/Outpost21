@@ -674,10 +674,13 @@
 		sleep(1)		// was 1
 		if(!loc) return // check if we got GC'd
 
+		var/noiseprob = 2
 		if(hasmob && prob(3))
+			noiseprob = 8
 			for(var/mob/living/H in src)
 				if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
 					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
+					noiseprob = 80
 
 		var/obj/structure/disposalpipe/curr = loc
 		last = curr
@@ -687,6 +690,20 @@
 
 		if(!curr)
 			last.expel(src, loc, dir)
+
+		// outpost 21 edit begin - funny vents
+		// make noises to spook people lots, the teshari love it!
+		if(prob(noiseprob))
+			var/turf/T = get_turf(src)
+			playsound(T, 'sound/machines/ventcrawl.ogg', 50, 1, -3)
+			var/message = pick(
+				prob(90);"* clunk *",
+				prob(90);"* thud *",
+				prob(90);"* clatter *",
+				prob(1);"* <span style='font-size:2em'>ඞ</span> *"
+			)
+			T.runechat_message(message)
+		// outpost 21 edit end
 
 		//
 		if(!(count--))

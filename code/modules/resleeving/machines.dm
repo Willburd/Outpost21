@@ -97,8 +97,10 @@
 	H.resize(current_project.sizemult, FALSE)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
+	/* // outpost 21 edit - custom species removal
 	if(current_project.speciesname)
 		H.custom_species = current_project.speciesname
+	*/
 
 	//Apply genetic modifiers
 	for(var/modifier_type in R.genetic_modifiers)
@@ -322,8 +324,10 @@
 	H.resize(current_project.sizemult)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
+	/* // outpost 21 edit - custom species removal
 	if(current_project.speciesname)
 		H.custom_species = current_project.speciesname
+	*/
 
 	//Suiciding var
 	H.suiciding = 0

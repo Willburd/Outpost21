@@ -85,11 +85,14 @@
 
 	var/name_ender = ""
 	if(!((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)))
+		/* outpost 21 edit - custom species removal
 		//VOREStation Add Start
 		if(custom_species)
 			name_ender = ", a <b>[src.custom_species]</b>"
 		else if(looks_synth)
 		//VOREStation Add End
+		*/
+		if(looks_synth)
 			var/use_gender = "a synthetic"
 			if(gender == MALE)
 				use_gender = "an android"

@@ -118,7 +118,7 @@
 
 	//General stuff about them
 	synthetic = M.isSynthetic()
-	speciesname = M.custom_species ? M.custom_species : null
+	speciesname = null // speciesname = M.custom_species ? M.custom_species : null // outpost 21 edit - custom species removal
 	bodygender = M.gender
 	body_oocnotes = M.ooc_notes
 	sizemult = M.size_multiplier

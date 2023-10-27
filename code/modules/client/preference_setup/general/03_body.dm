@@ -70,7 +70,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			continue
 		if(instance.ckeys_allowed && (!client || !(client.ckey in instance.ckeys_allowed)))
 			continue
-		if(instance.species_allowed && (!species || !(species in instance.species_allowed)) && (!client || !check_rights(R_ADMIN | R_EVENT | R_FUN, 0, client)) && (!custom_base || !(custom_base in instance.species_allowed))) //VOREStation Edit: Custom Species
+		if(instance.species_allowed && (!species || !(species in instance.species_allowed)) && (!client || !check_rights(R_ADMIN | R_EVENT | R_FUN, 0, client))) // && (!custom_base || !(custom_base in instance.species_allowed))) //VOREStation Edit: Custom Species // outpost 21 edit - custom species removal
 			continue
 		.[instance.name] = instance
 
@@ -694,7 +694,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if(prev_species != pref.species)
 			if(!(pref.biological_gender in mob_species.genders))
 				pref.set_biological_gender(mob_species.genders[1])
-			pref.custom_species = null //VOREStation Edit - This is cleared on species changes
+			//pref.custom_species = null //VOREStation Edit - This is cleared on species changes // outpost 21 edit - custom species removal
 			//grab one of the valid hair styles for the newly chosen species
 			var/list/valid_hairstyles = pref.get_valid_hairstyles()
 

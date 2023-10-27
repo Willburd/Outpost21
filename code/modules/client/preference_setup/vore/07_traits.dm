@@ -6,8 +6,10 @@
 #define SYNTHETICS	2
 
 /datum/preferences
+	/* // outpost 21 edit - custom species removal
 	var/custom_species	// Custom species name, can't be changed due to it having been used in savefiles already.
 	var/custom_base		// What to base the custom species on
+	*/
 	var/blood_color = "#A10808"
 
 	var/custom_say = null
@@ -31,8 +33,10 @@
 	sort_order = 7
 
 /datum/category_item/player_setup_item/vore/traits/load_character(var/savefile/S)
+	/*  // outpost 21 edit - custom species removal
 	S["custom_species"]	>> pref.custom_species
 	S["custom_base"]	>> pref.custom_base
+	*/
 	S["pos_traits"]		>> pref.pos_traits
 	S["neu_traits"]		>> pref.neu_traits
 	S["neg_traits"]		>> pref.neg_traits
@@ -48,8 +52,10 @@
 	S["custom_exclaim"]	>> pref.custom_exclaim
 
 /datum/category_item/player_setup_item/vore/traits/save_character(var/savefile/S)
+	/*  // outpost 21 edit - custom species removal
 	S["custom_species"]	<< pref.custom_species
 	S["custom_base"]	<< pref.custom_base
+	*/
 	S["pos_traits"]		<< pref.pos_traits
 	S["neu_traits"]		<< pref.neu_traits
 	S["neg_traits"]		<< pref.neg_traits
@@ -120,11 +126,13 @@
 		if((pref.dirty_synth && !(take_flags & SYNTHETICS)) || (pref.gross_meatbag && !(take_flags & ORGANICS)))
 			pref.neg_traits -= path
 
-	var/datum/species/selected_species = GLOB.all_species[pref.species]
-	if(selected_species.selects_bodytype)
+	//var/datum/species/selected_species = GLOB.all_species[pref.species]
+	//if(selected_species.selects_bodytype)
 		// Allowed!
+	/* // outpost 21 edit - custom species removal
 	else if(!pref.custom_base || !(pref.custom_base in GLOB.custom_species_bases))
 		pref.custom_base = SPECIES_HUMAN
+	*/
 
 	pref.custom_say = lowertext(trim(pref.custom_say))
 	pref.custom_whisper = lowertext(trim(pref.custom_whisper))
@@ -132,7 +140,7 @@
 	pref.custom_exclaim = lowertext(trim(pref.custom_exclaim))
 
 /datum/category_item/player_setup_item/vore/traits/copy_to_mob(var/mob/living/carbon/human/character)
-	character.custom_species	= pref.custom_species
+	//character.custom_species	= pref.custom_species // outpost 21 edit - custom species removal
 	character.custom_say		= lowertext(trim(pref.custom_say))
 	character.custom_ask		= lowertext(trim(pref.custom_ask))
 	character.custom_whisper	= lowertext(trim(pref.custom_whisper))
@@ -146,7 +154,7 @@
 		pref.dirty_synth = 0
 
 	var/datum/species/S = character.species
-	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, pref.custom_base)
+	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character) // , pref.custom_base)  // outpost 21 edit - custom species removal
 
 	for(var/datum/trait/T in new_S.traits)
 		T.apply_pref(src)

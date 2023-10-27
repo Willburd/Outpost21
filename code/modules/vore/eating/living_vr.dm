@@ -427,7 +427,7 @@
 	else
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			taste_message += "a normal [H.custom_species ? H.custom_species : H.species.name]"
+			taste_message += "a normal [H.species.name]" // H.custom_species ? H.custom_species : H.species.name]" // outpost 21 edit - custom species removal
 		else
 			taste_message += "a plain old normal [src]"
 
@@ -465,7 +465,7 @@
 	else
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
-			smell_message += "a normal [H.custom_species ? H.custom_species : H.species.name]"
+			smell_message += "a normal [H.species.name]" // H.custom_species ? H.custom_species : H.species.name]" // outpost 21 edit - custom species removal
 		else
 			smell_message += "a plain old normal [src]"
 

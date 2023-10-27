@@ -31,6 +31,7 @@
 		pass = FALSE
 		to_chat(src,"<span class='warning'>You are not allowed to spawn in as this species.</span>")
 
+	/* // outpost 21 edit - custom species removal
 	//Custom species checks
 	if (client?.prefs?.species == "Custom Species")
 
@@ -68,6 +69,7 @@
 		if(points_left < 0 || traits_left < 0)
 			pass = FALSE
 			to_chat(src,"<span class='warning'>Your custom species is not playable. Reconfigure your traits on the VORE tab.</span>")
+	*/
 
 	//Final popup notice
 	if (!pass)

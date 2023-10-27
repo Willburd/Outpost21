@@ -166,7 +166,7 @@
 		dark_gains = 0
 		return
 
-	 
+
 	darkness = 1-brightness //Invert
 	var/is_dark = (darkness >= 0.5)
 
@@ -338,7 +338,7 @@
 
 	H.health = H.maxHealth
 
-/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base)
+/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H) //, var/custom_base) // outpost 21 edit - custom species removal
 
 	var/datum/species/shadekin/new_copy = ..()
 

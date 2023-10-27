@@ -29,7 +29,7 @@ GLOBAL_DATUM(character_directory, /datum/character_directory)
 
 /datum/character_directory/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
 	var/list/data = ..()
-	
+
 	data["personalVisibility"] = user?.client?.prefs?.show_in_directory
 	data["personalTag"] = user?.client?.prefs?.directory_tag || "Unset"
 	data["personalErpTag"] = user?.client?.prefs?.directory_erptag || "Unset"
@@ -44,7 +44,7 @@ GLOBAL_DATUM(character_directory, /datum/character_directory)
 		// Allow opt-out.
 		if(!C?.prefs?.show_in_directory)
 			continue
-		
+
 		// These are the three vars we're trying to find
 		// The approach differs based on the mob the client is controlling
 		var/name = null
@@ -62,7 +62,7 @@ GLOBAL_DATUM(character_directory, /datum/character_directory)
 					if(!find_record("name", H.real_name, data_core.hidden_general))
 						continue
 			name = H.real_name
-			species = "[H.custom_species ? H.custom_species : H.species.name]"
+			species = H.species.name // "[H.custom_species ? H.custom_species : H.species.name]" // outpost 21 edit - custom species removal
 			ooc_notes = H.ooc_notes
 			flavor_text = H.flavor_texts["general"]
 
@@ -86,7 +86,7 @@ GLOBAL_DATUM(character_directory, /datum/character_directory)
 		// But if we can't find the name, they must be using a non-compatible mob type currently.
 		if(!name)
 			continue
-		
+
 		directory_mobs.Add(list(list(
 			"name" = name,
 			"species" = species,

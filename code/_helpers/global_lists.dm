@@ -47,7 +47,7 @@ var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears 
 var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
 var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
 
-GLOBAL_LIST_INIT(custom_species_bases, new) // Species that can be used for a Custom Species icon base
+//GLOBAL_LIST_INIT(custom_species_bases, new) // Species that can be used for a Custom Species icon base // outpost 21 edit - custom species removal
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
@@ -238,7 +238,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 	for(var/oretype in paths)
 		var/ore/OD = new oretype()
 		GLOB.ore_data[OD.name] = OD
-	
+
 	paths = subtypesof(/datum/alloy)
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
@@ -271,7 +271,6 @@ GLOBAL_LIST_EMPTY(mannequins)
 	// VOREStation Add End
 	init_crafting_recipes(GLOB.crafting_recipes)
 
-/*
 	// Custom species traits
 	paths = subtypesof(/datum/trait)
 	for(var/path in paths)
@@ -288,20 +287,21 @@ GLOBAL_LIST_EMPTY(mannequins)
 				neutral_traits[path] = instance
 			if(0.1 to INFINITY)
 				positive_traits[path] = instance
-*/
 
+	/* //VOREStation Edit. outpost 21 - custom race removal
 	// Custom species icon bases
 	var/list/blacklisted_icons = list(/*SPECIES_CUSTOM,*/SPECIES_PROMETHEAN) //VOREStation Edit. outpost 21 - custom race removal
-	var/list/whitelisted_icons = list(SPECIES_FENNEC,SPECIES_XENOHYBRID) //VOREStation Edit
+	var/list/whitelisted_icons = list(SPECIES_FENNEC,SPECIES_XENOHYBRID) //VOREStation Edit // outpost 21 edit - custom species removal
 	for(var/species_name in GLOB.playable_species)
 		if(species_name in blacklisted_icons)
 			continue
 		var/datum/species/S = GLOB.all_species[species_name]
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
 			continue
-		GLOB.custom_species_bases += species_name
+		GLOB.custom_species_bases += species_name // outpost 21 edit - custom species removal
 	for(var/species_name in whitelisted_icons)
-		GLOB.custom_species_bases += species_name
+		GLOB.custom_species_bases += species_name // outpost 21 edit - custom species removal
+	*/
 
 	return 1 // Hooks must return 1
 

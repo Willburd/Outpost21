@@ -154,4 +154,4 @@
 	var/flapping = 0
 
 	// Custom Species Name
-	var/custom_species
+	// var/custom_species // outpost 21 edit - custom species removal

@@ -34,16 +34,6 @@ const viewMindRecordModalBodyOverride = (modal, context) => {
               })
             }
           />
-          <Button
-            icon="user-plus"
-            content="Card"
-            onClick={() =>
-              act('sleeve', {
-                ref: activerecord,
-                mode: 2,
-              })
-            }
-          />
         </LabeledList.Item>
         <LabeledList.Item label="OOC Notes">
           <Section style={{ 'word-break': 'break-all', 'height': '100px' }} scrollable>

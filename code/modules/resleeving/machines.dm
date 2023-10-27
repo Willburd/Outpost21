@@ -83,6 +83,10 @@
 	H.UpdateAppearance() //Update appearance
 	H.sync_organ_dna()
 
+	//Apply genetic modifiers
+	for(var/modifier_type in R.genetic_modifiers)
+		H.add_modifier(modifier_type)
+
 	// update icons
 	H.regenerate_icons()
 
@@ -93,7 +97,7 @@
 
 	//Basically all the VORE stuff
 	H.ooc_notes = current_project.body_oocnotes
-	H.flavor_texts = R.flavor.Copy()
+	H.flavor_texts = current_project.mydna.flavor.Copy()
 	H.resize(current_project.sizemult, FALSE)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
@@ -101,10 +105,6 @@
 	if(current_project.speciesname)
 		H.custom_species = current_project.speciesname
 	*/
-
-	//Apply genetic modifiers
-	for(var/modifier_type in R.genetic_modifiers)
-		H.add_modifier(modifier_type)
 
 	//Suiciding var
 	H.suiciding = 0
@@ -586,6 +586,9 @@
 		else
 			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")
 			return 0
+		occupant.identifying_gender = MR.id_gender
+		occupant.ooc_notes = MR.mind_oocnotes
+		occupant.apply_vore_prefs() //Cheap hack for now to give them SOME bellies.
 
 	if(MR.one_time)
 		var/how_long = round((world.time - MR.last_update)/10/60)

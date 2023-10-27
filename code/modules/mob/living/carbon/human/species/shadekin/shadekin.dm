@@ -338,9 +338,9 @@
 
 	H.health = H.maxHealth
 
-/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H) //, var/custom_base) // outpost 21 edit - custom species removal
+/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/resetdna = TRUE) //, var/custom_base) // outpost 21 edit - custom species removal
 
-	var/datum/species/shadekin/new_copy = ..()
+	var/datum/species/shadekin/new_copy = ..( traits, H, resetdna)
 
 	new_copy.total_health = total_health
 

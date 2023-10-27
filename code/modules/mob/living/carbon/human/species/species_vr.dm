@@ -57,7 +57,7 @@
 	else
 	*/
 	..()
-/datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H) //  , var/custom_base) // outpost 21 edit - custom species removal
+/datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/resetdna = TRUE) //  , var/custom_base) // outpost 21 edit - custom species removal
 	ASSERT(src)
 	ASSERT(istype(H))
 	var/datum/species/new_copy = new src.type()
@@ -87,7 +87,7 @@
 	if(new_copy.holder_type)
 		H.holder_type = new_copy.holder_type
 
-	if(H.dna)
+	if(resetdna && H.dna)
 		H.dna.ready_dna(H)
 
 	return new_copy

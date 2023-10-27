@@ -180,8 +180,11 @@
 		// Store the scanned document to the notes
 		notes.note = formatted_scan
 		notes.notetitle = sanitize_simple(P.name, list("\n" = "", "\t" = "", "ÿ" = ""))
-		// notehtml ISN'T set to allow user to get their old notes back. A better implementation would add a "scanned documents"
-		// feature to the PDA, which would better convey the availability of the feature, but this will work for now.
+		// update the saved note too incase we kept the pda open, this is really silly due to how the notehtml is actually what's passed to the editor's text.
+		// If I don't update it here, it loses the data when you edit it!
+		notes.storednotes[notes.currentnote] = notes.note
+		notes.storedtitles[notes.currentnote] = notes.notetitle
+		notes.notehtml = html_decode(replacetext(notes.note,"<br>", "\n"))
 		// Inform the user
 		var/scannedtitle = "Paper"
 		if(!isnull(notes.notetitle) && notes.notetitle != "")

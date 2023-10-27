@@ -50,6 +50,7 @@
 	icon = "sticky-note-o"
 	template = "pda_notekeeper"
 
+	var/greeted = FALSE
 	var/note = null
 	var/notetitle = null
 	var/currentnote = 1
@@ -59,18 +60,11 @@
 
 /datum/data/pda/app/notekeeper/start()
 	. = ..()
-	if(!note)
+	if(!note && greeted == FALSE)
 		// display greeting!
+		greeted = TRUE
 		note = "Your station has chosen the [pda.model_name]!"
 		notetitle = "Congratulations!"
-
-		// initial notes
-		var/index = 1
-		while(index < 11)
-			storednotes[index] = ""
-			index++
-		storednotes[1] = note
-		storedtitles[1] = notetitle
 
 /datum/data/pda/app/notekeeper/update_ui(mob/user as mob, list/data)
 	data["note"] = note									// current pda notes

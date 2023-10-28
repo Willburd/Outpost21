@@ -202,6 +202,7 @@
 	// outpost 21 edit begin - tweaked disabilities chances, made anxiety meds actually work
 	var/anxietymedcount = 0 // DO NOT MIX THESE MEDS
 	var/seizuremedcount = 0
+	var/antihistaminescount = 0
 	if( bloodstr.get_reagent_amount("qerr_quem") > 0)
 		anxietymedcount += 1;
 	if( bloodstr.get_reagent_amount("paroxetine") > 0)
@@ -213,6 +214,9 @@
 	if( bloodstr.get_reagent_amount("methylphenidate") > 0)
 		anxietymedcount += 1;
 		seizuremedcount += 1;
+	// lets check for any one of these... Faster than doing each one, as it'll trigger on the first one it finds instead of checking them all every time
+	if( bloodstr.get_reagent_amount("inaprovaline") > 0 || bloodstr.get_reagent_amount("menthol") > 0 || bloodstr.get_reagent_amount("adranol") > 0 || bloodstr.get_reagent_amount("immunosuprizine") > 0 || bloodstr.get_reagent_amount("malish-qualem") > 0)
+		antihistaminescount += 1; // there is no harm to stacking them as an allergy med, except their own overdoses anyway
 
 	// if no hazardous meds are mixed... just let any of the other ones work...
 	if( anxietymedcount == 0)
@@ -220,9 +224,10 @@
 			anxietymedcount = 1;
 		if( bloodstr.get_reagent_amount("nicotine") > 0)
 			anxietymedcount = 1;
+			antihistaminescount += 1;
 		if( ingested.get_reagent_amount("tea") > 0)
 			anxietymedcount = 1;
-
+			antihistaminescount += 1;
 
 	// alright, we need to see if we've mixed our meds... which is really bad.
 	if(anxietymedcount > 1)
@@ -262,58 +267,59 @@
 					O.show_message(text("<span class='danger'>[src] starts having a seizure!</span>"), 1)
 				Paralyse(10)
 				make_jittery(200)
+	// and not for sneezy stuff!
+	if(antihistaminescount == 0)
+		if(species.allergens & ALLERGEN_POLLEN) // this behaves in a funny way compared to all other allergens! Behaves like a disability
+			var/isirritated = FALSE
+			var/things = list()
+			if(prob(22))
+				if(!isnull(r_hand))
+					things += r_hand
+				if(!isnull(l_hand))
+					things += l_hand
+
+			if(isturf(src.loc))
+				// terrain tests
+				things += src.loc.contents
+				if(prob(8))
+					if(istype(src.loc,/turf/simulated/floor/grass))
+						isirritated = TRUE // auto irritate!
+
+				if(!isirritated)
+					if(prob(12)) // ranged laggier check
+						things += orange(2,src.loc)
+
+			// scan irritants!
+			if(!isirritated)
+				for(var/obj/machinery/portable_atmospherics/hydroponics/irritanttray in things)
+					if(!irritanttray.dead && !isnull(irritanttray.seed))
+						isirritated = TRUE
+						break
+			if(!isirritated)
+				for(var/obj/effect/plant/irritant in things)
+					isirritated = TRUE
+					break
+			if(!isirritated)
+				for(var/obj/item/toy/bouquet/irritant in things)
+					isirritated = TRUE
+					break
+
+			if(isirritated)
+				to_chat(src, "<font color='red'>[pick("The air feels itchy!","Your face feels uncomfortable!","Your body tingles!")]</font>")
+				add_chemical_effect(CE_ALLERGEN, rand(5,20) * REM)
+		// may as well allow this to be handled in it's own way too
+		if (disabilities & COUGHING)
+			if ((prob(10) && prob(8) && paralysis <= 1))
+				if(prob(23)) drop_item()
+				spawn( 0 )
+					emote("cough")
 	// not fixed by meds
-	if (disabilities & COUGHING)
-		if ((prob(10) && prob(8) && paralysis <= 1))
-			if(prob(23)) drop_item()
-			spawn( 0 )
-				emote("cough")
 	if (disabilities & VERTIGO)
 		if ((prob(5) && prob(4) && paralysis < 1))
 			to_chat(src, "<font color='red'>You feel the world spinning!</font>")
 			make_dizzy(9)
 			Confuse(12)
 			make_jittery(15)
-	if(species.allergens & ALLERGEN_POLLEN) // this behaves in a funny way compared to all other allergens! Behaves like a disability
-		var/isirritated = FALSE
-		var/things = list()
-		if(prob(22))
-			if(!isnull(r_hand))
-				things += r_hand
-			if(!isnull(l_hand))
-				things += l_hand
-
-		if(isturf(src.loc))
-			// terrain tests
-			things += src.loc.contents
-			if(prob(8))
-				if(istype(src.loc,/turf/simulated/floor/grass))
-					isirritated = TRUE // auto irritate!
-
-			if(!isirritated)
-				if(prob(12)) // ranged laggier check
-					things += orange(2,src.loc)
-
-		// scan irritants!
-		if(!isirritated)
-			for(var/obj/machinery/portable_atmospherics/hydroponics/irritanttray in things)
-				if(!irritanttray.dead && !isnull(irritanttray.seed))
-					isirritated = TRUE
-					break
-		if(!isirritated)
-			for(var/obj/effect/plant/irritant in things)
-				isirritated = TRUE
-				break
-		if(!isirritated)
-			for(var/obj/item/toy/bouquet/irritant in things)
-				isirritated = TRUE
-				break
-
-		if(isirritated)
-			to_chat(src, "<font color='red'>[pick("The air feels itchy!","Your face feels uncomfortable!","Your body tingles!")]</font>")
-			add_chemical_effect(CE_ALLERGEN, rand(5,20) * REM)
-
-
 	// outpost 21 edit end
 
 	var/rn = rand(0, 200)
@@ -931,8 +937,16 @@
 					if(prob(30))
 						to_chat(src, "<span class='warning'>You feel like you are about to sneeze!</span>")
 					spawn(5)
-						src.say("*sneeze")
-						if(prob(23)) drop_item()
+						emote("sneeze")
+						if(prob(23))
+							drop_item()
+		if(species.allergen_reaction & AG_COUGH) // outpost 21 addition
+			if(prob(disable_severity/2))
+				emote(pick("cough","cough","cough","gasp","choke"))
+				if(prob(10))
+					drop_item()
+				if(prob(33))
+					adjustOxyLoss(damage_severity)
 
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)

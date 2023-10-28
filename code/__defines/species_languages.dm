@@ -55,6 +55,7 @@
 #define AG_CONFUSE			0x400	// disorientation
 #define AG_GIBBING			0x800	// SPLODE
 #define AG_SNEEZE			0x1000	// sneezes
+#define AG_COUGH			0x2000	// coughing
 
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED      0x1  // Must be whitelisted to play.

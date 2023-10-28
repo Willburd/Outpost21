@@ -334,6 +334,12 @@ YW change end */
 	cost = 0
 	allergeneffect = AG_GIBBING
 
+/datum/trait/neutral/allergy_effects/cough
+	name = "Allergic Reaction : Coughing"
+	desc = "This trait causes spontanious coughing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	allergeneffect = AG_COUGH
+
 //Allergen traits! Not available to any species with a base allergens var.
 /datum/trait/neutral/allergy
 	name = "Allergy: Gluten"

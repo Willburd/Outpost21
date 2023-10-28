@@ -238,7 +238,7 @@
 		H.b_tail3  = dna.GetUIValueRange(DNA_UI_TAIL3_B,   255)
 
 		// Technically custom_species is not part of the UI, but this place avoids merge problems.
-		// H.custom_species = dna.custom_species // outpost 21 edit - custom species removal
+		H.custom_species = dna.custom_species
 		H.custom_say = dna.custom_say
 		H.custom_ask = dna.custom_ask
 		H.custom_whisper = dna.custom_whisper

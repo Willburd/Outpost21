@@ -6,8 +6,8 @@
 #define SYNTHETICS	2
 
 /datum/preferences
-	/* // outpost 21 edit - custom species removal
 	var/custom_species	// Custom species name, can't be changed due to it having been used in savefiles already.
+	/* // outpost 21 edit - custom species removal
 	var/custom_base		// What to base the custom species on
 	*/
 	var/blood_color = "#A10808"
@@ -33,8 +33,8 @@
 	sort_order = 7
 
 /datum/category_item/player_setup_item/vore/traits/load_character(var/savefile/S)
-	/*  // outpost 21 edit - custom species removal
 	S["custom_species"]	>> pref.custom_species
+	/*  // outpost 21 edit - custom species removal
 	S["custom_base"]	>> pref.custom_base
 	*/
 	S["pos_traits"]		>> pref.pos_traits
@@ -52,8 +52,8 @@
 	S["custom_exclaim"]	>> pref.custom_exclaim
 
 /datum/category_item/player_setup_item/vore/traits/save_character(var/savefile/S)
-	/*  // outpost 21 edit - custom species removal
 	S["custom_species"]	<< pref.custom_species
+	/*  // outpost 21 edit - custom species removal
 	S["custom_base"]	<< pref.custom_base
 	*/
 	S["pos_traits"]		<< pref.pos_traits
@@ -140,7 +140,7 @@
 	pref.custom_exclaim = lowertext(trim(pref.custom_exclaim))
 
 /datum/category_item/player_setup_item/vore/traits/copy_to_mob(var/mob/living/carbon/human/character)
-	//character.custom_species	= pref.custom_species // outpost 21 edit - custom species removal
+	character.custom_species	= pref.custom_species
 	character.custom_say		= lowertext(trim(pref.custom_say))
 	character.custom_ask		= lowertext(trim(pref.custom_ask))
 	character.custom_whisper	= lowertext(trim(pref.custom_whisper))
@@ -171,18 +171,17 @@
 	*/
 
 /datum/category_item/player_setup_item/vore/traits/content(var/mob/user)
-	/* outpost 21 - custom race removal
 	. += "<b>Custom Species Name:</b> "
 	. += "<a href='?src=\ref[src];custom_species=1'>[pref.custom_species ? pref.custom_species : "-Input Name-"]</a><br>"
 
+	/* outpost 21 edit - custom species removal
 	var/datum/species/selected_species = GLOB.all_species[pref.species]
 	if(selected_species.selects_bodytype)
 		. += "<b>Icon Base: </b> "
 		. += "<a href='?src=\ref[src];custom_base=1'>[pref.custom_base ? pref.custom_base : "Human"]</a><br>"
+	*/
 
 	var/traits_left = pref.max_traits
-
-
 	var/points_left = pref.starting_trait_points
 
 	for(var/T in pref.pos_traits + pref.neg_traits)
@@ -190,7 +189,7 @@
 		traits_left--
 	. += "<b>Traits Left:</b> [traits_left]<br>"
 	. += "<b>Points Left:</b> [points_left]<br>"
-	if(points_left < 0 || traits_left < 0 || (!pref.custom_species && pref.species == SPECIES_CUSTOM))
+	if(points_left < 0 || traits_left < 0) // || (!pref.custom_species && pref.species == SPECIES_CUSTOM)) // outpost 21 edit - custom species removal
 		. += "<span style='color:red;'><b>^ Fix things! ^</b></span><br>"
 
 	. += "<a href='?src=\ref[src];add_trait=[POSITIVE_MODE]'>Positive Trait +</a><br>"
@@ -200,17 +199,8 @@
 		. += "<li>- <a href='?src=\ref[src];clicked_pos_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
 	. += "</ul>"
 
-		. += "<a href='?src=\ref[src];add_trait=[NEGATIVE_MODE]'>Negative Trait +</a><br>"
-		. += "<ul>"
-		for(var/T in pref.neg_traits)
-			var/datum/trait/trait = negative_traits[T]
-			. += "<li>- <a href='?src=\ref[src];clicked_neg_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
-		. += "</ul>"
-	*/
-
 	. += "<a href='?src=\ref[src];add_trait=[NEUTRAL_MODE]'>Neutral Trait +</a><br>"
 	. += "<ul>"
-
 	for(var/T in pref.neu_traits)
 		var/datum/trait/trait = neutral_traits[T]
 		. += "<li>- <a href='?src=\ref[src];clicked_neu_trait=[T]'>[trait.name] ([trait.cost])</a></li>"
@@ -249,7 +239,7 @@
 	if(!CanUseTopic(user))
 		return TOPIC_NOACTION
 
-	/*  outpost 21 - custom race removal
+
 	else if(href_list["custom_species"])
 		var/raw_choice = sanitize(tgui_input_text(user, "Input your custom species name:",
 			"Character Preference", pref.custom_species, MAX_NAME_LEN), MAX_NAME_LEN)
@@ -257,6 +247,7 @@
 			pref.custom_species = raw_choice
 		return TOPIC_REFRESH
 
+	/*  outpost 21 - custom race removal
 	else if(href_list["custom_base"])
 		var/list/choices = GLOB.custom_species_bases
 		if(pref.species != SPECIES_CUSTOM)

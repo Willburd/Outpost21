@@ -62,7 +62,7 @@ GLOBAL_DATUM(character_directory, /datum/character_directory)
 					if(!find_record("name", H.real_name, data_core.hidden_general))
 						continue
 			name = H.real_name
-			species = H.species.name // "[H.custom_species ? H.custom_species : H.species.name]" // outpost 21 edit - custom species removal
+			species = "[H.custom_species ? H.custom_species : H.species.name]"
 			ooc_notes = H.ooc_notes
 			flavor_text = H.flavor_texts["general"]
 

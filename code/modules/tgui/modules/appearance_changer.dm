@@ -92,11 +92,7 @@
 		if("race")
 			if(can_change(APPEARANCE_RACE) && (params["race"] in valid_species))
 				if(target.change_species(params["race"]))
-					/* // outpost 21 edit - custom species removal
-					if(params["race"] == "Custom Species")
-						target.custom_species = sanitize(tgui_input_text(usr, "Input custom species name:",
-							"Custom Species Name", null, MAX_NAME_LEN), MAX_NAME_LEN)
-					*/
+					target.custom_species = sanitize( tgui_input_text(usr, "Input custom species name:", "Custom Species Name", null, MAX_NAME_LEN), MAX_NAME_LEN)
 					cut_data()
 					generate_data(usr)
 					changed_hook(APPEARANCECHANGER_CHANGED_RACE)

@@ -110,7 +110,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
 
 	// VOREStation
-	// var/custom_species // outpost 21 edit - custom species removal
+	var/custom_species
 	var/base_species = "Human"
 	var/list/species_traits = list()
 	var/blood_color = "#A10808"
@@ -137,7 +137,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.species=species
 	new_dna.body_markings=body_markings.Copy()
 	new_dna.base_species=base_species //VOREStation Edit
-	//new_dna.custom_species=custom_species //VOREStaton Edit // outpost 21 edit - custom species removal
+	new_dna.custom_species=custom_species
 	new_dna.species_traits=species_traits.Copy() //VOREStation Edit
 	new_dna.blood_color=blood_color //VOREStation Edit
 	new_dna.custom_say=custom_say //VOREStaton Edit
@@ -208,7 +208,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 			break
 
 	// Technically custom_species is not part of the UI, but this place avoids merge problems.
-	// src.custom_species = character.custom_species // outpost 21 edit - custom species removal
+	src.custom_species = character.custom_species
 	src.base_species = character.species.base_species
 	src.blood_color = character.species.blood_color
 	src.species_traits = character.species.traits.Copy()

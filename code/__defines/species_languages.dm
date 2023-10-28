@@ -39,18 +39,22 @@
 #define ALLERGEN_SUGARS		0x400	// For unathi-like reactions
 #define ALLERGEN_EGGS		0x800	// For Skrell eggs allergy
 #define ALLERGEN_STIMULANT	0x1000	// Stimulants are what makes the Tajaran heart go ruh roh - not just coffee!
+#define ALLERGEN_POLLEN		0x2000  // This one operates weirdly! Runs where disability code does!
 
 // Allergen reactions
-#define AG_PHYS_DMG	0x1	// brute
-#define AG_BURN_DMG	0x2	// burns
-#define AG_TOX_DMG	0x4	// the classic
-#define AG_OXY_DMG	0x8	// intense airway reactions
-#define AG_EMOTE	0x10	// general emote reactions based on affect type
-#define AG_PAIN		0x20	// short-lived hurt
-#define AG_WEAKEN	0x40	// too weak to move, oof
-#define AG_BLURRY	0x80	// blurred vision!
-#define AG_SLEEPY	0x100	// fatigue/exhaustion
-#define AG_CONFUSE	0x200	// disorientation
+#define AG_FLAG_SPECIESBASE	0x1 	// This flag MUST be set when assigning the DEFAULT alergic reactions for a species. /datum/trait/neutral/allergy_effects/apply() uses this to know if it needs to clear all effects!
+#define AG_PHYS_DMG			0x2		// brute
+#define AG_BURN_DMG			0x4		// burns
+#define AG_TOX_DMG			0x8		// the classic
+#define AG_OXY_DMG			0x10	// intense airway reactions
+#define AG_EMOTE			0x20	// general emote reactions based on affect type
+#define AG_PAIN				0x40	// short-lived hurt
+#define AG_WEAKEN			0x80	// too weak to move, oof
+#define AG_BLURRY			0x100	// blurred vision!
+#define AG_SLEEPY			0x200	// fatigue/exhaustion
+#define AG_CONFUSE			0x400	// disorientation
+#define AG_GIBBING			0x800	// SPLODE
+#define AG_SNEEZE			0x1000	// sneezes
 
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED      0x1  // Must be whitelisted to play.

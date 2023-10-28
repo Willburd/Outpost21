@@ -274,6 +274,46 @@
 			make_dizzy(9)
 			Confuse(12)
 			make_jittery(15)
+	if(species.allergens & ALLERGEN_POLLEN) // this behaves in a funny way compared to all other allergens! Behaves like a disability
+		var/isirritated = FALSE
+		var/things = list()
+		if(prob(22))
+			if(!isnull(r_hand))
+				things += r_hand
+			if(!isnull(l_hand))
+				things += l_hand
+
+		if(isturf(src.loc))
+			// terrain tests
+			things += src.loc.contents
+			if(prob(8))
+				if(istype(src.loc,/turf/simulated/floor/grass))
+					isirritated = TRUE // auto irritate!
+
+			if(!isirritated)
+				if(prob(12)) // ranged laggier check
+					things += orange(2,src.loc)
+
+		// scan irritants!
+		if(!isirritated)
+			for(var/obj/machinery/portable_atmospherics/hydroponics/irritanttray in things)
+				if(!irritanttray.dead && !isnull(irritanttray.seed))
+					isirritated = TRUE
+					break
+		if(!isirritated)
+			for(var/obj/effect/plant/irritant in things)
+				isirritated = TRUE
+				break
+		if(!isirritated)
+			for(var/obj/item/toy/bouquet/irritant in things)
+				isirritated = TRUE
+				break
+
+		if(isirritated)
+			to_chat(src, "<font color='red'>[pick("The air feels itchy!","Your face feels uncomfortable!","Your body tingles!")]</font>")
+			add_chemical_effect(CE_ALLERGEN, rand(5,20) * REM)
+
+
 	// outpost 21 edit end
 
 	var/rn = rand(0, 200)
@@ -877,13 +917,22 @@
 			drowsyness = max(drowsyness, disable_severity)
 		if(species.allergen_reaction & AG_CONFUSE)
 			Confuse(disable_severity/4)
-		if(species.allergen_explosive) // outpost 21 addition
-			if(prob(disable_severity / 50))
+		if(species.allergen_reaction & AG_GIBBING) // outpost 21 addition
+			if(prob(disable_severity / 8))
 				gib()
-			else
-				emote(pick("blech","choke","shiver"))
-				if(prob(disable_severity / 5))
-					Weaken(disable_severity)
+			else if(prob(disable_severity))
+				emote(pick("whimper","gasp","choke","shiver"))
+				Weaken(disable_severity / 3)
+		if(species.allergen_reaction & AG_SNEEZE) // outpost 21 addition
+			if(prob(disable_severity/3))
+				if(prob(20))
+					to_chat(src, "<span class='warning'>You go to sneeze, but it gets caught in your sinuses!</span>")
+				else if(prob(80))
+					if(prob(30))
+						to_chat(src, "<span class='warning'>You feel like you are about to sneeze!</span>")
+					spawn(5)
+						src.say("*sneeze")
+						if(prob(23)) drop_item()
 
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)

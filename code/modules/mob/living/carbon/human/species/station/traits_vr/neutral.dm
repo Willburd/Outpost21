@@ -266,6 +266,96 @@ YW change end */
 	H.verbs |= /mob/living/proc/glow_toggle
 	H.verbs |= /mob/living/proc/glow_color
 
+//Allergen custom effects!
+/datum/trait/neutral/allergy_effects
+	name = "Allergic Reaction : Sneezing"
+	desc = "This trait causes spontanious sneezing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	var/allergeneffect = AG_SNEEZE
+
+/datum/trait/neutral/allergy_effects/apply(var/datum/species/S,var/mob/living/carbon/human/H)
+	if(S.allergen_reaction & AG_FLAG_SPECIESBASE)
+		S.allergen_reaction = 0 // this is the first to override! Wipe all effects, so we can setup our custom reaction!
+	S.allergen_reaction |= allergeneffect
+	..(S,H)
+
+/datum/trait/neutral/allergy_effects/bruise
+	name = "Allergic Reaction : Bruising"
+	desc = "This trait causes spontanious bruising as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_PHYS_DMG
+
+/datum/trait/neutral/allergy_effects/burns
+	name = "Allergic Reaction : Burns"
+	desc = "This trait causes spontanious burns as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_BURN_DMG
+
+/datum/trait/neutral/allergy_effects/toxic
+	name = "Allergic Reaction : Toxins"
+	desc = "This trait causes spontanious bloodstream toxins as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_TOX_DMG
+
+/datum/trait/neutral/allergy_effects/gasp
+	name = "Allergic Reaction : Gasping"
+	desc = "This trait causes spontanious airway constriction as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_OXY_DMG
+
+/datum/trait/neutral/allergy_effects/twitch
+	name = "Allergic Reaction : Twitch"
+	desc = "This trait causes spontanious twitching as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_EMOTE
+
+/datum/trait/neutral/allergy_effects/weakness
+	name = "Allergic Reaction : Weakness"
+	desc = "This trait causes spontanious weakness as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_WEAKEN
+
+/datum/trait/neutral/allergy_effects/sleepy
+	name = "Allergic Reaction : Blurred vision"
+	desc = "This trait causes spontanious blurred vision as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_BLURRY
+
+/datum/trait/neutral/allergy_effects/sleepy
+	name = "Allergic Reaction : Sleepy"
+	desc = "This trait causes spontanious sleepiness as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_SLEEPY
+
+/datum/trait/neutral/allergy_effects/confusion
+	name = "Allergic Reaction : Confusion"
+	desc = "This trait causes spontanious confusion as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_CONFUSE
+
+/datum/trait/neutral/allergy_effects/sneeze
+	name = "Allergic Reaction : Sneezing"
+	desc = "This trait causes spontanious sneezing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_SNEEZE
+
+/datum/trait/neutral/allergy_effects/gibbing
+	name = "Allergic Reaction : Gibbing"
+	desc = "This trait causes spontanious gibbing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
+	cost = 0
+	custom_only = FALSE
+	allergeneffect = AG_GIBBING
 
 //Allergen traits! Not available to any species with a base allergens var.
 /datum/trait/neutral/allergy
@@ -292,6 +382,13 @@ YW change end */
 	cost = 0
 	custom_only = FALSE
 	allergen = ALLERGEN_FISH
+
+/datum/trait/neutral/allergy/pollen
+	name = "Allergy: Pollen"
+	desc = "You're highly allergic to pollen and many plants. It's probably best to avoid hydroponics in general. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
+	cost = 0
+	custom_only = FALSE
+	allergen = ALLERGEN_POLLEN
 
 /datum/trait/neutral/allergy/fruit
 	name = "Allergy: Fruit"
@@ -357,13 +454,6 @@ YW change end */
 	custom_only = FALSE
 	var_changes = list("allergen_damage_severity" = 5, "allergen_disable_severity" = 20)
 	excludes = list(/datum/trait/neutral/allergen_reduced_effect)
-
-/datum/trait/neutral/allergen_gibbing
-	name = "Gibbing Allergen Reaction"
-	desc = "This trait causes spontanious gibbing as an allergen reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
-	cost = 0
-	custom_only = FALSE
-	var_changes = list("allergen_explosive" = TRUE)
 
 // Spicy Food Traits, from negative to positive.
 /datum/trait/neutral/spice_intolerance_extreme

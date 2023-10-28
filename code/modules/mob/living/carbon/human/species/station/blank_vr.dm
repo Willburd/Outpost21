@@ -53,7 +53,7 @@
 	return real.race_key
 
 /datum/species/custom/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/resetdna = TRUE) //, var/custom_base) // outpost 21 edit - custom species removal
-	. = ..(traits) //, H, custom_base) // outpost 21 edit - custom species removal
+	. = ..(traits, H, resetdna) //, custom_base) // outpost 21 edit - custom species removal
 	H.maxHealth = H.species.total_health
 	H.hunger_rate = H.species.hunger_factor
 

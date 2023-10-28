@@ -67,9 +67,26 @@
 	if(M.status_flags & FAKEDEATH)
 		OX = fake_oxy > 50 			? 	"<b>[fake_oxy]</b>" 			: fake_oxy
 		dat += "<span class='notice'>Analyzing Results for [M]:</span><br>"
+		if(advscan >= 2)
+			var/speciesdata = "???";
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				speciesdata = H.species.name
+				if(H.custom_species)
+					speciesdata = "[H.custom_species] \[Similar biology to [H.species.name]\]"
+			dat += "\tSapient Species: [speciesdata]<br>"
 		dat += "<span class='notice'>Overall Status: dead</span><br>"
 	else
-		dat += 	"<span class='notice'>Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "dead" : "[round((M.health/M.getMaxHealth())*100) ]% healthy"]<br>"
+		dat += "<span class='notice'>Analyzing Results for [M]:"
+		dat += "\tOverall Status: [M.stat > 1 ? "dead" : "[round((M.health/M.getMaxHealth())*100) ]% healthy"]<br>"
+		if(advscan >= 2)
+			var/speciesdata = "???";
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				speciesdata = H.species.name
+				if(H.custom_species)
+					speciesdata = "[H.custom_species] \[Similar biology to [H.species.name]\]"
+			dat += "\tSapient Species: [speciesdata]<br>"
 	dat += 		"\tKey: <font color='cyan'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font><br>"
 	dat += 		"\tDamage Specifics: <font color='cyan'>[OX]</font> - <font color='green'>[TX]</font> - <font color='#FFA500'>[BU]</font> - <font color='red'>[BR]</font><br>"
 	dat +=		"Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span><br>"

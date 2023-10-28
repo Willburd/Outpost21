@@ -185,6 +185,9 @@
 		update_icon() //VOREStation Edit - Health display for consoles with light and such.
 		var/mob/living/carbon/human/H = occupant
 		occupantData["name"] = H.name
+		occupantData["species"] = H.species.name
+		if(H.custom_species)
+			occupantData["species"] = "[H.custom_species] \[Similar biology to [H.species.name]\]"
 		occupantData["stat"] = H.stat
 		occupantData["health"] = H.health
 		occupantData["maxHealth"] = H.getMaxHealth()
@@ -364,6 +367,12 @@
 
 	dat = "<font color='blue'><b>Occupant Statistics:</b></font><br>" //Blah obvious
 	if(istype(occupant)) //is there REALLY someone in there?
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			var/speciestext = H.species.name
+			if(H.custom_species)
+				speciestext = "[H.custom_species] \[Similar biology to [H.species.name]\]"
+				dat += "<font color='blue'>Sapient Species: [speciestext]</font><BR>"
 		var/t1
 		switch(occupant.stat) // obvious, see what their status is
 			if(0)

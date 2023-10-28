@@ -157,6 +157,7 @@ const BodyScannerMainOccupant = (props, context) => {
       }>
       <LabeledList>
         <LabeledList.Item label="Name">{occupant.name}</LabeledList.Item>
+        <LabeledList.Item label="Species">{occupant.species}</LabeledList.Item>
         <LabeledList.Item label="Health">
           <ProgressBar
             min="0"

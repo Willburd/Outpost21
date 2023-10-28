@@ -93,6 +93,10 @@
 	// auto detect above!
 	if(input_plate && input_plate.z != loc.z)
 		Bumped( locate( /mob, input_plate))
+	// backup item ejection
+	if(!operating && isnull(occupant) && contents.len > 0 && prob(50))
+		updatesleever()
+		processcontents()
 
 /obj/machinery/gibber/New()
 	..()

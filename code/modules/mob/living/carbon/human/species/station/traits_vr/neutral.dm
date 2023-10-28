@@ -151,7 +151,6 @@ YW change end */
 	name = "Bloodsucker, Obligate"
 	desc = "Makes you unable to gain nutrition from anything but blood. To compenstate, you get fangs that can be used to drain blood from prey."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("organic_food_coeff" = 0, "bloodsucker" = TRUE)
 	excludes = list(/datum/trait/positive/bloodsucker_plus) //YW EDIT: /datum/trait/positive/bloodsucker_plus
 
@@ -163,7 +162,6 @@ YW change end */
 	name = "Bloodsucker"
 	desc = "You get fangs that can be used to drain blood from prey."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("bloodsucker" = TRUE)
 	excludes = list(/datum/trait/neutral/bloodsucker)
 */
@@ -175,7 +173,6 @@ YW change end */
 	name = "Succubus Drain"
 	desc = "Makes you able to gain nutrition from draining prey in your grasp."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/succubus_drain/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -187,7 +184,6 @@ YW change end */
 	name = "Long Predatorial Reach"
 	desc = "Makes you able to use your tongue to grab creatures."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/long_vore/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -197,7 +193,6 @@ YW change end */
 	name = "Feeder"
 	desc = "Allows you to feed your prey using your own body."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/feeder/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -207,7 +202,6 @@ YW change end */
 	name = "Brutal Predation"
 	desc = "Allows you to tear off limbs & tear out internal organs."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/hard_vore/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -217,7 +211,6 @@ YW change end */
 	name = "Trash Can"
 	desc = "Allows you to dispose of some garbage on the go instead of having to look for a bin or littering like an animal."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("trashcan" = 1)
 
 /datum/trait/neutral/trashcan/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -228,7 +221,6 @@ YW change end */
 	name = "Expensive Taste"
 	desc = "You only gain nutrition from raw ore and refined minerals. There's nothing that sates the appetite better than precious gems, exotic or rare minerals and you have damn fine taste. Anything else is beneath you."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("organic_food_coeff" = 0, "eat_minerals" = 1)
 
 /datum/trait/neutral/gem_eater/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -239,7 +231,6 @@ YW change end */
 	name = "Biofuel Processor"
 	desc = "You are able to gain energy through consuming and processing normal food, at the cost of significantly slower recharging via cyborg chargers. Energy-dense foods such as protein bars and survival food will yield the best results."
 	cost = 0
-	custom_only = FALSE
 	can_take = SYNTHETICS
 	var_changes = list("organic_food_coeff" = 0, "synthetic_food_coeff" = 0.6)
 	excludes = list(/datum/trait/neutral/biofuel_value_down)
@@ -248,7 +239,6 @@ YW change end */
 	name = "Glowing Eyes"
 	desc = "Your eyes show up above darkness. SPOOKY! And kinda edgey too."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("has_glowing_eyes" = 1)
 
 /datum/trait/neutral/glowing_eyes/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -259,7 +249,6 @@ YW change end */
 	name = "Glowing Body"
 	desc = "Your body glows about as much as a PDA light! Settable color and toggle in Abilities tab ingame."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/glowing_body/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -271,7 +260,6 @@ YW change end */
 	name = "Allergic Reaction : Sneezing"
 	desc = "This trait causes spontanious sneezing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	var/allergeneffect = AG_SNEEZE
 
 /datum/trait/neutral/allergy_effects/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -284,77 +272,66 @@ YW change end */
 	name = "Allergic Reaction : Bruising"
 	desc = "This trait causes spontanious bruising as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_PHYS_DMG
 
 /datum/trait/neutral/allergy_effects/burns
 	name = "Allergic Reaction : Burns"
 	desc = "This trait causes spontanious burns as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_BURN_DMG
 
 /datum/trait/neutral/allergy_effects/toxic
 	name = "Allergic Reaction : Toxins"
 	desc = "This trait causes spontanious bloodstream toxins as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_TOX_DMG
 
 /datum/trait/neutral/allergy_effects/gasp
 	name = "Allergic Reaction : Gasping"
 	desc = "This trait causes spontanious airway constriction as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_OXY_DMG
 
 /datum/trait/neutral/allergy_effects/twitch
 	name = "Allergic Reaction : Twitch"
 	desc = "This trait causes spontanious twitching as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_EMOTE
 
 /datum/trait/neutral/allergy_effects/weakness
 	name = "Allergic Reaction : Weakness"
 	desc = "This trait causes spontanious weakness as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_WEAKEN
 
 /datum/trait/neutral/allergy_effects/sleepy
 	name = "Allergic Reaction : Blurred vision"
 	desc = "This trait causes spontanious blurred vision as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_BLURRY
 
 /datum/trait/neutral/allergy_effects/sleepy
 	name = "Allergic Reaction : Sleepy"
 	desc = "This trait causes spontanious sleepiness as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_SLEEPY
 
 /datum/trait/neutral/allergy_effects/confusion
 	name = "Allergic Reaction : Confusion"
 	desc = "This trait causes spontanious confusion as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_CONFUSE
 
 /datum/trait/neutral/allergy_effects/sneeze
 	name = "Allergic Reaction : Sneezing"
 	desc = "This trait causes spontanious sneezing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_SNEEZE
 
 /datum/trait/neutral/allergy_effects/gibbing
 	name = "Allergic Reaction : Gibbing"
 	desc = "This trait causes spontanious gibbing as an Allergic reaction. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	allergeneffect = AG_GIBBING
 
 //Allergen traits! Not available to any species with a base allergens var.
@@ -362,7 +339,6 @@ YW change end */
 	name = "Allergy: Gluten"
 	desc = "You're highly allergic to gluten proteins, which are found in most common grains. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	var/allergen = ALLERGEN_GRAINS
 
 /datum/trait/neutral/allergy/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -373,77 +349,66 @@ YW change end */
 	name = "Allergy: Meat"
 	desc = "You're highly allergic to just about any form of meat. You're probably better off just sticking to vegetables. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_MEAT
 
 /datum/trait/neutral/allergy/fish
 	name = "Allergy: Fish"
 	desc = "You're highly allergic to fish. It's probably best to avoid seafood in general. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_FISH
 
 /datum/trait/neutral/allergy/pollen
 	name = "Allergy: Pollen"
 	desc = "You're highly allergic to pollen and many plants. It's probably best to avoid hydroponics in general. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_POLLEN
 
 /datum/trait/neutral/allergy/fruit
 	name = "Allergy: Fruit"
 	desc = "You're highly allergic to fruit. Vegetables are fine, but you should probably read up on how to tell the difference. Remember, tomatoes are a fruit. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_FRUIT
 
 /datum/trait/neutral/allergy/vegetable
 	name = "Allergy: Vegetable"
 	desc = "You're highly allergic to vegetables. Fruit are fine, but you should probably read up on how to tell the difference. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_VEGETABLE
 
 /datum/trait/neutral/allergy/nuts
 	name = "Allergy: Nuts"
 	desc = "You're highly allergic to hard-shell seeds, such as peanuts. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_SEEDS
 
 /datum/trait/neutral/allergy/soy
 	name = "Allergy: Soy"
 	desc = "You're highly allergic to soybeans, and some other kinds of bean. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_BEANS
 
 /datum/trait/neutral/allergy/dairy
 	name = "Allergy: Lactose"
 	desc = "You're highly allergic to lactose, and consequently, just about all forms of dairy. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_DAIRY
 
 /datum/trait/neutral/allergy/fungi
 	name = "Allergy: Fungi"
 	desc = "You're highly allergic to fungi such as mushrooms. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_FUNGI
 
 /datum/trait/neutral/allergy/coffee
 	name = "Allergy: Coffee"
 	desc = "You're highly allergic to coffee in specific. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
 	cost = 0
-	custom_only = FALSE
 	allergen = ALLERGEN_COFFEE
 
 /datum/trait/neutral/allergen_reduced_effect
 	name = "Reduced Allergen Reaction"
 	desc = "This trait drastically reduces the effects of allergen reactions. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("allergen_damage_severity" = 1.25, "allergen_disable_severity" = 5)
 	excludes = list(/datum/trait/neutral/allergen_increased_effect)
 
@@ -451,7 +416,6 @@ YW change end */
 	name = "Increased Allergen Reaction"
 	desc = "This trait drastically increases the effects of allergen reactions, enough that even a small dose can be lethal. If you don't have any allergens set, it does nothing. It does not apply to special reactions (such as unathi drowsiness from sugars)."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("allergen_damage_severity" = 5, "allergen_disable_severity" = 20)
 	excludes = list(/datum/trait/neutral/allergen_reduced_effect)
 
@@ -460,42 +424,36 @@ YW change end */
 	name = "Spice Intolerance, Extreme"
 	desc = "Spicy (and chilly) peppers are three times as strong. (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 3) // 300% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/spice_intolerance_basic
 	name = "Spice Intolerance, Heavy"
 	desc = "Spicy (and chilly) peppers are twice as strong. (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 2) // 200% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/spice_intolerance_slight
 	name = "Spice Intolerance, Slight"
 	desc = "You have a slight struggle with spicy foods. Spicy (and chilly) peppers are one and a half times stronger. (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 1.5) // 150% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/spice_tolerance_basic
 	name = "Spice Tolerance"
 	desc = "Spicy (and chilly) peppers are only three-quarters as strong. (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 0.75) // 75% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/spice_tolerance_advanced
 	name = "Spice Tolerance, Strong"
 	desc = "Spicy (and chilly) peppers are only half as strong. (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 0.5) // 50% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/spice_immunity
 	name = "Spice Tolerance, Extreme"
 	desc = "Spicy (and chilly) peppers are basically ineffective! (This does not affect pepperspray.)"
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("spice_mod" = 0.25) // 25% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /*YW CHANGE START: Commented out because we got our own variants
@@ -504,42 +462,36 @@ YW change end */
 	name = "Liver of Air"
 	desc = "The only way you can hold a drink is if it's in your own two hands, and even then you'd best not inhale too deeply near it. Drinks are three times as strong."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 3) // 300% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/alcohol_intolerance_basic
 	name = "Liver of Lilies"
 	desc = "You have a hard time with alcohol. Maybe you just never took to it, or maybe it doesn't agree with you... either way, drinks are twice as strong."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 2) // 200% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/alcohol_intolerance_slight
 	name = "Liver of Tulips"
 	desc = "You have a slight struggle with alcohol. Drinks are one and a half times stronger."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 1.5) // 150% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/alcohol_tolerance_basic
 	name = "Liver of Iron"
 	desc = "You can hold drinks much better than those lily-livered land-lubbers! Arr! Drinks are only three-quarters as strong."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 0.75) // 75% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/alcohol_tolerance_advanced
 	name = "Liver of Steel"
 	desc = "Drinks tremble before your might! You can hold your alcohol twice as well as those blue-bellied barnacle boilers! Drinks are only half as strong."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 0.5) // 50% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 
 /datum/trait/neutral/alcohol_immunity
 	name = "Liver of Durasteel"
 	desc = "You've drunk so much that most booze doesn't even faze you. It takes something like a Pan-Galactic or a pint of Deathbell for you to even get slightly buzzed."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("alcohol_mod" = 0.25) // 25% as effective if alcohol_mod is set to 1. If it's not 1 in species.dm, update this!
 // Alcohol Traits End Here.
 YW CHANGE STOP*/
@@ -548,7 +500,6 @@ YW CHANGE STOP*/
 	name = "Colorblindness (Monochromancy)"
 	desc = "You simply can't see colors at all, period. You are 100% colorblind."
 	cost = 0
-	custom_only = FALSE // YW EDIT
 
 /datum/trait/neutral/colorblind/mono/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -558,7 +509,6 @@ YW CHANGE STOP*/
 	name = "Colorblindness (Para Vulp)"
 	desc = "You have a severe issue with green colors and have difficulty recognizing them from red colors."
 	cost = 0
-	custom_only = FALSE // YW EDIT
 
 /datum/trait/neutral/colorblind/para_vulp/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -568,7 +518,6 @@ YW CHANGE STOP*/
 	name = "Colorblindness (Para Taj)"
 	desc = "You have a minor issue with blue colors and have difficulty recognizing them from red colors."
 	cost = 0
-	custom_only = FALSE // YW EDIT
 
 /datum/trait/neutral/colorblind/para_taj/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -580,7 +529,6 @@ YW CHANGE STOP*/
 	desc = "Your body is taller than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_y" = 1.09)
 	excludes = list(/datum/trait/neutral/tall, /datum/trait/neutral/short, /datum/trait/neutral/shorter)
 
@@ -593,7 +541,6 @@ YW CHANGE STOP*/
 	desc = "Your body is a bit taller than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_y" = 1.05)
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/short, /datum/trait/neutral/shorter)
 
@@ -606,7 +553,6 @@ YW CHANGE STOP*/
 	desc = "Your body is a bit shorter than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_y" = 0.95)
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/tall, /datum/trait/neutral/shorter)
 
@@ -619,7 +565,6 @@ YW CHANGE STOP*/
 	desc = "Your body is shorter than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_y" = 0.915)
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/tall, /datum/trait/neutral/short)
 
@@ -632,7 +577,6 @@ YW CHANGE STOP*/
 	desc = "Your body is much wider than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_x" = 1.095)
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/thin, /datum/trait/neutral/thinner)
 
@@ -645,7 +589,6 @@ YW CHANGE STOP*/
 	desc = "Your body is wider than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_x" = 1.054)
 	excludes = list(/datum/trait/neutral/obese, /datum/trait/neutral/thin, /datum/trait/neutral/thinner)
 
@@ -658,7 +601,6 @@ YW CHANGE STOP*/
 	desc = "Your body is thinner than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_x" = 0.945)
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/obese, /datum/trait/neutral/thinner)
 
@@ -671,7 +613,6 @@ YW CHANGE STOP*/
 	desc = "Your body is much thinner than average."
 	sort = TRAIT_SORT_BODYTYPE
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("icon_scale_x" = 0.905)
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/obese, /datum/trait/neutral/thin)
 
@@ -683,7 +624,6 @@ YW CHANGE STOP*/
 	name = "Dominate Predator"
 	desc = "Allows you to attempt to take control of a predator while inside of their belly."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/dominate_predator/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -693,7 +633,6 @@ YW CHANGE STOP*/
 	name = "Dominate Prey"
 	desc = "Connect to and dominate the brain of your prey."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/dominate_prey/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -703,7 +642,6 @@ YW CHANGE STOP*/
 	name = "Submit To Prey"
 	desc = "Allow prey's mind to control your own body."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/submit_to_prey/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -713,7 +651,6 @@ YW CHANGE STOP*/
 	name = "Vertical Nom"
 	desc = "Allows you to consume people from up above."
 	cost = 0
-	custom_only = FALSE
 
 /datum/trait/neutral/vertical_nom/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -723,42 +660,36 @@ YW CHANGE STOP*/
 	name = "Light Frame"
 	desc = "You are considered smaller than you are for micro interactions."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("micro_size_mod" = -0.15)
 
 /datum/trait/neutral/micro_size_up
 	name = "Heavy Frame"
 	desc = "You are considered bigger than you are for micro interactions."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("micro_size_mod" = 0.15)
 
 /datum/trait/neutral/digestion_value_up
 	name = "Highly Filling"
 	desc = "You provide notably more nutrition to anyone who makes a meal of you."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("digestion_nutrition_modifier" = 2)
 
 /datum/trait/neutral/digestion_value_up_plus
 	name = "Extremely Filling"
 	desc = "You provide a lot more nutrition to anyone who makes a meal of you."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("digestion_nutrition_modifier" = 3)
 
 /datum/trait/neutral/digestion_value_down
 	name = "Slightly Filling"
 	desc = "You provide notably less nutrition to anyone who makes a meal of you."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("digestion_nutrition_modifier" = 0.5)
 
 /datum/trait/neutral/digestion_value_down_plus
 	name = "Barely Filling"
 	desc = "You provide a lot less nutrition to anyone who makes a meal of you."
 	cost = 0
-	custom_only = FALSE
 	var_changes = list("digestion_nutrition_modifier" = 0.25)
 
 
@@ -766,7 +697,6 @@ YW CHANGE STOP*/
 	name = "Insatiable"
 	desc = "You need to eat a third of a plate more to be sated."
 	cost = 0
-	custom_only = FALSE
 	can_take = ORGANICS
 	var_changes = list(organic_food_coeff = 0.67, digestion_efficiency = 0.66)
 	excludes = list(/datum/trait/neutral/bloodsucker)
@@ -775,7 +705,6 @@ YW CHANGE STOP*/
 	name = "Insatiable, Greater"
 	desc = "You need to eat three times as much to feel sated."
 	cost = 0
-	custom_only = FALSE
 	can_take = ORGANICS
 	var_changes = list(organic_food_coeff = 0.33, digestion_efficiency = 0.33)
 	excludes = list(/datum/trait/neutral/bloodsucker, /datum/trait/neutral/food_value_down)
@@ -784,7 +713,6 @@ YW CHANGE STOP*/
 	name = "Discount Biofuel processor"
 	desc = "You are able to gain energy through consuming and processing normal food. Unfortunately, it is half as effective as premium models. On the plus side, you still recharge from charging stations fairly efficiently."
 	cost = 0
-	custom_only = FALSE
 	can_take = SYNTHETICS
 	var_changes = list("organic_food_coeff" = 0, "synthetic_food_coeff" = 0.3, digestion_efficiency = 0.5)
 	excludes = list(/datum/trait/neutral/synth_chemfurnace)
@@ -793,7 +721,6 @@ YW CHANGE STOP*/
 	name = "Pain simulation"
 	desc = "You have added modules in your synthetic shell that simulates the sensation of pain. You are able to turn this on and off for repairs as needed or convenience at will."
 	cost = 0
-	custom_only = FALSE
 	can_take = SYNTHETICS
 
 

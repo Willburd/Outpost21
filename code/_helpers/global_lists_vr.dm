@@ -546,16 +546,13 @@ var/global/list/remainless_species = list(SPECIES_PROMETHEAN,
 		switch(category)
 			if(-INFINITY to -0.1)
 				negative_traits[traitpath] = T
-				if(!(T.custom_only))
-					everyone_traits_negative[traitpath] = T
+				everyone_traits_negative[traitpath] = T
 			if(0)
 				neutral_traits[traitpath] = T
-				if(!(T.custom_only))
-					everyone_traits_neutral[traitpath] = T
+				everyone_traits_neutral[traitpath] = T
 			if(0.1 to INFINITY)
 				positive_traits[traitpath] = T
-				if(!(T.custom_only))
-					everyone_traits_positive[traitpath] = T
+				everyone_traits_positive[traitpath] = T
 
 
 	// Weaver recipe stuff

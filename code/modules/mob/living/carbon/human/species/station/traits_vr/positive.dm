@@ -208,7 +208,6 @@
 	desc = "You can fall from certain heights without suffering any injuries, be it via wings, lightness of frame or general dexterity."
 	cost = 1
 	var_changes = list("soft_landing" = TRUE)
-	custom_only = FALSE
 
 /datum/trait/positive/hardfeet
 	name = "Hard Feet"
@@ -230,7 +229,6 @@
 	desc = "You're capable of parkour and can *flip over low objects (most of the time)."
 	cost = 2
 	var_changes = list("agility" = 90)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 //YW ADDITIONS: START
@@ -317,7 +315,6 @@
 	cost = 1
 	var_changes = list("num_alternate_languages" = 6)
 	var_changes_pref = list("extra_languages" = 3)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 /datum/trait/positive/good_shooter
@@ -325,7 +322,6 @@
 	desc = "You are better at aiming than most."
 	cost = 2
 	var_changes = list("gun_accuracy_mod" = 25)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 /datum/trait/positive/pain_tolerance

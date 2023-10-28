@@ -136,7 +136,6 @@
 	desc = "Increases your susceptibility to electric shocks by 50%" //YW EDIT
 	cost = -3 //YW EDIT
 	var_changes = list("siemens_coefficient" = 1.5) //This makes you significantly weaker to tasers. //YW EDIT
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_LESS_BETTER
 
 //YW ADDITIONS: START
@@ -153,7 +152,6 @@
 	cost = -3 //YW EDIT
 	var_changes = list("bloodloss_rate" = 2)
 	can_take = ORGANICS
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_LESS_BETTER
 
 /datum/trait/negative/hollow
@@ -172,19 +170,16 @@
 	desc = "Your light weight and poor balance make you very susceptible to unhelpful bumping. Think of it like a bowling ball versus a pin."
 	cost = -2
 	var_changes = list("lightweight" = 1)
-	custom_only = FALSE
 
 /datum/trait/negative/neural_hypersensitivity
 	name = "Neural Hypersensitivity"
 	desc = "Your nerves are particularly sensitive to physical changes, leading to experiencing twice the intensity of pain and pleasure alike. Makes all pain effects twice as strong, and occur at half as much damage."
 	cost = -1
 	var_changes = list("trauma_mod" = 2)
-	can_take = ORGANICS
 
 /datum/trait/negative/breathes
 	cost = -2
 	can_take = ORGANICS
-	custom_only = FALSE
 
 /datum/trait/negative/breathes/phoron
 	name = "Phoron Breather"
@@ -207,7 +202,6 @@
 	cost = -1
 	var_changes = list("num_alternate_languages" = 0)
 	var_changes_pref = list("extra_languages" = -3)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 /datum/trait/negative/dark_blind
@@ -215,7 +209,6 @@
 	desc = "You cannot see in dark at all."
 	cost = -1
 	var_changes = list("darksight" = 0)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 /datum/trait/negative/bad_shooter
@@ -223,7 +216,6 @@
 	desc = "You are terrible at aiming."
 	cost = -1
 	var_changes = list("gun_accuracy_mod" = -35)
-	custom_only = FALSE
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 
 //YW ADDITIONS: START
@@ -232,12 +224,10 @@
 	desc = "You have trouble dealing with sudden flashes of light, taking some time for you to recover. The effects of flashes from cameras and security equipment leaves you stunned for some time."
 	cost = -1
 	var_changes = list("flash_mod" = 1.5)
-	custom_only = FALSE
 
 /datum/trait/negative/light_sensitivity_plus
 	name = "Photosensitivity Extreme"
 	desc = "You have trouble dealing with sudden flashes of light, taking quite a long time for you to be able to recover. The effects of flashes from cameras and security equipment leave you stunned for some time."
 	cost = -2
 	var_changes = list("flash_mod" = 2.0)
-	custom_only = FALSE
 //YW ADDITIONS: END

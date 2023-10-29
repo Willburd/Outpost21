@@ -386,7 +386,8 @@
 	var/obj/item/organ/internal/I = null //Used for further down below when an organ is picked.
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
-			set_light(0)
+			if(!glow_toggle) // stops glowing body trait promies from turning off instantly if they WANT to glow
+				set_light(0)
 		if(accumulated_rads)
 			accumulated_rads -= RADIATION_SPEED_COEFFICIENT //Accumulated rads slowly dissipate very slowly. Get to medical to get it treated!
 	else if(((life_tick % 5 == 0) && radiation) || (radiation > 600)) //Radiation is a slow, insidious killer. Unless you get a massive dose, then the onset is sudden!

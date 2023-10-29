@@ -135,7 +135,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/verb/rename_gun()
 	set name = "Name Gun"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Rename your gun."
 
 	var/input = sanitizeSafe(input(usr, "What do you want to name the gun?", ,""), MAX_NAME_LEN)
@@ -148,7 +148,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/verb/reskin_gun()
 	set name = "Resprite gun"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Click to choose a sprite for your gun."
 
 	var/mob/M = usr
@@ -233,4 +233,3 @@
 	load_method = SINGLE_CASING
 	max_shells = 5
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
-	

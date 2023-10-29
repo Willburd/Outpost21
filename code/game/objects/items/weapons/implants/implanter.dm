@@ -16,7 +16,7 @@
 	update()
 
 /obj/item/weapon/implanter/verb/remove_implant()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Remove Implant"
 	set src in usr
 

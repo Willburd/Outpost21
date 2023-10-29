@@ -272,7 +272,7 @@
 // Parameters: None
 // Description: Allows ghosts to call communicators, if they meet all the requirements.
 /mob/observer/dead/verb/join_as_voice()
-	set category = "Ghost"
+	set category = VERBTAB_GHOST
 	set name = "Call Communicator"
 	set desc = "If there is a communicator available, send a request to speak through it.  This will reset your respawn timer, if someone picks up."
 
@@ -364,4 +364,3 @@
 
 	visible_message(.)
 	update_icon()
-

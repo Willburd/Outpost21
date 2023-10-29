@@ -199,7 +199,7 @@
 /obj/item/clothing/head/helmet/space/void/aether/verb/select_color()
 	set name = "Helmet Color"
 	set desc = "Change the color of [src]"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 
 	var/choice = tgui_input_list(usr, "Select a new color:", "[src] Color", list("White", "Blue", "Purple", "Yellow", "Red", "Green"))
 	if(!choice)

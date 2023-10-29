@@ -1,7 +1,7 @@
 //Used to create the gene mask. Shamelessly stolen from the plant controller and cut down.
 
 /client/proc/show_xenobio_genes()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Show Xenobio Genes"
 	set desc = "Prints the round's plant xenobio masks."
 

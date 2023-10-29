@@ -25,7 +25,7 @@
 	incoming_damage_percent = 1.35
 
 /mob/proc/changeling_enfeebling_string()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Enfeebling Sting (30)"
 	set desc = "Reduces the maximum health of a victim for a few minutes.."
 

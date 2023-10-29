@@ -53,7 +53,7 @@
 
 /obj/item/device/assembly/electronic_assembly/verb/toggle()
 	set src in usr
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Open/Close Device Assembly"
 	set desc = "Open or close device assembly!"
 
@@ -81,4 +81,3 @@
 	if(!CanInteract(user, state = GLOB.tgui_deep_inventory_state))
 		return 0
 	return 1
-

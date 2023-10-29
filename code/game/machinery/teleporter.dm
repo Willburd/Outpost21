@@ -105,7 +105,7 @@
 	teleport_control.tgui_interact(user)
 
 /obj/machinery/computer/teleporter/verb/set_id(t as text)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Set teleporter ID"
 	set src in oview(1)
 	set desc = "ID Tag:"

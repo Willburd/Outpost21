@@ -5,7 +5,7 @@
 	verbpath = /mob/proc/changeling_paralysis_sting
 
 /mob/proc/changeling_paralysis_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Paralysis sting (30)"
 	set desc="Sting target"
 

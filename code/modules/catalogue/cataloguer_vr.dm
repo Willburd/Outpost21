@@ -23,7 +23,7 @@
 
 /obj/item/device/cataloguer/compact/verb/toggle()
 	set name = "Toggle Cataloguer"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if(busy)
 		to_chat(usr, span("warning", "\The [src] is currently scanning something."))

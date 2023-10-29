@@ -122,7 +122,7 @@
 /obj/item/device/floor_painter/verb/choose_colour()
 	set name = "Choose Colour"
 	set desc = "Choose a paint colour."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.incapacitated())
@@ -135,7 +135,7 @@
 /obj/item/device/floor_painter/verb/choose_decal()
 	set name = "Choose Decal"
 	set desc = "Choose a painting decal."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.incapacitated())
@@ -149,7 +149,7 @@
 /obj/item/device/floor_painter/verb/choose_direction()
 	set name = "Choose Direction"
 	set desc = "Choose a painting direction."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.incapacitated())

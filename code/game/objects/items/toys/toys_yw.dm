@@ -14,7 +14,7 @@
 
 /obj/item/toy/plushie/teshari/strix/rename_plushie()
 	set name = "Name Plushie"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Give your plushie a cute name!"
 	var/mob/M = usr
 	if(!M.mind)
@@ -41,7 +41,7 @@
 
 /obj/item/toy/plushie/teshari/eili/rename_plushie()
 	set name = "Name Plushie"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Give your plushie a cute name!"
 	var/mob/M = usr
 	if(!M.mind)
@@ -122,7 +122,7 @@
 
 /obj/item/toy/plushie/jeans/rename_plushie()
 	set name = "Name Plushie"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Give your plushie a cute name!"
 	var/mob/M = usr
 	if(!M.mind)
@@ -131,4 +131,3 @@
 	if(src && !M.stat && in_range(M,src))
 		to_chat(M, "You cannot rename Jeans! You hug her anyway.")
 		return 1
-

@@ -1,6 +1,6 @@
 /mob/living/proc/toggle_rider_reins()
 	set name = "Give Reins"
-	set category = "Abilities"
+	set category = VERBTAB_ACTIONS
 	set desc = "Let people riding on you control your movement."
 
 	if(riding_datum)

@@ -131,7 +131,7 @@
 /obj/item/device/closet_painter/verb/choose_colour()
 	set name = "Choose Colour"
 	set desc = "Choose a regular closet painter colour."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.incapacitated())
@@ -145,7 +145,7 @@
 /obj/item/device/closet_painter/verb/choose_colour_secure()
 	set name = "Choose Secure Colour"
 	set desc = "Choose a secure closet painter colour."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.incapacitated())

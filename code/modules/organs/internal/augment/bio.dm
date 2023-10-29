@@ -44,7 +44,7 @@
 /mob/living/carbon/human/proc/toggle_shades()
 	set name = "Toggle Integrated Thermoshades"
 	set desc = "Toggle your flash-proof, thermal-integrated sunglasses."
-	set category = "Augments"
+	set category = VERBTAB_EQUIP
 
 	var/obj/item/organ/internal/augment/aug = internal_organs_by_name[O_AUG_EYES]
 
@@ -101,4 +101,3 @@
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = owner
 		H.add_modifier(/datum/modifier/sprinting, 1 MINUTES)
-

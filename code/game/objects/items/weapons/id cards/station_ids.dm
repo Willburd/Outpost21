@@ -103,7 +103,7 @@
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	to_chat(usr, "\icon[src][bicon(src)] [src.name]: The current assignment on the card is [src.assignment].")

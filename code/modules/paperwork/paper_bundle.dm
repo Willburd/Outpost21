@@ -189,7 +189,7 @@
 
 /obj/item/weapon/paper_bundle/verb/rename()
 	set name = "Rename bundle"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	var/n_name = sanitizeSafe(tgui_input_text(usr, "What would you like to label the bundle?", "Bundle Labelling", null, MAX_NAME_LEN), MAX_NAME_LEN)
@@ -201,7 +201,7 @@
 
 /obj/item/weapon/paper_bundle/verb/remove_all()
 	set name = "Loose bundle"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	to_chat(usr, "<span class='notice'>You loosen the bundle.</span>")

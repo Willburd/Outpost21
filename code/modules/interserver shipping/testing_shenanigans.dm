@@ -1,6 +1,6 @@
 /client/verb/accept_request(var/port as text)
 	set name = "Accept an inbound request"
-	set category = "Shipping"
+	set category = VERBTAB_DEBUG
 
 	if (shipping_contacts.len < 2)
 		usr << "Not enough people have talked to you!"
@@ -41,7 +41,7 @@
 
 /client/verb/finalize_outbound(var/target as text, var/port as text)
 	set name = "Finalize outbound shipping"
-	set category = "Shipping"
+	set category = VERBTAB_DEBUG
 
 	var/list/rids = shipping_contacts["origin"]
 
@@ -88,7 +88,7 @@
 
 /client/verb/create_shipping(var/count as num)
 	set name = "Create a shipment"
-	set category = "Shipping"
+	set category = VERBTAB_DEBUG
 
 	if (!count || count < 0)
 		usr << "Bad count"

@@ -85,7 +85,7 @@
 /*
 /obj/item/clothing/under/det/verb/rollup()
 	set name = "Roll Suit Sleeves"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	var/unrolled = item_state_slots[slot_w_uniform_str] == initial(worn_state)
 	item_state_slots[slot_w_uniform_str] = unrolled ? "[worn_state]_r" : initial(worn_state)

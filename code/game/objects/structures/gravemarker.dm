@@ -112,7 +112,7 @@
 
 /obj/structure/gravemarker/verb/rotate_clockwise()
 	set name = "Rotate Grave Marker Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(anchored)

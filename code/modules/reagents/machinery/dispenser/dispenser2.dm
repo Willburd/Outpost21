@@ -32,7 +32,7 @@
 
 /obj/machinery/chemical_dispenser/verb/rotate_clockwise()
 	set name = "Rotate Dispenser Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if (src.anchored || usr:stat)
@@ -134,7 +134,7 @@
 	data["amount"] = amount
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
-	
+
 	var/beakerContents[0]
 	if(container && container.reagents && container.reagents.reagent_list.len)
 		for(var/datum/reagent/R in container.reagents.reagent_list)

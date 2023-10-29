@@ -118,7 +118,7 @@
 
 /mob/living/simple_animal/cat/fluff/verb/become_friends()
 	set name = "Become Friends"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set src in view(1)
 
 	if(!friend)

@@ -33,7 +33,7 @@
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
 	set name = "Set Cartridge Label"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(usr, 1)
 
 	setLabel(L, usr)

@@ -174,7 +174,7 @@
 /obj/machinery/appliance/proc/choose_output()
 	set src in view()
 	set name = "Choose output"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if (!isliving(usr))
 		return
@@ -595,7 +595,7 @@
 /obj/machinery/appliance/attack_hand(var/mob/user)
 	if(..())
 		return
-	
+
 	if(cooking_objs.len)
 		removal_menu(user)
 

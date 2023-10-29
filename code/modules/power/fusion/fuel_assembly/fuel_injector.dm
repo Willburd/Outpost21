@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(fuel_injectors)
 		StopInjecting()
 
 /obj/machinery/fusion_fuel_injector/verb/rotate_clockwise()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Rotate Generator Clockwise"
 	set src in view(1)
 
@@ -145,7 +145,7 @@ GLOBAL_LIST_EMPTY(fuel_injectors)
 	src.set_dir(turn(src.dir, 270))
 
 /obj/machinery/fusion_fuel_injector/verb/rotate_counterclockwise()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Rotate Generator Counterclockwise"
 	set src in view(1)
 

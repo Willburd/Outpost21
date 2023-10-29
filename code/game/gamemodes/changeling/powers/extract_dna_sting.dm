@@ -8,7 +8,7 @@
 	verbpath = /mob/proc/changeling_extract_dna_sting
 
 /mob/proc/changeling_extract_dna_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Extract DNA Sting (40)"
 	set desc="Stealthily sting a target to extract their DNA."
 
@@ -37,7 +37,7 @@
 
 	add_attack_logs(src,T,"DNA extraction sting (changeling)")
 
-	var/saved_dna = T.dna.Clone() /// Prevent transforming bugginess. 
+	var/saved_dna = T.dna.Clone() /// Prevent transforming bugginess.
 	var/datum/absorbed_dna/newDNA = new(T.real_name, saved_dna, T.species.name, T.languages, T.identifying_gender, T.flavor_text, T.modifiers)
 	absorbDNA(newDNA)
 

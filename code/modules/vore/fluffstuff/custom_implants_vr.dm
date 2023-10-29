@@ -121,7 +121,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant_roiz()
 	set name = "Lay Egg"
 	set desc = "Force Roiz to lay an egg by squeezing into his lower body! This makes the lizard extremely embarrassed, and it looks funny."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)
@@ -190,7 +190,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant_jasmine()
 	set name = "Lay Egg"
 	set desc = "Cause Jasmine to lay an egg by squeezing her tauric belly!"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)
@@ -259,7 +259,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant_yonra()
 	set name = "Lay Egg"
 	set desc = "Force Yonra to lay an egg by squeezing into her lower body! This makes the Teshari stop whatever she is doing at the time, greatly embarassing her."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)
@@ -344,7 +344,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant_rischi()
 	set name = "Lay Egg"
 	set desc = "Force Rischi to lay an egg by squeezing her! What a terribly rude thing to do!"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)
@@ -495,7 +495,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant_evian()
 	set name = "Lay Egg"
 	set desc = "Force Evian to lay an egg by squeezing into his lower body! This makes the lizard extremely embarrassed, and it looks funny."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)

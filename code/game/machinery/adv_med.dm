@@ -113,7 +113,7 @@
 
 /obj/machinery/bodyscanner/verb/eject()
 	set src in oview(1)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Eject Body Scanner"
 
 	if(usr.incapacitated())

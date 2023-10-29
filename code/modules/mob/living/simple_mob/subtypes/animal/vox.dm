@@ -66,7 +66,7 @@
 
 	set name = "Fire quill"
 	set desc = "Fires a viciously pointed quill at a high speed."
-	set category = "Alien"
+	set category = VERBTAB_POWERS
 
 	if(quills<=0)
 		return
@@ -86,7 +86,7 @@
 		quills++
 
 /mob/living/simple_mob/vox/armalis/verb/message_mob()
-	set category = "Alien"
+	set category = VERBTAB_POWERS
 	set name = "Commune with creature"
 	set desc = "Send a telepathic message to an unlucky recipient."
 
@@ -116,7 +116,7 @@
 		H.drip(1)
 
 /mob/living/simple_mob/vox/armalis/verb/shriek()
-	set category = "Alien"
+	set category = VERBTAB_POWERS
 	set name = "Shriek"
 	set desc = "Give voice to a psychic shriek."
 

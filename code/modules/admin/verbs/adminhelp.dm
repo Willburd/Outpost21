@@ -579,7 +579,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //
 
 /client/verb/adminhelp(msg as text)
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Adminhelp"
 
 	if(say_disabled)	//This is here to try to identify lag problems
@@ -619,7 +619,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //admin proc
 /client/proc/cmd_admin_ticket_panel()
 	set name = "Show Ticket List"
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG|R_EVENT, TRUE))
 		return

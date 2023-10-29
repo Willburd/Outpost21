@@ -447,7 +447,7 @@
 /obj/item/weapon/storage/backpack/parachute/verb/pack_parachute()
 
 	set name = "Pack/Unpack Parachute"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!istype(src.loc, /mob/living))

@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(plants)
 
 	// Caching
 	var/list/currentrun = src.currentrun
-	
+
 	while(currentrun.len)
 		var/obj/effect/plant/P = currentrun[currentrun.len]
 		--currentrun.len
@@ -146,7 +146,7 @@ SUBSYSTEM_DEF(plants)
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Show Plant Genes"
 	set desc = "Prints the round's plant gene masks."
 

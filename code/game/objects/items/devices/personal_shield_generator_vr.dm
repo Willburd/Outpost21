@@ -234,7 +234,7 @@
 
 /obj/item/device/personal_shield_generator/verb/toggle_shield()
 	set name = "Toggle Shield"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/mob/living/carbon/human/user = usr
 
@@ -268,7 +268,7 @@
 
 /obj/item/device/personal_shield_generator/verb/weapon_toggle() //Make this work on Alt-Click
 	set name = "Toggle Gun"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 
 	var/mob/living/carbon/human/user = usr
 

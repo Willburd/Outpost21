@@ -32,7 +32,7 @@
 	hides_bulges = TRUE
 
 /obj/item/clothing/under/hyperfiber/verb/toggle_fibers()
-		set category = "Object"
+		set category = VERBTAB_OBJECT
 		set name = "Adjust Bluespace Fibers"
 		set desc = "Adjust your suit's HYPER fibers. Activating it hides your stomach(s) and your general body-build. Good if you have a lot to hide."
 		set src in usr
@@ -59,7 +59,7 @@
 /obj/item/clothing/under/hyperfiber/bluespace/verb/resize()
 	set name = "Adjust Bluespace Fibers"
 	set desc = "Adjust your suit's bluespace fibers. Activating it allows you to expand your own body or reduce it in size! Effect is limited to when you have the suit on."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	bluespace_size(usr)
 

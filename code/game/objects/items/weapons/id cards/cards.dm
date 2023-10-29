@@ -65,7 +65,7 @@
 
 /obj/item/weapon/card/data/verb/label(t as text)
 	set name = "Label Card"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if (t)

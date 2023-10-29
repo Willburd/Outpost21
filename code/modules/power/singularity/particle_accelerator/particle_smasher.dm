@@ -246,7 +246,7 @@
 
 /obj/machinery/particle_smasher/verb/eject_contents()
 	set src in view(1)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Eject Particle Focus Contents"
 
 	if(usr.incapacitated())

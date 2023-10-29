@@ -299,7 +299,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		to_chat(usr, "<span class='notice'>This PDA does not have a pen in it.</span>")
 
 /obj/item/device/pda/verb/verb_reset_pda()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Reset PDA"
 	set src in usr
 
@@ -315,7 +315,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
 /obj/item/device/pda/verb/verb_remove_id()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Remove id"
 	set src in usr
 
@@ -332,7 +332,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 /obj/item/device/pda/verb/verb_remove_pen()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Remove pen"
 	set src in usr
 
@@ -345,7 +345,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
 /obj/item/device/pda/verb/verb_remove_cartridge()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Remove cartridge"
 	set src in usr
 

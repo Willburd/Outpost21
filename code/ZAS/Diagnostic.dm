@@ -1,5 +1,5 @@
 /client/proc/ZoneTick()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Process Atmos"
 	set desc = "Manually run a single tick of the air subsystem"
 
@@ -17,7 +17,7 @@
 	*/
 
 /client/proc/Zone_Info(turf/T as null|turf)
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	if(T)
 		if(istype(T,/turf/simulated) && T:zone)
 			T:zone:dbg_data(src)
@@ -36,7 +36,7 @@
 /client/var/list/zone_debug_images
 
 /client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	if(!istype(T))
 		return
 
@@ -95,6 +95,6 @@
 			to_chat(mob, "both turfs can merge.")
 
 /client/proc/ZASSettings()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 
 	vsc.SetDefault(mob)

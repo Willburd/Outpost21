@@ -205,7 +205,7 @@
 
 /obj/item/weapon/bluespace_harpoon/verb/chande_fire_mode(mob/user as mob)
 	set name = "Change Fire Mode"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in range(0)
 
 	if(transforming) return
@@ -216,7 +216,7 @@
 
 /obj/item/weapon/bluespace_harpoon/verb/chande_dropnom_mode(mob/user as mob)
 	set name = "Toggle Spatial Rearrangement"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in range(0)
 
 	dropnoms_active = !dropnoms_active

@@ -169,7 +169,7 @@
 
 /obj/item/device/electronic_assembly/verb/rename()
 	set name = "Rename Circuit"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Rename your circuit, useful to stay organized."
 
 	var/mob/M = usr

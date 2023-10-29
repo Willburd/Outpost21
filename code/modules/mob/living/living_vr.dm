@@ -4,7 +4,7 @@
 	..()
 
 /mob/living/verb/customsay()
-	set category = "IC"
+	set category = VERBTAB_IC
 	set name = "Customize Speech Verbs"
 	set desc = "Customize the text which appears when you type- e.g. 'says', 'asks', 'exclaims'."
 
@@ -25,7 +25,7 @@
 /mob/living/verb/set_metainfo()
 	set name = "Set OOC Metainfo"
 	set desc = "Sets OOC notes about yourself or your RP preferences or status."
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	var/new_metadata = sanitize(tgui_input_text(usr, "Enter any information you'd like others to see, such as Roleplay-preferences. This will not be saved permanently, only for this round.", "Game Preference" , html_decode(ooc_notes), multiline = TRUE,  prevent_enter = TRUE), extra = 0)
 	if(new_metadata && CanUseTopic(usr))
@@ -36,7 +36,7 @@
 /mob/living/verb/set_voice_freq()
 	set name = "Set Voice Frequency"
 	set desc = "Sets your voice frequency to be higher or lower pitched!"
-	set category = "OOC"
+	set category = VERBTAB_IC
 
 	var/list/preset_voice_freqs = list("high" = MAX_VOICE_FREQ, "middle-high" = 56250, "middle" = 425000, "middle-low"= 28750, "low" = MIN_VOICE_FREQ, "custom" = 1, "random" = 0)
 	var/choice = tgui_input_list(src, "What would you like to set your voice frequency to?", "Voice Frequency", preset_voice_freqs)
@@ -57,7 +57,7 @@
 /mob/living/verb/set_voice_type()
 	set name = "Set Voice Type"
 	set desc = "Sets your voice style!"
-	set category = "OOC"
+	set category = VERBTAB_IC
 
 	var/list/possible_voice_types = list(
 		"beep-boop",

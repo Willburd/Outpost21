@@ -17,7 +17,7 @@
 
 /obj/item/weapon/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if(show_above_suit == -1)
 		to_chat(usr, "<span class='notice'>\The [src] cannot be worn above your suit!</span>")

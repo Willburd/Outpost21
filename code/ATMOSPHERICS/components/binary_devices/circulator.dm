@@ -130,7 +130,7 @@
 
 /obj/machinery/atmospherics/binary/circulator/verb/rotate_clockwise()
 	set name = "Rotate Circulator Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained() || anchored)
@@ -142,7 +142,7 @@
 
 /obj/machinery/atmospherics/binary/circulator/verb/rotate_counterclockwise()
 	set name = "Rotate Circulator Counterclockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained() || anchored)

@@ -81,11 +81,11 @@
 	else
 		to_chat(M, "<span class='notice'>\The [src] emits an unpleasant tone... \The [bound_mob] is unresponsive.</span>")
 		playsound(src, 'sound/effects/capture-crystal-negative.ogg', 75, 1, -1)
-	
+
 //Lets the owner get AI controlled bound mobs to follow them, or tells player controlled mobs to follow them.
 /obj/item/capture_crystal/verb/follow_owner()
 	set name = "Toggle Follow"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!ismob(loc))
 		return
@@ -129,7 +129,7 @@
 //(Which is consistent with how it works with digestion anyway.)
 /obj/item/capture_crystal/verb/destroy_crystal()
 	set name = "Destroy Crystal"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!ismob(loc))
 		return
@@ -143,7 +143,7 @@
 //If you catch something/someone and want to give it to someone else though, that's fine.
 /obj/item/capture_crystal/verb/release_ownership()
 	set name = "Release Ownership"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!ismob(loc))
 		return
@@ -160,7 +160,7 @@
 //Let's make inviting ghosts be an option you can do instead of an automatic thing!
 /obj/item/capture_crystal/verb/invite_ghost()
 	set name = "Enhance (Toggle Ghost Join)"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!ismob(loc))
 		return
@@ -208,7 +208,7 @@
 	else return TRUE
 
 /obj/item/capture_crystal/attack(mob/living/M, mob/living/user)
-	if(bound_mob)	
+	if(bound_mob)
 		if(!bound_mob.devourable)	//Don't eat if prefs are bad
 			return
 		if(user.zone_sel.selecting == "mouth")	//Click while targetting the mouth and you eat/feed the stored mob to whoever you clicked on
@@ -268,7 +268,7 @@
 		bound_mob.capture_caught = TRUE
 		persist_storable = FALSE
 	desc = "A glowing crystal in what appears to be some kind of steel housing."
-	
+
 //Determines the capture chance! So you can't capture AI mobs if they're perfectly healthy and all that
 /obj/item/capture_crystal/proc/capture_chance(mob/living/M, user)
 	if(capture_chance_modifier >= 100)		//Master crystal always work

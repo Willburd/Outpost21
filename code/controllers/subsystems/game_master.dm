@@ -149,7 +149,7 @@ SUBSYSTEM_DEF(game_master)
 	var/ignore_round_chaos = FALSE			// If true, the system will happily choose back to back intense events like meteors and blobs, Dwarf Fortress style.
 
 /client/proc/show_gm_status()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Show GM Status"
 	set desc = "Shows you what the GM is thinking.  If only that existed in real life..."
 

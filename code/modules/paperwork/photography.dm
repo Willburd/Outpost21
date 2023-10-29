@@ -72,7 +72,7 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo/verb/rename()
 	set name = "Rename photo"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	var/n_name = sanitizeSafe(tgui_input_text(usr, "What would you like to label the photo?", "Photo Labelling", null, MAX_NAME_LEN), MAX_NAME_LEN)
@@ -139,7 +139,7 @@ var/global/photo_count = 0
 
 /obj/item/device/camera/verb/change_size()
 	set name = "Set Photo Focus"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	var/nsize = tgui_input_list(usr, "Photo Size","Pick a size of resulting photo.", list(1,3,5,7))
 	if(nsize)
 		size = nsize

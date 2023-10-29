@@ -2,7 +2,7 @@
 // Use case: if the server is left in the lobby for long enough,  players that join will see player_age = 0, restricting them from all age-locked jobs.
 /client/proc/dbcon_fix()
 	set name = "Fix Database Connection"
-	set category = "Server"
+	set category = VERBTAB_SERVER
 	set desc = "Experimental: Will hopefully perform a one-button fix for a database connection that has timed out."
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_FUN))
@@ -14,7 +14,7 @@
 		dbcon.Disconnect()
 	else
 		log_admin("Database already disconnected")
-	
+
 	establish_db_connection()
 	var/errno = dbcon.ErrorMsg()
 	if(errno)
@@ -23,7 +23,7 @@
 	if(!dbcon.IsConnected())
 		log_admin("Database could not be reconnected! Aborting.")
 		return FALSE
-	log_admin("Database reconnected. Fixing player ages...")	
+	log_admin("Database reconnected. Fixing player ages...")
 
 	var/num = 0
 	for(var/client/C in GLOB.clients)
@@ -34,6 +34,6 @@
 			return FALSE
 		if(C.player_age)
 			num++
-	
+
 	log_admin("Successfully updated non-0 player age for [num] clients.")
 	return FALSE

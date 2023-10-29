@@ -139,7 +139,7 @@
 
 /obj/structure/railing/verb/rotate_counterclockwise()
 	set name = "Rotate Railing Counter-Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.incapacitated())
@@ -158,7 +158,7 @@
 
 /obj/structure/railing/verb/rotate_clockwise()
 	set name = "Rotate Railing Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.incapacitated())
@@ -177,7 +177,7 @@
 
 /obj/structure/railing/verb/flip() // This will help push railing to remote places, such as open space turfs
 	set name = "Flip Railing"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.incapacitated())

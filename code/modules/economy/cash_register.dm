@@ -459,7 +459,7 @@
 
 
 /obj/machinery/cash_register/verb/open_cash_box()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Open Cash Box"
 	set desc = "Open/closes the register's cash box."
 	set src in view(1)

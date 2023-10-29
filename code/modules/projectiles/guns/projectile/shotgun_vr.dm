@@ -72,7 +72,7 @@
 	user.update_action_buttons()
 
 /obj/item/weapon/gun/projectile/shotgun/compact/verb/verb_toggle_stock(mob/user as mob)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle stock"
 	set src in usr
 

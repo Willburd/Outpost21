@@ -8,7 +8,7 @@
 
 //Increases macimum chemical storage
 /mob/proc/changeling_recursive_enhancement()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Recursive Enhancement"
 	set desc = "Empowers our abilities."
 	var/datum/changeling/changeling = changeling_power(0,0,100,UNCONSCIOUS)

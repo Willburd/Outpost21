@@ -345,7 +345,7 @@
 
 /obj/structure/window/verb/rotate_counterclockwise()
 	set name = "Rotate Window Counterclockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.incapacitated())
@@ -367,7 +367,7 @@
 
 /obj/structure/window/verb/rotate_clockwise()
 	set name = "Rotate Window Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.incapacitated())

@@ -391,7 +391,7 @@
 
 /obj/item/clothing/accessory/bracelet/friendship/verb/dedicate_bracelet()
 	set name = "Dedicate Bracelet"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Dedicate your friendship bracelet to a special someone."
 	var/mob/M = usr
 	if(!M.mind)

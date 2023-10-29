@@ -8,7 +8,7 @@
 /mob/living/proc/hide()
 	set name = "Hide"
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Abilities"
+	set category = VERBTAB_ACTIONS
 
 	if(stat == DEAD || paralysis || weakened || stunned || restrained() || buckled || LAZYLEN(grabbed_by) || has_buckled_mobs()) //VORE EDIT: Check for has_buckled_mobs() (taur riding)
 		return
@@ -24,7 +24,7 @@
 /mob/living/proc/toggle_selfsurgery()
 	set name = "Allow Self Surgery"
 	set desc = "Toggles the 'safeties' on self-surgery, allowing you to do so."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	allow_self_surgery = !allow_self_surgery
 

@@ -78,7 +78,7 @@ var/global/last_fax_role_request
 
 /obj/machinery/photocopier/faxmachine/verb/request_roles()
 	set name = "Staff Request Form"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	var/mob/living/L = usr

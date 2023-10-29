@@ -78,7 +78,7 @@
 /mob/living/simple_mob/animal/sif/shantak/leader/verb/rally_pack()
 	set name = "Rally Pack"
 	set desc = "Commands your fellow packmembers to follow you, the leader."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	for(var/mob/living/simple_mob/animal/sif/shantak/S in hearers(7, src))
 		if(istype(S, /mob/living/simple_mob/animal/sif/shantak/leader)) // Leaders won't follow other leaders. Also avoids trying to follow ourselves.
@@ -109,6 +109,6 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/passive
 	makes_dirt = 0
 	faction = "neutral"
-	
+
 /decl/mob_organ_names/shantak
 	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "mane", "snout")

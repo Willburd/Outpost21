@@ -13,7 +13,7 @@
 
 /obj/item/godfig/verb/resprite_figure()
 	set name = "Customize Figure"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Click to choose an appearance for your icon."
 
 	var/mob/M = usr
@@ -117,7 +117,7 @@
 
 /obj/item/godfig/verb/rename_fig()
 	set name = "Name Figure"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Rename your icon."
 
 	var/mob/M = usr

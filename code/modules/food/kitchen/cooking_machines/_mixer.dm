@@ -25,19 +25,19 @@ fundamental differences
 	cooking_objs += new /datum/cooking_item(new /obj/item/weapon/reagent_containers/cooking_container(src))
 	cooking = FALSE
 	selected_option = pick(output_options)
-	
+
 	mixer_loop = new(list(src), FALSE)
-	
+
 /obj/machinery/appliance/mixer/Destroy()
 	. = ..()
-	
+
 	QDEL_NULL(mixer_loop)
 
 //Mixers cannot-not do combining mode. So the default option is removed from this. A combine target must be chosen
 /obj/machinery/appliance/mixer/choose_output()
 	set src in view(1)
 	set name = "Choose output"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if (!isliving(usr))
 		return
@@ -102,7 +102,7 @@ fundamental differences
 /obj/machinery/appliance/mixer/toggle_power()
 	set src in view(1)
 	set name = "Toggle Power"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/datum/cooking_item/CI = cooking_objs[1]
 	if(!CI.container.check_contents())

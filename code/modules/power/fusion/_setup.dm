@@ -7,7 +7,7 @@
 #define SETUP_DELAYED 4		// Wait for other things first.
 
 /datum/admins/proc/setup_fusion()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Setup Fusion Core"
 	set desc = "Allows you to start the R-UST engine."
 

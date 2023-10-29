@@ -67,7 +67,7 @@
 	scope()
 
 /obj/item/weapon/gun/projectile/heavysniper/verb/scope()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1
 
@@ -106,7 +106,7 @@
 	scope()
 
 /obj/item/weapon/gun/projectile/SVD/verb/scope()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1
 

@@ -9,7 +9,7 @@
 	verbpath = /mob/proc/changeling_augmented_eyesight
 
 /mob/proc/changeling_augmented_eyesight()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Augmented Eyesight (5)"
 	set desc = "We evolve our eyes to sense the infrared."
 

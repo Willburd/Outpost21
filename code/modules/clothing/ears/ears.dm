@@ -19,7 +19,7 @@
 
 /obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
 	set name = "Toggle Headphone Music"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return

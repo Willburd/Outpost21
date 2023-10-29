@@ -108,7 +108,7 @@
 			loc = M.loc // simple "attach to head" effect!
 
 /mob/living/carbon/slime/verb/Evolve()
-	set category = "Slime"
+	set category = VERBTAB_POWERS
 	set desc = "This will let you evolve from baby to adult slime."
 
 	if(stat)
@@ -128,7 +128,7 @@
 		to_chat(src, "<span class='notice'>I have already evolved...</span>")
 
 /mob/living/carbon/slime/verb/Reproduce()
-	set category = "Slime"
+	set category = VERBTAB_POWERS
 	set desc = "This will make you split into four Slimes."
 
 	if(stat)

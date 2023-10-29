@@ -58,7 +58,7 @@ SUBSYSTEM_DEF(webhooks)
 
 /client/proc/reload_webhooks()
 	set name = "Reload Webhooks"
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 
 	if(!holder)
 		return
@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(webhooks)
 
 /client/proc/ping_webhook()
 	set name = "Ping Webhook"
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 
 	if(!holder)
 		return

@@ -71,7 +71,7 @@
 
 /obj/structure/closet/crate/verb/rotate_clockwise()
 	set name = "Rotate Crate Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if (usr.stat || usr.restrained()  || anchored)
@@ -80,7 +80,7 @@
 	src.set_dir(turn(src.dir, 270))
 
 /obj/structure/closet/crate/verb/rotate_counterclockwise()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Rotate Crate Counterclockwise"
 	set src in view(1)
 
@@ -190,7 +190,7 @@
 
 /obj/structure/closet/crate/secure/verb/verb_togglelock()
 	set src in oview(1) // One square distance
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle Lock"
 
 	if(!usr.canmove || usr.stat || usr.restrained()) // Don't use it if you're not able to! Checks for stuns, ghost and restrain

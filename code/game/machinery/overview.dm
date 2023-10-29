@@ -1,7 +1,7 @@
 //#define AMAP
 /obj/machinery/computer/security/verb/station_map()
 	set name = ".map"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 	usr.set_machine(src)
 	if(!mapping)	return

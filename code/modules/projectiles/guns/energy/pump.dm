@@ -195,7 +195,7 @@
 	scope()
 
 /obj/item/weapon/gun/energy/locked/frontier/rifle/verb/scope()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1
 

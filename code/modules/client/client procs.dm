@@ -463,7 +463,7 @@
 
 /client/verb/character_setup()
 	set name = "Character Setup"
-	set category = "Preferences"
+	set category = VERBTAB_PREFS
 	if(prefs)
 		prefs.ShowChoices(usr)
 
@@ -487,7 +487,7 @@
 
 /client/verb/reload_vchat()
 	set name = "Reload VChat"
-	set category = "OOC"
+	set category = VERBTAB_SPECIAL
 
 	//Timing
 	if(src.chatOutputLoadedAt > (world.time - 10 SECONDS))
@@ -588,7 +588,7 @@
 
 /client/verb/toggle_fullscreen()
 	set name = "Toggle Fullscreen"
-	set category = "OOC"
+	set category = VERBTAB_PREFS
 
 	fullscreen = !fullscreen
 
@@ -609,7 +609,7 @@
 /*
 /client/verb/toggle_status_bar()
 	set name = "Toggle Status Bar"
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	show_status_bar = !show_status_bar
 

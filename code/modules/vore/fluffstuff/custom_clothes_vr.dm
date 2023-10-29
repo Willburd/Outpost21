@@ -255,7 +255,7 @@
 
 /obj/item/clothing/suit/storage/fluff/fedcoat/verb/toggle()
 	set name = "Toggle coat buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -1117,7 +1117,7 @@
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/welding/fluff/vinjj/toggle() //overriding this 'cause it only conceals the eyes - it's a hat, not a mask
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.canmove && !usr.stat && !usr.restrained())
@@ -1438,7 +1438,7 @@ Departamental Swimsuits, for general use
 
 /obj/item/clothing/suit/storage/fluff/jacket/verb/toggle()
 	set name = "Toggle coat buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -2106,7 +2106,7 @@ Departamental Swimsuits, for general use
 	var/obj/item/device/perfect_tele/translocator = null // The translocator installed inside, if there is one. Gotta go out and get it first!
 
 /obj/item/clothing/head/fluff/nikki/verb/verb_translocator_unequip()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Nikki's Hat - Unequip Translocator"
 	set src in usr
 	translocator_unequip(translocator, usr)
@@ -2337,7 +2337,7 @@ Departamental Swimsuits, for general use
 
 /obj/item/clothing/accessory/poncho/roles/cloak/fluff/cloakglowing/verb/color_verb()
 	set name = "Swap color"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return

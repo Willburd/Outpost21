@@ -40,7 +40,7 @@
 
 		var/brain_activity = "none"
 		var/breathing = "none"
-		
+
 		if(victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
 			var/obj/item/organ/internal/brain/brain = victim.internal_organs_by_name[O_BRAIN]
 			if(istype(brain))
@@ -50,7 +50,7 @@
 					brain_activity = "weak"
 				else
 					brain_activity = "normal"
-			
+
 			var/obj/item/organ/internal/lungs/lungs = victim.internal_organs_by_name[O_LUNGS]
 			if(istype(lungs))
 				var/oxyloss = victim.getOxyLoss()
@@ -60,7 +60,7 @@
 					breathing = "shallow"
 				else
 					breathing = "normal"
-		
+
 		. += "<span class='notice'>Brain activity: [brain_activity]</span>"
 		. += "<span class='notice'>Breathing: [breathing]</span>"
 
@@ -118,7 +118,7 @@
 		else if(victim.stat == UNCONSCIOUS)
 			add_overlay("brain_bad")
 		else
-			add_overlay("brain_ok")				
+			add_overlay("brain_ok")
 	else
 		add_overlay("brain_warning")
 
@@ -137,7 +137,7 @@
 
 /obj/machinery/vitals_monitor/verb/toggle_beep()
 	set name = "Toggle Monitor Beeping"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	var/mob/user = usr

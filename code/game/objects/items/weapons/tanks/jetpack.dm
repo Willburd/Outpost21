@@ -36,13 +36,13 @@
 
 /obj/item/weapon/tank/jetpack/verb/toggle_rockets()
 	set name = "Toggle Jetpack Stabilization"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	stabilization_on = !( stabilization_on )
 	to_chat(usr, "You toggle the stabilization [stabilization_on? "on":"off"].")
 
 /obj/item/weapon/tank/jetpack/verb/toggle()
 	set name = "Toggle Jetpack"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 
 	on = !on
 	if(on)

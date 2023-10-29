@@ -6,7 +6,7 @@
 	verbpath = /mob/proc/changeling_DEATHsting
 
 /mob/proc/changeling_DEATHsting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Death Sting (40)"
 	set desc = "Causes spasms onto death."
 

@@ -1790,7 +1790,7 @@
 
 /obj/mecha/verb/connect_to_port()
 	set name = "Connect to port"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 
@@ -1821,7 +1821,7 @@
 
 /obj/mecha/verb/disconnect_from_port()
 	set name = "Disconnect from port"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 
@@ -1840,7 +1840,7 @@
 
 /obj/mecha/verb/toggle_lights()
 	set name = "Toggle Lights"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 	lights()
@@ -1858,7 +1858,7 @@
 
 /obj/mecha/verb/toggle_internal_tank()
 	set name = "Toggle internal airtank usage"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 	internal_tank()
@@ -1885,7 +1885,7 @@
 
 /obj/mecha/verb/toggle_strafing()
 	set name = "Toggle strafing"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 	strafing()
@@ -1910,7 +1910,7 @@
 	move_inside()
 
 /obj/mecha/verb/enter()
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set name = "Enter Exosuit"
 	set src in oview(1)
 	move_inside()
@@ -2057,7 +2057,7 @@
 
 /obj/mecha/verb/view_stats()
 	set name = "View Stats"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 	if(usr!=src.occupant)
@@ -2068,7 +2068,7 @@
 
 /*
 /obj/mecha/verb/force_eject()
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set name = "Force Eject"
 	set src in view(5)
 	src.go_out()
@@ -2077,7 +2077,7 @@
 
 /obj/mecha/verb/eject()
 	set name = "Eject"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 	if(usr!=src.occupant)
@@ -2847,7 +2847,7 @@
 /*
 /obj/mecha/verb/test_int_damage()
 	set name = "Test internal damage"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 	if(!occupant) return
 	if(usr!=occupant)

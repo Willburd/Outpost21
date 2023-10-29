@@ -74,7 +74,7 @@
 
 /obj/item/weapon/watertank/verb/toggle_mister()
 	set name = "Toggle Mister"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/mob/living/carbon/human/user = usr
 	if(!noz)

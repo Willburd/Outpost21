@@ -131,7 +131,7 @@
 	orescanner = new /obj/item/weapon/mining_scanner
 
 /obj/mecha/working/ripley/verb/detect_ore()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Detect Ores"
 	set src = usr.loc
 	set popup_menu = 0

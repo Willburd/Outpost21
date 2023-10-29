@@ -1,6 +1,6 @@
 //Revive from revival stasis
 /mob/proc/changeling_revive()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Revive"
 	set desc = "We are ready to revive ourselves on command."
 
@@ -98,7 +98,7 @@
 
 /obj/changeling_revive_holder/verb/ling_revive()
 	set src = usr.contents
-	set category = "Regenerate"
+	set category = VERBTAB_POWERS
 	set name = "Revive"
 	set desc = "We are ready to revive ourselves on command."
 

@@ -80,7 +80,7 @@
 
 // /obj/structure/ore_box/verb/empty_box() //Servercrash.mov
 //	set name = "Empty Ore Box"
-//	set category = "Object"
+//	set category = VERBTAB_OBJECT
 //	set src in view(1)
 //
 //	if(!ishuman(usr) && !isrobot(usr)) //Only living, intelligent creatures with gripping aparatti can empty ore boxes.

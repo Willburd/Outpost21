@@ -126,7 +126,7 @@
 //rotates piece
 /obj/structure/smoletrack/verb/rotate_clockwise()
 	set name = "Rotate Road Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
 		return
@@ -135,7 +135,7 @@
 //color roads
 /obj/structure/smoletrack/verb/colorpieces()
 	set name = "Use Color Pieces"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
 		return
@@ -147,7 +147,7 @@
 // probably redundant, allows for direct way to dismantal without knowing intents
 /obj/structure/smoletrack/verb/menudismantal()
 	set name = "Take Road Apart"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
 		return
@@ -295,7 +295,7 @@
 //color buildings
 /obj/structure/smolebuilding/verb/colorpieces()
 	set name = "Use Color Pieces"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
 		return
@@ -306,7 +306,7 @@
 //probably a bit redundant but gives a more direct way to disassemble buildings without using intents
 /obj/structure/smolebuilding/verb/menudismantal()
 	set name = "Take Building Apart"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
 		return

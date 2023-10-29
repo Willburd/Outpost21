@@ -1,6 +1,6 @@
 /proc/readglobal(which)
 	. = global.vars[which]
-		
+
 /proc/writeglobal(which, newval)
 	global.vars[which] = newval
 
@@ -83,7 +83,7 @@
 	)
 
 /client/proc/debug_global_variables()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "View Global Variables"
 
 	if(!global_vars_)

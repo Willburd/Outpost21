@@ -138,7 +138,7 @@
 		to_chat(viewer, "The [D.name] shows a [D.result].")
 
 /obj/item/weapon/storage/dicecup/verb/peekAtDice()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Peek at Dice"
 	set desc = "Peek at the dice under your cup."
 
@@ -146,7 +146,7 @@
 
 /obj/item/weapon/storage/dicecup/verb/revealDiceHand()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Reveal Dice"
 	set desc = "Reveal the dice hidden under your cup."
 

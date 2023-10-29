@@ -652,7 +652,7 @@
 
 /obj/item/weapon/storage/verb/toggle_gathering_mode()
 	set name = "Switch Gathering Method"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	collection_mode = !collection_mode
 	switch (collection_mode)
@@ -664,7 +664,7 @@
 
 /obj/item/weapon/storage/verb/quick_empty()
 	set name = "Empty Contents"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	// Only humans and robots can dump contents

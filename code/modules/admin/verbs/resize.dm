@@ -1,10 +1,10 @@
 /client/proc/resize(var/mob/living/L in mob_list)
     set name = "Resize"
     set desc = "Resizes any living mob without any restrictions on size."
-    set category = "Fun"
+    set category = VERBTAB_SPECIAL
     if(!check_rights(R_ADMIN, R_FUN))
         return
-    
+
     var/size_multiplier = tgui_input_number(usr, "Input size multiplier.", "Resize", 1)
     if(!size_multiplier)
         return //cancelled

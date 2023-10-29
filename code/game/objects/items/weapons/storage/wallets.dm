@@ -113,7 +113,7 @@
 
 /obj/item/weapon/storage/wallet/poly/proc/change_color()
 	set name = "Change Wallet Color"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Change the color of the wallet."
 	set src in usr
 
@@ -186,7 +186,7 @@
 		)
 
 /obj/item/weapon/storage/wallet/casino/verb/toggle_design()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle design"
 	set src in usr
 

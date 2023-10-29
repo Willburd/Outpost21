@@ -133,7 +133,7 @@
 /mob/living/simple_mob/vore/leopardmander/exotic/proc/toggle_glow()
 	set name = "Toggle Glow"
 	set desc = "Switch between glowing and not glowing."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	glow_toggle = !glow_toggle
 

@@ -34,7 +34,7 @@
 
 /obj/item/clothing/suit/storage/toggle/verb/toggle()
 	set name = "Toggle Coat Buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/suit/storage/hooded/toggle/verb/toggle()
 	set name = "Toggle Coat Buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0
@@ -95,7 +95,7 @@
 
 /obj/item/clothing/suit/storage/vest/verb/toggle()
 	set name ="Adjust Badge"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0
@@ -110,4 +110,3 @@
 		to_chat(usr, "\The [src] does not have a badge.")
 		return
 	update_clothing_icon()
-

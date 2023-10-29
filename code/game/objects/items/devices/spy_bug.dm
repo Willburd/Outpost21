@@ -35,7 +35,7 @@
 */
 /obj/item/device/camerabug/verb/reset()
 	set name = "Reset camera bug"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	if(linkedmonitor)
 		linkedmonitor.unpair(src)
 	linkedmonitor = null

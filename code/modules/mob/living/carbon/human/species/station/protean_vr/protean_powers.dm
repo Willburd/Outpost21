@@ -5,7 +5,7 @@
 /mob/living/carbon/human/proc/nano_partswap()
 	set name = "Ref - Single Limb"
 	set desc = "Allows you to replace and reshape your limbs as you see fit."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = TRUE
 
 	if(stat)
@@ -87,7 +87,7 @@
 /mob/living/carbon/human/proc/nano_regenerate() //fixed the proc, it used to leave active_regen true.
 	set name = "Ref - Whole Body"
 	set desc = "Allows you to regrow limbs and replace organs, given you have enough materials."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = TRUE
 
 	if(stat)
@@ -192,7 +192,7 @@
 /mob/living/carbon/human/proc/nano_metalnom()
 	set name = "Ref - Store Metals"
 	set desc = "If you're holding a stack of material, you can consume some and store it for later."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = TRUE
 
 	var/obj/item/organ/internal/nano/refactory/refactory = nano_get_refactory()
@@ -236,7 +236,7 @@
 /mob/living/carbon/human/proc/nano_blobform()
 	set name = "Toggle Blobform"
 	set desc = "Switch between amorphous and humanoid forms."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = TRUE
 
 	var/atom/movable/to_locate = temporary_form || src
@@ -266,7 +266,7 @@
 /mob/living/carbon/human/proc/nano_change_fitting()
 	set name = "Change Species Fit"
 	set desc = "Tweak your shape to change what suits you fit into (and their sprites!)."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat)
 		to_chat(src,"<span class='warning'>You must be awake and standing to perform this action!</span>")
@@ -283,7 +283,7 @@
 ////
 /mob/living/carbon/human/proc/nano_set_size()
 	set name = "Adjust Volume"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = TRUE
 
 	var/mob/living/user = temporary_form || src

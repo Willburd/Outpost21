@@ -292,7 +292,7 @@
 
 /obj/item/weapon/pen/chameleon/verb/set_colour()
 	set name = "Change Pen Colour"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red", "Invisible", "Black")
 	var/selected_type = tgui_input_list(usr, "Pick new colour.", "Pen Colour", possible_colours)

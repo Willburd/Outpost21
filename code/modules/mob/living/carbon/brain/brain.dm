@@ -48,7 +48,7 @@
 /mob/living/carbon/brain/runechat_holder(datum/chatmessage/CM)
 	if(isturf(loc))
 		return ..()
-		
+
 	return loc
 
 /mob/living/carbon/brain/set_typing_indicator(var/state)
@@ -74,13 +74,13 @@
 // Vorestation edit start
 
 /mob/living/carbon/brain/verb/backup_ping()
-	set category = "IC"
+	set category = VERBTAB_OOC
 	set name = "Notify Transcore"
 	set desc = "Your body is gone. Notify robotics to be resleeved!"
 	var/datum/transcore_db/db = SStranscore.db_by_mind_name(mind.name)
 	if(db)
 		var/datum/transhuman/mind_record/record = db.backed_up[src.mind.name]
-		if(!(record.dead_state == MR_DEAD))	
+		if(!(record.dead_state == MR_DEAD))
 			if((world.time - timeofhostdeath ) > 5 MINUTES)	//Allows notify transcore to be used if you have an entry but for some reason weren't marked as dead
 				record.dead_state = MR_DEAD				//Such as if you got scanned but didn't take an implant. It's a little funky, but I mean, you got scanned
 				db.notify(record)						//So you probably will want to let someone know if you die.

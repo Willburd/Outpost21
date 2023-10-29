@@ -206,7 +206,7 @@
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if(!src || !isturf(src.loc) || !(A in view(src.loc)))
 		return 0
@@ -240,7 +240,7 @@
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = "Object"
+	set category = VERBTAB_ACTIONS
 	set src = usr
 
 	return
@@ -258,7 +258,7 @@
 
 /mob/verb/memory()
 	set name = "Notes"
-	set category = "IC"
+	set category = VERBTAB_IC
 	if(mind)
 		mind.show_memory(src)
 	else
@@ -266,7 +266,7 @@
 
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
-	set category = "IC"
+	set category = VERBTAB_IC
 
 	msg = sanitize(msg)
 
@@ -354,7 +354,7 @@
 
 /mob/verb/abandon_mob()
 	set name = "Return to Menu"
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	if(stat != DEAD || !ticker)
 		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
@@ -432,7 +432,7 @@
 
 /client/verb/changes()
 	set name = "Changelog"
-	set category = "OOC"
+	set category = VERBTAB_SPECIAL
 	src << browse('html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != changelog_hash)
 		prefs.lastchangelog = changelog_hash
@@ -441,7 +441,7 @@
 
 /mob/verb/observe()
 	set name = "Observe"
-	set category = "OOC"
+	set category = VERBTAB_OOC
 	var/is_admin = 0
 
 	if(client.holder && (client.holder.rights & R_ADMIN|R_EVENT))
@@ -483,7 +483,7 @@
 
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
-	set category = "OOC"
+	set category = VERBTAB_EQUIP
 	unset_machine()
 	reset_view(null)
 
@@ -508,7 +508,7 @@
 /mob/verb/stop_pulling()
 
 	set name = "Stop Pulling"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 
 	if(pulling)
 		if(ishuman(pulling))
@@ -901,7 +901,7 @@
 	return (embedded.len > 0)
 
 /mob/proc/yank_out_object()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
@@ -1013,7 +1013,7 @@
 /mob/verb/face_direction()
 
 	set name = "Face Direction"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set src = usr
 
 	set_face_dir()

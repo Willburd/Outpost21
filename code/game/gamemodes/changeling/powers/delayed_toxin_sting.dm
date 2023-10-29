@@ -21,7 +21,7 @@
 	holder.adjustToxLoss(rand(40, 60))
 
 /mob/proc/changeling_delayed_toxic_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Delayed Toxic Sting (20)"
 	set desc = "Injects the target with a toxin that will take effect after a few minutes."
 

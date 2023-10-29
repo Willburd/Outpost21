@@ -118,7 +118,7 @@
 
 /obj/item/clothing/accessory/collar/bell/verb/jinglebell()
 	set name = "Jingle Bell"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return

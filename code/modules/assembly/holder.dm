@@ -196,7 +196,7 @@
 
 /obj/item/device/assembly_holder/timer_igniter/verb/configure()
 	set name = "Set Timer"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if ( !(usr.stat || usr.restrained()) )

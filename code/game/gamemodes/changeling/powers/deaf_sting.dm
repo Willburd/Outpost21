@@ -9,7 +9,7 @@
 
 
 /mob/proc/changeling_deaf_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Deaf sting (5)"
 	set desc="Sting target:"
 

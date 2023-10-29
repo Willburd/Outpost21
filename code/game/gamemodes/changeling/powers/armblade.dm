@@ -9,7 +9,7 @@
 
 //Grows a scary, and powerful arm blade.
 /mob/proc/changeling_arm_blade()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Arm Blade (20)"
 
 	if(src.mind.changeling.recursive_enhancement)
@@ -34,7 +34,7 @@
 
 //Grows a scary, and powerful claw.
 /mob/proc/changeling_claw()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Claw (15)"
 
 	if(src.mind.changeling.recursive_enhancement)

@@ -169,7 +169,7 @@
 /obj/machinery/sleeper/attack_hand(var/mob/user)
 	if(!controls_inside)
 		return FALSE
-	
+
 	if(user == occupant)
 		tgui_interact(user)
 
@@ -398,7 +398,7 @@
 
 /obj/machinery/sleeper/verb/move_eject()
 	set name = "Eject occupant"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	if(usr == occupant)
 		switch(usr.stat)

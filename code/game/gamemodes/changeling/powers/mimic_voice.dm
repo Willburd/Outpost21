@@ -9,7 +9,7 @@
 // Fake Voice
 
 /mob/proc/changeling_mimicvoice()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Mimic Voice"
 	set desc = "Shape our vocal glands to form a voice of someone we choose. We cannot regenerate chemicals when mimicing."
 

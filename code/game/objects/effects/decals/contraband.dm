@@ -105,7 +105,7 @@
 
 /obj/item/weapon/contraband/poster/custom/verb/select_poster()
 	set name = "Set Poster type"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Click to choose a poster to display."
 
 	var/mob/M = usr

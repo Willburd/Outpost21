@@ -38,7 +38,7 @@
 
 /obj/machinery/washing_machine/verb/start_washing()
 	set name = "Start Washing"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 	start()
 
@@ -83,7 +83,7 @@
 
 /obj/machinery/washing_machine/verb/climb_out()
 	set name = "Climb out"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr.loc
 
 	sleep(20)

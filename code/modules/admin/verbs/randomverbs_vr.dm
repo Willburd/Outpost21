@@ -1,8 +1,8 @@
 /client/proc/spawn_character_mob()
-	set category = "Special Verbs"
+	set category = VERBTAB_SPECIAL
 	set name = "Spawn Character As Mob"
 	set desc = "Spawn a specified ckey as a chosen mob."
-	
+
 	if(!holder)
 		return
 
@@ -74,7 +74,7 @@
 	return new_mob
 
 /client/proc/cmd_admin_z_narrate() // Allows administrators to fluff events a little easier -- TLE
-	set category = "Special Verbs"
+	set category = VERBTAB_SPECIAL
 	set name = "Z Narrate"
 	set desc = "Narrates to your Z level."
 
@@ -99,7 +99,7 @@
 	feedback_add_details("admin_verb","GLNA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/toggle_vantag_hud(var/mob/target as mob)
-	set category = "Fun"
+	set category = VERBTAB_SPECIAL
 	set name = "Give/Remove Event HUD"
 	set desc = "Give a mob the event hud, which shows them other people's event preferences, or remove it from them"
 
@@ -107,10 +107,10 @@
 		target.vantag_hud = FALSE
 		target.recalculate_vis()
 		to_chat(src, "You removed the event HUD from [key_name(target)].")
-		to_chat(target, "You no longer have the event HUD.")	
+		to_chat(target, "You no longer have the event HUD.")
 	else
 		target.vantag_hud = TRUE
 		target.recalculate_vis()
 		to_chat(src, "You gave the event HUD to [key_name(target)].")
-		to_chat(target, "You now have the event HUD.  Icons will appear next to characters indicating if they prefer to be killed(red crosshairs), devoured(belly), or kidnapped(blue crosshairs) by event characters.")	
+		to_chat(target, "You now have the event HUD.  Icons will appear next to characters indicating if they prefer to be killed(red crosshairs), devoured(belly), or kidnapped(blue crosshairs) by event characters.")
 	feedback_add_details("admin_verb","GREHud") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

@@ -218,7 +218,7 @@
 
 /obj/vehicle/train/engine/verb/start_engine()
 	set name = "Start engine"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -241,7 +241,7 @@
 
 /obj/vehicle/train/engine/verb/stop_engine()
 	set name = "Stop engine"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -257,7 +257,7 @@
 
 /obj/vehicle/train/engine/verb/remove_key()
 	set name = "Remove key"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))

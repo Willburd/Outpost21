@@ -20,7 +20,7 @@
 
 /obj/item/weapon/seedbag/verb/toggle_mode()
 	set name = "Switch Bagging Method"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	mode = !mode
 	switch (mode)

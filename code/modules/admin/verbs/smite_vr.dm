@@ -1,7 +1,7 @@
 /client/proc/smite_vr(var/mob/living/carbon/human/target in player_list)
 	set name = "Smite (Vore)"
 	set desc = "Abuse a player with various 'special Vore-brand treatments' from a list."
-	set category = "Fun"
+	set category = VERBTAB_SPECIAL
 	if(!check_rights(R_ADMIN|R_FUN))
 		return
 

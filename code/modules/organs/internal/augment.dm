@@ -105,7 +105,7 @@
 /mob/living/carbon/human/proc/augment_menu()
 	set name = "Open Augment Menu"
 	set desc = "Toggle your augment menu."
-	set category = "Augments"
+	set category = VERBTAB_EQUIP
 
 	enable_augments(usr)
 

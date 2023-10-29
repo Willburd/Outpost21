@@ -59,3 +59,30 @@
 // Create a typed null global
 #define GLOBAL_DATUM(X, Typepath) GLOBAL_RAW(Typepath/##X); GLOBAL_UNMANAGED(X)
 
+
+// verb tab IDs
+#define VERBTAB_SERVER "Server"
+#define VERBTAB_ADMIN "Admin"
+#define VERBTAB_DEBUG "Debug"
+#define VERBTAB_PREFS "Preferences"
+#define VERBTAB_MAPPING "Mapping"
+#define VERBTAB_ZAS "ZAS"
+
+// AI verbs
+#define VERBTAB_AICOMMS "AI Commands"
+#define VERBTAB_AISETTINGS "AI Settings"
+#define VERBTAB_SUBSYS "Subsystems"
+#define VERBTAB_HARDWARE "Hardware"
+#define VERBTAB_SOFTWARE "Software"
+
+#define VERBTAB_BLUEPRINT "Blueprints"
+
+#define VERBTAB_GHOST "Ghost"		// the dead's commands
+#define VERBTAB_ACTIONS "Actions"	// inherent actions a player can perform like looking around or climbing
+#define VERBTAB_EQUIP "Equipment"	// Objects that persist on a player for a long time, and shouldn't be cluttered by Objects tab stuff, like hardsuits or vehicles
+#define VERBTAB_IC "IC"				// character settings and toggles, or menus/notes
+#define VERBTAB_OOC "OOC"			// OOC chats and game specific toggles
+#define VERBTAB_POWERS "Powers"		// powers unique to species, traits, or antags
+#define VERBTAB_OBJECT "Object"		// objects around a player that can be interacted with
+
+#define VERBTAB_SPECIAL "Special Verbs"	// server pings, chatlogs, reloading buttons, and bugfix verbs,  also admin shenanigans

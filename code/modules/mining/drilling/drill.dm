@@ -386,7 +386,7 @@
 
 /obj/machinery/mining/drill/verb/unload()
 	set name = "Unload Drill"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.stat) return
@@ -488,7 +488,7 @@
 
 /obj/machinery/mining/brace/verb/rotate_clockwise()
 	set name = "Rotate Brace Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.stat) return

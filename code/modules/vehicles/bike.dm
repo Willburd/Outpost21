@@ -63,7 +63,7 @@
 
 /obj/vehicle/bike/verb/toggle()
 	set name = "Toggle Engine"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 
 	if(!isliving(usr) || ismouse(usr))
@@ -86,7 +86,7 @@
 
 /obj/vehicle/bike/verb/kickstand(var/mob/user as mob)
 	set name = "Toggle Kickstand"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in view(0)
 
 	if(!isliving(usr) || ismouse(usr))

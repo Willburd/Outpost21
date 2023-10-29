@@ -11,7 +11,7 @@
 
 	var/list/decals
 	var/list/available_decals = list(
-		"Stripe" = "stripe", 
+		"Stripe" = "stripe",
 		"Vertical Stripe" = "stripe_vertical"
 	)
 
@@ -25,13 +25,13 @@
 /obj/item/weapon/robot_module/robot/platform/verb/set_eye_colour()
 	set name = "Set Eye Colour"
 	set desc = "Select an eye colour to use."
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set src in usr
 
 	var/new_pupil_color = input(usr, "Select a pupil colour.", "Pupil Colour Selection") as color|null
 	if(usr.incapacitated() || QDELETED(usr) || QDELETED(src) || loc != usr)
 		return
-	
+
 	pupil_color = new_pupil_color || initial(pupil_color)
 	usr.update_icon()
 
@@ -64,7 +64,7 @@
 	modules += bandaid
 	synths += medicine
 
-	var/obj/item/weapon/gun/energy/phasegun/mounted/cyborg/phasegun = new(src) 
+	var/obj/item/weapon/gun/energy/phasegun/mounted/cyborg/phasegun = new(src)
 	modules += phasegun
 
 	emag = new /obj/item/weapon/chainsaw(src)

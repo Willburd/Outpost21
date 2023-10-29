@@ -285,7 +285,7 @@
 
 /obj/item/blueprints/verb/seeAreaColors()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Show Area Colors"
 
 	// Remove any existing
@@ -304,7 +304,7 @@
 
 /obj/item/blueprints/verb/seeRoomColors()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Show Room Colors"
 
 	// If standing somewhere we can expand from, use expand perms, otherwise create
@@ -331,7 +331,7 @@
 
 /obj/item/blueprints/verb/seeAreaColors_remove()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Remove Area Colors"
 
 	areaColor_turfs.Cut()

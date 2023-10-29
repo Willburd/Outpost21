@@ -310,7 +310,7 @@
 	update_icon()
 
 /obj/machinery/recharge_station/verb/move_eject()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Eject Recharger"
 	set src in oview(1)
 
@@ -322,7 +322,7 @@
 	return
 
 /obj/machinery/recharge_station/verb/move_inside()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Enter Recharger"
 	set src in oview(1)
 

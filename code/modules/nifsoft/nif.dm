@@ -686,7 +686,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 /mob/living/carbon/human/proc/set_nif_examine()
 	set name = "NIF Appearance"
 	set desc = "If your NIF alters your appearance in some way, describe it here."
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	if(!nif)
 		verbs -= /mob/living/carbon/human/proc/set_nif_examine

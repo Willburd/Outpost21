@@ -9,7 +9,7 @@ var/silent_ert = 0
 
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
-	set category = "Special Verbs"
+	set category = VERBTAB_SPECIAL
 	set desc = "Send an emergency response team to the station"
 
 	if(!holder)
@@ -44,7 +44,7 @@ var/silent_ert = 0
 /client/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
-	set category = "IC"
+	set category = VERBTAB_SPECIAL
 
 	if(!MayRespawn(1))
 		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")

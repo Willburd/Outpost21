@@ -382,7 +382,7 @@
 
 /mob/living/carbon/brain/caught_soul/resist()
 	set name = "Resist"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 
 	to_chat(src,"<span class='warning'>There's no way out! You're stuck in VR.</span>")
 
@@ -472,7 +472,7 @@
 /mob/proc/nsay(message as text|null)
 	set name = "NSay"
 	set desc = "Speak into your NIF's Soulcatcher."
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 
 	src.nsay_act(message)
 
@@ -502,7 +502,7 @@
 /mob/proc/nme(message as text|null)
 	set name = "NMe"
 	set desc = "Emote into your NIF's Soulcatcher."
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 
 	src.nme_act(message)
 
@@ -535,7 +535,7 @@
 /mob/living/carbon/brain/caught_soul/verb/ar_project()
 	set name = "AR Project"
 	set desc = "Project your form into Augmented Reality for those around your predator with the appearance of your loaded character."
-	set category = "Soulcatcher"
+	set category = VERBTAB_EQUIP
 
 	if(eyeobj)
 		to_chat(src,"<span class='warning'>You're already projecting in AR!</span>")
@@ -554,7 +554,7 @@
 /mob/living/carbon/brain/caught_soul/verb/jump_to_owner()
 	set name = "Jump to Owner"
 	set desc = "Jump your projection back to the owner of the soulcatcher you're inside."
-	set category = "Soulcatcher"
+	set category = VERBTAB_EQUIP
 
 	if(!eyeobj)
 		to_chat(src,"<span class='warning'>You're not projecting into AR!</span>")
@@ -565,7 +565,7 @@
 /mob/living/carbon/brain/caught_soul/verb/reenter_soulcatcher()
 	set name = "Re-enter Soulcatcher"
 	set desc = "Leave AR projection and drop back into the soulcatcher."
-	set category = "Soulcatcher"
+	set category = VERBTAB_EQUIP
 
 	if(!eyeobj)
 		to_chat(src,"<span class='warning'>You're not projecting into AR!</span>")
@@ -577,7 +577,7 @@
 /mob/living/carbon/brain/caught_soul/verb/nsay_brain(message as text|null)
 	set name = "NSay"
 	set desc = "Speak into the NIF's Soulcatcher (circumventing AR speaking)."
-	set category = "Soulcatcher"
+	set category = VERBTAB_EQUIP
 
 	if(!message)
 		message = tgui_input_text(usr, "Type a message to say.","Speak into Soulcatcher")
@@ -588,7 +588,7 @@
 /mob/living/carbon/brain/caught_soul/verb/nme_brain(message as text|null)
 	set name = "NMe"
 	set desc = "Emote into the NIF's Soulcatcher (circumventing AR speaking)."
-	set category = "Soulcatcher"
+	set category = VERBTAB_EQUIP
 
 	if(!message)
 		message = tgui_input_text(usr, "Type an action to perform.","Emote into Soulcatcher")

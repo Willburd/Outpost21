@@ -309,7 +309,7 @@
 
 /obj/machinery/clonepod/verb/eject()
 	set name = "Eject Cloner"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.stat != 0)
@@ -380,7 +380,7 @@
 // Empties all of the beakers from the cloning pod, used to refill it
 /obj/machinery/clonepod/verb/empty_beakers()
 	set name = "Eject Beakers"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(usr.stat != 0)

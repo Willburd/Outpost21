@@ -162,7 +162,7 @@
 //VOREStation edit start
 /obj/item/clothing/proc/change_color()
 	set name = "Change Color"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Change the color of the clothing."
 	set src in usr
 
@@ -621,7 +621,7 @@
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
 	set desc = "Pull out your boot knife."
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set src in usr
 
 	if(usr.stat || usr.restrained() || usr.incapacitated())
@@ -669,7 +669,7 @@
 
 /obj/item/clothing/shoes/verb/toggle_layer()
 	set name = "Switch Shoe Layer"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	if(shoes_under_pants == -1)
 		to_chat(usr, "<span class='notice'>\The [src] cannot be worn above your suit!</span>")
@@ -978,13 +978,13 @@
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Toggle Suit Sensors"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in usr
 	set_sensors(usr)
 
 /obj/item/clothing/under/verb/rollsuit()
 	set name = "Roll Down Jumpsuit"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
@@ -1017,7 +1017,7 @@
 
 /obj/item/clothing/under/verb/rollsleeves()
 	set name = "Roll Up Sleeves"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return

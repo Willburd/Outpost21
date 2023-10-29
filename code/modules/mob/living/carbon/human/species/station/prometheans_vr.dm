@@ -39,7 +39,7 @@
 /mob/living/carbon/human/proc/prommie_blobform()
 	set name = "Toggle Blobform"
 	set desc = "Switch between amorphous and humanoid forms."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set hidden = FALSE
 
 	var/atom/movable/to_locate = temporary_form || src

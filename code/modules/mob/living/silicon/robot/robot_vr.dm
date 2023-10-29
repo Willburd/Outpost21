@@ -71,7 +71,7 @@
 
 /mob/living/silicon/robot/verb/robot_nom(var/mob/living/T in living_mobs(1))
 	set name = "Robot Nom"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set desc = "Allows you to eat someone."
 
 	if (stat != CONSCIOUS)
@@ -80,7 +80,7 @@
 
 /mob/living/silicon/robot/proc/rest_style()
 	set name = "Switch Rest Style"
-	set category = "IC"
+	set category = VERBTAB_IC
 	set desc = "Select your resting pose."
 	sitting = FALSE
 	bellyup = FALSE
@@ -171,7 +171,7 @@
 
 /mob/living/silicon/robot/proc/ex_reserve_refill()
 	set name = "Refill Extinguisher"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	var/datum/matter_synth/water = water_res
 	for(var/obj/item/weapon/extinguisher/E in module.modules)
 		if(E.reagents.total_volume < E.max_water)
@@ -277,7 +277,7 @@
 
 /mob/living/silicon/robot/proc/robot_mount(var/mob/living/M in living_mobs(1))
 	set name = "Robot Mount/Dismount"
-	set category = "Abilities"
+	set category = VERBTAB_ACTIONS
 	set desc = "Let people ride on you."
 
 	if(LAZYLEN(buckled_mobs))

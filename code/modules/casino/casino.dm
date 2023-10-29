@@ -90,7 +90,7 @@
 
 /obj/structure/casino_table/roulette_table/verb/remove_ball()
 	set name = "Remove Roulette Ball"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(!usr || !isturf(usr.loc))
@@ -520,7 +520,7 @@
 
 /obj/machinery/wheel_of_fortune/verb/setinterval()
 	set name = "Change interval"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if(usr.incapacitated())

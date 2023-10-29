@@ -606,7 +606,7 @@ var/list/possible_cable_coil_colours = list(
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	var/mob/M = usr
 
 	if(ishuman(M) && !M.restrained() && !M.stat && !M.paralysis && ! M.stunned)
@@ -623,7 +623,7 @@ var/list/possible_cable_coil_colours = list(
 
 /obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/selected_type = tgui_input_list(usr, "Pick new colour.", "Cable Colour", possible_cable_coil_colours)
 	set_cable_color(selected_type, usr)

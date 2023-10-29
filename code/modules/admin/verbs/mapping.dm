@@ -40,11 +40,11 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 	return 0
 
 /client/proc/do_not_use_these()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "-None of these are for ingame use!!"
 
 /client/proc/camera_view()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Camera Range Display"
 
 	if(camera_range_display_status)
@@ -65,7 +65,7 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 
 
 /client/proc/sec_camera_report()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Camera Report"
 
 	if(!master_controller)
@@ -105,7 +105,7 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 	feedback_add_details("admin_verb","mCRP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/intercom_view()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Intercom Range Display"
 
 	if(intercom_range_display_status)
@@ -167,7 +167,7 @@ var/list/debug_verbs = list (
 
 
 /client/proc/enable_debug_verbs()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Debug verbs"
 
 	if(!check_rights(R_DEBUG)) return
@@ -177,7 +177,7 @@ var/list/debug_verbs = list (
 	feedback_add_details("admin_verb","mDV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/hide_debug_verbs()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set name = "Hide Debug verbs"
 
 	if(!check_rights(R_DEBUG)) return
@@ -209,7 +209,7 @@ var/list/debug_verbs = list (
 
 
 /client/proc/testZAScolors()
-	set category = "ZAS"
+	set category = VERBTAB_ZAS
 	set name = "Check ZAS connections"
 
 	if(!check_rights(R_DEBUG)) return
@@ -258,7 +258,7 @@ var/list/debug_verbs = list (
 		testZAScolors_turfs += T
 
 /client/proc/testZAScolors_remove()
-	set category = "ZAS"
+	set category = VERBTAB_ZAS
 	set name = "Remove ZAS connection colors"
 
 	testZAScolors_turfs.Cut()
@@ -270,14 +270,14 @@ var/list/debug_verbs = list (
 				images.Remove(i)
 
 /client/proc/rebootAirMaster()
-	set category = "ZAS"
+	set category = VERBTAB_ZAS
 	set name = "Reboot ZAS"
 
 	if(tgui_alert(usr, "This will destroy and remake all zone geometry on the whole map.","Reboot ZAS",list("Reboot ZAS","Nevermind")) == "Reboot ZAS")
 		SSair.RebootZAS()
 
 /client/proc/count_objects_on_z_level()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Count Objects On Level"
 	var/level = tgui_input_text(usr, "Which z-level?","Level?")
 	if(!level) return
@@ -320,7 +320,7 @@ var/list/debug_verbs = list (
 	feedback_add_details("admin_verb","mOBJZ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_all()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Count Objects All"
 
 	var/type_text = tgui_input_text(usr, "Which type path?","")
@@ -350,7 +350,7 @@ var/list/debug_verbs = list (
 var/global/prevent_airgroup_regroup = 0
 
 /client/proc/break_all_air_groups()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Break All Airgroups"
 
 	/*prevent_airgroup_regroup = 1
@@ -359,7 +359,7 @@ var/global/prevent_airgroup_regroup = 0
 	message_admins("[src.ckey] used 'Break All Airgroups'")*/
 
 /client/proc/regroup_all_air_groups()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Regroup All Airgroups Attempt"
 
 	to_chat(usr, "<font color='red'>Proc disabled.</font>") //Why not.. Delete the procs instead?
@@ -370,7 +370,7 @@ var/global/prevent_airgroup_regroup = 0
 	message_admins("[src.ckey] used 'Regroup All Airgroups Attempt'")*/
 
 /client/proc/kill_pipe_processing()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Kill pipe processing"
 
 	to_chat(usr, "<font color='red'>Proc disabled.</font>")
@@ -382,7 +382,7 @@ var/global/prevent_airgroup_regroup = 0
 		message_admins("[src.ckey] used 'kill pipe processing', restoring all pipe processing.")*/
 
 /client/proc/kill_air_processing()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Kill air processing"
 
 	to_chat(usr, "<font color='red'>Proc disabled.</font>")
@@ -396,7 +396,7 @@ var/global/prevent_airgroup_regroup = 0
 //This proc is intended to detect lag problems relating to communication procs
 var/global/say_disabled = 0
 /client/proc/disable_communication()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Disable all communication verbs"
 
 	to_chat(usr, "<font color='red'>Proc disabled.</font>")
@@ -411,7 +411,7 @@ var/global/say_disabled = 0
 var/global/movement_disabled = 0
 var/global/movement_disabled_exception //This is the client that calls the proc, so he can continue to run around to gauge any change to lag.
 /client/proc/disable_movement()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Disable all movement"
 
 	to_chat(usr, "<font color='red'>Proc disabled.</font>")

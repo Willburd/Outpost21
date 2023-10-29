@@ -9,7 +9,7 @@
 
 //Starts healing you every second for 50 seconds. Can be used whilst unconscious.
 /mob/proc/changeling_fleshmend()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Fleshmend (10)"
 	set desc = "Begins a slow rengeration of our form.  Does not effect stuns or chemicals."
 

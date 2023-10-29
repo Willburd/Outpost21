@@ -13,7 +13,7 @@
 
 /mob/living/proc/insidePanel()
 	set name = "Vore Panel"
-	set category = "IC"
+	set category = VERBTAB_POWERS
 
 	if(!vorePanel)
 		log_debug("[src] ([type], \ref[src]) didn't have a vorePanel and tried to use the verb.")

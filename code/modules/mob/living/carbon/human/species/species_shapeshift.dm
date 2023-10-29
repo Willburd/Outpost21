@@ -79,7 +79,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_hair()
 
 	set name = "Select Hair"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -123,7 +123,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_gender()
 
 	set name = "Select Gender"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -145,7 +145,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_shape()
 
 	set name = "Select Body Shape"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -170,7 +170,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_colour()
 
 	set name = "Select Body Colour"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -208,7 +208,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_hair_colors()
 
 	set name = "Select Hair Colors"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -307,7 +307,7 @@ var/list/wrapped_species_by_ref = list()
 /mob/living/carbon/human/proc/shapeshifter_select_eye_colour()
 
 	set name = "Select Eye Color"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 
 	if(stat || world.time < last_special)
 		return
@@ -318,11 +318,11 @@ var/list/wrapped_species_by_ref = list()
 	var/new_eyes = input(usr, "Pick a new color for your eyes.","Eye Color", current_color) as null|color
 	if(!new_eyes)
 		return
-	
+
 	shapeshifter_set_eye_color(new_eyes)
 
 /mob/living/carbon/human/proc/shapeshifter_set_eye_color(var/new_eyes)
-	
+
 	var/list/new_color_rgb_list = hex2rgb(new_eyes)
 	// First, update mob vars.
 	r_eyes = new_color_rgb_list[1]

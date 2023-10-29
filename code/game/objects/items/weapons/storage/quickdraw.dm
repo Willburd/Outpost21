@@ -35,7 +35,7 @@
 
 /obj/item/weapon/storage/quickdraw/verb/toggle_quickdraw()
 	set name = "Switch Quickdraw Mode"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	quickmode = !quickmode
 	switch (quickmode)

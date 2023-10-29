@@ -117,7 +117,7 @@
 
 /obj/machinery/atmospherics/pipeturbine/verb/rotate_clockwise()
 	set name = "Rotate Turbine Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained() || anchored)
@@ -128,7 +128,7 @@
 
 /obj/machinery/atmospherics/pipeturbine/verb/rotate_counterclockwise()
 	set name = "Rotate Turbine Counterclockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained() || anchored)
@@ -267,7 +267,7 @@
 
 /obj/machinery/power/turbinemotor/verb/rotate_clockwise()
 	set name = "Rotate Motor Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained()  || anchored)
@@ -277,7 +277,7 @@
 
 /obj/machinery/power/turbinemotor/verb/rotate_counterclockwise()
 	set name = "Rotate Motor Counterclockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (usr.stat || usr.restrained()  || anchored)

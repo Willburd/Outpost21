@@ -39,7 +39,7 @@ var/global/list/default_pai_software = list()
 	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/verb/paiInterface()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Software Interface"
 
 	tgui_interact(src)
@@ -55,7 +55,7 @@ var/global/list/default_pai_software = list()
 
 /mob/living/silicon/pai/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
 	var/list/data = ..()
-	
+
 	// Software we have bought
 	var/list/bought_software = list()
 	// Software we have not bought

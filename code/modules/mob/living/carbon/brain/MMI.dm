@@ -25,7 +25,7 @@
 /obj/item/device/mmi/verb/toggle_radio()
 	set name = "Toggle Brain Radio"
 	set desc = "Enables or disables the integrated brain radio, which is only usable outside of a body."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	set popup_menu = 1
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -209,7 +209,7 @@
 				. += "<span class='deadsay'>It appears to be completely inactive.</span>"
 	else
 		. += "<span class='deadsay'>It appears to be completely inactive.</span>"
-		
+
 /obj/item/device/mmi/digital/emp_act(severity)
 	if(!src.brainmob)
 		return

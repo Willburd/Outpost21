@@ -50,7 +50,7 @@
 
 /obj/item/device/bluespaceradio/verb/toggle_handset()
 	set name = "Toggle Handset"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/mob/living/carbon/human/user = usr
 	if(!handset)
@@ -138,7 +138,7 @@
 		return -1
 	if(!freq)
 		return -1
-	
+
 	//Only listen on main freq
 	if(freq == frequency)
 		return canhear_range

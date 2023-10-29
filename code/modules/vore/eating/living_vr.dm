@@ -402,7 +402,7 @@
 //
 /mob/living/proc/lick(mob/living/tasted in living_mobs(1))
 	set name = "Lick"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set desc = "Lick someone nearby!"
 	set popup_menu = FALSE // Stop licking by accident!
 
@@ -443,7 +443,7 @@
 //This is just the above proc but switched about.
 /mob/living/proc/smell(mob/living/smelled in living_mobs(1))
 	set name = "Smell"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set desc = "Smell someone nearby!"
 	set popup_menu = FALSE
 
@@ -479,7 +479,7 @@
 //
 /mob/living/proc/escapeOOC()
 	set name = "OOC Escape"
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	//You're in a belly!
 	if(isbelly(loc))
@@ -736,7 +736,7 @@
 
 /mob/living/proc/glow_toggle()
 	set name = "Glow (Toggle)"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Toggle your glowing on/off!"
 
 	//I don't really see a point to any sort of checking here.
@@ -747,7 +747,7 @@
 
 /mob/living/proc/glow_color()
 	set name = "Glow (Set Color)"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Pick a color for your body's glow."
 
 	//Again, no real need for a check on this. I'm unsure how it could be somehow abused.
@@ -767,7 +767,7 @@
 
 /mob/living/proc/eat_trash()
 	set name = "Eat Trash"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Consume held garbage."
 
 	if(!vore_selected)
@@ -917,7 +917,7 @@
 
 /mob/living/proc/eat_minerals() //Actual eating abstracted so the user isn't given a prompt due to an argument in this verb.
 	set name = "Eat Minerals"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Consume held raw ore, gems and refined minerals. Snack time!"
 
 	handle_eat_minerals()
@@ -1044,7 +1044,7 @@
 
 /mob/living/proc/switch_scaling()
 	set name = "Switch scaling mode"
-	set category = "Preferences"
+	set category = VERBTAB_PREFS
 	set desc = "Switch sharp/fuzzy scaling for current mob."
 	appearance_flags ^= PIXEL_SCALE
 	fuzzy = !fuzzy
@@ -1103,7 +1103,7 @@
 
 /mob/living/proc/vorebelly_printout() //Spew the vorepanel belly messages into chat window for copypasting.
 	set name = "X-Print Vorebelly Settings"
-	set category = "Preferences"
+	set category = VERBTAB_PREFS
 	set desc = "Print out your vorebelly messages into chat for copypasting."
 
 	var/result = tgui_alert(src, "Would you rather open the export panel?", "Selected Belly Export", list("Open Panel", "Print to Chat"))

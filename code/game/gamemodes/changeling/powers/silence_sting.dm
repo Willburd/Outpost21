@@ -9,7 +9,7 @@
 	verbpath = /mob/proc/changeling_silence_sting
 
 /mob/proc/changeling_silence_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Silence sting (10)"
 	set desc="Sting target"
 

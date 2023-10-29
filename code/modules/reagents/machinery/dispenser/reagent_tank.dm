@@ -49,7 +49,7 @@
 
 /obj/structure/reagent_dispensers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 	var/N = tgui_input_list(usr, "Amount per transfer from this:","[src]", possible_transfer_amounts)
 	if (N)
@@ -341,7 +341,7 @@
 
 /obj/structure/reagent_dispensers/water_cooler/verb/rotate_clockwise()
 	set name = "Rotate Cooler Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if (src.anchored || usr:stat)

@@ -16,7 +16,7 @@
 		world.Export("[config.chat_webhook_url]?[query_string]")
 
 /client/verb/adminspice()
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Request Spice"
 	set desc = "Request admins to spice round up for you"
 

@@ -130,7 +130,7 @@
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/verb/toggle_power(mob/user = usr)
 	set name = "Toggle Distillery Heating"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if(powered())
@@ -141,7 +141,7 @@
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/verb/toggle_mixing(mob/user = usr)
 	set name = "Start Distillery Mixing"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	to_chat(user, "<span class='notice'>You press \the [src]'s chamber agitator button.</span>")

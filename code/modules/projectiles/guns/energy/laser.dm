@@ -231,7 +231,7 @@
 	scope()
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1
 
@@ -336,7 +336,7 @@
 	sights()
 
 /obj/item/weapon/gun/energy/monorifle/verb/sights()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Aim Down Sights"
 	set popup_menu = 1
 

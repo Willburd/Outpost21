@@ -31,7 +31,7 @@
 	if(!ui)
 		ui = new(user, src, "PlantAnalyzer", name)
 		ui.open()
-	
+
 /obj/item/device/analyzer/plant_analyzer/tgui_state(mob/user)
 	return GLOB.tgui_inventory_state
 
@@ -51,7 +51,7 @@
 /obj/item/device/analyzer/plant_analyzer/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
-	
+
 	switch(action)
 		if("print")
 			print_report(usr)
@@ -117,7 +117,7 @@
 
 /obj/item/device/analyzer/plant_analyzer/proc/print_report_verb()
 	set name = "Print Plant Report"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src = usr
 
 	if(usr.stat || usr.restrained() || usr.lying)
@@ -277,7 +277,7 @@
 
 	if(get_trait(TRAIT_SPORING))
 		data["trait_info"] += "It occasionally releases reagent carrying spores into the atmosphere."
-	
+
 	if(exude_gasses && exude_gasses.len)
 		for(var/gas in exude_gasses)
 			var/amount = ""

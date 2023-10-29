@@ -346,7 +346,7 @@
 
 /obj/item/weapon/technomancer_core/verb/toggle_lock()
 	set name = "Toggle Core Lock"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Toggles the locking mechanism on your manipulation core."
 
 	canremove = !canremove

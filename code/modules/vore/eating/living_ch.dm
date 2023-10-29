@@ -68,7 +68,7 @@
 
 /mob/living/proc/vore_check_reagents()
 	set name = "Check Belly Liquid (Vore)"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Check the amount of liquid in your belly."
 
 	var/obj/belly/RTB = input("Choose which vore belly to check") as null|anything in src.vore_organs
@@ -79,7 +79,7 @@
 
 /mob/living/proc/vore_transfer_reagents()
 	set name = "Transfer Liquid (Vore)"
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	set desc = "Transfer liquid from an organ to another or stomach, or into another person or container."
 	set popup_menu = FALSE
 
@@ -222,7 +222,7 @@
 
 /mob/living/proc/vore_bellyrub(var/mob/living/T in view(1,src))
 	set name = "Give Bellyrubs"
-	set category = "Abilities"
+	set category = VERBTAB_ACTIONS
 	set desc = "Provide bellyrubs to either yourself or another mob with a belly."
 
 	if(!T)

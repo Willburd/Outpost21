@@ -381,7 +381,7 @@
 /mob/living/carbon/human/proc/alraune_fruit_select() //So if someone doesn't want fruit/vegetables, they don't have to select one.
 	set name = "Select fruit"
 	set desc = "Select what fruit/vegetable you wish to grow."
-	set category = "Abilities"
+	set category = VERBTAB_POWERS
 	var/obj/item/organ/internal/fruitgland/fruit_gland
 	for(var/F in contents)
 		if(istype(F, /obj/item/organ/internal/fruitgland))
@@ -404,7 +404,7 @@
 /mob/living/carbon/human/proc/alraune_fruit_pick()
 	set name = "Pick Fruit"
 	set desc = "Pick fruit off of [src]."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//do_reagent_implant(usr)

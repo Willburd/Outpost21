@@ -39,7 +39,7 @@
 
 /obj/item/weapon/gun/energy/sizegun/proc/select_size()
 	set name = "Select Size"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	var/size_select = tgui_input_number(usr, "Put the desired size (25-200%), (1-600%) in dormitory areas.", "Set Size", size_set_to * 100, 600, 1)
@@ -115,7 +115,7 @@
 
 /obj/item/weapon/gun/energy/sizegun/admin/select_size()
 	set name = "Select Size"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	var/size_select = tgui_input_number(usr, "Put the desired size (1-600%)", "Set Size", size_set_to * 100, 600, 1)

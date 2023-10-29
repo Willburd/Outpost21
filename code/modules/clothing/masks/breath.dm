@@ -35,7 +35,7 @@
 	adjust_mask(user)
 
 /obj/item/clothing/mask/breath/verb/toggle()
-		set category = "Object"
+		set category = VERBTAB_OBJECT
 		set name = "Adjust mask"
 		set src in usr
 

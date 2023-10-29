@@ -22,10 +22,10 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
 	open = 1
-	
+
 /obj/item/clothing/suit/storage/toggle/yw/secjacket/toggle()
 	set name = "Toggle Coat Buttons"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0

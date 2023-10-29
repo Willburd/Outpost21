@@ -1,5 +1,5 @@
 /mob/proc/changeling_respec()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Re-adapt"
 	set desc = "Allows us to refund our purchased abilities."
 

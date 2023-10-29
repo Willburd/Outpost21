@@ -4,7 +4,7 @@
 
 /mob/verb/me_verb_subtle(message as message) //This would normally go in say.dm
 	set name = "Subtle"
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set desc = "Emote to nearby people (and your pred/prey)"
 
 	if(say_disabled)	//This is here to try to identify lag problems
@@ -116,7 +116,7 @@
 ///// PSAY /////
 
 /mob/verb/psay(message as text|null)
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set name = "Psay"
 	set desc = "Talk to people affected by complete absorbed or dominate predator/prey."
 
@@ -213,7 +213,7 @@
 ///// PME /////
 
 /mob/verb/pme(message as text|null)
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set name = "Pme"
 	set desc = "Emote to people affected by complete absorbed or dominate predator/prey."
 

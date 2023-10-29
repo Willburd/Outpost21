@@ -3,7 +3,7 @@
 
 	set name = "Open Hardsuit Interface"
 	set desc = "Open the hardsuit system interface."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(wearer && (wearer.back == src || wearer.belt == src))
@@ -18,7 +18,7 @@
 
 	set name = "Toggle Visor"
 	set desc = "Turns your rig visor off or on."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -48,7 +48,7 @@
 
 	set name = "Toggle Helmet"
 	set desc = "Deploys or retracts your helmet."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -64,7 +64,7 @@
 
 	set name = "Toggle Chestpiece"
 	set desc = "Deploys or retracts your chestpiece."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!check_suit_access(usr))
@@ -76,7 +76,7 @@
 
 	set name = "Toggle Gauntlets"
 	set desc = "Deploys or retracts your gauntlets."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -92,7 +92,7 @@
 
 	set name = "Toggle Boots"
 	set desc = "Deploys or retracts your boots."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -108,7 +108,7 @@
 
 	set name = "Deploy Hardsuit"
 	set desc = "Deploys helmet, gloves and boots."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -127,7 +127,7 @@
 
 	set name = "Toggle Hardsuit"
 	set desc = "Activates or deactivates your rig."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(!istype(wearer) || (!wearer.back == src && !wearer.belt == src))
@@ -143,7 +143,7 @@
 
 	set name = "Switch Vision Mode"
 	set desc = "Switches between available vision modes."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(malfunction_check(usr))
@@ -173,7 +173,7 @@
 
 	set name = "Configure Voice Synthesiser"
 	set desc = "Toggles or configures your voice synthesizer."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(malfunction_check(usr))
@@ -197,7 +197,7 @@
 
 	set name = "Select Module"
 	set desc = "Selects a module as your primary system."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(malfunction_check(usr))
@@ -233,7 +233,7 @@
 
 	set name = "Toggle Module"
 	set desc = "Toggle a system module."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(malfunction_check(usr))
@@ -271,7 +271,7 @@
 
 	set name = "Engage Module"
 	set desc = "Engages a system module."
-	set category = "Hardsuit"
+	set category = VERBTAB_EQUIP
 	set src = usr.contents
 
 	if(malfunction_check(usr))

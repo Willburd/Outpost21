@@ -122,7 +122,7 @@
 
 // flip and rotate verbs
 /obj/structure/disposalconstruct/verb/rotate_clockwise()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Rotate Pipe Clockwise"
 	set src in view(1)
 
@@ -137,7 +137,7 @@
 	update()
 
 /obj/structure/disposalconstruct/verb/flip()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Flip Pipe"
 	set src in view(1)
 	if(usr.stat)

@@ -68,7 +68,7 @@
 // Description: Disconnects the voice mob from the communicator.
 /mob/living/voice/verb/hang_up()
 	set name = "Hang Up"
-	set category = "Communicator"
+	set category = VERBTAB_EQUIP
 	set desc = "Disconnects you from whoever you're talking to."
 	set src = usr
 
@@ -84,7 +84,7 @@
 // Description: Allows the voice mob to change their name, assuming it is valid.
 /mob/living/voice/verb/change_name()
 	set name = "Change Name"
-	set category = "Communicator"
+	set category = VERBTAB_EQUIP
 	set desc = "Changes your name."
 	set src = usr
 

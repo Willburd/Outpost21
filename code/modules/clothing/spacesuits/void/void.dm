@@ -47,7 +47,7 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 	var/obj/item/device/suit_cooling_unit/cooler = null// Cooling unit, for FBPs.  Cannot be installed alongside a tank.
-	
+
 	//Cycler settings
 	var/no_cycle = FALSE	//stop this item from being put in a cycler
 
@@ -148,7 +148,7 @@
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
 	set name = "Toggle Helmet"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!istype(src.loc,/mob/living)) return
@@ -179,14 +179,14 @@
 			helmet.pickup(H)
 			helmet.canremove = FALSE
 			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
-	
+
 	if(helmet.light_system == STATIC_LIGHT)
 		helmet.update_light()
 
 /obj/item/clothing/suit/space/void/verb/eject_tank()
 
 	set name = "Eject Voidsuit Tank/Cooler"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!istype(src.loc,/mob/living)) return

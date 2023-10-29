@@ -188,7 +188,7 @@
 
 /obj/item/verb/move_to_top()
 	set name = "Move To Top"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(!istype(src.loc, /turf) || usr.stat || usr.restrained() )
@@ -494,7 +494,7 @@ var/list/global/slot_flags_enumeration = list(
 
 /obj/item/verb/verb_pickup()
 	set src in oview(1)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Pick up"
 
 	if(!(usr)) //BS12 EDIT
@@ -677,7 +677,7 @@ GLOBAL_LIST_EMPTY(blood_overlays_by_type)
 
 /mob/living/carbon/verb/showoff()
 	set name = "Show Held Item"
-	set category = "Object"
+	set category = VERBTAB_ACTIONS
 
 	var/obj/item/I = get_active_hand()
 	if(I && !I.abstract)

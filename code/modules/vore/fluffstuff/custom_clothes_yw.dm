@@ -14,7 +14,7 @@
 
 /obj/item/clothing/suit/storage/labcoat/fluff/eioni_1/verb/toggle()
 	set name = "Toggle coat buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -54,7 +54,7 @@
 
 /obj/item/clothing/suit/storage/hoodie/fluff/redax_1/verb/toggle()
 	set name = "Toggle coat buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -175,7 +175,7 @@
 
 /obj/item/clothing/suit/storage/labcoat/fluff/zeke_vincir_3/verb/toggle()
 	set name = "Toggle coat buttons"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -868,7 +868,7 @@
 
 /obj/item/clothing/suit/storage/fluff/ivy/verb/toggle()
 	set name = "Toggle Hood"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(!usr.canmove || usr.stat || usr.restrained())
@@ -1273,7 +1273,7 @@
 
 /obj/item/clothing/ears/earings/fluff/noel_earings/verb/toggle_rings()
 	set name = "Toggle right earring"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
@@ -1400,7 +1400,7 @@
 
 /obj/item/accessory/fluff/kettek_collar/proc/change_color()
 	set name = "Change collar colour"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Chane the colour of the collar."
 	set src in usr
 
@@ -1682,7 +1682,7 @@
 	toggle()
 
 /obj/item/clothing/glasses/fluff/avigoggles_yw/verb/toggle()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Adjust aviation goggles"
 	set src in usr
 

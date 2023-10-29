@@ -58,7 +58,7 @@
 
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -94,7 +94,7 @@
 
 /obj/item/clothing/head/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Hat/Helmet Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -129,7 +129,7 @@
 
 /obj/item/clothing/suit/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Oversuit Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -163,7 +163,7 @@
 
 /obj/item/clothing/shoes/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Footwear Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -199,7 +199,7 @@
 
 /obj/item/weapon/storage/backpack/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Backpack Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -249,7 +249,7 @@
 
 /obj/item/clothing/gloves/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Gloves Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -283,7 +283,7 @@
 
 /obj/item/clothing/mask/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Mask Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -318,7 +318,7 @@
 
 /obj/item/clothing/glasses/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Glasses Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -354,7 +354,7 @@
 
 /obj/item/weapon/storage/belt/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Belt Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -393,7 +393,7 @@
 
 /obj/item/clothing/accessory/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Accessory Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(clothing_choices[picked]))
@@ -477,7 +477,7 @@
 
 /obj/item/weapon/gun/energy/chameleon/verb/change(picked in gun_choices)
 	set name = "Change Gun Appearance"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	set src in usr
 
 	if(!ispath(gun_choices[picked]))

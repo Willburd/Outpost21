@@ -5,7 +5,7 @@
 	verbpath = /mob/proc/changeling_unfat_sting
 
 /mob/proc/changeling_unfat_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Unfat sting (5)"
 	set desc = "Sting target"
 

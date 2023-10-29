@@ -29,7 +29,7 @@
 /mob/living/carbon/human/proc/phase_shift()
 	set name = "Phase Shift (100)"
 	set desc = "Shift yourself out of alignment with realspace to travel quickly to different areas."
-	set category = "Shadekin"
+	set category = VERBTAB_POWERS
 
 	var/ability_cost = 100
 
@@ -179,7 +179,7 @@
 /mob/living/carbon/human/proc/regenerate_other()
 	set name = "Regenerate Other (50)"
 	set desc = "Spend energy to heal physical wounds in another creature."
-	set category = "Shadekin"
+	set category = VERBTAB_POWERS
 
 	var/ability_cost = 50
 
@@ -248,7 +248,7 @@
 /mob/living/carbon/human/proc/create_shade()
 	set name = "Create Shade (25)"
 	set desc = "Create a field of darkness that follows you."
-	set category = "Shadekin"
+	set category = VERBTAB_POWERS
 
 	var/ability_cost = 25
 

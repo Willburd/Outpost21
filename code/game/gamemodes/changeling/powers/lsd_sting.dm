@@ -7,7 +7,7 @@
 	verbpath = /mob/proc/changeling_lsdsting
 
 /mob/proc/changeling_lsdsting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Hallucination Sting (15)"
 	set desc = "Causes terror in the target."
 

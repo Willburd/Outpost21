@@ -23,7 +23,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 //Grows biological versions of chameleon clothes.
 /mob/proc/changeling_fabricate_clothing()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Fabricate Clothing (10)"
 
 	if(changeling_generic_equip_all_slots(changeling_fabricated_clothing, cost = 10))
@@ -49,7 +49,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/under/chameleon/changeling/verb/shred() //Remove individual pieces if needed.
 	set name = "Shred Jumpsuit"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -70,7 +70,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/head/chameleon/changeling/verb/shred() //The copypasta is real.
 	set name = "Shred Helmet"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -95,7 +95,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/suit/chameleon/changeling/verb/shred()
 	set name = "Shred Suit"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -120,7 +120,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/shoes/chameleon/changeling/verb/shred()
 	set name = "Shred Shoes"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -145,7 +145,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/weapon/storage/backpack/chameleon/changeling/verb/shred()
 	set name = "Shred Backpack"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -173,7 +173,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/gloves/chameleon/changeling/verb/shred()
 	set name = "Shred Gloves"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -199,7 +199,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/mask/chameleon/changeling/verb/shred()
 	set name = "Shred Mask"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -220,7 +220,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/clothing/glasses/chameleon/changeling/verb/shred()
 	set name = "Shred Glasses"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -245,7 +245,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/weapon/storage/belt/chameleon/changeling/verb/shred()
 	set name = "Shred Belt"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)
@@ -274,7 +274,7 @@ var/global/list/changeling_fabricated_clothing = list(
 
 /obj/item/weapon/card/id/syndicate/changeling/verb/shred()
 	set name = "Shred ID Card"
-	set category = "Chameleon Items"
+	set category = VERBTAB_EQUIP
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		playsound(src, 'sound/effects/splat.ogg', 30, 1)

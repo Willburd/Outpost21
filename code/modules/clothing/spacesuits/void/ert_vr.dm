@@ -122,7 +122,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE+10000
 
 /obj/item/clothing/head/helmet/space/void/responseteam/verb/toggle()
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle Mark 7 Suit HUD"
 	set src in usr
 

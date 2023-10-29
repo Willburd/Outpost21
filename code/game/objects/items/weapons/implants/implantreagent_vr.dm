@@ -64,7 +64,7 @@
 /mob/living/carbon/human/proc/use_reagent_implant()
 	set name = "Transfer From Reagent Implant"
 	set desc = "Remove reagents from am internal reagent into a container."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	do_reagent_implant(usr)
@@ -98,4 +98,3 @@
 					src.visible_message("<span class='notice'>[src] [pick(rimplant.random_emote)].</span>") // M-mlem.
 			if(rimplant.reagents.total_volume == rimplant.reagents.maximum_volume * 0.05)
 				to_chat(src, "<span class='notice'>[pick(rimplant.empty_message)]</span>")
-

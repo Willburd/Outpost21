@@ -91,7 +91,7 @@ world/New()
 
 // display only the reports that haven't been handled
 /client/proc/display_admin_reports()
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Display Admin Reports"
 	if(!src.holder) return
 
@@ -119,7 +119,7 @@ world/New()
 
 
 /client/proc/Report(mob/M as mob in world)
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	if(!src.holder)
 		return
 
@@ -149,7 +149,7 @@ world/New()
 	for(var/datum/admin_report/N in reports)
 		if(N.ID == ID)
 			found = N
-	if(!found) 
+	if(!found)
 		to_chat(src, "<b>* An error occured, sorry.</b>")
 
 	found.done = 1
@@ -171,7 +171,7 @@ world/New()
 	for(var/datum/admin_report/N in reports)
 		if(N.ID == ID)
 			found = N
-	if(!found) 
+	if(!found)
 		to_chat(src, "<b>* An error occured, sorry.</b>")
 
 	var/body = tgui_input_text(src.mob, "Enter a body for the news", "Body", multiline = TRUE, prevent_enter = TRUE)

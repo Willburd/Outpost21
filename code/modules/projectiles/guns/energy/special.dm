@@ -101,7 +101,7 @@
 
 /obj/item/weapon/gun/energy/floragun/verb/select_gene()
 	set name = "Select Gene"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	var/genemask = tgui_input_list(usr, "Choose a gene to modify.", "Gene Choice", SSplants.plant_gene_datums)

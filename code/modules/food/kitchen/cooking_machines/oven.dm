@@ -76,7 +76,7 @@
 
 /obj/machinery/appliance/cooker/oven/verb/toggle_door()
 	set src in oview(1)
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Open/close oven door"
 
 	try_toggle_door(usr)

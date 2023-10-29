@@ -43,7 +43,7 @@ var/list/mentor_verbs_default = list(
 		verbs -= mentor_verbs_default
 
 /client/proc/make_mentor()
-	set category = "Special Verbs"
+	set category = VERBTAB_SPECIAL
 	set name = "Make Mentor"
 	if(!holder)
 		to_chat(src, "<span class='pm warning'>Error: Only administrators may use this command.</span>")
@@ -66,7 +66,7 @@ var/list/mentor_verbs_default = list(
 	feedback_add_details("admin_verb","Make Mentor") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/unmake_mentor()
-	set category = "Special Verbs"
+	set category = VERBTAB_SPECIAL
 	set name = "Unmake Mentor"
 	if(!holder)
 		to_chat(src, "<span class='pm warning'>Error: Only administrators may use this command.</span>")
@@ -85,7 +85,7 @@ var/list/mentor_verbs_default = list(
 	feedback_add_details("admin_verb","Unmake Mentor") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_mentor_say(msg as text)
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name ="Mentorsay"
 
 	//check rights
@@ -126,7 +126,7 @@ var/list/mentor_verbs_default = list(
 	mentor_commands(href, href_list, usr)
 
 /client/proc/cmd_dementor()
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "De-mentor"
 
 	if(tgui_alert(usr, "Confirm self-dementor for the round? You can't re-mentor yourself without someone promoting you.","Dementor",list("Yes","No")) == "Yes")
@@ -163,7 +163,7 @@ var/list/mentor_verbs_default = list(
 // You can still directly adminhelp if necessary, this ONLY replaces the inbuilt hotkeys
 
 /client/verb/requesthelp()
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Request help"
 	set hidden = 1
 
@@ -178,7 +178,7 @@ var/list/mentor_verbs_default = list(
 
 
 /client/proc/cmd_mentor_pm(whom, msg, datum/mentor_help/MH)
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Mentor-PM"
 	set hidden = 1
 

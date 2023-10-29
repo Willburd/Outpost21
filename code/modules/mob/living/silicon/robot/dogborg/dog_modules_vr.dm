@@ -518,7 +518,7 @@
 
 /mob/living/silicon/robot/proc/reskin_booze()
 	set name = "Change Drink Color"
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set desc = "Choose the color of drink displayed inside you."
 
 	var/mob/M = usr

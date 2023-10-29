@@ -145,6 +145,6 @@
 	scope()
 
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/verb/scope()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1

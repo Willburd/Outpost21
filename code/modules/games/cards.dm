@@ -75,7 +75,7 @@
 
 /obj/item/weapon/deck/verb/draw_card()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Draw"
 	set desc = "Draw a card from a deck."
 	set src in view(1)
@@ -116,7 +116,7 @@
 
 /obj/item/weapon/deck/verb/deal_card()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Deal"
 	set desc = "Deal a card from a deck."
 	set src in view(1)
@@ -140,7 +140,7 @@
 
 /obj/item/weapon/deck/verb/deal_card_multi()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Deal Multiple Cards"
 	set desc = "Deal multiple cards from a deck."
 	set src in view(1)
@@ -216,7 +216,7 @@
 
 
 /obj/item/weapon/deck/verb/verb_shuffle()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Shuffle"
 	set desc = "Shuffle the cards in the deck."
 	set src in view(1)
@@ -315,7 +315,7 @@
 
 /obj/item/weapon/hand/verb/discard()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Discard"
 	set desc = "Place (a) card(s) from your hand in front of you."
 
@@ -363,7 +363,7 @@
 
 /obj/item/weapon/hand/verb/Removecard()
 
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Remove card"
 	set desc = "Remove a card from the hand."
 	set src in view(1)

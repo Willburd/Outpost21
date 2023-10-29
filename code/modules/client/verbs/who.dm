@@ -1,6 +1,6 @@
 /client/verb/who()
 	set name = "Who"
-	set category = "OOC"
+	set category = VERBTAB_OOC
 
 	var/msg = "<b>Current Players:</b>\n"
 
@@ -54,7 +54,7 @@
 	to_chat(src,msg)
 
 /client/verb/staffwho()
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Staffwho"
 
 	var/msg = ""

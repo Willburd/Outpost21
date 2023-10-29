@@ -90,7 +90,7 @@
 	if(isrobot(user) && user.Adjacent(src))
 		return try_remove_cargo(user)
 	return ..()
-	
+
 /mob/living/silicon/robot/platform/proc/try_remove_cargo(var/mob/user)
 	if(!length(stored_atoms) || !istype(user))
 		return FALSE
@@ -106,7 +106,7 @@
 
 /mob/living/silicon/robot/platform/verb/drop_stored_atom_verb()
 	set name = "Eject Cargo"
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set desc = "Drop something from your internal storage."
 
 	if(incapacitated())

@@ -222,7 +222,7 @@
 				update_icon()
 
 /obj/structure/medical_stand/verb/toggle_mode()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle IV Mode"
 	set src in view(1)
 
@@ -238,7 +238,7 @@
 
 /obj/structure/medical_stand/verb/set_APTFT()
 	set name = "Set IV transfer amount"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in range(1)
 	var/N = tgui_input_list(usr, "Amount per transfer from this:","[src]", transfer_amounts)
 	if(N)
@@ -441,4 +441,3 @@
 	spawn_type = /obj/item/weapon/tank/anesthetic
 	mask_type = /obj/item/clothing/mask/breath/medical
 	is_loosen = FALSE
-

@@ -67,7 +67,7 @@
 /obj/item/weapon/reagent_containers/cooking_container/verb/empty()
 	set src in oview(1)
 	set name = "Empty Container"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Removes items from the container, excluding reagents."
 
 	do_empty(usr)

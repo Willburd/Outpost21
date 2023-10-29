@@ -90,7 +90,7 @@
 
 /mob/living/silicon/pai/proc/pai_nom(var/mob/living/T in oview(1))
 	set name = "pAI Nom"
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set desc = "Allows you to eat someone while unfolded. Can't be used while in card form."
 
 	if (stat != CONSCIOUS)
@@ -162,7 +162,7 @@
 
 //proc override to avoid pAI players being invisible while the chassis selection window is open
 /mob/living/silicon/pai/proc/choose_chassis()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Choose Chassis"
 	var/choice
 
@@ -195,7 +195,7 @@
 	update_icon()
 
 /mob/living/silicon/pai/verb/toggle_eyeglow()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Toggle Eye Glow"
 
 	if(chassis in allows_eye_color)
@@ -211,7 +211,7 @@
 
 
 /mob/living/silicon/pai/verb/pick_eye_color()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Pick Eye Color"
 	if(chassis in allows_eye_color)
 	else
@@ -397,7 +397,7 @@
 	return 1
 
 /mob/living/silicon/pai/verb/save_pai_to_slot()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Save Configuration"
 	savefile_save(src)
 	to_chat(src, "[name] configuration saved to global pAI settings.")
@@ -433,7 +433,7 @@
 /mob/living/silicon/pai/verb/toggle_gender_identity_vr()
 	set name = "Set Gender Identity"
 	set desc = "Sets the pronouns when examined and performing an emote."
-	set category = "IC"
+	set category = VERBTAB_IC
 	var/new_gender_identity = tgui_input_list(usr, "Please select a gender Identity:", "Set Gender Identity", list(FEMALE, MALE, NEUTER, PLURAL, HERM))
 	if(!new_gender_identity)
 		return 0
@@ -443,7 +443,7 @@
 /mob/living/silicon/pai/verb/pai_hide()
 	set name = "Hide"
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Abilities"
+	set category = VERBTAB_ACTIONS
 
 	hide()
 	if(status_flags & HIDING)
@@ -453,7 +453,7 @@
 	update_icon()
 
 /mob/living/silicon/pai/verb/screen_message(message as text|null)
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set name = "Screen Message"
 	set desc = "Allows you to display a message on your screen. This will show up in the chat of anyone who is holding your card."
 

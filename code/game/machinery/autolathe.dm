@@ -107,7 +107,7 @@
 
 	if(shocked)
 		shock(user, 50)
-	
+
 	tgui_interact(user)
 
 /obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -138,7 +138,7 @@
 	if(istype(O,/obj/item/ammo_magazine/clip) || istype(O,/obj/item/ammo_magazine/s357) || istype(O,/obj/item/ammo_magazine/s38) || istype (O,/obj/item/ammo_magazine/s44)/* VOREstation Edit*/) // Prevents ammo recycling exploit with speedloaders.
 		to_chat(user, "\The [O] is too hazardous to recycle with the autolathe!")
 		return
-	
+
 	return ..()
 
 /obj/machinery/autolathe/attack_hand(mob/user as mob)
@@ -185,7 +185,7 @@
 
 			//Check if we still have the materials.
 			var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
-			
+
 			for(var/datum/material/used_material as anything in making.resources)
 				var/amount_needed = making.resources[used_material] * coeff * multiplier
 				materials_used[used_material] = amount_needed
@@ -193,7 +193,7 @@
 			if(LAZYLEN(materials_used))
 				if(!materials.has_materials(materials_used))
 					return
-				
+
 				materials.use_materials(materials_used)
 
 			busy = making.name
@@ -291,7 +291,7 @@
 /* commented out until i can be assed to actually fix the code
 /obj/machinery/autolathe/verb/eatmaterialsnearby()
 	set name = "Recycle nearby materials"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	var/filltype = 0       // Used to determine message.
@@ -353,7 +353,7 @@
 
 /obj/machinery/autolathe/verb/setrecyclepos()
 	set name = "Set recycle input"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	input_dir_name = input("Which direction ?") in list("North", "South", "East", "West")

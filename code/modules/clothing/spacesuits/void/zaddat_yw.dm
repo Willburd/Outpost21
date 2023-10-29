@@ -35,7 +35,7 @@
 
 /obj/item/clothing/suit/space/void/zaddat/security/custom_suit() //so it cant turn into looks that dont makes sense and keep security name in it
 	set name = "Customize Shroud"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set desc = "Pick an appearence for your Shroud."
 
 	var/mob/M = usr
@@ -111,7 +111,7 @@
 
 /obj/item/clothing/suit/space/void/zaddat/engineer/custom_suit()
 	set name = "Customize Shroud"
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set desc = "Pick an appearence for your Shroud."
 
 	var/mob/M = usr

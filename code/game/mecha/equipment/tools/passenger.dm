@@ -39,7 +39,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/verb/eject()
 	set name = "Eject"
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set src = usr.loc
 	set popup_menu = 0
 
@@ -95,7 +95,7 @@
 #define OCCUPIED 2
 
 /obj/mecha/proc/move_inside_passenger()
-	set category = "Object"
+	set category = VERBTAB_EQUIP
 	set name = "Enter Passenger Compartment"
 	set src in oview(1)
 

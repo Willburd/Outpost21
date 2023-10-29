@@ -116,7 +116,7 @@
 
 /obj/item/device/defib_kit/verb/toggle_paddles()
 	set name = "Toggle Paddles"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 
 	var/mob/living/carbon/human/user = usr
 	if(!paddles)

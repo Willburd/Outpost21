@@ -77,7 +77,7 @@
 
 /obj/machinery/light_construct/floortube/verb/rotate_clockwise()
     set name = "Rotate Fixture Clockwise"
-    set category = "Object"
+    set category = VERBTAB_OBJECT
     set src in view(1)
 
     if (usr.stat || usr.restrained() || anchored)

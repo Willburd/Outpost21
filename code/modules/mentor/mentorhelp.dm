@@ -351,7 +351,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 //
 
 /client/verb/mentorhelp(msg as text)
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 	set name = "Mentorhelp"
 
 	if(say_disabled)	//This is here to try to identify lag problems
@@ -392,7 +392,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 //admin proc
 /client/proc/cmd_mentor_ticket_panel()
 	set name = "Mentor Ticket List"
-	set category = "Admin"
+	set category = VERBTAB_ADMIN
 
 	var/browse_to
 

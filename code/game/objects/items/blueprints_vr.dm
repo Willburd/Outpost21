@@ -716,7 +716,7 @@
 
 /obj/item/areaeditor/verb/seeRoomColors()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Show Room Colors"
 
 	// If standing somewhere we can expand from, use expand perms, otherwise create
@@ -743,7 +743,7 @@
 
 /obj/item/areaeditor/verb/seeAreaColors()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Show Area Colors"
 
 	// Remove any existing
@@ -762,7 +762,7 @@
 
 /obj/item/areaeditor/verb/seeAreaColors_remove()
 	set src in usr
-	set category = "Blueprints"
+	set category = VERBTAB_BLUEPRINT
 	set name = "Remove Area Colors"
 
 	areaColor_turfs.Cut()
@@ -790,7 +790,7 @@
 
 /obj/item/weapon/paper/verb/create_area()
 	set name = "Create Area"
-	set category = "Object"
+	set category = VERBTAB_BLUEPRINT
 	set src in usr
 
 	if(created_area)

@@ -80,7 +80,7 @@
 
 /* outpost 21  edit - nif removal
 /mob/living/silicon/pai/verb/suicide()
-	set category = "pAI Commands"
+	set category = VERBTAB_AICOMMS
 	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
 	set name = "pAI Suicide"
 	var/answer = tgui_alert(usr, "REALLY kill yourself? This action can't be undone.", "Suicide", list("Yes","No"))

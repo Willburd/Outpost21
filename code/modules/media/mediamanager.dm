@@ -54,7 +54,7 @@
 
 /client/verb/change_volume()
 	set name = "Set Volume"
-	set category = "OOC"
+	set category = VERBTAB_SPECIAL
 	set desc = "Set jukebox volume"
 	set_new_volume(usr)
 

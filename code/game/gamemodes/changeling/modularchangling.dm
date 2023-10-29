@@ -23,7 +23,7 @@ var/list/datum/power/changeling/powerinstances = list()
 // Modularchangling, totally stolen from the new player panel.  YAYY
 /datum/changeling/proc/EvolutionMenu()//The new one
 	set name = "-Evolution Menu-"
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set desc = "Adapt yourself carefully."
 
 	if(!usr || !usr.mind || !usr.mind.changeling)	return
@@ -357,4 +357,3 @@ var/list/datum/power/changeling/powerinstances = list()
 		call(M.current, Thepower.verbpath)()
 	else if(remake_verbs)
 		M.current.make_changeling()
-

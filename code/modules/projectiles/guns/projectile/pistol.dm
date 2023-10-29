@@ -34,7 +34,7 @@
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
 	set name = "Name Gun"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Rename your gun. If you're Security."
 
 	var/mob/M = usr
@@ -53,7 +53,7 @@
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
 	set name = "Resprite gun"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Click to choose a sprite for your gun."
 
 	var/mob/M = usr

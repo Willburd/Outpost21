@@ -41,7 +41,7 @@
 /datum/game_mode/malfunction/verb/electrical_pulse()
 	set name = "Electrical Pulse"
 	set desc = "15 CPU - Sends feedback pulse through station's power grid, overloading some sensitive systems, such as lights."
-	set category = "Software"
+	set category = VERBTAB_SOFTWARE
 	var/price = 15
 	var/mob/living/silicon/ai/user = usr
 	if(!ability_prechecks(user, price) || !ability_pay(user,price))
@@ -57,7 +57,7 @@
 /datum/game_mode/malfunction/verb/hack_camera(var/obj/machinery/camera/target in cameranet.cameras)
 	set name = "Hack Camera"
 	set desc = "100 CPU - Hacks existing camera, allowing you to add upgrade of your choice to it. Alternatively it lets you reactivate broken camera."
-	set category = "Software"
+	set category = VERBTAB_SOFTWARE
 	var/price = 100
 	var/mob/living/silicon/ai/user = usr
 
@@ -114,7 +114,7 @@
 /datum/game_mode/malfunction/verb/emergency_forcefield(var/turf/T as turf in world)
 	set name = "Emergency Forcefield"
 	set desc = "275 CPU - Uses station's emergency shielding system to create temporary barrier which lasts for few minutes, but won't resist gunfire."
-	set category = "Software"
+	set category = VERBTAB_SOFTWARE
 	var/price = 275
 	var/mob/living/silicon/ai/user = usr
 	if(!T || !istype(T))
@@ -132,7 +132,7 @@
 /datum/game_mode/malfunction/verb/machine_overload(obj/machinery/M in machines)
 	set name = "Machine Overload"
 	set desc = "400 CPU - Causes cyclic short-circuit in machine, resulting in weak explosion after some time."
-	set category = "Software"
+	set category = VERBTAB_SOFTWARE
 	var/price = 400
 	var/mob/living/silicon/ai/user = usr
 

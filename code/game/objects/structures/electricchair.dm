@@ -25,7 +25,7 @@
 
 /obj/structure/bed/chair/e_chair/verb/toggle()
 	set name = "Toggle Electric Chair"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if(on)

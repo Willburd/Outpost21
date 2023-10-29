@@ -8,7 +8,7 @@
 	verbpath = /mob/proc/changeling_blind_sting
 
 /mob/proc/changeling_blind_sting()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Blind sting (20)"
 	set desc="Sting target"
 

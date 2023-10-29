@@ -8,7 +8,7 @@
 
 //No breathing required
 /mob/proc/changeling_self_respiration()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Toggle Breathing"
 	set desc = "We choose whether or not to breathe."
 

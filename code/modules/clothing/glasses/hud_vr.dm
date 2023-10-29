@@ -75,7 +75,7 @@
 /obj/item/clothing/glasses/omnihud/verb/chromatize()
 	set name = "Toggle AR Glasses Shading"
 	set desc = "Toggle the cosmetic electrochromatic shading of your AR glasses."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return
@@ -200,7 +200,7 @@
 
 /obj/item/clothing/glasses/omnihud/eng/meson/verb/toggleprojector()
 	set name = "Toggle projector"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
@@ -246,7 +246,7 @@
 
 /obj/item/clothing/glasses/hud/security/eyepatch/verb/switcheye()
 	set name = "Switch Eyepatch"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
@@ -271,7 +271,7 @@
 
 /obj/item/clothing/glasses/hud/security/eyepatch2/verb/switcheye()
 	set name = "Switch Eyepatch"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
@@ -295,7 +295,7 @@
 
 /obj/item/clothing/glasses/hud/health/eyepatch/verb/switcheye()
 	set name = "Switch Eyepatch"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return

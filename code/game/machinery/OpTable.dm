@@ -100,15 +100,15 @@
 
 	if(!Adjacent(target) || !Adjacent(user))
 		return ..()
-	
+
 	if(user.incapacitated() || !check_table(target, user))
 		return ..()
 
 	take_victim(target, user)
-	
+
 /obj/machinery/optable/verb/climb_on()
 	set name = "Climb On Table"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	var/mob/living/user = usr

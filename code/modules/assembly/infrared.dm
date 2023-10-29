@@ -134,7 +134,7 @@
 
 /obj/item/device/assembly/infra/verb/rotate_clockwise()
 	set name = "Rotate Infrared Laser Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	set_dir(turn(dir, 270))

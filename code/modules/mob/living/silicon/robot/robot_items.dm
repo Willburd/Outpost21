@@ -398,7 +398,7 @@
 
 /obj/item/borg/combat/shield/verb/set_shield_level()
 	set name = "Set shield level"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in range(0)
 
 	var/N = tgui_input_list(usr, "How much damage should the shield absorb?", "Shield Level", list("5","10","25","50","75","100"))

@@ -149,7 +149,7 @@
 
 
 /obj/machinery/iv_drip/verb/toggle_mode()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle Mode"
 	set src in view(1)
 

@@ -9,7 +9,7 @@
 	var/parts
 	var/list/climbers
 	var/block_turf_edges = FALSE // If true, turf edge icons will not be made on the turf this occupies.
-	
+
 	var/list/connections
 	var/list/other_connections
 	var/list/blend_objects = newlist() // Objects which to blend with
@@ -60,7 +60,7 @@
 /obj/structure/proc/climb_on()
 	set name = "Climb structure"
 	set desc = "Climbs onto a structure."
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	do_climb(usr)

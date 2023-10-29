@@ -123,7 +123,7 @@
 
 /obj/structure/closet/secure_closet/verb/verb_togglelock()
 	set src in oview(1) // One square distance
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Toggle Lock"
 
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr)) // Don't use it if you're not able to! Checks for stuns, ghost and restrain

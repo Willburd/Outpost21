@@ -67,7 +67,7 @@
 	return ..()
 
 /obj/machinery/computer/med_data/verb/eject_id()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Eject ID Card"
 	set src in oview(1)
 

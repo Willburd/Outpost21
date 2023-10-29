@@ -10,7 +10,7 @@
 
 //Hide us from anyone who would do us harm.
 /mob/proc/changeling_visible_camouflage()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Visible Camouflage (10)"
 	set desc = "Turns yourself almost invisible, as long as you move slowly."
 

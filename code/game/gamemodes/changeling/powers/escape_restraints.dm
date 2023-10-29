@@ -9,7 +9,7 @@
 
 //Escape Cuffs. By design this does not escape from straight jackets
 /mob/proc/changeling_escape_restraints()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Escape Restraints (40)"
 	set desc = "Removes handcuffs and legcuffs instantly."
 

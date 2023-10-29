@@ -113,7 +113,7 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 /mob/living/silicon/robot/proc/undeploy_act()
 	set name = "Release Control"
 	set desc = "Release control of a remote drone."
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 
 	undeploy("Remote session terminated.")
 

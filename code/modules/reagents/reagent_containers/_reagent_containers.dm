@@ -11,7 +11,7 @@
 
 /obj/item/weapon/reagent_containers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in range(0)
 	var/N = tgui_input_list(usr, "Amount per transfer from this:","[src]", possible_transfer_amounts)
 	if(N)
@@ -22,7 +22,7 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
 	create_reagents(volume)
-	
+
 	if(starts_with)
 		var/total_so_far = 0
 		for(var/string in starts_with)
@@ -109,12 +109,12 @@
 			return FALSE
 
 	user.setClickCooldown(user.get_attack_speed(src)) //puts a limit on how fast people can eat/drink things
-	if(user == target)	
+	if(user == target)
 		self_feed_message(user)
 		reagents.trans_to_mob(user, issmall(user) ? CEILING(amount_per_transfer_from_this/2, 1) : amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
 		return TRUE
-		
+
 	else
 		other_feed_message_start(user, target)
 		if(!do_mob(user, target))

@@ -671,7 +671,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/machinery/vending/verb/rotate_clockwise()
 	set name = "Rotate Vending Machine Clockwise"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	if (src.can_rotate == 0)
@@ -686,7 +686,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/machinery/vending/verb/check_logs()
 	set name = "Check Vending Logs"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in oview(1)
 
 	show_log(usr)

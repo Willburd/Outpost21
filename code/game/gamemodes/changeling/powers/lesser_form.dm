@@ -6,7 +6,7 @@
 
 //Transform into a monkey.
 /mob/proc/changeling_lesser_form()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Lesser Form (1)"
 
 	var/datum/changeling/changeling = changeling_power(1,0,0)
@@ -36,7 +36,7 @@
 
 //Transform into a human
 /mob/proc/changeling_lesser_transform()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Transform (1)"
 
 	var/datum/changeling/changeling = changeling_power(1,1,0)

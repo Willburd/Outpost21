@@ -356,7 +356,7 @@
 			ooc_notes = meta_info
 
 /mob/living/silicon/robot/verb/Namepick()
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	if(custom_name)
 		to_chat(usr, "You can't pick another custom name. Go ask for a name change.")
 		return 0
@@ -383,7 +383,7 @@
 	return dat
 
 /mob/living/silicon/robot/verb/toggle_lights()
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Toggle Lights"
 
 	lights_on = !lights_on
@@ -392,7 +392,7 @@
 	updateicon() //VOREStation Add - Since dogborgs have sprites for this
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Self Diagnosis"
 
 	if(!is_component_functioning("diagnosis unit"))
@@ -406,7 +406,7 @@
 
 
 /mob/living/silicon/robot/verb/toggle_component()
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Toggle Component"
 	set desc = "Toggle a component, conserving power."
 
@@ -430,14 +430,14 @@
 		to_chat(src, "<font color='red'>You enable [C.name].</font>")
 
 /mob/living/silicon/robot/verb/spark_plug() //So you can still sparkle on demand without violence.
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Emit Sparks"
 	to_chat(src, "You harmlessly spark.")
 	spark_system.start()
 
 // outpost 21 addition begin - technically the crew monitor exists, but this helps you learn the station easier
 /mob/living/silicon/robot/verb/current_location() //So you can still sparkle on demand without violence.
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Display Location Name"
 	var/area/A = get_area(src)
 	if(A)
@@ -1023,7 +1023,7 @@
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set name = "Reset Identity Codes"
 	set desc = "Scrambles your security and identification codes and resets your current buffers.  Unlocks you and but permenantly severs you from your AI and the robotics console and will deactivate your camera system."
 
@@ -1099,7 +1099,7 @@
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Toggle Sensor Augmentation" //VOREStation Add
-	set category = "Robot Commands"
+	set category = VERBTAB_POWERS
 	set desc = "Augment visual feed with internal sensor overlays."
 	sensor_type = !sensor_type //VOREStation Add
 	to_chat(usr, "You [sensor_type ? "enable" : "disable"] your sensors.") //VOREStation Add

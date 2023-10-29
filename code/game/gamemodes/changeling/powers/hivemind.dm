@@ -21,7 +21,7 @@
 var/list/datum/dna/hivemind_bank = list()
 
 /mob/proc/changeling_hiveupload()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Hive Channel (10)"
 	set desc = "Allows you to channel DNA in the airwaves to allow other changelings to absorb it."
 
@@ -51,7 +51,7 @@ var/list/datum/dna/hivemind_bank = list()
 	return 1
 
 /mob/proc/changeling_hivedownload()
-	set category = "Changeling"
+	set category = VERBTAB_POWERS
 	set name = "Hive Absorb (20)"
 	set desc = "Allows you to absorb DNA that is being channeled in the airwaves."
 

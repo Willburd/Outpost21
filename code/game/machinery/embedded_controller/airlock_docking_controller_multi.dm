@@ -40,7 +40,7 @@
 	var/master_tag	//for mapping
 	tag_secure = 1
 	valid_actions = list("cycle_ext", "cycle_int", "force_ext", "force_int", "abort", "toggle_override")
-	
+
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port_multi/tgui_data(mob/user)
 	var/datum/embedded_program/airlock/multi_docking/airlock_program = program // Cast to proper type
@@ -72,12 +72,12 @@
 	..(signal)
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/verb/view_state()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set src in view(1)
 	src.program:print_state()
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/verb/spoof_signal(var/command as text, var/sender as text)
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set src in view(1)
 	var/datum/signal/signal = new
 	signal.data["tag"] = sender
@@ -87,12 +87,12 @@
 	src.program:receive_signal(signal)
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/verb/debug_init_dock(var/target as text)
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set src in view(1)
 	src.program:initiate_docking(target)
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/verb/debug_init_undock()
-	set category = "Debug"
+	set category = VERBTAB_DEBUG
 	set src in view(1)
 	src.program:initiate_undocking()
 

@@ -1,5 +1,5 @@
 /client/proc/atmosscan()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Check Piping"
 	set background = 1
 	if(!src.holder)
@@ -41,7 +41,7 @@
 	to_chat(usr, "Done")
 
 /client/proc/powerdebug()
-	set category = "Mapping"
+	set category = VERBTAB_MAPPING
 	set name = "Check Power"
 	if(!src.holder)
 		return

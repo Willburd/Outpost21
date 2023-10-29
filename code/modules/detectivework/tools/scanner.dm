@@ -136,7 +136,7 @@
 
 /obj/item/device/detective_scanner/verb/examine_data()
 	set name = "Examine Forensic Data"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	//to_world("usr is [usr]") //why was this a thing? -KK.
@@ -187,7 +187,7 @@
 
 /obj/item/device/detective_scanner/verb/wipe()
 	set name = "Wipe Forensic Data"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set src in view(1)
 
 	if (tgui_alert(usr, "Are you sure you want to wipe all data from [src]?","Wipe Data",list("Yes","No")) == "Yes")

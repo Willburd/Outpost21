@@ -140,7 +140,7 @@
 
 /mob/living/proc/set_size()
 	set name = "Adjust Mass"
-	set category = "Abilities" //Seeing as prometheans have an IC reason to be changing mass.
+	set category = VERBTAB_POWERS //Seeing as prometheans have an IC reason to be changing mass.
 
 	if(!resizable)
 		to_chat(src, "<span class='warning'>You are immune to resizing!</span>")
@@ -382,7 +382,7 @@
 /mob/living/verb/toggle_pickups()
 	set name = "Toggle Micro Pick-up"
 	set desc = "Toggles whether your help-intent action attempts to pick up the micro or pet/hug/help them. Does not disable participation in pick-up mechanics entirely, refer to Vore Panel preferences for that."
-	set category = "IC"
+	set category = VERBTAB_POWERS
 
 	pickup_active = !pickup_active
 	to_chat(src, "You will [pickup_active ? "now" : "no longer"] attempt to pick up mobs when clicking them with help intent.")

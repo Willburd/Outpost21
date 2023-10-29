@@ -1,5 +1,5 @@
 /client/proc/adminorbit()
-	set category = "Fun"
+	set category = VERBTAB_SPECIAL
 	set name = "Orbit Things"
 	set desc = "Makes something orbit around something else."
 	set popup_menu = FALSE

@@ -61,7 +61,7 @@
 
 /obj/item/clothing/mask/gas/sechailer/verb/selectphrase()
 	set name = "Select gas mask phrase"
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set desc = "Alter the message shouted by your complionator gas mask."
 
 	var/key = phrase_list[phrase]
@@ -147,7 +147,7 @@
 
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
 	set name = "HALT!"
-	set category = "Objects"
+	set category = VERBTAB_OBJECT
 	set desc = "Activate your face mask hailer."
 	var/key = phrase_list[phrase]
 	var/message = phrase_list[key]

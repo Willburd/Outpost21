@@ -47,7 +47,7 @@
 /*
 	verb/set_perspective()
 		set name = "Set client perspective."
-		set category = "Exosuit Interface"
+		set category = VERBTAB_EQUIP
 		set src = usr.loc
 		var/perspective = input(usr, "Select a perspective type.",
                       "Client perspective",
@@ -58,7 +58,7 @@
 
 	verb/toggle_eye()
 		set name = "Toggle eye."
-		set category = "Exosuit Interface"
+		set category = VERBTAB_EQUIP
 		set src = usr.loc
 		if(occupant.client.eye == occupant)
 			occupant.client.eye = src

@@ -211,7 +211,7 @@ var/bomb_set
 	onclose(user, "nukebomb_hack")
 
 /obj/machinery/nuclearbomb/verb/make_deployable()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Make Deployable"
 	set src in oview(1)
 
@@ -504,7 +504,7 @@ var/bomb_set
 /obj/machinery/nuclearbomb/station/attack_hand(mob/user as mob)
 	if(!user.IsAdvancedToolUser())
 		return
-	
+
 	user.set_machine(src)
 	var/dat = text("<TT><B>Nuclear Fission Explosive</B><BR>\nAuth. Disk: <A href='?src=\ref[];auth=1'>[]</A><HR>", src, (auth ? "++++++++++" : "----------"))
 	if(auth)

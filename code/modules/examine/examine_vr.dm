@@ -1,7 +1,7 @@
 /mob/verb/mob_examine()
 	set name = "Mob Examine"
 	set desc = "Allows one to examine mobs they can see, even from inside of bellies and objects."
-	set category = "IC"
+	set category = VERBTAB_ACTIONS
 	set popup_menu = FALSE
 
 	if((is_blind(src) || src.stat) && !isobserver(src))
@@ -32,14 +32,14 @@
 						update_examine_panel(src)
 						return
 					else
-						E |= M	
+						E |= M
 		if(E.len == 0)
 			return
 	else
 		var/my_turf = get_turf(src)
 		for(var/atom/M in view(world.view, my_turf))
 			if(ismob(M) && M != src && !istype(M, /mob/observer) && !M.invisibility)
-				E |= M	
+				E |= M
 		for(var/turf/T in view(world.view, my_turf))
 			if(!isopenspace(T))
 				continue
@@ -53,7 +53,7 @@
 				checked = checking
 				if(!isopenspace(checked))
 					keepgoing = FALSE
-	
+
 	if(E.len == 0)
 		to_chat(src, SPAN_NOTICE("There are no mobs to examine."))
 		return

@@ -3,7 +3,7 @@
 /obj/item/weapon/gun/projectile/heavysniper/collapsible
 
 /obj/item/weapon/gun/projectile/heavysniper/collapsible/verb/take_down()
-	set category = "Object"
+	set category = VERBTAB_OBJECT
 	set name = "Disassemble Rifle"
 
 	var/mob/living/carbon/human/user = usr

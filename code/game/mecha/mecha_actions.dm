@@ -195,7 +195,7 @@
 		return
 	if(!chassis.selected)
 		chassis.selected = available_equipment[1]
-		chassis.occupant_message("You select [chassis.selected]") 
+		chassis.occupant_message("You select [chassis.selected]")
 		send_byjax(chassis.occupant,"exosuit.browser","eq_list",chassis.get_equipment_list())
 		button_icon_state = "mech_cycle_equip_on"
 		button.UpdateIcon()
@@ -264,7 +264,7 @@
 
 
 /obj/mecha/verb/toggle_defence_mode()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle defence mode"
 	set src = usr.loc
 	set popup_menu = 0
@@ -287,7 +287,7 @@
 
 
 /obj/mecha/verb/toggle_overload()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle leg actuators overload"
 	set src = usr.loc
 	set popup_menu = 0
@@ -316,7 +316,7 @@
 
 
 /obj/mecha/verb/toggle_smoke()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Activate Smoke"
 	set src = usr.loc
 	set popup_menu = 0
@@ -348,7 +348,7 @@
 
 
 /obj/mecha/verb/toggle_zoom()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Zoom"
 	set src = usr.loc
 	set popup_menu = 0
@@ -371,7 +371,7 @@
 
 
 /obj/mecha/verb/toggle_thrusters()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle thrusters"
 	set src = usr.loc
 	set popup_menu = 0
@@ -390,7 +390,7 @@
 
 
 /obj/mecha/verb/switch_damtype()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Change melee damage type"
 	set src = usr.loc
 	set popup_menu = 0
@@ -416,7 +416,7 @@
 
 
 /obj/mecha/verb/toggle_phasing()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle phasing"
 	set src = usr.loc
 	set popup_menu = 0
@@ -432,7 +432,7 @@
 
 
 /obj/mecha/verb/toggle_cloak()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle cloaking"
 	set src = usr.loc
 	set popup_menu = 0
@@ -451,7 +451,7 @@
 	return
 
 /obj/mecha/verb/toggle_weapons_only_cycle()
-	set category = "Exosuit Interface"
+	set category = VERBTAB_EQUIP
 	set name = "Toggle weapons only cycling"
 	set src = usr.loc
 	set popup_menu = 0

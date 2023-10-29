@@ -21,7 +21,7 @@
 	if(!istype(refactory))
 		to_chat(src,"<span class='warning'>You don't have a working refactory module!</span>")
 		return
-		
+
 	var/choice = tgui_input_list(src,"Pick the bodypart to change:", "Refactor - One Bodypart", species.has_limbs)
 	if(!choice)
 		return
@@ -243,7 +243,7 @@
 	if(!isturf(to_locate.loc))
 		to_chat(to_locate,"<span class='warning'>You need more space to perform this action!</span>")
 		return
-	
+
 	//Blob form
 	if(temporary_form)
 		if(health < maxHealth*0.5)
@@ -294,8 +294,8 @@
 		to_chat(user,"<span class='warning'>You don't have a working refactory module!</span>")
 		return
 
-	var/nagmessage = "Adjust your mass to be a size between 25 to 200% (or between 1 to 600% in dorms area). Up-sizing consumes metal, downsizing returns metal."
-	var/new_size = tgui_input_number(user, nagmessage, "Pick a Size", user.size_multiplier*100, 600, 1)
+	var/nagmessage = "Adjust your mass to be a size between [RESIZE_MINIMUM * 100]% to [RESIZE_MAXIMUM * 100]%. Up-sizing consumes metal, downsizing returns metal."
+	var/new_size = tgui_input_number(user, nagmessage, "Pick a Size", user.size_multiplier*100, RESIZE_MAXIMUM * 100, RESIZE_MINIMUM * 100)
 	if(!new_size || !size_range_check(new_size))
 		return
 

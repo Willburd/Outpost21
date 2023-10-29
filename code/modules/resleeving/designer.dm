@@ -369,8 +369,8 @@
 		return
 
 	if(params["target_href"] == "size_multiplier")
-		var/new_size = tgui_input_number(user, "Choose your character's size, ranging from 25% to 200%", "Character Preference", null, 200, 25)
-		if(new_size && ISINRANGE(new_size,25,200))
+		var/new_size = tgui_input_number(user, "Choose your character's size, ranging from [RESIZE_MINIMUM * 100]% to [RESIZE_MAXIMUM * 100]%", "Character Preference", null, RESIZE_MAXIMUM * 100, RESIZE_MINIMUM * 100)
+		if(new_size && ISINRANGE(new_size,RESIZE_MINIMUM * 100,RESIZE_MAXIMUM * 100))
 			active_br.sizemult = (new_size/100)
 			update_preview_icon()
 		return 1

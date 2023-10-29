@@ -55,7 +55,7 @@
 
 /atom/movable/proc/size_range_check(size_select)		//both objects and mobs needs to have that
 	var/area/A = get_area(src) //Get the atom's area to check for size limit.
-	if((A?.limit_mob_size && (size_select > 200 || size_select < 25)) || (size_select > 600 || size_select <1))
+	if((A?.limit_mob_size && (size_select > (RESIZE_MAXIMUM * 100) || size_select < (RESIZE_MINIMUM * 100))) || (size_select > 200 || size_select < 25))
 		return FALSE
 	return TRUE
 
@@ -146,9 +146,9 @@
 		to_chat(src, "<span class='warning'>You are immune to resizing!</span>")
 		return
 
-	var/nagmessage = "Adjust your mass to be a size between 25 to 200% (or 1% to 600% in dormitories). (DO NOT ABUSE)"
+	var/nagmessage = "Adjust your mass to be a size between [RESIZE_MINIMUM * 100]% to [RESIZE_MAXIMUM * 100]%."
 	var/default = size_multiplier * 100
-	var/new_size = tgui_input_number(usr, nagmessage, "Pick a Size", default, 600, 1)
+	var/new_size = tgui_input_number(usr, nagmessage, "Pick a Size", default, RESIZE_MAXIMUM * 100, RESIZE_MINIMUM * 100)
 	if(size_range_check(new_size))
 		resize(new_size/100, uncapped = has_large_resize_bounds(), ignore_prefs = TRUE)
 		// I'm not entirely convinced that `src ? ADMIN_JMP(src) : "null"` here does anything

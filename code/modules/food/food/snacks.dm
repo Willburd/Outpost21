@@ -930,6 +930,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/mushroomslice/Initialize()
 	. = ..()
 	reagents.add_reagent("psilocybin", 3)
+	reagents.add_reagent("fungi", 7)
 
 /obj/item/weapon/reagent_containers/food/snacks/tomatomeat
 	name = "tomato slice"
@@ -1392,6 +1393,7 @@
 	. = ..()
 	reagents.add_reagent("amatoxin", 3)
 	reagents.add_reagent("psilocybin", 1)
+	reagents.add_reagent("fungi", 16)
 
 /obj/item/weapon/reagent_containers/food/snacks/plump_pie
 	name = "plump pie"
@@ -1706,6 +1708,7 @@
 	. = ..()
 	reagents.add_reagent("amatoxin", 6)
 	reagents.add_reagent("psilocybin", 3)
+	reagents.add_reagent("fungi", 16)
 
 /obj/item/weapon/reagent_containers/food/snacks/poppypretzel
 	name = "Poppy pretzel"
@@ -2351,6 +2354,9 @@
 /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 5)
+	reagents.add_reagent("carrotjuice", 5)
+	reagents.add_reagent("potatojuice", 5)
+	reagents.add_reagent("cornoil", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/nettlesoup
 	name = "Nettle soup"
@@ -2381,7 +2387,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/mysterysoup/Initialize()
 	. = ..()
-	var/mysteryselect = pick(1,2,3,4,5,6,7,8,9,10)
+	var/mysteryselect = pick(1,2,3,4,5,6,7,8,9,10,11)
 	switch(mysteryselect)
 		if(1)
 			reagents.add_reagent("nutriment", 6, nutriment_desc)
@@ -2417,6 +2423,9 @@
 			reagents.add_reagent("nutriment", 6, nutriment_desc)
 			reagents.add_reagent("tomatojuice", 5)
 			reagents.add_reagent("imidazoline", 5)
+		if(11)
+			reagents.add_reagent("fungi", 20)
+			reagents.add_reagent("water", 10)
 
 /obj/item/weapon/reagent_containers/food/snacks/wishsoup
 	name = "Wish Soup"
@@ -2460,6 +2469,11 @@
 	nutriment_desc = list("mushroom" = 8, "milk" = 2)
 	bitesize = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/mushroomsoup/Initialize()
+	. = ..()
+	reagents.add_reagent("fungi", 14)
+	reagents.add_reagent("milk", 5)
+
 /obj/item/weapon/reagent_containers/food/snacks/beetsoup
 	name = "beet soup"
 	desc = "Wait, how do you spell it again..?"
@@ -2474,6 +2488,9 @@
 /obj/item/weapon/reagent_containers/food/snacks/beetsoup/Initialize()
 	. = ..()
 	name = pick(list("borsch","bortsch","borstch","borsh","borshch","borscht"))
+	reagents.add_reagent("tomatojuice", 5)
+	reagents.add_reagent("cornoil", 5) // kindatemp, this was nothing before so veg allergies wouldn't be triggered...
+	reagents.add_reagent("water", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/soup/onion
 	name = "onion soup"
@@ -2485,6 +2502,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("onion" = 2, "soup" = 2)
 	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/onion/Initialize()
+	. = ..()
+	reagents.add_reagent("cornoil", 5) // kindatemp, this was nothing before so veg allergies wouldn't be triggered...
+	reagents.add_reagent("water", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/chickennoodlesoup
 	name = "chicken noodle soup"
@@ -2500,8 +2522,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/chickennoodlesoup/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("carrotjuice", 5)
 	reagents.add_reagent("water", 5)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/stew
 	name = "Stew"
@@ -2519,7 +2541,10 @@
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("tomatojuice", 5)
+	reagents.add_reagent("potatojuice", 5)
+	reagents.add_reagent("carrotjuice", 5)
 	reagents.add_reagent("imidazoline", 5)
+	reagents.add_reagent("fungi", 5)
 	reagents.add_reagent("water", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/bearstew
@@ -2537,7 +2562,8 @@
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("hyperzine", 5)
-	reagents.add_reagent("tomatojuice", 5)
+	reagents.add_reagent("potatojuice", 5)
+	reagents.add_reagent("carrotjuice", 5)
 	reagents.add_reagent("imidazoline", 5)
 	reagents.add_reagent("water", 5)
 
@@ -2651,6 +2677,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 20)
+	reagents.add_reagent("flour", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/meatbread
 	name = "meatbread slice"
@@ -2680,6 +2707,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 20)
+	reagents.add_reagent("flour", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread
 	name = "xenomeatbread slice"
@@ -2709,6 +2737,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread/Initialize()
 	. = ..()
 	reagents.add_reagent("banana", 20)
+	reagents.add_reagent("flour", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/bananabread
 	name = "Banana-nut bread slice"
@@ -2734,6 +2763,10 @@
 	nutriment_amt = 10
 	bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread/Initialize()
+	. = ..()
+	reagents.add_reagent("tofu", 20)
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/tofubread
 	name = "Tofubread slice"
 	desc = "A slice of delicious tofubread."
@@ -2755,6 +2788,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=4)
 	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
+
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/bread/filled
 	filled = TRUE
@@ -3090,6 +3124,10 @@
 	nutriment_desc = list("bread" = 6)
 	nutriment_amt = 6
 	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread/Initialize()
+	. = ..()
+	reagents.add_reagent("flour", 20)
 
 /obj/item/weapon/reagent_containers/food/snacks/watermelonslice
 	name = "Watermelon Slice"
@@ -3554,6 +3592,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
+	reagents.add_reagent("fungi", 12)
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/mushroompizza
 	name = "Mushroompizza slice"
@@ -5762,6 +5801,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/friedmushroom/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
+	reagents.add_reagent("fungi", 12)
 
 /obj/item/weapon/reagent_containers/food/snacks/pisanggoreng
 	name = "pisang goreng"

@@ -294,6 +294,13 @@
 		else
 			..()
 
+/datum/reagent/nutriment/protein/fungi
+	name = "fungal protein"
+	id = "fungi"
+	taste_description = "some sort of fungas"
+	color = "#979797"
+	allergen_type = ALLERGEN_FUNGI
+
 /datum/reagent/nutriment/protein/tofu
 	name = "tofu protein"
 	id = "tofu"

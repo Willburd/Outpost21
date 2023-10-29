@@ -79,6 +79,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/reishicup/Initialize()
 	. = ..()
 	reagents.add_reagent("psilocybin", 3)
+	reagents.add_reagent("fungi", 13)
 	bitesize = 6
 
 /obj/item/weapon/storage/box/wings //This is kinda like the donut box.

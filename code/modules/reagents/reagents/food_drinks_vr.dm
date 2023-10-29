@@ -257,6 +257,7 @@
 	halluci = 30
 	var/adj_dizzy = 30
 	color = "#d3785d"
+	allergen_type = ALLERGEN_FUNGI
 
 	glass_name = "Dumb Shroom Juice"
 	glass_desc = "Touch fuzzy, get dizzy."
@@ -349,6 +350,7 @@
 	description = "Coco and milk, a timeless classic."
 	taste_description = "sophisticated bittersweet chocolate mixed with silky, creamy, whole milk."
 	color = "#d3785d"
+	allergen_type = ALLERGEN_DAIRY
 
 	glass_name = "Choccy Milk"
 	glass_desc = "The most iconic duo in the galaxy, chocolate, and milk."

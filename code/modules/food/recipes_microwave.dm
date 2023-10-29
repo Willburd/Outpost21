@@ -170,11 +170,11 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 
 /datum/recipe/spacylibertyduff
-	reagents = list("water" = 5, "vodka" = 5, "psilocybin" = 5)
+	reagents = list("water" = 5, "vodka" = 5, "psilocybin" = 5, "fungi" = 16)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff
 
 /datum/recipe/amanitajelly
-	reagents = list("water" = 5, "vodka" = 5, "amatoxin" = 5)
+	reagents = list("water" = 5, "vodka" = 5, "amatoxin" = 5, "fungi" = 16)
 	result = /obj/item/weapon/reagent_containers/food/snacks/amanitajelly
 
 /datum/recipe/amanitajelly/make_food(var/obj/container as obj)

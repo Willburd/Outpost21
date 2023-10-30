@@ -133,14 +133,15 @@
 		H.dna.real_name = H.real_name
 	else
 		H.dna = R.dna.Clone()
-	H.UpdateAppearance()
 	H.sync_organ_dna()
 	if(heal_level < 60)
 		randmutb(H) //Sometimes the clones come out wrong.
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
 
+	H.UpdateAppearance()
 	H.set_cloned_appearance()
+	H.regenerate_icons()
 	update_icon()
 
 	// A modifier is added which makes the new clone be unrobust.

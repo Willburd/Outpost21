@@ -229,6 +229,10 @@
 		// No point processing if we're already stressing the hell out.
 		if(H.hallucination >= hallucination_cap && H.loneliness_stage >= warning_cap)
 			return
+		// We are never alone~
+		if(H.mind && H.mind.changeling)
+			H.loneliness_stage = 0
+			return
 		// Vored? Not gonna get frightened.
 		if(isbelly(H.loc))
 			if(H.loneliness_stage > 0)

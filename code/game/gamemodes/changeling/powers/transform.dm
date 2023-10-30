@@ -43,9 +43,18 @@
 		var/mob/living/carbon/human/H = src
 		H.b_type = "AB+" //For some reason we have two blood types on the mob.
 		H.identifying_gender = chosen_dna.identifying_gender
+		//Basically all the VORE stuff
 		H.flavor_texts = chosen_dna.flavour_texts ? chosen_dna.flavour_texts.Copy() : null
-	src.real_name = chosen_dna.name
-	src.UpdateAppearance()
+		H.ooc_notes = chosen_dna.ooc_notes ? chosen_dna.ooc_notes : null
+		H.appearance_flags = chosen_dna.appearance_flags ? chosen_dna.appearance_flags : null
+		H.weight = chosen_dna.weight ? chosen_dna.weight : null
+		H.UpdateAppearance()
+		H.sync_organ_dna()
+		H.resize(chosen_dna.sizemult, TRUE)
+	else
+		src.UpdateAppearance()
+	src.real_name = chosen_dna.name ? chosen_dna.name : null
+
 	domutcheck(src, null)
 	changeling_update_languages(changeling.absorbed_languages)
 	if(chosen_dna.genMods)
@@ -56,10 +65,12 @@
 		for(var/datum/modifier/mod in chosen_dna.genMods)
 			self.modifiers.Add(mod.type)
 
+	// appearance controls
+	src.regenerate_icons()
+
 	src.verbs -= /mob/proc/changeling_transform
 	spawn(10)
 		src.verbs += /mob/proc/changeling_transform
-		src.regenerate_icons()
 
 	feedback_add_details("changeling_powers","TR")
 	return 1

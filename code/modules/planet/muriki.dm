@@ -432,8 +432,12 @@ var/datum/planet/muriki/planet_muriki = null
 	if(!L.enzyme_affect)
 		return
 
-	// acid burn time!
+	// We find this to be pleasant weather~
 	var/mob/living/carbon/human/H = L
+	if(istype(H) && H.mind && H.mind.changeling)
+		return
+
+	// acid burn time!
 	var/min_permeability = 0.15;
 
 	//Burn eyes, lungs and skin if misting...

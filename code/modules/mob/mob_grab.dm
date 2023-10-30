@@ -1,5 +1,5 @@
-#define UPGRADE_COOLDOWN	40
-#define UPGRADE_KILL_TIMER	100
+#define UPGRADE_COOLDOWN	20
+#define UPGRADE_KILL_TIMER	80
 
 ///Process_Grab()
 ///Called by client/Move()

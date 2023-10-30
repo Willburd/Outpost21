@@ -3,7 +3,7 @@
 	name = "Hallucination Sting"
 	desc = "We evolve the ability to sting a target with a powerful hallunicationary chemical."
 	helptext = "The target does not notice they have been stung.  The effect occurs after 30 to 60 seconds."
-	ability_icon_state = "ling_sting_lsd
+	ability_icon_state = "ling_sting_lsd"
 	genomecost = 3
 	verbpath = /mob/proc/changeling_lsdsting
 

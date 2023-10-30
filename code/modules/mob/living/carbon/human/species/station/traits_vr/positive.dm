@@ -351,3 +351,9 @@
 	var_changes = list("trauma_mod" = 0.85)
 	excludes = list(/datum/trait/negative/neural_hypersensitivity)
 	can_take = ORGANICS
+
+/datum/trait/positive/phoron_resist
+	name = "Phoron Resistant"
+	desc = "Allows contact exposure to phoron without ill effects. Your results may vary."
+	cost = 2
+	var_changes = list("phoron_contact_mod" = 0)

@@ -22,6 +22,17 @@
 		pass_flags |= PASSTABLE
 	else
 		Confuse(1) //Thud
+		// outpost 21 edit - add the sillier interactions
+		if(prob(2))
+			AdjustWeakened(12)
+			if(prob(50))
+				var/obj/item/organ/external/left_leg = get_organ(BP_L_LEG)
+				if(left_leg)
+					left_leg.fracture()
+			else
+				var/obj/item/organ/external/right_leg = get_organ(BP_R_LEG)
+				if(right_leg)
+					right_leg.fracture()
 
 	if(dir & WEST)
 		SpinAnimation(7,1,0)

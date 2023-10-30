@@ -7,6 +7,12 @@
 /decl/emote/visible/spin/do_extra(mob/user)
 	if(istype(user))
 		user.spin(20, 1)
+	// outpost 21 edit - add the sillier interactions
+	if(prob(5))
+		var/mob/living/M = user
+		if(!M.isSynthetic())
+			M.vomit()
+			return
 
 /decl/emote/visible/sidestep
 	key = "sidestep"

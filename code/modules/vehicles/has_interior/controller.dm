@@ -1078,6 +1078,13 @@
 		// turn toward!
 		update_weapon_turn( angledir)
 		return
+
+	// intent check
+	if(user_calling.a_intent == I_HELP && user_calling.is_preference_enabled(/datum/client_preference/safefiring))
+		to_chat(user_calling, "<span class='warning'>You refrain from firing the mounted \the [src] as your intent is set to help.</span>")
+		return
+
+	// ACTUALLY fire
 	control_console.interior_controller.visible_message("<span class='warning'>[user_calling] fires [src]!</span>")
 	to_chat(user_calling,"<span class='warning'>You fire [src]!</span>")
 	var/target_for_log = "unknown"

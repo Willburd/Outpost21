@@ -1766,18 +1766,23 @@
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	requires_power = FALSE
 
+
 /area/vehicle_interior/heavyarmor_carrier_A
 	name = "\improper Carrier A"
 
-/*
-// just an example of how to add a new carrier/tank
 /area/vehicle_interior/heavyarmor_carrier_B
 	name = "\improper Carrier A"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
-*/
+
 
 /area/vehicle_interior/heavyarmor_tank_A
 	name = "\improper Tank A"
+
+/area/vehicle_interior/heavyarmor_tank_B
+	name = "\improper Tank B"
+
+/area/vehicle_interior/heavyarmor_tank_C
+	name = "\improper Tank C"
+
 
 /area/vehicle_interior/heavyarmor_medic_recovery
 	name = "\improper Medic Recovery Vehicle"

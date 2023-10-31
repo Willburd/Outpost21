@@ -24,7 +24,7 @@
 	else if(href_list["ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowseTickets(text2num(href_list["ahelp_tickets"]))
 
-	mentor_commands(href, href_list, src)								  
+	mentor_commands(href, href_list, src)
 	if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
 
 		var/adminckey = href_list["dbsearchadmin"]
@@ -104,7 +104,7 @@
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 		if((bantype == BANTYPE_PERMA || bantype == BANTYPE_TEMP) && playermob.client)
-			qdel(playermob.client)																	   
+			qdel(playermob.client)
 
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
@@ -641,7 +641,7 @@
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[entry];jobban4=\ref[M]'><font color=red>[entry]</font></a></td>"
 			else
 				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[entry];jobban4=\ref[M]'>[entry]</a></td>"
-			
+
 			if(++counter >= 5) //So things dont get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
@@ -1251,6 +1251,7 @@
 		log_admin("[key_name(usr)] AIized [key_name(H)]")
 		H.AIize()
 
+	/* outpost 21 edit - removing xenomorphs
 	else if(href_list["makealien"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -1260,6 +1261,7 @@
 			return
 
 		usr.client.cmd_admin_alienize(H)
+	*/
 
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
@@ -1566,7 +1568,7 @@
 		var/mob/M = locate(href_list["jumpto"])
 		if(!M)
 			return
-		
+
 		var/turf/T = get_turf(M)
 		if(isturf(T))
 			usr.on_mob_jump()
@@ -1605,16 +1607,16 @@
 		var/mob/M = locate(href_list["sendmob"])
 		if(!M)
 			return
-		
+
 		var/list/areachoices = return_sorted_areas()
 		var/choice = tgui_input_list(usr, "Pick an area:", "Send Mob", areachoices)
 		if(!choice)
 			return
-		
+
 		var/area/A = areachoices[choice]
 		if(!A)
 			return
-			
+
 		M.on_mob_jump()
 		M.forceMove(pick(get_area_turfs(A)))
 		var/msg = "[key_name_admin(usr)] teleported [ADMIN_LOOKUPFLW(M)]"
@@ -2027,7 +2029,7 @@
 
 	// player info stuff
 
-	
+
 	if(href_list["notes"])
 		var/ckey = href_list["ckey"]
 		if(!ckey)

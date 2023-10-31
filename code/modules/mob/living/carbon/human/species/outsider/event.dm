@@ -104,11 +104,13 @@ Variables you may want to make use of are:
 		O_LIVER =    /obj/item/organ/internal/liver/grey/colormatch,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys/grey/colormatch,
 		O_BRAIN =    /obj/item/organ/internal/brain/grey/colormatch,
-		O_EYES =     /obj/item/organ/internal/eyes/grey/colormatch,
+		O_EYES =     /obj/item/organ/internal/eyes/grey/colormatch
+		/* outpost 21 edit - removing xenomorphs,
 		O_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/grey/colormatch,
 		O_ACID =     /obj/item/organ/internal/xenos/acidgland/grey/colormatch,
 		O_HIVE =     /obj/item/organ/internal/xenos/hivenode/grey/colormatch,
 		O_RESIN =    /obj/item/organ/internal/xenos/resinspinner/grey/colormatch
+		*/
 		)
 
 	var/use_bodyshape = SPECIES_HUMAN

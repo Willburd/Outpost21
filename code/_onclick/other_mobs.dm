@@ -46,8 +46,10 @@
 	else if(TK in mutations)
 		A.attack_tk(src)
 
+	/* outpost 21 edit - removing xenomorphs
 	else if(spitting) //Only used by xenos right now, can be expanded.
 		Spit(A)
+	*/
 
 /mob/living/RestrainedClickOn(var/atom/A)
 	return

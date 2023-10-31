@@ -85,6 +85,7 @@
 		return
 	..()
 
+/* outpost 21 edit - removing xenomorphs
 /obj/machinery/door/airlock/attack_alien(var/mob/user) //Familiar, right? Doors. -Mechoid
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/X = user
@@ -115,6 +116,7 @@
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 			return
 	..()
+*/
 
 /obj/machinery/door/airlock/get_material()
 	if(mineral)
@@ -966,11 +968,13 @@ About the new airlock wires panel:
 			if(src.shock(user, 100))
 				return
 
+	/* outpost 21 edit - removing xenomorphs
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
 			return
+	*/
 
 	if(src.p_open)
 		user.set_machine(src)

@@ -348,8 +348,10 @@
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
 		return 0
+	/* outpost 21 edit - removing xenomorphs
 	if(buckled && istype(buckled, /obj/structure/bed/nest)) // buckling does not restrict hands
 		return 0
+	*/
 	return 1
 
 /mob/living/carbon/restrained()

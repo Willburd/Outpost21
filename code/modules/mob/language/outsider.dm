@@ -74,6 +74,7 @@
 		"gal'h'rfikk", "harfrandid", "mud'gib", "il", "fuu", "ma'jin", "dedo", "ol'btoh", "n'ath", "reth", "sh'yro", "eth", \
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis", "spiri", "malum")
 
+/* outpost 21 edit - removing xenomorphs
 /datum/language/xenocommon
 	name = "Xenomorph"
 	colour = "alien"
@@ -104,6 +105,7 @@
 		return 1
 
 	return 0
+*/
 
 /datum/language/swarmbot
 	name = LANGUAGE_SWARMBOT

@@ -50,7 +50,7 @@
 		return
 	for(var/t in organs)
 		qdel(t)
-	
+
 	//VOREStation Edit Start - Hologram examine flavor
 	var/mob/living/silicon/ai/O = ..(move)
 	if(O)
@@ -201,6 +201,7 @@
 		qdel(src)
 	return O
 
+/* outpost 21 edit - removing xenomorphs
 //human -> alien
 /mob/living/carbon/human/proc/Alienize()
 	if (transforming)
@@ -224,7 +225,7 @@
 	to_chat(new_xeno, "<B>You are now an alien.</B>")
 	qdel(src)
 	return
-
+*/
 
 /mob/living/carbon/human/proc/corgize()
 	if (transforming)

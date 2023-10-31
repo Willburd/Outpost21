@@ -139,11 +139,13 @@
 //Proc: attack_hand
 //Description: Attacked with empty hand. Only to allow special attack_bys.
 /obj/machinery/door/blast/attack_hand(mob/user as mob)
+	/* outpost 21 edit - removing xenomorphs
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
 			return
+	*/
 	..()
 
 
@@ -213,6 +215,7 @@
 				take_damage(W.force*0.15) //If the item isn't a weapon, let's make this take longer than usual to break it down.
 			return
 
+/* outpost 21 edit - removing xenomorphs
 // Proc: attack_alien()
 // Parameters: Attacking Xeno mob.
 // Description: Forces open the door after a delay.
@@ -236,6 +239,7 @@
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 			return
 	..()
+*/
 
 // Proc: attack_generic()
 // Parameters: Attacking simple mob, incoming damage.

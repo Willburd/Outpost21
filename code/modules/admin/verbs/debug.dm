@@ -161,6 +161,7 @@
 	feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 */
 
+/* outpost 21 edit - removing xenomorphs,
 /client/proc/cmd_admin_alienize(var/mob/M in mob_list)
 	set category = VERBTAB_SPECIAL
 	set name = "Make Alien"
@@ -177,7 +178,7 @@
 		message_admins("<span class='notice'>[key_name_admin(usr)] made [key_name(M)] into an alien.</span>", 1)
 	else
 		tgui_alert_async(usr, "Invalid mob")
-
+*/
 
 //TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all()

@@ -57,7 +57,7 @@
 		if(F != src)
 			log_debug("Duplicate firedoors at [x],[y],[z]")
 			return INITIALIZE_HINT_QDEL
-	
+
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
 
@@ -80,7 +80,7 @@
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..()
-	
+
 	if(!Adjacent(user))
 		return .
 
@@ -137,11 +137,13 @@
 	if(operating)
 		return//Already doing something.
 
+	/* outpost 21 edit - removing xenomorphs
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
 			return
+	*/
 
 	if(blocked)
 		to_chat(user, "<span class='warning'>\The [src] is welded solid!</span>")
@@ -193,6 +195,7 @@
 				nextstate = FIREDOOR_CLOSED
 				close()
 
+/* outpost 21 edit - removing xenomorphs
 /obj/machinery/door/firedoor/attack_alien(var/mob/user) //Familiar, right? Doors.
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/X = user
@@ -217,6 +220,7 @@
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 			return
 	..()
+*/
 
 /obj/machinery/door/firedoor/attack_generic(var/mob/living/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))

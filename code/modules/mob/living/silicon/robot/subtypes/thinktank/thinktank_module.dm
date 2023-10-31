@@ -48,7 +48,6 @@
 	)
 
 /obj/item/weapon/robot_module/robot/platform/explorer/New()
-	..()
 	modules += new /obj/item/weapon/tool/wrench/cyborg(src)
 	modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
 	modules += new /obj/item/weapon/tool/wirecutters/cyborg(src)
@@ -68,6 +67,8 @@
 	modules += phasegun
 
 	emag = new /obj/item/weapon/chainsaw(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/platform/explorer/respawn_consumable(var/mob/living/silicon/robot/R, rate)
 	. = ..()
@@ -89,11 +90,12 @@
 	networks = list(NETWORK_MINE)
 
 /obj/item/weapon/robot_module/robot/platform/cargo/New()
-	..()
 	modules += new /obj/item/weapon/packageWrap(src)
 	modules += new /obj/item/weapon/pen/multi(src)
 	modules += new /obj/item/device/destTagger(src)
 	emag = new /obj/item/weapon/stamp/denied
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/platform/cargo/respawn_consumable(mob/living/silicon/robot/R, rate)
 	. = ..()

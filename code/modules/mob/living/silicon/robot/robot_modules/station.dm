@@ -54,14 +54,15 @@ var/global/list/robot_modules = list(
 	add_subsystems(R)
 	apply_status_flags(R)
 	handle_shell(R)
+	R.update_hud()
 
 	if(R.radio)
 		if(R.shell)
 			channels = R.mainframe.aiRadio.channels
 		R.radio.recalculateChannels()
 
-	vr_add_sprites() //Vorestation Edit: For vorestation only sprites
-
+	// append custom sprites to rest of sprite list
+	sprites += sprites_append
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
 
@@ -176,12 +177,11 @@ var/global/list/robot_modules = list(
 
 // Cyborgs (non-drones), default loadout. This will be given to every module.
 /obj/item/weapon/robot_module/robot/New()
-	..()
 	src.modules += new /obj/item/device/flash/robot(src)
 	src.modules += new /obj/item/weapon/tool/crowbar/cyborg(src)
 	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/device/gps/robot(src)
-	vr_new() // Vorestation Edit: For modules in robot_modules_vr.dm
+	..() // IS DONE LAST, because it scans over all added modules
 
 /obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
@@ -203,17 +203,18 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Standard",
 					"Decapod" = "decapod-Standard",
 					"Pneuma" = "pneuma-Standard",
-					"Tower" = "drider-Standard",
+					//"Tower" = "drider-Standard", // missing?
 					"Miss M" = "miss-standard" // YW change, Added Miss M
 					)
 
 
 /obj/item/weapon/robot_module/robot/standard/New()
-	..()
 	src.modules += new /obj/item/weapon/melee/baton/loaded(src)
 	src.modules += new /obj/item/weapon/tool/wrench/cyborg(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.emag = new /obj/item/weapon/melee/energy/sword(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/medical
 	name = "medical robot module"
@@ -243,12 +244,11 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Surgeon",
 					"Decapod" = "decapod-Surgeon",
 					"Pneuma" = "pneuma-Surgeon",
-					"Tower" = "drider-Surgeon",
+					//"Tower" = "drider-Surgeon", // missing?
 					"Miss M" = "miss-medical" // YW change, Added Miss M
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
-	..()
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/surgeon(src)
 	src.modules += new /obj/item/weapon/autopsy_scanner(src)
@@ -291,6 +291,9 @@ var/global/list/robot_modules = list(
 	src.modules += B
 	src.modules += O
 
+	// DO THIS LAST
+	..()
+
 /obj/item/weapon/robot_module/robot/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 
 	var/obj/item/weapon/reagent_containers/syringe/S = locate() in src.modules
@@ -328,12 +331,11 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Crisis",
 					"Decapod" = "decapod-Crisis",
 					"Pneuma" = "pneuma-Crisis",
-					"Tower" = "drider-Crisis",
+					//"Tower" = "drider-Crisis", // missing?
 					"Miss M" = "miss-medical" // YW change, Added Miss M
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
-	..()
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
 	src.modules += new /obj/item/roller_holder(src)
@@ -368,6 +370,9 @@ var/global/list/robot_modules = list(
 	src.modules += O
 	src.modules += B
 	src.modules += S
+
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 
@@ -410,13 +415,12 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Engineering",
 					"Decapod" = "decapod-Engineering",
 					"Pneuma" = "pneuma-Engineering",
-					"Tower" = "drider-Engineering",
+					//"Tower" = "drider-Engineering", // missing?
 					"Servitor" = "servitor", //YW Addition to add new Servitor Sprite
 					"Miss M" = "miss-engineer" // YW change, Added Miss M
 					)
 
 /obj/item/weapon/robot_module/robot/engineering/general/New()
-	..()
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
 	src.modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
@@ -502,6 +506,8 @@ var/global/list/robot_modules = list(
 	var/obj/item/stack/material/cyborg/plastic/PL = new (src)
 	PL.synths = list(plastic)
 	src.modules += PL
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/security
 	name = "security robot module"
@@ -531,12 +537,11 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Security",
 					"Decapod" = "decapod-Security",
 					"Pneuma" = "pneuma-Security",
-					"Tower" = "drider-Security",
+					//"Tower" = "drider-Security", // missing?
 					"Miss M" = "miss-security" // YW change, Added Miss M
 					)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
-	..()
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
@@ -545,6 +550,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/reagent_containers/spray/pepper(src)
 	src.modules += new /obj/item/weapon/gripper/security(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/flash/F = locate() in src.modules
@@ -580,12 +587,11 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Janitor",
 					"Decapod" = "decapod-Janitor",
 					"Pneuma" = "pneuma-Janitor",
-					"Tower" = "drider-Janitor",
+					// "Tower" = "drider-Janitor", // missing?
 					"Miss M" = "miss-janitor" // YW change, Added Miss M
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
-	..()
 	src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 	src.modules += new /obj/item/weapon/storage/bag/trash(src)
 	src.modules += new /obj/item/weapon/mop(src)
@@ -593,6 +599,8 @@ var/global/list/robot_modules = list(
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("lube", 250)
 	src.emag.name = "Lube spray"
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
@@ -645,12 +653,12 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Service",
 					"Decapod" = "decapod-Service",
 					"Pneuma" = "pneuma-Service",
-					"Tower" = "drider-Service",
+					//"Tower" = "drider-Service", // missing?
+					"Bovtender" = "bovtender-base", // outpost 21 edit - added these because they're cute
 					"Miss M" = "miss-service" // YW change, Added Miss M
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
-	..()
 	src.modules += new /obj/item/weapon/gripper/service(src)
 	src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
 	src.modules += new /obj/item/weapon/material/minihoe(src)
@@ -682,6 +690,8 @@ var/global/list/robot_modules = list(
 	R.add_reagent("beer2", 50)
 	src.emag.name = "Auntie Hong's Final Sip"
 	src.emag.desc = "A bottle of very special mix of alcohol and poison. Some may argue that there's alcohol to die for, but Auntie Hong took it to next level."
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/clerical/general
 	name = "clerical robot module"
@@ -704,11 +714,10 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Clerical",
 					"Decapod" = "decapod-Clerical",
 					"Pneuma" = "pneuma-Clerical",
-					"Tower" = "drider-Clerical"
+					//"Tower" = "drider-Clerical" // missing?
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
-	..()
 	src.modules += new /obj/item/weapon/pen/robopen(src)
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
@@ -717,6 +726,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/stamp/denied(src)
 	src.emag = new /obj/item/weapon/stamp/chameleon(src)
 	src.emag = new /obj/item/weapon/pen/chameleon(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -745,13 +756,13 @@ var/global/list/robot_modules = list(
 					"Pyralis" = "Glitterfly-Miner",
 					"Decapod" = "decapod-Miner",
 					"Pneuma" = "pneuma-Miner",
-					"Tower" = "drider-Miner",
-					"Miss M" = "miss-miner" // YW change, Added Miss M
+					// "Tower" = "drider-Miner", // missing?
+					"Miss M" = "miss-miner", // YW change, Added Miss M
+					"Mole Miner" = "moleminer" // outpost 21 edit - add these cause they're cute
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/pka, /obj/item/borg/upgrade/diamonddrill)
 
 /obj/item/weapon/robot_module/robot/miner/New()
-	..()
 	src.modules += new /obj/item/borg/sight/material(src)
 	src.modules += new /obj/item/weapon/tool/wrench/cyborg(src)
 	src.modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
@@ -766,6 +777,8 @@ var/global/list/robot_modules = list(
 	// No reason for these, upgrade modules replace them.
 	//src.emag = new /obj/item/weapon/pickaxe/plasmacutter/borg(src)
 	//src.emag = new /obj/item/weapon/pickaxe/diamonddrill(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/research
 	name = "research module"
@@ -783,13 +796,12 @@ var/global/list/robot_modules = list(
 					"Usagi-II" = "tall2peace",
 					"Pyralis" = "Glitterfly-Research",
 					"Decapod" = "decapod-Research",
-					"Pneuma" = "pneuma-Research",
-					"Tower" = "drider-Research"
+					"Pneuma" = "pneuma-Research"
+					//"Tower" = "drider-Research" // missing?
 					)
 	supported_upgrades = list(/obj/item/borg/upgrade/advrped)
 
 /obj/item/weapon/robot_module/robot/research/New()
-	..()
 	src.modules += new /obj/item/weapon/portable_destructive_analyzer(src)
 	src.modules += new /obj/item/weapon/gripper/research(src)
 	src.modules += new /obj/item/weapon/gripper/circuit(src)
@@ -831,6 +843,8 @@ var/global/list/robot_modules = list(
 	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)	//Cable code, taken from engiborg,
 	C.synths = list(wire)
 	src.modules += C
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/research/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 
@@ -855,7 +869,6 @@ var/global/list/robot_modules = list(
 					)
 
 /obj/item/weapon/robot_module/robot/security/combat/New()
-	..()
 	src.modules += new /obj/item/device/flash(src)
 	//src.modules += new /obj/item/borg/sight/thermal(src) // VOREStation Edit
 	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
@@ -863,7 +876,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
 	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
-
+	// DO THIS LAST
+	..()
 
 /* Drones */
 
@@ -874,7 +888,6 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_ENGINEERING)
 
 /obj/item/weapon/robot_module/drone/New(var/mob/living/silicon/robot/robot)
-	..()
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
 	src.modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
@@ -950,6 +963,8 @@ var/global/list/robot_modules = list(
 	var/obj/item/stack/material/cyborg/plastic/P = new (src)
 	P.synths = list(plastic)
 	src.modules += P
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
@@ -958,8 +973,9 @@ var/global/list/robot_modules = list(
 	languages = list()
 
 /obj/item/weapon/robot_module/drone/construction/New()
-	..()
 	src.modules += new /obj/item/weapon/rcd/electric/mounted/borg/lesser(src)
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
@@ -973,9 +989,10 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_MINE)
 
 /obj/item/weapon/robot_module/drone/mining/New()
-	..()
 	src.modules += new /obj/item/borg/sight/material(src)
 	src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 	src.modules += new /obj/item/weapon/storage/bag/ore(src)
 	src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
 	src.emag = new /obj/item/weapon/pickaxe/diamonddrill(src)
+	// DO THIS LAST
+	..()

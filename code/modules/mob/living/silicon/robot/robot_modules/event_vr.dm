@@ -6,7 +6,6 @@
 				)
 
 /obj/item/weapon/robot_module/robot/stray/New(var/mob/living/silicon/robot/R)
-	..()
 	// General
 	src.modules += new /obj/item/device/dogborg/boop_module(src)
 
@@ -48,15 +47,23 @@
 	B.water = water
 	src.modules += B
 
-	R.icon 		 = 'icons/mob/widerobot_vr.dmi'
-	R.ui_style_vr = TRUE
 	R.pixel_x 	 = -16
 	R.old_x 	 = -16
 	R.default_pixel_x = -16
-	R.dogborg = TRUE
+
+	// Assign wideborg department icon, DO NOT SET THE ICON MANUALLY vr_sprite_check() DOES THIS
 	R.wideborg = TRUE
+	R.wideborg_dept 		 = 'icons/mob/widerobot_vr.dmi'
+
+	// set UI and overlay flags
+	R.ui_style_vr = TRUE
+	R.dogborg = TRUE
+
 	R.verbs |= /mob/living/silicon/robot/proc/ex_reserve_refill
 	R.verbs |= /mob/living/silicon/robot/proc/robot_mount
 	R.verbs |= /mob/living/proc/toggle_rider_reins
 	R.verbs |= /mob/living/proc/shred_limb
 	R.verbs |= /mob/living/silicon/robot/proc/rest_style
+
+	// DO THIS LAST
+	..()

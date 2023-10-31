@@ -9,7 +9,6 @@
 				)
 
 /obj/item/weapon/robot_module/robot/lost/New(var/mob/living/silicon/robot/R)
-	..()
 	// Sec
 	src.modules += new /obj/item/weapon/melee/baton/shocker/robot(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
@@ -39,6 +38,9 @@
 	C.synths = list(wire)
 	src.modules += C
 
+	// DO THIS LAST
+	..()
+
 /obj/item/weapon/robot_module/robot/gravekeeper
 	name = "gravekeeper robot module"
 	hide_on_manifest = TRUE
@@ -48,7 +50,6 @@
 				)
 
 /obj/item/weapon/robot_module/robot/gravekeeper/New(var/mob/living/silicon/robot/R)
-	..()
 	// For fending off animals and looters
 	src.modules += new /obj/item/weapon/melee/baton/shocker/robot(src)
 	src.modules += new /obj/item/borg/combat/shield(src)
@@ -78,3 +79,6 @@
 	var/obj/item/stack/material/cyborg/wood/W = new (src)
 	W.synths = list(wood)
 	src.modules += W
+
+	// DO THIS LAST
+	..()

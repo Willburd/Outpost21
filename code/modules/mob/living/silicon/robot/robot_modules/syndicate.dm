@@ -31,7 +31,6 @@
 
 // All syndie modules get these, and the base borg items (flash, crowbar, etc).
 /obj/item/weapon/robot_module/robot/syndicate/New(var/mob/living/silicon/robot/R)
-	..()
 	loc = R
 	src.modules += new /obj/item/weapon/pinpointer/shuttle/merc(src)
 	src.modules += new /obj/item/weapon/melee/energy/sword(src)
@@ -48,6 +47,8 @@
 
 	id = R.idcard
 	src.modules += id
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/syndicate/Destroy()
 	src.modules -= id
@@ -65,11 +66,12 @@
 		)
 
 /obj/item/weapon/robot_module/robot/syndicate/protector/New(var/mob/living/silicon/robot/R)
-	..()
 	src.modules += new /obj/item/shield_projector/rectangle/weak(src)
 	src.modules += new /obj/item/weapon/gun/energy/dakkalaser(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
+	// DO THIS LAST
+	..()
 
 // 95% engi-borg and 15% roboticist.
 /obj/item/weapon/robot_module/robot/syndicate/mechanist
@@ -80,7 +82,6 @@
 		)
 
 /obj/item/weapon/robot_module/robot/syndicate/mechanist/New(var/mob/living/silicon/robot/R)
-	..()
 	// General engineering/hacking.
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
@@ -136,7 +137,8 @@
 	var/obj/item/stack/material/cyborg/glass/reinforced/RG = new (src)
 	RG.synths = list(metal, glass)
 	src.modules += RG
-
+	// DO THIS LAST
+	..()
 
 
 
@@ -148,7 +150,6 @@
 		)
 
 /obj/item/weapon/robot_module/robot/syndicate/combat_medic/New(var/mob/living/silicon/robot/R)
-	..()
 	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer/advanced(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/merc(src)
@@ -192,6 +193,8 @@
 	src.modules += O
 	src.modules += B
 	src.modules += S
+	// DO THIS LAST
+	..()
 
 /obj/item/weapon/robot_module/robot/syndicate/combat_medic/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 

@@ -21,8 +21,11 @@
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("lube", 250)
 	src.emag.name = "Lube spray"
-	R.icon 		 = 'icons/mob/robots_yw.dmi'
-	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
+
+	// set UI and overlay flags
+	R.ui_style_vr = TRUE
+
+	// DO THIS LAST
 	..()
 
 
@@ -53,10 +56,18 @@
 	src.modules += new /obj/item/weapon/tool/crowbar(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag 	 = new /obj/item/weapon/gun/energy/laser/mounted(src) //Emag. Not a big problem.
-	R.icon 		 = 'icons/mob/widerobot_yw.dmi'
-	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
+
+	// Assign wideborg department icon, DO NOT SET THE ICON MANUALLY vr_sprite_check() DOES THIS
+	R.wideborg = TRUE
+	R.wideborg_dept = 'icons/mob/widerobot_yw.dmi'
+
+	// set UI and overlay flags
+	R.ui_style_vr = TRUE
+
 	R.pixel_x 	 = -16
 	R.old_x 	 = -16
+
+	// DO THIS LAST
 	..()
 
 
@@ -98,10 +109,16 @@
 	src.emag.name = "Polyacid spray"
 
 	src.modules += new /obj/item/device/dogborg/pounce_module(src) //Pounce shit test
-	//R.icon_state = "medihound"
+
+	// Assign wideborg department icon, DO NOT SET THE ICON MANUALLY vr_sprite_check() DOES THIS
+	R.wideborg = TRUE
+	R.wideborg_dept = 'icons/mob/widerobot_vr.dmi'
+
+	// set UI and overlay flags
+	R.ui_style_vr = TRUE
+
 	R.pixel_x 	 = -16
 	R.old_x  	 = -16
-	..()
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
 	synths += medicine
@@ -116,8 +133,10 @@
 	B.synths = list(medicine)
 	src.modules += N
 	src.modules += B
-	R.icon = 'icons/mob/widerobot_vr.dmi'
-	R.hands.icon = 'icons/mob/screen1_robot_vr.dmi'
+
+	// DO THIS LAST
+	..()
+
 
 /obj/item/weapon/robot_module/medical/robot/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)

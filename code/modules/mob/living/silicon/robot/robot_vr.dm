@@ -7,15 +7,14 @@
 	var/leap_at
 	var/dogborg = FALSE //Dogborg special features (overlays etc.)
 	var/wideborg = FALSE //When the borg simply doesn't use standard 32p size.
+	var/wideborg_dept = 'icons/mob/widerobot_vr.dmi'
 	var/scrubbing = FALSE //Floor cleaning enabled
 	var/datum/matter_synth/water_res = null
 	var/notransform
-	var/original_icon = 'icons/mob/robots.dmi'
 	var/ui_style_vr = FALSE //Do we use our hud icons?
 	var/sitting = FALSE
 	var/bellyup = FALSE
 	does_spin = FALSE
-	var/wideborg_dept = 'icons/mob/widerobot_vr.dmi'
 	var/vr_icons = list(
 					   "handy-hydro",
 					   "handy-service",
@@ -67,6 +66,18 @@
 					   "uptall-security",
 					   "uptall-science"
 					   )					//List of all used sprites that are in robots_vr.dmi
+	var/yw_icons = list(
+					   "miss-standard",
+					   "miss-medical",
+					   "miss-engineer",
+					   "miss-security",
+					   "miss-janitor",
+					   "miss-service",
+					   "miss-miner",
+					   "bovtender-base",
+					   "xenomaid",
+					   "moleminer"
+					   )					//List of all used sprites that are in robots_yw.dmi
 
 
 /mob/living/silicon/robot/verb/robot_nom(var/mob/living/T in living_mobs(1))
@@ -154,20 +165,27 @@
 /mob/living/silicon/robot/proc/vr_sprite_check()
 	if(custom_sprite == TRUE)
 		return
-	if(wideborg == TRUE)
+
+	if(wideborg) // ENWIDEN
 		if(icontype == "Drake") // Why, Why can't we have normal nice things
 			icon = 'icons/mob/drakeborg/drakeborg_vr.dmi'
 		else
 			icon = wideborg_dept // why was this broken on YW code? - outpost21
-	else
-		icon = original_icon // drakes break borg icons otherwise... - outpost21
+			//to_world("WIDEBOT [wideborg_dept]")
+		return
 
-	if((!(original_icon == icon)) && (!(icon == 'icons/mob/robots_vr.dmi')))
-		original_icon = icon
-	if((icon_state in vr_icons) && (icon == 'icons/mob/robots.dmi'))
+	if((icon_state in vr_icons))
+		//to_world("ROBOT VR")
 		icon = 'icons/mob/robots_vr.dmi'
-	else if(!(icon_state in vr_icons))
-		icon = original_icon
+		return
+
+	if((icon_state in yw_icons))
+		//to_world("ROBOT YW")
+		icon = 'icons/mob/robots_yw.dmi'
+		return
+
+	//to_world("ROBOT MAIN")
+	icon = 'icons/mob/robots.dmi'
 
 /mob/living/silicon/robot/proc/ex_reserve_refill()
 	set name = "Refill Extinguisher"

@@ -239,7 +239,8 @@ default behaviour is:
 	if(buckled && buckled.loc != newloc) //not updating position
 		if(istype(buckled,/obj/structure/bed/chair/vehicle_interior_seat/pilot))
 			var/obj/structure/bed/chair/vehicle_interior_seat/pilot/P = buckled
-			return P.relaymove(src, direct) // for controlling vehicles with interiors
+			P.relaymove(src, direct) // for controlling vehicles with interiors
+			return 0 // so we don't turn in the seat!
 		else if(!buckled.anchored && buckled.buckle_movable)
 			return buckled.Move(newloc, direct)
 		else

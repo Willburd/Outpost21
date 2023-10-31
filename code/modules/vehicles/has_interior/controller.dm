@@ -45,7 +45,9 @@
 	var/key_type = /obj/item/weapon/key/cargo_train // override me
 	var/breakwalls = FALSE
 	var/has_breaking_speed = TRUE // if becomes stopped by a wall, this becomes false, until we are able to free move again (including reversing)
+	var/headlight_maxrange = 10
 	var/headlights_enabled = FALSE
+	var/extra_view = 4 // how much the view is increased by when the mob is in tank view
 
 	// area needed for each unique vehicle interior!
 	// Cannot share map locations either.
@@ -514,7 +516,7 @@
 	if(!on)
 		light_range = 0
 	if(!headlights_enabled)
-		light_range = 3
+		light_range = headlight_maxrange
 	else
 		light_range = 6
 	intarea.power_change()
@@ -648,7 +650,6 @@
 	circuit = /obj/item/weapon/circuitboard/security
 
 	var/list/viewers // Weakrefs to mobs in direct-view mode.
-	var/extra_view = 0 // how much the view is increased by when the mob is in tank view
 	var/obj/vehicle/has_interior/controller/interior_controller = null
 	var/obj/structure/bed/chair/vehicle_interior_seat/paired_seat = null
 	var/controls_weapon_index = 0 // if above 0, controls weapons in interior_controller.internal_weapon_list
@@ -705,7 +706,7 @@
 		var/mob/living/L = user
 		L.looking_elsewhere = 1
 		L.handle_vision()
-	user.set_viewsize(world.view + extra_view)
+	user.set_viewsize(world.view + interior_controller.extra_view)
 	GLOB.moved_event.register(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
 	// TODO GLOB.stat_set_event.register(user, src, /obj/machinery/computer/vehicle_interior_console/proc/unlook)
 	LAZYDISTINCTADD(viewers, weakref(user))
@@ -1003,7 +1004,6 @@
 		var/obj/item/vehicle_interior_weapon/W = paired_console.interior_controller.internal_weapons_list[paired_console.controls_weapon_index]
 		W.action(target, params, user)
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Vehicle weaponry
 
@@ -1034,11 +1034,40 @@
 		return FALSE
 	return TRUE
 
+/obj/item/vehicle_interior_weapon/proc/solve_aim_direction(var/endx, var/endy)
+	var/ev = control_console.interior_controller.extra_view
+
+	// is just /proc/Get_Angle(atom/movable/start,atom/movable/end) but with X/Y on the screen from its center...
+	var/startx = (15 + (ev * 2)) / 2
+	var/starty = ((15 + (ev * 2)) / 2)
+	var/dy = endy - starty
+	var/dx = endx - startx
+	var/returnangle = 0
+	if(!dy)
+		return (dx>=0)?90:270
+	returnangle = arctan(dx/dy)
+	if(dy<0)
+		returnangle += 180
+	else if(dx<0)
+		returnangle += 360
+
+	return returnangle
+
 /obj/item/vehicle_interior_weapon/proc/action(var/atom/target, var/params, var/mob/user_calling)
 	if(!action_checks(target))
 		return
+
+	// get clicked location on screen, this is just copied from /proc/screen_loc2turf(scr_loc, turf/origin) but I only want the XY on screen and not a turf
+	var/list/pr = params2list(params)
+	var/tX = splittext(pr["screen-loc"], ",")
+	var/tY = splittext(tX[2], ":")
+	tY = tY[1]
+	tX = splittext(tX[1], ":")
+	tX = tX[1]
+
+	// actually use it!
 	var/turf/curloc = control_console.interior_controller.loc
-	var/angledir = angle2dir( 360 + (round(Get_Angle(curloc, target) / 45) * 45 ))
+	var/angledir = angle2dir( solve_aim_direction(text2num(tX),text2num(tY)) )
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return

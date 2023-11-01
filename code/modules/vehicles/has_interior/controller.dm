@@ -99,13 +99,13 @@
 						entrance_hatch = R
 					// scan for consoles
 					for(var/obj/machinery/computer/vehicle_interior_console/C in T.contents)
-						C.name = "[name]'s Helm"
 						C.desc = "Used to pilot the [name]. Use ctrl-click to quickly toggle the engine if you're adjacent. Alt-click will grab the keys, if present."
 						C.interior_controller = src
 
 						for(var/obj/structure/bed/chair/vehicle_interior_seat/S in get_step(C.loc,C.dir))
 							S.paired_console = C
 							C.paired_seat = S
+							C.paired_seat.name = C.name + " Seat"
 							if(istype(S,/obj/structure/bed/chair/vehicle_interior_seat/pilot))
 								var/obj/structure/bed/chair/vehicle_interior_seat/pilot/PS = S
 								PS.remote_turn_off()	//so engine verbs are correctly set
@@ -183,6 +183,11 @@
 			crush_mobs_at_loc(T)
 		return could_move
 	return FALSE
+
+/obj/vehicle/has_interior/controller/forceMove(atom/destination)
+	. = ..()
+	update_weapons_location(loc)
+	update_exit_pos()
 
 /obj/vehicle/has_interior/controller/Moved(atom/old_loc, direction, forced = FALSE, movetime)
 	. = ..()
@@ -657,7 +662,6 @@
 	var/obj/structure/bed/chair/vehicle_interior_seat/paired_seat = null
 	var/controls_weapon_index = 0 // if above 0, controls weapons in interior_controller.internal_weapon_list
 
-
 /obj/machinery/computer/vehicle_interior_console/Initialize()
 	. = ..()
 
@@ -668,22 +672,16 @@
 /obj/machinery/computer/vehicle_interior_console/tgui_interact(mob/user, datum/tgui/ui = null)
 	// nothing
 
-/obj/machinery/computer/vehicle_interior_console/attack_robot(mob/user)
-	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
-		if(!R.shell)
-			return attack_hand(user)
-	..()
-
 /obj/machinery/computer/vehicle_interior_console/attack_ai(mob/user)
-	if(isAI(user))
-		to_chat(user, "<span class='notice'>This system in inaccessible to AI units.</span>")
-		return
-	attack_hand(user)
+	to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
+	return
 
 /obj/machinery/computer/vehicle_interior_console/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(stat & (BROKEN|NOPOWER))
+		return
+	if(issilicon(user) || isrobot(user))
+		to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 		return
 	if(user.blinded)
 		to_chat(user, "<span class='notice'>You cannot see!</span>")

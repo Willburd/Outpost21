@@ -64,7 +64,7 @@ var/global/list/robot_modules = list(
 	// append custom sprites to rest of sprite list
 	sprites += sprites_append
 	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+	R.choose_icon(R.module_sprites.len + 8, R.module_sprites)
 
 	for(var/obj/item/I in modules)
 		I.canremove = FALSE

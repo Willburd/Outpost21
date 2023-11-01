@@ -68,13 +68,16 @@
 	var/list/internal_weapons_list = list()
 	var/cached_dir // used for weapon position being retained in moved()
 
+	var/haskey = TRUE
+
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/New()
 	..()
 	cell = new /obj/item/weapon/cell/high(src)
-	key = new key_type(src)
+	if(haskey)
+		key = new key_type(src)
 	for(var/weapon_type in weapons_equiped)
 		internal_weapons_list.Add( new weapon_type(loc))
 

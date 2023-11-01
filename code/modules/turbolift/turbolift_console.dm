@@ -22,7 +22,7 @@
 		pixel_x = 32
 
 /obj/structure/lift/proc/pressed(var/mob/user)
-	if(!istype(user, /mob/living/silicon))
+	if(!issilicon(user))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
 		else
@@ -143,7 +143,7 @@
 /obj/structure/lift/panel/interact(var/mob/user)
 	if(!..())
 		return
-	
+
 	tgui_interact(user)
 
 /obj/structure/lift/panel/tgui_interact(mob/user, datum/tgui/ui)
@@ -171,7 +171,7 @@
 			"name" = floor.name,
 		)))
 	data["floors"] = floors
-	
+
 	return data
 
 /obj/structure/lift/panel/tgui_act(action, params)

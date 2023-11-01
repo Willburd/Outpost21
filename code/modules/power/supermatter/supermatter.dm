@@ -104,8 +104,8 @@
 	var/config_hallucination_power = 0.1
 
 	var/debug = 0
-	
-	/// Cooldown tracker for accent sounds, 
+
+	/// Cooldown tracker for accent sounds,
 	var/last_accent_sound = 0
 
 	var/datum/looping_sound/supermatter/soundloop
@@ -265,7 +265,7 @@
 		if((damage > emergency_point) && !public_alert)
 			global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT!", "Supermatter Monitor")
 			for(var/mob/M in player_list) // Rykka adds SM Delam alarm
-				if(!istype(M,/mob/new_player) && !isdeaf(M)) // Rykka adds SM Delam alarm
+				if(!isnewplayer(M) && !isdeaf(M)) // Rykka adds SM Delam alarm
 					M << message_sound // Rykka adds SM Delam alarm
 			admin_chat_message(message = "SUPERMATTER DELAMINATING!", color = "#FF2222") //VOREStation Add
 			public_alert = 1
@@ -299,7 +299,7 @@
 		shift_light(4,initial(light_color))
 	if(grav_pulling)
 		supermatter_pull(src)
-	
+
 	// Vary volume by power produced.
 	if(power)
 		// Volume will be 1 at no power, ~12.5 at ENERGY_NITROGEN, and 20+ at ENERGY_PHORON.
@@ -312,7 +312,7 @@
 		soundloop.mid_sounds = list('sound/machines/sm/loops/delamming.ogg' = 1)
 	else
 		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
-	
+
 	// Play Delam/Neutral sounds at rate determined by power and damage.
 	if(last_accent_sound < world.time && prob(20))
 		var/aggression = min(((damage / 800) * (power / 2500)), 1.0) * 100
@@ -471,7 +471,7 @@
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
 	if(istype(AM, /obj/effect))
 		return
-	if(istype(AM, /mob/living))
+	if(isliving(AM))
 		var/mob/living/M = AM
 		var/datum/gender/T = gender_datums[M.get_visible_gender()]
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... [T.his] body starts to glow and catch flame before flashing into ash.</span>",\

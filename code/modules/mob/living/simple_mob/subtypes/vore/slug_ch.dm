@@ -113,7 +113,7 @@
 /mob/living/simple_mob/vore/slug/do_attack(atom/A, turf/T) //Override of attack proc to ensure the slug can only attempt to eat people, not harm them. Inability to actually hurt anybody is intended, otherwise this mob wouldn't have 98 melee armor.
 	if(ckey) //If we're player controlled, use the default attack code.
 		return ..()
-	if(istype(A, /mob/living) && !will_eat(A))
+	if(isliving(A) && !will_eat(A))
 		ai_holder.lose_target() //Ignore anybody we can't eat.
 		return
 	else //This is the parent do_attack() code for determining whether or not attacks can hit.
@@ -190,7 +190,7 @@
 /obj/effect/slug_glue/Uncross(atom/movable/AM, atom/newloc)
 	if(istype(AM, /mob/living/simple_mob/vore/slug))
 		return ..()
-	else if(istype(AM, /mob/living))
+	else if(isliving(AM))
 		if(prob(25))
 			to_chat(AM, span("warning", "You stick to \the [my_turf]!"))
 			return FALSE
@@ -201,7 +201,7 @@
 	if(AM.is_incorporeal())
 		return
 
-	if(istype(AM, /mob/living))
+	if(isliving(AM))
 		var/mob/living/L = AM
 		if(istype(L, /mob/living/simple_mob/vore/slug))
 			return

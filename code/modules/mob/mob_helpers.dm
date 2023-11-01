@@ -1,14 +1,14 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /* outpost 21 edit - removing xenomorphs
 /proc/isxenomorph(A)
-	if(istype(A, /mob/living/carbon/human))
+	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
 		return istype(H.species, /datum/species/xenos)
 	return 0
 */
 
 /proc/issmall(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SMALL
 	return 0
@@ -23,14 +23,14 @@
 	return TRUE
 
 /proc/istiny(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_TINY
 	return 0
 
 
 /proc/ismini(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_MINISCULE
 	return 0
@@ -408,7 +408,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return // Can't talk in deadchat if you can't see it.
 
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights && M.is_preference_enabled(/datum/client_preference/holder/show_staff_dsay))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!isnewplayer(M) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights && M.is_preference_enabled(/datum/client_preference/holder/show_staff_dsay))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
 			if(M.forbid_seeing_deadchat && !M.client.holder)
@@ -422,7 +422,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
 				var/mob/observer/dead/DM
-				if(istype(subject, /mob/observer/dead))
+				if(isobserver(subject))
 					DM = subject
 				if(M.client.holder) 							// What admins see
 					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
@@ -438,7 +438,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 
 /proc/say_dead_object(var/message, var/obj/subject = null)
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights && M.is_preference_enabled(/datum/client_preference/holder/show_staff_dsay))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!isnewplayer(M) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights && M.is_preference_enabled(/datum/client_preference/holder/show_staff_dsay))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname = "Game Master"
 			if(M.forbid_seeing_deadchat && !M.client.holder)

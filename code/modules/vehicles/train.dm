@@ -56,12 +56,12 @@
 				A.Move(T)	//bump things away when hit
 
 	if(emagged)
-		if(istype(A, /mob/living))
+		if(isliving(A))
 			var/mob/living/M = A
 			visible_message("<font color='red'>[src] knocks over [M]!</font>")
 			M.apply_effects(5, 5)				//knock people down if you hit them
 			M.apply_damages(22 / move_delay)	// and do damage according to how fast the train is going
-			if(istype(load, /mob/living/carbon/human))
+			if(ishuman(load))
 				var/mob/living/D = load
 				to_chat(D, "<font color='red'>You hit [M]!</font>")
 				add_attack_logs(D,M,"Ran over with [src.name]")
@@ -139,7 +139,7 @@
 	set category = VERBTAB_EQUIP
 	set src in view(1)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))

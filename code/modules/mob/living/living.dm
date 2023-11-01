@@ -133,7 +133,7 @@
 
 //sort of a legacy burn method for /electrocute, /shock, and the e_chair
 /mob/living/proc/burn_skin(burn_amount)
-	if(istype(src, /mob/living/carbon/human))
+	if(ishuman(src))
 		//to_world("DEBUG: burn_skin(), mutations=[mutations]")
 		if(mShock in src.mutations) //shockproof
 			return 0
@@ -148,7 +148,7 @@
 				H.UpdateDamageIcon()
 		H.updatehealth()
 		return 1
-	else if(istype(src, /mob/living/silicon/ai))
+	else if(isAI(src))
 		return 0
 
 /mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
@@ -167,7 +167,7 @@
 		temperature -= change
 		if(actual < desired)
 			temperature = desired
-//	if(istype(src, /mob/living/carbon/human))
+//	if(ishuman(src))
 //		to_world("[src] ~ [src.bodytemperature] ~ [temperature]")
 	return temperature
 
@@ -1194,7 +1194,7 @@
 		var/real_damage = rand_damage
 		var/hit_dam_type = attack.damage_type
 		real_damage += attack.get_unarmed_damage(src)
-		if(istype(src,/mob/living/carbon/human))
+		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
 			real_damage *= H.damage_multiplier
 			rand_damage *= H.damage_multiplier

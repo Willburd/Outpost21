@@ -138,7 +138,7 @@
 		return//Already doing something.
 
 	/* outpost 21 edit - removing xenomorphs
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
@@ -197,7 +197,7 @@
 
 /* outpost 21 edit - removing xenomorphs
 /obj/machinery/door/firedoor/attack_alien(var/mob/user) //Familiar, right? Doors.
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			if(src.blocked)

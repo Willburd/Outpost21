@@ -31,7 +31,7 @@
 		for(var/x in 1 to 2) // Delete things that shouldn't be players.
 			for(var/turf/T in turfs_to_clean)
 				for(var/atom/movable/AM in T)
-					if(!istype(AM, /mob/living) && !istype(AM, /mob/observer))
+					if(!isliving(AM) && !istype(AM, /mob/observer))
 						if(istype(AM, /mob)) // a mob we don't know what to do with got in somehow.
 							message_admins("a mob of type [AM.type] was in the build area and got deleted.", R_DEBUG)
 							++killed_mobs
@@ -40,7 +40,7 @@
 
 		for(var/turf/T in turfs_to_clean) //now deal with those pesky players.
 			for(var/mob/living/LH in T)
-				if(istype(LH, /mob/living))
+				if(isliving(LH))
 					to_chat(LH, "<span class='danger'>It feels like you're being torn apart!</span>")
 					LH.apply_effect(20, AGONY, 0, 0)
 					LH.visible_message("<span class='danger'>[LH.name] is ripped apart by something you can't see!</span>")
@@ -98,7 +98,7 @@
 	..()
 
 /obj/machinery/computer/pickengine/attack_ai(var/mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot))
+	if(isrobot(user))
 		return attack_hand(user)
 	else
 		user << "<span class='warning'>The network data sent by this machine is encrypted!</span>"
@@ -137,7 +137,7 @@
 	if(..())
 		return 1
 
-	if( isturf(loc) && (in_range(src, usr) || istype(usr, /mob/living/silicon)) )
+	if( isturf(loc) && (in_range(src, usr) || issilicon(usr)) )
 		usr.set_machine(src)
 
 	if(href_list["RUSTEngine"] && !building)

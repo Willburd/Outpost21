@@ -86,7 +86,7 @@
 
 /mob/living/simple_mob/animal/thrumbo/Bump(atom/movable/AM)
 	if(charging)
-		if(istype(AM, /mob/living))
+		if(isliving(AM))
 			var/mob/living/M = AM
 			visible_message("<span class='warning'>[src] rams [AM]!</span>")
 			M.Stun(5)

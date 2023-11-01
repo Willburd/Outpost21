@@ -32,7 +32,7 @@
 
 	var/damage_dealt = 1
 	var/attack_message = "kicks"
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
@@ -286,4 +286,3 @@
 	health -= damage
 	spawn(1) healthcheck()
 	return 1
-

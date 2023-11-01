@@ -255,7 +255,7 @@ update_flag
 		src.add_fingerprint(user)
 		healthcheck()
 
-	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/weapon/tank/jetpack))
+	if(isrobot(user) && istype(W, /obj/item/weapon/tank/jetpack))
 		var/datum/gas_mixture/thejetpack = W:air_contents
 		var/env_pressure = thejetpack.return_pressure()
 		var/pressure_delta = min(10*ONE_ATMOSPHERE - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
@@ -343,7 +343,7 @@ update_flag
 				pressure = 10*ONE_ATMOSPHERE
 				. = TRUE
 			else if(pressure == "input")
-				pressure = tgui_input_number(usr, "New release pressure ([ONE_ATMOSPHERE/10]-[10*ONE_ATMOSPHERE] kPa):", name, release_pressure, 10*ONE_ATMOSPHERE, ONE_ATMOSPHERE/10) 
+				pressure = tgui_input_number(usr, "New release pressure ([ONE_ATMOSPHERE/10]-[10*ONE_ATMOSPHERE] kPa):", name, release_pressure, 10*ONE_ATMOSPHERE, ONE_ATMOSPHERE/10)
 				if(!isnull(pressure) && !..())
 					. = TRUE
 			else if(text2num(pressure) != null)

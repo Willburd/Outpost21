@@ -36,12 +36,12 @@
 	..()
 	if (usr.stat || usr.restrained())
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || issilicon(usr))
 		var/A = tgui_input_list(usr, "Area to jump bombard", "Open Fire", teleportlocs)
 		var/area/thearea = teleportlocs[A]
 		if (usr.stat || usr.restrained()) return
 		if(src.reload < reloadmax) return
-		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || issilicon(usr))
 			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
 			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
 			var/list/L = list()

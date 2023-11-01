@@ -283,7 +283,7 @@ var/list/all_technomancer_assistance = subtypesof(/datum/technomancer/assistance
 
 	if(H.stat || H.restrained())
 		return
-	if(!istype(H, /mob/living/carbon/human))
+	if(!ishuman(H))
 		return 1 //why does this return 1?
 
 	if(H != owner)
@@ -385,4 +385,3 @@ var/list/all_technomancer_assistance = subtypesof(/datum/technomancer/assistance
 				qdel(AM)
 				return
 	to_chat(user, "<span class='warn'>\The [src] is unable to refund \the [AM].</span>")
-

@@ -9,7 +9,7 @@
 
 /datum/artifact_effect/celldrain/DoEffectTouch(var/mob/user)
 	if(user)
-		if(istype(user, /mob/living/silicon/robot))
+		if(isrobot(user))
 			var/mob/living/silicon/robot/R = user
 			for (var/obj/item/weapon/cell/D in R.contents)
 				D.charge = max(D.charge - rand() * 100, 0)
@@ -65,7 +65,7 @@
 				continue
 			S.charge = max(S.charge - 250,0)
 		for (var/mob/living/silicon/robot/M in silicon_mob_list)
-			if(T.z != M.z) 
+			if(T.z != M.z)
 				continue
 			if(get_dist(T, M) > 100)
 				continue

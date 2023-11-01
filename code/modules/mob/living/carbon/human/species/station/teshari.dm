@@ -244,7 +244,7 @@
 			return
 		// Check for company.
 		for(var/mob/living/M in viewers(H))
-			if(!istype(M, /mob/living/carbon) && !istype(M, /mob/living/silicon/robot))
+			if(!istype(M, /mob/living/carbon) && !isrobot(M))
 				continue
 			if(M == H || M.stat == DEAD || M.invisibility > H.see_invisible)
 				continue

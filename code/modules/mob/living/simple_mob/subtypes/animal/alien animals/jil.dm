@@ -412,7 +412,7 @@
 				forbid = TRUE
 				break
 
-		if(can_attack(A) && !forbid && !istype(A, /mob/living))
+		if(can_attack(A) && !forbid && !isliving(A))
 			// for item pickup targeting
 			. += A
 

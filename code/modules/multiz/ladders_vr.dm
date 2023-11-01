@@ -16,7 +16,7 @@
 	return ..()
 
 /obj/structure/portal_subtle/Bumped(mob/M as mob|obj)
-	if(istype(M,/mob) && !(istype(M,/mob/living)))
+	if(istype(M,/mob) && !(isliving(M)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(M)
@@ -24,7 +24,7 @@
 	return
 
 /obj/structure/portal_subtle/Crossed(AM as mob|obj)
-	if(istype(AM,/mob) && !(istype(AM,/mob/living)))
+	if(istype(AM,/mob) && !(isliving(AM)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(AM)
@@ -32,7 +32,7 @@
 	return
 
 /obj/structure/portal_subtle/attack_hand(mob/user as mob)
-	if(istype(user) && !(istype(user,/mob/living)))
+	if(istype(user) && !(isliving(user)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(user)
@@ -69,14 +69,14 @@
 	anchored = TRUE
 
 /obj/structure/portal_gateway/Bumped(mob/M as mob|obj)
-	if(istype(M,/mob) && !(istype(M,/mob/living)))
+	if(istype(M,/mob) && !(isliving(M)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	var/obj/effect/landmark/dest = pick(eventdestinations)
 	if(dest)
 		M << 'sound/effects/phasein.ogg'
 		playsound(src, 'sound/effects/phasein.ogg', 100, 1)
 		M.forceMove(dest.loc)
-		if(istype(M, /mob/living) && dest.abductor)
+		if(isliving(M) && dest.abductor)
 			var/mob/living/L = M
 			//Situations to get the mob out of
 			if(L.buckled)

@@ -273,7 +273,7 @@ GLOBAL_LIST_INIT(pitcher_plant_lure_messages, list(
 /mob/living/simple_mob/vore/pitcher_plant/Crossed(atom/movable/AM as mob|obj) //Yay slipnoms
 	if(AM.is_incorporeal())
 		return
-	if(istype(AM, /mob/living) && will_eat(AM) && !istype(AM, type) && prob(vore_bump_chance) && !ckey)
+	if(isliving(AM) && will_eat(AM) && !istype(AM, type) && prob(vore_bump_chance) && !ckey)
 		animal_nom(AM)
 	..()
 

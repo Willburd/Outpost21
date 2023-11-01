@@ -756,7 +756,7 @@
 // called when player tries to move while in a pipe
 /obj/structure/disposalholder/relaymove(mob/user as mob)
 
-	if(!istype(user,/mob/living))
+	if(!isliving(user))
 		return
 
 	var/mob/living/U = user
@@ -921,7 +921,7 @@
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 100, 1)
-						if(istype(AM,/mob/living)) // same ignore as above
+						if(isliving(AM)) // same ignore as above
 							var/mob/living/L = AM
 							if(L.stat == DEAD && L.getBruteLoss() > 150)
 								L.gib() // SPLOOT out of tubes violently in a shower of gore
@@ -940,7 +940,7 @@
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 5, 1)
-						if(istype(AM,/mob/living)) // same ignore as above
+						if(isliving(AM)) // same ignore as above
 							var/mob/living/L = AM
 							if(L.stat == DEAD && L.getBruteLoss() > 150)
 								L.gib() // SPLOOT out of tubes violently in a shower of gore
@@ -1630,7 +1630,7 @@
 			if(!istype(AM,/mob/living/silicon/robot/drone)) //Drones keep smashing windows from being fired out of chutes. Bad for the station. ~Z
 				spawn(5)
 					AM.throw_at(target, 3, 1)
-				if(istype(AM,/mob/living)) // same ignore as above
+				if(isliving(AM)) // same ignore as above
 					var/mob/living/L = AM
 					if(L.stat == DEAD && L.getBruteLoss() > 150)
 						L.gib() // SPLOOT out of tubes violently in a shower of gore

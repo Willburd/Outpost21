@@ -172,7 +172,7 @@
 		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
 		return
 
-	if(istype(victim,/mob/living/carbon/human) && !emagged)
+	if(ishuman(victim) && !emagged)
 		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
 		return
 
@@ -254,7 +254,7 @@
 		// extra loot from butchery!
 		byproducts += grindable?.butchery_loot?.Copy()
 
-		if(istype(grindable,/mob/living/carbon/human))
+		if(ishuman(grindable))
 			var/mob/living/carbon/human/H = grindable
 			slab_name = grindable.real_name
 			slab_type = H.isSynthetic() ? /obj/item/stack/material/steel : H.species.meat_type
@@ -315,7 +315,7 @@
 		M.drop_from_inventory(I,src)
 
 	// release prey
-	if(istype(M,/mob/living))
+	if(isliving(M))
 		var/mob/living/L = M
 		L.release_vore_contents(silent = TRUE)
 

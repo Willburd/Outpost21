@@ -447,7 +447,7 @@ var/list/mob/living/forced_ambiance_list = new
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
 		return
 
-	if(istype(mob,/mob/living/carbon/human/))
+	if(ishuman(mob))
 		var/mob/living/carbon/human/H = mob
 		if(H.buckled)
 			return // Being buckled to something solid keeps you in place.

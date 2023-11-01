@@ -71,7 +71,7 @@
 	set category = VERBTAB_OBJECT
 	set src in view(usr, 1)
 	set name = "Print Data"
-	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
+	if(usr.stat || !(ishuman(usr)))
 		to_chat(usr, "No.")
 		return
 

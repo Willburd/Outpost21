@@ -75,7 +75,7 @@
 			var/alert_lev = 0
 			var/mob/living/zapmob = null
 
-			if(istype(AM,/obj/mecha) || istype(AM,/mob/living/silicon))
+			if(istype(AM,/obj/mecha) || issilicon(AM))
 				// pretty much always is
 				alert_lev = 2
 
@@ -94,7 +94,7 @@
 				for(var/obj/item/I in AM.contents)
 					alert_lev = max( alert_lev, slot_scan(I))
 
-				if(istype(AM,/mob/living))
+				if(isliving(AM))
 					zapmob = AM
 
 			// boop!

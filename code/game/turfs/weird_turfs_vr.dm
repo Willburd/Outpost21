@@ -19,7 +19,7 @@
 	cut_overlays()
 	if(prob(5))
 		add_glow()
-	if(istype(O, /mob/living/carbon/human))
+	if(ishuman(O))
 		var/mob/living/carbon/human/L = O
 		if(istype(L.species, /datum/species/crew_shadekin))
 			L.halloss += 5
@@ -79,7 +79,7 @@
 	. = ..()
 	if(prob(5))
 		add_glow()
-		
+
 /turf/unsimulated/floor/dark/Crossed(O)
 	. = ..()
 	if(!isliving(O))
@@ -87,7 +87,7 @@
 	cut_overlays()
 	if(prob(5))
 		add_glow()
-	if(istype(O, /mob/living/carbon/human))
+	if(ishuman(O))
 		var/mob/living/carbon/human/L = O
 		if(istype(L.species, /datum/species/crew_shadekin))
 			L.halloss += 5
@@ -111,7 +111,7 @@
 	var/choiceb
 	if(flip == 1)
 		choice = "overlay-[rand(1,6)]"
-	if(flip == 2)	
+	if(flip == 2)
 		choice = "overlay-[rand(7,12)]"
 	var/image/i = image('icons/turf/flooring/weird_vr.dmi', choice)
 	i.plane = PLANE_LIGHTING_ABOVE

@@ -421,7 +421,7 @@
 //For if the dogborg's existing patient uh, doesn't make it.
 /obj/item/device/dogborg/sleeper/proc/update_patient()
 	hound = src.loc
-	if(!istype(hound,/mob/living/silicon/robot))
+	if(!isrobot(hound))
 		return
 	if(UI_open == TRUE)
 		sleeperUI(hound)
@@ -651,7 +651,7 @@
 	return
 
 /obj/item/device/dogborg/sleeper/process()
-	if(!istype(src.loc,/mob/living/silicon/robot))
+	if(!isrobot(src.loc))
 		return
 
 	if(cleaning) //We're cleaning, return early after calling this as we don't care about the patient.

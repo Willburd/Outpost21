@@ -385,7 +385,7 @@
 				to_chat(usr, "<span class='notice'>\icon[src][bicon(src)] Sent message to [istype(comm, /obj/item/device/communicator) ? comm.owner : comm.name], <b>\"[text]\"</b> (<a href='?src=\ref[src];action=Reply;target=\ref[exonet.get_atom_from_address(comm.exonet.address)]'>Reply</a>)</span>")
 				for(var/mob/M in player_list)
 					if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-						if(istype(M, /mob/new_player) || M.forbid_seeing_deadchat)
+						if(isnewplayer(M) || M.forbid_seeing_deadchat)
 							continue
 						if(exonet.get_atom_from_address(their_address) == M)
 							continue

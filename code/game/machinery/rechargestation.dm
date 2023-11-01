@@ -172,7 +172,7 @@
 			return
 		if (istype(O, /obj/item/weapon/grab) && get_dist(src,user)<2)
 			var/obj/item/weapon/grab/G = O
-			if(istype(G.affecting,/mob/living))
+			if(isliving(G.affecting))
 				var/mob/living/M = G.affecting
 				qdel(O)
 				go_in(M)
@@ -251,7 +251,7 @@
 	if(occupant)
 		return
 
-	if(istype(L, /mob/living/silicon/robot))
+	if(isrobot(L))
 		var/mob/living/silicon/robot/R = L
 
 		if(R.incapacitated())

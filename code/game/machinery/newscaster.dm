@@ -211,7 +211,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 	if(hitstaken > 0) //Cosmetic damage overlay
 		add_overlay("crack[hitstaken]")
-	
+
 	icon_state = "newscaster_normal"
 	add_overlay(emissive_appearance(icon, "newscaster_normal_ov"))
 	add_overlay(mutable_appearance(icon, "newscaster_normal_ov"))
@@ -272,7 +272,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 	if(!user.IsAdvancedToolUser())
 		return 0
-	
+
 	tgui_interact(user)
 
 /**
@@ -286,7 +286,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	temp = list(text = text, style = style)
 	if(update_now)
 		SStgui.update_uis(src)
-	
+
 /obj/machinery/newscaster/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -316,7 +316,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	data["wanted_issue"] = wanted_issue
 
 	data["securityCaster"] = !!securityCaster
-	
+
 	var/list/network_channels = list()
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		network_channels.Add(list(list(
@@ -483,7 +483,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 			if(!paper_remaining)
 				set_temp("Unable to print newspaper. Insufficient paper. Please notify maintenance personnel to refill machine storage.", "danger", FALSE)
 				return TRUE
-			
+
 			print_paper()
 			set_temp("Printing successful. Please receive your newspaper from the bottom of the machine.", "success", FALSE)
 			return TRUE
@@ -644,7 +644,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 		user.drop_item()
 		photo.loc = src
 		photo_data = new(photo, 0)
-	else if(istype(user,/mob/living/silicon))
+	else if(issilicon(user))
 		var/mob/living/silicon/tempAI = user
 		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if(!selection)
@@ -667,7 +667,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	return "Unknown"
 
 /obj/machinery/newscaster/proc/scan_user(mob/living/user)
-	if(istype(user,/mob/living/carbon/human))                       //User is a human
+	if(ishuman(user))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
 		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
 		if(I)

@@ -450,7 +450,7 @@
 	set category = VERBTAB_OBJECT
 	set src in usr
 
-	if(!istype(src.loc, /mob/living))
+	if(!isliving(src.loc))
 		return
 
 	var/mob/living/carbon/human/H = usr

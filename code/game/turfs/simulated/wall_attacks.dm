@@ -130,10 +130,10 @@
 /turf/simulated/wall/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	user.setClickCooldown(user.get_attack_speed(W))
-	
+
 	// outpost 21 addition - if grabbing a creature, and attacking a wall, SLAM them into it by body or head, and do damage to wall!
 	var/item = user.get_active_hand()
-	if(istype(user,/mob/living) && istype(item,/obj/item/weapon/grab))
+	if(isliving(user) && istype(item,/obj/item/weapon/grab))
 		var/mob/living/L = user
 		var/damage_done = L.slam_grabbed_mob_against_thing(item)
 		if(damage_done > -1)
@@ -151,7 +151,7 @@
 		return
 
 	/*
-	//As with the floors, only this time it works AND tries pushing the wall after it's done. 
+	//As with the floors, only this time it works AND tries pushing the wall after it's done.
 		if(!construction_stage && user.a_intent == I_HELP)
 			if(try_graffiti(user,W))
 				return
@@ -430,5 +430,3 @@
 
 	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
 		return attack_hand(user)
-
-

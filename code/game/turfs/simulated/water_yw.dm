@@ -11,7 +11,7 @@
 	if(AM.is_incorporeal())
 		return // no splishy splashy
 
-	if(istype(AM, /mob/living))
+	if(isliving(AM))
 		var/mob/living/L = AM
 		L.update_water()
 		if(L.check_submerged() <= 0)

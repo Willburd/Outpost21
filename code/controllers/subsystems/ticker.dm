@@ -186,7 +186,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 		var/rssound = 1
 		if(rssound == 1)
 			if(prob(95))
-				world << sound('sound/AI/yawn/welcome.ogg') 
+				world << sound('sound/AI/yawn/welcome.ogg')
 			else
 				world << sound('sound/AI/yawn/welcome_secret.ogg')
 		//YW Change end:
@@ -449,7 +449,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				//player.apply_traits() //VOREStation Removal
 	if(captainless)
 		for(var/mob/M in player_list)
-			if(!istype(M,/mob/new_player))
+			if(!isnewplayer(M))
 				to_chat(M, "<span class='notice'>Site Management is not forced on anyone.</span>")
 
 
@@ -471,7 +471,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				else
 					to_chat(Player, "<span class='filter_system'><font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font></span>")
 			else
-				if(istype(Player,/mob/observer/dead))
+				if(isobserver(Player))
 					var/mob/observer/dead/O = Player
 					if(!O.started_as_observer)
 						to_chat(Player, "<span class='filter_system'><font color='red'><b>You did not survive the events on [station_name()]...</b></font></span>")

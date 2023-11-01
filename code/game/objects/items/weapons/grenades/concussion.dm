@@ -79,7 +79,7 @@
 				else if(H.ear_damage >= 5)
 					to_chat(H, "<span class='danger'>Your ears start to ring!</span>")
 			/* outpost 21 edit - disabled spinview, breaks things pretty badly when flipped 180, mostly double doors... Makes map communication difficult as well, and probably breaks sprites.
-			if(istype(L, /mob/living/silicon/robot))
+			if(isrobot(L))
 				var/mob/living/silicon/robot/R = L
 				if(L.client)
 					if(prob(50))

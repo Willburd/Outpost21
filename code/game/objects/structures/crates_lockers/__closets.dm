@@ -52,7 +52,7 @@
 		starts_with = null
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
-		if(istype(loc, /mob/living)) return
+		if(isliving(loc)) return
 		var/obj/item/I
 		for(I in loc)
 			if(I.density || I.anchored || I == src) continue
@@ -130,7 +130,7 @@
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
-		if(istype(M,/mob/living)) // outpost 21 addition - lockers are dark and spooky!
+		if(isliving(M)) // outpost 21 addition - lockers are dark and spooky!
 			var/mob/living/L = M
 			L.Life() // update hud and blindness state
 
@@ -207,7 +207,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		if(istype(M,/mob/living)) // outpost 21 addition - lockers are dark and spooky!
+		if(isliving(M)) // outpost 21 addition - lockers are dark and spooky!
 			var/mob/living/L = M
 			L.Life() // update hud and blindness state
 		added_units += M.mob_size

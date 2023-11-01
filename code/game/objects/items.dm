@@ -702,7 +702,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	var/cannotzoom
 
-	if((usr.stat && !zoom) || !(istype(usr,/mob/living/carbon/human)))
+	if((usr.stat && !zoom) || !(ishuman(usr)))
 		to_chat(usr, "You are unable to focus through the [devicename]")
 		cannotzoom = 1
 	else if(!zoom && (global_hud.darkMask[1] in usr.client.screen))

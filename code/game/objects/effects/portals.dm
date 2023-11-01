@@ -14,7 +14,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 	anchored = TRUE
 
 /obj/effect/portal/Bumped(mob/M as mob|obj)
-	if(istype(M,/mob) && !(istype(M,/mob/living)))
+	if(istype(M,/mob) && !(isliving(M)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(M)
@@ -24,7 +24,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 /obj/effect/portal/Crossed(atom/movable/AM as mob|obj)
 	if(AM.is_incorporeal())
 		return
-	if(istype(AM,/mob) && !(istype(AM,/mob/living)))
+	if(istype(AM,/mob) && !(isliving(AM)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(AM)
@@ -32,7 +32,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 	return
 
 /obj/effect/portal/attack_hand(mob/user as mob)
-	if(istype(user) && !(istype(user,/mob/living)))
+	if(istype(user) && !(isliving(user)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(user)
@@ -55,7 +55,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 		return
 	if (istype(M, /atom/movable))
 		//VOREStation Addition Start: Prevent taurriding abuse
-		if(istype(M, /mob/living))
+		if(isliving(M))
 			var/mob/living/L = M
 			if(LAZYLEN(L.buckled_mobs))
 				var/datum/riding/R = L.riding_datum
@@ -72,7 +72,7 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 					redexitlist += R
 
 			// passout on return to reality
-			if(istype(M,/mob/living/carbon/human))
+			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				H.AdjustSleeping(15)
 				H.AdjustWeakened(3)

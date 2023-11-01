@@ -140,7 +140,7 @@
 //Description: Attacked with empty hand. Only to allow special attack_bys.
 /obj/machinery/door/blast/attack_hand(mob/user as mob)
 	/* outpost 21 edit - removing xenomorphs
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
@@ -220,7 +220,7 @@
 // Parameters: Attacking Xeno mob.
 // Description: Forces open the door after a delay.
 /obj/machinery/door/blast/attack_alien(var/mob/user) //Familiar, right? Doors.
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			if(src.density)

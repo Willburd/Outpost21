@@ -144,7 +144,7 @@
 		for(var/A in tile)
 			if(istype(A,/obj/effect/rune) || istype(A,/obj/effect/decal/cleanable) || istype(A,/obj/effect/overlay))
 				qdel(A)
-			else if(istype(A, /mob/living/carbon/human))
+			else if(ishuman(A))
 				var/mob/living/carbon/human/cleaned_human = A
 				if(cleaned_human.lying)
 					if(cleaned_human.head)

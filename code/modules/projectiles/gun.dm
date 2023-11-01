@@ -170,7 +170,7 @@
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
 /obj/item/weapon/gun/proc/special_check(var/mob/user)
 
-	if(!istype(user, /mob/living))
+	if(!isliving(user))
 		return 0
 	if(!user.IsAdvancedToolUser())
 		return 0
@@ -450,7 +450,7 @@
 					to_chat(nerd, "<span class='danger'>You're so tiny that you drop the gun and hurt yourself from the recoil!</span>")
 				else
 					to_chat(nerd, "<span class='danger'>You're so tiny that the pull of the trigger causes you to drop the gun!</span>")
-				
+
 	//YAWNEDIT: Knockdown code end
 
 // Similar to the above proc, but does not require a user, which is ideal for things like turrets.

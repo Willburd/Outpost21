@@ -446,7 +446,7 @@
 
 	if(client.holder && (client.holder.rights & R_ADMIN|R_EVENT))
 		is_admin = 1
-	else if(stat != DEAD || istype(src, /mob/new_player))
+	else if(stat != DEAD || isnewplayer(src))
 		to_chat(usr, "<font color='blue'>You must be observing to use this!</font>")
 		return
 
@@ -623,7 +623,7 @@
 /mob/proc/is_mechanical()
 	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
 		return 1
-	return istype(src, /mob/living/silicon) || get_species() == "Machine"
+	return issilicon(src) || get_species() == "Machine"
 
 /mob/proc/is_ready()
 	return client && !!mind

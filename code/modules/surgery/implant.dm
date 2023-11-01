@@ -127,7 +127,7 @@
 		return 0
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(istype(user,/mob/living/silicon/robot))
+		if(isrobot(user))
 			if(istype(tool, /obj/item/weapon/gripper))
 				var/obj/item/weapon/gripper/Gripper = tool
 				if(Gripper.wrapped)

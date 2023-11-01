@@ -42,13 +42,13 @@
 	if(scan)
 		to_chat(usr, "You remove \the [scan] from \the [src].")
 		scan.forceMove(get_turf(src))
-		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+		if(!usr.get_active_hand() && ishuman(usr))
 			usr.put_in_hands(scan)
 		scan = null
 	else if(modify)
 		to_chat(usr, "You remove \the [modify] from \the [src].")
 		modify.forceMove(get_turf(src))
-		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+		if(!usr.get_active_hand() && ishuman(usr))
 			usr.put_in_hands(modify)
 		modify = null
 	else
@@ -59,7 +59,7 @@
 	if(!istype(id_card))
 		return ..()
 
-	if(!scan && (access_change_ids in id_card.access) && (user.unEquip(id_card) || (id_card.loc == user && istype(user,/mob/living/silicon/robot)))) //Grippers. Again. ~Mechoid
+	if(!scan && (access_change_ids in id_card.access) && (user.unEquip(id_card) || (id_card.loc == user && isrobot(user)))) //Grippers. Again. ~Mechoid
 		user.drop_item()
 		id_card.forceMove(src)
 		scan = id_card

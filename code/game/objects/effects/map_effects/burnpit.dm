@@ -66,7 +66,7 @@
 					var/burnedthing = FALSE
 					if(istype(thing,/obj/effect/decal/cleanable/ash))
 						burnedthing = TRUE
-					else if(istype(thing,/mob/living))
+					else if(isliving(thing))
 						var/mob/living/L = thing
 						if(L.stat == DEAD)
 							burnedthing = TRUE
@@ -79,7 +79,7 @@
 						if(istype(thing,/obj/effect/decal/cleanable/ash)) // ashes to nothing~
 							var/obj/effect/decal/cleanable/ash/A = thing
 							A.Destroy()
-						else if(istype(thing,/mob/living))
+						else if(isliving(thing))
 							var/mob/living/L = thing
 							for(var/obj/item/W in L)
 								if(istype(W, /obj/item/weapon/implant/backup)/* || istype(W, /obj/item/device/nif) */)	//VOREStation Edit - There's basically no reason to remove either of these

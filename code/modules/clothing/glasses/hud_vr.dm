@@ -202,7 +202,7 @@
 	set name = "Toggle projector"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 	if(toggleable)
 		if(active)
@@ -248,7 +248,7 @@
 	set name = "Switch Eyepatch"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	eye = !eye
@@ -273,7 +273,7 @@
 	set name = "Switch Eyepatch"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	eye = !eye
@@ -297,7 +297,7 @@
 	set name = "Switch Eyepatch"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	eye = !eye

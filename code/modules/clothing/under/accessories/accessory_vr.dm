@@ -120,7 +120,7 @@
 	set name = "Jingle Bell"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	if(!jingled)
@@ -161,7 +161,7 @@
 /obj/item/clothing/accessory/collar/shock/Topic(href, href_list)
 	if(usr.stat || usr.restrained())
 		return
-	if(((istype(usr, /mob/living/carbon/human) && ((!( ticker ) || (ticker && ticker.mode != "monkey")) && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
+	if(((ishuman(usr) && ((!( ticker ) || (ticker && ticker.mode != "monkey")) && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
 		usr.set_machine(src)
 		if(href_list["freq"])
 			var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
@@ -223,7 +223,7 @@
 	return
 
 /obj/item/clothing/accessory/collar/shock/attack_self(mob/user as mob, flag1)
-	if(!istype(user, /mob/living/carbon/human))
+	if(!ishuman(user))
 		return
 	user.set_machine(src)
 	var/dat = {"<TT>

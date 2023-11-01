@@ -190,7 +190,7 @@ var/datum/planet/muriki/planet_muriki = null
 	for(var/mob/living/L as anything in dead_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
-			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+			if(!T.is_outdoors() || isobserver(L))
 				continue // They're indoors, so no need to rain on them.
 
 			// digest dead things
@@ -248,7 +248,7 @@ var/datum/planet/muriki/planet_muriki = null
 	for(var/mob/living/L as anything in dead_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
-			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+			if(!T.is_outdoors() || isobserver(L))
 				continue // They're indoors, so no need to rain on them.
 
 			// digest dead things
@@ -314,7 +314,7 @@ var/datum/planet/muriki/planet_muriki = null
 	for(var/mob/living/L as anything in dead_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
-			if(!T.is_outdoors() || istype(L,/mob/observer/dead))
+			if(!T.is_outdoors() || isobserver(L))
 				continue // They're indoors, so no need to rain on them.
 
 			// digest dead things
@@ -426,7 +426,7 @@ var/datum/planet/muriki/planet_muriki = null
 		return
 
 	// no synth damage
-	if(istype(L,/mob/living/silicon))
+	if(issilicon(L))
 		return
 	// check for excluded wildlife
 	if(!L.enzyme_affect)

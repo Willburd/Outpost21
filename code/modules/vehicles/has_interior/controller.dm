@@ -385,7 +385,7 @@
 
 /obj/vehicle/has_interior/controller/proc/crush_mobs(var/target)
 	var/move_damage = 33 / move_delay
-	if(istype(target, /mob/living))
+	if(isliving(target))
 		var/mob/living/M = target
 		if(!M.is_incorporeal())
 			visible_message("<font color='red'>[src] runs over [M]!</font>")
@@ -507,7 +507,7 @@
 
 
 /obj/vehicle/has_interior/controller/load(var/atom/movable/C, var/mob/user)
-	if(!istype(C, /mob/living/carbon/human))
+	if(!ishuman(C))
 		return 0
 
 	return ..()
@@ -870,7 +870,7 @@
 	set category = VERBTAB_EQUIP
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(paired_console.interior_controller.on)
@@ -899,7 +899,7 @@
 	set category = VERBTAB_EQUIP
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(!paired_console.interior_controller.on)
@@ -915,7 +915,7 @@
 	set category = VERBTAB_EQUIP
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!ishuman(usr))
 		return
 
 	if(!paired_console.interior_controller.key)

@@ -1916,7 +1916,7 @@ Departamental Swimsuits, for general use
 	if(!..())
 		return 0
 
-	if(istype(M,/mob/living/carbon/human))
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!(H.get_species() == SPECIES_PROMETHEAN))	//Only wearable by slimes, since species_restricted actually checks bodytype, not species
 			return 0
@@ -2339,7 +2339,7 @@ Departamental Swimsuits, for general use
 	set name = "Swap color"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	colorswap(usr)

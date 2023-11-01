@@ -151,7 +151,7 @@
 	set category = VERBTAB_EQUIP
 	set src in usr
 
-	if(!istype(src.loc,/mob/living)) return
+	if(!isliving(src.loc)) return
 
 	if(!helmet)
 		to_chat(usr, "There is no helmet installed.")
@@ -189,7 +189,7 @@
 	set category = VERBTAB_EQUIP
 	set src in usr
 
-	if(!istype(src.loc,/mob/living)) return
+	if(!isliving(src.loc)) return
 
 	if(!tank && !cooler)
 		to_chat(usr, "There is no tank or cooling unit inserted.")
@@ -214,7 +214,7 @@
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(!istype(user,/mob/living)) return
+	if(!isliving(user)) return
 
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/weapon/hand_labeler))
 		return ..()

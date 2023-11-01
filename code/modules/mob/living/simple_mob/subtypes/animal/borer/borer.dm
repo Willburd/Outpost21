@@ -30,7 +30,7 @@
 
 	var/mob/living/carbon/human/host = null		// The humanoid host for the brain worm.
 	var/mob/living/captive_brain/host_brain		// Used for swapping control of the body back and forth.
-	
+
 	var/roundstart = FALSE						// If true, spawning won't try to pull a ghost.
 	var/antag = TRUE							// If false, will avoid setting up objectives and events
 
@@ -39,7 +39,7 @@
 	var/true_name = null						// String used when speaking among other worms.
 	var/controlling = FALSE						// Used in human death ceck.
 	var/docile = FALSE							// Sugar can stop borers from acting.
-	
+
 	var/has_reproduced = FALSE
 	var/used_dominate							// world.time when the dominate power was last used.
 
@@ -113,7 +113,7 @@
 	if(!host || !controlling)
 		return
 
-	if(istype(host, /mob/living/carbon/human))
+	if(ishuman(host))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		if(head)
@@ -175,7 +175,7 @@
 	reset_view(null)
 	machine = null
 
-	if(istype(host, /mob/living/carbon/human))
+	if(ishuman(host))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		if(head)
@@ -264,7 +264,7 @@
 	to_chat(host, "Your own thoughts speak: \"[message]\"")
 
 	for(var/mob/M in player_list)
-		if(istype(M, /mob/new_player))
+		if(isnewplayer(M))
 			continue
 		else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 			to_chat(M, "[src.true_name] whispers to [host], \"[message]\"")

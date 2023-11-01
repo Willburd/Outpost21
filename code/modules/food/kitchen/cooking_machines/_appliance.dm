@@ -203,7 +203,7 @@
 
 //Handles all validity checking and error messages for inserting things
 /obj/machinery/appliance/proc/can_insert(var/obj/item/I, var/mob/user)
-	if(istype(I.loc, /mob/living/silicon))
+	if(issilicon(I.loc))
 		return 0
 	else if (istype(I.loc, /obj/item/rig_module))
 		return 0
@@ -665,7 +665,7 @@
 				src.composition_reagent = "nutriment" // diona are plants, not meat
 			else
 				src.composition_reagent = "protein"
-				if(istype(src, /mob/living/carbon/human))
+				if(ishuman(src))
 					var/mob/living/carbon/human/H = src
 					if(istype(H.species, /datum/species/diona))
 						src.composition_reagent = "nutriment"

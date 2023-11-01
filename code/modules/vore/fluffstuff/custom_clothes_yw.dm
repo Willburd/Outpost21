@@ -1275,7 +1275,7 @@
 	set name = "Toggle right earring"
 	set category = VERBTAB_OBJECT
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	var/base_icon = "noel_earings"

@@ -65,7 +65,7 @@
 	if(scan)
 		to_chat(usr, "You remove \the [scan] from \the [src].")
 		scan.loc = get_turf(src)
-		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+		if(!usr.get_active_hand() && ishuman(usr))
 			usr.put_in_hands(scan)
 		scan = null
 	else
@@ -464,13 +464,13 @@
 		SStgui.update_uis(src)
 
 /obj/machinery/computer/secure_data/proc/is_not_allowed(var/mob/user)
-	return !src.authenticated || user.stat || user.restrained() || (!in_range(src, user) && (!istype(user, /mob/living/silicon)))
+	return !src.authenticated || user.stat || user.restrained() || (!in_range(src, user) && !issilicon(user))
 
 /obj/machinery/computer/secure_data/proc/get_photo(var/mob/user)
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/photo = user.get_active_hand()
 		return photo.img
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		var/mob/living/silicon/tempAI = usr
 		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if (selection)

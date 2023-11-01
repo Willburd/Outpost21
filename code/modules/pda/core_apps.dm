@@ -172,7 +172,7 @@
 
 /datum/data/pda/app/notekeeper/proc/printnote()
 	// get active hand of person holding PDA, and print the page to the paper in it
-	if(istype( usr, /mob/living/carbon/human ))
+	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		var/obj/item/I = H.get_active_hand()
 		if(istype(I,/obj/item/weapon/paper))

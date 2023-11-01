@@ -91,7 +91,7 @@
 
 			if(isobserver(C.mob))
 				temp += " - Observing"
-			else if(istype(C.mob,/mob/new_player))
+			else if(isnewplayer(C.mob))
 				temp += " - Lobby"
 			else
 				temp += " - Playing"
@@ -130,7 +130,7 @@
 		if(holder)
 			if(isobserver(C.mob))
 				mmsg += " - Observing"
-			else if(istype(C.mob,/mob/new_player))
+			else if(isnewplayer(C.mob))
 				mmsg += " - Lobby"
 			else
 				mmsg += " - Playing"

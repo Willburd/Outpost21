@@ -454,7 +454,7 @@
 		user.visible_message("<span class='warning'>[user] presses the big red button.</span>", "<span class='notice'>You press the button, it plays a loud noise!</span>", "<span class='notice'>The button clicks loudly.</span>")
 		playsound(src, 'sound/effects/explosionfar.ogg', 50, 0, 0)
 		for(var/mob/M in range(10, src)) // Checks range
-			if(!M.stat && !istype(M, /mob/living/silicon/ai)) // Checks to make sure whoever's getting shaken is alive/not the AI
+			if(!M.stat && !isAI(M)) // Checks to make sure whoever's getting shaken is alive/not the AI
 				sleep(2) // Short delay to match up with the explosion sound
 				shake_camera(M, 2, 1)
 	else
@@ -516,7 +516,7 @@
 	drop_sound = 'sound/items/drop/ring.ogg'
 
 /obj/item/clothing/gloves/ring/buzzer/toy/Touch(var/atom/A, var/proximity)
-	if(proximity && istype(usr, /mob/living/carbon/human))
+	if(proximity && ishuman(usr))
 
 		return zap(usr, A, proximity)
 	return 0
@@ -848,7 +848,7 @@
 			icon_state = "tastybread"
 
 /obj/item/toy/snake_popper/attack(mob/living/M as mob, mob/user as mob)
-	if(istype(M,/mob/living/carbon/human))
+	if(ishuman(M))
 		if(!popped)
 			to_chat(user, "<span class='warning'>A snake popped out of [src]!</span>")
 			if(real == 0)

@@ -31,7 +31,7 @@
 /obj/machinery/gravity_generator/Initialize()
 	. = ..()
 	locatelocalareas()
-	
+
 /obj/machinery/computer/gravity_control_computer/proc/updatemodules()
 	src.gravity_generator = findgenerator()
 
@@ -102,7 +102,7 @@
 	..()
 
 	if ( (get_dist(src, usr) > 1 ))
-		if (!istype(usr, /mob/living/silicon))
+		if (!issilicon(usr))
 			usr.unset_machine()
 			usr << browse(null, "window=air_alarm")
 			return

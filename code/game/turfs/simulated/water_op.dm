@@ -23,7 +23,7 @@
 	reagent_type = "water"
 
 /turf/simulated/floor/water/acidic/Entered(atom/movable/AM, atom/oldloc)
-	if(istype(AM, /mob/living))
+	if(isliving(AM))
 		var/allowburn = TRUE
 		var/mob/living/L = AM
 		if(L.buckled && L.buckled.riding_datum)
@@ -84,7 +84,7 @@
 /turf/simulated/floor/water/acidic/shoreline/corner/corner_dirt
 	icon_state = "shorelinecorner_dirt"
 	water_state = "dirt_shore" // Water gets generated as an overlay in update_icon()
-	
+
 
 
 // edges mud
@@ -161,7 +161,7 @@
 	icon_state = "shorelinecorner_mud"
 	outdoors = OUTDOORS_NO
 
-	
+
 /turf/simulated/floor/water/acidic/shoreline/shoreline_plate/indoor
 	icon_state = "shoreline_plate"
 	outdoors = OUTDOORS_NO

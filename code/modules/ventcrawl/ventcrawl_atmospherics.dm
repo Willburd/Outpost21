@@ -18,7 +18,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/Entered(atom/movable/Obj)
-	if(istype(Obj, /mob/living))
+	if(isliving(Obj))
 		var/mob/living/L = Obj
 		L.ventcrawl_layer = layer
 	. = ..()
@@ -51,7 +51,7 @@
 					prob(1);"* <span style='font-size:2em'>ඞ</span> *"
 				)
 				T.runechat_message(message)
-				
+
 	else
 		if((direction & initialize_directions) || is_type_in_list(src, ventcrawl_machinery) && src.can_crawl_through()) //if we move in a way the pipe can connect, but doesn't - or we're in a vent
 			user.remove_ventcrawl()

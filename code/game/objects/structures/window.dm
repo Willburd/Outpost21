@@ -187,7 +187,7 @@
 
 	else if (usr.a_intent == I_HURT)
 
-		if (istype(usr,/mob/living/carbon/human))
+		if (ishuman(usr))
 			var/mob/living/carbon/human/H = usr
 			if(H.species.can_shred(H))
 				attack_generic(H,25)
@@ -241,7 +241,7 @@
 	// Slamming.
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
-		if(istype(G.affecting,/mob/living))
+		if(isliving(G.affecting))
 			var/mob/living/M = G.affecting
 			var/state = G.state
 			qdel(W)	//gotta delete it here because if window breaks, it won't get deleted

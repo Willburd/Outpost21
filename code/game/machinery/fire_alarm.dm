@@ -88,14 +88,14 @@ FIRE ALARM
 			if("blue")	set_light(l_range = 2, l_power = 0.25, l_color = "#1024A9")
 			if("red")	set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
 			if("delta")	set_light(l_range = 4, l_power = 0.9, l_color = "#FF6633")
-	
+
 	. += mutable_appearance(icon, fire_state)
 	. += emissive_appearance(icon, fire_state)
-	
+
 	if(seclevel)
 		. += mutable_appearance(icon, "overlay_[seclevel]")
 		. += emissive_appearance(icon, "overlay_[seclevel]")
-	
+
 	add_overlay(.)
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
@@ -233,7 +233,7 @@ Just a object used in constructing fire alarms
 	ASSERT(isarea(A))
 	var/d1
 	var/d2
-	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
+	if(ishuman(user) || isAI(user))
 
 		if(A.party)
 			d1 = text("<A href='?src=\ref[];reset=1'>No Party :(</A>", src)
@@ -284,7 +284,7 @@ Just a object used in constructing fire alarms
 	..()
 	if(usr.stat || stat & (BROKEN|NOPOWER))
 		return
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (isAI(usr)))
 		usr.machine = src
 		if(href_list["reset"])
 			reset()

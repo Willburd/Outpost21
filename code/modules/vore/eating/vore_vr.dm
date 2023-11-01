@@ -117,7 +117,7 @@ V::::::V           V::::::VO:::::::OOO:::::::ORR:::::R     R:::::REE::::::EEEEEE
 //	Check if an object is capable of eating things, based on vore_organs
 //
 /proc/is_vore_predator(mob/living/O)
-	if(istype(O,/mob/living))
+	if(isliving(O))
 		if(O.vore_organs.len > 0)
 			return TRUE
 

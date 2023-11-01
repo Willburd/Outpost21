@@ -306,7 +306,7 @@
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be asleep.</span>"
 		if((stat == 2 || src.losebreath) && get_dist(user, src) <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>"
-		if(istype(user, /mob/living/carbon/human) && !user.stat && Adjacent(user))
+		if(ishuman(user) && !user.stat && Adjacent(user))
 			user.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
 		spawn(15)
 			if(isobserver(user) || (Adjacent(user) && !user.stat)) // If you're a corpse then you can't exactly check their pulse, but ghosts can see anything
@@ -466,7 +466,7 @@
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(hasHUD_vr(H,hudtype)) return 1 //VOREStation Add - Added records access for certain modes of omni-hud glasses
 		switch(hudtype)
@@ -474,7 +474,7 @@
 				return istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud)
 			if("medical")
 				return istype(H.glasses, /obj/item/clothing/glasses/hud/health)
-	else if(istype(M, /mob/living/silicon/robot))
+	else if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		return R.sensor_type //VOREStation Add - Borgo sensors are now binary so just have them on or off
 

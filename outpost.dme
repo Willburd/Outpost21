@@ -1130,7 +1130,6 @@
 #include "code\game\objects\effects\portals.dm"
 #include "code\game\objects\effects\semirandom_mobs_vr.dm"
 #include "code\game\objects\effects\spiders.dm"
-#include "code\game\objects\effects\spiders_vr.dm"
 #include "code\game\objects\effects\step_triggers.dm"
 #include "code\game\objects\effects\wire_deleter.dm"
 #include "code\game\objects\effects\zone_divider.dm"

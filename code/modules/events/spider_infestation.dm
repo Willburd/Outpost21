@@ -25,6 +25,6 @@
 
 	while((spawncount >= 1) && vents.len)
 		var/obj/vent = pick(vents)
-		new /obj/effect/spider/spiderling/virgo(vent.loc) //VOREStation Edit - No nurses
+		new /obj/effect/spider/spiderling(vent.loc) //VOREStation Edit - No nurses, outpost 21 edit - nah we want em
 		vents -= vent
 		spawncount--

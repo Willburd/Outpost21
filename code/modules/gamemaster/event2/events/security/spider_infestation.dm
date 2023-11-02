@@ -22,7 +22,7 @@
 
 /datum/event2/event/spider_infestation
 	var/spiders_to_spawn = 8
-	var/spiderling_to_spawn = /obj/effect/spider/spiderling/varied // outpost 21 edit - use a lottttt more spider types~
+	var/spiderling_to_spawn = /obj/effect/spider/spiderling
 
 /datum/event2/event/spider_infestation/weak
 	spiders_to_spawn = 5

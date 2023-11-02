@@ -46,7 +46,7 @@
 
 //Allows staff to determine who the newer players are.
 /client/proc/cmd_check_new_players()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_MANAGE
 	set name = "Check new Players"
 	if(!holder)
 		return
@@ -306,7 +306,7 @@ Ccomp's first proc.
 
 
 /client/proc/toggle_antagHUD_use()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set name = "Toggle antagHUD usage"
 	set desc = "Toggles antagHUD usage for observers"
 
@@ -341,7 +341,7 @@ Ccomp's first proc.
 
 
 /client/proc/toggle_antagHUD_restrictions()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set name = "Toggle antagHUD Restrictions"
 	set desc = "Restricts players that have used antagHUD from being able to join this round."
 
@@ -622,7 +622,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	admin_delete(O)
 
 /client/proc/cmd_admin_list_open_jobs()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "List free slots"
 
 	if (!holder)
@@ -852,7 +852,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","CVRA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/admin_call_shuttle()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Call Shuttle"
 
 	if ((!( ticker ) || !emergency_shuttle.location()))
@@ -884,7 +884,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	return
 
 /client/proc/admin_cancel_shuttle()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Cancel Shuttle"
 
 	if(!check_rights(R_ADMIN))	return //VOREStation Edit
@@ -960,7 +960,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 
 /client/proc/toggle_random_events()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set name = "Toggle random events on/off"
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
 
@@ -978,7 +978,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 /client/proc/despawn_player(var/mob/M in living_mob_list)
 	set name = "Cryo Player"
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_MANAGE
 	set desc = "Removes a player from the round as if they'd cryo'd."
 	set popup_menu = FALSE
 

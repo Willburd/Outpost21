@@ -1,6 +1,6 @@
 /client/proc/recipe_dump()
 	set name = "Generate Recipe Dump"
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_LOGS
 	set desc = "Dumps food and drink recipe info and images for wiki or other use."
 
 	if(!holder)

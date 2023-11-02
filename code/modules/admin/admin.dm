@@ -26,7 +26,7 @@ var/global/floorIsLava = 0
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in mob_list)
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -217,7 +217,7 @@ var/global/floorIsLava = 0
 /datum/player_info/var/timestamp // Because this is bloody annoying
 
 /datum/admins/proc/PlayerNotes()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_MANAGE
 	set name = "Player Notes"
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -257,7 +257,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/show_player_info(var/key as text)
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Show Player Info"
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -815,7 +815,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggletraitorscaling()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_LOGS
 	set desc="Toggle traitor scaling"
 	set name="Toggle Traitor Scaling"
 	config.traitor_scaling = !config.traitor_scaling
@@ -861,7 +861,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleAI()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set desc="People can't be AI"
 	set name="Toggle AI"
 	config.allow_ai = !( config.allow_ai )
@@ -916,7 +916,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","TMPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggle_aliens()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set desc="Toggle alien mobs"
 	set name="Toggle Aliens"
 	config.aliens_allowed = !config.aliens_allowed
@@ -925,7 +925,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggle_space_ninja()
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_MANAGE
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
 	config.ninjas_allowed = !config.ninjas_allowed
@@ -1092,7 +1092,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 			to_chat(usr, "- name: [item.name] icon: [item.item_icon] path: [item.item_path] desc: [item.item_desc]")
 
 /datum/admins/proc/spawn_plant(seedtype in SSplants.seeds)
-	set category = VERBTAB_DEBUG
+	set category = VERBTAB_SPECIAL
 	set desc = "Spawn a spreading plant effect."
 	set name = "Spawn Plant"
 
@@ -1139,7 +1139,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in mob_list)
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_SPECIAL
 	set desc = "Edit mobs's memory and role"
 	set name = "Show Traitor Panel"
 
@@ -1154,7 +1154,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","STP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/show_game_mode()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set desc = "Show the current round configuration."
 	set name = "Show Game Mode"
 
@@ -1277,7 +1277,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 		to_chat(usr, "<b>No AIs located</b>") //Just so you know the thing is actually working and not just ignoring you.
 
 /datum/admins/proc/show_skills()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_MANAGE
 	set name = "Show Skills"
 
 	if (!istype(src,/datum/admins))
@@ -1393,7 +1393,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	return 1
 
 /datum/admins/proc/force_antag_latespawn()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Force Template Spawn"
 	set desc = "Force an antagonist template to spawn."
 
@@ -1417,7 +1417,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	antag.attempt_late_spawn()
 
 /datum/admins/proc/force_mode_latespawn()
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	set name = "Force Mode Spawn"
 	set desc = "Force autotraitor to proc."
 

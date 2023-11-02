@@ -62,7 +62,7 @@
 
 // verb tab IDs
 #define VERBTAB_SERVER "Server"
-#define VERBTAB_EVENT "Server Management"
+#define VERBTAB_MANAGE "Server Management"
 #define VERBTAB_LOGS "Server Logs"
 #define VERBTAB_ADMIN "Admin"
 #define VERBTAB_DEBUG "Debug"

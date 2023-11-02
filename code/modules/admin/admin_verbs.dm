@@ -97,7 +97,7 @@
 
 /client/proc/player_panel()
 	set name = "Player Panel"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		holder.player_panel_old()
 	feedback_add_details("admin_verb","PP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -105,7 +105,7 @@
 
 /client/proc/player_panel_new()
 	set name = "Player Panel New"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		holder.player_panel_new()
 	feedback_add_details("admin_verb","PPN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -113,7 +113,7 @@
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		holder.check_antagonists()
 		log_admin("[key_name(usr)] checked antagonists.")	//for tsar~
@@ -122,7 +122,7 @@
 
 /client/proc/jobbans()
 	set name = "Display Job bans"
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_MANAGE
 	if(holder)
 		if(config.ban_legacy_system)
 			holder.Jobbans()
@@ -144,7 +144,7 @@
 
 /client/proc/game_panel()
 	set name = "Game Panel"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		holder.Game()
 	feedback_add_details("admin_verb","GP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -152,7 +152,7 @@
 
 /client/proc/secrets()
 	set name = "Secrets"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_ADMIN
 	if (holder)
 		holder.Secrets()
 	feedback_add_details("admin_verb","S") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -405,7 +405,7 @@
 
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"
-	set category = VERBTAB_SERVER
+	set category = VERBTAB_LOGS
 	if(!holder)	return
 	if(config)
 		config.log_hrefs = !config.log_hrefs
@@ -413,13 +413,13 @@
 
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		src.holder.output_ai_laws()
 
 /client/proc/rename_silicon()
 	set name = "Rename Silicon"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 
 	if(!check_rights(R_ADMIN|R_FUN|R_EVENT)) return
 
@@ -434,7 +434,7 @@
 
 /client/proc/manage_silicon_laws()
 	set name = "Manage Silicon Laws"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 
 	if(!check_rights(R_ADMIN|R_EVENT)) return
 
@@ -449,7 +449,7 @@
 /client/proc/change_security_level()
 	set name = "Set security level"
 	set desc = "Sets the station security level"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 
 	if(!check_rights(R_ADMIN|R_EVENT))	return
 	var/sec_level = tgui_input_list(usr, "It's currently code [get_security_level()].", "Select Security Level", (list("green","yellow","violet","orange","blue","red","delta")-get_security_level()))
@@ -461,7 +461,7 @@
 
 /client/proc/shuttle_panel()
 	set name = "Shuttle Control Panel"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 
 	if(!check_rights(R_ADMIN | R_EVENT))
 		return
@@ -490,7 +490,7 @@
 
 /client/proc/free_slot()
 	set name = "Free Job Slot"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(holder)
 		var/list/jobs = list()
 		for (var/datum/job/J in job_master.occupations)
@@ -507,7 +507,7 @@
 
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(!holder)	return
 	if(config)
 		config.cult_ghostwriter = !config.cult_ghostwriter
@@ -515,7 +515,7 @@
 
 /client/proc/toggledrones()
 	set name = "Toggle maintenance drones"
-	set category = VERBTAB_EVENT
+	set category = VERBTAB_MANAGE
 	if(!holder)	return
 	if(config)
 		config.allow_drone_spawn = !config.allow_drone_spawn

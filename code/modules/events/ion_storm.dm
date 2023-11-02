@@ -31,20 +31,40 @@
 		players += player.real_name
 
 	// Flomph synthetics
-	for(var/mob/living/carbon/S in living_mob_list)
-		if (!S.isSynthetic())
+	for(var/mob/living/L in living_mob_list)
+		if(!(L.z in affecting_z))
 			continue
-		if(!(S.z in affecting_z))
+		if(isAI(L)) // AI is handled later!
 			continue
+		/* outpost 21 edit - radshield made it functionally impossible for borgs to be ioned in 90% of the station
 		var/area/A = get_area(S)
 		if(!A || A.flags & RAD_SHIELDED) // Rad shielding will protect from ions too
 			continue
-		to_chat(S, "<span class='warning'>Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart.</span>")
-		var/ionbug = rand(3, 9)
-		S.confused += ionbug
-		S.eye_blurry += (ionbug - 1)
+		*/
+		if(ishuman(L))
+			// MMIs
+			var/mob/living/carbon/human/H = L
+			if (!H.isSynthetic())
+				continue
+			to_chat(H, "<span class='warning'>Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart.</span>")
+			var/ionbug = rand(3, 9)
+			H.confused += ionbug
+			H.eye_blurry += (ionbug - 1)
+		else if(issilicon(L))
+			// BORGS
+			var/mob/living/silicon/S = L
+			to_chat(S, "<span class='warning'>Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart.</span>")
+			var/ionbug = rand(3, 9)
+			S.confused += ionbug
+			S.eye_blurry += (ionbug - 1)
+			// funni laws!
+			var/law = S.generate_ion_law()
+			to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
+			to_chat(S, law)
+			S.add_ion_law(law)
+			S.show_laws()
 
-	// Ionize silicon mobs
+	// Ionize AI
 	for (var/mob/living/silicon/ai/target in silicon_mob_list)
 		if(!(target.z in affecting_z))
 			continue
@@ -53,7 +73,7 @@
 		to_chat(target, law)
 		target.add_ion_law(law)
 		target.show_laws()
-/* //VOREstation edit. Was fucking up all PDA messagess.
+
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
 			MS.spamfilter.Cut()
@@ -61,8 +81,8 @@
 			for (i = 1, i <= MS.spamfilter_limit, i++)
 				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[using_map.station_short]", \
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
-					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
-*/
+					"director", "Hello", "Hi!","help","nuke","crate","dwarf","xeno")
+
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in mob_list)

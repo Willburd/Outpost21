@@ -36,14 +36,10 @@
 #define BE_PLANT      0x1000
 #define BE_MUTINEER   0x2000
 #define BE_LOYALIST   0x4000
-#define BE_PAI        0x8000
-//VOREStation Add
-#define BE_LOSTDRONE	0x10000
-#define BE_MAINTPRED	0x20000
-#define BE_MORPH		0x40000
-#define BE_CORGI		0x80000
-#define BE_CURSEDSWORD	0x100000
-//VOREStation Add End
+#define BE_ZOMBIE	  0x8000
+#define BE_LOSTDRONE  0x10000
+#define BE_MAINTPRED  0x20000
+#define BE_DEEPHUNGER 0x40000
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -65,10 +61,14 @@ var/list/be_special_flags = list(
 	//VOREStation Add
 	"Lost Drone"       = BE_LOSTDRONE,
 	"Maint Pred"       = BE_MAINTPRED,
-	"Morph"            = BE_MORPH,
-	"Corgi"            = BE_CORGI,
-	"Cursed Sword"     = BE_CURSEDSWORD,
+	//"Morph"            = BE_MORPH,
+	//"Corgi"            = BE_CORGI,
+	//"Cursed Sword"     = BE_CURSEDSWORD,
 	//VOREStation Add End
+	// outpost 21 addition begin
+	"Deep Hunger"      	= BE_DEEPHUNGER,
+	"Zombie"          	= BE_ZOMBIE
+	// outpost 21 addition end
 )
 
 
@@ -111,6 +111,10 @@ var/list/be_special_flags = list(
 #define MODE_INFILTRATOR "infiltrator"
 #define MODE_THUG "thug"
 #define MODE_STOWAWAY "stowaway"
+#define MODE_DEEPHUNGER "deephunger"
+#define MODE_CHU "chuinfestation"
+#define MODE_SYNX "synxhunt"
+#define MODE_ZOMBIE "zombies"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 120
 

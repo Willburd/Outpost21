@@ -1,8 +1,8 @@
 /datum/game_mode/epidemic
 	name = "Epidemic"
 	config_tag = "epidemic"
-	required_players = 1
-	required_players_secret = 15
+	required_players = 3
+	required_players_secret = 5
 	round_description = "A deadly epidemic is spreading on the station. Find a cure as fast as possible, and keep your distance to anyone who speaks in a hoarse voice!"
 
 	var/cruiser_arrival

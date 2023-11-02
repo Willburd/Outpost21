@@ -16,14 +16,10 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"diona" = 1,										// 12
 	"mutineer" = 1,										// 13
 	"loyalist" = 1,										// 14
-	// "pAI candidate" = 1,								// 15 outpost 21  edit - nif removal
-	//VOREStation Add
+	"zombie" = 1,										// 15
 	"lost drone" = 1,									// 16
 	"maint pred" = 1,									// 17
-	"morph" = 1,										// 18
-	"corgi" = 1,										// 19
-	"cursed sword" = 1,									// 20
-	//VOREStation Add End
+	"deep hunger" = 1,									// 18
 )
 
 /datum/category_item/player_setup_item/antagonism/candidacy

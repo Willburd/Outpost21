@@ -46,3 +46,15 @@
 /obj/effect/landmark/late_antag/raider
 	name = "Raider - Lateload"
 	antag_id = MODE_RAIDER
+
+/obj/effect/landmark/late_antag/chu
+	name = "Chu - Lateload"
+	antag_id = MODE_CHU
+
+/obj/effect/landmark/late_antag/synx
+	name = "Synx - Lateload"
+	antag_id = MODE_SYNX
+
+/obj/effect/landmark/late_antag/zombie
+	name = "Zombie - Lateload"
+	antag_id = MODE_ZOMBIE

@@ -359,9 +359,11 @@ var/list/mob_hat_cache = list()
 	for(var/mob/observer/dead/O in player_list)
 		if(jobban_isbanned(O, "Cyborg"))
 			continue
+		/* outpost 21 edit - pai removal
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PAI)
 				question(O.client)
+		*/
 
 /mob/living/silicon/robot/drone/proc/question(var/client/C)
 	spawn(0)
@@ -371,8 +373,10 @@ var/list/mob_hat_cache = list()
 			return
 		if(response == "Yes")
 			transfer_personality(C)
+		/* outpost 21 edit - pai removal
 		else if (response == "Never for this round")
 			C.prefs.be_special ^= BE_PAI
+		*/
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
 

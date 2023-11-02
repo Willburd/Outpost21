@@ -88,6 +88,7 @@
 /obj/structure/ghost_pod/ghost_activated/maintpred/no_announce
 	announce_prob = 0
 
+/* outpost 21 edit - morph spawn disabled
 /obj/structure/ghost_pod/ghost_activated/morphspawn
 	name = "weird goo"
 	desc = "A pile of weird gunk... Wait, is it actually moving?"
@@ -121,3 +122,4 @@
 
 /obj/structure/ghost_pod/ghost_activated/morphspawn/no_announce
 	announce_prob = 0
+*/

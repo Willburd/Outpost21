@@ -487,7 +487,7 @@
 
 /client/verb/reload_vchat()
 	set name = "Reload VChat"
-	set category = VERBTAB_SPECIAL
+	set category = VERBTAB_OOC
 
 	//Timing
 	if(src.chatOutputLoadedAt > (world.time - 10 SECONDS))

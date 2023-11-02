@@ -44,7 +44,7 @@ var/silent_ert = 0
 /client/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
-	set category = VERBTAB_SPECIAL
+	set category = VERBTAB_OOC
 
 	if(!MayRespawn(1))
 		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")

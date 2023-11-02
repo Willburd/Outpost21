@@ -103,7 +103,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 /mob/living/simple_mob/animal/sif/grafadreka/verb/sit_down()
 	set name = "Sit Down"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(sitting)
 		resting = FALSE

@@ -545,7 +545,7 @@
 
 /mob/living/bot/verb/bot_nom(var/mob/living/T in oview(1))
 	set name = "Bot Nom"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Allows you to eat someone. Yum."
 
 	if (stat != CONSCIOUS)
@@ -555,7 +555,7 @@
 /* outpost 21 - PAI removal
 /mob/living/bot/verb/ejectself()
 	set name = "Eject pAI"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Eject your card, return to smole."
 
 	return ejectpai()

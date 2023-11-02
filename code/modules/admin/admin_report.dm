@@ -91,7 +91,7 @@ world/New()
 
 // display only the reports that haven't been handled
 /client/proc/display_admin_reports()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_LOGS
 	set name = "Display Admin Reports"
 	if(!src.holder) return
 

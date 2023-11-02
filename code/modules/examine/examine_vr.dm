@@ -1,7 +1,7 @@
 /mob/verb/mob_examine()
 	set name = "Mob Examine"
 	set desc = "Allows one to examine mobs they can see, even from inside of bellies and objects."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set popup_menu = FALSE
 
 	if((is_blind(src) || src.stat) && !isobserver(src))

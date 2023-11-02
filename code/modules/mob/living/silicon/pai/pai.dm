@@ -350,7 +350,7 @@
 
 /mob/living/silicon/pai/lay_down()
 	set name = "Rest"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))

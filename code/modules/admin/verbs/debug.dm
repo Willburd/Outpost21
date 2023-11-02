@@ -275,7 +275,7 @@
 		. = lines.Join("\n")
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Grant Full Access"
 
 	if (!ticker)

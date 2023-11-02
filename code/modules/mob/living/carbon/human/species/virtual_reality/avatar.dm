@@ -87,7 +87,7 @@
 // exit_vr is called on the vr mob, and puts the mind back into the original mob
 /mob/living/carbon/human/proc/exit_vr()
 	set name = "Exit Virtual Reality"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(!vr_holder)
 		return

@@ -62,6 +62,8 @@
 
 // verb tab IDs
 #define VERBTAB_SERVER "Server"
+#define VERBTAB_EVENT "Server Management"
+#define VERBTAB_LOGS "Server Logs"
 #define VERBTAB_ADMIN "Admin"
 #define VERBTAB_DEBUG "Debug"
 #define VERBTAB_PREFS "Preferences"
@@ -78,7 +80,6 @@
 #define VERBTAB_BLUEPRINT "Blueprints"
 
 #define VERBTAB_GHOST "Ghost"		// the dead's commands
-#define VERBTAB_ACTIONS "Actions"	// inherent actions a player can perform like looking around or climbing
 #define VERBTAB_EQUIP "Equipment"	// Objects that persist on a player for a long time, and shouldn't be cluttered by Objects tab stuff, like hardsuits or vehicles
 #define VERBTAB_IC "IC"				// character settings and toggles, or menus/notes
 #define VERBTAB_OOC "OOC"			// OOC chats and game specific toggles

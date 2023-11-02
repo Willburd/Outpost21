@@ -399,7 +399,7 @@
 
 /mob/living/carbon/verb/mob_sleep()
 	set name = "Sleep"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(usr.sleeping)
 		to_chat(usr, "<font color='red'>You are already sleeping</font>")

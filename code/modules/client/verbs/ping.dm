@@ -8,5 +8,5 @@
 
 /client/verb/ping()
 	set name = "Ping"
-	set category = VERBTAB_SPECIAL
+	set category = VERBTAB_LOGS
 	winset(src, null, "command=.display_ping+[world.time+world.tick_lag*world.tick_usage/100]")

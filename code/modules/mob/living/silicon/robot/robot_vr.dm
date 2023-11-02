@@ -82,7 +82,7 @@
 
 /mob/living/silicon/robot/verb/robot_nom(var/mob/living/T in living_mobs(1))
 	set name = "Robot Nom"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Allows you to eat someone."
 
 	if (stat != CONSCIOUS)
@@ -295,7 +295,7 @@
 
 /mob/living/silicon/robot/proc/robot_mount(var/mob/living/M in living_mobs(1))
 	set name = "Robot Mount/Dismount"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Let people ride on you."
 
 	if(LAZYLEN(buckled_mobs))

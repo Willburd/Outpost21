@@ -37,7 +37,7 @@ var/can_call_traders = 1
 /client/verb/JoinTraders()
 
 	set name = "Join Trader Visit"
-	set category = VERBTAB_SPECIAL
+	set category = VERBTAB_OOC
 
 	if(!MayRespawn(1))
 		to_chat(usr, "<span class='warning'>You cannot join the traders.</span>")

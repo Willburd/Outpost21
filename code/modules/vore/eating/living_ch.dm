@@ -222,7 +222,7 @@
 
 /mob/living/proc/vore_bellyrub(var/mob/living/T in view(1,src))
 	set name = "Give Bellyrubs"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Provide bellyrubs to either yourself or another mob with a belly."
 
 	if(!T)

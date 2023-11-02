@@ -1,5 +1,5 @@
 /client/proc/fixatmos()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Fix Atmospherics Grief"
 
 	if(!check_rights(R_ADMIN|R_DEBUG|R_EVENT)) return

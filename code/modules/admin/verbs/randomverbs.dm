@@ -622,7 +622,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	admin_delete(O)
 
 /client/proc/cmd_admin_list_open_jobs()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "List free slots"
 
 	if (!holder)
@@ -852,7 +852,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","CVRA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/admin_call_shuttle()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Call Shuttle"
 
 	if ((!( ticker ) || !emergency_shuttle.location()))
@@ -884,7 +884,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	return
 
 /client/proc/admin_cancel_shuttle()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Cancel Shuttle"
 
 	if(!check_rights(R_ADMIN))	return //VOREStation Edit

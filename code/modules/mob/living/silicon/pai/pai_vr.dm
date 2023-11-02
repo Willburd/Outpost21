@@ -443,7 +443,7 @@
 /mob/living/silicon/pai/verb/pai_hide()
 	set name = "Hide"
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	hide()
 	if(status_flags & HIDING)

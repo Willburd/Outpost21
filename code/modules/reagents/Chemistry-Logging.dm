@@ -16,7 +16,7 @@
 
 /client/proc/view_chemical_reaction_logs()
 	set name = "Show Chemical Reactions"
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_LOGS
 
 	if(!check_rights(R_ADMIN|R_MOD))
 		return

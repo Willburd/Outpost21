@@ -911,7 +911,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/dead/proc/ghost_whisper()
 	set name = "Spectral Whisper"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(is_manifest)  //Only able to whisper if it's hit with a tome.
 		var/list/options = list()

@@ -382,7 +382,7 @@
 
 /mob/living/carbon/brain/caught_soul/resist()
 	set name = "Resist"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	to_chat(src,"<span class='warning'>There's no way out! You're stuck in VR.</span>")
 
@@ -472,7 +472,7 @@
 /mob/proc/nsay(message as text|null)
 	set name = "NSay"
 	set desc = "Speak into your NIF's Soulcatcher."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	src.nsay_act(message)
 
@@ -502,7 +502,7 @@
 /mob/proc/nme(message as text|null)
 	set name = "NMe"
 	set desc = "Emote into your NIF's Soulcatcher."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	src.nme_act(message)
 

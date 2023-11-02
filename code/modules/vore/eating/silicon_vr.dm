@@ -86,7 +86,7 @@
 //I basically have to do this, you know?
 /mob/living/silicon/ai/examinate(atom/A as mob|obj|turf in view(eyeobj))
 	set name = "Examine"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	A.examine(src)
 */

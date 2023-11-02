@@ -34,7 +34,7 @@
 			to_chat(src, "<span class ='notice'>You're already using that style.</span>")
 
 /mob/living/carbon/human/proc/tackle()
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set name = "Tackle"
 	set desc = "Tackle someone down."
 
@@ -119,7 +119,7 @@
 /mob/living/carbon/human/proc/regurgitate()
 	set name = "Regurgitate"
 	set desc = "Empties the contents of your stomach"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(stomach_contents.len)
 		for(var/mob/M in src)
@@ -246,7 +246,7 @@
 /mob/living/carbon/human/proc/sonar_ping()
 	set name = "Listen In"
 	set desc = "Allows you to listen in to movement and noises around you."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You need to recover before you can use this ability.</span>")

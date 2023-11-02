@@ -102,7 +102,7 @@ var/list/_cat_default_emotes = list(
 
 /mob/living/simple_mob/animal/passive/cat/verb/become_friends()
 	set name = "Become Friends"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set src in view(1)
 
 	var/mob/living/L = usr

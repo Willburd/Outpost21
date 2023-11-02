@@ -2,7 +2,7 @@
 	var/datum/managed_browser/feedback_viewer/feedback_viewer = null
 
 /datum/admins/proc/view_feedback()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_LOGS
 	set name = "View Feedback"
 	set desc = "Open the Feedback Viewer"
 

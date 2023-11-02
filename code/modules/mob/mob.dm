@@ -240,7 +240,7 @@
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set src = usr
 
 	return
@@ -432,7 +432,7 @@
 
 /client/verb/changes()
 	set name = "Changelog"
-	set category = VERBTAB_SPECIAL
+	set category = VERBTAB_LOGS
 	src << browse('html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != changelog_hash)
 		prefs.lastchangelog = changelog_hash
@@ -508,7 +508,7 @@
 /mob/verb/stop_pulling()
 
 	set name = "Stop Pulling"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(pulling)
 		if(ishuman(pulling))
@@ -1013,7 +1013,7 @@
 /mob/verb/face_direction()
 
 	set name = "Face Direction"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set src = usr
 
 	set_face_dir()

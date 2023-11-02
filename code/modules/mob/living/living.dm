@@ -694,7 +694,7 @@
 
 /mob/living/verb/resist()
 	set name = "Resist"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(!incapacitated(INCAPACITATION_KNOCKOUT) && (last_resist_time + RESIST_COOLDOWN < world.time))
 		last_resist_time = world.time
@@ -754,7 +754,7 @@
 
 /mob/living/verb/lay_down()
 	set name = "Rest"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	resting = !resting
 	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")

@@ -444,7 +444,7 @@
 /mob/living/simple_mob/animal/synx/proc/randomspeech()
 	set name = "speak"
 	set desc = "Take a sentence you heard and speak it."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	if(speak && voices)
 		handle_mimic()
 	else
@@ -465,7 +465,7 @@
 /mob/living/simple_mob/animal/synx/proc/sonar_ping()
 	set name = "Listen In"
 	set desc = "Allows you to listen in to movement and noises around you."
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 
 	if(incapacitated())
 		to_chat(src, "<span class='warning'>You need to recover before you can use this ability.</span>")

@@ -83,7 +83,7 @@
 
 /mob/living/carbon/human/proc/taur_mount(var/mob/living/M in living_mobs(1))
 	set name = "Taur Mount/Dismount"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Let people ride on you."
 
 	if(LAZYLEN(buckled_mobs))

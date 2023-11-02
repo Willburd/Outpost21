@@ -139,7 +139,7 @@
 
 /mob/living/mode()
 	set name = "Activate Held Object"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set src = usr
 
 	if(!checkClickCooldown())

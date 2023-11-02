@@ -359,7 +359,7 @@
 
 /mob/living/simple_mob/proc/animal_mount(var/mob/living/M in living_mobs(1))
 	set name = "Animal Mount/Dismount"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Let people ride on you."
 
 	if(LAZYLEN(buckled_mobs))

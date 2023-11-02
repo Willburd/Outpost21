@@ -53,7 +53,7 @@ GLOBAL_DATUM(revdata, /datum/getrev)
 		. += "<a href=\"[config.githuburl]/pull/[tm.number]\">#[tm.number][details]</a>"
 
 /client/verb/showrevinfo()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_LOGS
 	set name = "Show Server Revision"
 	set desc = "Check the current server code revision"
 

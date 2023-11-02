@@ -402,7 +402,7 @@
 //
 /mob/living/proc/lick(mob/living/tasted in living_mobs(1))
 	set name = "Lick"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Lick someone nearby!"
 	set popup_menu = FALSE // Stop licking by accident!
 
@@ -443,7 +443,7 @@
 //This is just the above proc but switched about.
 /mob/living/proc/smell(mob/living/smelled in living_mobs(1))
 	set name = "Smell"
-	set category = VERBTAB_ACTIONS
+	set category = VERBTAB_IC
 	set desc = "Smell someone nearby!"
 	set popup_menu = FALSE
 

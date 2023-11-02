@@ -26,7 +26,7 @@ var/global/floorIsLava = 0
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in mob_list)
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -257,7 +257,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/show_player_info(var/key as text)
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Show Player Info"
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
@@ -1154,7 +1154,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	feedback_add_details("admin_verb","STP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/show_game_mode()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set desc = "Show the current round configuration."
 	set name = "Show Game Mode"
 
@@ -1393,7 +1393,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	return 1
 
 /datum/admins/proc/force_antag_latespawn()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Force Template Spawn"
 	set desc = "Force an antagonist template to spawn."
 
@@ -1417,7 +1417,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	antag.attempt_late_spawn()
 
 /datum/admins/proc/force_mode_latespawn()
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	set name = "Force Mode Spawn"
 	set desc = "Force autotraitor to proc."
 
@@ -1435,7 +1435,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	ticker.mode.try_latespawn()
 
 /datum/admins/proc/paralyze_mob(mob/living/H as mob)
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_SPECIAL
 	set name = "Toggle Paralyze"
 	set desc = "Paralyzes a player. Or unparalyses them."
 

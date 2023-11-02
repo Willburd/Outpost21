@@ -235,6 +235,6 @@
 
 /client/proc/event_manager_panel()
 	set name = "Event Manager Panel"
-	set category = VERBTAB_ADMIN
+	set category = VERBTAB_EVENT
 	SSevents.Interact(usr)
 	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

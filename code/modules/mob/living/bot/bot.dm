@@ -545,7 +545,7 @@
 
 /mob/living/bot/verb/bot_nom(var/mob/living/T in oview(1))
 	set name = "Bot Nom"
-	set category = VERBTAB_IC
+	set category = VERBTAB_POWERS
 	set desc = "Allows you to eat someone. Yum."
 
 	if (stat != CONSCIOUS)

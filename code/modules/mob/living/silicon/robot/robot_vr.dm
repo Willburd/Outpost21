@@ -82,7 +82,7 @@
 
 /mob/living/silicon/robot/verb/robot_nom(var/mob/living/T in living_mobs(1))
 	set name = "Robot Nom"
-	set category = VERBTAB_IC
+	set category = VERBTAB_POWERS
 	set desc = "Allows you to eat someone."
 
 	if (stat != CONSCIOUS)

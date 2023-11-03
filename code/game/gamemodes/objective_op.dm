@@ -26,3 +26,22 @@
 /datum/objective/consume/deephunger/New(var/mincount,var/maxcount)
 	target_amount = rand(mincount,maxcount)
 	. = ..("At least [target_amount] crew members, who are not possessed, must be digested, absorbed, or contained inside you. If you run out of prey, find out how to make more.")
+
+
+
+/datum/objective/chuinfestation
+	explanation_text = "Not yet init."
+
+/datum/objective/chuinfestation/New()
+	. = ..("Infest the crew, and spread your happiness by making them chus like you! Have no less than [chus.infestationglobalgoal] chus alive by the end of the round.")
+
+/datum/objective/chuinfestation/check_completion()
+	if(isnull(chus))
+		return FALSE // wat
+
+	var/infestedchus = 0
+	for(var/mob/living/simple_mob/vore/alienanimals/chu/C in living_mob_list)
+		if(C.stat != DEAD)
+			infestedchus++
+
+	return infestedchus > chus.infestationglobalgoal

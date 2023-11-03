@@ -15,5 +15,6 @@
 #define LANGUAGE_ANIMAL "Animal"
 #define LANGUAGE_TEPPI "Teppi"
 #define LANGUAGE_MOUSE "Mouse"
+#define LANGUAGE_CHU "Chu"
 
 #define LANGUAGE_SHADEKIN "Shadekin Empathy"

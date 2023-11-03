@@ -338,5 +338,31 @@
 	//Not in here? Must be untested!
 	return 0
 
+/mob/living/carbon/human/proc/chuify()
+	if (transforming)
+		return
+	for(var/obj/item/W in src)
+		if (W==w_uniform) // will be torn
+			continue
+		drop_from_inventory(W)
+	regenerate_icons()
+	transforming = 1
+	canmove = 0
+	stunned = 1
+	for(var/t in organs)
+		qdel(t)
 
+	// lets not make this pleasant
+	emote("scream")
+	transforming = 0
+	stunned = 0
+	update_canmove()
 
+	var/mob/new_mob = new /mob/living/simple_mob/vore/alienanimals/chu(src.loc)
+	new_mob.key = key
+	new_mob.a_intent = a_intent
+
+	to_chat(new_mob, "You suddenly feel more... happy. You should make more \"friends\" happy like you are!")
+	spawn()
+		qdel(src)
+	return new_mob

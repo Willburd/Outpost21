@@ -31,3 +31,15 @@
 	machine_understands = 0
 	space_chance = 100
 	syllables = list("gyoh", "snoof", "gyoooooOOOooh", "iuuuuh", "gyuuuuh")
+
+/datum/language/chu
+	name = LANGUAGE_CHU
+	desc = "Rambling chitters of mad beasts."
+	speech_verb = "chitters"
+	ask_verb = "tilts"
+	exclaim_verb = "screams"
+	key = "c"
+	flags = WHITELISTED
+	machine_understands = 0
+	space_chance = 100
+	syllables = list("chitter", "chatter", "giggles", "hisses", "squeeks")

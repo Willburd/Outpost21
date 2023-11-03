@@ -10,8 +10,7 @@ var/datum/antagonist/synx/synxes
 	mob_path = /mob/living/simple_mob/animal/synx
 	initial_spawn_target = 1
 	welcome_text = "You awaken once again to the hunt. Stalk the crew, and strike when they least expect it... You are an ambush predator after all."
-	antag_sound = 'sound/goonstation/spooky/Meatzone_BreathingSlow.ogg'
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Site Manager")
+	antag_sound = 'sound/rakshasa/Breath1.ogg'
 	role_type = BE_ALIEN
 	antag_indicator = "synxhunt"
 	flags = ANTAG_OVERRIDE_MOB | ANTAG_RANDSPAWN | ANTAG_OVERRIDE_JOB | ANTAG_VOTABLE | ANTAG_CHOOSE_NAME

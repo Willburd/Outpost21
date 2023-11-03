@@ -28,13 +28,13 @@
 	glow_color = "#75ebeb"
 
 	// durable...
-	maxHealth = 55
-	health = 55
+	maxHealth = 45
+	health = 45
 	enzyme_affect = FALSE
 
 	universal_understand = 1
 	melee_damage_lower = 4
-	melee_damage_upper = 8
+	melee_damage_upper = 6
 	base_attack_cooldown = 1 SECOND
 	attacktext = list("bit", "chomped", "scratched")
 
@@ -140,7 +140,7 @@
 				T.emote("scream")
 				add_attack_logs(src,T,"Infest (chu)")
 				var/obj/item/organ/external/affecting = T.get_organ(BP_TORSO)
-				if(affecting.take_damage(39,0,1,0,"infesting mass"))
+				if(affecting.take_damage(12,0,1,0,"infesting mass"))
 					T:UpdateDamageIcon()
 
 		if(!do_mob(src, T, 150))

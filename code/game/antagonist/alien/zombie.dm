@@ -21,22 +21,27 @@ var/datum/antagonist/zombie/zombies
 	loss_feedback_tag = "loss - staff survived the infestation"
 	can_speak_aooc = TRUE	// Hoardsenses tingling
 
+	var/infestationglobalgoal = 0 // object above minimum required to win
+	var/infestationminimum = 0 // minimum to spawn from the graves
+
 /datum/antagonist/zombie/New()
 	..()
 	zombies = src
+	infestationminimum = rand(13,26);
+	infestationglobalgoal = rand(5,8); // lowpop
 
-/datum/antagonist/zombie/create_objectives(var/datum/mind/hunger)
+/datum/antagonist/zombie/create_objectives(var/datum/mind/zombie)
 	if(!..())
 		return
 
-	var/datum/objective/survive/survive_objective = new
-	survive_objective.owner = hunger
-	hunger.objectives += survive_objective
+	var/datum/objective/zombieinfestation/zombie_objective = new
+	zombie_objective.owner = zombie
+	zombie.objectives += zombie_objective
 
 	// TODO zombie infestation objectives
 
 
-/datum/antagonist/zombie/equip(var/mob/living/carbon/human/hunger_mob)
+/datum/antagonist/zombie/equip(var/mob/living/carbon/human/zombie_mob)
 	if(!..())
 		return 0
 	// what would a zombie even get?

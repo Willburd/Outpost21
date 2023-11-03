@@ -24,20 +24,20 @@ var/datum/antagonist/synx/synxes
 	..()
 	synxes = src
 
-/datum/antagonist/synx/create_objectives(var/datum/mind/hunger)
+/datum/antagonist/synx/create_objectives(var/datum/mind/synx)
 	if(!..())
 		return
 
 	var/datum/objective/survive/survive_objective = new
-	survive_objective.owner = hunger
-	hunger.objectives += survive_objective
+	survive_objective.owner = synx
+	synx.objectives += survive_objective
 
 	var/datum/objective/consume/hunter/consume_objective = new(3,6)
-	consume_objective.owner = hunger
-	hunger.objectives += consume_objective
+	consume_objective.owner = synx
+	synx.objectives += consume_objective
 
 
-/datum/antagonist/synx/equip(var/mob/living/carbon/human/hunger_mob)
+/datum/antagonist/synx/equip(var/mob/living/carbon/human/synx_mob)
 	if(!..())
 		return 0
 	// what would a synx even get?

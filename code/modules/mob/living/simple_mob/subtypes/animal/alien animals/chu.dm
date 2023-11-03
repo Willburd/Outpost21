@@ -1,5 +1,5 @@
 /datum/category_item/catalogue/fauna/chu
-	name = "Chu"
+	name = "Chu'uraka Parasite"
 	desc = "TODO - chu description"
 	value = CATALOGUER_REWARD_SUPERHARD
 
@@ -14,6 +14,7 @@
 	real_name = "chu"
 	desc = "A \"friendly\" creature that wanders maintenance."
 	tt_desc = "Chitter"
+	player_msg = "Eat others, and infest them with your strange parasitic powers!"
 
 	icon = 'icons/mob/animal_op.dmi'
 	icon_state = "chu"

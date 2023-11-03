@@ -20,12 +20,12 @@
 
 /datum/objective/consume/hunter/New(var/mincount,var/maxcount)
 	target_amount = rand(mincount,maxcount)
-	. = ..("At least [target_amount] crew members, must be digested, absorbed, or contained inside you. A good hunter encourages their prey to keep their numbers plentiful.")
+	. = ..("At least [target_amount] crew members must be digested, absorbed, or contained inside you. A good hunter encourages their prey to keep their numbers plentiful.")
 
 
 /datum/objective/consume/deephunger/New(var/mincount,var/maxcount)
 	target_amount = rand(mincount,maxcount)
-	. = ..("At least [target_amount] crew members, who are not possessed, must be digested, absorbed, or contained inside you. If you run out of prey, find out how to make more.")
+	. = ..("At least [target_amount] crew members who are not possessed must be digested, absorbed, or contained inside you. If you run out of prey, find out how to make more.")
 
 
 
@@ -45,3 +45,24 @@
 			infestedchus++
 
 	return infestedchus > chus.infestationglobalgoal
+
+
+
+
+
+/datum/objective/zombieinfestation
+	explanation_text = "Not yet init."
+
+/datum/objective/zombieinfestation/New()
+	. = ..("BRAAAIINNSSS! Infect the crew, shamble, and moan! At least [zombies.infestationminimum + zombies.infestationglobalgoal] zombies must be still shambling around by the end of the round!")
+
+/datum/objective/zombieinfestation/check_completion()
+	if(isnull(chus))
+		return FALSE // wat
+
+	var/zombiecount = 0
+	for(var/mob/living/simple_mob/vore/alienanimals/chu/C in living_mob_list)
+		if(C.stat != DEAD)
+			zombiecount++
+
+	return zombiecount > (zombies.infestationminimum + chus.infestationglobalgoal)

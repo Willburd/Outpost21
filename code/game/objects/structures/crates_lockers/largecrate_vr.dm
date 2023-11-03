@@ -67,12 +67,14 @@
 	starts_with = list(pick(/mob/living/simple_mob/animal/space/carp/large,
 						/mob/living/simple_mob/vore/aggressive/deathclaw,
 						/mob/living/simple_mob/vore/aggressive/dino,
-						/mob/living/simple_mob/animal/space/alien,
+						///mob/living/simple_mob/animal/space/alien,
 						/mob/living/simple_mob/animal/space/alien/drone,
-						/mob/living/simple_mob/animal/space/alien/sentinel,
-						/mob/living/simple_mob/animal/space/alien/queen,
-//						/mob/living/simple_mob/otie/feral,
-//						/mob/living/simple_mob/otie/red,
+						/mob/living/simple_mob/vore/alienanimals/chu,
+						/mob/living/simple_mob/animal/synx,
+						///mob/living/simple_mob/animal/space/alien/sentinel,
+						///mob/living/simple_mob/animal/space/alien/queen,
+						///mob/living/simple_mob/otie/feral,
+						///mob/living/simple_mob/otie/red,
 						/mob/living/simple_mob/vore/aggressive/corrupthound))
 	return ..()
 /*

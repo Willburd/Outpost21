@@ -1418,6 +1418,11 @@
 				if(!isnull(P.id))
 					detectedtag = "corpse" // send these to medical body disposal as well
 					break
+			for(var/obj/item/weapon/storage in H)
+				for(var/obj/item/weapon/card/id in storage.contents)
+					detectedtag = "corpse" // check simple storages for idcards! one level deep only!
+					break
+
 	// outpost 21 edit end
 	var/nextdir = nextdir(H.dir, detectedtag)
 	H.set_dir(nextdir)

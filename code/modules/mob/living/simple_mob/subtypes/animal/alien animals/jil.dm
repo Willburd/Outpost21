@@ -177,6 +177,9 @@
 			if(sleeping > 0)
 				// sleep process
 				AdjustSleeping(-1)
+				health += round(maxHealth / rand(5,15)) // heal!
+				if(health > maxHealth)
+					health = maxHealth
 				resting = (sleeping > 0)
 		update_icons()
 
@@ -572,9 +575,6 @@
 					var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
 					if(J.sleeping <= 0)
 						J.Sleeping( 30 + rand(50))
-						J.health += round(J.maxHealth / rand(5,15)) // heal!
-						if(J.health > J.maxHealth)
-							J.health = J.maxHealth
 					holder.update_icons()
 
 

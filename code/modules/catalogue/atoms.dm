@@ -66,7 +66,10 @@
 	// Now for species.
 	if(!(beep_boop in list(FBP_POSI, FBP_DRONE))) // Don't give the species entry if they are a posi or drone.
 		if(species && LAZYLEN(species.catalogue_data))
-			data += species.catalogue_data
+			if(custom_species)
+				data += /datum/category_item/catalogue/fauna/custom_species
+			else
+				data += species.catalogue_data
 	return data
 
 /mob/living/silicon/robot/get_catalogue_data()

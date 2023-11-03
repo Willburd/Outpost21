@@ -10,13 +10,19 @@ var/global/list/allisclean_list = list()
 	current_size = 9 //It moves/eats like a max-size singulo, aside from range. --NEO.
 	contained = 0 // Are we going to move around?
 	dissipate = 0 // Do we lose energy over time?
-	grav_pull = 10 //How many tiles out do we pull?
-	consume_range = 6 //How many tiles out do we eat
-
+	grav_pull = 12 //How many tiles out do we pull?
+	consume_range = 3 //How many tiles out do we eat
+	var/list/vents = list()
 
 /obj/singularity/allisclean/New()
 	..()
 	allisclean_list.Add(src)
+
+	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
+		if(temp_vent.loc.z in using_map.station_levels)
+			var/area/A = get_area(temp_vent)
+			if(!(A.forbid_events))
+				vents += temp_vent
 
 /obj/singularity/allisclean/Destroy()
 	allisclean_list.Remove(src)
@@ -25,6 +31,16 @@ var/global/list/allisclean_list = list()
 /obj/singularity/allisclean/process()
 	eat()
 	move()
+	// clean
+	if(prob(20))
+		var/i = 0
+		while(i < 5)
+			i += 1
+			var/obj/machinery/atmospherics/unary/vent_pump/vent = pick(vents)
+			if(!vent.welded)
+				var/obj/item/weapon/grenade/chem_grenade/cleaner/C = new /obj/item/weapon/grenade/chem_grenade/cleaner(vent.loc)
+				C.stage = 2
+				C.detonate( FALSE )
 
 /obj/singularity/allisclean/move(var/force_move = 0)
 	if(!move_self)
@@ -64,13 +80,15 @@ var/global/list/allisclean_list = list()
 		if(C2.status_flags & GODMODE)
 			return 0
 
-		C2.dust() // Changed from gib(), just for less lag.
+		C2.gib()
 
 	else if (istype(A, /obj/))
 		qdel(A)
 
 		if (A)
 			qdel(A)
+
+	/* Mr.clean will only clean!
 	else if (isturf(A))
 		var/dist = get_dist(A, src)
 
@@ -95,6 +113,7 @@ var/global/list/allisclean_list = list()
 		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A
 			T2.ChangeTurf(get_base_turf_by_area(A))
+	*/
 
 /obj/singularity/allisclean/ex_act(severity) //No throwing bombs at it either. --NEO
 	return

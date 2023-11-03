@@ -244,7 +244,7 @@
 			set_light(distance, distance * 4, l_color = "#660066")
 			return TRUE
 
-	else if(glow_toggle)
+	else if(glow_toggle && !is_ventcrawling)
 		set_light(glow_range, glow_intensity, glow_color)
 
 	else
@@ -265,7 +265,7 @@
 	if(isturf(loc))
 		var/turf/T = loc //Will be true 99% of the time, thus avoiding the whole elif chain
 		brightness = T.get_lumcount()
-	else if(istype(loc,/obj/structure/closet)) // outpost 21 addition - lockers are dark and spooky! 
+	else if(istype(loc,/obj/structure/closet)) // outpost 21 addition - lockers are dark and spooky!
 		brightness = 0 // it's dark in here!
 	else if(istype(loc,/obj/mecha)) //I imagine there's like displays and junk in there. Use the lights!
 		brightness = 1

@@ -28,8 +28,8 @@
 	glow_color = "#75ebeb"
 
 	// durable...
-	maxHealth = 45
-	health = 45
+	maxHealth = 65
+	health = 65
 	enzyme_affect = FALSE
 
 	universal_understand = 1
@@ -89,8 +89,8 @@
 
 	var/obj/belly/foundbelly = null
 	var/foundprey = null
-	if(!isnull(vore_organs) || vore_organs.len == 0)
-		for(var/B in vore_organs)
+	if(!isnull(vore_organs) && vore_organs.len > 0)
+		for(var/obj/belly/B in vore_organs)
 			for(var/mob/living/L in B)
 				if(L.stat < DEAD && ishuman(L) && !L.isSynthetic())
 					foundprey = L
@@ -181,6 +181,21 @@
 	else
 		icon_state = icon_living
 
+	// always handle belly overlay!
+	if(stat != DEAD)
+		var/hasbelly = FALSE
+		if(!isnull(vore_organs) && vore_organs.len > 0)
+			for(var/obj/belly/B in vore_organs)
+				if(B.contents.len > 0)
+					hasbelly = TRUE
+					break
+		if(hasbelly)
+			var/mutable_appearance/I = mutable_appearance(icon,  "[icon_state]-belly")
+			I.appearance_flags |= PIXEL_SCALE
+			I.layer = MOB_LAYER
+			I.plane = MOB_PLANE + 0.1
+			add_overlay(I)
+
 	// overlays for cursed players~
 	if(isOriginal)
 		return
@@ -210,11 +225,12 @@
 
 /mob/living/simple_mob/vore/alienanimals/chu/Life()
 	. = ..()
+	// adjust sleep here, needs mind to sleep otherwise...
+	// adding the check so this doesn't conflict with life/handle_regular_status_updates()
+	// catslugs added simple mobs healing while resting... so i don't need to do that myself!
 	if(sleeping > 0)
 		AdjustSleeping(-1)
-		health += round(maxHealth / rand(5,15)) // heal!
-		if(health > maxHealth)
-			health = maxHealth
+		resting = sleeping > 0
 		if(sleeping <= 0)
 			update_icon()
 

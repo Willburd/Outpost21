@@ -174,12 +174,10 @@
 
 			// adjust sleep here, needs mind to sleep otherwise...
 			// adding the check so this doesn't conflict with life/handle_regular_status_updates()
+			// catslugs added simple mobs healing while resting... so i don't need to do that myself!
 			if(sleeping > 0)
 				// sleep process
 				AdjustSleeping(-1)
-				health += round(maxHealth / rand(5,15)) // heal!
-				if(health > maxHealth)
-					health = maxHealth
 				resting = (sleeping > 0)
 		update_icons()
 

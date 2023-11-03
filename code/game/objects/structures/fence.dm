@@ -136,6 +136,9 @@
 	desc = "It looks like it has a strong padlock attached."
 	locked = TRUE
 
+/obj/structure/fence/door/attack_generic(mob/user, damage, attack_verb)
+	. = attack_hand(user)
+
 /obj/structure/fence/door/attack_hand(mob/user)
 	if(can_open(user))
 		toggle(user)

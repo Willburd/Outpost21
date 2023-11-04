@@ -364,11 +364,13 @@
 	new_mob.overlay_colors["Eyes"] = rgb(r_eyes,g_eyes,b_eyes)
 	new_mob.overlay_colors["Blood"] = species.blood_color
 	new_mob.glow_color = new_mob.overlay_colors["Eyes"]
-	new_mob.key = key
 	new_mob.a_intent = a_intent
 
 	// transfer!
-	mind.transfer_to(new_mob)
+	if(mind)
+		mind.transfer_to(new_mob)
+	if(key)
+		new_mob.key = key
 
 	to_chat(new_mob, "You suddenly feel more... happy. You should make more \"friends\" happy like you are!")
 	spawn()

@@ -167,9 +167,11 @@
 					var/obj/structure/closet/C = loc
 					if(!C.opened && (C.can_open()))
 						// WAKEUP! Try and escape!
-						AdjustSleeping(sleeping-100) // force a wakeup... weird I can't just use Sleeping for this...
+						SetSleeping(0) // force a wakeup... weird I can't just use Sleeping for this...
 						resting = FALSE
+						lying = FALSE
 						bonk(src,TRUE)
+						update_icon()
 						C.open(src)
 
 			// adjust sleep here, needs mind to sleep otherwise...

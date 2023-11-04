@@ -141,7 +141,7 @@
 				to_chat(foundprey, "<span class='danger'>You feel something strange begin to happen...</span>")
 			if(2)
 				to_chat(src, "<span class='notice'>You begin to press close to [foundprey].</span>")
-				src.visible_message("<span class='warning'>[src] presses uncomfortably close, crushing you inside of them!</span>")
+				to_chat(foundprey, "<span class='warning'>[src] presses uncomfortably close, crushing you inside of them!</span>")
 				if(ishuman(foundprey))
 					T.emote("gasp")
 			if(3)

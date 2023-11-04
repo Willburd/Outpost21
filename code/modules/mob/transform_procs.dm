@@ -365,6 +365,8 @@
 	new_mob.overlay_colors["Blood"] = species.blood_color
 	new_mob.glow_color = new_mob.overlay_colors["Eyes"]
 	new_mob.a_intent = a_intent
+	if(species.name == "Vox")
+		new_mob.overlay_colors["Body"] = "#226622"
 
 	// transfer!
 	if(mind)

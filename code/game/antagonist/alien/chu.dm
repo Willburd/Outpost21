@@ -24,7 +24,7 @@ var/datum/antagonist/chu/chus
 /datum/antagonist/chu/New()
 	. = ..()
 	chus = src
-	infestationglobalgoal = rand(3,6); // lowpop
+	infestationglobalgoal = rand(15,25); // lowpop
 
 /datum/antagonist/chu/create_objectives(var/datum/mind/chu)
 	if(!..())

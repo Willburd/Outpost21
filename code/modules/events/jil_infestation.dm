@@ -13,12 +13,11 @@
 /datum/event/jil_infestation/announce()
 	command_announcement.Announce("A Jil hoard has been detected in [station_name()]'s vent system. Ensure station property is not stolen.", "Jil Alert", new_sound = 'sound/AI/aliens.ogg')
 
-
 /datum/event/jil_infestation/start()
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
 		if(!temp_vent.welded && temp_vent.network && (temp_vent.loc.z in using_map.station_levels))
-			if(temp_vent.network.normal_members.len > 50)
+			if(temp_vent.network.normal_members.len > 20)
 				for(var/mob/living/L in range(12,temp_vent))
 					if((ishuman(L) || issilicon(L)) && L.stat != DEAD)
 						continue // skip... Too close to player

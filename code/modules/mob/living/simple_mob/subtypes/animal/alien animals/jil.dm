@@ -610,4 +610,4 @@
 				unreachable_locs += target.loc // if not inside something!
 			last_pickup_turf = null // clear last pickup, we freaked out
 			lose_target()
-	return ..(attacker)
+	return ..(attacker, ignore_timers)

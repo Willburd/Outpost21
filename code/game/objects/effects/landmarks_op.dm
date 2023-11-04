@@ -22,7 +22,7 @@
 	if(!isturf(src.loc))
 		return
 
-	switch(rand(1,5))
+	switch(rand(1,6))
 		if(1)
 			// clowns are the most complex, taken right from the clune infestation event
 			var/spawncount = pick(1,2)
@@ -72,4 +72,8 @@
 
 		if(5)
 			var/mob/living/simple_mob/vore/demon/engorge/C = new /mob/living/simple_mob/vore/demon/engorge()
+			C.loc = src.loc
+
+		if(6)
+			var/mob/living/simple_mob/vore/alienanimals/chu/C = new /mob/living/simple_mob/vore/alienanimals/chu()
 			C.loc = src.loc

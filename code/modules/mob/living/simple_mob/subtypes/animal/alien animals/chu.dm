@@ -29,8 +29,8 @@
 	glow_color = "#75ebeb"
 
 	// durable...
-	maxHealth = 65
-	health = 65
+	maxHealth = 75
+	health = 75
 	enzyme_affect = FALSE
 
 	universal_understand = 1
@@ -44,8 +44,14 @@
 
 	layer = MOB_LAYER
 
+	pass_flags = PASSTABLE
+
 	vore_default_mode = DM_HOLD
 	vore_active = TRUE
+	vore_pounce_chance = 10
+
+	nutrition = 300 // to prevent hunger issues at start
+
 	has_hands = FALSE
 	response_help  = "pets"
 	response_disarm = "pushes aside"
@@ -89,7 +95,7 @@
 		return
 
 	var/obj/belly/foundbelly = null
-	var/foundprey = null
+	var/mob/foundprey = null
 	if(!isnull(vore_organs) && vore_organs.len > 0)
 		for(var/obj/belly/B in vore_organs)
 			for(var/mob/living/L in B)
@@ -111,66 +117,102 @@
 		to_chat(src, "<span class='warning'>You must have prey inside you to infest them!</span>")
 		return
 
+	var/mob/living/carbon/human/T = foundprey
+	if(ishuman(foundprey))
+		if(T.isSynthetic())
+			to_chat(src, "<span class='warning'>\The [T] is not compatible with our biology.</span>")
+			return
+
+	else if(!isliving(foundprey))
+		to_chat(src, "<span class='warning'>\The [foundprey] is not a biological creature?</span>")
+		return
+
+	if(foundprey.stat == DEAD)
+		to_chat(src, "<span class='warning'>\The [foundprey] is dead!</span>")
+		return
+
 	if(istype(foundprey,/mob/living/simple_mob/vore/alienanimals/chu))
 		to_chat(src, "<span class='warning'>\The [foundprey] is already a chu!</span>")
 		return
 
-	var/mob/living/carbon/human/T = foundprey
-	if(!istype(T) || T.isSynthetic())
-		to_chat(src, "<span class='warning'>\The [T] is not compatible with our biology.</span>")
-		return
-
-	if(T.stat == DEAD)
-		to_chat(src, "<span class='warning'>\The [T] is dead!</span>")
-		return
-
+	// convert others to chus!
 	isinfesting = TRUE
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
 			if(1)
-				to_chat(src, "<span class='notice'>[T] is being infested. Hold still...</span>")
-				to_chat(T, "<span class='danger'>You feel something strange begin to happen...</span>")
+				to_chat(src, "<span class='notice'>[foundprey] is being infested. Hold still...</span>")
+				to_chat(foundprey, "<span class='danger'>You feel something strange begin to happen...</span>")
 			if(2)
-				to_chat(src, "<span class='notice'>You begin to press close to [T].</span>")
+				to_chat(src, "<span class='notice'>You begin to press close to [foundprey].</span>")
 				src.visible_message("<span class='warning'>[src] presses uncomfortably close!</span>")
-				T.emote("gasp")
+				if(ishuman(foundprey))
+					T.emote("gasp")
 			if(3)
-				to_chat(src, "<span class='notice'>You begin to sink into [T]!</span>")
-				src.visible_message("<span class='danger'>[src] sinks into [T] with a sickening crunch!</span>")
-				to_chat(T, "<span class='danger'>\The [src] begins to sink into your body!</span>")
-				T.emote("scream")
-				add_attack_logs(src,T,"Infest (chu)")
-				var/obj/item/organ/external/affecting = T.get_organ(BP_TORSO)
-				if(affecting.take_damage(12,0,1,0,"infesting mass"))
-					T:UpdateDamageIcon()
+				to_chat(src, "<span class='notice'>You begin to sink into [foundprey]!</span>")
+				src.visible_message("<span class='danger'>[src] sinks into [foundprey] with a sickening crunch!</span>")
+				to_chat(foundprey, "<span class='danger'>\The [src] begins to sink into your body!</span>")
 
-		if(!do_mob(src, T, 150))
-			to_chat(src, "<span class='warning'>Your infestation of [T] has been interrupted!</span>")
+				if(ishuman(foundprey))
+					T.emote("scream")
+					var/obj/item/organ/external/affecting = T.get_organ(BP_TORSO)
+					if(affecting.take_damage(12,0,1,0,"infesting mass"))
+						T.UpdateDamageIcon()
+				add_attack_logs(src,T,"Infest (chu)")
+
+		if(!do_mob(src, foundprey, 150))
+			to_chat(src, "<span class='warning'>Your infestation of [foundprey] has been interrupted!</span>")
 			isinfesting = FALSE
 			return
-
 	isinfesting = FALSE
-	if(T.loc != foundbelly)
-		to_chat(src, "<span class='warning'>[T] has escaped our belly, your infestation has been interrupted!</span>")
+
+	if(foundprey.loc != foundbelly)
+		to_chat(src, "<span class='warning'>[foundprey] has escaped our belly, your infestation has been interrupted!</span>")
 		return
 
-	var/hostname = T.name
-	to_chat(src, "<span class='notice'>You have infested [T]!</span>")
-	src.visible_message("<span class='danger'>[src] merges with [T] and converts them into more of itself!</span>")
-	to_chat(T, "<span class='danger'>You have been infested by the chu!</span>")
-	var/mob/living/simple_mob/vore/alienanimals/chu/CC = T.chuify()
-	if(!isnull(CC))
-		// setup sprites and flavor
-		foundbelly.release_specific_contents(CC)
-		CC.tt_desc = "Reminds you of [hostname]..."
-		CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
-		CC.update_icon()
+	var/hostname = foundprey.name
+	to_chat(src, "<span class='notice'>You have infested [foundprey]!</span>")
+	src.visible_message("<span class='danger'>[src] merges with [foundprey] and converts them into more of itself!</span>")
+	to_chat(foundprey, "<span class='danger'>You have been infested by the chu!</span>")
+
+	if(ishuman(foundprey))
+		// human infesting
+		var/mob/living/simple_mob/vore/alienanimals/chu/CC = T.chuify()
+		if(!isnull(CC))
+			// setup sprites and flavor
+			foundbelly.release_specific_contents(CC)
+			CC.tt_desc = "Reminds you of [hostname]..."
+			CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
+			CC.update_icon()
+			// emote a bit
+			sleep(rand(2,6))
+			CC.emote(pick("choke","gasp"))
+		else
+			// SOMETHING happened?
+			foundbelly.release_specific_contents(T)
+	else
+		// simple conversion
+		var/key = null
+		if(!isnull(foundprey.key))
+			key = foundprey.key
+		var/mob/living/simple_mob/vore/alienanimals/chu/CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
+		if(isnull(key))
+			// ghost request
+
+		else
+			// pass on mob
+			CC.key = key
+
+		foundprey.Destroy()
 		// emote a bit
 		sleep(rand(2,6))
 		CC.emote(pick("choke","gasp"))
-	else
-		// SOMETHING happened?
-		foundbelly.release_specific_contents(T)
+		foundbelly.release_specific_contents(CC)
+
+	// spit all the rest of if it's items
+	if(!isnull(vore_organs) && vore_organs.len > 0)
+		for(var/obj/belly/B in vore_organs)
+			for(var/obj/item/I in B)
+				B.release_specific_contents(I)
 
 /mob/living/simple_mob/vore/alienanimals/chu/update_icon()
 	. = ..()
@@ -239,15 +281,67 @@
 	hostile = TRUE
 	can_flee = TRUE
 	flee_when_outmatched = TRUE
+	unconscious_vore = TRUE
 	outmatched_threshold = 100
 	max_home_distance = 50
+	var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null
 
 /datum/ai_holder/simple_mob/melee/evasive/chu/handle_special_strategical()
+	if(!isnull(vent_found))
+		// sanity
+		if(!vent_found.Adjacent(holder))
+			vent_found = null
+			return
+
+		// find a vent
+		var/obj/machinery/atmospherics/unary/vent_pump/goalvent = null
+		for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
+			if(prob(5))
+				if(temp_vent.loc.z in using_map.station_levels)
+					if(!temp_vent.welded)
+						goalvent = temp_vent
+						break;
+
+		// attempt to ventcrawl!
+		if(goalvent && vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))
+			holder.set_AI_busy(1)
+
+			holder.fade_towards(vent_found,45)
+			holder.prepping_to_ventcrawl = 1
+			spawn(50)
+				holder.prepping_to_ventcrawl = 0
+			if(!do_after(holder, 45, vent_found, 1, 1))
+				return
+
+			// spit out
+			holder.set_AI_busy(0)
+			holder.visible_message("<B>[holder] scrambles into the ventilation ducts!</B>", "You climb into the ventilation system.")
+			holder.visible_message("You hear something squeezing through the ducts.", "You climb out the ventilation system.")
+			holder.forceMove(goalvent.loc)
+			var/turf/findhome = get_turf(holder)
+			if(isturf(findhome))
+				home_turf = findhome
+			vent_found = null
+		return
+
 	if(holder.sleeping > 0)
 		return
 
+	// try stalking along with player chus
+	if(!target && leader == null && prob(80))
+		for(var/mob/living/simple_mob/vore/alienanimals/chu/C in range(4,holder))
+			if(!isnull(C.key))
+				// try to stick around player chus, they can just tell!
+				set_follow(C, follow_for = 6 SECONDS)
+				break
 
-	if(prob(5))
+	if(leader != null && prob(15))
+		holder.emote(pick("giggle","hiss","twitches"))
+		var/turf/findhome = get_turf(holder)
+		if(isturf(findhome))
+			home_turf = findhome
+
+	else if(prob(5))
 		var/turf/findhome = get_turf(holder)
 		if(isturf(findhome))
 			home_turf = findhome
@@ -274,6 +368,25 @@
 			var/turf/findhome = get_turf(C)
 			if(isturf(findhome))
 				home_turf = findhome
-		else if(prob(20) && holder.health < 30 && get_dist(holder, home_turf) < 40)
+		else if(prob(10) && holder.health < 30 && get_dist(holder, home_turf) < 40)
 			holder.Sleeping(50)
 			holder.update_icon()
+			var/turf/findhome = get_turf(holder)
+			if(isturf(findhome))
+				home_turf = findhome
+
+	else if((prob(10) && !target) ||(prob(60) && should_flee()))
+		// VENT TIME
+		for(var/obj/machinery/atmospherics/unary/vent_pump/searchvent in holder.loc.contents)
+			if(!searchvent.welded)
+				vent_found = searchvent
+
+/datum/ai_holder/simple_mob/melee/evasive/chu/react_to_attack(atom/movable/attacker, ignore_timers = FALSE)
+	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
+		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
+		var/mob/living/simple_mob/vore/alienanimals/chu/C = holder
+		C.Sleeping(0)
+		C.resting = FALSE
+		C.update_icons()
+
+	return ..(attacker, ignore_timers)

@@ -548,12 +548,17 @@
 		//"groundbase_nanomap_z6.png"			= 'icons/_nanomaps/gbeast.png',
 		//"groundbase_nanomap_z7.png"			= 'icons/_nanomaps/gbwest.png',
 		//"groundbase_nanomap_z10.png"		= 'icons/_nanomaps/gbmining.png',
-		"cryogaia_nanomap_z2.png"				= 'icons/_nanomaps/cryogaia_nanomap_z2.png',
-		"cryogaia_nanomap_z3.png"				= 'icons/_nanomaps/cryogaia_nanomap_z3.png',
-		"cryogaia_nanomap_z4.png"				= 'icons/_nanomaps/cryogaia_nanomap_z4.png',
-		"cryogaia_nanomap_z5.png"				= 'icons/_nanomaps/cryogaia_nanomap_z5.png',
-		"cryogaia_nanomap_z6.png"				= 'icons/_nanomaps/cryogaia_nanomap_z6.png',
-		"cryogaia_nanomap_z13.png"				= 'icons/_nanomaps/cryogaia_nanomap_z13.png',
+		//"cryogaia_nanomap_z2.png"				= 'icons/_nanomaps/cryogaia_nanomap_z2.png',
+		//"cryogaia_nanomap_z3.png"				= 'icons/_nanomaps/cryogaia_nanomap_z3.png',
+		//"cryogaia_nanomap_z4.png"				= 'icons/_nanomaps/cryogaia_nanomap_z4.png',
+		//"cryogaia_nanomap_z5.png"				= 'icons/_nanomaps/cryogaia_nanomap_z5.png',
+		//"cryogaia_nanomap_z6.png"				= 'icons/_nanomaps/cryogaia_nanomap_z6.png',
+		//"cryogaia_nanomap_z13.png"				= 'icons/_nanomaps/cryogaia_nanomap_z13.png',
 		// YW Edit End
-
+		// outpost 21 begin
+		"outpost21_nanomap_z1.png"				= 'icons/_nanomaps/cryogaia_nanomap_z1.png',
+		"outpost21_nanomap_z2.png"				= 'icons/_nanomaps/cryogaia_nanomap_z2.png',
+		"outpost21_nanomap_z3.png"				= 'icons/_nanomaps/cryogaia_nanomap_z3.png',
+		"outpost21_nanomap_z7.png"				= 'icons/_nanomaps/cryogaia_nanomap_z7.png',
+		// outpost 21 end
 	)

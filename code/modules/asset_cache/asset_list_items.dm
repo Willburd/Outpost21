@@ -556,8 +556,9 @@
 		//"cryogaia_nanomap_z13.png"				= 'icons/_nanomaps/cryogaia_nanomap_z13.png',
 		// YW Edit End
 		// outpost 21 begin
-		"outpost21_nanomap_z1.png"				= 'icons/_nanomaps/outpost21_nanomap_z1.png',
-		"outpost21_nanomap_z2.png"				= 'icons/_nanomaps/outpost21_nanomap_z2.png',
-		"outpost21_nanomap_z3.png"				= 'icons/_nanomaps/outpost21_nanomap_z3.png'
+		"outpost_nanomap_z1.png"				= 'icons/_nanomaps/outpost_nanomap_z1.png',
+		"outpost_nanomap_z2.png"				= 'icons/_nanomaps/outpost_nanomap_z2.png',
+		"outpost_nanomap_z3.png"				= 'icons/_nanomaps/outpost_nanomap_z3.png',
+		"outpost_nanomap_z7.png"				= 'icons/_nanomaps/outpost_nanomap_z7.png'
 		// outpost 21 end
 	)

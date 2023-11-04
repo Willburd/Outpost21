@@ -128,14 +128,22 @@
 /obj/structure/closet/crate/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			for(var/obj/O in src.contents)
-				qdel(O)
+			if(istype(src,/obj/structure/closet/crate/secure/loot))	// outpost 21 edit - stop destroying items
+				for(var/obj/O in src.contents)
+					qdel(O)
+			else
+				for(var/obj/O in src.contents)
+					O.forceMove(get_turf(src))
 			qdel(src)
 			return
 		if(2.0)
-			for(var/obj/O in src.contents)
-				if(prob(50))
-					qdel(O)
+			if(istype(src,/obj/structure/closet/crate/secure/loot))	// outpost 21 edit - stop destroying items
+				for(var/obj/O in src.contents)
+					if(prob(50))
+						qdel(O)
+			else
+				for(var/obj/O in src.contents)
+					O.forceMove(get_turf(src))
 			qdel(src)
 			return
 		if(3.0)

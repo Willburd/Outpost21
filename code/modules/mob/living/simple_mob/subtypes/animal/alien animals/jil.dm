@@ -145,7 +145,7 @@
 		to_chat(M, pick("Squee!","Squeee!","Squeak!","Eeeee!"))
 		playsound(M, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
 
-/mob/living/simple_mob/vore/alienanimals/jil/update_icons()
+/mob/living/simple_mob/vore/alienanimals/jil/update_icon()
 	..()
 	if(stat == DEAD)
 		// leave icon as is, set by death
@@ -179,7 +179,19 @@
 				// sleep process
 				AdjustSleeping(-1)
 				resting = (sleeping > 0)
-		update_icons()
+				if(!resting)
+					lying = FALSE
+					update_icon()
+			else if(resting)
+				// resting when not sleeping?
+				resting = FALSE
+				lying = FALSE
+				update_icon()
+		else
+			if(sleeping > 0)
+				SetSleeping(0)
+				lying = FALSE
+				update_icon()
 
 /mob/living/simple_mob/vore/alienanimals/jil/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(stat == DEAD)
@@ -573,7 +585,7 @@
 					var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
 					if(J.sleeping <= 0)
 						J.Sleeping( 30 + rand(50))
-					holder.update_icons()
+					holder.update_icon()
 
 
 /datum/ai_holder/simple_mob/intentional/jil/special_flee_check()
@@ -583,9 +595,10 @@
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
 		var/mob/living/simple_mob/vore/alienanimals/jil/J = holder
-		J.Sleeping(0)
+		J.SetSleeping(0)
 		J.resting = FALSE
-		J.update_icons()
+		J.lying = FALSE
+		J.update_icon()
 
 	if(holder.is_ventcrawling || !istype(holder.loc,/turf))
 		return FALSE

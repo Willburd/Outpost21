@@ -8,6 +8,8 @@
 	speak = list()
 	emote_hear = list("hiss","giggles","hiss","hiss")
 	emote_see = list("twitches")
+	threaten_sound = 'sound/voice/hiss4.ogg'
+	stand_down_sound = 'sound/voice/hiss3.ogg'
 
 /mob/living/simple_mob/vore/alienanimals/chu
 	name = "chu"
@@ -99,7 +101,7 @@
 	if(!isnull(vore_organs) && vore_organs.len > 0)
 		for(var/obj/belly/B in vore_organs)
 			for(var/mob/living/L in B)
-				if(L.stat < DEAD && ishuman(L) && !L.isSynthetic())
+				if(L.stat < DEAD && !issilicon(L) && !isrobot(L) && !L.isSynthetic() && !istype(L,/mob/living/simple_mob/vore/alienanimals/chu))
 					foundprey = L
 					foundbelly = B
 					break
@@ -117,14 +119,8 @@
 		to_chat(src, "<span class='warning'>You must have prey inside you to infest them!</span>")
 		return
 
-	var/mob/living/carbon/human/T = foundprey
-	if(ishuman(foundprey))
-		if(T.isSynthetic())
-			to_chat(src, "<span class='warning'>\The [T] is not compatible with our biology.</span>")
-			return
-
-	else if(!isliving(foundprey))
-		to_chat(src, "<span class='warning'>\The [foundprey] is not a biological creature?</span>")
+	if(!isliving(foundprey) || (ishuman(foundprey) && foundprey.isSynthetic()) || isrobot(foundprey) || issilicon(foundprey))
+		to_chat(src, "<span class='warning'>\The [foundprey] is not compatible with our biology.</span>")
 		return
 
 	if(foundprey.stat == DEAD)
@@ -136,6 +132,7 @@
 		return
 
 	// convert others to chus!
+	var/mob/living/carbon/human/T = foundprey
 	isinfesting = TRUE
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
@@ -144,13 +141,12 @@
 				to_chat(foundprey, "<span class='danger'>You feel something strange begin to happen...</span>")
 			if(2)
 				to_chat(src, "<span class='notice'>You begin to press close to [foundprey].</span>")
-				src.visible_message("<span class='warning'>[src] presses uncomfortably close!</span>")
+				src.visible_message("<span class='warning'>[src] presses uncomfortably close, crushing you inside of them!</span>")
 				if(ishuman(foundprey))
 					T.emote("gasp")
 			if(3)
-				to_chat(src, "<span class='notice'>You begin to sink into [foundprey]!</span>")
-				src.visible_message("<span class='danger'>[src] sinks into [foundprey] with a sickening crunch!</span>")
-				to_chat(foundprey, "<span class='danger'>\The [src] begins to sink into your body!</span>")
+				to_chat(src, "<span class='notice'>You begin to sink [foundprey] into yourself, you are becoming one!</span>")
+				to_chat(foundprey, "<span class='danger'>You begin to sink into [src]'s body, it feels like you're being torn apart at the seams!</span>")
 
 				if(ishuman(foundprey))
 					T.emote("scream")
@@ -171,8 +167,7 @@
 
 	var/hostname = foundprey.name
 	to_chat(src, "<span class='notice'>You have infested [foundprey]!</span>")
-	src.visible_message("<span class='danger'>[src] merges with [foundprey] and converts them into more of itself!</span>")
-	to_chat(foundprey, "<span class='danger'>You have been infested by the chu!</span>")
+	to_chat(foundprey, "<span class='danger'>You have been infested by \the [src]!</span>")
 
 	if(ishuman(foundprey))
 		// human infesting
@@ -211,8 +206,13 @@
 	// spit all the rest of if it's items
 	if(!isnull(vore_organs) && vore_organs.len > 0)
 		for(var/obj/belly/B in vore_organs)
-			for(var/obj/item/I in B)
-				B.release_specific_contents(I)
+			for(var/I in B)
+				if(istype(I,/obj/item))
+					B.release_specific_contents(I)	// spit out items
+				if(isliving(I))
+					var/mob/living/L = I
+					if(L.stat == DEAD)
+						B.release_specific_contents(I) // spit out dead mobs
 
 /mob/living/simple_mob/vore/alienanimals/chu/update_icon()
 	. = ..()
@@ -271,11 +271,24 @@
 	// adjust sleep here, needs mind to sleep otherwise...
 	// adding the check so this doesn't conflict with life/handle_regular_status_updates()
 	// catslugs added simple mobs healing while resting... so i don't need to do that myself!
-	if(sleeping > 0)
-		AdjustSleeping(-1)
-		resting = sleeping > 0
-		if(sleeping <= 0)
-			update_icon()
+	if(stat != DEAD && !istype(loc,/obj/belly))
+		if((!mind || !mind.active) && client == null)
+			if(sleeping > 0)
+				AdjustSleeping(-1)
+				resting = (sleeping > 0)
+				if(!resting)
+					lying = FALSE
+					update_icon()
+			else if(resting)
+				// resting when not sleeping?
+				resting = FALSE
+				lying = FALSE
+				update_icon()
+		else
+			if(sleeping > 0)
+				SetSleeping(0)
+				lying = FALSE
+				update_icon()
 
 /datum/ai_holder/simple_mob/melee/evasive/chu
 	hostile = TRUE
@@ -335,8 +348,10 @@
 				set_follow(C, follow_for = 6 SECONDS)
 				break
 
-	if(leader != null && prob(15))
-		holder.emote(pick("giggle","hiss","twitches"))
+	if(leader != null && prob(55))
+		if(prob(5))
+			holder.emote(pick("giggle","hiss","hiss","hiss","twitches"))
+			playsound(holder, pick('sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg') , 50, 0)
 		var/turf/findhome = get_turf(holder)
 		if(isturf(findhome))
 			home_turf = findhome
@@ -385,8 +400,9 @@
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
 		var/mob/living/simple_mob/vore/alienanimals/chu/C = holder
-		C.Sleeping(0)
+		C.SetSleeping(0)
 		C.resting = FALSE
+		C.lying = FALSE
 		C.update_icons()
 
 	return ..(attacker, ignore_timers)

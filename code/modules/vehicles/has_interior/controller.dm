@@ -167,8 +167,6 @@
 			// normally called from Moved()!
 			if(dir == reverse_direction(cached_dir))
 				dir = cached_dir // hold direction...
-			update_weapons_location(loc)
-			update_exit_pos()
 
 		// break things we run over, IS A WIDE BOY
 		smash_at_loc(checkm) // at destination
@@ -184,31 +182,12 @@
 		return could_move
 	return FALSE
 
-/obj/vehicle/has_interior/controller/forceMove(atom/destination)
-	. = ..()
-	update_weapons_location(loc)
-	update_exit_pos()
-
 /obj/vehicle/has_interior/controller/Moved(atom/old_loc, direction, forced = FALSE, movetime)
 	. = ..()
 	// restore breaking speed
 	has_breaking_speed = TRUE
 	if(dir == reverse_direction(cached_dir))
 		dir = cached_dir // hold direction...
-	update_weapons_location(loc)
-	update_exit_pos()
-
-/obj/vehicle/has_interior/controller/GotoAirflowDest(n)
-	. = ..()
-	shake_cab()
-	update_weapons_location(loc)
-	update_exit_pos()
-
-/obj/vehicle/has_interior/controller/RepelAirflowDest(n)
-	. = ..()
-	shake_cab()
-	update_weapons_location(loc)
-	update_exit_pos()
 
 /obj/vehicle/has_interior/controller/proc/shake_cab()
 	for(var/mob/living/M in intarea)
@@ -530,6 +509,10 @@
 	intarea.power_change()
 	GLOB.lights_switched_on_roundstat++
 
+/obj/vehicle/has_interior/controller/doMove(atom/destination, direction, movetime)
+	. = ..(destination,direction,movetime)
+	update_weapons_location(loc)
+	update_exit_pos()
 
 ////////////////////////////////////////////////////////////////////////////////
 // interior area objects
@@ -643,7 +626,6 @@
 
 /obj/machinery/door/vehicle_interior_hatch/ex_act(severity)
 	// nothing, because it would cause some gamebreaking behaviors
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // View consoles

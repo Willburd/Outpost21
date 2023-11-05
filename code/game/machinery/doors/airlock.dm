@@ -1178,7 +1178,7 @@ About the new airlock wires panel:
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
 	*/
-	else if(!repairing && C.is_crowbar())
+	else if(!repairing && C.is_crowbar() && user.a_intent == I_HELP)
 		if(brace)
 			to_chat(user, text("<span class='notice'>The airlock's brace holds it firmly in place.</span>"))
 		else if(can_remove_electronics())

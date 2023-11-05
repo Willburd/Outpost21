@@ -62,10 +62,7 @@
 	var/list/components = list()
 
 	var/obj/item/device/mmi/mmi = null
-
-	/* outpost 21  edit - nif removal
 	var/obj/item/device/pda/ai/rbPDA = null
-	*/
 
 	var/opened = 0
 	var/emagged = 0
@@ -209,13 +206,13 @@
 		return amount
 	return 0
 
-/* outpost 21  edit - nif removal
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
 	if (!rbPDA)
 		rbPDA = new/obj/item/device/pda/ai(src)
 	rbPDA.set_name_and_job(name,"[modtype] [braintype]")
 
+/* outpost 21  edit - nif removal
 /mob/living/silicon/robot/proc/setup_communicator()
 	if (!communicator)
 		communicator = new/obj/item/device/communicator/integrated(src)
@@ -243,12 +240,10 @@
 		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
-	/* outpost 21  edit - nif removal
 	if(shell)
 		if(deployed)
 			undeploy()
 		revert_shell() // To get it out of the GLOB list.
-	*/
 	qdel(wires)
 	wires = null
 	return ..()

@@ -74,6 +74,14 @@
 
 	allowed_spawns = list("Elevator", "Cyborg Storage")
 
+	ai_shell_restricted = TRUE
+	ai_shell_allowed_levels = list(
+		Z_LEVEL_OUTPOST_CENTCOM,
+		Z_LEVEL_OUTPOST_BASEMENT,
+		Z_LEVEL_OUTPOST_SURFACE,
+		Z_LEVEL_OUTPOST_UPPER
+		)
+
 	planet_datums_to_make = list(/datum/planet/muriki)
 
 /datum/map/outpost/perform_map_generation()

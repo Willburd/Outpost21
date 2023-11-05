@@ -122,10 +122,9 @@ var/list/ai_verbs_default = list(
 				possibleNames -= pickedName
 				pickedName = null
 
-	/* outpost 21  edit - nif removal
 	if(!is_dummy)
 		aiPDA = new/obj/item/device/pda/ai(src)
-	*/
+
 	SetName(pickedName)
 	anchored = TRUE
 	canmove = 0

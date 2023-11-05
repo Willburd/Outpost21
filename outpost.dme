@@ -3401,6 +3401,7 @@
 #include "code\modules\paperwork\photography.dm"
 #include "code\modules\paperwork\silicon_photography.dm"
 #include "code\modules\paperwork\stamps.dm"
+#include "code\modules\pda\ai.dm"
 #include "code\modules\pda\app.dm"
 #include "code\modules\pda\cart.dm"
 #include "code\modules\pda\cart_apps.dm"

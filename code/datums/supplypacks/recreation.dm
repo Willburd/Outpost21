@@ -102,6 +102,7 @@
 			///obj/item/device/closet_painter = 2
 			)
 
+/*
 /datum/supply_pack/recreation/cheapbait
 	name = "Cheap Fishing Bait"
 	cost = 10
@@ -121,6 +122,7 @@
 			/obj/item/weapon/storage/box/wormcan,
 			/obj/item/weapon/storage/box/wormcan/deluxe
 			)
+*/
 
 /datum/supply_pack/recreation/ltagturrets
 	name = "Laser Tag Turrets"

@@ -31,9 +31,6 @@
 /obj/effect/map_effect/interval/burnpit/trigger()
 	var/turf/simulated/T = loc
 	if(T)
-		// dumb illusion of fire
-		set_light(rand(2,8))
-
 		// never put this out, reset my own air tile to FORCE combustion, should be enough to boost the other tiles too
 		var/datum/gas_mixture/air_contents = T.return_air()
 		if(!air_contents)

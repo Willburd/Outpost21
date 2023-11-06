@@ -220,21 +220,21 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 	spawn(0)
 		to_world("Started processing APCs")
 		for (var/obj/machinery/power/apc/APC in GLOB.apcs)
-			if(APC.z in station_levels)
+			if(APC.z in event_levels)
 				APC.ion_act()
 				apcnum++
 		to_world("Finished processing APCs. Processed: [apcnum]")
 	spawn(0)
 		to_world("Started processing SMES")
 		for (var/obj/machinery/power/smes/SMES in GLOB.smeses)
-			if(SMES.z in station_levels)
+			if(SMES.z in event_levels)
 				SMES.ion_act()
 				smesnum++
 		to_world("Finished processing SMES. Processed: [smesnum]")
 	spawn(0)
 		to_world("Started processing AIRLOCKS")
 		for (var/obj/machinery/door/airlock/D in machines)
-			if(D.z in station_levels)
+			if(D.z in event_levels)
 				//if(length(D.req_access) > 0 && !(12 in D.req_access)) //not counting general access and maintenance airlocks
 				airlocknum++
 				spawn(0)
@@ -243,7 +243,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 	spawn(0)
 		to_world("Started processing FIREDOORS")
 		for (var/obj/machinery/door/firedoor/D in machines)
-			if(D.z in station_levels)
+			if(D.z in event_levels)
 				firedoornum++;
 				spawn(0)
 					D.ion_act()

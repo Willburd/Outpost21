@@ -77,11 +77,15 @@
 /proc/isPlayerLevel(var/level)
 	return level in using_map.player_levels
 
+/proc/isEventLevel(var/level)
+	return level in using_map.event_levels
+
 /proc/isAdminLevel(var/level)
 	return level in using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
+
 
 /proc/circlerange(center=usr,radius=3)
 

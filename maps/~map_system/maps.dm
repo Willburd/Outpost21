@@ -39,6 +39,7 @@ var/list/all_maps = list()
 	var/static/list/empty_levels = list()   // Empty Z-levels that may be used for various things
 	var/static/list/mappable_levels = list()// List of levels where mapping or other similar devices might work fully
 	var/static/list/below_blocked_levels = list()// List of levels where mapping or other similar devices might work fully
+	var/static/list/event_levels = list() // Events happen on these levels, even if not part of station!
 	// End Static Lists
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
@@ -145,6 +146,8 @@ var/list/all_maps = list()
 			new type(src)
 	if(!map_levels?.len)
 		map_levels = station_levels.Copy()
+	if(!event_levels.len)
+		event_levels = station_levels.Copy()
 	if(!mappable_levels?.len)
 		mappable_levels = station_levels.Copy()
 	if(!persist_levels?.len)
@@ -316,6 +319,7 @@ var/list/all_maps = list()
 	if(flags & MAP_LEVEL_SEALED) map.sealed_levels += z
 	if(flags & MAP_LEVEL_XENOARCH_EXEMPT) map.xenoarch_exempt_levels += z
 	if(flags & MAP_LEVEL_PERSIST) map.persist_levels += z
+	if(flags & MAP_LEVEL_EVENTS) map.event_levels += z
 	if(flags & MAP_LEVEL_EMPTY)
 		if(!map.empty_levels) map.empty_levels = list()
 		map.empty_levels += z

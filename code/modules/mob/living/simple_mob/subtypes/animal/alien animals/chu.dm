@@ -305,6 +305,9 @@
 		if(!vent_found.Adjacent(holder))
 			vent_found = null
 			return
+		if(!(vent_found.loc.z in using_map.station_levels)) // how did you manage this? Shuttle?
+			vent_found = null
+			return
 
 		// find a vent
 		var/i = 5
@@ -399,9 +402,10 @@
 
 	else if((prob(10) && !target) ||(prob(60) && should_flee()))
 		// VENT TIME
-		for(var/obj/machinery/atmospherics/unary/vent_pump/searchvent in holder.loc.contents)
-			if(!searchvent.welded)
-				vent_found = searchvent
+		if(holder.loc.z in using_map.station_levels)
+			for(var/obj/machinery/atmospherics/unary/vent_pump/searchvent in holder.loc.contents)
+				if(!searchvent.welded)
+					vent_found = searchvent
 
 /datum/ai_holder/simple_mob/melee/evasive/chu/react_to_attack(atom/movable/attacker, ignore_timers = FALSE)
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.

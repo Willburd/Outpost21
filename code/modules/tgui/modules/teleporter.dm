@@ -20,7 +20,7 @@
 /datum/tgui_module/teleport_control/tgui_act(action, params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
-	
+
 	switch(action)
 		if("select_target")
 			var/list/L = list()
@@ -76,10 +76,10 @@
 		if("toggle_on")
 			if(!station)
 				return FALSE
-			
+
 			if(station.engaged)
 				station.disengage()
 			else
 				station.engage()
-			
+
 			return TRUE

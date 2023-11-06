@@ -14,7 +14,7 @@
 		var/area/A = get_area(temp_vent)
 		if(A.forbid_events)
 			continue
-		if(!temp_vent.welded && temp_vent.network && (temp_vent.loc.z in using_map.station_levels))
+		if(!temp_vent.welded && temp_vent.network && (temp_vent.loc.z in using_map.event_levels))
 			if(temp_vent.network.normal_members.len > 50)
 				vents += temp_vent
 

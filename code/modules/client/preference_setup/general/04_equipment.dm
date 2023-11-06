@@ -11,7 +11,7 @@
 	S["all_underwear_metadata"] >> pref.all_underwear_metadata
 	S["backbag"]	>> pref.backbag
 	S["pdachoice"]	>> pref.pdachoice
-	S["communicator_visibility"]	>> pref.communicator_visibility
+	//S["communicator_visibility"]	>> pref.communicator_visibility // outpost 21 edit - communicator removal
 	S["ttone"]	>> pref.ttone //YW Edit
 
 /datum/category_item/player_setup_item/general/equipment/save_character(var/savefile/S)
@@ -19,7 +19,7 @@
 	S["all_underwear_metadata"] << pref.all_underwear_metadata
 	S["backbag"]	<< pref.backbag
 	S["pdachoice"]	<< pref.pdachoice
-	S["communicator_visibility"]	<< pref.communicator_visibility
+	//S["communicator_visibility"]	<< pref.communicator_visibility // outpost 21 edit - communicator removal
 	S["ttone"]	<< pref.ttone // YW EDIT
 
 // Moved from /datum/preferences/proc/copy_to()
@@ -91,8 +91,8 @@
 		. += "<br>"
 	. += "Backpack Type: <a href='?src=\ref[src];change_backpack=1'><b>[backbaglist[pref.backbag]]</b></a><br>"
 	. += "PDA Type: <a href='?src=\ref[src];change_pda=1'><b>[pdachoicelist[pref.pdachoice]]</b></a><br>"
-	. += "Communicator Visibility: <a href='?src=\ref[src];toggle_comm_visibility=1'><b>[(pref.communicator_visibility) ? "Yes" : "No"]</b></a><br>"
-	. += "Ringtone (leave blank for job default): <a href='?src=\ref[src];set_ttone=1'><b>[pref.ttone]</b></a><br>" //YW EDIT
+	//. += "Communicator Visibility: <a href='?src=\ref[src];toggle_comm_visibility=1'><b>[(pref.communicator_visibility) ? "Yes" : "No"]</b></a><br>" // outpost 21 edit - communicator removal
+	. += "Ringtone (leave blank for job default): <a href='?src=\ref[src];set_ttone=1'><b>[pref.ttone]</b></a> <a href='?src=\ref[src];test_ttone=1'><b>TEST</b></a><br>" //YW EDIT
 
 	return jointext(.,null)
 
@@ -146,14 +146,28 @@
 		if(new_metadata)
 			set_metadata(underwear, gt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+	/* outpost 21 edit - communicator removal
 	else if(href_list["toggle_comm_visibility"])
 		if(CanUseTopic(user))
 			pref.communicator_visibility = !pref.communicator_visibility
 			return TOPIC_REFRESH
+	*/
 	else if(href_list["set_ttone"]) //Start of YW EDIT
 		if(CanUseTopic(user))
-			pref.ttone = sanitize(input(user, "Please enter a new ringtone.", "Character Preference") as null|text, 20)
-			return TOPIC_REFRESH //End of YW EDIT
+			var/tonelist = ""
+			for(var/tone in pda_ttones)
+				if(tonelist != "")
+					tonelist += ", "
+				tonelist += tone
+			pref.ttone = sanitize(input(user, "Please enter a new ringtone.\nAvailable selection: [tonelist]", "Character Preference") as null|text, 20)
+			return TOPIC_REFRESH
 
+	else if(href_list["test_ttone"])
+		if(CanUseTopic(user))
+			var/S = 'sound/machines/twobeep.ogg'
+			if(pref.ttone in pda_ttones)
+				S = pda_ttones[pref.ttone]
+			SEND_SOUND(user.client, S)
+	//End of YW EDIT
 
 	return ..()

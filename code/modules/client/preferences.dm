@@ -146,7 +146,7 @@ var/list/preferences_datums = list()
 	var/client_ckey = null
 
 	// Communicator identity data
-	var/communicator_visibility = 0
+	//var/communicator_visibility = 0 // outpost 21 edit - communicator removal
 
 	// Default ringtone for character; if blank, use job default. YW EDIT
 	var/ttone = null

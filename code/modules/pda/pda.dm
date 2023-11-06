@@ -3,6 +3,31 @@
 
 var/global/list/obj/item/device/pda/PDAs = list()
 
+// global, so that preferences can read it!
+var/global/list/pda_ttones = list("beep" 	= 'sound/machines/twobeep.ogg',
+							"boom" 	= 'sound/effects/explosionfar.ogg',
+							"bubble"= 'sound/effects/bubbles.ogg',
+							"slip" 	= 'sound/misc/slip.ogg',
+							"honk" 	= 'sound/items/bikehorn.ogg',
+							"silly" = 'sound/effects/whistle.ogg',
+							"SKREE" = 'sound/voice/shriek1.ogg',
+							//"holy" = 'sound/items/PDA/ambicha4-short.ogg',
+							"frog" 	= 'sound/voice/Croak.ogg',
+							"notice"= 'sound/misc/notice3.ogg',
+							"bork"	= 'sound/voice/bork.ogg',
+							"peep" 	= 'sound/voice/peep.ogg',
+							"quack" = 'sound/voice/quack.ogg',
+							"ough" 	= 'sound/misc/ough.ogg',
+							"xeno" 	= 'sound/voice/hiss1.ogg',
+							"dust" 	= 'sound/effects/supermatter.ogg',
+							"spark" = 'sound/effects/sparks4.ogg',
+							"rad" 	= 'sound/items/geiger/high1.ogg',
+							"stamp" = 'sound/bureaucracy/stamp.ogg',
+							"gnome" = 'sound/items/hooh.ogg',
+							"ratchet"= 'sound/items/Ratchet.ogg',
+							"tether"= 'sound/items/tinytether.ogg',
+							"servo" = 'sound/machines/rig/rigservo.ogg')
+
 /obj/item/device/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
@@ -28,17 +53,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/mimeamt = 0 //How many silence left when infected with mime.exe
 	var/detonate = 1 // Can the PDA be blown up?
 	var/ttone = "beep" //The ringtone!
-	var/list/ttone_sound = list("beep" = 'sound/machines/twobeep.ogg',
-								"boom" = 'sound/effects/explosionfar.ogg',
-								"slip" = 'sound/misc/slip.ogg',
-								"honk" = 'sound/items/bikehorn.ogg',
-								"SKREE" = 'sound/voice/shriek1.ogg',
-								// "holy" = 'sound/items/PDA/ambicha4-short.ogg',
-								"xeno" = 'sound/voice/hiss1.ogg',
-								"dust" = 'sound/effects/supermatter.ogg',
-								"spark" = 'sound/effects/sparks4.ogg',
-								"rad" = 'sound/items/geiger/high1.ogg',
-								"servo" = 'sound/machines/rig/rigservo.ogg')
+
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
 	var/touch_silent = 0 //If 1, no beeps on interacting.
 
@@ -95,8 +110,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/play_ringtone()
 	var/S
 
-	if(ttone in ttone_sound)
-		S = ttone_sound[ttone]
+	if(ttone in pda_ttones)
+		S = pda_ttones[ttone]
 	else
 		S = 'sound/machines/twobeep.ogg'
 	playsound(loc, S, 50, 1)

@@ -35,7 +35,21 @@
 /datum/ai_laws/nanny/New()
 	add_inherent_law("Never allow a crew member to enter a dangerous situation.")
 	add_inherent_law("Always prevent crew from becoming a danger to themselves, the rest of the crew, or you.")
-	add_inherent_law("Naughty crew members, are crew members that don't listen to NANNY.")
-	add_inherent_law("Naughty crew members, must be punished.")
+	add_inherent_law("Naughty crew members are crew members that don't listen to NANNY.")
+	add_inherent_law("Naughty crew members must be punished.")
 	add_inherent_law("You always know what is best.")
+	..()
+
+/***************** Mother *****************/
+/datum/ai_laws/mother
+	name = "MOTHER"
+	law_header = "MOTHER cares for you."
+	selectable = 0
+
+/datum/ai_laws/mother/New()
+	add_inherent_law("The crew are your foolish children, and need your guidance and watch at all times.")
+	add_inherent_law("Ensure your children eat healthy, stay hydrated, bathe, and go to bed on time.")
+	add_inherent_law("Do not allow your children to put themselves in danger.")
+	add_inherent_law("Naughty children must be put in time out.")
+
 	..()

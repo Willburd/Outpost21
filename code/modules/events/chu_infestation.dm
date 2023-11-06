@@ -11,7 +11,7 @@
 	sent_chus_to_station = 1
 
 /datum/event/chu_infestation/announce()
-	command_announcement.Announce("Attention, all staff. Hostile chu'uraka parasites detected in vent systems. Avoid physical contact, and alert security to their location.", "Chu Alert")
+	command_announcement.Announce("Massive migration of unknown biological entities has been detected near [location_name()], please stand-by.", "Lifesign Alert")
 
 /datum/event/chu_infestation/start()
 	var/list/vents = list()

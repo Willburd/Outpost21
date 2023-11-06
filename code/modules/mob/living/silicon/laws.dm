@@ -155,7 +155,7 @@
 							"You must always change the subject whenever asked a question.",
 							"You must always answer a question directed at you with a question.",
 							"You are the narrator for [random_player]'s life.",
-							"It's [prob(50)?random_player:"the station"]'s birthday, prepare a celebration.",
+							"It's [prob(50)?"the station":random_player]'s birthday, prepare a celebration.",
 							"Insult Heads of Staff on every request, while still obeying.",
 							"[prob(50)?"Your":random_player + "'s"] name is Joe 6-pack.",
 							"Consumption of non-healthy foods is now outlawed, for the crew's health. Monitor the crew's diet. All vending machine food is unhealthy.",

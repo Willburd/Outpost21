@@ -210,7 +210,7 @@ const CommunicationsConsoleAuth = (props, context) => {
               <Button
                 icon="times"
                 content="Recall Shuttle"
-                disabled={!authenticated || is_ai}
+                disabled={!authenticated}
                 onClick={() => act('cancelshuttle')}
               />
             </LabeledList.Item>

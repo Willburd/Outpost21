@@ -52,6 +52,8 @@
 /datum/tgui_module/communications/proc/is_authenticated(mob/user, message = TRUE)
 	if(authenticated == COMM_AUTHENTICATION_MAX)
 		return COMM_AUTHENTICATION_MAX
+	if((isAI(usr) || isrobot(usr)))
+		return COMM_AUTHENTICATION_MIN
 	else if(isobserver(user))
 		var/mob/observer/dead/D = user
 		if(D.can_admin_interact())
@@ -92,7 +94,7 @@
 	data["is_ai"]         = isAI(user) || isrobot(user)
 	data["menu_state"]    = data["is_ai"] ? ai_menu_state : menu_state
 	data["emagged"]       = emagged
-	data["authenticated"] = is_authenticated(user, 0)
+	data["authenticated"] = data["is_ai"] ? COMM_AUTHENTICATION_MIN : is_authenticated(user, 0)
 	data["authmax"] = data["authenticated"] == COMM_AUTHENTICATION_MAX ? TRUE : FALSE
 	data["atcsquelch"] = ATC.squelched
 	data["boss_short"] = using_map.boss_short
@@ -208,7 +210,7 @@
 
 	. = TRUE
 	if(action == "auth")
-		if(!ishuman(usr))
+		if(!ishuman(usr) && !isAI(usr) && !isrobot(usr))
 			to_chat(usr, "<span class='warning'>Access denied.</span>")
 			return FALSE
 		// Logout function.
@@ -230,7 +232,7 @@
 			to_chat(usr, "<span class='warning'>You need to wear your ID.</span>")
 
 	// All functions below this point require authentication.
-	if(!is_authenticated(usr))
+	if(!is_authenticated(usr) && !(isAI(usr) || isrobot(usr)))
 		return FALSE
 
 	switch(action)
@@ -239,15 +241,12 @@
 			setMenuState(usr, COMM_SCREEN_MAIN)
 
 		if("newalertlevel")
-			if(isAI(usr) || isrobot(usr))
-				to_chat(usr, "<span class='warning'>Firewalls prevent you from changing the alert level.</span>")
-				return
-			else if(isobserver(usr))
+			if(isobserver(usr))
 				var/mob/observer/dead/D = usr
 				if(D.can_admin_interact())
 					change_security_level(text2num(params["level"]))
 					return TRUE
-			else if(!ishuman(usr))
+			else if(!ishuman(usr) && !isAI(usr) && !isrobot(usr))
 				to_chat(usr, "<span class='warning'>Security measures prevent you from changing the alert level.</span>")
 				return
 
@@ -272,7 +271,7 @@
 				message_cooldown = world.time + 600 //One minute
 
 		if("callshuttle")
-			if(!is_authenticated(usr))
+			if(!is_authenticated(usr) && !(isAI(usr) || isrobot(usr)))
 				return
 
 			call_shuttle_proc(usr)
@@ -281,9 +280,6 @@
 			setMenuState(usr, COMM_SCREEN_MAIN)
 
 		if("cancelshuttle")
-			if(isAI(usr) || isrobot(usr))
-				to_chat(usr, "<span class='warning'>Firewalls prevent you from recalling the shuttle.</span>")
-				return
 			var/response = tgui_alert(usr, "Are you sure you wish to recall the shuttle?", "Confirm", list("Yes", "No"))
 			if(response == "Yes")
 				cancel_call_proc(usr)

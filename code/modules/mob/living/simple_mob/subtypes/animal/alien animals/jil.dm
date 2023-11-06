@@ -180,11 +180,11 @@
 			if(sleeping > 0)
 				// sleep process
 				AdjustSleeping(-1)
-				resting = (sleeping > 0)
+				resting = (sleeping >= 1)
 				if(!resting)
 					lying = FALSE
 					update_icon()
-			else if(resting)
+			else if(icon_state == icon_rest)
 				// resting when not sleeping?
 				resting = FALSE
 				lying = FALSE

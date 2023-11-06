@@ -279,7 +279,7 @@
 				if(!resting)
 					lying = FALSE
 					update_icon()
-			else if(resting)
+			else if(icon_state == icon_rest)
 				// resting when not sleeping?
 				resting = FALSE
 				lying = FALSE

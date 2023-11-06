@@ -56,7 +56,6 @@
 					new /obj/effect/decal/cleanable/liquid_fuel( T, 1, TRUE)
 
 		// praise zorg
-		T.hotspot_expose( PHORON_MINIMUM_BURN_TEMPERATURE * 1,1, 500)
 		T.create_fire( 2 ) // lingering fires ( was air_contents.calculate_firelevel() )
 
 		if(T.contents.len)

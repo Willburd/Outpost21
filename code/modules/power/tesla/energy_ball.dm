@@ -278,9 +278,9 @@
 		if(!Aburn && istype(Aburn.loc,/turf/simulated))
 			var/turf/simulated/T = Aburn.loc
 			var/datum/gas_mixture/air_mix = T.return_air()
-			if(air_mix.return_pressure() > ONE_ATMOSPHERE * 0.02)
+			if(air_mix.return_pressure() > ONE_ATMOSPHERE * 0.3)
 				// burn baby burn
-				T.hotspot_expose(2000,500)
+				T.create_fire( 2 )
 
 	var/drain_energy = FALSE // VOREStation Edit - Safety First! Drain Tesla fast when its loose
 

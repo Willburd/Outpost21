@@ -29,8 +29,8 @@
 	var/global/list/suitable_turf_types =  list(
 		/turf/simulated/floor/beach/water,
 		/turf/simulated/floor/beach/coastline,
-		/turf/simulated/floor/holofloor/beach/water,
-		/turf/simulated/floor/holofloor/beach/coastline,
+		///turf/simulated/floor/holofloor/beach/water, outpost 21 edit - holodeck removal
+		///turf/simulated/floor/holofloor/beach/coastline, outpost 21 edit - holodeck removal
 		/turf/simulated/floor/water
 	)
 

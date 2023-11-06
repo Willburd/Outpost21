@@ -82,7 +82,7 @@
 		/obj/item/weapon/book/manual/chef_recipes,
 		/obj/item/weapon/bikehorn,
 		/obj/item/weapon/beach_ball,
-		/obj/item/weapon/beach_ball/holoball,
+		///obj/item/weapon/beach_ball/holoball, outpost 21 edit - holodeck removal
 		/obj/item/toy/balloon,
 		/obj/item/toy/blink,
 		/obj/item/weapon/gun/projectile/revolver/toy/crossbow,

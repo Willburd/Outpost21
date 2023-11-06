@@ -307,13 +307,20 @@
 			return
 
 		// find a vent
-		var/obj/machinery/atmospherics/unary/vent_pump/goalvent = null
-		for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
-			if(prob(5))
-				if(temp_vent.loc.z in using_map.station_levels)
-					if(!temp_vent.welded)
-						goalvent = temp_vent
-						break;
+		var/i = 5
+		var/obj/machinery/attemptgoal
+		while(i > 0)
+			attemptgoal = pick(machines)
+			if(istype(attemptgoal,/obj/machinery/atmospherics/unary/vent_pump))
+				break;
+			i--
+		if(!istype(attemptgoal,/obj/machinery/atmospherics/unary/vent_pump))
+			vent_found = null
+			return
+		var/obj/machinery/atmospherics/unary/vent_pump/goalvent = attemptgoal
+		if(!(goalvent.loc.z in using_map.station_levels) || !goalvent.welded)
+			vent_found = null
+			return
 
 		// attempt to ventcrawl!
 		if(goalvent && vent_found.network && (vent_found.network.normal_members.len || vent_found.network.line_members.len))

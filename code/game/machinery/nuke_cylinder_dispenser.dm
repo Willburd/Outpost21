@@ -3,7 +3,7 @@
 	desc = "It's a secure, armored storage unit embedded into the floor for storing the nuclear cylinders."
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	icon_state = "base"
-	anchored = TRUE	
+	anchored = TRUE
 	density = FALSE
 	req_access = list(access_heads_vault)
 
@@ -42,6 +42,8 @@
 			locked = !locked
 			user.visible_message("[user] [locked ? "locks" : "unlocks"] \the [src].", "You [locked ? "lock" : "unlock"] \the [src].")
 			update_icon()
+		else
+			to_chat(user, SPAN_WARNING("Access denied."))
 		return
 	if(open && istype(O, /obj/item/nuclear_cylinder) && (length(cylinders) < 6))
 		user.visible_message("[user] begins inserting \the [O] into storage.", "You begin inserting \the [O] into storage.")

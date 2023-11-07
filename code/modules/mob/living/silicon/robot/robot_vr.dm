@@ -170,8 +170,7 @@
 		if(icontype == "Drake") // Why, Why can't we have normal nice things
 			icon = 'icons/mob/drakeborg/drakeborg_vr.dmi'
 		else
-			icon = wideborg_dept // why was this broken on YW code? - outpost21
-			//to_world("WIDEBOT [wideborg_dept]")
+			icon = wideborg_dept
 		return
 
 	if((icon_state in vr_icons))

@@ -25,9 +25,9 @@
 		for(var/obj/machinery/M in global.machines)
 			if(istype(M,/obj/machinery/media/jukebox) && istype( get_area(M.loc), autolinkareajuke_onspawn))
 				pair_juke( M, null)
+				unanchor()
+				anchor()
 				break
-	unanchor()
-	anchor()
 	return ..()
 
 // Pairing

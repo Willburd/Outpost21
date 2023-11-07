@@ -439,10 +439,11 @@ var/bomb_set
 	var/list/flash_tiles = list()
 	var/list/inserters = list()
 	var/last_turf_state
+	var/warningstage = 0
 
 	var/announced = 0
-	timeleft = 120.0 // default 2 mins
-	var/self_destruct_cutoff = 60 //Seconds
+	timeleft = 60.0 * 10 // default (10 mins)
+	var/self_destruct_cutoff = 60 * 5 //Seconds (5 mins)
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
@@ -452,6 +453,25 @@ var/bomb_set
 	update_icon() // this updates the flasher tiles too!
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
+
+	// spawn the disk and paper!
+	if(nukeitems.len)
+		var/paper_spawn_loc = pick(nukeitems)
+		if(paper_spawn_loc)
+			// Create and pass on the bomb code paper.
+			var/obj/item/weapon/paper/P = new(paper_spawn_loc)
+			P.info = "The nuclear authorization code is: <b>[r_code]</b>"
+			P.name = "nuclear bomb code"
+			error("Nuclear codes paper spawned, location [P.loc]")
+
+		nukeitems -= paper_spawn_loc
+		var/nukedisk_spawn_loc = paper_spawn_loc
+		if(nukeitems.len > 0)
+			nukedisk_spawn_loc = pick(nukeitems)
+		var/obj/item/weapon/disk/nuclear/disk = new /obj/item/weapon/disk/nuclear(nukedisk_spawn_loc)
+		error("Nuclear disk spawned, location [disk.loc]")
+	else
+		error("No nuclear landmarks defined")
 
 /obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
 	if(O.is_wrench())
@@ -546,11 +566,13 @@ var/bomb_set
 					usr.drop_item()
 					I.loc = src
 					auth = I
+					radiowarn( FALSE, FALSE)
 		if(auth)
 			if(href_list["type"])
 				if(href_list["type"] == "E")
 					if(code == r_code)
 						yes_code = 1
+						radiowarn( FALSE, FALSE)
 						code = null
 					else
 						code = "ERROR"
@@ -566,7 +588,7 @@ var/bomb_set
 				if(href_list["time"])
 					var/time = text2num(href_list["time"])
 					timeleft += time
-					timeleft = min(max(round(timeleft), 120), 600) // different min timer
+					timeleft = min(max(round(timeleft), 60 * 10), 60 * 30) // different min timer( 10 min, 30 min )
 				if(href_list["timer"])
 					if(timing == -1.0)
 						return
@@ -651,3 +673,33 @@ var/bomb_set
 				log_game("Rebooting due to nuclear detonation")
 				world.Reboot()
 				return
+
+/obj/machinery/nuclearbomb/station/proc/radiowarn( storageopened, tube_inserted )
+	var/message = ""
+	if(tube_inserted || yes_code)
+		var/tubefailed = FALSE
+		for(var/inserter in inserters)
+			var/obj/machinery/self_destruct/sd = inserter
+			if(!sd || !sd.armed)
+				tubefailed = TRUE
+				break
+		if(!tubefailed && yes_code)
+			if(warningstage < 3)
+				warningstage = 3
+				message = "DANGER! The Terraformer Euthanizer is now armed and ready to fire! Destroy any unauthorized usage of the Terraformer Euthanizer with extreme prejudice immediately! All non-security crew must retreat to minimum safe distance incase of detonation! This is a Delta-Level Hazard!"
+				global_announcer.autosay(message, "Primary System", "Command")
+				global_announcer.autosay(message, "Primary System", "Security")
+				global_announcer.autosay(message, "Primary System", "Common")
+
+	if(yes_code)
+		if(warningstage < 2)
+			warningstage = 2
+			message = "Warning! Terraformer Euthanizer has been armed, detonation is possible. If this is unauthorized, respond with all available force to stop the process immediately! E-Shui law prevents any usage of the Euthanizer that is not in compliance with SolGov Vs N.T. 443-72!"
+			global_announcer.autosay(message, "Primary System", "Command")
+			global_announcer.autosay(message, "Primary System", "Security")
+
+	if(auth || storageopened)
+		if(warningstage < 1)
+			warningstage = 1
+			message = "Warning! Utilization of the Terraformer Euthanizer detected. Respond with all available force to stop the process if this is unauthorized."
+			global_announcer.autosay(message, "Security Subsystem", "Command")

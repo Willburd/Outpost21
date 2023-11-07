@@ -84,6 +84,12 @@
 			delete_me = 1
 			return
 		//VORE Station Add End
+		// outpost 21 edit start
+		if("nukeitem")
+			nukeitems += loc
+			delete_me = 1
+			return
+		// outpost 21 edit end
 
 	landmarks_list += src
 	return 1

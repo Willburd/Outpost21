@@ -76,6 +76,7 @@ var/list/prisonsecuritywarp = list() // Prison security goes to these.
 var/list/prisonwarped       = list() // List of players already warped.
 var/list/blobstart          = list()
 var/list/ninjastart         = list()
+var/list/nukeitems         = list()
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
 var/list/cardinalz   = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)

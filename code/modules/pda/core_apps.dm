@@ -337,3 +337,34 @@
 		news.Swap(1, 3) // List is sorted in ascending order of timestamp, we want descending
 
 	return news
+
+/datum/data/pda/app/weather
+	name = "Weather"
+	icon = "cloud"
+	template = "pda_weather"
+
+/datum/data/pda/app/weather/update_ui(mob/user as mob, list/data)
+	var/list/weather = list()
+	//Weather reports.
+	for(var/datum/planet/planet in SSplanets.planets)
+		if(planet.weather_holder && planet.weather_holder.current_weather)
+			var/list/W = list(
+				"Planet" = planet.name,
+				"Time" = planet.current_time.show_time("hh:mm"),
+				"Weather" = planet.weather_holder.current_weather.name,
+				"Temperature" = planet.weather_holder.temperature - T0C,
+				"High" = planet.weather_holder.current_weather.temp_high - T0C,
+				"Low" = planet.weather_holder.current_weather.temp_low - T0C,
+				"WindDir" = planet.weather_holder.wind_dir ? dir2text(planet.weather_holder.wind_dir) : "None",
+				"WindSpeed" = planet.weather_holder.wind_speed ? "[planet.weather_holder.wind_speed > 2 ? "Severe" : "Normal"]" : "None",
+				"Forecast" = english_list(planet.weather_holder.forecast, and_text = "&#8594;", comma_text = "&#8594;", final_comma_text = "&#8594;") // Unicode RIGHTWARDS ARROW.
+				)
+			weather.Add(list(W))
+	data["weather"] = weather
+
+/datum/data/pda/app/weather/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
+	if(..())
+		return TRUE
+	//switch(action)
+	//	if("newsfeed")
+	//		newsfeed_channel = text2num(params["newsfeed"])

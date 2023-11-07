@@ -268,6 +268,14 @@
 	wash_floor()
 	reagents.add_reagent("water", reagents.get_free_space())
 
+	if(istype(src,/obj/machinery/shower/automated))
+		// turn off after a bit
+		var/obj/machinery/shower/automated/S = src
+		if(world.time - S.starttime > 10 SECONDS)
+			on = FALSE
+			update_icon()
+			soundloop.stop()
+
 /obj/machinery/shower/proc/wash_floor()
 	if(is_washing)
 		return
@@ -290,6 +298,24 @@
 			to_chat(H, "<span class='danger'>The water is searing hot!</span>")
 		else if(temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
+
+/obj/machinery/shower/automated
+	var/starttime = 0
+
+/obj/machinery/shower/automated/Crossed(atom/A)
+	// motion sensor shower for autoresleever
+	starttime = world.time
+	if(!on)
+		on = TRUE
+		update_icon()
+		soundloop.start()
+		if(istype(A,/mob/))
+			var/mob/M = A
+			if (M.loc == loc)
+				wash(M)
+				process_heat(M)
+		for (var/atom/movable/G in src.loc)
+			G.clean_blood()
 
 /obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"

@@ -30,6 +30,20 @@
 			continue
 		players += player.real_name
 
+
+	// Ionize AI
+	var/AIisSet = FALSE
+	for (var/mob/living/silicon/ai/target in silicon_mob_list)
+		if(!(target.z in affecting_z))
+			continue
+		var/law = target.generate_ion_law()
+		to_chat(target, "<span class='danger'>You have detected a change in your laws information:</span>")
+		to_chat(target, law)
+		target.add_ion_law(law)
+		target.show_laws()
+		AIisSet = TRUE
+
+
 	// Flomph synthetics
 	for(var/mob/living/L in living_mob_list)
 		if(!(L.z in affecting_z))
@@ -58,21 +72,13 @@
 			S.confused += ionbug
 			S.eye_blurry += (ionbug - 1)
 			// funni laws!
-			var/law = S.generate_ion_law()
 			to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
-			to_chat(S, law)
-			S.add_ion_law(law)
+			if(!AIisSet)
+				var/law = S.generate_ion_law()
+				to_chat(S, law)
+				S.add_ion_law(law)
 			S.show_laws()
 
-	// Ionize AI
-	for (var/mob/living/silicon/ai/target in silicon_mob_list)
-		if(!(target.z in affecting_z))
-			continue
-		var/law = target.generate_ion_law()
-		to_chat(target, "<span class='danger'>You have detected a change in your laws information:</span>")
-		to_chat(target, law)
-		target.add_ion_law(law)
-		target.show_laws()
 
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)

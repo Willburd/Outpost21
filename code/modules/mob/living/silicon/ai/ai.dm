@@ -230,8 +230,8 @@ var/list/ai_verbs_default = list(
 	QDEL_NULL(announcement)
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(psupply)
-	/* outpost 21  edit - nif removal
 	QDEL_NULL(aiPDA)
+	/* outpost 21  edit - nif removal
 	QDEL_NULL(aiCommunicator)
 	*/
 	QDEL_NULL(aiMulti)
@@ -295,13 +295,13 @@ var/list/ai_verbs_default = list(
 	if(eyeobj)
 		eyeobj.name = "[pickedName] (AI Eye)"
 
-	/* outpost 21  edit - nif removal
 	// Set ai pda name
 	if(aiPDA)
 		aiPDA.ownjob = "AI"
 		aiPDA.owner = pickedName
 		aiPDA.name = pickedName + " (" + aiPDA.ownjob + ")"
 
+	/* outpost 21  edit - nif removal
 	if(aiCommunicator)
 		aiCommunicator.register_device(src.name)
 	*/

@@ -209,7 +209,7 @@
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
 	if (!rbPDA)
-		rbPDA = new/obj/item/device/pda/ai(src)
+		rbPDA = new/obj/item/device/pda/ai/shell(src)
 	rbPDA.set_name_and_job(name,"[modtype] [braintype]")
 
 /* outpost 21  edit - nif removal
@@ -323,10 +323,10 @@
 	real_name = changed_name
 	name = real_name
 
-	/* outpost 21  edit - nif removal
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
 
+	/* outpost 21  edit - nif removal
 	// as well as our communicator registration
 	setup_communicator()
 	*/

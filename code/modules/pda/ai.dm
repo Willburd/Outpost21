@@ -24,7 +24,7 @@
 
 //AI verb and proc for sending PDA messages.
 /obj/item/device/pda/ai/verb/cmd_pda_open_ui()
-	set category = "AI IM"
+	set category = VERBTAB_AICOMMS
 	set name = "Use PDA"
 	set src in usr
 
@@ -42,6 +42,7 @@
 	return
 
 
+/* outpost 21 edit - pai removal
 /obj/item/device/pda/ai/pai
 	ttone = "assist"
 	var/our_owner = null // Ref to a pAI
@@ -55,6 +56,7 @@
 	if(!istype(user) || REF(user) != our_owner) // Only allow our pAI to interface with us
 		return STATUS_CLOSE
 	return ..()
+*/
 
 /obj/item/device/pda/ai/shell
 	spam_proof = TRUE // Since empty shells get a functional PDA.

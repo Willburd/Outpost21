@@ -24,7 +24,7 @@
 
 //AI verb and proc for sending PDA messages.
 /obj/item/device/pda/ai/verb/cmd_pda_open_ui()
-	set category = VERBTAB_AICOMMS
+	set category = VERBTAB_OBJECT
 	set name = "Use PDA"
 	set src in usr
 

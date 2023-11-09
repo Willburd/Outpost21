@@ -1042,14 +1042,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			found_vents.Add(v)
 	if(found_vents.len)
 		vent_found = pick(found_vents)
-		host = new /mob/living/simple_mob/animal/passive/mouse(vent_found)
+		host = new /mob/living/simple_mob/vore/alienanimals/jil(vent_found)
 	else
 		to_chat(src, "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>")
 
 	if(host)
 		if(config.uneducated_mice)
 			host.universal_understand = 0
-		announce_ghost_joinleave(src, 0, "They are now a mouse.")
+		announce_ghost_joinleave(src, 0, "They are now a Jil.")
 		host.ckey = src.ckey
 		host.add_ventcrawl(vent_found)
-		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
+		to_chat(host, "<span class='danger'>You are now a Jil, a fluffy little thief that seeks to steal anything you can grab, and bring it back to your nest. Be warned, the crew might not like you taking their things.</span>")

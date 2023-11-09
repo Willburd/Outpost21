@@ -2546,6 +2546,7 @@ Departamental Swimsuits, for general use
     icon_override = 'icons/vore/custom_clothes_vr.dmi'
     item_state = "greek_dress"
     body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+*/
 //JadeManique: Freyr
 /obj/item/clothing/mask/fluff/freyr_mask
     name = "Freyr's Mask"
@@ -2556,4 +2557,3 @@ Departamental Swimsuits, for general use
     item_state = "freyrmask_mob"
     item_state_slots = null
     body_parts_covered = FACE
-*/

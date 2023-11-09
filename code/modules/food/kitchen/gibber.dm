@@ -278,7 +278,8 @@
 		add_attack_logs(user,grindable,"Used [src] to gib")
 
 		// process grindables into meaty treaties
-		grindable.ghostize()
+		if(!isnull(grindable.mind))
+			grindable.ghostize()
 		grindable.gib()
 
 	spawn(gib_time)

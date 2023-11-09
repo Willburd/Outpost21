@@ -857,10 +857,7 @@
 /mob/living/silicon/robot/updateicon()
 	cut_overlays()
 	if(stat == CONSCIOUS)
-		/* outpost 21  edit - nif removal
 		if(!shell || deployed) // Shell borgs that are not deployed will have no eyes.
-		*/
-		if(deployed)
 			add_overlay("eyes-[module_sprites[icontype]]")
 
 	if(opened)

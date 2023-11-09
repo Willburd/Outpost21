@@ -362,9 +362,42 @@
 			weather.Add(list(W))
 	data["weather"] = weather
 
-/datum/data/pda/app/weather/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
+/datum/data/pda/app/sop
+	name = "S.O.P"
+	icon = "balance-scale"
+	template = "pda_sop"
+	var/pagenum = 1
+	var/list/soptitles = list()
+	var/list/sopbodies = list()
+	var/list/sopauthor = list()
+
+/datum/data/pda/app/sop/start()
+	. = ..()
+	// add each sop datum to the reported entries!
+	var/list/paths = subtypesof(/datum/sop_entry)
+	for(var/subtype in paths)
+		var/datum/sop_entry/entry = new subtype()
+		soptitles.Add(entry.title)
+		sopbodies.Add(entry.body)
+		sopauthor.Add(entry.author)
+
+/datum/data/pda/app/sop/update_ui(mob/user as mob, list/data)
+	data["sop_title"] = soptitles[pagenum]
+	data["sop_body"] = sopbodies[pagenum]
+	data["sop_author"] = sopauthor[pagenum]
+	data["first"] = (pagenum == 1)
+	data["last"] = (pagenum == soptitles.len)
+
+/datum/data/pda/app/sop/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
-	//switch(action)
-	//	if("newsfeed")
-	//		newsfeed_channel = text2num(params["newsfeed"])
+	switch(action)
+		if("next")
+			pagenum++
+			if(pagenum > soptitles.len)
+				pagenum = soptitles.len
+
+		if("prev")
+			pagenum--
+			if(pagenum < 1)
+				pagenum = 1

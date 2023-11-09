@@ -1411,17 +1411,21 @@
 					detectedtag = "corpse"
 					break
 		else
-			for(var/obj/item/weapon/card/id in H)
-				detectedtag = "corpse" // send these to medical body disposal as well
+			var/obj/item/weapon/card/foundid = null
+			for(var/obj/item/weapon/card/id in H) // send these to medical body disposal as well
+				foundid = id
 				break
 			for(var/obj/item/device/pda/P in H)
-				if(!isnull(P.id))
-					detectedtag = "corpse" // send these to medical body disposal as well
+				if(!isnull(P.id)) // send these to medical body disposal as well
+					foundid = P.id
 					break
 			for(var/obj/item/weapon/storage in H)
 				for(var/obj/item/weapon/card/id in storage.contents)
-					detectedtag = "corpse" // check simple storages for idcards! one level deep only!
+					foundid = id // check simple storages for idcards! one level deep only!
 					break
+			// check ID validity
+			if(!isnull(foundid) && !istype(foundid,/obj/item/weapon/card/id/guest))
+				detectedtag = "corpse"
 
 	// outpost 21 edit end
 	var/nextdir = nextdir(H.dir, detectedtag)

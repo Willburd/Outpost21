@@ -34,6 +34,13 @@
 	if(isnull(D))
 		src.visible_message("[src] flashes 'Invalid ID!', and lets out a loud incorrect sounding beep!")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		return
+
+	// do not let guest IDs be used
+	if(istype(D,/obj/item/weapon/card/id/guest))
+		src.visible_message("[src] flashes 'Temporary guest ID identified!', and lets out a loud incorrect sounding beep!")
+		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+		return
 
 	//Name matching is ugly but mind doesn't persist to look at.
 	var/datum/transcore_db/db = SStranscore.db_by_mind_name(D.registered_name)

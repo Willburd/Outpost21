@@ -142,6 +142,10 @@
 
 	// outpost 21 removal
 	if(href_list["observe"])
+		if(!ticker.HasRoundStarted())
+			to_chat(src, "<span class='danger'>The round has not yet started, please wait!</span>")
+			return
+
 		// outpost 21 change, to encourage new players
 		var/admin_mode = (check_rights(R_ADMIN, 0) || check_rights(R_MOD, 0))
 		var/display_message = "Are you sure you wish to observe? You will join the round as a wild animal, and be incapable of most actions. If you do, be sure to have a little fun with the players online! If you decide to join the shift, make sure to not use any knowledge gained from observing."

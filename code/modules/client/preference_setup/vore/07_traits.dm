@@ -8,6 +8,7 @@
 /datum/preferences
 	var/custom_species	// Custom species name, can't be changed due to it having been used in savefiles already.
 	var/custom_base		// What to base the custom species on
+	var/shapeshift_base // used for promies, keeping seperate because it doesn't actually change any species stuff, just calls the transform procs on mob creation
 	var/blood_color = "#A10808"
 
 	var/custom_say = null
@@ -33,6 +34,7 @@
 /datum/category_item/player_setup_item/vore/traits/load_character(var/savefile/S)
 	S["custom_species"]	>> pref.custom_species
 	S["custom_base"]	>> pref.custom_base
+	S["shapeshift_base"]>> pref.shapeshift_base
 	S["pos_traits"]		>> pref.pos_traits
 	S["neu_traits"]		>> pref.neu_traits
 	S["neg_traits"]		>> pref.neg_traits
@@ -50,6 +52,7 @@
 /datum/category_item/player_setup_item/vore/traits/save_character(var/savefile/S)
 	S["custom_species"]	<< pref.custom_species
 	S["custom_base"]	<< pref.custom_base
+	S["shapeshift_base"]<< pref.shapeshift_base
 	S["pos_traits"]		<< pref.pos_traits
 	S["neu_traits"]		<< pref.neu_traits
 	S["neg_traits"]		<< pref.neg_traits
@@ -120,12 +123,18 @@
 		if((pref.dirty_synth && !(take_flags & SYNTHETICS)) || (pref.gross_meatbag && !(take_flags & ORGANICS)))
 			pref.neg_traits -= path
 
+	// custom base species for xenochimera
 	var/datum/species/selected_species = GLOB.all_species[pref.species]
 	if(selected_species.selects_bodytype)
 		// Allowed!
 	else if(!pref.custom_base || !(pref.custom_base in GLOB.custom_species_bases))
 		pref.custom_base = SPECIES_HUMAN
 
+	// promethean shapeshifting default form, and for preview image
+	if(!istype(selected_species,/datum/species/shapeshifter))
+		pref.shapeshift_base = null // not a shapeshifter, sanitize
+	else if(pref.shapeshift_base == null)
+		pref.shapeshift_base = SPECIES_HUMAN // reset on start
 
 	pref.custom_say = lowertext(trim(pref.custom_say))
 	pref.custom_whisper = lowertext(trim(pref.custom_whisper))
@@ -155,6 +164,16 @@
 	//Any additional non-trait settings can be applied here
 	new_S.blood_color = pref.blood_color
 
+	// apply shapeshifting here
+	if(istype(S,/datum/species/shapeshifter))
+		if(isnull(pref.shapeshift_base))
+			pref.shapeshift_base = SPECIES_HUMAN
+		var/datum/species/shapeshifter/shifted = S
+		shifted.default_form = pref.shapeshift_base // apply shapeshift!
+		character.shapeshifter_change_shape(shifted.default_form)
+		wrapped_species_by_ref["\ref[character]"] = shifted.default_form
+		character.regenerate_icons()
+
 	/* outpost 21 - custom race removal
 	if(pref.species == SPECIES_CUSTOM)
 		//Statistics for this would be nice
@@ -171,6 +190,10 @@
 	if(selected_species.selects_bodytype)
 		. += "<b>Icon Base: </b> "
 		. += "<a href='?src=\ref[src];custom_base=1'>[pref.custom_base ? pref.custom_base : "Human"]</a><br>"
+
+	if(istype(selected_species,/datum/species/shapeshifter))
+		. += "<b>Shapeshift Icon: </b> "
+		. += "<a href='?src=\ref[src];shapeshift_base=1'>[pref.shapeshift_base ? pref.shapeshift_base : "Unset"]</a><br>"
 
 	var/traits_left = pref.max_traits
 	var/points_left = pref.starting_trait_points
@@ -230,7 +253,6 @@
 	if(!CanUseTopic(user))
 		return TOPIC_NOACTION
 
-
 	else if(href_list["custom_species"])
 		var/raw_choice = sanitize(tgui_input_text(user, "Input your custom species name:",
 			"Character Preference", pref.custom_species, MAX_NAME_LEN), MAX_NAME_LEN)
@@ -245,6 +267,15 @@
 		var/text_choice = tgui_input_list(usr, "Pick an icon set for your species:","Icon Base", choices)
 		if(text_choice in choices)
 			pref.custom_base = text_choice
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["shapeshift_base"])
+		var/datum/species/selected_species = GLOB.all_species[pref.species]
+		var/find_species = tgui_input_list(usr, "Pick an icon set to use for your initial shapeshifted form:","Shapeshift Icon", selected_species.get_valid_shapeshifter_forms(null))
+		if(isnull(find_species))
+			find_species = SPECIES_HUMAN // backup
+		else
+			pref.shapeshift_base = find_species
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["blood_color"])

@@ -64,6 +64,7 @@ var/list/wrapped_species_by_ref = list()
 /datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form
+	H.shapeshifter_import_species_overlay_flags(default_form)
 	if(monochromatic)
 		H.r_hair =   H.r_skin
 		H.g_hair =   H.g_skin
@@ -74,6 +75,7 @@ var/list/wrapped_species_by_ref = list()
 
 	for(var/obj/item/organ/external/E in H.organs)
 		E.sync_colour_to_human(H)
+
 
 // Verbs follow.
 /mob/living/carbon/human/proc/shapeshifter_select_hair()
@@ -164,8 +166,34 @@ var/list/wrapped_species_by_ref = list()
 		return
 
 	wrapped_species_by_ref["\ref[src]"] = new_species
+	shapeshifter_import_species_overlay_flags(new_species)
+
 	visible_message("<b>\The [src]</b> shifts and contorts, taking the form of \a [new_species]!")
 	regenerate_icons()
+
+/mob/living/carbon/human/proc/shapeshifter_import_species_overlay_flags(var/new_species = null)
+	if(!new_species)
+		return
+	// update limbs with species limbs!
+	var/datum/species/selected_species = GLOB.all_species[new_species]
+	var/list/bpcheck = list(BP_TORSO,BP_GROIN,BP_HEAD,BP_L_ARM,BP_R_ARM,BP_L_LEG,BP_R_LEG,BP_L_HAND,BP_R_HAND,BP_L_FOOT,BP_R_FOOT)
+	// scan through BPs, and attempt to locate equivilents in the species we're turning into.
+	for(var/B in bpcheck)
+		var/obj/item/organ/external/our_E = organs_by_name[B]
+		var/limb_data = selected_species.has_limbs[B]
+		var/limb_path = limb_data["path"]
+		var/obj/item/organ/external/new_E = new limb_path()
+		// typecheck and handle each limb uniquely... cause of course we have to
+		if(istype(our_E,/obj/item/organ/external/head) && istype(new_E,/obj/item/organ/external/head))
+			// teshari eye fix here, amoung other things...
+			var/obj/item/organ/external/head/ourhead = our_E
+			var/obj/item/organ/external/head/newhead = new_E
+			ourhead.eye_icon_location = newhead.eye_icon_location
+			ourhead.eye_icon = newhead.eye_icon
+			ourhead.head_offset = newhead.head_offset
+		// clean our invisible check organ
+		if(!isnull(new_E))
+			new_E.Destroy()
 
 /mob/living/carbon/human/proc/shapeshifter_select_colour()
 

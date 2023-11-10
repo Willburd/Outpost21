@@ -172,7 +172,7 @@
 		shifted.default_form = pref.shapeshift_base // apply shapeshift!
 		character.shapeshifter_change_shape(shifted.default_form)
 		wrapped_species_by_ref["\ref[character]"] = shifted.default_form
-		character.regenerate_icons()
+		character.shapeshifter_import_species_overlay_flags(pref.shapeshift_base)
 
 	/* outpost 21 - custom race removal
 	if(pref.species == SPECIES_CUSTOM)

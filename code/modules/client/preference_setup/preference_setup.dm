@@ -150,6 +150,7 @@
 /datum/category_group/player_setup_category/proc/copy_to_mob(var/mob/living/carbon/human/C)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.copy_to_mob(C)
+		C.regenerate_icons() // for prometheans mostly
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"

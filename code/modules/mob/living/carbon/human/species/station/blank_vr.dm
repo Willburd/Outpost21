@@ -52,8 +52,8 @@
 	var/datum/species/real = GLOB.all_species[base_species]
 	return real.race_key
 
-/datum/species/custom/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/resetdna = TRUE) //, var/custom_base) // outpost 21 edit - custom species removal
-	. = ..(traits, H, resetdna) //, custom_base) // outpost 21 edit - custom species removal
+/datum/species/custom/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE)
+	. = ..(traits, H, custom_base, resetdna)
 	H.maxHealth = H.species.total_health
 	H.hunger_rate = H.species.hunger_factor
 

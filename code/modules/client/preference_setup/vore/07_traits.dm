@@ -7,9 +7,7 @@
 
 /datum/preferences
 	var/custom_species	// Custom species name, can't be changed due to it having been used in savefiles already.
-	/* // outpost 21 edit - custom species removal
 	var/custom_base		// What to base the custom species on
-	*/
 	var/blood_color = "#A10808"
 
 	var/custom_say = null
@@ -34,9 +32,7 @@
 
 /datum/category_item/player_setup_item/vore/traits/load_character(var/savefile/S)
 	S["custom_species"]	>> pref.custom_species
-	/*  // outpost 21 edit - custom species removal
 	S["custom_base"]	>> pref.custom_base
-	*/
 	S["pos_traits"]		>> pref.pos_traits
 	S["neu_traits"]		>> pref.neu_traits
 	S["neg_traits"]		>> pref.neg_traits
@@ -53,9 +49,7 @@
 
 /datum/category_item/player_setup_item/vore/traits/save_character(var/savefile/S)
 	S["custom_species"]	<< pref.custom_species
-	/*  // outpost 21 edit - custom species removal
 	S["custom_base"]	<< pref.custom_base
-	*/
 	S["pos_traits"]		<< pref.pos_traits
 	S["neu_traits"]		<< pref.neu_traits
 	S["neg_traits"]		<< pref.neg_traits
@@ -126,13 +120,12 @@
 		if((pref.dirty_synth && !(take_flags & SYNTHETICS)) || (pref.gross_meatbag && !(take_flags & ORGANICS)))
 			pref.neg_traits -= path
 
-	//var/datum/species/selected_species = GLOB.all_species[pref.species]
-	//if(selected_species.selects_bodytype)
+	var/datum/species/selected_species = GLOB.all_species[pref.species]
+	if(selected_species.selects_bodytype)
 		// Allowed!
-	/* // outpost 21 edit - custom species removal
 	else if(!pref.custom_base || !(pref.custom_base in GLOB.custom_species_bases))
 		pref.custom_base = SPECIES_HUMAN
-	*/
+
 
 	pref.custom_say = lowertext(trim(pref.custom_say))
 	pref.custom_whisper = lowertext(trim(pref.custom_whisper))
@@ -154,7 +147,7 @@
 		pref.dirty_synth = 0
 
 	var/datum/species/S = character.species
-	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, TRUE) // , pref.custom_base)  // outpost 21 edit - custom species removal
+	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, pref.custom_base, TRUE)
 
 	for(var/datum/trait/T in new_S.traits)
 		T.apply_pref(src)
@@ -174,12 +167,10 @@
 	. += "<b>Custom Species Name:</b> "
 	. += "<a href='?src=\ref[src];custom_species=1'>[pref.custom_species ? pref.custom_species : "-Input Name-"]</a><br>"
 
-	/* outpost 21 edit - custom species removal
 	var/datum/species/selected_species = GLOB.all_species[pref.species]
 	if(selected_species.selects_bodytype)
 		. += "<b>Icon Base: </b> "
 		. += "<a href='?src=\ref[src];custom_base=1'>[pref.custom_base ? pref.custom_base : "Human"]</a><br>"
-	*/
 
 	var/traits_left = pref.max_traits
 	var/points_left = pref.starting_trait_points
@@ -247,16 +238,14 @@
 			pref.custom_species = raw_choice
 		return TOPIC_REFRESH
 
-	/*  outpost 21 - custom race removal
 	else if(href_list["custom_base"])
 		var/list/choices = GLOB.custom_species_bases
-		if(pref.species != SPECIES_CUSTOM)
+		//if(pref.species != SPECIES_CUSTOM)
 		choices = (choices | pref.species)
 		var/text_choice = tgui_input_list(usr, "Pick an icon set for your species:","Icon Base", choices)
 		if(text_choice in choices)
 			pref.custom_base = text_choice
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	*/
 
 	else if(href_list["blood_color"])
 		var/color_choice = input(usr, "Pick a blood color (does not apply to synths)","Blood Color",pref.blood_color) as color

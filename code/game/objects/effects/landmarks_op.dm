@@ -22,7 +22,7 @@
 	if(!isturf(src.loc))
 		return
 
-	switch(rand(1,6))
+	switch(rand(1,7))
 		if(1)
 			// clowns are the most complex, taken right from the clune infestation event
 			var/spawncount = pick(1,2)
@@ -77,3 +77,63 @@
 		if(6)
 			var/mob/living/simple_mob/vore/alienanimals/chu/C = new /mob/living/simple_mob/vore/alienanimals/chu()
 			C.loc = src.loc
+
+		if(7)
+			var/mob/living/simple_mob/creature/C = new /mob/living/simple_mob/creature()
+			C.loc = src.loc
+
+
+/obj/effect/landmark/hostile_xenobio
+	name = "dangerous xenobio spawner"
+
+/obj/effect/landmark/hostile_xenobio/New()
+	. = ..()
+
+	if(prob(80))
+		return // most likely to be empty, so xenobio doesn't need to clear it out any time they want to do stuff
+
+	if(!isturf(src.loc))
+		return
+
+	switch(rand(1,8))
+		if(1)
+			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx()
+			C.loc = src.loc
+
+		if(2)
+			var/mob/living/simple_mob/animal/space/jelly/C = new /mob/living/simple_mob/animal/space/jelly()
+			C.loc = src.loc
+
+		if(3)
+			var/mob/living/simple_mob/vore/alienanimals/chu/C = new /mob/living/simple_mob/vore/alienanimals/chu()
+			C.loc = src.loc
+
+		if(4)
+			var/mob/living/simple_mob/animal/space/carp/C = new /mob/living/simple_mob/animal/space/carp()
+			C.loc = src.loc
+
+		if(5)
+			var/mob/living/simple_mob/animal/passive/gaslamp/G = new /mob/living/simple_mob/animal/passive/gaslamp()
+			G.loc = src.loc
+
+		if(6)
+			var/mob/living/simple_mob/animal/passive/gaslamp/G = new /mob/living/simple_mob/animal/passive/gaslamp()
+			G.loc = src.loc
+
+		if(7)
+			var/mob/living/simple_mob/animal/giant_spider/S = new /mob/living/simple_mob/animal/giant_spider()
+			S.loc = src.loc
+
+		if(8)
+			var/mob/living/simple_mob/vore/leopardmander/M = new /mob/living/simple_mob/vore/leopardmander()
+			M.loc = src.loc
+
+
+
+/obj/effect/landmark/dangerous_situation
+	name = "dangerous situation spawner"
+
+/obj/effect/landmark/dangerous_situation/New()
+	. = ..()
+	// creates stuff like ruptured gas tanks, and landmines
+	// TODO - crazy shit here for maintenance secrets

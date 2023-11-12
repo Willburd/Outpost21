@@ -7,7 +7,7 @@ var/datum/antagonist/zombie/zombies
 	role_text_plural = "Zombie"       // As above but plural.
 	bantype = "zombies"
 	hard_cap = 8
-	mob_path = /mob/living/simple_mob/animal/synx
+	mob_path = /mob/living/simple_mob/vore/alienanimals/synx
 	initial_spawn_target = 2
 	welcome_text = "You have so many new friends to meet today... Stalk crew from the dark, and convert them into more chus. You'll always be safer with friends!"
 	antag_sound = 'sound/goonstation/spooky/Meatzone_BreathingSlow.ogg'

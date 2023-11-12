@@ -70,7 +70,7 @@
 						///mob/living/simple_mob/animal/space/alien,
 						/mob/living/simple_mob/animal/space/alien/drone,
 						/mob/living/simple_mob/vore/alienanimals/chu,
-						/mob/living/simple_mob/animal/synx,
+						/mob/living/simple_mob/vore/alienanimals/synx,
 						///mob/living/simple_mob/animal/space/alien/sentinel,
 						///mob/living/simple_mob/animal/space/alien/queen,
 						///mob/living/simple_mob/otie/feral,

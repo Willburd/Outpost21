@@ -63,7 +63,7 @@
 			C.loc = src.loc
 
 		if(3)
-			var/mob/living/simple_mob/animal/synx/C = new /mob/living/simple_mob/animal/synx()
+			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx()
 			C.loc = src.loc
 
 		if(4)

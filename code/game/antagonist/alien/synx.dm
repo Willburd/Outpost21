@@ -7,7 +7,7 @@ var/datum/antagonist/synx/synxes
 	role_text_plural = "Synx"       // As above but plural.
 	bantype = "synxhunt"
 	hard_cap = 2
-	mob_path = /mob/living/simple_mob/animal/synx
+	mob_path = /mob/living/simple_mob/vore/alienanimals/synx
 	initial_spawn_target = 1
 	welcome_text = "You awaken once again to the hunt. Stalk the crew, and strike when they least expect it... You are an ambush predator after all."
 	antag_sound = 'sound/rakshasa/Breath1.ogg'

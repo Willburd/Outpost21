@@ -97,7 +97,7 @@
 		return
 
 	var/obj/belly/foundbelly = null
-	var/mob/foundprey = null
+	var/mob/living/foundprey = null
 	if(!isnull(vore_organs) && vore_organs.len > 0)
 		for(var/obj/belly/B in vore_organs)
 			for(var/mob/living/L in B)
@@ -169,27 +169,19 @@
 	to_chat(src, "<span class='notice'>You have infested [foundprey]!</span>")
 	to_chat(foundprey, "<span class='danger'>You have been infested by \the [src]!</span>")
 
+	var/mob/living/simple_mob/vore/alienanimals/chu/CC = null
 	if(ishuman(foundprey))
 		// human infesting
-		var/mob/living/simple_mob/vore/alienanimals/chu/CC = T.chuify()
-		if(!isnull(CC))
-			// setup sprites and flavor
-			foundbelly.release_specific_contents(CC)
-			CC.tt_desc = "Reminds you of [hostname]..."
-			CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
-			CC.update_icon()
-			// emote a bit
-			sleep(rand(2,6))
-			CC.emote(pick("choke","gasp"))
-		else
-			// SOMETHING happened?
-			foundbelly.release_specific_contents(T)
+		CC = T.chuify()
+		CC.tt_desc = "Reminds you of [hostname]..."
+		CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
+		CC.update_icon()
 	else
 		// simple conversion
 		var/key = null
 		if(!isnull(foundprey.key))
 			key = foundprey.key
-		var/mob/living/simple_mob/vore/alienanimals/chu/CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
+		CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
 		if(isnull(key))
 			// ghost request
 
@@ -197,11 +189,28 @@
 			// pass on mob
 			CC.key = key
 
+	if(!isnull(CC))
+		// transfer contents of prey to new body
+		QDEL_LIST_NULL(CC.vore_organs)
+		CC.vore_organs = list()
+		for(var/obj/belly/PB as anything in foundprey.vore_organs)
+			PB.loc = CC
+			PB.forceMove(CC)
+			PB.owner = CC
+			foundprey.vore_organs -= PB
+			CC.vore_organs += PB
+
+		// release it! and destroy old body
+		foundbelly.release_specific_contents(CC)
 		foundprey.Destroy()
+		CC.update_icon()
+
 		// emote a bit
 		sleep(rand(2,6))
 		CC.emote(pick("choke","gasp"))
-		foundbelly.release_specific_contents(CC)
+	else if(!isnull(T))
+		// what happened?
+		foundbelly.release_specific_contents(T)
 
 	// spit all the rest of if it's items
 	if(!isnull(vore_organs) && vore_organs.len > 0)

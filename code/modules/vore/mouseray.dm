@@ -85,9 +85,6 @@
 	var/mob/living/M = target
 	if(!istype(M))
 		return
-	if(target != firer)	//If you shot yourself, you probably want to be TFed so don't bother with prefs.
-		if(!M.allow_spontaneous_tf && !tf_admin_pref_override)
-			return
 	if(M.tf_mob_holder)
 		var/mob/living/ourmob = M.tf_mob_holder
 		if(ourmob.ai_holder)
@@ -244,7 +241,6 @@
 	new_mob.vore_taste = vore_taste
 	new_mob.vore_smell = vore_smell
 	new_mob.nutrition_message_visible = nutrition_message_visible
-	new_mob.allow_spontaneous_tf = allow_spontaneous_tf
 
 /////SUBTYPES/////
 
@@ -291,10 +287,6 @@
 	var/mob/living/M = target
 	if(!istype(M))
 		return
-	if(target != firer)	//If you shot yourself, you probably want to be TFed so don't bother with prefs.
-		if(!M.allow_spontaneous_tf && !tf_admin_pref_override)
-			firer.visible_message("<span class='warning'>\The [src] buzzes impolitely.</span>")
-			return
 	if(M.tf_mob_holder)
 		var/mob/living/ourmob = M.tf_mob_holder
 		if(ourmob.ai_holder)

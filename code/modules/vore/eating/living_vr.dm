@@ -40,7 +40,6 @@
 	var/throw_vore = TRUE				//Enabled by default since you have to enable drop pred/prey to do this anyway
 	var/can_be_drop_prey = FALSE
 	var/can_be_drop_pred = FALSE
-	var/allow_spontaneous_tf = FALSE	// Obviously.
 	var/next_preyloop					// For Fancy sound internal loop
 	var/adminbus_trash = FALSE			// For abusing trash eater for event shenanigans.
 	var/adminbus_eat_minerals = FALSE	// This creature subsists on a diet of pure adminium.
@@ -118,10 +117,6 @@
 			B.name = "Stomach"
 			B.desc = "It appears to be rather warm and wet. Makes sense, considering it's inside \the [name]."
 			B.can_taste = TRUE
-			if(ishuman(src))
-				var/mob/living/carbon/human/H = src
-				if(istype(H.species,/datum/species/monkey))
-					allow_spontaneous_tf = TRUE
 		return TRUE
 
 //
@@ -280,7 +275,6 @@
 	P.can_be_drop_prey = src.can_be_drop_prey
 	P.can_be_drop_pred = src.can_be_drop_pred
 	P.allow_inbelly_spawning = src.allow_inbelly_spawning
-	P.allow_spontaneous_tf = src.allow_spontaneous_tf
 	P.appendage_color = src.appendage_color
 	P.appendage_alt_setting = src.appendage_alt_setting
 	P.step_mechanics_pref = src.step_mechanics_pref
@@ -329,7 +323,6 @@
 	can_be_drop_prey = P.can_be_drop_prey
 	can_be_drop_pred = P.can_be_drop_pred
 	allow_inbelly_spawning = P.allow_inbelly_spawning
-	allow_spontaneous_tf = P.allow_spontaneous_tf
 	appendage_color = P.appendage_color
 	appendage_alt_setting = P.appendage_alt_setting
 	step_mechanics_pref = P.step_mechanics_pref
@@ -1086,7 +1079,6 @@
 	dispvoreprefs += "<b>Throw vore:</b> [throw_vore ? "Enabled" : "Disabled"]<br>"
 	dispvoreprefs += "<b>Stumble Vore:</b> [stumble_vore ? "Enabled" : "Disabled"]<br>"
 	dispvoreprefs += "<b>Inbelly Spawning:</b> [allow_inbelly_spawning ? "Allowed" : "Disallowed"]<br>"
-	dispvoreprefs += "<b>Spontaneous transformation:</b> [allow_spontaneous_tf ? "Enabled" : "Disabled"]<br>"
 	dispvoreprefs += "<b>Can be stepped on/over:</b> [step_mechanics_pref ? "Allowed" : "Disallowed"]<br>"
 	dispvoreprefs += "<b>Can be picked up:</b> [pickup_pref ? "Allowed" : "Disallowed"]<br>"
 	user << browse("<html><head><title>Vore prefs: [src]</title></head><body><center>[dispvoreprefs]</center></body></html>", "window=[name]mvp;size=300x400;can_resize=1;can_minimize=0")

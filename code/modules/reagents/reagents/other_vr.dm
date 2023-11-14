@@ -6,8 +6,6 @@
 	color = "#13BC5E"
 
 /datum/reagent/advmutationtoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!(M.allow_spontaneous_tf))
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name != "Promethean")
@@ -125,7 +123,7 @@
 			if(nif.stat == NIF_TEMPFAIL)
 				nif.stat = NIF_INSTALLING
 			nif.repair(removed*0.1)
-	
+
 */
 
 //Special toxins for solargrubs

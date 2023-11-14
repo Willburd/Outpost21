@@ -132,8 +132,6 @@
 	color = "#00BBFF"
 
 /datum/reagent/androrovir/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!(M.allow_spontaneous_tf))
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(M.reagents.has_reagent("gynorovir") || M.reagents.has_reagent("androgynorovir"))
@@ -153,8 +151,6 @@
 	color = "#FF00AA"
 
 /datum/reagent/gynorovir/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!(M.allow_spontaneous_tf))
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(M.reagents.has_reagent("androrovir") || M.reagents.has_reagent("androgynorovir"))
@@ -174,8 +170,6 @@
 	color = "#6600FF"
 
 /datum/reagent/androgynorovir/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!(M.allow_spontaneous_tf))
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(M.reagents.has_reagent("gynorovir") || M.reagents.has_reagent("androrovir"))

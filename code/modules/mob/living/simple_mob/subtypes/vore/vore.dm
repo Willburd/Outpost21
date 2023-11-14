@@ -20,7 +20,6 @@
 	can_be_drop_pred = client.prefs_vr.can_be_drop_pred
 	throw_vore = client.prefs_vr.throw_vore
 	allow_inbelly_spawning = client.prefs_vr.allow_inbelly_spawning
-	allow_spontaneous_tf = client.prefs_vr.allow_spontaneous_tf
 	digest_leave_remains = client.prefs_vr.digest_leave_remains
 	allowmobvore = client.prefs_vr.allowmobvore
 	permit_healbelly = client.prefs_vr.permit_healbelly

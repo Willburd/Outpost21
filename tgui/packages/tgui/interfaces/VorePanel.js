@@ -925,7 +925,6 @@ const VoreUserPreferences = (props, context) => {
     can_be_drop_prey,
     can_be_drop_pred,
     allow_inbelly_spawning,
-    allow_spontaneous_tf,
     step_mechanics_active,
     pickup_mechanics_active,
     noisy,
@@ -1214,21 +1213,6 @@ const VoreUserPreferences = (props, context) => {
         disabled: 'Pick-up Mechanics Disabled',
       },
     },
-    spontaneous_tf: {
-      action: 'toggle_allow_spontaneous_tf',
-      test: allow_spontaneous_tf,
-      tooltip: {
-        main:
-          'This toggle is for spontaneous or environment related transformation' +
-          ' as a victim, such as via chemicals.',
-        enable: 'Click here to allow being spontaneously transformed.',
-        disable: 'Click here to disable being spontaneously transformed.',
-      },
-      content: {
-        enabled: 'Spontaneous TF Enabled',
-        disabled: 'Spontaneous TF Disabled',
-      },
-    },
     examine_nutrition: {
       action: 'toggle_nutrition_ex',
       test: nutrition_message_visible,
@@ -1323,9 +1307,7 @@ const VoreUserPreferences = (props, context) => {
         <Flex.Item basis="32%">
           <VoreUserPreferenceItem spec={preferences.pickuppref} tooltipPosition="top" />
         </Flex.Item>
-        <Flex.Item basis="32%" grow={1}>
-          <VoreUserPreferenceItem spec={preferences.spontaneous_tf} />
-        </Flex.Item>
+        <Flex.Item basis="32%" grow={1} />
         <Flex.Item basis="32%">
           <Button fluid content="Selective Mode Preference" onClick={() => act('switch_selective_mode_pref')} />
         </Flex.Item>

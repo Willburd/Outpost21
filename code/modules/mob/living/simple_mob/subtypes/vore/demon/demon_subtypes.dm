@@ -8,6 +8,8 @@
 
 	vore_icons = null
 
+	ai_holder_type = /datum/ai_holder/simple_mob/destructive
+
 /mob/living/simple_mob/vore/demon/zellic
 	name = "Zellic"
 

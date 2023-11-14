@@ -15,7 +15,7 @@
 	melee_damage_upper = 7
 
 	say_list_type = /datum/say_list/jelly
-	ai_holder_type = /datum/ai_holder/simple_mob/retaliate/jelly
+	ai_holder_type = /datum/ai_holder/simple_mob/melee //datum/ai_holder/simple_mob/retaliate/jelly   // More hostile!
 
 // Activate Noms!
 /mob/living/simple_mob/animal/space/jelly
@@ -23,6 +23,9 @@
 	vore_pounce_chance = 0
 	vore_icons = SA_ICON_LIVING
 	swallowTime = 2 SECONDS // Hungry little bastards.
+	// Like a likin' like-like.
+	vore_default_mode = DM_HOLD
+	vore_default_flags = DM_FLAG_STRIPPING | DM_FLAG_JAMSENSORS | DM_FLAG_THICKBELLY
 
 /datum/say_list/jelly
 	emote_hear = list("squishes","spluts","splorts","sqrshes","makes slime noises")

@@ -63,7 +63,7 @@
 			C.loc = src.loc
 
 		if(3)
-			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx()
+			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx/ai()
 			C.loc = src.loc
 
 		if(4)
@@ -97,7 +97,7 @@
 
 	switch(rand(1,8))
 		if(1)
-			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx()
+			var/mob/living/simple_mob/vore/alienanimals/synx/C = new /mob/living/simple_mob/vore/alienanimals/synx/ai()
 			C.loc = src.loc
 
 		if(2)

@@ -39,8 +39,6 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	block_turf_edges = TRUE // Don't want turf edges popping up from the cliff edge.
 	plane = TURF_PLANE
 
-	var/icon_variant = null // Used to make cliffs less repeative by having a selection of sprites to display.
-
 	var/uphill_penalty = 30 // Odds of a projectile not making it up the cliff.
 
 /obj/structure/cliff/corner
@@ -231,3 +229,61 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	if(should_fall(L))
 		return FALSE
 	return ..()
+
+
+
+/obj/structure/cliff_end
+	name = "cliff"
+	desc = "A steep rock ledge. You might be able to climb it if you feel bold enough."
+	description_info = "Walking off the edge of a cliff while on top will cause you to fall off, causing severe injury.<br>\
+	You can climb this cliff if wearing special climbing equipment, by click-dragging yourself onto the cliff.<br>\
+	Projectiles traveling up a cliff may hit the cliff instead, making it more difficult to fight something \
+	on top."
+	icon = 'icons/obj/flora/cliffs_op.dmi'
+	icon_state = "planner-end"
+
+	anchored = TRUE
+	density = FALSE
+	opacity = FALSE
+	climbable = FALSE
+	unacidable = TRUE
+	block_turf_edges = FALSE
+	plane = TURF_PLANE
+	var/fadedir = NORTH // direction originally placed in
+
+/obj/structure/cliff_end/Initialize()
+	icon_state = "cliff-end"
+	. = INITIALIZE_HINT_LATELOAD
+	fadedir = dir
+	update_icon()
+
+/obj/structure/cliff_end/update_icon()
+	// Copy the cliff in the direction we face, and add a fadeout overlay
+	cut_overlays()
+	var/turf/T = get_step(src, fadedir)
+	if(istype(T))
+		var/obj/structure/cliff/foundcliff = null
+		for(var/obj/structure/cliff/C in T.contents)
+			foundcliff = C
+			break
+
+		if(!isnull(foundcliff))
+			icon = foundcliff.icon
+			icon_state = foundcliff.icon_state
+			if(icon_state == "planner")
+				icon_state = "cliff"
+			if(icon_state == "planner-corner")
+				icon_state = "cliff-corner"
+			dir = foundcliff.dir
+
+			// add fade overlay to discovered cliff icon!
+			var/cache_string = "cliff-end-[fadedir]"
+			T = get_turf(src.loc) // use the turf under us!
+			if(istype(T))
+				if(!((cache_string+"-[T.name]") in GLOB.cliff_icon_cache_upper))
+					var/icon/underlying_ground = icon(T.icon, T.icon_state, T.dir)
+					var/icon/subtract = icon(icon, "cliff-end-subtract", fadedir)
+					underlying_ground.Blend(subtract, ICON_SUBTRACT)
+					var/image/final = image(underlying_ground)
+					GLOB.cliff_icon_cache_upper[cache_string+"-[T.name]"] = final
+				add_overlay(GLOB.cliff_icon_cache_upper[cache_string+"-[T.name]"])

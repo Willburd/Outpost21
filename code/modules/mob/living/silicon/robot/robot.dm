@@ -265,14 +265,17 @@
 	if(module)
 		return
 	var/list/modules = list()
+	/* Outpost 21 edit - allow the AI access to more shells
 	//VOREStatation Edit Start: shell restrictions
-	/* outpost 21  edit - nif removal
 	if(shell)
 		modules.Add(shell_module_types)
 	else
 	*/
 	modules.Add(robot_module_types)
-	if(crisis || security_level == SEC_LEVEL_RED || crisis_override)
+	if(client && client.holder.rights & R_ADMIN)
+		// outpost 21 edit - allow admins to use ERT
+		modules += emergency_module_types
+	else if(crisis || security_level == SEC_LEVEL_RED || crisis_override)
 		to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
 		modules += emergency_module_types
 	for(var/module_name in whitelisted_module_types)

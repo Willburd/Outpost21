@@ -415,7 +415,7 @@
 	..()
 
 /obj/item/weapon/robot_module/robot/ert
-	name = "Emergency Responce module"
+	name = "Emergency Response module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
 	pto_type = PTO_SECURITY

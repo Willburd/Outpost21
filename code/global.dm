@@ -147,10 +147,14 @@ var/list/robot_module_types = list(
 var/list/emergency_module_types = list(
 	"Combat", "ERT"
 )
+
+/* Outpost 21 edit - allow the AI access to more shells
 // List of modules available to AI shells
 var/list/shell_module_types = list(
 	"Standard", "Service", "Clerical", "Service-Hound", "BoozeHound"
 )
+*/
+
 // List of whitelisted modules
 var/list/whitelisted_module_types = list(
 	"Lost", "Stray"

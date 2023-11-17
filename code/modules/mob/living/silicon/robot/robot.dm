@@ -272,7 +272,7 @@
 	else
 	*/
 	modules.Add(robot_module_types)
-	if(client && client.holder.rights & R_ADMIN)
+	if(client && client.holder && client.holder.rights & R_ADMIN)
 		// outpost 21 edit - allow admins to use ERT
 		modules += emergency_module_types
 	else if(crisis || security_level == SEC_LEVEL_RED || crisis_override)

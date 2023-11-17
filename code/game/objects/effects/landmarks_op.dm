@@ -89,7 +89,7 @@
 /obj/effect/landmark/hostile_xenobio/New()
 	. = ..()
 
-	if(prob(80))
+	if(prob(60))
 		return // most likely to be empty, so xenobio doesn't need to clear it out any time they want to do stuff
 
 	if(!isturf(src.loc))
@@ -117,16 +117,17 @@
 			G.loc = src.loc
 
 		if(6)
-			var/mob/living/simple_mob/animal/passive/gaslamp/G = new /mob/living/simple_mob/animal/passive/gaslamp()
-			G.loc = src.loc
-
-		if(7)
 			var/mob/living/simple_mob/animal/giant_spider/S = new /mob/living/simple_mob/animal/giant_spider()
 			S.loc = src.loc
 
-		if(8)
+		if(7)
 			var/mob/living/simple_mob/vore/leopardmander/M = new /mob/living/simple_mob/vore/leopardmander()
 			M.loc = src.loc
+
+		if(8)
+			var/mob/living/simple_mob/animal/space/goose/G = new /mob/living/simple_mob/animal/space/goose()
+			G.loc = src.loc
+
 
 
 
@@ -135,5 +136,24 @@
 
 /obj/effect/landmark/dangerous_situation/New()
 	. = ..()
+	/*
+	if(!isturf(src.loc))
+		return
+
 	// creates stuff like ruptured gas tanks, and landmines
-	// TODO - crazy shit here for maintenance secrets
+	switch(rand(1,2))
+		if(1)
+			var/newpath = pick(/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/obj/machinery/portable_atmospherics/canister/nitrous_oxide,/obj/machinery/portable_atmospherics/canister/phoron)
+			var/obj/machinery/portable_atmospherics/canister/tank = new newpath()
+
+			if(!isnull(tank))
+				tank.take_damage(10000) // BANG
+
+		if(2)
+			var/newpath = pick(prob(30);/obj/effect/mine,
+				prob(25);/obj/effect/mine/frag,
+				prob(25);/obj/effect/mine/emp,
+				prob(10);/obj/effect/mine/stun,
+				prob(10);/obj/effect/mine/incendiary)
+			new newpath()
+	*/

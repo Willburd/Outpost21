@@ -1,3 +1,13 @@
+/datum/category_item/catalogue/technology/cargo_train
+	name = "Cargo Train Tug"
+	desc = "A standard issue cargo tug, meant for hauling obscene amounts of crates when the mail system won't suffice. Note: only licensed cargo crew are authorized to drive this vehicle."
+	value = CATALOGUER_REWARD_TRIVIAL
+
+/datum/category_item/catalogue/technology/cargo_cart
+	name = "Cargo Train Trolley"
+	desc = "A loading platform for the tug. Simply drag on any crates, then use the in-built unloader to release any loaded cargo. Safety mechanisms prevent living creatures from riding it. Use a standard crowbar to latch it to another car, or tug, in front of it."
+	value = CATALOGUER_REWARD_TRIVIAL
+
 /obj/vehicle/train/engine
 	name = "cargo train tug"
 	desc = "A ridable electric car designed for pulling cargo trolleys."
@@ -17,6 +27,8 @@
 	active_engines = 1
 	var/obj/item/weapon/key/key
 	var/key_type = /obj/item/weapon/key/cargo_train
+
+	catalogue_data = list(/datum/category_item/catalogue/technology/cargo_train)
 
 /obj/item/weapon/key/cargo_train
 	name = "key"
@@ -38,6 +50,8 @@
 	load_offset_x = 0
 	load_offset_y = 7		//VOREStation Edit
 	mob_offset_y = 8
+
+	catalogue_data = list(/datum/category_item/catalogue/technology/cargo_cart)
 
 //-------------------------------------------
 // Standard procs

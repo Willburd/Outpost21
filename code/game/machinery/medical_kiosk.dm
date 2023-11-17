@@ -7,6 +7,11 @@
 #define TOXIN_DAMAGE 0x40
 #define OXY_DAMAGE 0x80
 
+/datum/category_item/catalogue/technology/medical_kiosk
+	name = "Medical Kiosk"
+	desc = "A standard issue medical kiosk, also called a \"save station\". Used for scanning injuries deeper than a normal health analyzer, in addition, it scans and saves the current neural network of crew for uploading into the station's database for resleeving. Don't forget to save!"
+	value = CATALOGUER_REWARD_TRIVIAL
+
 /obj/machinery/medical_kiosk
 	name = "medical kiosk"
 	desc = "A helpful kiosk for finding out whatever is wrong with you."
@@ -22,6 +27,8 @@
 	var/mob/living/active_user
 	var/db_key
 	var/datum/transcore_db/our_db
+
+	catalogue_data = list(/datum/category_item/catalogue/technology/medical_kiosk)
 
 /obj/machinery/medical_kiosk/Initialize()
 	. = ..()

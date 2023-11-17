@@ -733,7 +733,7 @@
 //Mining Cart
 /obj/structure/closet/crate/miningcar
 	name = "mining cart"
-	desc = "A mining car. This one doesn't work on rails, but has to be dragged."
+	desc = "A mining car. This one doesn't work on rails, and has to be dragged."
 	icon = 'icons/obj/closets/miningcar.dmi'
 	closet_appearance = null
 	open_sound = 'sound/effects/wooden_closet_open.ogg'

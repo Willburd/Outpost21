@@ -333,7 +333,7 @@
 	icon_state_closed = "spdoor1"
 	icon_state_closing = "spdoorc1"
 	icon_state = "spdoor1"
-	maxhealth = 400
+	maxhealth = 600 //OP edit: Buffed. 400 --> 600. Same as main blast doors now.
 
 /obj/machinery/door/blast/shuttle/open
 	icon_state = "spdoor0"
@@ -360,7 +360,7 @@
 	icon_state_closing = "tshutterc1"
 	icon_state = "tshutter1"
 	damage = SHUTTER_CRUSH_DAMAGE
-	maxhealth = 400
+	maxhealth = 500 //OP edit: Buffed. 400 --> 500
 	block_air_zones = 0
 	opacity = 0
 	istransparent = 1
@@ -376,7 +376,7 @@
 	icon_state_closed = "shutter2_1"
 	icon_state_closing = "shutter2_c1"
 	icon_state = "shutter2_1"
-	maxhealth = 200
+	maxhealth = 500 //OP edit: Buffed. 200 --> 500
 	opacity = 0
 
 /obj/machinery/door/blast/gate/thin/open

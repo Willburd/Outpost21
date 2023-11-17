@@ -1689,6 +1689,13 @@
 	ambience = AMBIENCE_ENGINEERING
 	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
+/area/offworld/asteroidyard/station/teleport
+	name = "\improper Reclamation Yard Teleporter"
+	icon_state = "tcomsatlob"
+	sound_env = SMALL_ENCLOSED
+	ambience = AMBIENCE_ENGINEERING
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+
 //
 //-----------------------------------------------------------------------
 //Shuttles

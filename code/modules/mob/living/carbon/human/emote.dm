@@ -165,8 +165,11 @@ var/list/_human_default_emotes = list(
 	/decl/emote/audible/ack,
 	/decl/emote/audible/ough,
 	/decl/emote/audible/howl,
-	/decl/emote/visible/cross
+	/decl/emote/visible/cross,
 	//YW ADDITION: Add End
+	//outpost 21 add begin
+	/decl/emote/visible/ragescree
+	//outpost 21 add end
 )
 
 	//VOREStation Add Start

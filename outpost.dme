@@ -2253,6 +2253,7 @@
 #include "code\modules\emotes\definitions\synthetics.dm"
 #include "code\modules\emotes\definitions\visible.dm"
 #include "code\modules\emotes\definitions\visible_animated.dm"
+#include "code\modules\emotes\definitions\visible_custom_op.dm"
 #include "code\modules\emotes\definitions\visible_custom_yw.dm"
 #include "code\modules\emotes\definitions\visible_vomit.dm"
 #include "code\modules\emotes\definitions\visible_vr.dm"

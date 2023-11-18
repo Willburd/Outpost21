@@ -205,7 +205,7 @@
 		msgcooldown--
 		return
 
-	if(prob(2))
+	if(prob(1))
 		var/mob/living/carbon/halucinateTarget = null
 		var/count = 0
 		for(var/atom/A in view(src, 4))
@@ -218,9 +218,11 @@
 		if((count == 1 && istype(halucinateTarget,/mob/living/carbon)) || istype(get_area(src), /area/specialty/redspace))
 			// halucination replies
 			visible_message(halu_text(halucinateTarget))
+			msgcooldown = 60 SECONDS
 		else
 			// tease people to backup
 			visible_message(advert_text())
+			msgcooldown = 60 SECONDS
 	return
 
 

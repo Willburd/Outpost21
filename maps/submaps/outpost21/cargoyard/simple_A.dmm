@@ -6,7 +6,6 @@
 "A" = (/obj/random/flashlight,/turf/simulated/floor/outdoors/mud/muriki,/area/submap/outpost21/yard_generic)
 "D" = (/mob/living/simple_mob/vore/alienanimals/jil,/turf/simulated/floor/outdoors/mud/muriki,/area/submap/outpost21/yard_generic)
 "G" = (/obj/machinery/trailblazer/yellow,/turf/simulated/floor/outdoors/mud/muriki,/area/submap/outpost21/yard_generic)
-"H" = (/mob/living/simple_mob/vore/alienanimals/jil/jillioth,/turf/simulated/floor/outdoors/mud/muriki,/area/submap/outpost21/yard_generic)
 "M" = (/obj/random/maintenance,/turf/simulated/floor/outdoors/mud/muriki,/area/submap/outpost21/yard_generic)
 "N" = (/turf/template_noop,/area/submap/outpost21/yard_generic)
 
@@ -15,7 +14,7 @@ aaaaaaa
 ahNdNga
 agDNNha
 admGDda
-aNMHANa
+aNMhANa
 aMgNdNa
 aaaaaaa
 "}

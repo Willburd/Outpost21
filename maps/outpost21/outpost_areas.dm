@@ -226,6 +226,12 @@
 	base_turf = /turf/simulated/mineral/floor/muriki
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
+/area/muriki/bathroom/casino
+	name = "\improper Casino Royal Flush"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+
 //
 // Cargo ---------------------------------------------------------
 //
@@ -327,6 +333,18 @@
 	icon_state = "cyawhicir"
 	holomap_color = HOLOMAP_AREACOLOR_CIV
 
+/area/muriki/crew/casino
+	name = "\improper Casino and Smoke Lounge"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	icon_state = "cyawhicir"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+/area/muriki/crew/casinostore
+	name = "\improper Casino Storage"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	icon_state = "orawhicir"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
 /area/muriki/crew/barback
 	name = "\improper Bartender Backroom"
 	icon_state = "cyawhicir"
@@ -402,6 +420,8 @@
 	name = "\improper Music Room"
 	icon_state = "yellow"
 	holomap_color = HOLOMAP_AREACOLOR_CIV
+
+
 
 //Hallways-------
 /area/muriki/crewstairwell

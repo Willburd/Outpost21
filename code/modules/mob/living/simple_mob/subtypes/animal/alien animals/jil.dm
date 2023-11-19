@@ -24,8 +24,8 @@
 
 	faction = "jil"
 
-	maxHealth = 15
-	health = 15
+	maxHealth = 10
+	health = 10
 	has_hands = TRUE
 	humanoid_hands = TRUE
 	minbodytemp = 175
@@ -44,6 +44,10 @@
 
 	layer = MOB_LAYER
 	density = FALSE
+
+	mob_size = MOB_TINY
+	meat_amount = 1
+	butchery_loot = list()
 
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
@@ -87,6 +91,10 @@
 
 	melee_damage_lower = 20
 	melee_damage_upper = 40
+
+	mob_size = MOB_LARGE
+	meat_amount = 25
+	butchery_loot = list()
 
 	// enlorgen
 	icon_state = "jil_big"

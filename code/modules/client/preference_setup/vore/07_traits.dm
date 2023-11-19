@@ -408,6 +408,10 @@
 		var/list/nicelist = list()
 		for(var/P in picklist)
 			var/datum/trait/T = picklist[P]
+			if(pref.species in T.banned_species)
+				continue
+			if(LAZYLEN(T.allowed_species) && !(pref.species in T.allowed_species))
+				continue
 			nicelist[T.name] = P
 
 		var/points_left = pref.starting_trait_points

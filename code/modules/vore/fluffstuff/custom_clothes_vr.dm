@@ -1762,7 +1762,6 @@ Departamental Swimsuits, for general use
 	icon = 'icons/vore/custom_clothes_vr.dmi'
 	icon_override = 'icons/vore/custom_onmob_vr.dmi'
 
-/* outpost 21 edit - fluff removal
 /obj/item/clothing/head/helmet/space/void/security/hasd
 	name = "HASD EVA faceplate"
 	desc = "It's a faceplate that slots into the HASD EVA bodyplate assembly. Functionally useless alone."
@@ -1776,7 +1775,7 @@ Departamental Swimsuits, for general use
 
 /obj/item/clothing/head/helmet/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
 	if(..())
-		if(H.ckey != "silencedmp5a5")
+		if(H.ckey != "Seagha") // outpost 21 edit - requested fluff
 			to_chat(H, "<span class='warning'>...The faceplate is clearly not made for your anatomy, thus, does not fit.</span>")
 			return 0
 		else
@@ -1793,12 +1792,13 @@ Departamental Swimsuits, for general use
 	pixel_x = -16
 
 /obj/item/clothing/suit/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-	if(..() && istype(H) && H.ckey == "silencedmp5a5")
+	if(..() && istype(H) && H.ckey == "Seagha") // outpost 21 edit - requested fluff
 		return 1
 	else
 		to_chat(H, "<span class='warning'>This suit is not designed for you.</span>")
 		return 0
 
+/* outpost 21 edit - fluff removal
 //Zigfe:Zaoozaoo Xrimxuqmqixzix
 /obj/item/clothing/head/fluff/zao
 	name = "Zao's Hat"

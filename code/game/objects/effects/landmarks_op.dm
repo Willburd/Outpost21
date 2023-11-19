@@ -134,17 +134,22 @@
 /obj/effect/landmark/dangerous_situation
 	name = "dangerous situation spawner"
 
-/obj/effect/landmark/dangerous_situation/New()
+/obj/effect/landmark/dangerous_situation/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/landmark/dangerous_situation/LateInitialize()
 	. = ..()
-	/*
+
 	if(!isturf(src.loc))
 		return
 
 	// creates stuff like ruptured gas tanks, and landmines
-	switch(rand(1,2))
+	switch(rand(1,4))
 		if(1)
 			var/newpath = pick(/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/obj/machinery/portable_atmospherics/canister/nitrous_oxide,/obj/machinery/portable_atmospherics/canister/phoron)
 			var/obj/machinery/portable_atmospherics/canister/tank = new newpath()
+			tank.loc = src.loc
 
 			if(!isnull(tank))
 				tank.take_damage(10000) // BANG
@@ -155,5 +160,15 @@
 				prob(25);/obj/effect/mine/emp,
 				prob(10);/obj/effect/mine/stun,
 				prob(10);/obj/effect/mine/incendiary)
-			new newpath()
-	*/
+			var/obj/effect/mine/M = new newpath()
+			M.loc = src.loc
+
+		if(3)
+			var/obj/structure/largecrate/animal/pred/crate = new /obj/structure/largecrate/animal/pred()
+			crate.name = "Kobby Friend Crate [rand(999,9999)]"
+			crate.loc = src.loc
+
+		if(4)
+			var/obj/structure/largecrate/animal/dangerous/crate = new /obj/structure/largecrate/animal/dangerous()
+			crate.name = "Super Kobby Friend Crate [rand(999,9999)]"
+			crate.loc = src.loc

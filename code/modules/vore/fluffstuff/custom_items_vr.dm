@@ -1103,8 +1103,10 @@
 	..()
 	attack_verb = list("bapped", "thwapped", "bonked", "whacked")
 	icon_state = initial(icon_state)
+*/
 
-//SilencedMP5A5 - Serdykov Antoz
+//SilencedMP5A5 - Serdykov Antoz,
+//Outpost 21 edit: Seagha - Five-Five-Six
 /obj/item/device/modkit_conversion/hasd
 	name = "HASD EVA modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a suit and helmet into something a HASD unit can use for EVA operations."
@@ -1116,6 +1118,7 @@
 	to_helmet = /obj/item/clothing/head/helmet/space/void/security/hasd
 	to_suit = /obj/item/clothing/suit/space/void/security/hasd
 
+/*
 //InterroLouis - Kai Highlands
 /obj/item/borg/upgrade/modkit/chassis_mod/kai
 	name = "kai chassis"

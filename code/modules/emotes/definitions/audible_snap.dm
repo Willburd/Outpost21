@@ -15,8 +15,22 @@
 				return TRUE
 	return FALSE
 
+// a pretty awful way to do this, but it's not used anywhere else at all, and I'm not making it a 1% chance to burst into flames for no reason on a single snap
+/mob/living
+	var/lastsnapemotetime = 0
+
 /decl/emote/audible/snap/do_emote(var/atom/user, var/extra_params)
 	if(!can_snap(user))
 		to_chat(user, SPAN_WARNING("You need at least one working hand to snap your fingers."))
 		return FALSE
+	if(isliving(user))
+		// restored snapping fire
+		var/mob/living/L = user
+		var/lasttime = L.lastsnapemotetime
+		L.lastsnapemotetime = world.time
+		if((L.lastsnapemotetime - lasttime) <= 2.5 SECONDS)
+			if(prob(3))
+				L.adjust_fire_stacks(2)
+				L.IgniteMob()
+				L.visible_message("<span class='danger'>[L] bursts into flames!</span>")
 	. = ..()

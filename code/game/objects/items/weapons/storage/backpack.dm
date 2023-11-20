@@ -62,6 +62,8 @@
 		return FALSE
 	return ..()
 
+/* outpost 21 edit - this only has art as a bag?
+// this has been properly redone in code\game\objects\items\weapons\storage\bags.dm
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
@@ -70,6 +72,7 @@
 	w_class = ITEMSIZE_LARGE
 	max_w_class = ITEMSIZE_NORMAL
 	max_storage_space = ITEMSIZE_COST_NORMAL * 100 // can store a ton of shit!
+*/
 
 /obj/item/weapon/storage/backpack/cultpack
 	name = "trophy rack"

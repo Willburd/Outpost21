@@ -166,6 +166,7 @@
 							/obj/item/weapon/stock_parts/gear = 1,
 							/obj/item/weapon/reagent_containers/glass/beaker/large = 1)
 
+/* outpost 21 edit - removed distillery
 /obj/item/weapon/circuitboard/distiller
 	build_path = /obj/machinery/portable_atmospherics/powered/reagent_distillery
 	board_type = new /datum/frame/frame_types/reagent_distillery
@@ -174,6 +175,7 @@
 							/obj/item/weapon/stock_parts/micro_laser = 1,
 							/obj/item/weapon/stock_parts/motor = 2,
 							/obj/item/weapon/stock_parts/gear = 1)
+*/
 
 /obj/item/weapon/circuitboard/teleporter_hub
 	name = T_BOARD("teleporter hub")

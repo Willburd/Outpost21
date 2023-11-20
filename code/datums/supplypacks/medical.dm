@@ -343,6 +343,7 @@
 	containertype = /obj/structure/closet/crate/veymed
 	containername = "Defibrillator crate"
 
+/* outpost 21 edit - removed distillery
 /datum/supply_pack/med/distillery
 	name = "Chemical distiller crate"
 	contains = list(/obj/machinery/portable_atmospherics/powered/reagent_distillery = 1)
@@ -356,6 +357,7 @@
 	cost = 150
 	containertype = /obj/structure/closet/crate/large/xion
 	containername = "Industrial Chemical distiller crate"
+*/
 
 /datum/supply_pack/med/oxypump
 	name = "Oxygen pump crate"

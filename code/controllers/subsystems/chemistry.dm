@@ -42,8 +42,10 @@ SUBSYSTEM_DEF(chemistry)
 			var/list/add_to = instant_reactions_by_reagent // Default to instant reactions list, if something's gone wrong
 //			if(istype(D, /decl/chemical_reaction/fusion)) // TODO: fusion reactions as chemical reactions
 //				add_to = fusion_reactions_by_reagent
+			/* outpost 21 edit - removed distillery
 			if(istype(D, /decl/chemical_reaction/distilling))
 				add_to = distilled_reactions_by_reagent
+			*/
 
 			LAZYINITLIST(add_to[reagent_id])
 			add_to[reagent_id] += D

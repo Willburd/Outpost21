@@ -87,13 +87,13 @@
 
 /datum/trait/positive/darksight
 	name = "Darksight"
-	desc = "Allows you to see a short distance in the dark."
+	desc = "Allows you to see a short distance in the dark, but causes sensitivity to sudden flashes of light."
 	cost = 1
 	var_changes = list("darksight" = 5, "flash_mod" = 1.1)
 
 /datum/trait/positive/darksight_plus
 	name = "Darksight, Major"
-	desc = "Allows you to see in the dark for the whole screen."
+	desc = "Allows you to see in the dark for the whole screen, but causes sensitivity to sudden flashes of light."
 	allowed_species = list(SPECIES_XENOCHIMERA) // outpost 21 edit - most extreme traits are xenochimera locked
 	cost = 2
 	var_changes = list("darksight" = 8, "flash_mod" = 1.2)

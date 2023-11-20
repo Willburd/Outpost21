@@ -27,13 +27,17 @@
 	var/temp_shift = 0 // How much the temperature changes when the reaction occurs.
 
 /decl/chemical_reaction/distilling/can_happen(var/datum/reagents/holder)
-	if(!istype(holder, /datum/reagents/distilling) || !istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery))
+	if(!istype(holder, /datum/reagents/distilling)) // || !istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery)) // outpost 21 edit - removed reagent_distillery
 		return FALSE
 
+	/* outpost 21 edit - removed reagent_distillery
 	// Super special temperature check.
 	var/obj/machinery/portable_atmospherics/powered/reagent_distillery/RD = holder.my_atom
 	if(RD.current_temp < temp_range[1] || RD.current_temp > temp_range[2])
 		return FALSE
+	*/
+
+	// TODO - add a less weird distillery machine or chemistry set that can just be placed on a table or something.
 
 	return ..()
 

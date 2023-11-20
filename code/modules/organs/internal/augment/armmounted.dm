@@ -248,7 +248,9 @@
 		for(var/key in options)
 			choice = key
 	else
-		choice = show_radial_menu(owner, owner, options)
+		// choice = show_radial_menu(owner, owner, options)
+		choice = tgui_input_list(owner, "Configure augmentations.", "Augments", options) // outpost 21 edit - removing radial menu
+
 
 	integrated_object = integrated_tools_by_name[choice]
 

@@ -9,10 +9,11 @@
 	var/ammostate
 	var/list/effects = list()
 
-	var/static/image/radial_image_airlock = image(icon = 'icons/mob/radial.dmi', icon_state = "airlock")
-	var/static/image/radial_image_decon = image(icon= 'icons/mob/radial.dmi', icon_state = "delete")
-	var/static/image/radial_image_grillewind = image(icon = 'icons/mob/radial.dmi', icon_state = "grillewindow")
-	var/static/image/radial_image_floorwall = image(icon = 'icons/mob/radial.dmi', icon_state = "wallfloor")
+	// outpost 21 edit - removing radial menu
+	//var/static/image/radial_image_airlock = image(icon = 'icons/mob/radial.dmi', icon_state = "airlock")
+	//var/static/image/radial_image_decon = image(icon= 'icons/mob/radial.dmi', icon_state = "delete")
+	//var/static/image/radial_image_grillewind = image(icon = 'icons/mob/radial.dmi', icon_state = "grillewindow")
+	//var/static/image/radial_image_floorwall = image(icon = 'icons/mob/radial.dmi', icon_state = "wallfloor")
 
 // Ammo for the (non-electric) RCDs.
 /obj/item/weapon/rcd_ammo
@@ -36,20 +37,20 @@
 
 /obj/item/weapon/rcd/update_icon()
 	var/nearest_ten = round((stored_matter/max_stored_matter)*10, 1)
-	
+
 	//Just to prevent updates every use
 	if(ammostate == nearest_ten)
 		return //No change
 	ammostate = nearest_ten
-	
+
 	cut_overlays()
-	
+
 	//Main sprite update
 	if(!nearest_ten)
 		icon_state = "[initial(icon_state)]_empty"
 	else
 		icon_state = "[initial(icon_state)]"
-	
+
 	add_overlay("[initial(icon_state)]_charge[nearest_ten]")
 
 /obj/item/weapon/rcd/proc/perform_effect(var/atom/A, var/time_taken)
@@ -98,21 +99,21 @@
 	if(user.incapacitated())
 		world.log << "Two"
 		return FALSE
-	
+
 	var/obj/item/rig_module/device/D = loc
 	if(!istype(D) || !D?.holder?.wearer == user)
 		world.log << "Three"
 		return FALSE
-	
+
 	return TRUE
 
 /obj/item/weapon/rcd/attack_self(mob/living/user)
 	..()
 	var/list/choices = list(
-		"Airlock" = radial_image_airlock,
-		"Deconstruct" = radial_image_decon,
-		"Grilles & Windows" = radial_image_grillewind,
-		"Floors & Walls" = radial_image_floorwall
+		"Airlock" = 1,				//radial_image_airlock,
+		"Deconstruct" = 2,			//radial_image_decon,
+		"Grilles & Windows" = 3,	//radial_image_grillewind,
+		"Floors & Walls" = 4		//radial_image_floorwall
 	)
 	/* We don't have these features yet
 	if(upgrade & RCD_UPGRADE_FRAMES)
@@ -134,7 +135,13 @@
 			"Change Window Type" = image(icon = 'icons/mob/radial.dmi', icon_state = "windowtype")
 		)
 	*/
-	var/choice = show_radial_menu(user, user, choices, custom_check = CALLBACK(src, .proc/check_menu, user), tooltips = TRUE)
+
+	if(!in_range(src, user))
+		return
+	// var/choice = show_radial_menu(user, user, choices, custom_check = CALLBACK(src, .proc/check_menu, user), tooltips = TRUE)
+	var/choice = tgui_input_list(user, "Configure RCD settings.", "Mode", choices) // outpost 21 edit - removing radial menu
+	if(!in_range(src, user))
+		return
 	if(!check_menu(user))
 		return
 	switch(choice)

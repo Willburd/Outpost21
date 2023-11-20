@@ -348,6 +348,8 @@
 	. = ..()
 	if(!istype(user) || user.incapacitated())
 		return
+	if(!in_range(src, user))
+		return
 
 	var/static/list/options = list("Blank" = "papermask", "Neutral" = "neutralmask", "Eyes" = "eyemask",
 							"Sleeping" ="sleepingmask", "Heart" = "heartmask", "Core" = "coremask",
@@ -355,9 +357,9 @@
 							"Vertical" = "verticalmask", "Horizontal" = "horizontalmask", "X" ="xmask",
 							"Bugeyes" = "bugmask", "Double" = "doublemask", "Mark" = "markmask")
 
-	var/choice = show_radial_menu(user, src, papermask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
-
-	if(src && choice && !user.incapacitated() && in_range(user,src))
+	// var/choice = show_radial_menu(user, src, papermask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
+	var/choice = tgui_input_list(user, "Choose your mask's design.", "Design", papermask_designs) // outpost 21 - remove radial menus
+	if(src && choice && options[choice] && !user.incapacitated() && in_range(user,src))
 		icon_state = options[choice]
 		user.update_inv_wear_mask()
 		user.update_action_buttons()
@@ -388,12 +390,14 @@
 	. = ..()
 	if(!istype(user) || user.incapacitated())
 		return
+	if(!in_range(src, user))
+		return
 
 	var/static/list/options = list("Joy" = "joy", "Flushed" = "flushed", "Pensive" = "pensive","Angry" ="angry")
 
-	var/choice = show_radial_menu(user, src, joymask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
-
-	if(src && choice && !user.incapacitated() && in_range(user,src))
+	// var/choice = show_radial_menu(user, src, joymask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
+	var/choice = tgui_input_list(user, "Choose your mask's design.", "Design", joymask_designs) // outpost 21 edit - removing radial menu
+	if(src && choice && options[choice] && !user.incapacitated() && in_range(user,src))
 		icon_state = options[choice]
 		user.update_inv_wear_mask()
 		user.update_action_buttons()

@@ -36,12 +36,13 @@
 	var/emagged = 0
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-	var/static/image/radial_image_steel = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-metal")
-	var/static/image/radial_image_glass = image(icon= 'icons/mob/radial_vr.dmi', icon_state = "sheet-glass")
-	var/static/image/radial_image_cloth = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-cloth")
-	var/static/image/radial_image_plastic = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-plastic")
-	var/static/image/radial_image_stone = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-sandstone")
-	var/static/image/radial_image_random = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-random")
+	// outpost 21 edit - removing radial menu
+	//var/static/image/radial_image_steel = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-metal")
+	//var/static/image/radial_image_glass = image(icon= 'icons/mob/radial_vr.dmi', icon_state = "sheet-glass")
+	//var/static/image/radial_image_cloth = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-cloth")
+	//var/static/image/radial_image_plastic = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-plastic")
+	//var/static/image/radial_image_stone = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-sandstone")
+	//var/static/image/radial_image_random = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "sheet-random")
 
 
 /obj/item/weapon/rms/Initialize()
@@ -213,15 +214,20 @@
 
 /obj/item/weapon/rms/attack_self(mob/user)
 	var/list/choices = list(
-		"Steel" = radial_image_steel,
-		"Glass" = radial_image_glass,
-		"Cloth" = radial_image_cloth,
-		"Plastic" = radial_image_plastic,
-		"Stone" = radial_image_stone,
-		"Random" = radial_image_random
+		"Steel" = 1,//radial_image_steel,
+		"Glass" = 2,//radial_image_glass,
+		"Cloth" = 3,//radial_image_cloth,
+		"Plastic" = 4,//radial_image_plastic,
+		"Stone" = 5,//radial_image_stone,
+		"Random" = 6//radial_image_random
 	)
 
-	var/choice = show_radial_menu(user, src, choices, custom_check = CALLBACK(src, .proc/check_menu, user), require_near = TRUE, tooltips = TRUE)
+	if(!in_range(src, user))
+		return
+	// var/choice = show_radial_menu(user, src, choices, custom_check = CALLBACK(src, .proc/check_menu, user), require_near = TRUE, tooltips = TRUE)
+	var/choice = tgui_input_list(user, "Configure RMS settings.", "Mode", choices) // outpost 21 edit - removing radial menu
+	if(!in_range(src, user))
+		return
 	if(!check_menu(user))
 		return
 	switch(choice)

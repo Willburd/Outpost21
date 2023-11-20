@@ -442,8 +442,32 @@
 /obj/item/weapon/storage/part_replacer/AltClick(mob/user)
 	. = ..()
 	if(!reskin_ran)
-		reskin_radial(user)
+		//reskin_radial(user) // outpost 21 edit - removing radial menu
+		if(!LAZYLEN(unique_reskin))
+			return
+		if(!in_range(src, user))
+			return
 
+		var/list/items = list()
+		for(var/reskin_option in unique_reskin)
+			var/image/item_image = image(icon = src.icon, icon_state = unique_reskin[reskin_option])
+			items += list("[reskin_option]" = item_image)
+		sortList(items)
+
+		var/pick = tgui_input_list(user, "Choose an external casing. You can only do this once!", "Casing", items)
+		if(!in_range(src, user))
+			return
+		if(!pick)
+			return
+		if(!unique_reskin[pick])
+			return
+		icon_state = unique_reskin[pick]
+		item_state = unique_reskin[pick]
+		reskin_ran = TRUE
+		to_chat(user, "[src] is now '[pick]'.")
+
+
+/* outpost 21 edit - removing radial menu
 /obj/item/weapon/storage/part_replacer/proc/reskin_radial(mob/M)
 	if(!LAZYLEN(unique_reskin))
 		return
@@ -463,6 +487,7 @@
 	item_state = unique_reskin[pick]
 	reskin_ran = TRUE
 	to_chat(M, "[src] is now '[pick]'.")
+*/
 
 /obj/item/weapon/storage/part_replacer/drop_contents() // hacky-feeling tier-based drop system
 	hide_from(usr)

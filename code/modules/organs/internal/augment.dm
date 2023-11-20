@@ -127,7 +127,8 @@
 		for(var/key in options)
 			choice = key
 	else
-		choice = show_radial_menu(user, src, options)
+		// choice = show_radial_menu(user, src, options)
+		choice = tgui_input_list(user, "Configure augmentations.", "Augments", options) // outpost 21 edit - removing radial menu
 
 	if(!isnull(choice) && options[choice])
 		var/obj/item/organ/internal/augment/A = present_augs[choice]

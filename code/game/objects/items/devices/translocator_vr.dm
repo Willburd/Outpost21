@@ -25,11 +25,11 @@
 	var/list/warned_users = list()
 	var/list/logged_events = list()
 
-	var/list/radial_images = list()
+	//var/list/radial_images = list() // outpost 21 edit - remove radial menu
 
-	var/static/radial_plus = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_plus")
-	var/static/radial_set = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_set")
-	var/static/radial_seton = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_seton")
+	//var/static/radial_plus = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_plus")
+	//var/static/radial_set = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_set")
+	//var/static/radial_seton = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_seton")
 
 /obj/item/device/perfect_tele/Initialize()
 	. = ..()
@@ -43,7 +43,7 @@
 	spk.set_up(5, 0, src)
 	spk.attach(src)
 
-	rebuild_radial_images()
+	//rebuild_radial_images() // outpost 21 edit - remove radial menu
 
 /obj/item/device/perfect_tele/Destroy()
 	// Must clear the beacon's backpointer or we won't GC. Someday maybe do something nicer even.
@@ -64,6 +64,7 @@
 
 	..()
 
+/* outpost 21 edit - removing radial menu
 /obj/item/device/perfect_tele/proc/rebuild_radial_images()
 	radial_images.Cut()
 
@@ -85,6 +86,7 @@
 		var/image/I = image(icon = 'icons/mob/radial_vr.dmi', icon_state = "tl_[index]")
 		I.add_overlay(radial_plus)
 		radial_images["New Beacon"] = I
+*/
 
 /obj/item/device/perfect_tele/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
@@ -125,12 +127,21 @@ This device can be easily used to break ERP preferences due to the nature of tel
 Make sure you carefully examine someone's OOC prefs before teleporting them if you are going to use this device for ERP purposes.
 This device records all warnings given and teleport events for admin review in case of pref-breaking, so just don't do it.
 "},"OOC Warning")
-	var/choice = show_radial_menu(user, radial_menu_anchor, radial_images, custom_check = CALLBACK(src, .proc/check_menu, user), require_near = TRUE, tooltips = TRUE)
 
+	if(!in_range(src, user))
+		return
+	var/list/choicelist = beacons.Copy()
+	choicelist["New Beacon"] = 1
+	//var/choice = show_radial_menu(user, radial_menu_anchor, radial_images, custom_check = CALLBACK(src, .proc/check_menu, user), require_near = TRUE, tooltips = TRUE)
+	var/choice = tgui_input_list(user, "Set, or create a new, beacon.", "Beacons", choicelist) // outpost 21 edit - removing radial menu
+
+	if(!in_range(src, user))
+		return
 	if(!choice)
 		return
-
-	else if(choice == "New Beacon")
+	if(!choicelist[choice])
+		return
+	if(choice == "New Beacon")
 		if(beacons_left <= 0)
 			to_chat(user, "<span class='warning'>The translocator can't support any more beacons!</span>")
 			return
@@ -156,11 +167,12 @@ This device records all warnings given and teleport events for admin review in c
 		if(isliving(user))
 			var/mob/living/L = user
 			L.put_in_any_hand_if_possible(nb)
-		rebuild_radial_images()
+		//rebuild_radial_images() // outpost 21 edit - remove radial menu
 
 	else
 		destination = beacons[choice]
-		rebuild_radial_images()
+		name = initial(name) + "([choice])"
+		//rebuild_radial_images() // outpost 21 edit - remove radial menu
 
 /obj/item/device/perfect_tele/attackby(obj/W, mob/user)
 	if(istype(W,cell_type) && !power_source)

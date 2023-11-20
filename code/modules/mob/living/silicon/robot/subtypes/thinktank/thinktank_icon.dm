@@ -73,7 +73,14 @@
 	for(var/option in options)
 		LAZYSET(options, option, new /image('icons/effects/thinktank_labels.dmi', option))
 
-	var/choice = show_radial_menu(user, painting, options, radius = 42, require_near = TRUE)
+	if(!in_range(src, user))
+		return FALSE
+
+	//var/choice = show_radial_menu(user, painting, options, radius = 42, require_near = TRUE)
+	var/choice = tgui_input_list(user, "What will get painted?", "Painting", options) // outpost 21 edit - removing radial menu
+	if(!in_range(src, user))
+		return FALSE
+
 	if(!choice || QDELETED(src) || QDELETED(painting) || QDELETED(user) || user.incapacitated() || tank_module.loc != src)
 		return FALSE
 
@@ -82,7 +89,14 @@
 		options = list()
 		for(var/decal_name in tank_module.available_decals)
 			LAZYSET(options, decal_name, new /image('icons/effects/thinktank_labels.dmi', decal_name))
-		choice = show_radial_menu(user, painting, options, radius = 42, require_near = TRUE)
+
+		if(!in_range(src, user))
+			return FALSE
+		//choice = show_radial_menu(user, painting, options, radius = 42, require_near = TRUE)
+		choice = tgui_input_list(user, "Apply which decal?", "Paint Decal", options) // outpost 21 edit - removing radial menu
+		if(!in_range(src, user))
+			return FALSE
+
 		if(!choice || QDELETED(src) || QDELETED(painting) || QDELETED(user) || user.incapacitated() || tank_module.loc != src)
 			return FALSE
 

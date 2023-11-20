@@ -416,7 +416,8 @@ I think I covered everything.
 	var/list/options = list("Underbelly","Body","Ears","Mane","Horns","Eyes")
 	for(var/option in options)
 		LAZYSET(options, option, image('icons/effects/bigdragon_labels.dmi', option))
-	var/choice = show_radial_menu(src, src, options, radius = 60)
+	// var/choice = show_radial_menu(src, src, options, radius = 60)
+	var/choice = tgui_input_list(src, "Choose bodypart to customize.", "Customization", options) // outpost 21 edit - removing radial menu
 	if(!choice || QDELETED(src) || src.incapacitated())
 		return FALSE
 	. = TRUE
@@ -426,7 +427,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_under[option]", dir = 4, pixel_x = -48)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			// choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose underbelly.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick underbelly color:","Underbelly Color", overlay_colors["Underbelly"]) as null|color
@@ -439,7 +441,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_body[option]", dir = 4, pixel_x = -48)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			//choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose body.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick body color:","Body Color", overlay_colors["Body"]) as null|color
@@ -452,7 +455,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_ears[option]", dir = 4, pixel_x = -76, pixel_y = -50)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			//choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose ears.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick ear color:","Ear Color", overlay_colors["Ears"]) as null|color
@@ -465,7 +469,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_mane[option]", dir = 4, pixel_x = -76, pixel_y = -50)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			//choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose mane.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick mane color:","Mane Color", overlay_colors["Mane"]) as null|color
@@ -478,7 +483,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_horns[option]", dir = 4, pixel_x = -86, pixel_y = -50)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			//choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose horns.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick horn color:","Horn Color", overlay_colors["Horns"]) as null|color
@@ -491,7 +497,8 @@ I think I covered everything.
 			for(var/option in options)
 				var/image/I = image(icon, "dragon_eyes[option]", dir = 2, pixel_x = -48, pixel_y = -50)
 				LAZYSET(options, option, I)
-			choice = show_radial_menu(src, src, options, radius = 90)
+			//choice = show_radial_menu(src, src, options, radius = 90)
+			choice = tgui_input_list(src, "Choose eyes.", "Customization", options) // outpost 21 edit - removing radial menu
 			if(!choice || QDELETED(src) || src.incapacitated())
 				return 0
 			var/new_color = input("Pick eye color:","Eye Color", overlay_colors["Eyes"]) as null|color

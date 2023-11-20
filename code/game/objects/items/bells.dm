@@ -23,8 +23,19 @@
 		playsound(src, 'sound/effects/deskbell.ogg', 50, 1)
 	..()
 
-/obj/item/weapon/deskbell/attack_hand(mob/user)
+/obj/item/weapon/deskbell/attack_self(mob/user)
+	if(!broken && check_ability(user))
+		ring(user)
+		add_fingerprint(user)
 
+/obj/item/weapon/deskbell/attack_hand(mob/user)
+	if(!isturf(loc) || anchored)
+		if(!broken && check_ability(user))
+			ring(user)
+			add_fingerprint(user)
+	else
+		return ..()
+	/* outpost 21 edit - removing radial menu
 	//This defines the radials and what call we're assiging to them.
 	var/list/options = list()
 	options["examine"] = radial_examine
@@ -59,6 +70,7 @@
 
 		if("pick up")
 			..()
+	*/
 
 /obj/item/weapon/deskbell/proc/ring(mob/user)
 	if(user.a_intent == "harm")
@@ -87,13 +99,19 @@
 /obj/item/weapon/deskbell/attackby(obj/item/W, mob/user, params)
 	if(!istype(W))
 		return
-	if(W.is_wrench() && isturf(loc))
-		if(do_after(5))
-			if(!src) return
-			to_chat(user, "<span class='notice'>You dissasemble the desk bell</span>")
-			new /obj/item/stack/material/steel(get_turf(src), 1)
-			qdel(src)
+	if(isturf(loc))
+		if(W.is_wrench())
+			anchored = !anchored
+			playsound(src, W.usesound, 50, 1)
+			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] \the [src].</span>")
 			return
+		if(W.is_screwdriver())
+			if(do_after(5))
+				if(!src) return
+				to_chat(user, "<span class='notice'>You dissasemble the desk bell</span>")
+				new /obj/item/stack/material/steel(get_turf(src), 1)
+				qdel(src)
+				return
 	if(!broken)
 		ring(user)
 

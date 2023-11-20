@@ -558,6 +558,7 @@
 	if(M == occupant && radio.broadcasting)
 		radio.talk_into(M, message_pieces)
 
+/* outpost 21 edit - removing radial menu
 /obj/mecha/proc/check_occupant_radial(var/mob/user)
 	if(!user)
 		return FALSE
@@ -598,7 +599,7 @@
 			playsound(src, 'sound/mecha/heavylightswitch.ogg', 50, 1)
 		if("View Stats")
 			occupant << browse(src.get_stats_html(), "window=exosuit")
-
+*/
 
 ////////////////////////////
 ///// Action processing ////
@@ -629,8 +630,12 @@
 /obj/mecha/proc/click_action(atom/target,mob/user, params)
 	if(!src.occupant || src.occupant != user ) return
 	if(user.stat) return
+	/* outpost 21 edit - removing radial menu
 	if(target == src && user == occupant)
 		show_radial_occupant(user)
+		return
+	*/
+	if(target == src && user == occupant)
 		return
 	if(state)
 		occupant_message("<font color='red'>Maintenance protocols in effect</font>")
@@ -1074,8 +1079,12 @@
 	return
 
 /obj/mecha/attack_hand(mob/user as mob)
+	/* outpost 21 edit - radial menu removal
 	if(user == occupant)
 		show_radial_occupant(user)
+		return
+	*/
+	if(user == occupant)
 		return
 
 	user.setClickCooldown(user.get_attack_speed())

@@ -175,7 +175,7 @@
 					fuelamount = 2000 // lets not destroy the server
 				var/flashboom	= fuelamount / 75
 				var/breakrange 	= fuelamount / 500
-				var/smallboom	= fuelamount / 300
+				var/smallboom	= fuelamount / 250
 				var/bigboom 	= fuelamount / 200
 				to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, you have made an unfortunate mistake.</span>")
 				explosion(F.loc, breakrange, smallboom, bigboom, flashboom)

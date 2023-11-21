@@ -119,10 +119,10 @@
 
 	// outpost 21 edit begin - Micros are no longer immune to disposals
 	//Did they put a micro in it?
-	if(istype(I,/obj/item/weapon/holder/micro))
-		var/obj/item/weapon/holder/micro/micro_holder = I
-		if(ismob(micro_holder.held_mob))
-			var/mob/GM = micro_holder.held_mob
+	if(istype(I,/obj/item/weapon/holder))
+		var/obj/item/weapon/holder/thing_holder = I
+		if(ismob(thing_holder.held_mob))
+			var/mob/GM = thing_holder.held_mob
 			for (var/mob/V in viewers(usr))
 				V.show_message("[usr] places [GM.name] into the disposal.", 3)
 			if(do_after(usr, 20))
@@ -132,10 +132,10 @@
 				GM.forceMove(src)
 				for (var/mob/C in viewers(src))
 					C.show_message("<font color='red'>[GM.name] has been placed in the [src] by [user].</font>", 3)
-				qdel(micro_holder)
+				qdel(thing_holder)
 
-				add_attack_logs(user,GM,"Disposals dunked")
-		return
+				add_attack_logs(user,GM,"Disposals micro-dunked")
+			return
 	// outpost 21 edit end
 
 	var/obj/item/weapon/grab/G = I

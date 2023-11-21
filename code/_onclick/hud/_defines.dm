@@ -111,7 +111,7 @@
 #define ui_ammo_hud4 "EAST-1:28,CENTER+4:31"
 
 //Middle right (status indicators)
-#define ui_temp "EAST-1:28,CENTER-2:13"
+#define ui_moveupdown "EAST-1:28,CENTER-2:13"
 #define ui_health "EAST-1:28,CENTER-1:15"
 #define ui_internal "EAST-1:28,CENTER:17"
 									//borgs
@@ -166,7 +166,6 @@
 #define ui_ghost_reenter_corpse "SOUTH:6,CENTER:24"
 #define ui_ghost_teleport "SOUTH:6,CENTER+1:24"
 #define ui_ghost_pai "SOUTH: 6,CENTER+2:24"
-#define ui_ghost_updown "SOUTH: 6,CENTER+3:24"
 
 // NIF Soulcatcher guest ones
 #define ui_nifsc_reenter "SOUTH:6,CENTER-3:24"

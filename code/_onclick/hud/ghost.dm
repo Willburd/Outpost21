@@ -135,12 +135,12 @@
 */
 
 	using = new /obj/screen/ghost/up()
-	using.screen_loc = ui_ghost_updown
+	using.screen_loc = ui_moveupdown
 	using.hud = src
 	adding += using
 
 	using = new /obj/screen/ghost/down()
-	using.screen_loc = ui_ghost_updown
+	using.screen_loc = ui_moveupdown
 	using.hud = src
 	adding += using
 

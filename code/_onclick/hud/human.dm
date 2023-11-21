@@ -257,6 +257,18 @@
 		healths.screen_loc = ui_health
 		hud_elements |= healths
 
+	// outpost 21 edit begin - add up/down buttons
+	using = new /obj/screen/mob_living/up()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	hud_elements |= using
+
+	using = new /obj/screen/mob_living/down()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	hud_elements |= using
+	// outpost 21 edit end
+
 	//VOREStation Addition begin
 	shadekin_display = new /obj/screen/shadekin()
 	shadekin_display.screen_loc = ui_shadekin_display
@@ -364,3 +376,25 @@
 /obj/screen/wizard/energy
 	name = "energy"
 	icon_state = "wiz_energy"
+
+/obj/screen/mob_living/up
+	icon = 'icons/mob/screen_ghost.dmi' // TEMP - get customizable HUD colored buttons in soonish
+	name = "Move Upwards"
+	desc = "Move up a z-level."
+	icon_state = "up"
+
+/obj/screen/mob_living/up/Click()
+	..()
+	var/mob/living/L = usr
+	L.zMove(UP)
+
+/obj/screen/mob_living/down
+	icon = 'icons/mob/screen_ghost.dmi' // TEMP - get customizable HUD colored buttons in soonish
+	name = "Move Downwards"
+	desc = "Move down a z-level."
+	icon_state = "down"
+
+/obj/screen/mob_living/down/Click()
+	..()
+	var/mob/living/L = usr
+	L.zMove(DOWN)

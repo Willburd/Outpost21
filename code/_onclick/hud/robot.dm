@@ -11,7 +11,7 @@ var/obj/screen/robot_inventory
 
 	var/list/adding = list()
 	var/list/other = list()
-	
+
 	HUD.adding = adding
 	HUD.other = other
 
@@ -157,6 +157,19 @@ var/obj/screen/robot_inventory
 	radio_use_icon = new /obj/screen/gun/radio(null)
 	radio_use_icon.icon = HUD.ui_style
 	radio_use_icon.alpha = HUD.ui_alpha
+
+
+	// outpost 21 edit begin - add up/down buttons
+	using = new /obj/screen/mob_living/up()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	adding += using
+
+	using = new /obj/screen/mob_living/down()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	adding += using
+	// outpost 21 edit end
 
 	if(client && apply_to_client)
 		client.screen = list()

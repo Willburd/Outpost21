@@ -158,7 +158,17 @@
 	healths.screen_loc = ui_health
 	hud_elements |= healths
 
+	// outpost 21 edit begin - add up/down buttons
+	using = new /obj/screen/mob_living/up()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	hud_elements |= using
 
+	using = new /obj/screen/mob_living/down()
+	using.screen_loc = ui_moveupdown
+	using.hud = src
+	hud_elements |= using
+	// outpost 21 edit end
 
 	pain = new /obj/screen( null )
 

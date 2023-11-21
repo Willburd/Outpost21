@@ -164,10 +164,11 @@ YW change end */
 	cost = 0
 	var_changes = list("bloodsucker" = TRUE)
 	excludes = list(/datum/trait/neutral/bloodsucker)
-*/
+
 /datum/trait/neutral/bloodsucker_freeform/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
 	H.verbs |= /mob/living/carbon/human/proc/bloodsuck
+*/
 
 /datum/trait/neutral/succubus_drain
 	name = "Succubus Drain"

@@ -1618,16 +1618,15 @@
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth
 
-		/* outpost 21 - custom race removal
 		//VOREStation Add - Vampire hunger alert
-		else if(get_species() == SPECIES_CUSTOM)
-			var/datum/species/custom/C = species
+		else // if(get_species() == SPECIES_CUSTOM) // outpost 21 edit - custom species removal
+			//var/datum/species/custom/C = species
+			var/datum/species/C = species
 			if(/datum/trait/neutral/bloodsucker in C.traits)
 				fat_alert = /obj/screen/alert/fat/vampire
 				hungry_alert = /obj/screen/alert/hungry/vampire
 				starving_alert = /obj/screen/alert/starving/vampire
 		//VOREStation Add End
-		*/
 
 		switch(nutrition)
 			if(450 to INFINITY)

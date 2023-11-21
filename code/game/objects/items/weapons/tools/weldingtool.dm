@@ -162,11 +162,30 @@
 			to_chat(user, "<span class='notice'>[src] doesn't use fuel.</span>")
 			return
 		else
-			message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
-			log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
 			//Yawn edit: removed weldertank booms
-			to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, you are gaypwnd.</span>")
+			//to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, you are gaypwnd.</span>")
 			//End yawn edit
+			// outpost 21 edit - lol but yes..
+			var/obj/structure/reagent_dispensers/fueltank/F = O
+			var/fuelamount = F.reagents.get_reagent_amount("fuel")
+			if(fuelamount > 10)
+				message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool. Fuel size [fuelamount].")
+				log_game("[key_name(user)] triggered a fueltank explosion with a welding tool. Fuel size [fuelamount].")
+				if(fuelamount > 2000)
+					fuelamount = 2000 // lets not destroy the server
+				var/flashboom	= fuelamount / 75
+				var/breakrange 	= fuelamount / 500
+				var/smallboom	= fuelamount / 300
+				var/bigboom 	= fuelamount / 200
+				to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, you have made an unfortunate mistake.</span>")
+				explosion(F.loc, breakrange, smallboom, bigboom, flashboom)
+				F.Destroy()
+				user.ghostize()
+				user.gib() // lol no
+			else
+				message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool, but it was empty.")
+				log_game("[key_name(user)] triggered a fueltank explosion with a welding tool, but it was empty.")
+				to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize... This is empty.</span>")
 			return
 	if (src.welding)
 		remove_fuel(1)

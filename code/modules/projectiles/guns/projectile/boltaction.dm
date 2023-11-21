@@ -118,6 +118,7 @@
 /*
  * Scoped Rifle
  */
+/* outpost 21 edit - Scoping on this is completely non-functional, and personal crafting to attach a scope was pointless... I am speachless.
 /obj/item/weapon/gun/projectile/shotgun/pump/rifle/scoped
 	name = "scoped bolt-action rifle"
 	desc = "The Weissen Company Type-19 is a modern interpretation of an almost ancient weapon design. \
@@ -148,3 +149,4 @@
 	set category = VERBTAB_OBJECT
 	set name = "Use Scope"
 	set popup_menu = 1
+*/

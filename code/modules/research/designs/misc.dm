@@ -75,6 +75,7 @@
 	build_path = /obj/item/device/spaceflare
 	sort_string = "TBAAC"
 
+/* outpost 21 edit - this is entirely non-functional
 /datum/design/item/general/riflescope
 	name = "rifle scope"
 	desc = "A scope that can be mounted to certain rifles."
@@ -83,6 +84,7 @@
 	materials = list(MAT_STEEL = 4000, MAT_GLASS = 4000)
 	build_path = /obj/item/device/binoculars/scope
 	sort_string = "TBAAD"
+*/
 
 /datum/design/item/general/advmop
 	name = "advanced mop"

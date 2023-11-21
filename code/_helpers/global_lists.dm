@@ -269,7 +269,9 @@ GLOBAL_LIST_EMPTY(mannequins)
 		var/datum/digest_mode/DM = new T
 		GLOB.digest_modes[DM.id] = DM
 	// VOREStation Add End
+	/* outpost 21 - edit, removed personal crafting menu in favor of object interactions
 	init_crafting_recipes(GLOB.crafting_recipes)
+	*/
 
 	// Custom species traits
 	paths = subtypesof(/datum/trait)
@@ -305,6 +307,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 	return 1 // Hooks must return 1
 
 
+/* outpost 21 - edit, removed personal crafting menu in favor of object interactions
 /// Inits the crafting recipe list, sorting crafting recipe requirements in the process.
 /proc/init_crafting_recipes(list/crafting_recipes)
 	for(var/path in subtypesof(/datum/crafting_recipe))
@@ -312,6 +315,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 		recipe.reqs = sortList(recipe.reqs, /proc/cmp_crafting_req_priority)
 		crafting_recipes += recipe
 	return crafting_recipes
+*/
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()
 

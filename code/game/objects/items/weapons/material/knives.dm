@@ -172,6 +172,14 @@
 	sharp = TRUE
 	default_material = MAT_FLINT
 
+/obj/item/weapon/material/knife/stone/handle
+	name = "simple knife"
+	desc = "A crude blade with a handle. Useful for cutting, stabbing, slicing, and even shearing."
+	icon_state = "stone_wood_knife"
+	dulled = FALSE
+	fragile = FALSE
+
+/* outpost 21 edit - removed these, ebcause they describe too much to be useful in crafting, replaced with above
 /obj/item/weapon/material/knife/stone/wood
 	name = "stone knife"
 	desc = "A crude blade of flint with a wooden handle, secured with plant fibers twined into sturdy ropes. Useful for cutting, stabbing, slicing, and even shearing."
@@ -185,3 +193,4 @@
 	icon_state = "stone_bone_knife"
 	dulled = FALSE
 	fragile = FALSE
+*/

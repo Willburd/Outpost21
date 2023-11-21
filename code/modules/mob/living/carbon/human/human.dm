@@ -53,7 +53,9 @@
 		sync_organ_dna()
 
 	//verbs |= /mob/living/proc/toggle_selfsurgery //VOREStation Removal
+	/* outpost 21 - edit, removed personal crafting menu in favor of object interactions
 	AddComponent(/datum/component/personal_crafting)
+	*/
 
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src

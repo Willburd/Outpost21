@@ -192,6 +192,121 @@ var/last_chew = 0
 /obj/item/weapon/handcuffs/cable/tape/cyborg
 	dispenser = TRUE
 
+// outpost 21 edit begin - cable restraint crafting, to replace personal crafting! Basically just a bunch of verbs...
+/obj/item/weapon/handcuffs/cable/verb/craft_spear()
+	set name = "Bind Spear"
+	set category = VERBTAB_OBJECT
+	var/mob/M = usr
+
+	if(can_craft(M))
+		var/obj/item/blade = (find_crafting_material( M, /obj/item/weapon/material/butterflyblade) || find_crafting_material( M, /obj/item/weapon/material/shard) || find_crafting_material( M, /obj/item/stack/material/flint) || find_crafting_material( M, /obj/item/weapon/material/knife/stone))
+		var/obj/item/handle = (find_crafting_material( M, /obj/item/stack/rods) || find_crafting_material( M, /obj/item/stack/material/stick))
+
+		if(blade && handle)
+			M.visible_message( "\The [M] starts binding something together with \the [src].", "<span class='notice'>You start using \the [src] to bind the [blade.name] and [handle.name] together.</span>")
+			if(do_after( M, 20 SECONDS,src, TRUE))
+				produce_craft( M, /obj/item/weapon/material/twohanded/spear, blade, handle)
+		else if(!blade)
+			to_chat(M, "<span class='warning'>Nothing to use as a blade.</span>")
+		else if(!handle)
+			to_chat(M, "<span class='warning'>Nothing to use as a handle.</span>")
+
+/obj/item/weapon/handcuffs/cable/verb/craft_knife()
+	set name = "Bind Knife"
+	set category = VERBTAB_OBJECT
+	var/mob/M = usr
+
+	if(can_craft(M))
+		var/obj/item/blade = (find_crafting_material( M, /obj/item/weapon/material/butterflyblade) || find_crafting_material( M, /obj/item/weapon/material/shard) || find_crafting_material( M, /obj/item/stack/material/flint) || find_crafting_material( M, /obj/item/weapon/material/knife/stone))
+		var/obj/item/handle = (find_crafting_material( M, /obj/item/stack/material/stick) || find_crafting_material( M, /obj/item/stack/medical/crude_pack) || find_crafting_material( M, /obj/item/stack/medical/bruise_pack) || find_crafting_material( M, /obj/item/weapon/reagent_containers/glass/rag))
+
+		if(blade && handle)
+			M.visible_message( "\The [M] starts binding something together with \the [src].", "<span class='notice'>You start using \the [src] to bind the [blade.name] and [handle.name] together.</span>")
+			if(do_after( M, 10 SECONDS,src, TRUE))
+				produce_craft( M, /obj/item/weapon/material/knife/stone/handle, blade, handle)
+		else if(!blade)
+			to_chat(M, "<span class='warning'>Nothing to use as a blade.</span>")
+		else if(!handle)
+			to_chat(M, "<span class='warning'>Nothing to use as a handle.</span>")
+
+/obj/item/weapon/handcuffs/cable/verb/craft_axe()
+	set name = "Bind Axe"
+	set category = VERBTAB_OBJECT
+	var/mob/M = usr
+
+	if(can_craft(M))
+		var/obj/item/blade = (find_crafting_material( M, /obj/item/stack/material/flint) || find_crafting_material( M, /obj/item/weapon/material/knife/stone))
+		var/obj/item/handle = (find_crafting_material( M, /obj/item/stack/rods) || find_crafting_material( M, /obj/item/stack/material/stick))
+
+		if(blade && handle)
+			M.visible_message( "\The [M] starts binding something together with \the [src].", "<span class='notice'>You start using \the [src] to bind the [blade.name] and [handle.name] together.</span>")
+			if(do_after( M, 15 SECONDS,src, TRUE))
+				produce_craft( M, /obj/item/weapon/material/knife/machete/hatchet/stone, blade, handle)
+				Destroy() // end!
+		else if(!blade)
+			to_chat(M, "<span class='warning'>Nothing to use as a head.</span>")
+		else if(!handle)
+			to_chat(M, "<span class='warning'>Nothing to use as a handle.</span>")
+
+/obj/item/weapon/handcuffs/cable/proc/can_craft( var/mob/M)
+	if(!M.IsAdvancedToolUser())
+		to_chat(M, "<span class='warning'>This is too complex of an action for your tiny brain.</span>")
+		return FALSE
+	if(M.stat)//Must be concious
+		return FALSE
+	if(!M.Adjacent(src))
+		return FALSE
+	return TRUE
+
+/obj/item/weapon/handcuffs/cable/proc/find_crafting_material( var/mob/M, var/obj/item/thing)
+	// locate a thing, either in our hands
+	if(isliving(M))
+		var/mob/living/L = M
+		if(istype(L.get_right_hand(),thing))
+			return L.get_right_hand()
+		if(istype(L.get_left_hand(),thing))
+			return L.get_left_hand()
+	//  or at a mob's location...
+	for(var/obj/item/I in M.loc.contents)
+		if(istype(I,thing))
+			return I
+
+	return null
+
+/obj/item/weapon/handcuffs/cable/proc/produce_craft( var/mob/M, var/obj/item/result, var/obj/item/partA, var/obj/item/partB)
+	if(!can_craft( M) || !M.Adjacent(partA) || !M.Adjacent(partB))
+		return
+
+	// combine objects, and drop the result, before removing the materials
+	var/obj/item/O = new result(M.loc)
+	O.desc += " Appears to be a [partA.name] and [partB.name], bound together with [src.name]."
+	if(istype(O,/obj/item/weapon/material))
+		var/obj/item/weapon/material/W = O
+		// assign blade material from partA
+		if(istype(partA,/obj/item/weapon/material/))
+			var/obj/item/weapon/material/S = partA
+			W.set_material(S.material.name)
+		if(istype(partA,/obj/item/stack/material/))
+			var/obj/item/stack/material/S = partA
+			W.set_material(S.material.name)
+	consume_material( partA)
+	consume_material( partB)
+	Destroy() // end!
+
+	// pickup thing!
+	if(!M.get_active_hand())
+		M.put_in_active_hand(O)
+
+/obj/item/weapon/handcuffs/cable/proc/consume_material( var/obj/item/material)
+	if(istype(material,/obj/item/stack))
+		// reduce stacks till empty
+		var/obj/item/stack/S = material
+		S.use(1) // only ever USES ONE, so if you're using this... any stack should have at least one anyway?
+	else
+		// most others are probably just destroyed....
+		material.Destroy()
+// outpost 21 edit end
+
 //Legcuffs. Not /really/ handcuffs, but its close enough.
 /obj/item/weapon/handcuffs/legcuffs
 	name = "legcuffs"

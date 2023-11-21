@@ -36,13 +36,15 @@
 		new /datum/stack_recipe("pouch, supplies", /obj/item/weapon/storage/pouch/eng_supply, 10, time = 20 SECONDS, pass_stack_color = FALSE, recycle_material = "[name]"), //vorestation Add
 		new /datum/stack_recipe("pouch, medical", /obj/item/weapon/storage/pouch/medical, 10, time = 20 SECONDS, pass_stack_color = FALSE, recycle_material = "[name]"), //vorestation Add
 		new /datum/stack_recipe("pouch, flare", /obj/item/weapon/storage/pouch/flares, 10, time = 20 SECONDS, pass_stack_color = FALSE, recycle_material = "[name]"), //vorestation Add
-		new /datum/stack_recipe("crude bandage", /obj/item/stack/medical/crude_pack, 1, time = 2 SECONDS, pass_stack_color = TRUE, recycle_material = "[name]"),
+		new /datum/stack_recipe("crude bandage", /obj/item/stack/medical/crude_pack, 1, 5, 5, time = 2 SECONDS, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("empty sandbag", /obj/item/stack/emptysandbag, 2, time = 2 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
 		new /datum/stack_recipe("painting canvas (11x11)", /obj/item/canvas, 2, time = 2 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]"),
 		new /datum/stack_recipe("painting canvas (19x19)", /obj/item/canvas/nineteen_nineteen, 3, time = 2 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]"),
 		new /datum/stack_recipe("painting canvas (23x19)", /obj/item/canvas/twentythree_nineteen, 4, time = 3 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]"),
 		new /datum/stack_recipe("painting canvas (23x23), AI", /obj/item/canvas/twentythree_twentythree, 5, time = 3 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]"),
-		new /datum/stack_recipe("painting canvas (24x24)", /obj/item/canvas/twentyfour_twentyfour, 6, time = 3 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]")
+		new /datum/stack_recipe("painting canvas (24x24)", /obj/item/canvas/twentyfour_twentyfour, 6, time = 3 SECONDS, pass_stack_color = FALSE, supplied_material = "[name]"),
+		new /datum/stack_recipe("primitive clothes", /obj/item/clothing/under/primitive, 6, time = 9 SECONDS, recycle_material = "[name]"),
+		new /datum/stack_recipe("primitive shoes", /obj/item/clothing/shoes/primitive, 3, time = 6 SECONDS, recycle_material = "[name]")
 	)
 
 /datum/material/cloth/syncloth
@@ -153,3 +155,8 @@
 	pass_stack_colors = TRUE
 	hardness = 5
 	integrity = 5
+
+/datum/material/fibers/generate_recipes()
+	..()
+	recipes += list(new /datum/stack_recipe("cloth bolt", /obj/item/stack/material/cloth, 3, time = 40, recycle_material = "[name]"),
+					new /datum/stack_recipe("rope bindings", /obj/item/weapon/handcuffs/cable/plantfiber, 3, time = 60, recycle_material = "[name]"))

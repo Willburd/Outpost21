@@ -46,6 +46,13 @@
 	release_force = 20
 	release_speed = 15
 	var/drawn = FALSE
+	var/hasstring = TRUE // for crafting
+
+/obj/item/weapon/gun/launcher/crossbow/bow/stringless/New()
+	// crafted varient that starts without a string
+	. = ..()
+	hasstring = FALSE
+	icon_state = "[initial(icon_state)]_nostring"
 
 /obj/item/weapon/gun/launcher/crossbow/bow/update_release_force(obj/item/projectile)
 	return 0
@@ -86,6 +93,10 @@
 		draw(user)
 
 /obj/item/weapon/gun/launcher/crossbow/bow/draw(var/mob/user)
+	if(!hasstring)
+		to_chat(user, "\the [src] does not have a string yet.")
+		return
+
 	if(!bolt)
 		to_chat(user, "You don't have anything nocked to [src].")
 		return
@@ -101,6 +112,16 @@
 	update_icon()
 
 /obj/item/weapon/gun/launcher/crossbow/bow/attackby(obj/item/W as obj, mob/user)
+	if(!hasstring)
+		if(istype(W,/obj/item/weapon/handcuffs/cable))
+			hasstring = TRUE
+			W.Destroy()
+			update_icon()
+			to_chat(user, "you string \the [src] using \the [W].")
+		else
+			to_chat(user, "\the [src] does not have a string yet.")
+		return
+
 	if(!bolt && istype(W,/obj/item/weapon/arrow/standard))
 		user.drop_from_inventory(W, src)
 		bolt = W
@@ -108,7 +129,9 @@
 		update_icon()
 
 /obj/item/weapon/gun/launcher/crossbow/bow/update_icon()
-	if(drawn)
+	if(!hasstring)
+		icon_state = "[initial(icon_state)]_nostring"
+	else if(drawn)
 		icon_state = "[initial(icon_state)]_firing"
 	else if(bolt)
 		icon_state = "[initial(icon_state)]_loaded"

@@ -37,8 +37,8 @@
 	CheckParts()
 	FireModeModify()
 
-/obj/item/weapon/gun/energy/modular/CheckParts() //What parts do we have inside us, and how good are they?
-	..()
+/obj/item/weapon/gun/energy/modular/proc/CheckParts() //What parts do we have inside us, and how good are they?
+	//..() outpost 21 - edit, removed personal crafting menu in favor of object interactions
 	capacitor_rating = 0
 	laser_rating = 0
 	manipulator_rating = 0

@@ -20,7 +20,9 @@
 	icon_state = "spyglass"
 	slot_flags = SLOT_BELT
 
+/* outpost 21 edit - this is entirely non-functional
 /obj/item/device/binoculars/scope
 	name = "rifle scope"
 	desc = "It's a rifle scope. Would be better if it were actually attached to a rifle."
 	icon_state = "rifle_scope"
+*/

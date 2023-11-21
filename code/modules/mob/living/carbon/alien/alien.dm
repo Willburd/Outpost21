@@ -21,6 +21,7 @@
 	var/can_namepick_as_adult = 0
 	var/adult_name
 	var/instance_num
+	var/randomize_name = TRUE
 
 /mob/living/carbon/alien/Initialize()
 	. = ..()
@@ -31,7 +32,8 @@
 	verbs += /mob/living/proc/hide
 
 	instance_num = rand(1, 1000)
-	name = "[initial(name)] ([instance_num])"
+	if(randomize_name)
+		name = "[initial(name)] ([instance_num])"
 	real_name = name
 	regenerate_icons()
 
@@ -66,4 +68,3 @@
 		else if(ending == "?")
 			verb = "hisses curiously"
 	return verb
-

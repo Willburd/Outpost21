@@ -30,6 +30,16 @@
 
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
 	if(!destination)
+		if(direction == DOWN && isliving(src))
+			// attempt vent crawling
+			var/mob/living/L = src
+			if(/mob/living/proc/ventcrawl in L.verbs)
+				if(L.can_ventcrawl())
+					var/pipe = L.start_ventcrawl()
+					if(pipe)
+						L.handle_ventcrawl()
+						return 1
+		// otherwise if ventcrawl fails, or not a ventcrawler
 		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
 		return 0
 
@@ -43,6 +53,16 @@
 			return ladder.climbLadder(src, (direction == UP ? ladder.target_up : ladder.target_down))
 
 	if(!start.CanZPass(src, direction))
+		if(direction == DOWN && isliving(src))
+			// attempt vent crawling
+			var/mob/living/L = src
+			if(/mob/living/proc/ventcrawl in L.verbs)
+				if(L.can_ventcrawl())
+					var/pipe = L.start_ventcrawl()
+					if(pipe)
+						L.handle_ventcrawl()
+						return 1
+		// otherwise if ventcrawl fails, or not a ventcrawler
 		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
 		return 0
 

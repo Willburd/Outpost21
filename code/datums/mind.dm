@@ -526,9 +526,11 @@
 	. = ..()
 	mind.assigned_role = "slime"
 
+/* outpost 21 edit - xenomorph removal
 /mob/living/carbon/alien/larva/mind_initialize()
 	. = ..()
 	mind.special_role = "Larva"
+*/
 
 //AI
 /mob/living/silicon/ai/mind_initialize()

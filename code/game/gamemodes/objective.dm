@@ -598,12 +598,13 @@ var/global/list/all_objectives = list()
 			continue
 		captured_amount += worth
 
+	/* outpost 21 edit - xenomorph removal
 	for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 		if(M.stat==2)
 			captured_amount+=0.5
 			continue
 		captured_amount+=1
-
+	*/
 
 	if(captured_amount<target_amount)
 		return 0

@@ -29,7 +29,7 @@
 /datum/event_container/mundane/New()
 	available_events = list(
 		// Severity level, event name, even type, base weight, role weights, one shot, min weight, max weight. Last two only used if set and non-zero
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Nothing",			/datum/event/nothing,			100),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Nothing",			/datum/event/nothing,			70),
 		// Bluescreens APCs, but they still work
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "APC Damage",		/datum/event/apc_damage,		20, 	list(ASSIGNMENT_ENGINEER = 20)),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Brand Intelligence",/datum/event/brand_intelligence, 0, 	list(ASSIGNMENT_ENGINEER = 10),	1),
@@ -49,14 +49,9 @@
 		// Spawns mice, lizards, or dud spiderlings
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation",/datum/event/infestation, 		50,		list(ASSIGNMENT_JANITOR = 5), 1),
 		// Rot only weakens walls, not destroy them
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Aurora Caelus",		/datum/event/aurora_caelus,		2,		list(), 1), YW EDIT
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30), 1)
 	)
 	add_disabled_events(list(
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Aurora Caelus",		/datum/event/aurora_caelus,		2,		list(), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Ian Storm",			/datum/event/ianstorm,	 		1,		list(), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Lost Carp",			/datum/event/carp_migration, 	0, 		list(ASSIGNMENT_SECURITY = 10), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Supply Demand",		/datum/event/supply_demand,		0,		list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SCIENCE = 15, ASSIGNMENT_GARDENER = 10, ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_MEDICAL = 15), 1),
 	))
 
 /datum/event_container/moderate/New()
@@ -88,40 +83,32 @@
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Grub Infestation",			/datum/event/grub_infestation,			25,		list(ASSIGNMENT_SECURITY = 10, ASSIGNMENT_ENGINEER = 30), 1, min_jobs = list(ASSIGNMENT_SECURITY = 1, ASSIGNMENT_ENGINEER = 1)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Pod Drop",			/datum/event/drone_pod_drop,			10,		list(ASSIGNMENT_SCIENTIST = 40), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Appendicitis", 			/datum/event/spontaneous_appendicitis, 	10,		list(ASSIGNMENT_MEDICAL = 30), 1), //YW EDIT, Readde
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Maintenance Predator",		/datum/event/maintenance_predator,		100,	list(ASSIGNMENT_ANY = 5), 0),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Malignant Organ", 			/datum/event/spontaneous_malignant_organ,10,	list(ASSIGNMENT_MEDICAL = 30), 1),
+		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Maintenance Predator",		/datum/event/maintenance_predator,		100,	list(ASSIGNMENT_ANY = 5), 0),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Jellyfish School",			/datum/event/jellyfish_migration,		10,		list(ASSIGNMENT_ANY = 1, ASSIGNMENT_SECURITY = 15, ASSIGNMENT_MEDICAL = 3), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Supply Demand",			/datum/event/supply_demand,				0,		list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SCIENCE = 15, ASSIGNMENT_GARDENER = 10, ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_MEDICAL = 15), 3), //YW EDIT, Readded
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Wormholes",				/datum/event/wormholes, 				20),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Space Vines",				/datum/event/spacevine, 				15,		list(ASSIGNMENT_ENGINEER = 7, ASSIGNMENT_GARDENER = 2), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Atmos Leak",				/datum/event/atmos_leak, 				20,		list(ASSIGNMENT_ENGINEER = 25), 1),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Escaped Slimes",			/datum/event/escaped_slimes, 			0,		list(ASSIGNMENT_SCIENCE = 10, ASSIGNMENT_ENGINEER = 40, ASSIGNMENT_SECURITY = 30), 1, min_jobs = list(ASSIGNMENT_MEDICAL = 3)),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Escaped Slimes",			/datum/event/escaped_slimes, 			0,		list(ASSIGNMENT_SCIENCE = 10, ASSIGNMENT_ENGINEER = 40, ASSIGNMENT_SECURITY = 30), 1, min_jobs = list(ASSIGNMENT_MEDICAL = 3))
 	)
 	add_disabled_events(list(
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Jellyfish School",			/datum/event/jellyfish_migration,		5,		list(ASSIGNMENT_ANY = 1, ASSIGNMENT_SECURITY = 5, ASSIGNMENT_MEDICAL = 3), 1),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Meteor Shower",			/datum/event/meteor_wave,				30,		list(ASSIGNMENT_ENGINEER = 20)),
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Random Antagonist",		/datum/event/random_antag,		 		2.5,	list(ASSIGNMENT_SECURITY = 1), 1, 0, 5),
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Carp School",				/datum/event/carp_migration,			0, 		list(ASSIGNMENT_SECURITY = 30), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Supply Demand",			/datum/event/supply_demand,				0,		list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SCIENCE = 15, ASSIGNMENT_GARDENER = 10, ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_MEDICAL = 15), 1), YW EDIT
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Solar Storm",				/datum/event/solar_storm, 				30,		list(ASSIGNMENT_ENGINEER = 40, ASSIGNMENT_SECURITY = 30), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Space Dust",				/datum/event/dust,	 					0,		list(ASSIGNMENT_ENGINEER = 20), 1, 0, 50),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Gravity Failure",			/datum/event/gravity,	 				0,		list(ASSIGNMENT_ENGINEER = 60), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MODERATE, "Radiation Storm",			/datum/event/radiation_storm, 			50,		list(ASSIGNMENT_MEDICAL = 50), 1), //YW EDIT, Readded
 	))
 
 /datum/event_container/major/New()
 	available_events = list(
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",				/datum/event/nothing,				30),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Meteor Wave",			/datum/event/meteor_wave,			12,		list(ASSIGNMENT_ENGINEER = 15),	5),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Carp Migration",		/datum/event/carp_migration,		12,		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 5), 1, min_jobs = list(ASSIGNMENT_SECURITY = 3)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Containment Breach",	/datum/event/prison_break/station,	12,		list(ASSIGNMENT_ANY = 5), 1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jellyfish Migration",	/datum/event/jellyfish_migration,	10,		list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SECURITY = 15, ASSIGNMENT_MEDICAL = 10), 5),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Virus Outbreak", 		/datum/event/viral_infection, 		5,		list(ASSIGNMENT_MEDICAL = 10) , 10, min_jobs = list(ASSIGNMENT_MEDICAL = 3)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob, 					3,		list(ASSIGNMENT_ENGINEER = 10) , 10),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Chu Infestation",		/datum/event/chu_infestation, 	    9,		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jil Infestation",		/datum/event/jil_infestation, 	    8,		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Clowns",				/datum/event/clune_infestation, 	7,		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 5,ASSIGNMENT_SECURITY = 15) , 10),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Redspace",			/datum/event/redspacefissure, 		0,		list(ASSIGNMENT_ANY = 5), 1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean,					 0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",				/datum/event/nothing						,20),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Meteor Wave",			/datum/event/meteor_wave					,12	, list(ASSIGNMENT_ENGINEER = 15),	5),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Carp Migration",		/datum/event/carp_migration					,12	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 5), 1, min_jobs = list(ASSIGNMENT_SECURITY = 3)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Containment Breach",	/datum/event/prison_break/station			,12	, list(ASSIGNMENT_ANY = 5), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jellyfish Migration",	/datum/event/jellyfish_migration			,10	, list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SECURITY = 15, ASSIGNMENT_MEDICAL = 10), 5),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Virus Outbreak", 		/datum/event/viral_infection				,5	, list(ASSIGNMENT_MEDICAL = 10) , 10, min_jobs = list(ASSIGNMENT_MEDICAL = 3)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob							,3	, list(ASSIGNMENT_ENGINEER = 10) , 10),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Chu Infestation",		/datum/event/chu_infestation				,9	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jil Infestation",		/datum/event/jil_infestation				,8	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Clowns",				/datum/event/clune_infestation				,7	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 5,ASSIGNMENT_SECURITY = 15) , 10),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Redspace",			/datum/event/redspacefissure				,1	, list(ASSIGNMENT_ANY = 5), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean						,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Engineering",	/datum/event/bluespace_shelling/engineering	,0	, list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Science",		/datum/event/bluespace_shelling/science		,0	, list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Security",		/datum/event/bluespace_shelling/security	,0	, list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
@@ -129,7 +116,8 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Civilian",		/datum/event/bluespace_shelling/civilian	,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Medical",		/datum/event/bluespace_shelling/medical		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Waste",			/datum/event/bluespace_shelling/waste		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99))
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration				,10	, list(ASSIGNMENT_SECURITY = 5), 1) //YW shifted to spider migration
 	)
 	add_disabled_events(list(
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean,					 0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
@@ -141,12 +129,7 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Medical",		/datum/event/bluespace_shelling/medical		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Waste",			/datum/event/bluespace_shelling/waste		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
-		//new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jellyfish Migration",	/datum/event/jellyfish_migration,	5,	list(ASSIGNMENT_ANY = 1, ASSIGNMENT_SECURITY = 5, ASSIGNMENT_MEDICAL = 3), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MAJOR, "Meteor Wave",			/datum/event/meteor_wave,		30,		list(ASSIGNMENT_ENGINEER = 15),	1),
-		//new /datum/event_meta(EVENT_LEVEL_MAJOR, "Carp Migration",		/datum/event/carp_migration,	10,		list(ASSIGNMENT_SECURITY = 5), 1),
-		//new /datum/event_meta(EVENT_LEVEL_MAJOR, "Supply Demand",		/datum/event/supply_demand,		0,		list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SCIENCE = 15, ASSIGNMENT_GARDENER = 10, ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_MEDICAL = 15), 1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob, 				10,		list(ASSIGNMENT_ENGINEER = 60), 3) //YW Enabled
-		//new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration,	10,		list(ASSIGNMENT_SECURITY = 5), 1), //YW shifted to spider migration
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob, 					3,		list(ASSIGNMENT_ENGINEER = 10) , 10)
 	))
 
 #undef ASSIGNMENT_ANY

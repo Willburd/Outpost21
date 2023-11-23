@@ -371,11 +371,6 @@
 	if(!hoard_items)
 		return
 
-	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
-	for(var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
-		if(can_see(holder, HM, vision_range))
-			. += HM
-
 	if(holder.get_active_hand())	// We don't want item targets if we have an item!
 		return .
 
@@ -398,6 +393,10 @@
 			var/obj/structure/closet/C = A
 			if(!C.opened && (C.can_open() || istype(holder,/mob/living/simple_mob/vore/alienanimals/jil/jillioth)))
 				. += C
+		// fight god!
+		else if(istype(A,/obj/machinery/porta_turret) || istype(A,/obj/mecha))
+			if(istype(holder,/mob/living/simple_mob/vore/alienanimals/jil/jillioth))
+				. += A
 		/*
 		else if(istype(A,/obj/machinery/atmospherics/unary/vent_pump)) // entering vents
 			var/obj/machinery/atmospherics/unary/vent_pump/P = A

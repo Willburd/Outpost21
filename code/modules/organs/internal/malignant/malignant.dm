@@ -84,9 +84,9 @@
 		return
 
 	if(prob(feedchance))
+		cooldown = rand(cooldownmin,cooldownmax)
 		if(feed())
 			growth++
-		cooldown = rand(cooldownmin,cooldownmax)
 
 /obj/item/organ/internal/malignant/parasite/proc/feed()
 	// perform actions based on the parasite
@@ -105,8 +105,8 @@
 // cancer! *party blower*! Causes various bad symptoms, and eventually internally bleeds you to death.
 /obj/item/organ/internal/malignant/tumor/cancer
 	name = "tumor"
-	cooldownmin = 5
-	cooldownmax = 15
+	cooldownmin = 15
+	cooldownmax = 25
 
 /obj/item/organ/internal/malignant/tumor/cancer/process()
 	. = ..()
@@ -245,7 +245,7 @@
 	feedchance = 4
 	feedmodmin = 6
 	feedmodmax = 11
-	cooldownmin = 10
+	cooldownmin = 20
 	cooldownmax = 50
 
 /obj/item/organ/internal/malignant/parasite/painleech/feed()
@@ -261,8 +261,8 @@
 	feedchance = 4
 	feedmodmin = 2
 	feedmodmax = 3
-	cooldownmin = 20
-	cooldownmax = 30
+	cooldownmin = 30
+	cooldownmax = 60
 
 /obj/item/organ/internal/malignant/parasite/honker/feed()
 	..()

@@ -184,7 +184,12 @@
 		CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
 		if(isnull(key))
 			// ghost request
-
+			var/datum/ghost_query/Q = new /datum/ghost_query/chu()
+			var/list/winner = Q.query()
+			if(winner.len)
+				var/mob/observer/dead/D = winner[1]
+				CC.client = D.client
+				CC.key = D.key
 		else
 			// pass on mob
 			CC.key = key

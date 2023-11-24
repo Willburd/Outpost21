@@ -507,6 +507,7 @@
 			else
 				dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not Found</td>"
 			dat += "</tr>"
+		var/hasMalignants = ""
 		for(var/obj/item/organ/i in occupant.internal_organs)
 			var/mech = ""
 			var/i_dead = ""
@@ -538,6 +539,9 @@
 				if(A.inflamed)
 					infection = "Inflammation detected!"
 
+			if(istype(i, /obj/item/organ/internal/malignant))
+				hasMalignants += "<font color='red'> -[occupant.organs_by_name[i.parent_organ].name]</font><BR>"
+
 			dat += "<tr>"
 			dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech][i_dead]</td><td></td>"
 			dat += "</tr>"
@@ -546,6 +550,8 @@
 			dat += "<font color='red'>Cataracts detected.</font><BR>"
 		if(occupant.disabilities & NEARSIGHTED)
 			dat += "<font color='red'>Retinal misalignment detected.</font><BR>"
+		if(hasMalignants != "")
+			dat += "<font color='red'>Unknown body detected!</font><BR>" + hasMalignants
 	else
 		dat += "\The [src] is empty."
 

@@ -243,16 +243,23 @@
 		dat += "<span class='warning'>Minor brain damage detected.</span><br>"
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/internal/appendix/a in H.internal_organs)
-			var/severity = ""
-			if(a.inflamed > 3)
-				severity = "Severe"
-			else if(a.inflamed > 2)
-				severity = "Moderate"
-			else if(a.inflamed >= 1)
-				severity = "Mild"
-			if(severity)
-				dat += "<span class='warning'>[severity] inflammation detected in subject [a.name].</span><br>"
+		for(var/obj/item/organ/internal/io in H.internal_organs)
+			if(istype(io,/obj/item/organ/internal/appendix))
+				var/obj/item/organ/internal/appendix/a = io
+				var/severity = ""
+				if(a.inflamed > 3)
+					severity = "Severe"
+				else if(a.inflamed > 2)
+					severity = "Moderate"
+				else if(a.inflamed >= 1)
+					severity = "Mild"
+				if(severity)
+					dat += "<span class='warning'>[severity] inflammation detected in subject.</span><br>"
+			else if(istype(io,/obj/item/organ/internal/malignant))
+				if(advscan >= 2)
+					dat += "<span class='warning'>Anatomical irregularities detected in subject's [H.organs_by_name[io.parent_organ].name].</span><br>"
+				else
+					dat += "<span class='warning'>Anatomical irregularities detected in subject.</span><br>"
 		// Infections, fractures, and IB
 		var/basic_fracture = 0	// If it's a basic scanner
 		var/basic_ib = 0		// If it's a basic scanner

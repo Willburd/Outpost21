@@ -29,11 +29,16 @@
 	// invalid, spawn as dead...
 	status = ORGAN_DEAD
 
-/mob/living/carbon/human/proc/malignant_organ_spawn( var/allowtumors, var/allowparasites)
+/mob/living/carbon/human/proc/malignant_organ_spawn( var/allowtumors = TRUE, var/allowparasites = TRUE)
 	if(stat == DEAD)
 		return FALSE
 	if(isSynthetic())
 		return FALSE
+	if(!species)
+		return FALSE
+	if(species.reagent_tag == IS_DIONA || species.reagent_tag == IS_SLIME)
+		return
+
 	// get a list of valid malignant organs and spawn one
 	var/list/paths = list()
 	if(allowtumors)
@@ -50,7 +55,7 @@
 	return FALSE
 
 
-// these eventually kill you in some strange unique way.
+
 /obj/item/organ/internal/malignant/tumor
 	name = "tumor"
 	icon_state = "tumor"
@@ -59,7 +64,8 @@
 	var/stage = 0
 	var/stage_progress = 0
 
-// these produce something into your bloodstream. consuming nutrition, blood instead if starving
+
+
 /obj/item/organ/internal/malignant/parasite
 	name = "parasite"
 	icon_state = "parasite"
@@ -98,8 +104,18 @@
 	// by default, don't grow. Other parasites might thought!
 	return FALSE
 
+
+
+/obj/item/organ/internal/malignant/engineered
+	name = "engineered"
+	icon_state = "engineered"
+	dead_icon = "engineered-dead"
+	can_reject = 0
+
+
 /****************************************************
 				Tumor varients
+		these eventually kill you in some strange unique way.
 ****************************************************/
 
 // cancer! *party blower*! Causes various bad symptoms, and eventually internally bleeds you to death.
@@ -118,21 +134,21 @@
 	if(!owner)
 		return
 
-	if(++stage_progress > 500)
+	if(++stage_progress > 300)
 		++stage
 		stage_progress = rand(100,200)
 
-	if(stage_progress == 1)
+	if(stage == 1)
 		if(prob(1))
 			owner.Weaken(2)
 			cooldown = rand(cooldownmin,cooldownmax)
-	if(stage_progress > 1)
+	if(stage > 1)
 		if(prob(1))
 			owner.Weaken(3)
 			owner.adjustToxLoss(3)
 			owner.nutrition = max(owner.nutrition - rand(1,5),0)
 			cooldown = rand(cooldownmin,cooldownmax)
-	if(stage_progress > 2)
+	if(stage > 2)
 		if(prob(1))
 			switch(parent_organ)
 				if(BP_GROIN)
@@ -146,7 +162,7 @@
 						owner.Confuse(20)
 			owner.nutrition = max(owner.nutrition - rand(1,5),0)
 			cooldown = rand(cooldownmin,cooldownmax)
-	if(stage_progress > 3)
+	if(stage > 3)
 		if(prob(1))
 			var/obj/item/organ/external/bodypart = owner.get_organ(parent_organ)
 			var/datum/wound/W = new /datum/wound/internal_bleeding(2)
@@ -157,11 +173,13 @@
 			cooldown = rand(cooldownmin,cooldownmax)
 
 
-// WHERE SOIL
+// WHERE SOIL. Simple toxin damage that makes you throwup and lose nutrition sometimes
 /obj/item/organ/internal/malignant/tumor/potato
 	name = "mimetic potato"
 	icon_state = "potato"
 	validBPsites = list(BP_GROIN, BP_TORSO)
+	cooldownmin = 15
+	cooldownmax = 35
 
 /obj/item/organ/internal/malignant/tumor/potato/process()
 	. = ..()
@@ -170,25 +188,32 @@
 		cooldown--
 		return
 
+	if(prob(3))
+		owner.adjustToxLoss(2)
+		owner.nutrition = max(owner.nutrition - rand(1,5),0)
+
+	if(prob(2))
+		owner.vomit()
+		cooldown = rand(cooldownmin,cooldownmax)
+
 
 // pinata makes you eventually explode into candy
 /obj/item/organ/internal/malignant/tumor/pinata
 	name = "pinata gland"
 	icon_state = "pinata"
-	var/progress = 0
 
 /obj/item/organ/internal/malignant/tumor/pinata/process()
 	. = ..()
 
-	if(progress == 0)
-		progress = rand(100,200)
+	if(stage_progress == 0)
+		stage_progress = rand(10,60)
 	stage_progress++
 
 	if(cooldown > 0)
 		cooldown--
 		return
 
-	if(stage_progress > 5000)
+	if(stage_progress > 350)
 		// place a ton of candy at location, then delete organ!
 		var/count = rand(20,30)
 		while(count-- > 0)
@@ -196,13 +221,22 @@
 			var/obj/item/newcandy = new picker()
 			newcandy.loc = src.loc
 
+		var/turf/T = loc
 		if(owner)
 			// SURPRISE!
-			playsound(owner, 'sound/effects/snap.ogg', 50, 1)
+			playsound(owner, 'sound/items/bikehorn.ogg', 50, 1)
+			playsound(src, 'sound/effects/snap.ogg', 50, 1)
 			owner.gib()
+			T = owner.loc
 		else
 			// only the organ pops!
+			playsound(src, 'sound/items/bikehorn.ogg', 50, 1)
 			playsound(src, 'sound/effects/snap.ogg', 50, 1)
+
+		// YAYYYYY
+		if(!turf_clear(T))
+			T = get_turf(src)
+		new /obj/effect/decal/cleanable/confetti(T)
 
 		Destroy()
 		return
@@ -218,11 +252,11 @@
 		else
 			owner.Confuse(30)
 
-	if(prob(1))
-		if(stage_progress > 4000)
+	if(prob(2))
+		if(stage_progress > 200)
 			to_chat(owner, "<span class='danger'>The pressure inside you hurts.</span>")
 			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
-		else if(stage_progress > 2000)
+		else if(stage_progress > 100)
 			to_chat(owner, "<span class='warning'>You feel a pressure inside you.</span>")
 			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
 		else
@@ -232,6 +266,8 @@
 
 /****************************************************
 				Parasite varients
+		these produce something into your bloodstream.
+		consuming nutrition, blood instead if starving
 ****************************************************/
 
 // Makes all pain go away, gets greedy for food!
@@ -272,3 +308,11 @@
 							"wowzers")
 		owner.say(pick(jokelist))
 	return prob(5) && growth < 3
+
+
+/****************************************************
+				Engineered varients
+	specialized organs, made to be surgically grafted into people.
+	Will find lots of use with abductors in the future!
+	These are not randomly given!
+****************************************************/

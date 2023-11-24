@@ -30,6 +30,8 @@
 	glow_toggle = 1
 	glow_color = "#75ebeb"
 
+	can_be_antagged = TRUE
+
 	// durable...
 	maxHealth = 75
 	health = 75

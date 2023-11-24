@@ -24,6 +24,8 @@
 	var/transformed_state = "synx_transformed"
 	var/stomach_distended_state = "synx_pet_rainbow" //Proof of concept for now until actual sprite exists
 
+	can_be_antagged = TRUE
+
 	var/list/speak = list()
 	var/speak_chance = 0.5 //May have forgotten to read that.
 	// Synx speech code overrides normal speech code but is still a x in 200 chance of triggereing, as all mobs do.

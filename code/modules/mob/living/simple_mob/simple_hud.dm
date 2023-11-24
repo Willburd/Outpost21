@@ -170,6 +170,11 @@
 	hud_elements |= using
 	// outpost 21 edit end
 
+	borer_chem_display = new /obj/screen/borer/chems()
+	borer_chem_display.screen_loc = ui_ling_chemical_display
+	borer_chem_display.icon_state = "borer_chems"
+	hud_elements |= borer_chem_display
+
 	pain = new /obj/screen( null )
 
 	zone_sel = new /obj/screen/zone_sel( null )

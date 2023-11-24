@@ -62,12 +62,15 @@
 	//Handle brain slugs.
 	var/obj/item/organ/external/Hd = get_organ(BP_HEAD)
 	var/mob/living/simple_mob/animal/borer/B
-
 	if(Hd)
 		for(var/I in Hd.implants)
 			if(istype(I,/mob/living/simple_mob/animal/borer))
 				B = I
 	if(B)
+		if(B.controlling)
+			B.detatch()
+		B.leave_host()
+		/*
 		if(!B.ckey && ckey && B.controlling)
 			B.ckey = ckey
 			B.controlling = 0
@@ -78,6 +81,7 @@
 			B.host_brain.real_name = "host brain"
 
 		verbs -= /mob/living/carbon/proc/release_control
+		*/
 
 	callHook("death", list(src, gibbed))
 

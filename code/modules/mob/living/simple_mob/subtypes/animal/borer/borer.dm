@@ -50,7 +50,7 @@
 	antag = FALSE
 
 /mob/living/simple_mob/animal/borer/Login()
-	..()
+	. = ..()
 	if(antag && mind)
 		borers.add_antagonist(mind)
 
@@ -62,13 +62,13 @@
 
 	true_name = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 
-	if(!roundstart && antag)
+	if(!mind && !roundstart && antag)
 		request_player()
 
 	return ..()
 
 /mob/living/simple_mob/animal/borer/handle_special()
-	if(host && !stat && !host.stat)
+	if(host && stat != DEAD && host.stat != DEAD)
 		// Handle docility.
 		if(host.reagents.has_reagent("sugar") && !docile)
 			var/message = "You feel the soporific flow of sugar in your host's blood, lulling you into docility."
@@ -98,6 +98,32 @@
 
 			if(prob(host.brainloss/20))
 				host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
+
+	// hud
+	borer_chem_display.invisibility = 0
+	switch(chemicals)
+		if(0 to 9)
+			borer_chem_display.icon_state = "borer_chems0"
+		if(10 to 19)
+			borer_chem_display.icon_state = "borer_chems10"
+		if(20 to 29)
+			borer_chem_display.icon_state = "borer_chems20"
+		if(30 to 39)
+			borer_chem_display.icon_state = "borer_chems30"
+		if(40 to 49)
+			borer_chem_display.icon_state = "borer_chems40"
+		if(50 to 59)
+			borer_chem_display.icon_state = "borer_chems50"
+		if(60 to 69)
+			borer_chem_display.icon_state = "borer_chems60"
+		if(70 to 79)
+			borer_chem_display.icon_state = "borer_chems70"
+		if(80 to 89)
+			borer_chem_display.icon_state = "borer_chems80"
+		if(90 to 99)
+			borer_chem_display.icon_state = "borer_chems90"
+		else
+			borer_chem_display.icon_state = "borer_chems100"
 
 /mob/living/simple_mob/animal/borer/Stat()
 	..()
@@ -170,7 +196,7 @@
 	if(host.mind)
 		borers.remove_antagonist(host.mind)
 
-	forceMove(get_turf(host))
+	forceMove(host.loc)
 
 	reset_view(null)
 	machine = null

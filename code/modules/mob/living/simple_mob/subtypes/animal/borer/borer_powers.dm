@@ -60,11 +60,16 @@
 		to_chat(src, "There are no viable hosts within range...")
 		return
 
-	var/mob/living/carbon/M = tgui_input_list(src, "Who do you wish to infest?", "Target Choice", choices)
+	var/mob/living/carbon/M = choices[1]
+	if(choices.len > 1)
+		M = tgui_input_list(src, "Who do you wish to infest?", "Target Choice", choices)
 
-	if(!M || !src) return
+	if(!M || !src)
+		return
 
-	if(!(src.Adjacent(M))) return
+	if(!(src.Adjacent(M)))
+		to_chat(src, "\The [M] has escaped your range...")
+		return
 
 	if(M.has_brain_worms())
 		to_chat(src, "You cannot infest someone who is already infested!")
@@ -253,9 +258,19 @@
 		to_chat(src, "You cannot use that ability again so soon.")
 		return
 
-	var/mob/living/carbon/M = tgui_input_list(src, "Who do you wish to dominate?", "Target Choice", choices)
+	if(!choices.len)
+		to_chat(src, "There are no viable targets within range...")
+		return
+
+	var/mob/living/carbon/M = choices[1]
+	if(choices.len > 1)
+		tgui_input_list(src, "Who do you wish to dominate?", "Target Choice", choices)
 
 	if(!M || !src) return
+
+	if(!(M in view(3,src)))
+		to_chat(src, "\The [M] escaped your influence...")
+		return
 
 	if(M.has_brain_worms())
 		to_chat(src, "You cannot infest someone who is already infested!")

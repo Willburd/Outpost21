@@ -144,23 +144,19 @@
 						owner.make_dizzy(90)
 					else
 						owner.Confuse(20)
-
-			var/obj/item/organ/external/bodypart = owner.get_organ(parent_organ)
-			var/datum/wound/W = new /datum/wound/internal_bleeding(2)
-			bodypart.wounds += W
 			owner.nutrition = max(owner.nutrition - rand(1,5),0)
 			cooldown = rand(cooldownmin,cooldownmax)
 	if(stage_progress > 3)
 		if(prob(1))
 			var/obj/item/organ/external/bodypart = owner.get_organ(parent_organ)
-			var/datum/wound/W = new /datum/wound/internal_bleeding(25)
+			var/datum/wound/W = new /datum/wound/internal_bleeding(2)
 			bodypart.wounds += W
 			owner.Weaken(10)
 			owner.adjustToxLoss(20)
 			owner.nutrition = max(owner.nutrition - rand(1,5),0)
 			cooldown = rand(cooldownmin,cooldownmax)
 
-/*
+
 // WHERE SOIL
 /obj/item/organ/internal/malignant/tumor/potato
 	name = "mimetic potato"
@@ -173,7 +169,6 @@
 	if(cooldown > 0)
 		cooldown--
 		return
-*/
 
 
 // pinata makes you eventually explode into candy

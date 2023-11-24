@@ -501,7 +501,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Write the appearance and whatnot out to the character
 	picked_client.prefs.copy_to(new_character)
-	new_character.syncronize_to_client(picked_client, equipment, charjob, null, FALSE, null, inhabit)
+	new_character.syncronize_to_client(picked_client, equipment, charjob, null, FALSE, null, inhabit, inhabit)
 
 	//If desired, add records.
 	if(records)

@@ -577,7 +577,7 @@
 		if(!isnull(findclient))
 			// setup initial body and prefs
 			MR.mind_ref.active = 1 //Well, it's about to be.
-			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, FALSE, occupant.dna, TRUE)
+			occupant.syncronize_to_client(findclient, FALSE, null, MR.mind_ref, FALSE, occupant.dna, TRUE, FALSE)
 			occupant.key = MR.ckey // actually tell the client we are ready
 		else
 			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")

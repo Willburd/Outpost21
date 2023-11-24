@@ -109,7 +109,7 @@
 
 	// Write the appearance and whatnot out to the character
 	ghost_client.prefs.copy_to(new_character)
-	new_character.syncronize_to_client(ghost_client, FALSE, null, ghost.mind, FALSE, recordB.mydna.dna, TRUE)
+	new_character.syncronize_to_client(ghost_client, FALSE, null, ghost.mind, FALSE, recordB.mydna.dna, TRUE, FALSE)
 
 	// validate if this is legal
 	if(new_character.isSynthetic())

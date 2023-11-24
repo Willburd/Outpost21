@@ -1677,7 +1677,7 @@
 /mob/living/carbon/human/get_mob_riding_slots()
 	return list(back, head, wear_suit)
 
-/mob/living/carbon/human/proc/syncronize_to_client(var/client/client, var/loadequipment, var/charjob, var/datum/mind/mindinject, var/newplayer, var/datum/dna/forceddna, var/antagsetup)
+/mob/living/carbon/human/proc/syncronize_to_client(var/client/client, var/loadequipment, var/charjob, var/datum/mind/mindinject, var/newplayer, var/datum/dna/forceddna, var/antagsetup, var/setskey)
 	// WHY WAS THIS NEVER DONE BEFORE, STOP COPYPASTING AND START THINKING
 
 	// link mind stuff
@@ -1700,8 +1700,8 @@
 		// standard link
 		if(!isnull(mindinject))
 			mindinject.transfer_to(src)
-		else
-			key = client.key // alright lets just assume we're force linking anyway, because that's why the code did before
+		else if(setskey)
+			key = client.key
 
 		// dna setup
 		if(!isnull(forceddna))

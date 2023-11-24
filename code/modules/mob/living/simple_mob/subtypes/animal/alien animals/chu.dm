@@ -188,7 +188,6 @@
 			var/list/winner = Q.query()
 			if(winner.len)
 				var/mob/observer/dead/D = winner[1]
-				CC.client = D.client
 				CC.key = D.key
 		else
 			// pass on mob

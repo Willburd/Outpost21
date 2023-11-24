@@ -31,7 +31,7 @@
 	var/mob/living/carbon/human/host = null		// The humanoid host for the brain worm.
 	var/mob/living/captive_brain/host_brain		// Used for swapping control of the body back and forth.
 
-	var/roundstart = FALSE						// If true, spawning won't try to pull a ghost.
+	var/findghost = FALSE						// If true, spawning will try to pull a ghost.
 	var/antag = TRUE							// If false, will avoid setting up objectives and events
 
 	var/chemicals = 10							// A resource used for reproduction and powers.
@@ -43,8 +43,8 @@
 	var/has_reproduced = FALSE
 	var/used_dominate							// world.time when the dominate power was last used.
 
-/mob/living/simple_mob/animal/borer/roundstart
-	roundstart = TRUE
+/mob/living/simple_mob/animal/borer/findghost
+	findghost = TRUE
 
 /mob/living/simple_mob/animal/borer/non_antag
 	antag = FALSE
@@ -62,7 +62,7 @@
 
 	true_name = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 
-	if(!mind && !roundstart && antag)
+	if(findghost && antag)
 		request_player()
 
 	return ..()

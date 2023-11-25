@@ -328,8 +328,8 @@
 	. = ..()
 	for(var/i=0;i<3;i++)
 		buffers[i+1]=new /datum/dna2/record
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
-		connected = locate(/obj/machinery/dna_scannernew, get_step(src, dir))
+	for(var/dirfind in list(NORTH,EAST,SOUTH,WEST))
+		connected = locate(/obj/machinery/dna_scannernew, get_step(src, dirfind))
 		if(connected)
 			break
 	VARSET_IN(src, injector_ready, TRUE, 25 SECONDS)

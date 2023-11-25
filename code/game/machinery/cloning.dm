@@ -528,8 +528,8 @@
 
 /obj/item/weapon/disk/data/New()
 	..()
-	var/diskcolor = pick(0,1,2)
-	icon_state = "datadisk[diskcolor]"
+	var/diskcolor = pick("red","green","blue","yellow","black","white")
+	icon_state = "data-[diskcolor]"
 
 /obj/item/weapon/disk/data/attack_self(mob/user as mob)
 	read_only = !read_only

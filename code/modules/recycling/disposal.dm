@@ -27,6 +27,11 @@
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
 
+/obj/machinery/disposal/mail_reciever
+	name = "disposal mail destination()"
+	desc = "A pneumatic waste disposal unit. This unit is marked for receiving mail."
+	icon = 'icons/obj/pipes/disposal_op.dmi'
+
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
 /obj/machinery/disposal/Initialize()

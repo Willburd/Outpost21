@@ -61,7 +61,7 @@
 	icon_state = "tumor"
 	//dead_icon = "tumor-dead"
 
-	var/stage = 0
+	var/stage = 1
 	var/stage_progress = 0
 
 
@@ -196,6 +196,16 @@
 		owner.vomit()
 		cooldown = rand(cooldownmin,cooldownmax)
 
+/obj/item/organ/internal/malignant/tumor/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/material/knife))
+		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
+		to_chat(user, "<span class='notice'>You cut the mimetic potato.</span>")
+		qdel(src)
+		return
+	. = ..()
+
+
+
 
 // pinata makes you eventually explode into candy
 /obj/item/organ/internal/malignant/tumor/pinata
@@ -214,31 +224,7 @@
 		return
 
 	if(stage_progress > 350)
-		// place a ton of candy at location, then delete organ!
-		var/count = rand(20,30)
-		while(count-- > 0)
-			var/picker = pick(/obj/item/clothing/mask/chewable/candy/gum,/obj/item/clothing/mask/chewable/candy/lolli,/obj/item/weapon/reagent_containers/food/snacks/candy/gummy,/obj/item/weapon/reagent_containers/food/snacks/candy_corn)
-			var/obj/item/newcandy = new picker()
-			newcandy.loc = src.loc
-
-		var/turf/T = loc
-		if(owner)
-			// SURPRISE!
-			playsound(owner, 'sound/items/bikehorn.ogg', 50, 1)
-			playsound(src, 'sound/effects/snap.ogg', 50, 1)
-			owner.gib()
-			T = owner.loc
-		else
-			// only the organ pops!
-			playsound(src, 'sound/items/bikehorn.ogg', 50, 1)
-			playsound(src, 'sound/effects/snap.ogg', 50, 1)
-
-		// YAYYYYY
-		if(!turf_clear(T))
-			T = get_turf(src)
-		new /obj/effect/decal/cleanable/confetti(T)
-
-		Destroy()
+		pop()
 		return
 
 	if(!owner)
@@ -262,6 +248,204 @@
 		else
 			to_chat(owner, "<span class='warning'>You feel bloated.</span>")
 			owner.custom_emote(VISIBLE_MESSAGE, "winces slightly.")
+
+/obj/item/organ/internal/malignant/tumor/pinata/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(can_puncture(W))
+		pop()
+		return
+	. = ..()
+
+/obj/item/organ/internal/malignant/tumor/pinata/proc/pop()
+	// place a ton of candy at location, then delete organ!
+	var/count = rand(20,30)
+	while(count-- > 0)
+		var/picker = pick(/obj/item/clothing/mask/chewable/candy/gum,/obj/item/clothing/mask/chewable/candy/lolli,/obj/item/weapon/reagent_containers/food/snacks/candy/gummy,/obj/item/weapon/reagent_containers/food/snacks/candy_corn)
+		var/obj/item/newcandy = new picker()
+		newcandy.loc = src.loc
+
+	var/turf/T = loc
+	if(owner)
+		// SURPRISE!
+		playsound(owner, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(src, 'sound/effects/snap.ogg', 50, 1)
+		owner.gib()
+		T = owner.loc
+	else
+		// only the organ pops!
+		playsound(src, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(src, 'sound/effects/snap.ogg', 50, 1)
+
+	// YAYYYYY
+	if(!turf_clear(T))
+		T = get_turf(src)
+	new /obj/effect/decal/cleanable/confetti(T)
+	Destroy()
+
+
+// Teleports you randomly, until it gets you killed
+/obj/item/organ/internal/malignant/tumor/bluespace
+	name = "bluespace tumor"
+	icon_state = "tumor"
+	validBPsites = list(BP_GROIN, BP_TORSO)
+	cooldownmin = 25
+	cooldownmax = 65
+
+/obj/item/organ/internal/malignant/tumor/bluespace/process()
+	. = ..()
+
+	if(cooldown > 0)
+		cooldown--
+		return
+
+	if(!owner)
+		return
+
+	if(stage_progress == 0)
+		stage_progress = rand(10,60)
+	stage_progress++
+
+	if(stage_progress > 300 && stage < 6)
+		stage++
+		stage_progress = 0
+
+	if(prob(stage * 2))
+		var/outer_teleport_radius = stage * 2
+		var/inner_teleport_radius = stage / 2
+
+		var/list/turfs = list()
+		if(inner_teleport_radius > 0)
+			for(var/turf/T in orange(owner,outer_teleport_radius))
+				if(get_dist(owner,T) >= inner_teleport_radius)
+					turfs |= T
+
+		if(turfs.len)
+			// Moves the mob, causes sparks.
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(3, 1, get_turf(owner))
+			s.start()
+			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
+			owner.loc = picked                                          // And teleport them to the chosen location.
+		cooldown = rand(cooldownmin,cooldownmax)
+
+
+// Get you drunk constantly until liver failure
+/obj/item/organ/internal/malignant/tumor/beerbelly
+	name = "beerbelly"
+	icon_state = "tumor"
+	validBPsites = list(BP_GROIN)
+	cooldownmin = 25
+	cooldownmax = 95
+
+/obj/item/organ/internal/malignant/tumor/beerbelly/process()
+	. = ..()
+
+	if(!owner)
+		return
+
+	if(cooldown > 0)
+		cooldown--
+		return
+
+	if(stage_progress == 0)
+		stage_progress = rand(10,60)
+	stage_progress++
+
+	if(stage_progress > 350 && stage < 10)
+		stage++
+		stage_progress = 0
+
+	if(prob(12))
+		owner.bloodstr.add_reagent( "ethanol", stage * 2)
+		cooldown = rand(cooldownmin,cooldownmax)
+
+
+// Get you drunk constantly until liver failure
+/obj/item/organ/internal/malignant/tumor/moneyorgan
+	name = "crypto-cache"
+	icon_state = "tumor"
+	cooldownmin = 15
+	cooldownmax = 25
+	var/thalers = 0
+
+/obj/item/organ/internal/malignant/tumor/moneyorgan/process()
+	. = ..()
+
+	if(!owner)
+		return
+
+	if(cooldown > 0)
+		cooldown--
+		return
+
+	stage_progress++
+	if(stage_progress > 150 && stage < 100)
+		stage++
+		stage_progress = 0
+
+	if(prob(6))
+		thalers += stage
+
+	if(prob(2))
+		if(thalers < 100)
+
+		else if(thalers < 500)
+			to_chat(owner, "<span class='warning'>You feel bloated.</span>")
+			owner.custom_emote(VISIBLE_MESSAGE, "winces slightly.")
+		else if(thalers < 1000)
+			to_chat(owner, "<span class='warning'>You feel a pressure inside you.</span>")
+			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
+			if(prob(30))
+				owner.vomit()
+			else if(prob(30))
+				owner.make_dizzy(10)
+			else
+				owner.Confuse(15)
+		else if(thalers < 5000)
+			to_chat(owner, "<span class='danger'>The pressure inside you hurts.</span>")
+			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
+			owner.Weaken(3)
+			if(prob(30))
+				owner.Stun(10)
+				owner.Paralyse(4)
+			if(prob(30))
+				owner.vomit()
+			else if(prob(30))
+				owner.make_dizzy(20)
+			else
+				owner.Confuse(30)
+		else
+			pop()
+		cooldown = rand(cooldownmin,cooldownmax)
+
+/obj/item/organ/internal/malignant/tumor/moneyorgan/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(can_puncture(W))
+		pop()
+		return
+	. = ..()
+
+/obj/item/organ/internal/malignant/tumor/moneyorgan/proc/pop()
+	if(owner)
+		owner.gib()
+
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+
+	// place a ton of money at location, then delete organ!
+	while(thalers > 1000)
+		thalers -= 1000
+		spawn_money(1000, src.loc)
+	while(thalers > 500)
+		thalers -= 500
+		spawn_money(500, src.loc)
+	while(thalers > 50)
+		thalers -= 50
+		spawn_money(50, src.loc)
+	while(thalers > 5)
+		thalers -= 5
+		spawn_money(5, src.loc)
+	while(thalers > 1)
+		thalers -= 1
+		spawn_money(1, src.loc)
+	Destroy()
 
 
 /****************************************************
@@ -308,6 +492,21 @@
 							"wowzers")
 		owner.say(pick(jokelist))
 	return prob(5) && growth < 3
+
+
+// Makes you high periodically
+/obj/item/organ/internal/malignant/parasite/gethigh
+	name = "woggler"
+	feedchance = 4
+	feedmodmin = 6
+	feedmodmax = 11
+	cooldownmin = 10
+	cooldownmax = 40
+
+/obj/item/organ/internal/malignant/parasite/gethigh/feed()
+	..()
+	owner.druggy = max(owner.druggy, 10 + (growth * 20))
+	return prob(6) && growth < 5
 
 
 /****************************************************

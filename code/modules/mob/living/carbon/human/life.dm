@@ -476,7 +476,7 @@
 					to_chat(src, "<span class='warning'>You feel horribly ill.</span>")
 					AdjustWeakened(3)
 				if(prob(5) && internal_organs.len)
-					if(prob(5))
+					if(prob(2))
 						// random organ time!
 						malignant_organ_spawn(TRUE,FALSE)
 					else
@@ -511,7 +511,7 @@
 					to_chat(src, "<span class='critical'>Your entire body feels like it's on fire!</span>")
 					adjustHalLoss(5)
 				if(prob(10) && internal_organs.len)
-					if(prob(10))
+					if(prob(5))
 						// random organ time!
 						malignant_organ_spawn(TRUE,FALSE)
 					else
@@ -546,7 +546,7 @@
 					to_chat(src, "<span class='danger'>Your hand won't respond properly, you drop what you're holding!</span>")
 					drop_item()
 				if(internal_organs.len)
-					if(prob(15))
+					if(prob(8))
 						// random organ time!
 						malignant_organ_spawn(TRUE,FALSE)
 					else

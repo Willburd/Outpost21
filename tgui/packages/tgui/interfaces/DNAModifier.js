@@ -11,7 +11,7 @@ const stats = [
 ];
 
 const operations = [
-  ['ui', 'Modify U.I.', 'dna'],
+  /* ['ui', 'Modify U.I.', 'dna'], */
   ['se', 'Modify S.E.', 'dna'],
   ['buffer', 'Transfer Buffers', 'syringe'],
   ['rejuvenators', 'Rejuvenators', 'flask'],
@@ -149,6 +149,7 @@ const DNAModifierMain = (props, context) => {
     );
   }
   let body;
+  /*
   if (selectedMenuKey === 'ui') {
     body = (
       <Fragment>
@@ -156,7 +157,9 @@ const DNAModifierMain = (props, context) => {
         <DNAModifierMainRadiationEmitter />
       </Fragment>
     );
-  } else if (selectedMenuKey === 'se') {
+  } else
+  */
+  if (selectedMenuKey === 'se') {
     body = (
       <Fragment>
         <DNAModifierMainSE />
@@ -182,7 +185,7 @@ const DNAModifierMain = (props, context) => {
     </Section>
   );
 };
-
+/*
 const DNAModifierMainUI = (props, context) => {
   const { act, data } = useBackend(context);
   const { selectedUIBlock, selectedUISubBlock, selectedUITarget, occupant } = data;
@@ -212,6 +215,7 @@ const DNAModifierMainUI = (props, context) => {
     </Section>
   );
 };
+*/
 
 const DNAModifierMainSE = (props, context) => {
   const { act, data } = useBackend(context);
@@ -343,33 +347,11 @@ const DNAModifierMainBuffersElement = (props, context) => {
           <LabeledList.Item label="Write">
             <Button
               icon="arrow-circle-down"
-              content="Subject U.I"
+              content="From Subject"
               mb="0"
               onClick={() =>
                 act('bufferOption', {
-                  option: 'saveUI',
-                  id: id,
-                })
-              }
-            />
-            <Button
-              icon="arrow-circle-down"
-              content="Subject U.I and U.E."
-              mb="0"
-              onClick={() =>
-                act('bufferOption', {
-                  option: 'saveUIAndUE',
-                  id: id,
-                })
-              }
-            />
-            <Button
-              icon="arrow-circle-down"
-              content="Subject S.E."
-              mb="0"
-              onClick={() =>
-                act('bufferOption', {
-                  option: 'saveSE',
+                  option: 'saveDNA',
                   id: id,
                 })
               }
@@ -472,10 +454,7 @@ const DNAModifierMainBuffersDisk = (props, context) => {
             <LabeledList.Item label="Subject">
               {disk.owner ? disk.owner : <Box color="average">Unknown</Box>}
             </LabeledList.Item>
-            <LabeledList.Item label="Data Type">
-              {disk.type === 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}
-              {!!disk.ue && ' and Unique Enzymes'}
-            </LabeledList.Item>
+            <LabeledList.Item label="Data Type">Body Record</LabeledList.Item>
           </LabeledList>
         ) : (
           <Box color="label">Disk is blank.</Box>

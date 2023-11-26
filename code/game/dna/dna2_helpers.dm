@@ -63,8 +63,36 @@
 
 // I haven't yet figured out what the fuck this is supposed to do.
 /proc/miniscramble(input,rs,rd)
-	var/output
-	output = null
+	// these are based on the dna_modifier settings raw input
+	// rs is 1 to 10
+	// rd is 1 to 20
+	var/hexval = hex2num(input)
+	if(rd < rs)
+		// if duration is less than power, orbit near center
+		if(hexval > 8)
+			hexval -= rand(rs * 3)
+		else
+			hexval += rand(rs * 3)
+	else
+		// if duration is greater than power, push away from center
+		if(hexval > 8)
+			hexval += rand(rs * 2)
+		else
+			hexval -= rand(rs * 2)
+
+	// try to lock at far ends
+	if(hexval < 0)
+		hexval = 0
+	if(hexval > 15)
+		hexval = 15
+	if(prob(rd))
+		// teehee
+		if(hexval == 0)
+			hexval += rand(0,3)
+		if(hexval == 15)
+			hexval -= rand(0,3)
+
+	/* Old version is semi random, you basically learn by feel what type of radiation blast/duration is good or not!
 	if (input == "C" || input == "D" || input == "E" || input == "F")
 		output = pick(prob((rs*10));"4",prob((rs*10));"5",prob((rs*10));"6",prob((rs*10));"7",prob((rs*5)+(rd));"0",prob((rs*5)+(rd));"1",prob((rs*10)-(rd));"2",prob((rs*10)-(rd));"3")
 	if (input == "8" || input == "9" || input == "A" || input == "B")
@@ -74,6 +102,8 @@
 	if (input == "0" || input == "1" || input == "2" || input == "3")
 		output = pick(prob((rs*10));"8",prob((rs*10));"9",prob((rs*10));"A",prob((rs*10));"B",prob((rs*10)-(rd));"C",prob((rs*10)-(rd));"D",prob((rs*5)+(rd));"E",prob((rs*5)+(rd));"F")
 	if (!output) output = "5"
+	*/
+	var/output = num2hex(hexval,0)
 	return output
 
 // HELLO I MAKE BELL CURVES AROUND YOUR DESIRED TARGET

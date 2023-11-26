@@ -15,7 +15,7 @@
 	var/menu = MENU_MAIN //Which menu screen to display
 	var/list/records = null
 	var/datum/dna2/record/active_record = null
-	var/obj/item/weapon/disk/data/diskette = null //Mostly so the geneticist can steal everything.
+	var/obj/item/weapon/disk/body_record/diskette = null //Mostly so the geneticist can steal everything.
 	var/loading = 0 // Nice loading text
 	var/autoprocess = 0
 	var/obj/machinery/clonepod/selected_pod
@@ -91,7 +91,7 @@
 			P.name = "[initial(P.name)] #[num++]"
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob, params)
-	if(istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES
+	if(istype(W, /obj/item/weapon/disk/body_record)) //INSERT SOME DISKETTES
 		if(!diskette)
 			user.drop_item()
 			W.loc = src
@@ -270,7 +270,7 @@
 				return
 			switch(params["option"])
 				if("load")
-					if(isnull(diskette) || isnull(diskette.buf))
+					if(isnull(diskette) || isnull(diskette.stored) || isnull(diskette.stored.mydna))
 						set_temp("Error: The disk's data could not be read.", "danger")
 						return
 					else if(isnull(active_record))
@@ -278,13 +278,14 @@
 						menu = MENU_MAIN
 						return
 
-					active_record = diskette.buf
+					active_record = diskette.stored.mydna
 					set_temp("Successfully loaded from disk.", "success")
 				if("save")
 					if(isnull(diskette) || diskette.read_only || isnull(active_record))
 						set_temp("Error: The data could not be saved.", "danger")
 						return
 
+					/* unneeded as we store a whole bodyrec anyway
 					// DNA2 makes things a little simpler.
 					var/types
 					switch(params["savetype"]) // Save as Ui/Ui+Ue/Se
@@ -297,9 +298,13 @@
 						else
 							set_temp("Error: Invalid save format.", "danger")
 							return
-					diskette.buf = active_record
-					diskette.buf.types = types
-					diskette.name = "data disk - '[active_record.dna.real_name]'"
+					*/
+
+					// TODO - this needs BR already present to actually save the dna, but this console only has dna?
+					// we don't use this on outpost 21, so I'm considering this low priority... Sorry to anyone that uses this someday.
+					diskette.stored.mydna = active_record
+					//diskette.stored.mydna.types = types
+					diskette.name = "Body Design Disk ('[active_record.dna.real_name]')"
 					set_temp("Successfully saved to disk.", "success")
 				if("eject")
 					if(!isnull(diskette))

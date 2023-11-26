@@ -1785,5 +1785,4 @@
 	if(cli.prefs.disabilities & VERTIGO)
 		dna.SetSEState(VERTIGOBLOCK,1,1)
 		disabilities |= VERTIGO
-
 	dna.UpdateSE()

@@ -33,7 +33,8 @@
 				return // They might have been deleted during the wait
 			if(pref.resleeve_scan)
 				var/datum/transhuman/body_record/BR = new()
-				character.sync_dna_block_disabilities_from_client_setup(character.client)
+				if(!isnull(character.client))
+					character.sync_dna_block_disabilities_from_client_setup(character.client)
 				BR.init_from_mob(character, pref.resleeve_scan, pref.resleeve_lock)
 				to_chat(character, "<span class='notice'><b>Your body record has been synced with the [using_map.dock_name] database</b></span>")
 			if(pref.hasmind_scan && character.mind)

@@ -5,7 +5,7 @@
 #define DNA2_BUF_UE 2
 #define DNA2_BUF_SE 4
 
-#define PAGE_UI "ui"
+//#define PAGE_UI "ui"
 #define PAGE_SE "se"
 #define PAGE_BUFFER "buffer"
 #define PAGE_REJUVENATORS "rejuvenators"
@@ -124,6 +124,14 @@
 	if(!occupant)
 		for(var/mob/M in src)//Failsafe so you can get mobs out
 			M.loc = get_turf(src)
+	// eject disk too, because we can't get to the UI otherwise
+	for(var/dirfind in list(NORTH,EAST,SOUTH,WEST))
+		var/obj/machinery/computer/scan_consolenew/connected = locate(/obj/machinery/computer/scan_consolenew, get_step(src, dirfind))
+		if(connected)
+			if(!connected.disk)
+				return
+			connected.disk.forceMove(get_turf(connected))
+			connected.disk = null
 
 /obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to clone people without external assistance
 	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
@@ -285,25 +293,33 @@
 	var/selected_ui_target_hex = 1
 	var/radiation_duration = 2.0
 	var/radiation_intensity = 1.0
-	var/list/datum/dna2/record/buffers[3]
+	var/list/datum/transhuman/body_record/buffers[3]
 	var/irradiating = 0
 	var/injector_ready = 0	//Quick fix for issue 286 (screwdriver the screen twice to restore injector)	-Pete
 	var/obj/machinery/dna_scannernew/connected = null
-	var/obj/item/weapon/disk/data/disk = null
-	var/selected_menu_key = PAGE_UI
+	var/obj/item/weapon/disk/body_record/disk = null
+	var/selected_menu_key = PAGE_SE
 	anchored = TRUE
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 400
 
 /obj/machinery/computer/scan_consolenew/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/disk/data)) //INSERT SOME diskS
-		if(!src.disk)
-			user.drop_item()
-			I.loc = src
-			src.disk = I
-			to_chat(user, "You insert [I].")
-			SStgui.update_uis(src) // update all UIs attached to src
+	if(istype(I, /obj/item/weapon/disk/body_record)) //INSERT SOME diskS
+		if(connected)
+			if(connected.occupant)
+				if(!src.disk)
+					user.drop_item()
+					I.loc = src
+					src.disk = I
+					to_chat(user, "You insert [I].")
+					SStgui.update_uis(src) // update all UIs attached to src
+					return
+			else
+				to_chat(user, "\The [src] will not accept a disk without an occupant in \the [connected].")
+				return
+		else
+			to_chat(user, "\The [src] will not accept a disk without a DNA modifier connected.")
 			return
 	else
 		..()
@@ -327,7 +343,9 @@
 /obj/machinery/computer/scan_consolenew/Initialize()
 	. = ..()
 	for(var/i=0;i<3;i++)
-		buffers[i+1]=new /datum/dna2/record
+		var/datum/transhuman/body_record/rec = new()
+		rec.mydna = new()
+		buffers[i+1]=rec
 	for(var/dirfind in list(NORTH,EAST,SOUTH,WEST))
 		connected = locate(/obj/machinery/dna_scannernew, get_step(src, dirfind))
 		if(connected)
@@ -340,7 +358,7 @@
 		arr += "[i]:[EncodeDNABlock(buffer[i])]"
 	return arr
 
-/obj/machinery/computer/scan_consolenew/proc/setInjectorBlock(var/obj/item/weapon/dnainjector/I, var/blk, var/datum/dna2/record/buffer)
+/obj/machinery/computer/scan_consolenew/proc/setInjectorBlock(var/obj/item/weapon/dnainjector/I, var/blk, var/datum/transhuman/body_record/buffer)
 	var/pos = findtext(blk,":")
 	if(!pos) return 0
 	var/id = text2num(copytext(blk,1,pos))
@@ -386,19 +404,19 @@
 	data["hasDisk"] = disk ? 1 : 0
 
 	var/diskData[0]
-	if(!disk || !disk.buf)
+	if(!disk || !disk.stored || !disk.stored.mydna)
 		diskData["data"] = null
 		diskData["owner"] = null
 		diskData["label"] = null
 		diskData["type"] = null
 		diskData["ue"] = null
 	else
-		diskData = disk.buf.GetData()
+		diskData = disk.stored.mydna.GetData()
 	data["disk"] = diskData
 
 	var/list/new_buffers = list()
-	for(var/datum/dna2/record/buf in src.buffers)
-		new_buffers += list(buf.GetData())
+	for(var/datum/transhuman/body_record/buf in src.buffers)
+		new_buffers += list(buf.mydna.GetData())
 	data["buffers"]=new_buffers
 
 	data["radiationIntensity"] = radiation_intensity
@@ -473,7 +491,7 @@
 	switch(action)
 		if("selectMenuKey")
 			var/key = params["key"]
-			if(!(key in list(PAGE_UI, PAGE_SE, PAGE_BUFFER, PAGE_REJUVENATORS)))
+			if(!(key in list(/*PAGE_UI,*/ PAGE_SE, PAGE_BUFFER, PAGE_REJUVENATORS)))
 				return
 			selected_menu_key = key
 		if("toggleLock")
@@ -511,6 +529,7 @@
 		if("radiationIntensity")
 			radiation_intensity = clamp(text2num(params["value"]), 1, 10)
 	////////////////////////////////////////////////////////
+		/*
 		if("changeUITarget")
 			selected_ui_target = clamp(text2num(params["value"]), 1, 15)
 			selected_ui_target_hex = num2text(selected_ui_target, 1, 16)
@@ -551,6 +570,7 @@
 					randmuti(connected.occupant)
 					connected.occupant.UpdateAppearance()
 				connected.occupant.apply_effect(((radiation_intensity*2)+radiation_duration), IRRADIATE, check_protection = 0)
+		*/
 	////////////////////////////////////////////////////////
 		if("injectRejuvenators")
 			if(!connected.occupant || !connected.beaker)
@@ -616,6 +636,11 @@
 				connected.beaker = null
 		if("ejectOccupant")
 			connected.eject_occupant()
+			// eject disk too, because we can't get to the UI otherwise
+			if(!disk)
+				return
+			disk.forceMove(get_turf(src))
+			disk = null
 		// Transfer Buffer Management
 		if("bufferOption")
 			var/bufferOption = params["option"]
@@ -623,51 +648,96 @@
 			if(bufferId < 1 || bufferId > 3) // Not a valid buffer id
 				return
 
-			var/datum/dna2/record/buffer = buffers[bufferId]
+			var/datum/transhuman/body_record/buffer = buffers[bufferId]
 			switch(bufferOption)
-				if("saveUI")
+				if("saveDNA")
 					if(connected.occupant && connected.occupant.dna)
-						var/datum/dna2/record/databuf=new
-						databuf.types = DNA2_BUF_UI // DNA2_BUF_UE
-						databuf.dna = connected.occupant.dna.Clone()
+						var/datum/transhuman/body_record/databuf = new(connected.occupant)
+						databuf.mydna.types = DNA2_BUF_SE // structurals only
 						if(ishuman(connected.occupant))
 							var/mob/living/carbon/human/H = connected.occupant
-							databuf.dna.real_name = H.dna.real_name
-							databuf.gender = H.gender
-							databuf.body_descriptors = H.descriptors
-						databuf.name = "Unique Identifier"
+							databuf.mydna.dna.real_name = H.dna.real_name
+							databuf.mydna.gender = H.gender
+							databuf.mydna.body_descriptors = H.descriptors
+						buffers[bufferId] = databuf
+				/* // moved entirely to storing the entire dna record
+				if("saveUI")
+					if(connected.occupant && connected.occupant.dna)
+						var/datum/transhuman/body_record/databuf = new(connected.occupant)
+						databuf.mydna.types = DNA2_BUF_UI // DNA2_BUF_UE
+						if(ishuman(connected.occupant))
+							var/mob/living/carbon/human/H = connected.occupant
+							databuf.mydna.dna.real_name = H.dna.real_name
+							databuf.mydna.gender = H.gender
+							databuf.mydna.body_descriptors = H.descriptors
+						databuf.mydna.name = "Unique Identifier"
 						buffers[bufferId] = databuf
 				if("saveUIAndUE")
 					if(connected.occupant && connected.occupant.dna)
-						var/datum/dna2/record/databuf=new
-						databuf.types = DNA2_BUF_UI|DNA2_BUF_UE
-						databuf.dna = connected.occupant.dna.Clone()
+						var/datum/transhuman/body_record/databuf = new(connected.occupant)
+						databuf.mydna.types = DNA2_BUF_UI|DNA2_BUF_UE
 						if(ishuman(connected.occupant))
 							var/mob/living/carbon/human/H = connected.occupant
-							databuf.dna.real_name = H.dna.real_name
-							databuf.gender = H.gender
-							databuf.body_descriptors = H.descriptors
-						databuf.name = "Unique Identifier + Unique Enzymes"
+							databuf.mydna.dna.real_name = H.dna.real_name
+							databuf.mydna.gender = H.gender
+							databuf.mydna.body_descriptors = H.descriptors
+						databuf.mydna.name = "Unique Identifier + Unique Enzymes"
 						buffers[bufferId] = databuf
 				if("saveSE")
 					if(connected.occupant && connected.occupant.dna)
-						var/datum/dna2/record/databuf=new
-						databuf.types = DNA2_BUF_SE
-						databuf.dna = connected.occupant.dna.Clone()
+						var/datum/transhuman/body_record/databuf = new(connected.occupant)
+						databuf.mydna.types = DNA2_BUF_SE
 						if(ishuman(connected.occupant))
 							var/mob/living/carbon/human/H = connected.occupant
-							databuf.dna.real_name = H.dna.real_name
-							databuf.gender = H.gender
-							databuf.body_descriptors = H.descriptors
-						databuf.name = "Structural Enzymes"
+							databuf.mydna.dna.real_name = H.dna.real_name
+							databuf.mydna.gender = H.gender
+							databuf.mydna.body_descriptors = H.descriptors
+						databuf.mydna.name = "Structural Enzymes"
 						buffers[bufferId] = databuf
+				*/
 				if("clear")
-					buffers[bufferId] = new /datum/dna2/record()
+					buffers[bufferId] = new /datum/transhuman/body_record()
 				if("changeLabel")
-					tgui_modal_input(src, "changeBufferLabel", "Please enter the new buffer label:", null, list("id" = bufferId), buffer.name, TGUI_MODAL_INPUT_MAX_LENGTH_NAME)
+					tgui_modal_input(src, "changeBufferLabel", "Please enter the new buffer label:", null, list("id" = bufferId), buffer.mydna.name, TGUI_MODAL_INPUT_MAX_LENGTH_NAME)
 				if("transfer")
 					if(!connected.occupant || (NOCLONE in connected.occupant.mutations) || !connected.occupant.dna)
 						return
+
+					to_world("get buffer: [bufferId]")
+					var/datum/transhuman/body_record/buf = buffers[bufferId]
+					/* // we only handle SEs here now
+					if((buf.mydna.types & DNA2_BUF_UI))
+						if((buf.mydna.types & DNA2_BUF_UE))
+							connected.occupant.real_name = buf.mydna.dna.real_name
+							connected.occupant.name = buf.mydna.dna.real_name
+							if(ishuman(connected.occupant))
+								var/mob/living/carbon/human/H = connected.occupant
+								H.gender = buf.mydna.gender
+								H.descriptors = buf.mydna.body_descriptors
+						connected.occupant.UpdateAppearance(buf.mydna.dna.UI.Copy())
+					else
+					*/
+					if(buf.mydna.types & DNA2_BUF_SE)
+						// Apply SEs only to the current occupant!
+						connected.occupant.dna.SE = buf.mydna.dna.SE.Copy()
+						connected.occupant.dna.UpdateSE()
+						domutcheck(connected.occupant,connected)
+
+						// apply genes
+						if(ishuman(connected.occupant))
+							var/mob/living/carbon/human/H = connected.occupant
+							H.sync_organ_dna()
+
+						//Apply genetic modifiers
+						connected.occupant.dna.genetic_modifiers.Cut() // clear em!
+						for(var/modifier_type in buf.genetic_modifiers)
+							connected.occupant.add_modifier(modifier_type)
+
+					// update icons
+					connected.occupant.regenerate_icons()
+
+					// side effects
+					connected.occupant.apply_effect(rand(20,50), IRRADIATE, check_protection = 0)
 
 					irradiating = 2
 					var/lock_state = connected.locked
@@ -678,50 +748,32 @@
 
 					irradiating = 0
 					connected.locked = lock_state
-
-					var/datum/dna2/record/buf = buffers[bufferId]
-
-					if((buf.types & DNA2_BUF_UI))
-						if((buf.types & DNA2_BUF_UE))
-							connected.occupant.real_name = buf.dna.real_name
-							connected.occupant.name = buf.dna.real_name
-							if(ishuman(connected.occupant))
-								var/mob/living/carbon/human/H = connected.occupant
-								H.gender = buf.gender
-								H.descriptors = buf.body_descriptors
-						connected.occupant.UpdateAppearance(buf.dna.UI.Copy())
-					else if(buf.types & DNA2_BUF_SE)
-						connected.occupant.dna.SE = buf.dna.SE
-						connected.occupant.dna.UpdateSE()
-						if(ishuman(connected.occupant))
-							var/mob/living/carbon/human/H = connected.occupant
-							H.gender = buf.gender
-							H.descriptors = buf.body_descriptors
-						domutcheck(connected.occupant,connected)
-					connected.occupant.apply_effect(rand(20,50), IRRADIATE, check_protection = 0)
 				if("createInjector")
 					if(!injector_ready)
 						return
 					if(text2num(params["block"]) > 0)
-						var/list/choices = all_dna_blocks((buffer.types & DNA2_BUF_SE) ? buffer.dna.SE : buffer.dna.UI)
+						var/list/choices = all_dna_blocks(buffer.mydna.dna.SE)
 						tgui_modal_choice(src, "createInjectorBlock", "Please select the block to create an injector from:", null, list("id" = bufferId), null, choices)
 					else
 						create_injector(bufferId, TRUE)
 				if("loadDisk")
-					if(isnull(disk) || disk.read_only)
+					if(isnull(disk) || disk.read_only || !disk.stored)
 						return
-					buffers[bufferId] = disk.buf.copy()
+					var/datum/transhuman/body_record/databuf = new /datum/transhuman/body_record(disk.stored)
+					databuf.mydna.types = DNA2_BUF_SE // structurals only
+					buffers[bufferId] = databuf
 				if("saveDisk")
 					if(isnull(disk) || disk.read_only)
 						return
-					var/datum/dna2/record/buf = buffers[bufferId]
-					disk.buf = buf.copy()
-					disk.name = "data disk - '[buf.dna.real_name]'"
+					var/datum/transhuman/body_record/buf = buffers[bufferId]
+					disk.stored = new /datum/transhuman/body_record(buf)
+					disk.stored.mydna.types = DNA2_BUF_UI|DNA2_BUF_UE|DNA2_BUF_SE // DNA disks need to maintain their data
+					disk.name = "Body Design Disk ('[buf.mydna.name]')"
 
 		if("wipeDisk")
 			if(isnull(disk) || disk.read_only)
 				return
-			disk.buf = null
+			disk.stored = null
 		if("ejectDisk")
 			if(!disk)
 				return
@@ -744,12 +796,13 @@
 	addtimer(CALLBACK(src, .proc/injector_cooldown_finish), 30 SECONDS)
 
 	// Create it
-	var/datum/dna2/record/buf = buffers[buffer_id]
+	var/datum/transhuman/body_record/buf = buffers[buffer_id]
 	var/obj/item/weapon/dnainjector/I = new()
+	buf.mydna.types = DNA2_BUF_SE // SE only, use the designer for UI and UEs, super broken in this codebase due to years of no one respecting genetics...
 	I.forceMove(loc)
-	I.name += " ([buf.name])"
+	I.name += " ([buf.mydna.name])"
 	if(copy_buffer)
-		I.buf = buf.copy()
+		I.buf = buf.mydna.copy()
 	return I
 
 /**
@@ -777,15 +830,15 @@
 					var/buffer_id = text2num(arguments["id"])
 					if(buffer_id < 1 || buffer_id > length(buffers))
 						return
-					var/datum/dna2/record/buf = buffers[buffer_id]
+					var/datum/transhuman/body_record/buf = buffers[buffer_id]
 					var/obj/item/weapon/dnainjector/I = create_injector(buffer_id)
-					setInjectorBlock(I, answer, buf.copy())
+					setInjectorBlock(I, answer, buf.mydna.copy())
 				if("changeBufferLabel")
 					var/buffer_id = text2num(arguments["id"])
 					if(buffer_id < 1 || buffer_id > length(buffers))
 						return
-					var/datum/dna2/record/buf = buffers[buffer_id]
-					buf.name = answer
+					var/datum/transhuman/body_record/buf = buffers[buffer_id]
+					buf.mydna.name = answer
 					buffers[buffer_id] = buf
 				else
 					return FALSE
@@ -793,7 +846,7 @@
 			return FALSE
 
 
-#undef PAGE_UI
+//#undef PAGE_UI
 #undef PAGE_SE
 #undef PAGE_BUFFER
 #undef PAGE_REJUVENATORS

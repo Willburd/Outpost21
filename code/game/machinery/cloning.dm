@@ -481,6 +481,7 @@
 			healthstring = "ERROR"
 		return healthstring
 
+/* Outpost 21 edit - These are removed in favor of using /obj/item/weapon/disk/body_record disks
 //Disk stuff.
 //The return of data disks?? Just for transferring between genetics machine/cloning machine.
 //TO-DO: Make the genetics machine accept them.
@@ -556,6 +557,7 @@
 	new /obj/item/weapon/disk/data(src)
 	new /obj/item/weapon/disk/data(src)
 	new /obj/item/weapon/disk/data(src)
+*/
 
 /*
  *	Manual -- A big ol' manual.

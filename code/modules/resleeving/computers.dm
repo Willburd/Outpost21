@@ -178,8 +178,12 @@
 	data["sleevers"] = temppods.Copy()
 	temppods.Cut()
 
-	data["coredumped"] = our_db.core_dumped
-	data["emergency"] = disk
+	if(istype(src,/obj/machinery/computer/transhuman/resleeving/diskonly))
+		data["coredumped"] = FALSE
+		data["emergency"] = null
+	else
+		data["coredumped"] = our_db.core_dumped
+		data["emergency"] = disk
 	data["temp"] = temp
 	data["selected_pod"] = "\ref[selected_pod]"
 	data["selected_printer"] = "\ref[selected_printer]"
@@ -446,6 +450,19 @@
 			temp = null
 		else
 			return FALSE
+
+/obj/machinery/computer/transhuman/resleeving/diskonly
+	// varient for genetics that cannot read the bodyrecord or mind record DBs
+	name = "clone control console"
+
+/obj/machinery/computer/transhuman/resleeving/diskonly/tgui_interact(mob/user, datum/tgui/ui = null)
+	if(stat & (NOPOWER|BROKEN))
+		return
+
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "GeneticsCloneConsole", "Clone Control Console")
+		ui.open()
 
 // In here because only relevant to computer
 /obj/item/weapon/cmo_disk_holder

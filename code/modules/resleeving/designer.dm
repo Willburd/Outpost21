@@ -231,7 +231,7 @@
 				mannequin.real_name = "Stock [S.name] Body"
 				mannequin.name = mannequin.real_name
 				mannequin.dna.real_name = mannequin.real_name
-				mannequin.dna.base_species = mannequin.species
+				mannequin.dna.base_species = mannequin.species.base_species
 				active_br = new(mannequin, FALSE, FALSE)
 				active_br.speciesname = "Custom Sleeve"
 				update_preview_icon()
@@ -253,8 +253,10 @@
 			if(disk && active_br)
 				disk.stored = new /datum/transhuman/body_record(active_br) // Saves a COPY!
 				disk.name = "[initial(disk.name)] ([active_br.mydna.name])"
+				/* // why would it eject? There is a perfectly good eject button right beside it.
 				disk.forceMove(get_turf(src))
 				disk = null
+				*/
 
 		if("ejectdisk")
 			disk.forceMove(get_turf(src))
@@ -429,6 +431,13 @@
 	item_state = "card-id"
 	w_class = ITEMSIZE_SMALL
 	var/datum/transhuman/body_record/stored = null
+	var/read_only = FALSE // TODO - make this accessible, and respected by all consoles...
+
+/obj/item/weapon/disk/body_record/New()
+	. = ..()
+	// Because /obj/item/weapon/disk/data are replaced by these, lets make it a little easier to tell which BR disk is the right one!
+	var/diskcolor = pick("red","green","blue","yellow","black","white")
+	icon_state = "data-[diskcolor]"
 
 /*
  *	Diskette Box

@@ -69,28 +69,38 @@
 		L.apply_effect(rand(5,20), IRRADIATE, check_protection = 0)
 		L.apply_damage(max(2,L.getCloneLoss()), CLONE)
 
-	if (!(NOCLONE in M.mutations)) // prevents drained people from having their DNA changed
-		if (buf.types & DNA2_BUF_UI)
-			if (!block) //isolated block?
-				M.UpdateAppearance(buf.dna.UI.Copy())
-				if (buf.types & DNA2_BUF_UE) //unique enzymes? yes
-					M.real_name = buf.dna.real_name
-					M.name = buf.dna.real_name
+		if (!(NOCLONE in L.mutations)) // prevents drained people from having their DNA changed
+			/* // do not do UI changes anymore
+			if (buf.types & DNA2_BUF_UI)
+				if (!block) //isolated block?
+					L.UpdateAppearance(buf.dna.UI.Copy())
+					if (buf.types & DNA2_BUF_UE) //unique enzymes? yes
+						L.real_name = buf.dna.real_name
+						L.name = buf.dna.real_name
+					uses--
+				else
+					L.dna.SetUIValue(block,src.GetValue())
+					L.UpdateAppearance()
+					uses--
+			*/
+			if(buf.types & DNA2_BUF_SE)
+				if (!block) //isolated block?
+					L.dna.SE = buf.dna.SE.Copy()
+					L.dna.UpdateSE()
+				else
+					L.dna.SetSEValue(block,src.GetValue())
+				domutcheck(L, null, block!=null)
+				// apply genes
+				if(ishuman(L))
+					var/mob/living/carbon/human/H = L
+					H.sync_organ_dna()
+				//Apply genetic modifiers
+				L.dna.genetic_modifiers.Cut() // clear em!
+				for(var/modifier_type in buf.genetic_modifiers)
+					L.add_modifier(modifier_type)
 				uses--
-			else
-				M.dna.SetUIValue(block,src.GetValue())
-				M.UpdateAppearance()
-				uses--
-		if (buf.types & DNA2_BUF_SE)
-			if (!block) //isolated block?
-				M.dna.SE = buf.dna.SE.Copy()
-				M.dna.UpdateSE()
-			else
-				M.dna.SetSEValue(block,src.GetValue())
-			domutcheck(M, null, block!=null)
-			uses--
-			if(prob(5))
-				trigger_side_effect(M)
+				if(prob(5))
+					trigger_side_effect(L)
 
 	spawn(0)//this prevents the collapse of space-time continuum
 		if (user)

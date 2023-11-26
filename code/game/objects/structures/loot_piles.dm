@@ -280,7 +280,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/weapon/storage/box/beakers,
 		/obj/item/weapon/storage/box/botanydisk,
 		/obj/item/weapon/storage/box/cups,
-		/obj/item/weapon/storage/box/disks,
+		/obj/item/weapon/disk/body_record,  // replaces /obj/item/weapon/storage/box/disks
 		/obj/item/weapon/storage/box/donkpockets,
 		/obj/item/weapon/storage/box/donut,
 		/obj/item/weapon/storage/box/donut/empty,

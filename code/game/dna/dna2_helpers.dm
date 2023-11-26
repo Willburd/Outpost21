@@ -70,15 +70,15 @@
 	if(rd < rs)
 		// if duration is less than power, orbit near center
 		if(hexval > 8)
-			hexval -= rand(rs * 3)
+			hexval -= rand(rs,rs * 3)
 		else
-			hexval += rand(rs * 3)
+			hexval += rand(rs,rs * 3)
 	else
 		// if duration is greater than power, push away from center
 		if(hexval > 8)
-			hexval += rand(rs * 2)
+			hexval += rand(rs,rs * 2)
 		else
-			hexval -= rand(rs * 2)
+			hexval -= rand(rs,rs * 2)
 
 	// try to lock at far ends
 	if(hexval < 0)
@@ -88,9 +88,9 @@
 	if(prob(rd))
 		// teehee
 		if(hexval == 0)
-			hexval += rand(0,3)
+			hexval += rand(3)
 		if(hexval == 15)
-			hexval -= rand(0,3)
+			hexval -= rand(3)
 
 	/* Old version is semi random, you basically learn by feel what type of radiation blast/duration is good or not!
 	if (input == "C" || input == "D" || input == "E" || input == "F")

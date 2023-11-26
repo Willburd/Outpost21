@@ -136,10 +136,13 @@
 	H.sync_organ_dna()
 	if(heal_level < 60)
 		randmutb(H) //Sometimes the clones come out wrong.
-		H.dna.UpdateSE()
-		H.dna.UpdateUI()
 
 	H.UpdateAppearance()
+	H.ApplySpeciesAndTraits()
+	if(H.dna)
+		H.dna.UpdateSE()
+		H.dna.UpdateUI()
+		domutcheck(H,null)
 	H.set_cloned_appearance()
 	H.regenerate_icons()
 	update_icon()

@@ -12,6 +12,7 @@
 	var/list/banned_species			// A list of species that can't take this trait
 	var/list/allowed_species		// VORESTATION EDIT:chomp port. A list of species that CAN take this trait, use this if only a few species can use it. -shark
 	var/varchange_type = TRAIT_VARCHANGE_ALWAYS_OVERRIDE	//Mostly used for non-custom species.
+	var/linked_gene_block = 0		// related gene BLOCK, these blocks are init during setup, and are randomized. Needs to be set if you want genetics to be able to modify this trait ingame
 
 //Proc can be overridden lower to include special changes, make sure to call up though for the vars changes
 /datum/trait/proc/apply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -21,6 +22,14 @@
 			if((category == TRAIT_TYPE_POSITIVE && ((varchange_type == TRAIT_VARCHANGE_LESS_BETTER && var_changes[V] > S.vars[V]) || (varchange_type == TRAIT_VARCHANGE_MORE_BETTER && var_changes[V] < S.vars[V]))) || (category == TRAIT_TYPE_NEGATIVE && ((varchange_type == TRAIT_VARCHANGE_LESS_BETTER && var_changes[V] < S.vars[V]) || (varchange_type == TRAIT_VARCHANGE_MORE_BETTER && var_changes[V] > S.vars[V]))))
 				continue
 			S.vars[V] = var_changes[V]
+	return
+
+// this is just goofy...
+/datum/trait/proc/unapply(var/datum/species/S,var/mob/living/carbon/human/H)
+	ASSERT(S)
+	if(var_changes)
+		for(var/V in var_changes)
+			S.vars[V] = initial(S.vars[V])
 	return
 
 //Applying trait to preferences rather than just us.

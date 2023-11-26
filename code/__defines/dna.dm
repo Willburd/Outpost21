@@ -76,3 +76,5 @@ var/HALLUCINATIONBLOCK = 0
 var/NOPRINTSBLOCK      = 0
 var/SHOCKIMMUNITYBLOCK = 0
 var/SMALLSIZEBLOCK     = 0
+
+// Modern traits for modern agonizing problems, see code\game\dna\genes\traits.dm for explaination

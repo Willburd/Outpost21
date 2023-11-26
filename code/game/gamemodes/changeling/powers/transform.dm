@@ -49,10 +49,15 @@
 		H.appearance_flags = chosen_dna.appearance_flags ? chosen_dna.appearance_flags : null
 		H.weight = chosen_dna.weight ? chosen_dna.weight : null
 		H.UpdateAppearance()
+		H.ApplySpeciesAndTraits()
+		if(H.dna)
+			H.dna.UpdateSE()
+			H.dna.UpdateUI()
 		H.sync_organ_dna()
 		H.resize(chosen_dna.sizemult, TRUE)
 	else
 		src.UpdateAppearance()
+		src.ApplySpeciesAndTraits()
 	src.real_name = chosen_dna.name ? chosen_dna.name : null
 
 	domutcheck(src, null)

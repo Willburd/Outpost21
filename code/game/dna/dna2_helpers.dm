@@ -52,7 +52,6 @@
 				M.dna.SetUIValue(i,rand(1,4095),1)
 		M.dna.UpdateUI()
 		M.UpdateAppearance()
-
 	else
 		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
 			if(prob(prob))
@@ -267,6 +266,17 @@
 		H.g_tail3  = dna.GetUIValueRange(DNA_UI_TAIL3_G,   255)
 		H.b_tail3  = dna.GetUIValueRange(DNA_UI_TAIL3_B,   255)
 
+		return 1
+	else
+		return 0
+
+
+/mob/proc/ApplySpeciesAndTraits()
+	// this is often called near UpdateAppearance()
+	// Updates species and trait controlled data, lots of genes use this for initalizing!
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+
 		// Technically custom_species is not part of the UI, but this place avoids merge problems.
 		H.custom_species = dna.custom_species
 		H.custom_say = dna.custom_say
@@ -276,17 +286,12 @@
 		H.species.blood_color = dna.blood_color
 		var/datum/species/S = H.species
 		S.produceCopy(dna.species_traits, H, dna.base_species, FALSE)
-		// VOREStation Edit End
 
 		H.force_update_organs() //VOREStation Add - Gotta do this too
 		H.force_update_limbs()
 		//H.update_body(0) //VOREStation Edit - Done in force_update_limbs already
 		H.update_eyes()
 		H.update_hair()
-
-		return 1
-	else
-		return 0
 
 //VOREStation Add
 /mob/living/carbon/human/proc/force_update_organs()

@@ -71,13 +71,6 @@
 		var/list/organ_data = has_limbs[organ]
 		new_copy.has_limbs[organ] = organ_data.Copy()
 
-	new_copy.traits = traits
-	//If you had traits, apply them
-	if(new_copy.traits)
-		for(var/trait in new_copy.traits)
-			var/datum/trait/T = all_traits[trait]
-			T.apply(new_copy, H)
-
 	//Set up a mob
 	H.species = new_copy
 	H.icon_state = new_copy.get_bodytype()
@@ -87,6 +80,18 @@
 
 	if(resetdna && H.dna)
 		H.dna.ready_dna(H)
+
+	//If you had traits, apply them
+	new_copy.traits = traits
+	if(new_copy.traits)
+		for(var/trait in new_copy.traits)
+			var/datum/trait/T = all_traits[trait]
+			if(!T.linked_gene_block)
+				// if trait is not applied by gene blocks...
+				T.apply(new_copy, H)
+			else if(resetdna)
+				// the rest should set their block on mob creation only!
+				H.dna.SetSEState(T.linked_gene_block,1,1)
 
 	return new_copy
 

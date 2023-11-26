@@ -81,6 +81,10 @@
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
 	H.UpdateAppearance() //Update appearance
+	if(H.dna)
+		H.dna.UpdateSE()
+		H.dna.UpdateUI()
+		domutcheck(H,null)
 	H.sync_organ_dna()
 
 	//Apply genetic modifiers
@@ -306,6 +310,10 @@
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
 	H.UpdateAppearance() //Update appearance
+	if(H.dna)
+		H.dna.UpdateSE()
+		H.dna.UpdateUI()
+		domutcheck(H,null)
 	H.sync_organ_dna()
 
 	// update icons

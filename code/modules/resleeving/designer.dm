@@ -117,7 +117,14 @@
 		var/stock_bodyrecords_list_ui[0]
 		for (var/N in GLOB.all_species)
 			var/datum/species/S = GLOB.all_species[N]
-			if((S.spawn_flags & (SPECIES_IS_WHITELISTED|SPECIES_CAN_JOIN)) != SPECIES_CAN_JOIN) continue
+			if(S)
+				if((S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED))
+					continue
+				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW)
+					continue
+			else
+				// if we don't have a species, something sure is wrong!
+				continue
 			stock_bodyrecords_list_ui += N
 		if(stock_bodyrecords_list_ui.len)
 			data["stock_bodyrecords"] = stock_bodyrecords_list_ui
@@ -225,7 +232,15 @@
 
 		if("view_stock_brec")
 			var/datum/species/S = GLOB.all_species[params["view_stock_brec"]]
-			if(S && (S.spawn_flags & (SPECIES_IS_WHITELISTED|SPECIES_CAN_JOIN)) == SPECIES_CAN_JOIN)
+			var/toocomplex = FALSE
+			if(S)
+				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED)
+				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW)
+					toocomplex = TRUE // no DNA species, or not compatible with machinery
+			else
+				// if we don't have a species, something sure is wrong!
+				toocomplex = TRUE
+			if(!toocomplex)
 				// Generate body record from species!
 				mannequin = new(null, S.name)
 				mannequin.real_name = "Stock [S.name] Body"
@@ -351,6 +366,11 @@
 	// Apply DNA
 	H.dna = R.dna.Clone()
 	H.UpdateAppearance() // Update all appearance stuff from the DNA record
+	H.ApplySpeciesAndTraits()
+	if(H.dna)
+		H.dna.UpdateSE()
+		H.dna.UpdateUI()
+		domutcheck(H,null)
 	H.sync_organ_dna() // Do this because sprites depend on DNA-gender of organs (chest etc)
 	H.resize(active_br.sizemult, FALSE)
 

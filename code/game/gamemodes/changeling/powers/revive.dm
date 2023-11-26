@@ -73,6 +73,11 @@
 			SJ.dropped(H)
 			H.wear_suit = null
 	C.UpdateAppearance()
+	C.ApplySpeciesAndTraits()
+	if(C.dna)
+		C.dna.UpdateSE()
+		C.dna.UpdateUI()
+		domutcheck(C,null)
 	C.regenerate_icons()
 
 	C.halloss = 0

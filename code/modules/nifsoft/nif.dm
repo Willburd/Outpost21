@@ -203,8 +203,10 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 	durability -= wear
 	savetofile = TRUE // YW EDIT
 
+	/* outpost 21  edit - nif removal
 	if(human)
 		persist_nif_data(human)
+	*/
 
 	if(durability <= 0)
 		stat = NIF_TEMPFAIL
@@ -218,8 +220,10 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 /obj/item/device/nif/proc/repair(var/repair = 0)
 	durability = min(durability + repair, initial(durability))
 
+	/* outpost 21  edit - nif removal
 	if(human)
 		persist_nif_data(human)
+	*/
 
 //Attackby proc, for maintenance
 /obj/item/device/nif/attackby(obj/item/weapon/W, mob/user as mob)

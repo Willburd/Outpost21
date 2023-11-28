@@ -11,15 +11,23 @@ export const BodyDesigner = (props, context) => {
   let body = MenuToTemplate[menu];
 
   return (
-    <Window width={400} height={650}>
+    <Window width={450} height={650}>
       <Window.Content>
-        {disk ? (
-          <Box>
-            <Button icon="save" content="Save To Disk" onClick={() => act('savetodisk')} disabled={!activeBodyRecord} />
-            <Button icon="save" content="Load From Disk" onClick={() => act('loadfromdisk')} disabled={!diskStored} />
-            <Button icon="eject" content="Eject" onClick={() => act('ejectdisk')} />
-          </Box>
-        ) : null}
+        <Box>
+          <Button
+            icon="save"
+            content="Save To Disk"
+            onClick={() => act('savetodisk')}
+            disabled={!disk || !activeBodyRecord}
+          />
+          <Button
+            icon="save"
+            content="Load From Disk"
+            onClick={() => act('loadfromdisk')}
+            disabled={!disk || !diskStored}
+          />
+          <Button icon="eject" content="Eject" onClick={() => act('ejectdisk')} disabled={!disk} />
+        </Box>
         {body}
       </Window.Content>
     </Window>
@@ -195,6 +203,29 @@ const BodyDesignerSpecificRecord = (props, context) => {
                         width="32px"
                         height="20px"
                         color={style.color2}
+                        style={{
+                          border: '1px solid #fff',
+                        }}
+                      />
+                    </Box>
+                  ) : null}
+                  {style.colorHref3 ? (
+                    <Box>
+                      <Button
+                        icon="pen"
+                        content={style.color3}
+                        onClick={() =>
+                          act('href_conversion', {
+                            target_href: style.colorHref3,
+                            target_value: 1,
+                          })
+                        }
+                      />
+                      <ColorBox
+                        verticalAlign="top"
+                        width="32px"
+                        height="20px"
+                        color={style.color3}
                         style={{
                           border: '1px solid #fff',
                         }}

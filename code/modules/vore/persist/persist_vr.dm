@@ -84,8 +84,10 @@
 		return
 
 	//This one doesn't rely on persistence prefs
+	/* outpost 21  edit - nif removal
 	if(ishuman(occupant) && occupant.stat != DEAD)
 		persist_nif_data(occupant, prefs)
+	*/
 
 	if(!prefs.persistence_settings)
 		return // Persistence disabled by preference settings
@@ -108,6 +110,79 @@
 
 	prefs.save_character()
 
+
+// This basically needs to be the reverse of /datum/category_item/player_setup_item/general/body/copy_to_mob(var/mob/living/carbon/human/character) ~Willbird
+/proc/apply_mob_to_prefs(var/mob/living/carbon/human/character, var/datum/preferences/prefs)
+	if(!istype(character)) return
+	// species
+	prefs.species = character.species.name
+	prefs.custom_species = character.custom_species
+	if(character.species.selects_bodytype)
+		prefs.custom_base = character.species.get_bodytype()
+	else
+		prefs.custom_base = initial(character.species.base_species) // needs to be set or filtering for cosmetics will fail
+
+	// Copy basic values
+	prefs.r_eyes	= character.r_eyes
+	prefs.g_eyes	= character.g_eyes
+	prefs.b_eyes	= character.b_eyes
+	prefs.h_style	= character.h_style
+	prefs.r_hair	= character.r_hair
+	prefs.g_hair	= character.g_hair
+	prefs.b_hair	= character.b_hair
+	prefs.r_grad	= character.r_grad
+	prefs.g_grad	= character.g_grad
+	prefs.b_grad	= character.b_grad
+	prefs.f_style	= character.f_style
+	prefs.r_facial	= character.r_facial
+	prefs.g_facial	= character.g_facial
+	prefs.b_facial	= character.b_facial
+	prefs.r_skin	= character.r_skin
+	prefs.g_skin	= character.g_skin
+	prefs.b_skin	= character.b_skin
+	prefs.s_tone	= character.s_tone
+	prefs.grad_style= character.grad_style
+	prefs.b_type	= character.b_type
+	prefs.synth_color = character.synth_color
+	prefs.r_synth	= character.r_synth
+	prefs.g_synth	= character.g_synth
+	prefs.b_synth	= character.b_synth
+	prefs.synth_markings = character.synth_markings
+
+	if(character.ear_style) prefs.ear_style = character.ear_style.name
+	prefs.r_ears =     character.r_ears
+	prefs.b_ears =     character.b_ears
+	prefs.g_ears =     character.g_ears
+	prefs.r_ears2 =    character.r_ears2
+	prefs.b_ears2 =    character.b_ears2
+	prefs.g_ears2 =    character.g_ears2
+	prefs.r_ears3 =    character.r_ears3
+	prefs.b_ears3 =    character.b_ears3
+	prefs.g_ears3 =    character.g_ears3
+
+	if(character.tail_style) prefs.tail_style = character.tail_style.name
+	prefs.r_tail =     character.r_tail
+	prefs.b_tail =     character.b_tail
+	prefs.g_tail =     character.g_tail
+	prefs.r_tail2 =    character.r_tail2
+	prefs.b_tail2 =    character.b_tail2
+	prefs.g_tail2 =    character.g_tail2
+	prefs.r_tail3 =    character.r_tail3
+	prefs.b_tail3 =    character.b_tail3
+	prefs.g_tail3 =    character.g_tail3
+
+	if(character.wing_style) prefs.wing_style = character.wing_style.name
+	prefs.r_wing =     character.r_wing
+	prefs.b_wing =     character.b_wing
+	prefs.g_wing =     character.g_wing
+	prefs.r_wing2 =    character.r_wing2
+	prefs.b_wing2 =    character.b_wing2
+	prefs.g_wing2 =    character.g_wing2
+	prefs.r_wing3 =    character.r_wing3
+	prefs.b_wing3 =    character.b_wing3
+	prefs.g_wing3 =    character.g_wing3
+
+/* outpost 21 edit - these were all only used by the code\modules\resleeving\designer.dm, replaced by apply_mob_to_prefs() above
 // Saves mob's current coloration state to prefs
 // This basically needs to be the reverse of /datum/category_item/player_setup_item/general/body/copy_to_mob() ~Leshana
 /proc/apply_coloration_to_prefs(var/mob/living/carbon/human/character, var/datum/preferences/prefs)
@@ -140,6 +215,7 @@
 	prefs.b_tail			= character.b_tail
 	prefs.g_tail			= character.g_tail
 	prefs.custom_species	= character.custom_species
+*/
 
 // Saves mob's current organ state to prefs.
 // This basically needs to be the reverse of /datum/category_item/player_setup_item/general/body/copy_to_mob() ~Leshana
@@ -224,17 +300,15 @@
 * towards future shenanigans such as upgradable NIFs or different types or things of that nature,
 * without invoking the need for a bunch of different save file variables.
 */
+/* outpost 21  edit - nif removal
 /proc/persist_nif_data(var/mob/living/carbon/human/H,var/datum/preferences/prefs)
-	/* outpost 21  edit - nif removal
 	if(!istype(H))
 		stack_trace("Persist (NIF): Given a nonhuman: [H]")
 		return
-	*/
 
 	if(!prefs)
 		prefs = prep_for_persist(H)
 
-	/* outpost 21  edit - nif removal
 	if(!prefs)
 		warning("Persist (NIF): [H] has no prefs datum, skipping")
 		return
@@ -253,9 +327,7 @@
 		prefs.nif_path = null
 		prefs.nif_durability = null
 		prefs.nif_savedata = null
-	*/
 
-	/* outpost 21  edit - nif removal
 	var/datum/category_group/player_setup_category/vore_cat = prefs.player_setup.categories_by_name["VORE"]
 	var/datum/category_item/player_setup_item/vore/nif/nif_prefs = vore_cat.items_by_name["NIF Data"]
 
@@ -263,4 +335,4 @@
 	if(!S) warning("Persist (NIF): Couldn't load NIF save savefile? [prefs.real_name]")
 	S.cd = "/character[prefs.default_slot]"
 	nif_prefs.save_character(S)
-	*/
+*/

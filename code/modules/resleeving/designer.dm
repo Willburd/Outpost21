@@ -130,6 +130,9 @@
 			data["stock_bodyrecords"] = stock_bodyrecords_list_ui
 
 	if(active_br)
+		// update...
+		update_preview_mob()
+
 		data["activeBodyRecord"] = list(
 			"real_name" = active_br.mydna.name,
 			"speciesname" = active_br.speciesname ? active_br.speciesname : active_br.mydna.dna.species,
@@ -153,6 +156,9 @@
 			if(mannequin.ear_style.extra_overlay)
 				temp["color2"] = MOB_HEX_COLOR(mannequin, ears2)
 				temp["colorHref2"] = "ear_color2"
+			if(mannequin.ear_style.extra_overlay2)
+				temp["color3"] = MOB_HEX_COLOR(mannequin, ears3)
+				temp["colorHref3"] = "ear_color3"
 		styles["Ears"] = temp
 
 		temp = list("styleHref" = "tail_style", "style" = "Normal")
@@ -164,6 +170,9 @@
 			if(mannequin.tail_style.extra_overlay)
 				temp["color2"] = MOB_HEX_COLOR(mannequin, tail2)
 				temp["colorHref2"] = "tail_color2"
+			if(mannequin.tail_style.extra_overlay2)
+				temp["color3"] = MOB_HEX_COLOR(mannequin, tail3)
+				temp["colorHref3"] = "tail_color3"
 		styles["Tail"] = temp
 
 		temp = list("styleHref" = "wing_style", "style" = "Normal")
@@ -175,6 +184,9 @@
 			if(mannequin.wing_style.extra_overlay)
 				temp["color2"] = MOB_HEX_COLOR(mannequin, wing2)
 				temp["colorHref2"] = "wing_color2"
+			if(mannequin.wing_style.extra_overlay2)
+				temp["color3"] = MOB_HEX_COLOR(mannequin, wing3)
+				temp["colorHref3"] = "wing_color3"
 		styles["Wing"] = temp
 
 		temp = list("styleHref" = "hair_style", "style" = mannequin.h_style)
@@ -293,12 +305,7 @@
 
 // Based on /datum/preferences/proc/update_preview_icon()
 /obj/machinery/computer/transhuman/designer/proc/update_preview_icon()
-	if(!mannequin)
-		mannequin = new ()
-
-	mannequin.delete_inventory(TRUE)
-	update_preview_mob(mannequin)
-	mannequin.ImmediateOverlayUpdate()
+	update_preview_mob()
 
 	south_preview.appearance = getFlatIcon(mannequin,defdir = SOUTH)
 	south_preview.screen_loc = "[map_name]:1,1"
@@ -392,20 +399,23 @@
 	H.regenerate_icons()
 	return 1
 
-/obj/machinery/computer/transhuman/designer/proc/update_preview_mob(var/mob/living/carbon/human/H)
-	ASSERT(!QDELETED(H))
+/obj/machinery/computer/transhuman/designer/proc/update_preview_mob()
 	ASSERT(!QDELETED(active_br))
+	if(!mannequin)
+		mannequin = new ()
+
 	//log_debug("designer.update_preview_mob([H]) active_br = \ref[active_br]")
 	//Get the DNA and generate a new mob
 	var/datum/dna2/record/R = active_br.mydna
-	H.set_species(R.dna.species) // This needs to happen before anything else becuase it sets some variables.
+	mannequin.set_species(R.dna.species) // This needs to happen before anything else becuase it sets some variables.
+	mannequin.delete_inventory(TRUE)
 
 	// Update the external organs
 	for(var/part in active_br.limb_data)
 		var/status = active_br.limb_data[part]
 		if(status == null) continue //Species doesn't have limb? Child of amputated limb?
 
-		var/obj/item/organ/external/O = H.organs_by_name[part]
+		var/obj/item/organ/external/O = mannequin.organs_by_name[part]
 		if(!O) continue //Not an organ. Perhaps another amputation removed it already.
 
 		if(status == 1) //Normal limbs
@@ -423,7 +433,7 @@
 		var/status = active_br.organ_data[part]
 		if(status == null) continue //Species doesn't have organ? Child of missing part?
 
-		var/obj/item/organ/I = H.internal_organs_by_name[part]
+		var/obj/item/organ/I = mannequin.internal_organs_by_name[part]
 		if(!I) continue//Not an organ. Perhaps external conversion changed it already?
 
 		if(status == 0) //Normal organ
@@ -436,24 +446,24 @@
 			I.digitize()
 
 	// Apply DNA
-	H.dna = R.dna.Clone()
-	H.UpdateAppearance() // Update all appearance stuff from the DNA record
-	H.ApplySpeciesAndTraits()
-	if(H.dna)
-		H.dna.UpdateSE()
-		H.dna.UpdateUI()
-		domutcheck(H,null)
-	H.sync_organ_dna() // Do this because sprites depend on DNA-gender of organs (chest etc)
+	mannequin.dna = R.dna.Clone()
+	mannequin.UpdateAppearance() // Update all appearance stuff from the DNA record
+	mannequin.ApplySpeciesAndTraits()
+	if(mannequin.dna)
+		mannequin.dna.UpdateSE()
+		mannequin.dna.UpdateUI()
+	mannequin.sync_organ_dna() // Do this because sprites depend on DNA-gender of organs (chest etc)
 
 	//Apply genetic modifiers
 	for(var/modifier_type in R.genetic_modifiers)
-		H.add_modifier(modifier_type)
-	H.resize(active_br.sizemult, FALSE)
+		mannequin.add_modifier(modifier_type)
+	mannequin.resize(active_br.sizemult, FALSE)
 
 	// And as for clothing...
 	// We don't actually dress them! This is a medical machine, handle the nakedness DOCTOR!
 
-	H.regenerate_icons()
+	mannequin.regenerate_icons()
+	mannequin.ImmediateOverlayUpdate()
 
 	return 0 // Success!
 
@@ -478,11 +488,10 @@
 	var/datum/preferences/designer/P = new()
 
 	// We did DNA to mob, now mob to prefs!
-	P.species = mannequin.species.name
-	apply_coloration_to_prefs(mannequin, P)
+	apply_mob_to_prefs(mannequin, P)
 	apply_organs_to_prefs(mannequin, P)
 	apply_markings_to_prefs(mannequin, P)
-	apply_ears_to_prefs(mannequin, P)
+	P.biological_gender = mannequin.gender
 
 	// Now we start using the player_setup objects to do stuff!
 	var/datum/category_collection/CC = P.player_setup
@@ -506,9 +515,13 @@
 
 	var/action = 0
 	action = B.OnTopic(list2params(href_list), href_list, user)
-	if(action & TOPIC_UPDATE_PREVIEW && mannequin && active_br)
+	if(action & TOPIC_REFRESH_UPDATE_PREVIEW)
+		mannequin.set_species(active_br.mydna.dna.species)
+		mannequin.ApplySpeciesAndTraits()
 		B.copy_to_mob(mannequin)
-		active_br.mydna.dna.ResetUIFrom(mannequin)
+		mannequin.dna.ready_dna(mannequin)
+		mannequin.dna.UI[DNA_UI_GENDER] = active_br.mydna.dna.UI[DNA_UI_GENDER]
+		active_br.init_from_mob(mannequin, FALSE, FALSE) // reinit
 		update_preview_icon()
 		return 1
 

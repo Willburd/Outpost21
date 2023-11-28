@@ -661,8 +661,10 @@
 	if(!(target in host.vore_selected))
 		return TRUE // Not in our X anymore, update UI
 	var/list/available_options = list("Examine", "Eject", "Move", "Transfer")
+	/* // outpost 21 edit - Way too OP, if you want a species change, talk to genetics or medical for body record editing
 	if(ishuman(target))
 		available_options += "Transform"
+	*/
 	if(isliving(target))
 		var/mob/living/datarget = target
 		if(datarget.client)
@@ -735,6 +737,7 @@
 				host.vore_selected.transfer_contents(target, choice)
 			return TRUE
 
+		/* // outpost 21 edit - Way too OP, if you want a species change, talk to genetics or medical for body record editing
 		if("Transform")
 			if(host.stat)
 				to_chat(user,"<span class='warning'>You can't do that in your state!</span>")
@@ -747,6 +750,7 @@
 			var/datum/tgui_module/appearance_changer/vore/V = new(host, H)
 			V.tgui_interact(user)
 			return TRUE
+		*/
 
 		if("Process")
 			var/mob/living/ourtarget = target

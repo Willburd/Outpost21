@@ -2072,7 +2072,7 @@
 "olD" = (/turf/simulated/floor/reinforced,/area/rnd/telesci)
 "olE" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -26},/obj/structure/cable/orange{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/security/hangar)
 "olW" = (/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/kafel_full,/area/muriki/bathroom/chapel)
-"oml" = (/obj/effect/catwalk_plated,/obj/structure/disposalpipe/sortjunction/flipped{dir = 8; name = "Library"; sortType = "Library"},/turf/simulated/floor,/area/hallway/muriki/civup)
+"oml" = (/obj/effect/catwalk_plated,/obj/structure/disposalpipe/sortjunction{dir = 4; name = "Library"; sortType = "Library"},/turf/simulated/floor,/area/hallway/muriki/civup)
 "oms" = (/obj/machinery/oxygen_pump{pixel_y = -32},/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/regular{pixel_x = 5; pixel_y = 5},/obj/item/weapon/storage/firstaid/regular,/turf/simulated/floor/tiled/old_cargo/white,/area/shuttle/medical)
 "omL" = (/obj/structure/lattice,/obj/structure/catwalk,/obj/structure/railing{dir = 1; flags = null},/obj/structure/railing,/turf/simulated/open/vacuum,/area/engineering/engine_room)
 "omT" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/wood,/area/djstation)

@@ -1,4 +1,4 @@
-var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
+//var/global/mob/living/carbon/human/dummy/mannequin/sleevemate_mob
 
 //SleeveMate!
 /obj/item/device/sleevemate

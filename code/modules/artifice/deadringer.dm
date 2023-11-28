@@ -164,6 +164,8 @@
 	corpse.name = H.name
 	corpse.set_species(corpse.dna.species)
 	corpse.change_hair(H.h_style)
+	corpse.change_hair_gradient(H.grad_style)
+	corpse.change_grad_color(H.r_grad, H.g_grad, H.b_grad)
 	corpse.change_facial_hair(H.f_style)
 	corpse.change_hair_color(H.r_hair, H.g_hair, H.b_hair)
 	corpse.change_facial_hair_color(H.r_facial, H.g_facial, H.b_facial)

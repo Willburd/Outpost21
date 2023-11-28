@@ -1749,7 +1749,7 @@
 
 	// Do the initial caching of the player's body icons.
 	force_update_limbs()
-	update_icons_body()
+	regenerate_icons()
 	update_transform() //VOREStation Edit
 
 /mob/living/carbon/human/proc/sync_dna_block_disabilities_from_client_setup(var/client/cli)

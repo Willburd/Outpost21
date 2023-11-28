@@ -166,6 +166,10 @@
 		H.g_hair   = dna.GetUIValueRange(DNA_UI_HAIR_G,    255)
 		H.b_hair   = dna.GetUIValueRange(DNA_UI_HAIR_B,    255)
 
+		H.r_grad   = dna.GetUIValueRange(DNA_UI_HAIRGRAD_R,255)
+		H.g_grad   = dna.GetUIValueRange(DNA_UI_HAIRGRAD_G,255)
+		H.b_grad   = dna.GetUIValueRange(DNA_UI_HAIRGRAD_B,255)
+
 		H.r_facial = dna.GetUIValueRange(DNA_UI_BEARD_R,   255)
 		H.g_facial = dna.GetUIValueRange(DNA_UI_BEARD_G,   255)
 		H.b_facial = dna.GetUIValueRange(DNA_UI_BEARD_B,   255)
@@ -198,6 +202,11 @@
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
 		if((0 < hair) && (hair <= hair_styles_list.len))
 			H.h_style = hair_styles_list[hair]
+
+		//Hair gradiant
+		var/hairgrad = dna.GetUIValueRange(DNA_UI_HAIRGRAD_STYLE,GLOB.hair_gradients.len)
+		if((0 < hairgrad) && (hairgrad <= GLOB.hair_gradients.len))
+			H.grad_style = GLOB.hair_gradients[hairgrad]
 
 		//Facial Hair
 		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,facial_hair_styles_list.len)

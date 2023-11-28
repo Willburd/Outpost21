@@ -81,6 +81,7 @@
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
 	H.UpdateAppearance() //Update appearance
+	H.ApplySpeciesAndTraits()
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
@@ -310,6 +311,7 @@
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
 	H.UpdateAppearance() //Update appearance
+	H.ApplySpeciesAndTraits()
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()

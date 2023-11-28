@@ -64,7 +64,11 @@
 #define DNA_UI_WING3_R     45
 #define DNA_UI_WING3_G     46
 #define DNA_UI_WING3_B     47 // VOREStation snippet end.
-#define DNA_UI_LENGTH      47 // VOREStation Edit - Needs to match the highest number above.
+#define DNA_UI_HAIRGRAD_STYLE 48
+#define DNA_UI_HAIRGRAD_R     49
+#define DNA_UI_HAIRGRAD_G     50
+#define DNA_UI_HAIRGRAD_B     51
+#define DNA_UI_LENGTH      51 // VOREStation Edit - Needs to match the highest number above.
 
 #define DNA_SE_LENGTH 49 // VOREStation Edit (original was UI+11)
 // For later:
@@ -148,8 +152,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.body_markings=body_markings_genetic.Copy()
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
-		if(b<=DNA_UI_LENGTH)
-			new_dna.UI[b]=UI[b]
+	for(var/b=1;b<=DNA_UI_LENGTH;b++)
+		new_dna.UI[b]=UI[b]
 	new_dna.UpdateUI()
 	new_dna.UpdateSE()
 	return new_dna
@@ -182,6 +186,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		character.f_style = "Shaved"
 	var/beard	= facial_hair_styles_list.Find(character.f_style)
 
+	if(!character.grad_style)
+		character.grad_style = "None"
+	var/grad = GLOB.hair_gradients.Find(character.grad_style)
 
 	// VOREStation Edit Start
 
@@ -265,6 +272,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
 
+	SetUIValueRange(DNA_UI_HAIRGRAD_R,    character.r_grad,    255,    1)
+	SetUIValueRange(DNA_UI_HAIRGRAD_G,    character.g_grad,    255,    1)
+	SetUIValueRange(DNA_UI_HAIRGRAD_B,    character.b_grad,    255,    1)
+
 	SetUIValueRange(DNA_UI_BEARD_R,   character.r_facial,  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_G,   character.g_facial,  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_B,   character.b_facial,  255,    1)
@@ -282,6 +293,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
+	SetUIValueRange(DNA_UI_HAIRGRAD_STYLE, grad, GLOB.hair_gradients.len,  1)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
 
 	body_markings.Cut()

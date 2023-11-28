@@ -120,7 +120,7 @@
 			if(S)
 				if((S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED))
 					continue
-				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW)
+				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW || S.name == SPECIES_PROMETHEAN)
 					continue
 			else
 				// if we don't have a species, something sure is wrong!
@@ -235,7 +235,7 @@
 			var/toocomplex = FALSE
 			if(S)
 				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED)
-				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW)
+				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW || S.name == SPECIES_PROMETHEAN)
 					toocomplex = TRUE // no DNA species, or not compatible with machinery
 			else
 				// if we don't have a species, something sure is wrong!
@@ -300,17 +300,13 @@
 	update_preview_mob(mannequin)
 	mannequin.ImmediateOverlayUpdate()
 
-	var/mutable_appearance/MA = new(mannequin)
-	south_preview.appearance = MA
-	south_preview.dir = SOUTH
+	south_preview.appearance = getFlatIcon(mannequin,defdir = SOUTH)
 	south_preview.screen_loc = "[map_name]:1,1"
 	south_preview.name = ""
-	east_preview.appearance = MA
-	east_preview.dir = EAST
+	east_preview.appearance = getFlatIcon(mannequin,defdir = EAST)
 	east_preview.screen_loc = "[map_name]:2,1"
 	east_preview.name = ""
-	west_preview.appearance = MA
-	west_preview.dir = WEST
+	west_preview.appearance = getFlatIcon(mannequin,defdir = WEST)
 	west_preview.screen_loc = "[map_name]:0,1"
 	west_preview.name = ""
 
@@ -319,6 +315,82 @@
 	C.register_map_obj(east_preview)
 	C.register_map_obj(west_preview)
 
+/obj/machinery/computer/transhuman/designer/proc/debug_eject_record()
+	//Get the DNA and generate a new mob
+	var/datum/dna2/record/R = active_br.mydna
+	var/mob/living/carbon/human/H = new(src.loc, R.dna.species)
+
+	//Fix the external organs
+	for(var/part in active_br.limb_data)
+
+		var/status = active_br.limb_data[part]
+		if(status == null) continue //Species doesn't have limb? Child of amputated limb?
+
+		var/obj/item/organ/external/O = H.organs_by_name[part]
+		if(!O) continue //Not an organ. Perhaps another amputation removed it already.
+
+		if(status == 1) //Normal limbs
+			continue
+		else if(status == 0) //Missing limbs
+			O.remove_rejuv()
+		else if(status) //Anything else is a manufacturer
+			O.remove_rejuv() //Don't robotize them, leave them removed so robotics can attach a part.
+
+	//Look, this machine can do this because [reasons] okay?!
+	for(var/part in active_br.organ_data)
+
+		var/status = active_br.organ_data[part]
+		if(status == null) continue //Species doesn't have organ? Child of missing part?
+
+		var/obj/item/organ/I = H.internal_organs_by_name[part]
+		if(!I) continue//Not an organ. Perhaps external conversion changed it already?
+
+		if(status == 0) //Normal organ
+			continue
+		else if(status == 1) //Assisted organ
+			I.mechassist()
+		else if(status == 2) //Mechanical organ
+			I.robotize()
+		else if(status == 3) //Digital organ
+			I.digitize()
+
+	//Set the name or generate one
+	if(!R.dna.real_name)
+		R.dna.real_name = "clone ([rand(0,999)])"
+	H.real_name = R.dna.real_name
+
+	//Apply DNA
+	H.original_player = active_br.ckey
+	H.dna = R.dna.Clone()
+	H.UpdateAppearance() //Update appearance
+	H.ApplySpeciesAndTraits()
+	if(H.dna)
+		H.dna.UpdateSE()
+		H.dna.UpdateUI()
+		domutcheck(H,null)
+	H.sync_organ_dna()
+
+	//Apply genetic modifiers
+	for(var/modifier_type in R.genetic_modifiers)
+		H.add_modifier(modifier_type)
+
+	//Apply damage
+	H.adjustCloneLoss(H.getMaxHealth()*1.5)
+	H.Paralyse(4)
+	H.updatehealth()
+
+	//Basically all the VORE stuff
+	H.ooc_notes = active_br.body_oocnotes
+	H.flavor_texts = active_br.mydna.flavor.Copy()
+	H.resize(active_br.sizemult, FALSE)
+	H.appearance_flags = active_br.aflags
+	H.weight = active_br.weight
+	if(active_br.speciesname)
+		H.custom_species = active_br.speciesname
+
+	// EJECT
+	H.regenerate_icons()
+	return 1
 
 /obj/machinery/computer/transhuman/designer/proc/update_preview_mob(var/mob/living/carbon/human/H)
 	ASSERT(!QDELETED(H))
@@ -372,12 +444,17 @@
 		H.dna.UpdateUI()
 		domutcheck(H,null)
 	H.sync_organ_dna() // Do this because sprites depend on DNA-gender of organs (chest etc)
+
+	//Apply genetic modifiers
+	for(var/modifier_type in R.genetic_modifiers)
+		H.add_modifier(modifier_type)
 	H.resize(active_br.sizemult, FALSE)
 
 	// And as for clothing...
 	// We don't actually dress them! This is a medical machine, handle the nakedness DOCTOR!
 
 	H.regenerate_icons()
+
 	return 0 // Success!
 
 // HORROR SHOW BELOW

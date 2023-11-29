@@ -100,11 +100,13 @@ var/global/floorIsLava = 0
 			body += "<b>Transformation:</b>"
 			body += "<br>"
 
+			/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 			//Monkey
 			if(issmall(M))
 				body += "<B>Monkeyized</B> | "
 			else
 				body += "<A href='?src=\ref[src];monkeyone=\ref[M]'>Monkeyize</A> | "
+			*/
 
 			//Corgi
 			if(iscorgi(M))

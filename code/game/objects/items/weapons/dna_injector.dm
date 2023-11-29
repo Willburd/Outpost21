@@ -15,20 +15,6 @@
 	var/is_bullet = 0
 	var/inuse = 0
 
-	// USE ONLY IN PREMADE SYRINGES.  WILL NOT WORK OTHERWISE.
-	var/datatype=0
-	var/value=0
-
-/obj/item/weapon/dnainjector/New()
-	if(datatype && block)
-		buf=new
-		buf.dna=new
-		buf.types = datatype
-		buf.dna.ResetSE()
-		//testing("[name]: DNA2 SE blocks prior to SetValue: [english_list(buf.dna.SE)]")
-		SetValue(src.value)
-		//testing("[name]: DNA2 SE blocks after SetValue: [english_list(buf.dna.SE)]")
-
 /obj/item/weapon/dnainjector/proc/GetRealBlock(var/selblock)
 	if(selblock==0)
 		return block
@@ -135,17 +121,45 @@
 		to_chat(user, "<span class='warning'>Apparently it didn't work...</span>")
 		return
 
+	/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 	// Used by admin log.
 	var/injected_with_monkey = ""
 	if((buf.types & DNA2_BUF_SE) && (block ? (GetState() && block == MONKEYBLOCK) : GetState(MONKEYBLOCK)))
 		injected_with_monkey = " <span class='danger'>(MONKEY)</span>"
 
 	add_attack_logs(user,M,"[injected_with_monkey] used the [name] on")
+	*/
 
 	// Apply the DNA shit.
 	inject(M, user)
 	return
 
+
+/proc/spawn_dna_injector(var/setloc, var/selblock,var/disables)
+	for(var/datum/dna/gene/gene in dna_genes)
+		if(gene.block == selblock)
+			var/obj/item/weapon/dnainjector/dnainjector = new(setloc)
+			dnainjector.name = "\improper DNA injector (Hulk)"
+			dnainjector.desc = "[ disables ? "Disables" : "Enables" ] the [gene.name] gene."
+			dnainjector.buf=new()
+			dnainjector.buf.dna=new()
+			dnainjector.buf.types = DNA2_BUF_SE
+			dnainjector.buf.dna.ResetSE()
+			//testing("[name]: DNA2 SE blocks prior to SetValue: [english_list(buf.dna.SE)]")
+			dnainjector.SetValue(disables ? 0x001 : 0xFFF)
+			//testing("[name]: DNA2 SE blocks after SetValue: [english_list(buf.dna.SE)]")
+			return
+
+/proc/spawn_dna_injector_random(var/setloc)
+	var/list/getlist = list()
+	for(var/datum/dna/gene/gene in dna_genes)
+		if(gene.block)
+			getlist.Add(gene.block)
+
+	// makes a random injector
+	return spawn_dna_injector( setloc , pick(getlist), prob(30))
+
+/* outpost 21 edit - entirely replaced by spawner proc above
 /obj/item/weapon/dnainjector/hulkmut
 	name = "\improper DNA injector (Hulk)"
 	desc = "This will make you big and strong, but give you a bad skin condition."
@@ -596,3 +610,4 @@
 /obj/item/weapon/dnainjector/m2h/New()
 	block = MONKEYBLOCK
 	..()
+*/

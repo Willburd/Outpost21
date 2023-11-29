@@ -59,10 +59,7 @@ var/EPILEPSYBLOCK = 0
 var/TWITCHBLOCK   = 0
 var/NERVOUSBLOCK  = 0
 var/VERTIGOBLOCK  = 0
-var/MONKEYBLOCK   = STRUCDNASIZE
-
-var/BLOCKADD = 0
-var/DIFFMUT  = 0
+// var/MONKEYBLOCK   = STRUCDNASIZE // outpost 21 edit, this is too broken to keep with the current overlays code.
 
 var/HEADACHEBLOCK      = 0
 var/NOBREATHBLOCK      = 0
@@ -78,3 +75,4 @@ var/SHOCKIMMUNITYBLOCK = 0
 var/SMALLSIZEBLOCK     = 0
 
 // Modern traits for modern agonizing problems, see code\game\dna\genes\traits.dm for explaination
+var/TRAITBLOCK_X     = 0

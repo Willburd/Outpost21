@@ -227,6 +227,7 @@
 			if("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
 
+	/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 	else if(href_list["makemonkey"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -240,6 +241,7 @@
 			to_chat(usr, "Mob doesn't exist anymore")
 			return
 		holder.Topic(href, list("monkeyone"=href_list["makemonkey"]))
+	*/
 
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return

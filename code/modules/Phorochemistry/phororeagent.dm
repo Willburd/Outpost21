@@ -33,7 +33,7 @@ var/induromol_code = rand(1, 50)
 			if(prob(91 - (min(src.volume, 60) / 1.5))) //odds are always against you, and high doses are dangerous
 				block = pick(FAKEBLOCK, FAKEBLOCK, DEAFBLOCK, DEAFBLOCK, CLUMSYBLOCK, BLINDBLOCK)
 			else
-				block = pick(HULKBLOCK,XRAYBLOCK,FIREBLOCK,TELEBLOCK,XRAYBLOCK,FIREBLOCK,TELEBLOCK)
+				block = pick(HULKBLOCK,XRAYBLOCK,TELEBLOCK,XRAYBLOCK,TELEBLOCK)
 
 			var/cur_DNA = H.dna.GetSEState(block)
 			do

@@ -70,7 +70,7 @@
 #define DNA_UI_HAIRGRAD_B     51
 #define DNA_UI_LENGTH      51 // VOREStation Edit - Needs to match the highest number above.
 
-#define DNA_SE_LENGTH 49 // VOREStation Edit (original was UI+11)
+#define DNA_SE_LENGTH 80 // Outpost 21 edit - yowzers, we sure have a lot
 // For later:
 //#define DNA_SE_LENGTH 50 // Was STRUCDNASIZE, size 27. 15 new blocks added = 42, plus room to grow.
 

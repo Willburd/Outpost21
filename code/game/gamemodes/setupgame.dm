@@ -18,12 +18,6 @@
 
 /proc/setupgenetics()
 
-	if (prob(50))
-		// Currently unused.  Will revisit. - N3X
-		BLOCKADD = rand(-300,300)
-	if (prob(75))
-		DIFFMUT = rand(0,20)
-
 	var/list/numsToAssign=new()
 	for(var/i=1;i<DNA_SE_LENGTH;i++)
 		numsToAssign += i
@@ -47,6 +41,9 @@
 	TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
 	REMOTETALKBLOCK    = getAssignedBlock("REMOTETALK",    numsToAssign, DNA_HARDER_BOUNDS)
 
+	// Trait linked gene blocks! see code\game\dna\genes\traits.dm for info!
+	//TRAITBLOCK_X     = getAssignedBlock("TEST",      	   numsToAssign)
+
 	// UNUSED!
 	// Bay muts (UNUSED)
 	//HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
@@ -66,7 +63,7 @@
 	/////////////////////////////////////////////.
 
 	// Monkeyblock is always last.
-	MONKEYBLOCK = DNA_SE_LENGTH
+	// MONKEYBLOCK = DNA_SE_LENGTH  // outpost 21 edit, this is too broken to keep with the current overlays code.
 
 	// And the genes that actually do the work. (domutcheck improvements)
 	var/list/blocks_assigned[DNA_SE_LENGTH]

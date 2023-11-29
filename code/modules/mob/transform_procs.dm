@@ -1,3 +1,5 @@
+
+/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 /mob/living/carbon/human/proc/monkeyize()
 	if (transforming)
 		return
@@ -40,6 +42,7 @@
 	qdel(animation)
 
 	return src
+*/
 
 /mob/new_player/AIize(var/move = TRUE)
 	spawning = 1

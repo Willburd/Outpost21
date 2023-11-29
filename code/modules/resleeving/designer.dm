@@ -132,10 +132,12 @@
 	if(active_br)
 		// update...
 		update_preview_mob()
-
 		data["activeBodyRecord"] = list(
 			"real_name" = active_br.mydna.name,
-			"speciesname" = active_br.speciesname ? active_br.speciesname : active_br.mydna.dna.species,
+			"speciesname" = active_br.mydna.dna.species,
+			"speciescustom" = active_br.mydna.dna.custom_species,
+			"speciesicon" = active_br.mydna.dna.base_species,
+			"canusecustomicon" = GLOB.all_species[active_br.mydna.dna.species].selects_bodytype,
 			"gender" = active_br.bodygender,
 			"synthetic" = active_br.synthetic ? "Yes" : "No",
 			"locked" = active_br.locked ? "Low" : "High",
@@ -194,6 +196,12 @@
 			temp["color"] = MOB_HEX_COLOR(mannequin, hair)
 			temp["colorHref"] = "hair_color"
 		styles["Hair"] = temp
+
+		temp = list("styleHref" = "hair_grad", "style" = mannequin.grad_style)
+		if(mannequin.species && (mannequin.species.appearance_flags & HAS_HAIR_COLOR))
+			temp["color"] = MOB_HEX_COLOR(mannequin, grad)
+			temp["colorHref"] = "grad_color"
+		styles["Grad"] = temp
 
 		temp = list("styleHref" = "facial_style", "style" = mannequin.f_style)
 		if(mannequin.species && (mannequin.species.appearance_flags & HAS_HAIR_COLOR))
@@ -500,6 +508,36 @@
 	ASSERT(istype(B))
 	var/datum/category_item/player_setup_item/general/basic/G = CG.items_by_name["Basic"]
 	ASSERT(istype(G))
+
+	if(params["target_href"] == "rename")
+		var/raw_name = tgui_input_text(user, "Choose your character's name:", "Character Name")
+		if (!isnull(raw_name))
+			var/new_name = sanitize_name(raw_name, P.species, FALSE)
+			if(new_name)
+				active_br.mydna.name = P.real_name
+				active_br.mydna.dna.real_name = P.real_name
+				return 1
+			else
+				to_chat(user, "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>")
+				return 1
+		update_preview_icon()
+		return 1
+
+	if(params["target_href"] == "custom_species")
+		var/raw_choice = sanitize(tgui_input_text(user, "Input your custom species name:",
+			"Character Preference", P.custom_species, MAX_NAME_LEN), MAX_NAME_LEN)
+		active_br.mydna.dna.custom_species = raw_choice
+		update_preview_icon()
+		return 1
+
+	if(params["target_href"] == "custom_base" && GLOB.all_species[P.species].selects_bodytype)
+		var/list/choices = GLOB.custom_species_bases
+		choices = (choices | P.species)
+		var/text_choice = tgui_input_list(usr, "Pick an icon set for your species:","Icon Base", choices)
+		if(text_choice in choices)
+			active_br.mydna.dna.base_species = text_choice
+		update_preview_icon()
+		return 1
 
 	if(params["target_href"] == "bio_gender")
 		var/new_gender = tgui_input_list(user, "Choose your character's biological gender:", "Character Preference", G.get_genders())

@@ -11,7 +11,7 @@ export const BodyDesigner = (props, context) => {
   let body = MenuToTemplate[menu];
 
   return (
-    <Window width={450} height={650}>
+    <Window width={750} height={850}>
       <Window.Content>
         <Box>
           <Button
@@ -87,206 +87,256 @@ const BodyDesignerSpecificRecord = (props, context) => {
   const { activeBodyRecord, mapRef } = data;
   return activeBodyRecord ? (
     <Flex direction="column">
-      <Flex.Item basis="165px">
+      <Flex.Item basis="200px">
         <Section
           title="Specific Record"
           buttons={<Button icon="arrow-left" content="Back" onClick={() => act('menu', { menu: 'Main' })} />}>
-          <LabeledList>
-            <LabeledList.Item label="Name">{activeBodyRecord.real_name}</LabeledList.Item>
-            <LabeledList.Item label="Species">{activeBodyRecord.speciesname}</LabeledList.Item>
-            <LabeledList.Item label="Bio. Sex">
-              <Button
-                icon="pen"
-                content={capitalize(activeBodyRecord.gender)}
-                onClick={() =>
-                  act('href_conversion', {
-                    target_href: 'bio_gender',
-                    target_value: 1,
-                  })
-                }
+          <Flex direction="row">
+            <Flex.Item basis="50%">
+              <LabeledList>
+                <LabeledList.Item label="Name">
+                  <Button
+                    icon="pen"
+                    content={activeBodyRecord.real_name}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'rename',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Species">{activeBodyRecord.speciesname}</LabeledList.Item>
+                <LabeledList.Item label="Custom Species Name">
+                  <Button
+                    icon="pen"
+                    content={activeBodyRecord.speciescustom}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'custom_species',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Custom Species Icon">
+                  <Button
+                    icon="pen"
+                    content={activeBodyRecord.speciesicon}
+                    disabled={!activeBodyRecord.canusecustomicon}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'custom_base',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Bio. Sex">
+                  <Button
+                    icon="pen"
+                    content={capitalize(activeBodyRecord.gender)}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'bio_gender',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Synthetic">{activeBodyRecord.synthetic}</LabeledList.Item>
+                <LabeledList.Item label="Mind Compat">
+                  {activeBodyRecord.locked}
+                  <Button
+                    ml={1}
+                    icon="eye"
+                    content="View OOC Notes"
+                    disabled={!activeBodyRecord.booc}
+                    onClick={() => act('boocnotes')}
+                  />
+                </LabeledList.Item>
+              </LabeledList>
+            </Flex.Item>
+            <Flex.Item>
+              <ByondUi
+                style={{
+                  width: '100%',
+                  height: '165px',
+                }}
+                params={{
+                  id: mapRef,
+                  type: 'map',
+                }}
               />
-            </LabeledList.Item>
-            <LabeledList.Item label="Synthetic">{activeBodyRecord.synthetic}</LabeledList.Item>
-            <LabeledList.Item label="Mind Compat">
-              {activeBodyRecord.locked}
-              <Button
-                ml={1}
-                icon="eye"
-                content="View OOC Notes"
-                disabled={!activeBodyRecord.booc}
-                onClick={() => act('boocnotes')}
-              />
-            </LabeledList.Item>
-          </LabeledList>
+            </Flex.Item>
+          </Flex>
         </Section>
       </Flex.Item>
-      <Flex.Item basis="130px">
-        <ByondUi
-          style={{
-            width: '100%',
-            height: '128px',
-          }}
-          params={{
-            id: mapRef,
-            type: 'map',
-          }}
-        />
-      </Flex.Item>
-      <Flex.Item basis="300px">
-        <Section title="Customize" height="300px" style={{ overflow: 'auto' }}>
-          <LabeledList>
-            <LabeledList.Item label="Scale">
-              <Button
-                icon="pen"
-                content={activeBodyRecord.scale}
-                onClick={() =>
-                  act('href_conversion', {
-                    target_href: 'size_multiplier',
-                    target_value: 1,
-                  })
-                }
-              />
-            </LabeledList.Item>
-            {Object.keys(activeBodyRecord.styles).map((key) => {
-              const style = activeBodyRecord.styles[key];
-              return (
-                <LabeledList.Item key={key} label={key}>
-                  {style.styleHref ? (
-                    <Button
-                      icon="pen"
-                      content={style.style}
-                      onClick={() =>
-                        act('href_conversion', {
-                          target_href: style.styleHref,
-                          target_value: 1,
-                        })
-                      }
-                    />
-                  ) : null}
-                  {style.colorHref ? (
-                    <Box>
-                      <Button
-                        icon="pen"
-                        content={style.color}
-                        onClick={() =>
-                          act('href_conversion', {
-                            target_href: style.colorHref,
-                            target_value: 1,
-                          })
-                        }
-                      />
-                      <ColorBox
-                        verticalAlign="top"
-                        width="32px"
-                        height="20px"
-                        color={style.color}
-                        style={{
-                          border: '1px solid #fff',
-                        }}
-                      />
-                    </Box>
-                  ) : null}
-                  {style.colorHref2 ? (
-                    <Box>
-                      <Button
-                        icon="pen"
-                        content={style.color2}
-                        onClick={() =>
-                          act('href_conversion', {
-                            target_href: style.colorHref2,
-                            target_value: 1,
-                          })
-                        }
-                      />
-                      <ColorBox
-                        verticalAlign="top"
-                        width="32px"
-                        height="20px"
-                        color={style.color2}
-                        style={{
-                          border: '1px solid #fff',
-                        }}
-                      />
-                    </Box>
-                  ) : null}
-                  {style.colorHref3 ? (
-                    <Box>
-                      <Button
-                        icon="pen"
-                        content={style.color3}
-                        onClick={() =>
-                          act('href_conversion', {
-                            target_href: style.colorHref3,
-                            target_value: 1,
-                          })
-                        }
-                      />
-                      <ColorBox
-                        verticalAlign="top"
-                        width="32px"
-                        height="20px"
-                        color={style.color3}
-                        style={{
-                          border: '1px solid #fff',
-                        }}
-                      />
-                    </Box>
-                  ) : null}
+      <Flex.Item basis="400px">
+        <Flex direction="row">
+          <Flex.Item>
+            <Section title="Unique Identifiers">
+              <LabeledList>
+                <LabeledList.Item label="Scale">
+                  <Button
+                    icon="pen"
+                    content={activeBodyRecord.scale}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'size_multiplier',
+                        target_value: 1,
+                      })
+                    }
+                  />
                 </LabeledList.Item>
-              );
-            })}
-            <LabeledList.Item label="Body Markings">
-              <Button
-                icon="plus"
-                content="Add Marking"
-                onClick={() =>
-                  act('href_conversion', {
-                    target_href: 'marking_style',
-                    target_value: 1,
-                  })
-                }
-              />
-              <Flex wrap="wrap" justify="center" align="center">
-                {Object.keys(activeBodyRecord.markings).map((key) => {
-                  const marking = activeBodyRecord.markings[key];
+                {Object.keys(activeBodyRecord.styles).map((key) => {
+                  const style = activeBodyRecord.styles[key];
                   return (
-                    <Flex.Item basis="100%" key={key}>
-                      <Flex>
-                        <Flex.Item>
+                    <LabeledList.Item key={key} label={key}>
+                      {style.styleHref ? (
+                        <Button
+                          icon="pen"
+                          content={style.style}
+                          onClick={() =>
+                            act('href_conversion', {
+                              target_href: style.styleHref,
+                              target_value: 1,
+                            })
+                          }
+                        />
+                      ) : null}
+                      {style.colorHref ? (
+                        <Box>
                           <Button
-                            mr={0.2}
-                            fluid
-                            icon="times"
-                            color="red"
+                            icon="pen"
+                            content={style.color}
                             onClick={() =>
                               act('href_conversion', {
-                                target_href: 'marking_remove',
-                                target_value: key,
+                                target_href: style.colorHref,
+                                target_value: 1,
                               })
                             }
                           />
-                        </Flex.Item>
-                        <Flex.Item grow={1}>
+                          <ColorBox
+                            verticalAlign="top"
+                            width="32px"
+                            height="20px"
+                            color={style.color}
+                            style={{
+                              border: '1px solid #fff',
+                            }}
+                          />
+                        </Box>
+                      ) : null}
+                      {style.colorHref2 ? (
+                        <Box>
                           <Button
-                            fluid
-                            backgroundColor={marking}
-                            content={key}
+                            icon="pen"
+                            content={style.color2}
                             onClick={() =>
                               act('href_conversion', {
-                                target_href: 'marking_color',
-                                target_value: key,
+                                target_href: style.colorHref2,
+                                target_value: 1,
                               })
                             }
                           />
-                        </Flex.Item>
-                      </Flex>
-                    </Flex.Item>
+                          <ColorBox
+                            verticalAlign="top"
+                            width="32px"
+                            height="20px"
+                            color={style.color2}
+                            style={{
+                              border: '1px solid #fff',
+                            }}
+                          />
+                        </Box>
+                      ) : null}
+                      {style.colorHref3 ? (
+                        <Box>
+                          <Button
+                            icon="pen"
+                            content={style.color3}
+                            onClick={() =>
+                              act('href_conversion', {
+                                target_href: style.colorHref3,
+                                target_value: 1,
+                              })
+                            }
+                          />
+                          <ColorBox
+                            verticalAlign="top"
+                            width="32px"
+                            height="20px"
+                            color={style.color3}
+                            style={{
+                              border: '1px solid #fff',
+                            }}
+                          />
+                        </Box>
+                      ) : null}
+                    </LabeledList.Item>
                   );
                 })}
-              </Flex>
-            </LabeledList.Item>
-          </LabeledList>
-        </Section>
+              </LabeledList>
+            </Section>
+          </Flex.Item>
+          <Flex.Item>
+            <Section title="Customize">
+              <LabeledList>
+                <LabeledList.Item label="Body Markings">
+                  <Button
+                    icon="plus"
+                    content="Add Marking"
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'marking_style',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                  <Flex wrap="wrap" justify="center" align="center">
+                    {Object.keys(activeBodyRecord.markings).map((key) => {
+                      const marking = activeBodyRecord.markings[key];
+                      return (
+                        <Flex.Item basis="100%" key={key}>
+                          <Flex>
+                            <Flex.Item>
+                              <Button
+                                mr={0.2}
+                                fluid
+                                icon="times"
+                                color="red"
+                                onClick={() =>
+                                  act('href_conversion', {
+                                    target_href: 'marking_remove',
+                                    target_value: key,
+                                  })
+                                }
+                              />
+                            </Flex.Item>
+                            <Flex.Item grow={1}>
+                              <Button
+                                fluid
+                                backgroundColor={marking}
+                                content={key}
+                                onClick={() =>
+                                  act('href_conversion', {
+                                    target_href: 'marking_color',
+                                    target_value: key,
+                                  })
+                                }
+                              />
+                            </Flex.Item>
+                          </Flex>
+                        </Flex.Item>
+                      );
+                    })}
+                  </Flex>
+                </LabeledList.Item>
+              </LabeledList>
+            </Section>
+          </Flex.Item>
+        </Flex>
       </Flex.Item>
     </Flex>
   ) : (

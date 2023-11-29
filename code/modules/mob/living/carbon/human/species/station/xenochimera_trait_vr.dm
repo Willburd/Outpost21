@@ -8,6 +8,11 @@
 	desc = "You've evolved your body to produce silk that you can fashion into articles of clothing and other objects."
 	cost = 0
 	category = 0
+/datum/dna/gene/trait_linked/weaver/xenochimera/New() // Genetically linked trait
+	block = TRAITBLOCK_WEAVERXENO
+	linked_trait_path = /datum/trait/positive/weaver/xenochimera
+	. = ..()
+
 
 /datum/trait/positive/hardfeet/xenochimera
 	sort = TRAIT_SORT_SPECIES
@@ -16,6 +21,7 @@
 	desc = "Your body has adapted to make your feet immune to glass shards, whether by developing hooves, chitin, or just horrible callous."
 	cost = 0
 	category = 0
+
 
 // Why put this on Xenochimera of all species? I have no idea, but someone may be enough of a lunatic to take it.
 /datum/trait/negative/neural_hypersensitivity/xenochimera
@@ -26,6 +32,11 @@
 	Given your species' typical reactions to pain, this can only end well for you!"
 	cost = 0
 	category = 0
+/datum/dna/gene/trait_linked/neural_hypersensitivity/xenochimera/New() // Genetically linked trait
+	block = TRAITBLOCK_HYPERSENSITIVE_XENO
+	linked_trait_path = /datum/trait/negative/neural_hypersensitivity/xenochimera
+	. = ..()
+
 
 /datum/trait/positive/melee_attack_fangs/xenochimera
 	sort = TRAIT_SORT_SPECIES
@@ -35,6 +46,7 @@
 	cost = 0
 	category = 0
 
+
 /datum/trait/positive/snowwalker/xenochimera
 	sort = TRAIT_SORT_SPECIES
 	allowed_species = list(SPECIES_XENOCHIMERA)
@@ -42,6 +54,7 @@
 	desc = "You've adapted to traversing snowy terrain. Snow does not slow you down!"
 	cost = 0
 	category = 0
+
 
 /datum/trait/positive/aquatic/xenochimera
 	sort = TRAIT_SORT_SPECIES
@@ -52,11 +65,16 @@
 	category = 0
 	excludes = list(/datum/trait/positive/winged_flight/xenochimera)
 
+
 /datum/trait/positive/winged_flight/xenochimera
 	name = "Xenochhimera: Winged Flight"
 	desc = "Allows you to fly by using your wings. Don't forget to bring them!"
 	cost = 0
 	excludes = list(/datum/trait/positive/aquatic/xenochimera)
+/datum/dna/gene/trait_linked/winged_flight/xenochimera/New() // Genetically linked trait
+	block = TRAITBLOCK_WINGFLIGHT_XENO
+	linked_trait_path = /datum/trait/positive/winged_flight/xenochimera
+	. = ..()
 
 /* // Commented out in lieu of finding a better solution.
 /datum/trait/neutral/coldadapt/xenochimera
@@ -116,3 +134,7 @@
 	desc = "Allows you to build a cocoon around yourself, using it to transform your body if you desire."
 	cost = 0
 	category = 0
+/datum/dna/gene/trait_linked/cocoon_tf/xenochimera/New() // Genetically linked trait
+	block = TRAITBLOCK_COCOON_XENO
+	linked_trait_path = /datum/trait/positive/cocoon_tf/xenochimera
+	. = ..()

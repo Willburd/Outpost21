@@ -91,7 +91,10 @@
 				T.apply(new_copy, H)
 			else if(resetdna)
 				// the rest should set their block on mob creation only!
-				H.dna.SetSEState(T.linked_gene_block,1,1)
+				H.dna.SetSEState(T.linked_gene_block,1,1) // force on
+				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
+				gene.initial_activation( H ,null ,0) // forces antigenes off, and calls apply() on trait
+	H.dna.UpdateSE() // sync!
 
 	return new_copy
 

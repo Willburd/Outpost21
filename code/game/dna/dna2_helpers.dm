@@ -25,7 +25,7 @@
 	if(!M || !(M.dna)) return
 	M.dna.check_integrity()
 	//var/block = pick(GLASSESBLOCK,COUGHBLOCK,FAKEBLOCK,NERVOUSBLOCK,CLUMSYBLOCK,TWITCHBLOCK,HEADACHEBLOCK,BLINDBLOCK,DEAFBLOCK,HALLUCINATIONBLOCK) // Most of these are disabled anyway.
-	var/block = pick(FAKEBLOCK,CLUMSYBLOCK,BLINDBLOCK,DEAFBLOCK,VERTIGOBLOCK)
+	var/block = pick(BLINDBLOCK,DEAFBLOCK,VERTIGOBLOCK)
 	M.dna.SetSEState(block, 1)
 
 // Give Random Good Mutation to M
@@ -33,7 +33,7 @@
 	if(!M || !(M.dna)) return
 	M.dna.check_integrity()
 	//var/block = pick(HULKBLOCK,XRAYBLOCK,TELEBLOCK,NOBREATHBLOCK,REMOTEVIEWBLOCK,REGENERATEBLOCK,INCREASERUNBLOCK,REMOTETALKBLOCK,MORPHBLOCK,BLENDBLOCK,NOPRINTSBLOCK,SHOCKIMMUNITYBLOCK,SMALLSIZEBLOCK) // Much like above, most of these blocks are disabled in code.
-	var/block = pick(HULKBLOCK,XRAYBLOCK,TELEBLOCK,REGENERATEBLOCK,REMOTETALKBLOCK)
+	var/block = pick(XRAYBLOCK,TELEBLOCK,REGENERATEBLOCK)
 	M.dna.SetSEState(block, 1)
 
 // Random Appearance Mutation
@@ -62,6 +62,7 @@
 
 // I haven't yet figured out what the fuck this is supposed to do.
 /proc/miniscramble(input,rs,rd)
+	/* Willbird - my attempt at something more intersting and less goofy, but longtime players will likely prefer the original code.
 	// these are based on the dna_modifier settings raw input
 	// rs is 1 to 10
 	// rd is 1 to 20
@@ -90,8 +91,8 @@
 			hexval += rand(3)
 		if(hexval == 15)
 			hexval -= rand(3)
-
-	/* Old version is semi random, you basically learn by feel what type of radiation blast/duration is good or not!
+	*/
+	var/output = null
 	if (input == "C" || input == "D" || input == "E" || input == "F")
 		output = pick(prob((rs*10));"4",prob((rs*10));"5",prob((rs*10));"6",prob((rs*10));"7",prob((rs*5)+(rd));"0",prob((rs*5)+(rd));"1",prob((rs*10)-(rd));"2",prob((rs*10)-(rd));"3")
 	if (input == "8" || input == "9" || input == "A" || input == "B")
@@ -101,8 +102,7 @@
 	if (input == "0" || input == "1" || input == "2" || input == "3")
 		output = pick(prob((rs*10));"8",prob((rs*10));"9",prob((rs*10));"A",prob((rs*10));"B",prob((rs*10)-(rd));"C",prob((rs*10)-(rd));"D",prob((rs*5)+(rd));"E",prob((rs*5)+(rd));"F")
 	if (!output) output = "5"
-	*/
-	var/output = num2hex(hexval,0)
+	//var/output = num2hex(hexval,0)
 	return output
 
 // HELLO I MAKE BELL CURVES AROUND YOUR DESIRED TARGET

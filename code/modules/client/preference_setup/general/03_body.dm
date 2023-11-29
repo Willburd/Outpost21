@@ -141,11 +141,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["r_wing3"]		>> pref.r_wing3
 	S["g_wing3"]		>> pref.g_wing3
 	S["b_wing3"]		>> pref.b_wing3
+	/*
 	S["Wingdings"]			>> pref.wingdings //YWadd start
 	S["colorblind_mono"]	>> pref.colorblind_mono
 	S["colorblind_vulp"]	>> pref.colorblind_vulp
 	S["colorblind_taj"] 	>> pref.colorblind_taj
 	S["haemophilia"]        >> pref.haemophilia //YWadd end
+	*/
 	S["blind"]				>> pref.blind //OP21 start
 	S["mute"]				>> pref.mute
 	S["deaf"] 				>> pref.deaf //OP21 end
@@ -213,11 +215,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["r_wing3"]		<< pref.r_wing3
 	S["g_wing3"]		<< pref.g_wing3
 	S["b_wing3"]		<< pref.b_wing3
+	/*
 	S["Wingdings"]          << pref.wingdings //YWadd start
 	S["colorblind_mono"]	<< pref.colorblind_mono
 	S["colorblind_vulp"]	<< pref.colorblind_vulp
 	S["colorblind_taj"] 	<< pref.colorblind_taj
 	S["haemophilia"]        << pref.haemophilia //YWadd end
+	*/
 	S["blind"]				<< pref.blind //OP21 start
 	S["mute"]				<< pref.mute
 	S["deaf"] 				<< pref.deaf //OP21 end
@@ -312,22 +316,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	character.g_synth	= pref.g_synth
 	character.b_synth	= pref.b_synth
 	character.synth_markings = pref.synth_markings
-	//YWadd START
-	if(pref.species == "Grey")//YWadd START
-		character.wingdings = pref.wingdings
 
-	if(pref.colorblind_mono == 1)
-		character.add_modifier(/datum/modifier/trait/colorblind_monochrome)
-
-	else if(pref.colorblind_vulp == 1)
-		character.add_modifier(/datum/modifier/trait/colorblind_vulp)
-
-	else if(pref.colorblind_taj == 1)
-		character.add_modifier(/datum/modifier/trait/colorblind_taj)
-
-	if(pref.haemophilia == 1)
-		character.add_modifier(/datum/modifier/trait/haemophilia)
-	//YWadd END
 	var/list/ear_styles = pref.get_available_styles(global.ear_styles_list)
 	character.ear_style =  ear_styles[pref.ear_style]
 	character.r_ears =     pref.r_ears
@@ -1243,32 +1232,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	//YW Add Start
-	else if(href_list["wingdings"])
-		pref.wingdings = !pref.wingdings
-		Disabilities_YW(usr)
-
-	else if(href_list["colorblind_mono"])
-		pref.colorblind_mono = !pref.colorblind_mono
-		Disabilities_YW(usr)
-
-	else if(href_list["colorblind_vulp"])
-		pref.colorblind_vulp = !pref.colorblind_vulp
-		Disabilities_YW(usr)
-
-	else if(href_list["colorblind_taj"])
-		pref.colorblind_taj = !pref.colorblind_taj
-		Disabilities_YW(usr)
-
-	else if(href_list["haemophilia"])
-		pref.haemophilia = !pref.haemophilia
-		Disabilities_YW(usr)
-
 	else if(href_list["reset_disabilities"])
-		pref.wingdings = 0
-		pref.colorblind_mono = 0
-		pref.colorblind_taj = 0
-		pref.colorblind_vulp = 0
-		pref.haemophilia = 0
 		pref.blind = 0
 		pref.mute = 0
 		pref.deaf = 0

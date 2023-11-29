@@ -490,15 +490,18 @@
 	. = TRUE
 	switch(action)
 		if("selectMenuKey")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			var/key = params["key"]
 			if(!(key in list(/*PAGE_UI,*/ PAGE_SE, PAGE_BUFFER, PAGE_REJUVENATORS)))
 				return
 			selected_menu_key = key
 		if("toggleLock")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			if(connected && connected.occupant)
 				connected.locked = !(connected.locked)
 
 		if("pulseRadiation")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			irradiating = radiation_duration
 			var/lock_state = connected.locked
 			connected.locked = TRUE //lock it
@@ -573,6 +576,7 @@
 		*/
 	////////////////////////////////////////////////////////
 		if("injectRejuvenators")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			if(!connected.occupant || !connected.beaker)
 				return
 			var/inject_amount = clamp(round(text2num(params["amount"]), 5), 0, 50) // round to nearest 5 and clamp to 0-50
@@ -581,6 +585,7 @@
 			connected.beaker.reagents.trans_to_mob(connected.occupant, inject_amount, CHEM_BLOOD)
 	////////////////////////////////////////////////////////
 		if("selectSEBlock") // This chunk of code updates selected block / sub-block based on click (se stands for strutural enzymes)
+			playsound(src, "keyboard", 40) // into console
 			var/select_block = text2num(params["block"])
 			var/select_subblock = text2num(params["subblock"])
 			if(!select_block || !select_subblock)
@@ -589,6 +594,7 @@
 			selected_se_block = clamp(select_block, 1, DNA_SE_LENGTH)
 			selected_se_subblock = clamp(select_subblock, 1, DNA_BLOCK_SIZE)
 		if("pulseSERadiation")
+			playsound(src, "keyboard", 40) // into console
 			var/block = connected.occupant.dna.GetSESubBlock(selected_se_block,selected_se_subblock)
 			//var/original_block=block
 			//testing("Irradiating SE block [selected_se_block]:[selected_se_subblock] ([block])...")
@@ -630,11 +636,13 @@
 						//testing("Random identity mut!")
 						connected.occupant.UpdateAppearance()
 		if("ejectBeaker")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			if(connected.beaker)
 				var/obj/item/weapon/reagent_containers/glass/B = connected.beaker
 				B.loc = connected.loc
 				connected.beaker = null
 		if("ejectOccupant")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			connected.eject_occupant()
 			// eject disk too, because we can't get to the UI otherwise
 			if(!disk)
@@ -651,6 +659,7 @@
 			var/datum/transhuman/body_record/buffer = buffers[bufferId]
 			switch(bufferOption)
 				if("saveDNA")
+					playsound(src, "keyboard", 40) // into console
 					if(connected.occupant && connected.occupant.dna)
 						var/datum/transhuman/body_record/databuf = new(connected.occupant)
 						databuf.mydna.types = DNA2_BUF_SE // structurals only
@@ -696,14 +705,16 @@
 						buffers[bufferId] = databuf
 				*/
 				if("clear")
+					playsound(src, "keyboard", 40) // into console
 					buffers[bufferId] = new /datum/transhuman/body_record()
 				if("changeLabel")
+					playsound(src, "keyboard", 40) // into console
 					tgui_modal_input(src, "changeBufferLabel", "Please enter the new buffer label:", null, list("id" = bufferId), buffer.mydna.name, TGUI_MODAL_INPUT_MAX_LENGTH_NAME)
 				if("transfer")
 					if(!connected.occupant || (NOCLONE in connected.occupant.mutations) || !connected.occupant.dna)
 						return
+					playsound(src, "keyboard", 40) // into console
 
-					to_world("get buffer: [bufferId]")
 					var/datum/transhuman/body_record/buf = buffers[bufferId]
 					/* // we only handle SEs here now
 					if((buf.mydna.types & DNA2_BUF_UI))
@@ -749,6 +760,7 @@
 					irradiating = 0
 					connected.locked = lock_state
 				if("createInjector")
+					playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 					if(!injector_ready)
 						return
 					if(text2num(params["block"]) > 0)
@@ -757,12 +769,14 @@
 					else
 						create_injector(bufferId, TRUE)
 				if("loadDisk")
+					playsound(src, "keyboard", 40) // into console
 					if(isnull(disk) || disk.read_only || !disk.stored)
 						return
 					var/datum/transhuman/body_record/databuf = new /datum/transhuman/body_record(disk.stored)
 					databuf.mydna.types = DNA2_BUF_SE // structurals only
 					buffers[bufferId] = databuf
 				if("saveDisk")
+					playsound(src, "keyboard", 40) // into console
 					if(isnull(disk) || disk.read_only)
 						return
 					var/datum/transhuman/body_record/buf = buffers[bufferId]
@@ -771,10 +785,12 @@
 					disk.name = "Body Design Disk ('[buf.mydna.name]')"
 
 		if("wipeDisk")
+			playsound(src, "keyboard", 40) // into console
 			if(isnull(disk) || disk.read_only)
 				return
 			disk.stored = null
 		if("ejectDisk")
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			if(!disk)
 				return
 			disk.forceMove(get_turf(src))

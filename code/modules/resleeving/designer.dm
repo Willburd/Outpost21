@@ -17,7 +17,6 @@
 	light_color = "#315ab4"
 	circuit = /obj/item/weapon/circuitboard/body_designer
 	req_access = list(access_medical) // Used for loading people's designs
-	var/temp = ""
 	var/menu = MENU_MAIN //Which menu screen to display
 	var/datum/transhuman/body_record/active_br = null
 	//Mob preview
@@ -42,13 +41,13 @@
 	south_preview.name = ""
 	south_preview.assigned_map = map_name
 	south_preview.del_on_map_removal = FALSE
-	south_preview.screen_loc = "[map_name]:1,1"
+	south_preview.screen_loc = "[map_name]:2,1"
 
 	east_preview = new
 	east_preview.name = ""
 	east_preview.assigned_map = map_name
 	east_preview.del_on_map_removal = FALSE
-	east_preview.screen_loc = "[map_name]:2,1"
+	east_preview.screen_loc = "[map_name]:4,1"
 
 	west_preview = new
 	west_preview.name = ""
@@ -96,6 +95,13 @@
 		give_client_previews(user.client)
 		ui = new(user, src, "BodyDesigner", name)
 		ui.open()
+		sleep(1) // wait for resizing
+		if(active_br) // screw it, it's not updating often enough otherwise
+			update_preview_icon(TRUE)
+
+/obj/machinery/computer/transhuman/designer/tgui_close(mob/user)
+	. = ..()
+	clear_client_previews(user.client)
 
 /obj/machinery/computer/transhuman/designer/tgui_static_data(mob/user)
 	var/list/data = ..()
@@ -129,9 +135,10 @@
 		if(stock_bodyrecords_list_ui.len)
 			data["stock_bodyrecords"] = stock_bodyrecords_list_ui
 
+	var/list/temp
 	if(active_br)
 		// update...
-		update_preview_mob()
+		update_preview_icon()
 		data["activeBodyRecord"] = list(
 			"real_name" = active_br.mydna.name,
 			"speciesname" = active_br.mydna.dna.species,
@@ -141,14 +148,12 @@
 			"gender" = active_br.bodygender,
 			"synthetic" = active_br.synthetic ? "Yes" : "No",
 			"locked" = active_br.locked ? "Low" : "High",
-			"scale" = player_size_name(active_br.sizemult),
+			"scale" = "[player_size_name(active_br.sizemult)]\[[active_br.sizemult * 100]%\]",
 			"booc" = active_br.body_oocnotes,
 			"styles" = list()
 		)
 
 		var/list/styles = data["activeBodyRecord"]["styles"]
-		var/list/temp
-
 		temp = list("styleHref" = "ear_style", "style" = "Normal")
 		if(mannequin.ear_style)
 			temp["style"] = mannequin.ear_style.name
@@ -233,24 +238,26 @@
 	switch(action)
 		if("debug_load_my_body")
 			active_br = new /datum/transhuman/body_record(usr, FALSE, FALSE)
-			update_preview_icon()
+			update_preview_icon(TRUE)
 			menu = MENU_SPECIFICRECORD
 
 		if("view_brec")
+			playsound(src, "keyboard", 40) // into console
 			var/datum/transhuman/body_record/BR = locate(params["view_brec"])
 			if(BR && istype(BR.mydna))
 				if(allowed(usr) || BR.ckey == usr.ckey)
 					active_br = new /datum/transhuman/body_record(BR) // Load a COPY!
-					update_preview_icon()
+					update_preview_icon(TRUE)
 					menu = MENU_SPECIFICRECORD
 				else
 					active_br = null
-					temp = "Access denied: Body records are confidential."
+					to_chat(usr, "<span class='warning'>Access denied: Body records are confidential.</span>")
 			else
 				active_br = null
-				temp = "ERROR: Record missing."
+				to_chat(usr, "<span class='warning'>ERROR: Record missing.</span>")
 
 		if("view_stock_brec")
+			playsound(src, "keyboard", 40) // into console
 			var/datum/species/S = GLOB.all_species[params["view_stock_brec"]]
 			var/toocomplex = FALSE
 			if(S)
@@ -269,22 +276,24 @@
 				mannequin.dna.base_species = mannequin.species.base_species
 				active_br = new(mannequin, FALSE, FALSE)
 				active_br.speciesname = "Custom Sleeve"
-				update_preview_icon()
+				update_preview_icon(TRUE)
 				menu = MENU_SPECIFICRECORD
 			else
 				active_br = null
-				temp = "ERROR: Stock Record missing."
+				to_chat(usr, "<span class='warning'>ERROR: Stock Record missing.</span>")
 
 		if("boocnotes")
 			menu = MENU_OOCNOTES
 
 		if("loadfromdisk")
+			playsound(src, "keyboard", 40) // into console
 			if(disk && disk.stored)
 				active_br = new /datum/transhuman/body_record(disk.stored) // Loads a COPY!
-				update_preview_icon()
+				update_preview_icon(TRUE)
 				menu = MENU_SPECIFICRECORD
 
 		if("savetodisk")
+			playsound(src, "keyboard", 40) // into console
 			if(disk && active_br)
 				disk.stored = new /datum/transhuman/body_record(active_br) // Saves a COPY!
 				disk.name = "[initial(disk.name)] ([active_br.mydna.name])"
@@ -296,10 +305,10 @@
 		if("ejectdisk")
 			disk.forceMove(get_turf(src))
 			disk = null
+			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 
 		if("menu")
 			menu = params["menu"]
-			temp = ""
 
 		if("href_conversion")
 			PrefHrefMiddleware(params, usr)
@@ -312,14 +321,14 @@
 //
 
 // Based on /datum/preferences/proc/update_preview_icon()
-/obj/machinery/computer/transhuman/designer/proc/update_preview_icon()
-	update_preview_mob()
+/obj/machinery/computer/transhuman/designer/proc/update_preview_icon(var/forced)
+	update_preview_mob(forced)
 
 	south_preview.appearance = getFlatIcon(mannequin,defdir = SOUTH)
-	south_preview.screen_loc = "[map_name]:1,1"
+	south_preview.screen_loc = "[map_name]:2,1"
 	south_preview.name = ""
 	east_preview.appearance = getFlatIcon(mannequin,defdir = EAST)
-	east_preview.screen_loc = "[map_name]:2,1"
+	east_preview.screen_loc = "[map_name]:4,1"
 	east_preview.name = ""
 	west_preview.appearance = getFlatIcon(mannequin,defdir = WEST)
 	west_preview.screen_loc = "[map_name]:0,1"
@@ -329,6 +338,11 @@
 	C.register_map_obj(south_preview)
 	C.register_map_obj(east_preview)
 	C.register_map_obj(west_preview)
+
+/obj/machinery/computer/transhuman/designer/proc/clear_client_previews(client/C)
+	C.clear_map(south_preview)
+	C.clear_map(east_preview)
+	C.clear_map(west_preview)
 
 /obj/machinery/computer/transhuman/designer/proc/debug_eject_record()
 	//Get the DNA and generate a new mob
@@ -407,10 +421,15 @@
 	H.regenerate_icons()
 	return 1
 
-/obj/machinery/computer/transhuman/designer/proc/update_preview_mob()
+/obj/machinery/computer/transhuman/designer/proc/update_preview_mob(var/forced)
 	ASSERT(!QDELETED(active_br))
 	if(!mannequin)
 		mannequin = new ()
+	else
+		if(forced)
+			mannequin.Destroy()
+			mannequin = new()
+
 
 	//log_debug("designer.update_preview_mob([H]) active_br = \ref[active_br]")
 	//Get the DNA and generate a new mob
@@ -489,7 +508,7 @@
 		var/new_size = tgui_input_number(user, "Choose your character's size, ranging from [RESIZE_MINIMUM * 100]% to [RESIZE_MAXIMUM * 100]%", "Character Preference", null, RESIZE_MAXIMUM * 100, RESIZE_MINIMUM * 100)
 		if(new_size && ISINRANGE(new_size,RESIZE_MINIMUM * 100,RESIZE_MAXIMUM * 100))
 			active_br.sizemult = (new_size/100)
-			update_preview_icon()
+			update_preview_icon(TRUE)
 		return 1
 
 	// The black magic horror show begins

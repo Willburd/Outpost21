@@ -328,19 +328,6 @@ const DNAModifierMainBuffersElement = (props, context) => {
                 })
               }
             />
-            <Button
-              disabled={!buffer.data || !data.hasDisk}
-              icon="save"
-              content="Export"
-              tooltip="Exports this buffer to the currently loaded data disk."
-              tooltipPosition="bottom-end"
-              onClick={() =>
-                act('bufferOption', {
-                  option: 'saveDisk',
-                  id: id,
-                })
-              }
-            />
           </Fragment>
         }>
         <LabeledList>
@@ -411,6 +398,17 @@ const DNAModifierMainBuffersElement = (props, context) => {
                   onClick={() =>
                     act('bufferOption', {
                       option: 'transfer',
+                      id: id,
+                    })
+                  }
+                />
+                <Button
+                  disabled={!buffer.data || !data.hasDisk}
+                  icon="save"
+                  content="Disk"
+                  onClick={() =>
+                    act('bufferOption', {
+                      option: 'saveDisk',
                       id: id,
                     })
                   }

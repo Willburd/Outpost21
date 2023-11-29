@@ -6,7 +6,7 @@ import { Window } from '../layouts';
 export const BodyDesigner = (props, context) => {
   const { act, data } = useBackend(context);
 
-  const { menu, disk, diskStored, activeBodyRecord } = data;
+  const { menu, disk, diskStored, activeBodyRecord, temp } = data;
 
   let body = MenuToTemplate[menu];
 

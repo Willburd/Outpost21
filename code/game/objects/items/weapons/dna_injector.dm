@@ -74,7 +74,7 @@
 					L.dna.SE = buf.dna.SE.Copy()
 					L.dna.UpdateSE()
 				else
-					L.dna.SetSEValue(block,src.GetValue())
+					L.dna.SetSEValue(block,src.GetValue(block))
 				domutcheck(L, null, block!=null)
 				// apply genes
 				if(ishuman(L))
@@ -85,7 +85,6 @@
 					H.dna.UpdateSE()
 					H.dna.UpdateUI()
 					H.sync_organ_dna()
-					H.regenerate_icons()
 				L.dna.genetic_modifiers.Cut() // clear em!
 				for(var/modifier_type in buf.genetic_modifiers)
 					L.add_modifier(modifier_type)
@@ -140,30 +139,50 @@
 	inject(M, user)
 	return
 
+/obj/item/weapon/dnainjector/nullifier
+	name = "\improper DNA injector NULLIFIER"
+	desc = "Disables many genes at once."
+
+/obj/item/weapon/dnainjector/nullifier/New(var/newloc)
+	. = ..(newloc)
+	buf=new()
+	buf.dna=new()
+	buf.types = DNA2_BUF_SE
+	buf.dna.ResetSE()
+	//testing("[name]: DNA2 SE blocks prior to SetValue: [english_list(buf.dna.SE)]")
+	for(var/i=1;i<DNA_SE_LENGTH;i++)
+		if(prob(90)) buf.dna.SetSEBlock( i, prob(90) ? "001" : "FFF", TRUE)
+	buf.dna.UpdateSE()
+	//testing("[name]: DNA2 SE blocks after SetValue: [english_list(buf.dna.SE)]")
 
 /proc/spawn_dna_injector(var/setloc, var/selblock,var/disables)
-	for(var/datum/dna/gene/gene in dna_genes)
-		if(gene.block == selblock)
-			var/obj/item/weapon/dnainjector/dnainjector = new(setloc)
-			dnainjector.name = "\improper DNA injector (Hulk)"
-			dnainjector.desc = "[ disables ? "Disables" : "Enables" ] the [gene.name] gene."
-			dnainjector.buf=new()
-			dnainjector.buf.dna=new()
-			dnainjector.buf.types = DNA2_BUF_SE
-			dnainjector.buf.dna.ResetSE()
-			//testing("[name]: DNA2 SE blocks prior to SetValue: [english_list(buf.dna.SE)]")
-			dnainjector.SetValue(disables ? 0x001 : 0xFFF)
-			//testing("[name]: DNA2 SE blocks after SetValue: [english_list(buf.dna.SE)]")
-			return
+	var/datum/dna/gene/gene = dna_genes_by_block[selblock]
+	if(gene && gene.block)
+		var/obj/item/weapon/dnainjector/dnainjector = new(setloc)
+		dnainjector.name = "\improper DNA injector ([disables ? "Anti-" : "" ][gene.name])"
+		dnainjector.desc = "[ disables ? "Disables" : "Enables" ] the [gene.name] gene."
+		dnainjector.buf=new()
+		dnainjector.buf.dna=new()
+		dnainjector.buf.types = DNA2_BUF_SE
+		dnainjector.buf.dna.ResetSE()
+		dnainjector.block = gene.block
+		//testing("[name]: DNA2 SE blocks prior to SetValue: [english_list(buf.dna.SE)]")
+		dnainjector.buf.dna.SetSEState( gene.block, !disables, FALSE )
+		//testing("[name]: DNA2 SE blocks after SetValue: [english_list(buf.dna.SE)]")
+		return
 
 /proc/spawn_dna_injector_random(var/setloc)
+	if(prob(10))
+		// spawn nullifier sometimes too
+		return new /obj/item/weapon/dnainjector/nullifier(setloc)
+
+	// makes a random injector
 	var/list/getlist = list()
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(gene.block)
 			getlist.Add(gene.block)
-
-	// makes a random injector
 	return spawn_dna_injector( setloc , pick(getlist), prob(30))
+
 
 /* outpost 21 edit - entirely replaced by spawner proc above
 /obj/item/weapon/dnainjector/hulkmut

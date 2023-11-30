@@ -147,9 +147,9 @@
 
 /obj/item/weapon/storage/box/injectors
 	name = "box of DNA injectors"
-	desc = "This box contains injectors it seems."
+	desc = "<B>WARNING: These devices are extremely dangerous and can cause severe genetic damage if used.</B>"
 	icon_state = "dna"
-	starts_with = list()
+	starts_with = list(/obj/item/weapon/dnainjector/nullifier)
 
 /obj/item/weapon/storage/box/injectors/New()
 	. = ..()

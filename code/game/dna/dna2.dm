@@ -209,13 +209,6 @@ var/global/list/datum/dna/gene/dna_genes_by_block[DNA_SE_LENGTH] // lookup table
 	if(character.wing_style)
 		wing_style = wing_styles_list.Find(character.wing_style.type)
 
-	// Playerscale (This assumes list is sorted big->small)
-	var/size_multiplier = player_sizes_list.len // If fail to find, take smallest
-	for(var/N in player_sizes_list)
-		if(character.size_multiplier >= player_sizes_list[N])
-			size_multiplier = player_sizes_list.Find(N)
-			break
-
 	// Technically custom_species is not part of the UI, but this place avoids merge problems.
 	src.custom_species = character.custom_species
 	src.base_species = character.species.base_species
@@ -229,7 +222,7 @@ var/global/list/datum/dna/gene/dna_genes_by_block[DNA_SE_LENGTH] // lookup table
 	// +1 to account for the none-of-the-above possibility
 	SetUIValueRange(DNA_UI_EAR_STYLE,	ear_style + 1,     ear_styles_list.len  + 1,  1)
 	SetUIValueRange(DNA_UI_TAIL_STYLE,	tail_style + 1,    tail_styles_list.len + 1,  1)
-	SetUIValueRange(DNA_UI_PLAYERSCALE,	size_multiplier,   player_sizes_list.len,     1)
+	SetUIValueRange(DNA_UI_PLAYERSCALE,	character.size_multiplier * 100,   RESIZE_MAXIMUM * 100,     1)
 	SetUIValueRange(DNA_UI_WING_STYLE,	wing_style + 1,    wing_styles_list.len + 1,  1)
 
 	SetUIValueRange(DNA_UI_TAIL_R,    character.r_tail,    255,    1)

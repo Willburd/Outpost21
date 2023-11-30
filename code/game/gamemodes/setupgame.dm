@@ -77,6 +77,8 @@
 	TRAITBLOCK_DARKBLIND			= getAssignedBlock("DARKBLIND"		, numsToAssign)
 	TRAITBLOCK_LIGHTSENSITIVE		= getAssignedBlock("LIGHTSENSITIVE"	, numsToAssign)
 	TRAITBLOCK_LIGHTSENSITIVEEX		= getAssignedBlock("LIGHTSENSEEX"	, numsToAssign)
+	TRAITBLOCK_WINGDINGS			= getAssignedBlock("WINGDINGS"		, numsToAssign)
+	TRAITBLOCK_DETERIORATE			= getAssignedBlock("DETERIORATE"	, numsToAssign, DNA_HARDER_BOUNDS)
 	// NEUTRAL
 	TRAITBLOCK_METABOLISM_UP     	= getAssignedBlock("METAUP"			, numsToAssign)
 	TRAITBLOCK_METABOLISM_DOWN     	= getAssignedBlock("METADOWN"		, numsToAssign)
@@ -124,11 +126,11 @@
 	TRAITBLOCK_VORE_DOMPRED			= getAssignedBlock("DOMPRED"		, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_VORE_DOMPREY			= getAssignedBlock("DOMPREY"		, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_VORE_SUBTOPREY		= getAssignedBlock("SUBTOPREY"		, numsToAssign, DNA_HARDER_BOUNDS)
-	TRAITBLOCK_VORE_VERTNOM 		= getAssignedBlock("INSATIABLEEX"	, numsToAssign, DNA_HARDER_BOUNDS)
 	TRAITBLOCK_MICRO_SIZEDOWN		= getAssignedBlock("SIZEDOWN"		, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_MICRO_SIZEUP			= getAssignedBlock("SIZEUP"			, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_INSATIABLE			= getAssignedBlock("INSATIABLE"		, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_INSATIABLEEX			= getAssignedBlock("INSATIABLEEX"	, numsToAssign, DNA_HARDER_BOUNDS)
+	TRAITBLOCK_DRIPPY				= getAssignedBlock("DRIPPY"			, numsToAssign)
 	// Positive
 	TRAITBLOCK_SPEEDFAST			= getAssignedBlock("SPEED"			, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_SPEEDFASTEX			= getAssignedBlock("SPEEDEX"		, numsToAssign, DNA_HARDER_BOUNDS)

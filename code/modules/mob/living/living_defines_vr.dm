@@ -15,6 +15,7 @@
 //YW Add Start
 /mob
 	var/wingdings = 0
+	var/drippy = 0
 //Yw Add End
 
 //OP Add Start

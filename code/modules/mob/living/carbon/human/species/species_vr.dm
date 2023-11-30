@@ -96,6 +96,10 @@
 				gene.initial_activation( H ,null ,0) // forces antigenes off, and calls apply() on trait
 	H.dna.UpdateSE() // sync!
 
+	// apply these funny snowflakes
+	H.wingdings = H.species.wingdings
+	H.drippy = H.species.drippy
+
 	return new_copy
 
 /datum/species/proc/copy_variables(var/datum/species/S, var/list/whitelist)

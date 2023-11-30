@@ -114,6 +114,9 @@
 	var/emp_dmg_mod =		1			// Multiplier to all EMP damage sustained by the mob, if it's EMP-sensitive
 	var/emp_stun_mod = 		1			// Multiplier to all EMP disorient/etc. sustained by the mob, if it's EMP-sensitive
 	var/vision_flags = SEE_SELF							// Same flags as glasses.
+	// outpost 21
+	var/wingdings = 0
+	var/drippy = 0
 
 	// Death vars.
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human

@@ -403,3 +403,26 @@
 	linked_trait_path = /datum/trait/negative/light_sensitivity_plus
 	. = ..()
 //YW ADDITIONS: END
+
+
+// outpost 21 additions begin
+/datum/trait/negative/wingdings
+	name = "Speak Only Wingdings"
+	desc = "!?#X!"
+	cost = -2
+	var_changes = list("wingdings" = 1)
+/datum/dna/gene/trait_linked/wingdings/New() // Genetically linked trait
+	block = TRAITBLOCK_WINGDINGS
+	linked_trait_path = /datum/trait/negative/wingdings
+	. = ..()
+
+
+/datum/trait/negative/deteriorate
+	name = "Genetic Degradation"
+	desc = "You've lost the genetic lottery. Infact you've gone completely bankrupt, and now the universe is trying to foreclose on you. Your body is slowly deteriorating."
+	cost = -3
+/datum/dna/gene/trait_linked/deteriorate/New() // Genetically linked trait
+	block = TRAITBLOCK_DETERIORATE
+	linked_trait_path = /datum/trait/negative/deteriorate
+	. = ..()
+// outpost 21 additions end

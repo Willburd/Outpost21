@@ -1154,7 +1154,6 @@
 	species.create_organs(src)
 	//VOREStation Edit end: swap places of those two procs
 
-
 	maxHealth = species.total_health
 	hunger_rate = species.hunger_factor //VOREStation Add
 

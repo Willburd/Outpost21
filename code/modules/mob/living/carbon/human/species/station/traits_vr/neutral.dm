@@ -998,10 +998,6 @@ YW CHANGE STOP*/
 	name = "Vertical Nom"
 	desc = "Allows you to consume people from up above."
 	cost = 0
-/datum/dna/gene/trait_linked/vertical_nom/New() // Genetically linked trait
-	block = TRAITBLOCK_VORE_VERTNOM
-	linked_trait_path = /datum/trait/neutral/vertical_nom
-	. = ..()
 
 /datum/trait/neutral/vertical_nom/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
@@ -1104,3 +1100,16 @@ YW CHANGE STOP*/
 /datum/trait/neutral/synth_cosmetic_pain/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)
 	H.verbs |= /mob/living/carbon/human/proc/toggle_pain_module
+
+
+// outpost 21 additions begin
+/datum/trait/neutral/drippy
+	name = "Drippy"
+	desc = "You cannot hold your form together, or produce a constant film of sludge that drips off of your body. Hope the station has a janitor."
+	cost = 0
+	var_changes = list("drippy" = 1)
+/datum/dna/gene/trait_linked/drippy/New() // Genetically linked trait
+	block = TRAITBLOCK_DRIPPY
+	linked_trait_path = /datum/trait/neutral/drippy
+	. = ..()
+// outpost 21 additions end

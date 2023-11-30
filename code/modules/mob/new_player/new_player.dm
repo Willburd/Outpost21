@@ -591,10 +591,16 @@
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	else
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
+		if(new_character.dna)
+			new_character.sync_dna_blocks_from_client_setup(client);
 
 	// setup initial body and prefs
 	new_character.syncronize_to_client(client, FALSE, null, mind, TRUE, null, FALSE, FALSE)
 	new_character.key = client.key // actually tell the client we are ready
+
+	// enable mutations on spawn
+	domutcheck( new_character, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
+	new_character.regenerate_icons()
 
 	if(client && client.media)
 		client.media.stop_music() // MAD JAMS cant last forever yo

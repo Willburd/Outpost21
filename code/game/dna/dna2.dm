@@ -429,7 +429,7 @@ var/global/list/datum/dna/gene/dna_genes_by_block[DNA_SE_LENGTH] // lookup table
 	if (block<=0) return 0
 	var/list/BOUNDS=GetDNABounds(block)
 	var/value=GetSEValue(block)
-	return (value > BOUNDS[DNA_ON_LOWERBOUND])
+	return (value >= BOUNDS[DNA_ON_LOWERBOUND])
 
 // Set a block "on" or "off".
 /datum/dna/proc/SetSEState(var/block,var/on,var/defer=0)

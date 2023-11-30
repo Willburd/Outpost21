@@ -529,7 +529,9 @@
 			connected.occupant.ApplySpeciesAndTraits()
 			connected.occupant.dna.UpdateSE()
 			connected.occupant.dna.UpdateUI()
-			connected.occupant.sync_organ_dna()
+			if(ishuman(connected.occupant))
+				var/mob/living/carbon/human/H = connected.occupant
+				H.sync_organ_dna()
 			connected.occupant.regenerate_icons()
 
 			connected.occupant.apply_effect(((radiation_intensity*3)+radiation_duration*3), IRRADIATE, check_protection = 0)
@@ -644,7 +646,9 @@
 				connected.occupant.ApplySpeciesAndTraits()
 				connected.occupant.dna.UpdateSE()
 				connected.occupant.dna.UpdateUI()
-				connected.occupant.sync_organ_dna()
+				if(ishuman(connected.occupant))
+					var/mob/living/carbon/human/H = connected.occupant
+					H.sync_organ_dna()
 				connected.occupant.regenerate_icons()
 		if("ejectBeaker")
 			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)

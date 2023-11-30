@@ -629,7 +629,9 @@
 		M.ApplySpeciesAndTraits()
 		M.dna.UpdateSE()
 		M.dna.UpdateUI()
-		M.sync_organ_dna()
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.sync_organ_dna()
 		M.regenerate_icons()
 
 /datum/reagent/slimejelly
@@ -905,7 +907,8 @@
 		M.ApplySpeciesAndTraits()
 		M.dna.UpdateSE()
 		M.dna.UpdateUI()
-		M.sync_organ_dna()
+		if(ishuman(M))
+			H.sync_organ_dna()
 		M.regenerate_icons()
 
 /datum/reagent/aslimetoxin
@@ -941,7 +944,8 @@
 		M.ApplySpeciesAndTraits()
 		M.dna.UpdateSE()
 		M.dna.UpdateUI()
-		M.sync_organ_dna()
+		if(ishuman(M))
+			H.sync_organ_dna()
 		M.regenerate_icons()
 
 /*

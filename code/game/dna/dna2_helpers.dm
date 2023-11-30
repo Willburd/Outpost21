@@ -95,7 +95,9 @@
 				M.dna.SetUIValue(i,rand(1,4095),1)
 		M.dna.UpdateUI()
 		M.UpdateAppearance()
-		M.sync_organ_dna()
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.sync_organ_dna()
 	else
 		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
 			if(prob(prob))

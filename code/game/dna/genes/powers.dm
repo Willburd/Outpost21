@@ -30,6 +30,7 @@
 /datum/dna/gene/basic/regenerate/New()
 	block=REGENERATEBLOCK
 
+/* outpost 21 edit - disabled
 /datum/dna/gene/basic/increaserun
 	name="Super Speed"
 	activation_messages=list("Your leg muscles pulsate.")
@@ -37,6 +38,7 @@
 
 /datum/dna/gene/basic/increaserun/New()
 	block=INCREASERUNBLOCK
+*/
 
 /datum/dna/gene/basic/remotetalk
 	name="Telepathy"
@@ -50,6 +52,7 @@
 	..(M,connected,flags)
 	M.verbs += /mob/living/carbon/human/proc/remotesay
 
+/* outpost 21 edit - disabled
 /datum/dna/gene/basic/morph
 	name="Morph"
 	activation_messages=list("Your skin feels strange.")
@@ -61,6 +64,7 @@
 /datum/dna/gene/basic/morph/activate(var/mob/M)
 	..(M)
 	M.verbs += /mob/living/carbon/human/proc/morph
+*/
 
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
@@ -88,6 +92,7 @@
 /datum/dna/gene/basic/noprints/New()
 	block=NOPRINTSBLOCK
 
+/* outpost 21 edit -disabled
 /datum/dna/gene/basic/noshock
 	name="Shock Immunity"
 	activation_messages=list("Your skin feels strange.")
@@ -146,6 +151,7 @@
 		to_chat(M, "<span class='warning'>You suddenly feel very weak.</span>")
 		M.Weaken(3)
 		M.emote("collapse")
+*/
 
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"

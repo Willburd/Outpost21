@@ -77,7 +77,10 @@
 	if(C.dna)
 		C.dna.UpdateSE()
 		C.dna.UpdateUI()
-		domutcheck(C,null)
+		domutcheck(C,null,GENE_INITIAL_ACTIVATION)
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
+		H.sync_organ_dna()
 	C.regenerate_icons()
 
 	C.halloss = 0

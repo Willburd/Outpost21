@@ -51,6 +51,7 @@
 	else
 		testing("[name] has no deactivation message.")
 
+/* outpost 21 edit - disabling due to lots of genes
 // Note: Doesn't seem to do squat, at the moment.
 /datum/dna/gene/disability/hallucinate
 	name="Hallucinate"
@@ -59,6 +60,7 @@
 
 /datum/dna/gene/disability/hallucinate/New()
 	block=HALLUCINATIONBLOCK
+*/
 
 /datum/dna/gene/disability/epilepsy
 	name="Epilepsy"
@@ -76,6 +78,7 @@
 /datum/dna/gene/disability/cough/New()
 	block=COUGHBLOCK
 
+/* outpost 21 edit - disabling due to lots of genes
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
@@ -83,6 +86,7 @@
 
 /datum/dna/gene/disability/clumsy/New()
 	block=CLUMSYBLOCK
+*/
 
 /datum/dna/gene/disability/tourettes
 	name="Tourettes"

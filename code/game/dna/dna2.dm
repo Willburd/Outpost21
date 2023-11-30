@@ -70,7 +70,7 @@
 #define DNA_UI_HAIRGRAD_B     51
 #define DNA_UI_LENGTH      51 // VOREStation Edit - Needs to match the highest number above.
 
-#define DNA_SE_LENGTH 49 // VOREStation Edit (original was UI+11)
+#define DNA_SE_LENGTH 170 // Outpost 21 edit - yowzers, we sure have a lot
 // For later:
 //#define DNA_SE_LENGTH 50 // Was STRUCDNASIZE, size 27. 15 new blocks added = 42, plus room to grow.
 
@@ -85,6 +85,7 @@ var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
 var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
 var/global/list/datum/dna/gene/dna_genes[0]
+var/global/list/datum/dna/gene/dna_genes_by_block[DNA_SE_LENGTH] // lookup table due to randomly placed blocks, has nulls
 
 /////////////////
 // GENE DEFINES
@@ -92,6 +93,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Skip checking if it's already active.
 // Used for genes that check for value rather than a binary on/off.
 #define GENE_ALWAYS_ACTIVATE 1
+#define GENE_INITIAL_ACTIVATION 2
 
 /datum/dna
 	// READ-ONLY, GETS OVERWRITTEN

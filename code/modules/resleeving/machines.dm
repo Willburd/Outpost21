@@ -85,7 +85,7 @@
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
-		domutcheck(H,null)
+		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 
 	//Apply genetic modifiers
@@ -315,7 +315,7 @@
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
-		domutcheck(H,null)
+		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 
 	// update icons

@@ -1763,7 +1763,6 @@
 #include "code\modules\admin\secrets\fun_secrets\toggle_bomb_cap.dm"
 #include "code\modules\admin\secrets\fun_secrets\triple_ai_mode.dm"
 #include "code\modules\admin\secrets\fun_secrets\turn_humans_into_corgies.dm"
-#include "code\modules\admin\secrets\fun_secrets\turn_humans_into_monkeys.dm"
 #include "code\modules\admin\secrets\random_events\gravity.dm"
 #include "code\modules\admin\secrets\random_events\trigger_cordical_borer_infestation.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"

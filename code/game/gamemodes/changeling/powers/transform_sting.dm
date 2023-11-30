@@ -39,6 +39,7 @@
 	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name
 	T.UpdateAppearance()
+	T.sync_organ_dna()
 	T.regenerate_icons()
 	domutcheck(T, null)
 	feedback_add_details("changeling_powers","TS")

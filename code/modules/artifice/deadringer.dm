@@ -177,6 +177,7 @@
 	if(corpse.dna)
 		corpse.dna.UpdateSE()
 		corpse.dna.UpdateUI()
-		domutcheck(corpse,null)
+		domutcheck(corpse,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
+	corpse.sync_organ_dna()
 	corpse.regenerate_icons()
 	QDEL_NULL_LIST(corpse.internal_organs)

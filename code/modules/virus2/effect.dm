@@ -111,6 +111,8 @@
 /datum/disease2/effect/deaf/activate(var/mob/living/carbon/mob,var/multiplier)
 	mob.ear_deaf += 20
 
+
+/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 /datum/disease2/effect/monkey
 	name = "Genome Regression"
 	stage = 4
@@ -120,6 +122,7 @@
 	if(ishuman(mob))
 		var/mob/living/carbon/human/h = mob
 		h.monkeyize()
+*/
 
 /datum/disease2/effect/killertoxins
 	name = "Autoimmune Response"

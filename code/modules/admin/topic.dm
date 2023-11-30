@@ -1022,6 +1022,8 @@
 		Game() // updates the main game menu
 		.(href, list("f_secret"=1))
 
+
+	/* // outpost 21 edit, this is too broken to keep with the current overlays code.
 	else if(href_list["monkeyone"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -1033,6 +1035,7 @@
 		log_admin("[key_name(usr)] attempting to monkeyize [key_name(H)]")
 		message_admins("<font color='blue'>[key_name_admin(usr)] attempting to monkeyize [key_name_admin(H)]</font>", 1)
 		H.monkeyize()
+	*/
 
 	else if(href_list["corgione"])
 		if(!check_rights(R_SPAWN))	return

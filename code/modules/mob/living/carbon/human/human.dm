@@ -913,8 +913,8 @@
 		if(dna)
 			dna.ResetUIFrom(src)
 			sync_organ_dna()
-			// outpost 21 edit begin - sync diseases on respawn
-			sync_dna_block_disabilities_from_client_setup(client);
+			// outpost 21 edit begin - sync disabilities on respawn
+			sync_dna_blocks_from_client_setup(client);
 			// outpost 21 edit end
 	// end vorestation addition
 
@@ -923,6 +923,7 @@
 		V.cure(src)
 
 	losebreath = 0
+	domutcheck( src, null)
 
 	..()
 
@@ -1694,7 +1695,7 @@
 		if(!isnull(forceddna))
 			dna = forceddna.Clone()
 		else
-			sync_dna_block_disabilities_from_client_setup(client);
+			sync_dna_blocks_from_client_setup(client);
 		sync_organ_dna()
 	else
 		// standard link
@@ -1708,7 +1709,7 @@
 			dna = forceddna.Clone()
 		else
 			dna.ResetUIFrom(src)
-			sync_dna_block_disabilities_from_client_setup(client);
+			sync_dna_blocks_from_client_setup(client);
 		sync_organ_dna()
 
 
@@ -1744,6 +1745,9 @@
 				mind.role_alt_title = job_master.GetPlayerAltTitle(src, charjob)
 		//equip_custom_items(src)	//VOREStation Removal
 
+	// enable mutations on spawn
+	domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
+
 	// Apply belly configs
 	apply_vore_prefs()
 
@@ -1752,7 +1756,7 @@
 	regenerate_icons()
 	update_transform() //VOREStation Edit
 
-/mob/living/carbon/human/proc/sync_dna_block_disabilities_from_client_setup(var/client/cli)
+/mob/living/carbon/human/proc/sync_dna_blocks_from_client_setup(var/client/cli)
 	// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 	if(cli.prefs.sdisabilities & BLIND)
 		dna.SetSEState(BLINDBLOCK,1,1)
@@ -1785,4 +1789,12 @@
 	if(cli.prefs.disabilities & VERTIGO)
 		dna.SetSEState(VERTIGOBLOCK,1,1)
 		disabilities |= VERTIGO
+
+	// Auto enable trait based genes, otherwise we'd have to deal with the random activation chance...
+	if(species.traits)
+		for(var/trait in species.traits)
+			var/datum/trait/T = all_traits[trait]
+			if(T.linked_gene_block)
+				dna.SetSEState(T.linked_gene_block,1,1)
+
 	dna.UpdateSE()

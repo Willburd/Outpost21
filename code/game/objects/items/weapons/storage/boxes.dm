@@ -149,10 +149,14 @@
 	name = "box of DNA injectors"
 	desc = "This box contains injectors it seems."
 	icon_state = "dna"
-	starts_with = list(
-		/obj/item/weapon/dnainjector/h2m = 3,
-		/obj/item/weapon/dnainjector/m2h = 3
-	)
+	starts_with = list()
+
+/obj/item/weapon/storage/box/injectors/New()
+	. = ..()
+	spawn_dna_injector_random(src)
+	spawn_dna_injector_random(src)
+	spawn_dna_injector_random(src)
+	spawn_dna_injector_random(src)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"

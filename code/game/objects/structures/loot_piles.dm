@@ -216,6 +216,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	rare_loot = list(
 		/obj/item/clothing/suit/storage/vest/heavy/merc,
 		/obj/item/clothing/shoes/boots/combat,
+		/obj/item/weapon/storage/box/injectors
 	)
 
 // Contains mostly useless garbage.
@@ -258,7 +259,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/poster/custom,
 		/obj/item/weapon/newspaper,
 		/obj/item/weapon/paper/crumpled,
-		/obj/item/weapon/paper/crumpled/bloody
+		/obj/item/weapon/paper/crumpled/bloody,
+		/obj/item/weapon/storage/box/injectors
 	)
 
 	uncommon_loot = list(

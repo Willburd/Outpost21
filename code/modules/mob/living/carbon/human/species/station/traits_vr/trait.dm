@@ -12,7 +12,7 @@
 	var/list/banned_species			// A list of species that can't take this trait
 	var/list/allowed_species		// VORESTATION EDIT:chomp port. A list of species that CAN take this trait, use this if only a few species can use it. -shark
 	var/varchange_type = TRAIT_VARCHANGE_ALWAYS_OVERRIDE	//Mostly used for non-custom species.
-	var/linked_gene_block = 0		// related gene BLOCK, these blocks are init during setup, and are randomized. Needs to be set if you want genetics to be able to modify this trait ingame
+	var/linked_gene_block = 0		// do not set this manually, is set during trait gene New()
 
 //Proc can be overridden lower to include special changes, make sure to call up though for the vars changes
 /datum/trait/proc/apply(var/datum/species/S,var/mob/living/carbon/human/H)

@@ -35,7 +35,8 @@
 	if(sdisability)
 		M.sdisabilities|=sdisability
 	if(activation_message)
-		to_chat(M, "<span class='warning'>[activation_message]</span>")
+		if(!(flags & GENE_INITIAL_ACTIVATION))
+			to_chat(M, "<span class='warning'>[activation_message]</span>")
 	else
 		testing("[name] has no activation message.")
 
@@ -47,7 +48,8 @@
 	if(sdisability)
 		M.sdisabilities &= (~sdisability)
 	if(deactivation_message)
-		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
+		if(!(flags & GENE_INITIAL_ACTIVATION))
+			to_chat(M, "<span class='warning'>[deactivation_message]</span>")
 	else
 		testing("[name] has no deactivation message.")
 

@@ -81,7 +81,6 @@
 					var/mob/living/carbon/human/H = L
 					//Apply genetic modifiers
 					H.UpdateAppearance()
-					H.ApplySpeciesAndTraits()
 					H.dna.UpdateSE()
 					H.dna.UpdateUI()
 					H.sync_organ_dna()

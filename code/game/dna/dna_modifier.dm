@@ -525,8 +525,8 @@
 					randmutg(connected.occupant)
 				else
 					randmuti(connected.occupant)
+			domutcheck(connected.occupant, null)
 			connected.occupant.UpdateAppearance()
-			connected.occupant.ApplySpeciesAndTraits()
 			connected.occupant.dna.UpdateSE()
 			connected.occupant.dna.UpdateUI()
 			if(ishuman(connected.occupant))
@@ -641,9 +641,9 @@
 						domutcheck(connected.occupant,connected)
 					else
 						randmuti(connected.occupant)
+						domutcheck(connected.occupant)
 						//testing("Random identity mut!")
 				connected.occupant.UpdateAppearance()
-				connected.occupant.ApplySpeciesAndTraits()
 				connected.occupant.dna.UpdateSE()
 				connected.occupant.dna.UpdateUI()
 				if(ishuman(connected.occupant))

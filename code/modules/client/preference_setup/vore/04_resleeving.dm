@@ -35,7 +35,7 @@
 				var/datum/transhuman/body_record/BR = new()
 				if(!isnull(character.client))
 					character.sync_dna_blocks_from_client_setup(character.client)
-				domutcheck( character, null)
+				domutcheck( character, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 				BR.init_from_mob(character, pref.resleeve_scan, pref.resleeve_lock)
 				to_chat(character, "<span class='notice'><b>Your body record has been synced with the [using_map.dock_name] database</b></span>")
 			if(pref.hasmind_scan && character.mind)

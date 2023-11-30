@@ -142,7 +142,7 @@
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
-		domutcheck(H,null)
+		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 	H.set_cloned_appearance()
 	H.regenerate_icons()
@@ -344,7 +344,7 @@
 	if(ishuman(occupant)) //Need to be safe.
 		var/mob/living/carbon/human/patient = occupant
 		if(!(patient.species.flags & NO_SCAN)) //If, for some reason, someone makes a genetically-unalterable clone, let's not make them permanently disabled.
-			domutcheck(occupant) //Waiting until they're out before possible transforming.
+			domutcheck(occupant,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) //Waiting until they're out before possible transforming.
 	occupant = null
 
 	update_icon()

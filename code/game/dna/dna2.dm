@@ -93,6 +93,7 @@ var/global/list/datum/dna/gene/dna_genes_by_block[DNA_SE_LENGTH] // lookup table
 // Skip checking if it's already active.
 // Used for genes that check for value rather than a binary on/off.
 #define GENE_ALWAYS_ACTIVATE 1
+#define GENE_INITIAL_ACTIVATION 2
 
 /datum/dna
 	// READ-ONLY, GETS OVERWRITTEN

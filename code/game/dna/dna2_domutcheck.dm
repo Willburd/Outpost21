@@ -24,6 +24,8 @@
 		// Prior state
 		var/gene_prior_status = (gene.type in M.active_genes)
 		var/changed = gene_active != gene_prior_status || (gene.flags & GENE_ALWAYS_ACTIVATE)
+		if(flags & GENE_INITIAL_ACTIVATION)
+			changed = TRUE // Always on first activation! Avoid problems where a gene was already on and doesn't think it needs to be enabled!
 
 		// If gene state has changed:
 		if(changed)

@@ -1746,7 +1746,7 @@
 		//equip_custom_items(src)	//VOREStation Removal
 
 	// enable mutations on spawn
-	domutcheck( src, null)
+	domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 
 	// Apply belly configs
 	apply_vore_prefs()

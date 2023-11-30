@@ -95,7 +95,7 @@
 	O.loc = C.loc
 
 	O.UpdateAppearance()
-	domutcheck(O, null)
+	domutcheck(O, null,GENE_INITIAL_ACTIVATION)
 	O.setToxLoss(C.getToxLoss())
 	O.adjustBruteLoss(C.getBruteLoss())
 	O.setOxyLoss(C.getOxyLoss())

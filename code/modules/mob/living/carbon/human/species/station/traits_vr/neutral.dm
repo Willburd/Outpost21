@@ -291,10 +291,6 @@ YW change end */
 	name = "Brutal Predation"
 	desc = "Allows you to tear off limbs & tear out internal organs."
 	cost = 0
-/datum/dna/gene/trait_linked/hard_vore/New() // Genetically linked trait
-	block = TRAITBLOCK_HARDVORE
-	linked_trait_path = /datum/trait/neutral/hard_vore
-	. = ..()
 
 /datum/trait/neutral/hard_vore/apply(var/datum/species/S,var/mob/living/carbon/human/H)
 	..(S,H)

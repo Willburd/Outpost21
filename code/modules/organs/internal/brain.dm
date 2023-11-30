@@ -253,7 +253,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
-		domutcheck(H,null)
+		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 	H.regenerate_icons()
 

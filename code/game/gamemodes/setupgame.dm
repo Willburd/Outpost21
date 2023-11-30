@@ -90,7 +90,6 @@
 	TRAITBLOCK_SUCCUBUS				= getAssignedBlock("SUCCUBUS"		, numsToAssign)
 	TRAITBLOCK_TONGUE				= getAssignedBlock("TONGUE"			, numsToAssign, DNA_HARDER_BOUNDS)
 	TRAITBLOCK_FEEDER				= getAssignedBlock("FEEDER"			, numsToAssign, DNA_HARD_BOUNDS)
-	TRAITBLOCK_HARDVORE				= getAssignedBlock("HARDVORE"		, numsToAssign, DNA_HARDER_BOUNDS)
 	TRAITBLOCK_TRASHCAN				= getAssignedBlock("TRASHCAN"		, numsToAssign, DNA_HARD_BOUNDS)
 	TRAITBLOCK_GEMEATER				= getAssignedBlock("GEMEATER"		, numsToAssign, DNA_HARDER_BOUNDS)
 	TRAITBLOCK_EYEGLOW				= getAssignedBlock("EYEGLOW"		, numsToAssign)

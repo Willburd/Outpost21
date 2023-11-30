@@ -77,7 +77,7 @@
 		var/S = H.species
 		var/datum/trait/Tr = all_traits[linked_trait_path]
 		Tr.apply(S,H) // apply active traits!
-		if(activation_messages.len)
+		if(activation_messages.len && !(flags & GENE_INITIAL_ACTIVATION))
 			var/msg = pick(activation_messages)
 			to_chat(M, "<span class='notice'>[msg]</span>")
 
@@ -88,7 +88,7 @@
 		var/S = H.species
 		var/datum/trait/Tr = all_traits[linked_trait_path]
 		Tr.unapply(S,H) // apply active traits!
-		if(deactivation_messages.len)
+		if(deactivation_messages.len && !(flags & GENE_INITIAL_ACTIVATION))
 			var/msg = pick(deactivation_messages)
 			to_chat(M, "<span class='warning'>[msg]</span>")
 

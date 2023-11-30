@@ -29,7 +29,7 @@ export const DNAModifier = (props, context) => {
     radiatingModal = <DNAModifierIrradiating duration={irradiating} />;
   }
   return (
-    <Window width={660} height={700} resizable>
+    <Window width={900} height={700} resizable>
       <ComplexModal />
       {radiatingModal}
       <Window.Content className="Layout__content--flexColumn">
@@ -573,7 +573,7 @@ const DNAModifierBlocks = (props, context) => {
       );
     }
     dnaBlocks.push(
-      <Flex.Item flex="0 0 16%" mb="1rem">
+      <Flex.Item flex="0 0 10%" mb="1rem">
         <Box
           display="inline-block"
           width="20px"

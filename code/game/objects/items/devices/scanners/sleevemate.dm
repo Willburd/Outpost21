@@ -39,6 +39,8 @@
 	ooc_notes = M.ooc_notes
 	stored_mind = M.mind
 	M.ghostize()
+	M.mind = null
+	M.key = null
 	stored_mind.current = null
 	update_icon()
 

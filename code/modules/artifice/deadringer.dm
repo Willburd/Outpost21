@@ -178,5 +178,6 @@
 		corpse.dna.UpdateSE()
 		corpse.dna.UpdateUI()
 		domutcheck(corpse,null)
+	corpse.sync_organ_dna()
 	corpse.regenerate_icons()
 	QDEL_NULL_LIST(corpse.internal_organs)

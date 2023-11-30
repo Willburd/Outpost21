@@ -620,15 +620,17 @@
 			else
 				randmutg(M)
 			domutcheck(M, null)
-			M.UpdateAppearance()
-			M.ApplySpeciesAndTraits()
-			M.dna.UpdateSE()
-			M.dna.UpdateUI()
-			domutcheck(M, null)
 		if(prob(removed * 40)) //Additionally, let's make it so there's an 8% chance per tick for a random cosmetic/not guranteed good/bad mutation.
 			randmuti(M)//This should equate to 4 random cosmetic mutations per 10 injected/20 ingested/30 touching units
 			to_chat(M, "<span class='warning'>You feel odd!</span>")
 	M.apply_effect(10 * removed, IRRADIATE, 0)
+	if(M.dna)
+		M.UpdateAppearance()
+		M.ApplySpeciesAndTraits()
+		M.dna.UpdateSE()
+		M.dna.UpdateUI()
+		M.sync_organ_dna()
+		M.regenerate_icons()
 
 /datum/reagent/slimejelly
 	name = "Slime Jelly"
@@ -894,11 +896,17 @@
 			else
 				randmutg(M)
 			domutcheck(M, null)
-			M.UpdateAppearance()
 		if(prob(removed * 40))
 			randmuti(M)
 			to_chat(M, "<span class='warning'>You feel odd!</span>")
 	M.apply_effect(16 * removed, IRRADIATE, 0)
+	if(M.dna)
+		M.UpdateAppearance()
+		M.ApplySpeciesAndTraits()
+		M.dna.UpdateSE()
+		M.dna.UpdateUI()
+		M.sync_organ_dna()
+		M.regenerate_icons()
 
 /datum/reagent/aslimetoxin
 	name = "Docility Toxin"
@@ -924,11 +932,17 @@
 			else
 				randmutg(M)
 			domutcheck(M, null)
-			M.UpdateAppearance()
 		if(prob(removed * 40))
 			randmuti(M)
 			to_chat(M, "<span class='warning'>You feel odd!</span>")
 	M.apply_effect(6 * removed, IRRADIATE, 0)
+	if(M.dna)
+		M.UpdateAppearance()
+		M.ApplySpeciesAndTraits()
+		M.dna.UpdateSE()
+		M.dna.UpdateUI()
+		M.sync_organ_dna()
+		M.regenerate_icons()
 
 /*
  * Hostile nanomachines.

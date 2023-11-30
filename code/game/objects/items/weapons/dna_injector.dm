@@ -79,12 +79,18 @@
 				// apply genes
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L
+					//Apply genetic modifiers
+					H.UpdateAppearance()
+					H.ApplySpeciesAndTraits()
+					H.dna.UpdateSE()
+					H.dna.UpdateUI()
 					H.sync_organ_dna()
-				//Apply genetic modifiers
+					H.regenerate_icons()
 				L.dna.genetic_modifiers.Cut() // clear em!
 				for(var/modifier_type in buf.genetic_modifiers)
 					L.add_modifier(modifier_type)
 				uses--
+				L.regenerate_icons()
 				if(prob(5))
 					trigger_side_effect(L)
 

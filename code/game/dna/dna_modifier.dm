@@ -525,6 +525,12 @@
 					randmutg(connected.occupant)
 				else
 					randmuti(connected.occupant)
+			connected.occupant.UpdateAppearance()
+			connected.occupant.ApplySpeciesAndTraits()
+			connected.occupant.dna.UpdateSE()
+			connected.occupant.dna.UpdateUI()
+			connected.occupant.sync_organ_dna()
+			connected.occupant.regenerate_icons()
 
 			connected.occupant.apply_effect(((radiation_intensity*3)+radiation_duration*3), IRRADIATE, check_protection = 0)
 		if("radiationDuration")
@@ -634,7 +640,12 @@
 					else
 						randmuti(connected.occupant)
 						//testing("Random identity mut!")
-						connected.occupant.UpdateAppearance()
+				connected.occupant.UpdateAppearance()
+				connected.occupant.ApplySpeciesAndTraits()
+				connected.occupant.dna.UpdateSE()
+				connected.occupant.dna.UpdateUI()
+				connected.occupant.sync_organ_dna()
+				connected.occupant.regenerate_icons()
 		if("ejectBeaker")
 			playsound(src, 'sound/machines/button.ogg', 30, 1, 0)
 			if(connected.beaker)

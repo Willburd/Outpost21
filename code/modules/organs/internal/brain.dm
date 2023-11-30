@@ -254,6 +254,8 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
 		domutcheck(H,null)
+	H.sync_organ_dna()
+	H.regenerate_icons()
 
 	H.sync_organ_dna()
 	if(!R.dna.real_name)	//to prevent null names

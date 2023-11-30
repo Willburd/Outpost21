@@ -143,6 +143,7 @@
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
 		domutcheck(H,null)
+	H.sync_organ_dna()
 	H.set_cloned_appearance()
 	H.regenerate_icons()
 	update_icon()

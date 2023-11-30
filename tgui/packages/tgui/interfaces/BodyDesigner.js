@@ -87,7 +87,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
   const { activeBodyRecord, mapRef } = data;
   return activeBodyRecord ? (
     <Flex direction="column">
-      <Flex.Item basis="200px">
+      <Flex.Item basis="260px">
         <Section
           title="Specific Record"
           buttons={<Button icon="arrow-left" content="Back" onClick={() => act('menu', { menu: 'Main' })} />}>
@@ -153,6 +153,41 @@ const BodyDesignerSpecificRecord = (props, context) => {
                     content="View OOC Notes"
                     disabled={!activeBodyRecord.booc}
                     onClick={() => act('boocnotes')}
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Weight">
+                  <Button
+                    icon="pen"
+                    content={activeBodyRecord.weight}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'weight',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                </LabeledList.Item>
+                <LabeledList.Item label="Blood">
+                  <Button
+                    icon="pen"
+                    content={capitalize(activeBodyRecord.blood_type)}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'blood_type',
+                        target_value: 1,
+                      })
+                    }
+                  />
+                  <Button
+                    icon="pen"
+                    content="Color"
+                    backgroundColor={activeBodyRecord.blood_color}
+                    onClick={() =>
+                      act('href_conversion', {
+                        target_href: 'blood_color',
+                        target_value: 1,
+                      })
+                    }
                   />
                 </LabeledList.Item>
               </LabeledList>
@@ -309,6 +344,34 @@ const BodyDesignerSpecificRecord = (props, context) => {
                                 onClick={() =>
                                   act('href_conversion', {
                                     target_href: 'marking_remove',
+                                    target_value: key,
+                                  })
+                                }
+                              />
+                            </Flex.Item>
+                            <Flex.Item>
+                              <Button
+                                mr={0.2}
+                                fluid
+                                icon="sort-up"
+                                color="blue"
+                                onClick={() =>
+                                  act('href_conversion', {
+                                    target_href: 'marking_up',
+                                    target_value: key,
+                                  })
+                                }
+                              />
+                            </Flex.Item>
+                            <Flex.Item>
+                              <Button
+                                mr={0.2}
+                                fluid
+                                icon="sort-down"
+                                color="blue"
+                                onClick={() =>
+                                  act('href_conversion', {
+                                    target_href: 'marking_down',
                                     target_value: key,
                                   })
                                 }

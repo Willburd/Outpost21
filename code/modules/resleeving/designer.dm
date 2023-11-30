@@ -150,6 +150,9 @@
 			"locked" = active_br.locked ? "Low" : "High",
 			"scale" = "[player_size_name(active_br.sizemult)]\[[active_br.sizemult * 100]%\]",
 			"booc" = active_br.body_oocnotes,
+			"blood_type" = active_br.mydna.dna.b_type,
+			"blood_color" = active_br.mydna.dna.blood_color,
+			"weight" = active_br.weight,
 			"styles" = list()
 		)
 
@@ -202,7 +205,7 @@
 			temp["colorHref"] = "hair_color"
 		styles["Hair"] = temp
 
-		temp = list("styleHref" = "hair_grad", "style" = mannequin.grad_style)
+		temp = list("styleHref" = "grad_style", "style" = mannequin.grad_style)
 		if(mannequin.species && (mannequin.species.appearance_flags & HAS_HAIR_COLOR))
 			temp["color"] = MOB_HEX_COLOR(mannequin, grad)
 			temp["colorHref"] = "grad_color"
@@ -335,91 +338,16 @@
 	west_preview.name = ""
 
 /obj/machinery/computer/transhuman/designer/proc/give_client_previews(client/C)
-	C.register_map_obj(south_preview)
-	C.register_map_obj(east_preview)
-	C.register_map_obj(west_preview)
+	if(C)
+		C.register_map_obj(south_preview)
+		C.register_map_obj(east_preview)
+		C.register_map_obj(west_preview)
 
 /obj/machinery/computer/transhuman/designer/proc/clear_client_previews(client/C)
-	C.clear_map(south_preview)
-	C.clear_map(east_preview)
-	C.clear_map(west_preview)
-
-/obj/machinery/computer/transhuman/designer/proc/debug_eject_record()
-	//Get the DNA and generate a new mob
-	var/datum/dna2/record/R = active_br.mydna
-	var/mob/living/carbon/human/H = new(src.loc, R.dna.species)
-
-	//Fix the external organs
-	for(var/part in active_br.limb_data)
-
-		var/status = active_br.limb_data[part]
-		if(status == null) continue //Species doesn't have limb? Child of amputated limb?
-
-		var/obj/item/organ/external/O = H.organs_by_name[part]
-		if(!O) continue //Not an organ. Perhaps another amputation removed it already.
-
-		if(status == 1) //Normal limbs
-			continue
-		else if(status == 0) //Missing limbs
-			O.remove_rejuv()
-		else if(status) //Anything else is a manufacturer
-			O.remove_rejuv() //Don't robotize them, leave them removed so robotics can attach a part.
-
-	//Look, this machine can do this because [reasons] okay?!
-	for(var/part in active_br.organ_data)
-
-		var/status = active_br.organ_data[part]
-		if(status == null) continue //Species doesn't have organ? Child of missing part?
-
-		var/obj/item/organ/I = H.internal_organs_by_name[part]
-		if(!I) continue//Not an organ. Perhaps external conversion changed it already?
-
-		if(status == 0) //Normal organ
-			continue
-		else if(status == 1) //Assisted organ
-			I.mechassist()
-		else if(status == 2) //Mechanical organ
-			I.robotize()
-		else if(status == 3) //Digital organ
-			I.digitize()
-
-	//Set the name or generate one
-	if(!R.dna.real_name)
-		R.dna.real_name = "clone ([rand(0,999)])"
-	H.real_name = R.dna.real_name
-
-	//Apply DNA
-	H.original_player = active_br.ckey
-	H.dna = R.dna.Clone()
-	H.UpdateAppearance() //Update appearance
-	H.ApplySpeciesAndTraits()
-	if(H.dna)
-		H.dna.UpdateSE()
-		H.dna.UpdateUI()
-		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
-	H.sync_organ_dna()
-
-	//Apply genetic modifiers
-	for(var/modifier_type in R.genetic_modifiers)
-		H.add_modifier(modifier_type)
-
-	//Apply damage
-	H.adjustCloneLoss(H.getMaxHealth()*1.5)
-	H.Paralyse(4)
-	H.updatehealth()
-
-	//Basically all the VORE stuff
-	H.ooc_notes = active_br.body_oocnotes
-	H.flavor_texts = active_br.mydna.flavor.Copy()
-	H.resize(active_br.sizemult, FALSE)
-	H.appearance_flags = active_br.aflags
-	H.weight = active_br.weight
-	if(active_br.speciesname)
-		H.custom_species = active_br.speciesname
-
-	// EJECT
-	H.regenerate_icons()
-	return 1
+	if(C)
+		C.clear_map(south_preview)
+		C.clear_map(east_preview)
+		C.clear_map(west_preview)
 
 /obj/machinery/computer/transhuman/designer/proc/update_preview_mob(var/forced)
 	ASSERT(!QDELETED(active_br))
@@ -486,6 +414,15 @@
 		mannequin.add_modifier(modifier_type)
 	mannequin.resize(active_br.sizemult, FALSE)
 
+	//Basically all the VORE stuff
+	// mannequin.ooc_notes = active_br.body_oocnotes // Intentionally remove these, once you start editing, it's basically a fresh body for someone else...
+	mannequin.flavor_texts = active_br.mydna.flavor.Copy()
+	mannequin.resize(active_br.sizemult, FALSE)
+	mannequin.appearance_flags = active_br.aflags
+	mannequin.weight = active_br.weight
+	if(active_br.speciesname)
+		mannequin.custom_species = active_br.speciesname
+
 	// And as for clothing...
 	// We don't actually dress them! This is a medical machine, handle the nakedness DOCTOR!
 
@@ -533,13 +470,11 @@
 		if (!isnull(raw_name))
 			var/new_name = sanitize_name(raw_name, P.species, FALSE)
 			if(new_name)
-				active_br.mydna.name = P.real_name
-				active_br.mydna.dna.real_name = P.real_name
-				return 1
+				active_br.mydna.name = new_name
+				active_br.mydna.dna.real_name = new_name
 			else
 				to_chat(user, "<span class='warning'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</span>")
-				return 1
-		update_preview_icon()
+			update_preview_icon()
 		return 1
 
 	if(params["target_href"] == "custom_species")
@@ -555,7 +490,7 @@
 		var/text_choice = tgui_input_list(usr, "Pick an icon set for your species:","Icon Base", choices)
 		if(text_choice in choices)
 			active_br.mydna.dna.base_species = text_choice
-		update_preview_icon()
+			update_preview_icon()
 		return 1
 
 	if(params["target_href"] == "bio_gender")
@@ -563,8 +498,33 @@
 		if(new_gender)
 			active_br.bodygender = new_gender
 			active_br.mydna.dna.SetUIState(DNA_UI_GENDER, new_gender!=MALE, 1)
-		update_preview_icon()
+			update_preview_icon()
 		return 1
+
+	if(params["target_href"] == "blood_color")
+		var/color_choice = input(usr, "Pick a blood color (does not apply to synths)","Blood Color",active_br.mydna.dna.blood_color) as color
+		if(color_choice)
+			active_br.mydna.dna.blood_color = sanitize_hexcolor(color_choice, default="#A10808")
+			update_preview_icon()
+		return 1
+
+	if(params["target_href"] == "weight")
+		var/new_weight = tgui_input_number(user, "Choose your character's relative body weight.\n\
+			This measurement should be set relative to a normal 5'10'' person's body and not the actual size of your character.\n\
+			If you set your weight to 500 because you're a naga or have metal implants then complain that you're a blob I\n\
+			swear to god I will find you and I will punch you for not reading these directions!\n\
+			([WEIGHT_MIN]-[WEIGHT_MAX])", "Character Preference", null, WEIGHT_MAX, WEIGHT_MIN)
+		if(new_weight)
+			var/unit_of_measurement = tgui_alert(user, "Is that number in pounds (lb) or kilograms (kg)?", "Confirmation", list("Pounds", "Kilograms"))
+			if(unit_of_measurement == "Pounds")
+				new_weight = round(text2num(new_weight),4)
+			if(unit_of_measurement == "Kilograms")
+				new_weight = round(2.20462*text2num(new_weight),4)
+			active_br.weight = sanitize_integer(new_weight, WEIGHT_MIN, WEIGHT_MAX, P.weight_vr)
+			update_preview_icon()
+		return 1
+
+
 
 	var/href_list = list()
 	href_list["src"] = "\ref[src]"
@@ -572,12 +532,15 @@
 
 	var/action = 0
 	action = B.OnTopic(list2params(href_list), href_list, user)
-	if(action & TOPIC_REFRESH_UPDATE_PREVIEW)
+	if(action & TOPIC_REFRESH_UPDATE_PREVIEW || action & TOPIC_REFRESH)
 		mannequin.set_species(active_br.mydna.dna.species)
 		mannequin.ApplySpeciesAndTraits()
 		B.copy_to_mob(mannequin)
+		mannequin.dna.b_type = mannequin.b_type // update the dna too!
+		mannequin.dna.blood_color = active_br.mydna.dna.blood_color // copy blood color
+		mannequin.species.blood_color = mannequin.dna.blood_color
 		mannequin.dna.ready_dna(mannequin)
-		mannequin.dna.UI[DNA_UI_GENDER] = active_br.mydna.dna.UI[DNA_UI_GENDER]
+		mannequin.sync_organ_dna()
 		active_br.init_from_mob(mannequin, FALSE, FALSE) // reinit
 		update_preview_icon()
 		return 1

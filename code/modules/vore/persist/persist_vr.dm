@@ -143,6 +143,7 @@
 	prefs.s_tone	= character.s_tone
 	prefs.grad_style= character.grad_style
 	prefs.b_type	= character.b_type
+	prefs.blood_color = character.blood_color
 	prefs.synth_color = character.synth_color
 	prefs.r_synth	= character.r_synth
 	prefs.g_synth	= character.g_synth

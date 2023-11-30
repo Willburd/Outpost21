@@ -284,7 +284,7 @@
 	animate(dsoverlay, alpha = (adjust_to*255), time = (distance*10 SECONDS))
 
 /mob/living/proc/handle_dripping() // Outpost 21 edit
-	if(!drippy || prob(97))
+	if(!drippy || prob(96))
 		return
 	if(!isturf(src.loc))
 		return
@@ -316,6 +316,8 @@
 			drop.drips |= drips
 
 		// Update appearance.
+		B.name = "drips of something"
+		B.dryname = "dried something"
 		B.basecolor = rgb(H.r_skin,H.g_skin,H.b_skin)
 		B.update_icon()
 		B.fluorescent  = 0

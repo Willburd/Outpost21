@@ -1409,7 +1409,7 @@
 /obj/structure/disposalpipe/sortjunction/transfer(var/obj/structure/disposalholder/H)
 	// outpost 21 edit begin - bodies are internally tagged for a special sorter!
 	var/detectedtag = H.destinationTag
-	if(detectedtag == "")
+	if(istype(src,/obj/structure/disposalpipe/sortjunction/bodies) && detectedtag == "")
 		if(H.hasmob)
 			for(var/mob/living/L in H)
 				if(istype(L,/mob/living/carbon)) // only living carbons count not silicons

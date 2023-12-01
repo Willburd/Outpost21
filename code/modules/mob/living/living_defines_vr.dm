@@ -12,12 +12,6 @@
 	var/custom_exclaim = null
 	var/custom_whisper = null
 
-//YW Add Start
-/mob
-	var/wingdings = 0
-	var/drippy = 0
-//Yw Add End
-
 //OP Add Start
 	var/parasitic = FALSE //Digestion immunity and nutrition leeching variable
 //OP Add End

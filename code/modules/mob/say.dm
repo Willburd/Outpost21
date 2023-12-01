@@ -242,8 +242,10 @@
 		return list(new /datum/multilingual_say_piece(GLOB.all_languages["Noise"], trim(strip_prefixes(copytext(message, 2)))))
 
 	// wingding language override
-	if(wingdings)
-		message = Gibberish(message, 100)
+	if(iscarbon(src))
+		var/mob/living/carbon/C = src
+		if(C.species && C.species.wingdings)
+			message = Gibberish(message, 100)
 
 	// Scan the message for prefixes
 	var/list/prefix_locations = find_valid_prefixes(message)

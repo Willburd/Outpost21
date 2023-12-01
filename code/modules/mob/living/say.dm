@@ -120,9 +120,11 @@ var/list/channel_to_radio_key = new
 			. = 1
 		//VOREStation Edit End
 		//YW Edit start
-		if(wingdings)
-			S.message = span("wingdings",(S.message))
-			. = 1
+		if(iscarbon(src))
+			var/mob/living/carbon/C = src
+			if(C.species && C.species.wingdings)
+				S.message = span("wingdings",(S.message))
+				. = 1
 		//YW Edit End
 
 	message_data[1] = message_pieces

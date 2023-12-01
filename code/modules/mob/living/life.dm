@@ -284,14 +284,16 @@
 	animate(dsoverlay, alpha = (adjust_to*255), time = (distance*10 SECONDS))
 
 /mob/living/proc/handle_dripping() // Outpost 21 edit
-	if(!drippy || prob(95))
+	if(prob(95))
+		return
+	if(!ishuman(src))
 		return
 	if(!isturf(src.loc))
 		return
 
-	// drip body color if human
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+	var/mob/living/carbon/human/H = src
+	if(H.species && H.species.drippy)
+		// drip body color if human
 		var/obj/effect/decal/cleanable/blood/B
 		var/decal_type = /obj/effect/decal/cleanable/blood/splatter
 		var/turf/T = get_turf(src.loc)

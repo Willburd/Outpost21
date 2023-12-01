@@ -27,13 +27,13 @@ RUN /bin/bash -c "source _build_dependencies.sh \
 
 FROM base as dm_base
 
-WORKDIR /vorestation
+WORKDIR /outpost
 
 FROM dm_base as build
 
 COPY . .
 
-RUN DreamMaker -max_errors 0 vorestation.dme
+RUN DreamMaker -max_errors 0 outpost.dme
 
 FROM dm_base
 
@@ -53,8 +53,8 @@ RUN apt-get update \
     && mkdir -p /root/.byond/bin
 
 COPY --from=rust_g /rust_g/target/release/librust_g.so /root/.byond/bin/rust_g
-COPY --from=build /vorestation/ ./
+COPY --from=build /outpost/ ./
 
-#VOLUME [ "/vorestation/config", "/vorestation/data" ]
+#VOLUME [ "/outpost/config", "/outpost/data" ]
 
-ENTRYPOINT [ "DreamDaemon", "vorestation.dmb", "-port", "2303", "-trusted", "-close", "-verbose" ]
+ENTRYPOINT [ "DreamDaemon", "outpost.dmb", "-port", "2303", "-trusted", "-close", "-verbose" ]

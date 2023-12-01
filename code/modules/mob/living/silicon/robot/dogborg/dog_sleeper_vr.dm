@@ -164,6 +164,27 @@
 				message_admins("[key_name(hound)] has eaten [key_name(patient)] as a dogborg. ([hound ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[hound.x];Y=[hound.y];Z=[hound.z]'>JMP</a>" : "null"])")
 				playsound(src, gulpsound, vol = 100, vary = 1, falloff = 0.1, preference = /datum/client_preference/eating_noises)
 
+/obj/item/device/dogborg/sleeper/container_resist(mob/living/prey)
+	hound = src.loc
+	if(istype(prey,/mob/living/voice)) //Voices shouldn't be able to resist but we have this here just in case.
+		return
+	if(!istype(hound))
+		return ..(prey)
+	if(prob(98))
+		to_chat(prey, "<span class='notice'>The walls of the [src] resist your struggling!</span>")
+		return
+
+	var/escape_time = 20 SECONDS
+	to_chat(prey, "<span class='notice'>You find the emergency ejection controls, and quickly begin using them!</span>")
+	to_chat(hound, "<span class='danger'>Something is trying to operate your emergency ejection system!</span>")
+	if(!do_after(prey, escape_time, hound))
+		to_chat(prey, "<span class='danger'>You were jostled around, losing hold of the ejection controls!</span>")
+		to_chat(hound, "<span class='danger'>You jostle the escapee around, making them lose hold of your ejection controls!</span>")
+		return
+
+	// Eject
+	go_out()
+
 /obj/item/device/dogborg/sleeper/proc/go_out(var/target)
 	hound = src.loc
 	items_preserved.Cut()

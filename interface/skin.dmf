@@ -207,6 +207,9 @@ macro "borghotkeymode"
 		name = "U"
 		command = "Rest"
 	elem
+		name = "B"
+		command = "Resist"
+	elem
 		name = "NUMPAD1"
 		command = "body-r-leg"
 	elem

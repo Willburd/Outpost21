@@ -424,6 +424,18 @@
 				circuit.construct(B)
 				circuit.loc = null
 				B.circuit = circuit
+				// make computers merge with others beside it!
+				B.update_icon()
+				var/left = turn(B.dir, 90)
+				var/right = turn(B.dir, -90)
+				var/turf/L = get_step(B, left)
+				var/turf/R = get_step(B, right)
+				var/obj/machinery/computer/LC = locate() in L
+				var/obj/machinery/computer/RC = locate() in R
+				if(LC)
+					LC.update_icon()
+				if(RC)
+					LC.update_icon()
 				qdel(src)
 				return
 

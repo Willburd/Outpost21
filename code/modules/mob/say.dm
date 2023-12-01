@@ -241,6 +241,10 @@
 		// What we actually want is a normal say piece that's all noise lang
 		return list(new /datum/multilingual_say_piece(GLOB.all_languages["Noise"], trim(strip_prefixes(copytext(message, 2)))))
 
+	// wingding language override
+	if(wingdings)
+		message = Gibberish(message, 100)
+
 	// Scan the message for prefixes
 	var/list/prefix_locations = find_valid_prefixes(message)
 	if(!LAZYLEN(prefix_locations)) // There are no prefixes... or at least, no _valid_ prefixes.

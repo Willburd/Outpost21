@@ -21,6 +21,8 @@ var/global/list/image/splatter_cache=list()
 	var/synthblood = 0
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
+	var/customname
+	var/customdesc
 	generic_filth = TRUE
 	persistent = FALSE
 
@@ -55,7 +57,13 @@ var/global/list/image/splatter_cache=list()
 	if(basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
 
-	if(basecolor == SYNTH_BLOOD_COLOUR)
+	if(customname)
+		name = customname
+		if(customdesc)
+			desc = customdesc
+		else
+			desc = initial(desc)
+	else if(basecolor == SYNTH_BLOOD_COLOUR)
 		name = "oil"
 		desc = "It's quite oily."
 	else if(synthblood)

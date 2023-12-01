@@ -30,6 +30,7 @@
 	var/list/nif_software
 	var/list/nif_savedata = list()
 
+	var/last_scan_area = "Lobby"
 	var/one_time = FALSE
 
 /datum/transhuman/mind_record/New(var/datum/mind/mind, var/mob/living/carbon/human/M, var/add_to_db = TRUE, var/one_time = FALSE, var/database_key)
@@ -49,6 +50,9 @@
 		id_gender = M.identifying_gender
 		languages = M.languages.Copy()
 		mind_oocnotes = M.ooc_notes
+
+		if(isturf(M.loc) && get_area(M.loc))
+			last_scan_area = get_area(M.loc).name
 		/* outpost 21  edit - nif removal
 		if(M.nif)
 			nif_path = M.nif.type

@@ -233,6 +233,9 @@ SUBSYSTEM_DEF(transcore)
 		MR.last_update = world.time
 		MR.one_time = one_time
 
+		if(mind.current && isturf(mind.current.loc) && get_area(mind.current.loc))
+			MR.last_scan_area = get_area(mind.current.loc).name
+
 		/* outpost 21  edit - nif removal
 		//Pass a 0 to not change NIF status (because the elseif is checking for null)
 		if(nif && nif.savetofile) //This is to allow Transcore to skip over saving NIFs that have already been saved.

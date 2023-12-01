@@ -621,7 +621,7 @@
 	if(confuse_amount + blur_amount <= 16)
 		to_chat(occupant, "<span class='notice'>Your eyes open as you wake up in the tube, remembering only your last scan. Your new body feels comfortable, however.</span>")
 	else
-		to_chat(occupant, "<span class='warning'>Your eyes wince at the light as you try to remember what happened, weren't you just in the lobby? It's disorienting.</span>")
+		to_chat(occupant, "<span class='warning'>Your eyes wince at the light as you try to remember what happened, weren't you just in \the [MR.last_scan_area]? It's disorienting.</span>")
 	// Small edits to the flavor text. - Ignus
 
 	occupant.confused = max(occupant.confused, confuse_amount)									// Apply immedeate effects

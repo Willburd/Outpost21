@@ -48,7 +48,7 @@
 	ideal_air_type = /datum/gas_mixture/belly_air/vox
 	siemens_coefficient = 0.2
 
-	flags = NO_SCAN | NO_DEFIB
+	flags = NO_DEFIB
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#9066BD"

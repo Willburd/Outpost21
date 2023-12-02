@@ -101,7 +101,7 @@
 	of their precursors, leading to a massive divide between commoners, who live as serfs and the nobility, who live in \
 	comparable conditions as wealthy members of the Diaspora."
 	value = CATALOGUER_REWARD_TRIVIAL
-*/ 
+*/
 
 /datum/category_item/catalogue/fauna/altevian
 	name = "Sapients - Altevian"

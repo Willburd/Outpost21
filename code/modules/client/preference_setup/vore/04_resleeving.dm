@@ -37,11 +37,13 @@
 					character.sync_dna_blocks_from_client_setup(character.client)
 				domutcheck( character, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 				BR.init_from_mob(character, pref.resleeve_scan, pref.resleeve_lock)
-				to_chat(character, "<span class='notice'><b>Your body record has been synced with the [using_map.dock_name] database</b></span>")
+				if(!BR.hiderecord)
+					to_chat(character, "<span class='notice'><b>Your body record has been synced with the [using_map.dock_name] database</b></span>")
 			if(pref.hasmind_scan && character.mind)
 				var/datum/transcore_db/DB = SStranscore.db_by_key()
-				DB.m_backup(character.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
-				to_chat(character, "<span class='notice'><b>Your mind record has been synced with the [using_map.dock_name] database</b></span>")
+				var/success = DB.m_backup(character.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
+				if(success)
+					to_chat(character, "<span class='notice'><b>Your mind record has been synced with the [using_map.dock_name] database</b></span>")
 			if(pref.resleeve_lock)
 				character.resleeve_lock = character.ckey
 			character.original_player = character.ckey

@@ -186,13 +186,17 @@
 		persist_nif_data(user)
 	*/
 
-	our_db.m_backup(user.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
+	var/success = our_db.m_backup(user.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
 	var/datum/transhuman/body_record/BR = new()
 	BR.init_from_mob(user, TRUE, TRUE, database_key = db_key)
 
+	// notice for non-compats
+	if(BR.hiderecord || !success || (user.hallucination > 20 && prob(5)))
+		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Your body is incompatible with station resleeving equipment. Please ask medical personal for details."
+
 	// what a mean halucination
 	if((user.hallucination > 20 && prob(5)) || istype(get_area(src), /area/specialty/redspace))
-		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Backup scan erased. Body scan erased. You deserve to die forever."
+		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Backup scan erased. Body scan erased. You deserve to die."
 
 	return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Please ensure your suit's sensors are properly configured to alert medical and security personal to your current status."
 

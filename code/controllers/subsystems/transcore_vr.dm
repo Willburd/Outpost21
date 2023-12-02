@@ -226,6 +226,12 @@ SUBSYSTEM_DEF(transcore)
 	if(!mind.name || core_dumped)
 		return 0
 
+	if(mind.current && ishuman(mind.current))
+		var/mob/living/carbon/human/H = mind.current
+		var/datum/species/S = H.species
+		if(S.flags & NO_SCAN)
+			return 0 // invalid species
+
 	var/datum/transhuman/mind_record/MR
 
 	if(mind.name in backed_up)

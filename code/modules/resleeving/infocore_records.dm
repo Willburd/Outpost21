@@ -24,6 +24,7 @@
 	var/cryo_at = 0
 	var/languages = list()
 	var/mind_oocnotes = ""
+	var/hiderecord = FALSE
 
 	var/nif_path
 	var/nif_durability
@@ -53,6 +54,11 @@
 
 		if(isturf(M.loc) && get_area(M.loc))
 			last_scan_area = get_area(M.loc).name
+
+		var/datum/species/S = GLOB.all_species["[M.dna.species]"]
+		if(S)
+			hiderecord = (S.flags & NO_SCAN) // hidden from selection
+
 		/* outpost 21  edit - nif removal
 		if(M.nif)
 			nif_path = M.nif.type
@@ -89,6 +95,7 @@
 	var/list/genetic_modifiers = list()
 	var/toocomplex
 	var/sizemult
+	var/hiderecord = FALSE
 	var/weight
 	var/aflags
 	var/breath_type = "oxygen"
@@ -118,7 +125,8 @@
 	//Prevent people from printing restricted and whitelisted species
 	var/datum/species/S = GLOB.all_species["[M.dna.species]"]
 	if(S)
-		toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED)
+		toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED) || (S.flags & NO_SCAN)
+		hiderecord = (S.flags & NO_SCAN) // hidden from editing or selection
 
 	//General stuff about them
 	synthetic = M.isSynthetic()
@@ -224,5 +232,6 @@
 	src.organ_data = orig.organ_data.Copy()
 	src.genetic_modifiers = orig.genetic_modifiers.Copy()
 	src.toocomplex = orig.toocomplex
+	src.hiderecord = orig.hiderecord
 	src.sizemult = orig.sizemult
 	src.aflags = orig.aflags

@@ -23,7 +23,7 @@
 
 	health_hud_intensity = 1.5
 
-	flags = NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT
+	flags = NO_SCAN | NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT
 
 	vision_flags = SEE_SELF
 	darksight = 5

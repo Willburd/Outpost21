@@ -192,13 +192,15 @@
 	var/bodyrecords_list_ui[0]
 	for(var/N in our_db.body_scans)
 		var/datum/transhuman/body_record/BR = our_db.body_scans[N]
-		bodyrecords_list_ui[++bodyrecords_list_ui.len] = list("name" = N, "recref" = "\ref[BR]")
+		if(!BR.hiderecord)
+			bodyrecords_list_ui[++bodyrecords_list_ui.len] = list("name" = N, "recref" = "\ref[BR]")
 	data["bodyrecords"] = bodyrecords_list_ui
 
 	var/mindrecords_list_ui[0]
 	for(var/N in our_db.backed_up)
 		var/datum/transhuman/mind_record/MR = our_db.backed_up[N]
-		mindrecords_list_ui[++mindrecords_list_ui.len] = list("name" = N, "recref" = "\ref[MR]")
+		if(!MR.hiderecord)
+			mindrecords_list_ui[++mindrecords_list_ui.len] = list("name" = N, "recref" = "\ref[MR]")
 	data["mindrecords"] = mindrecords_list_ui
 
 	data["modal"] = tgui_modal_data(src)
@@ -387,6 +389,11 @@
 								tgui_modal_clear(src)
 								return
 
+							if(active_mr.hiderecord)
+								set_temp("Error: Mind incompatible with resleeving hardware.", "danger")
+								tgui_modal_clear(src)
+								return
+
 							var/list/subtargets = list()
 							for(var/mob/living/carbon/human/H in sleever.occupant)
 								if(H.resleeve_lock && active_mr.ckey != H.resleeve_lock)
@@ -522,9 +529,15 @@
 		else if(!synthetic_capable && !organic_capable) //What have you done??
 			can_grow_active = 0
 			set_temp("Error: Cannot grow [active_br.mydna.name] due to lack of synthfabs and cloners.", "danger")
-		else if(active_br.toocomplex && !istype(selected_pod,/obj/machinery/clonepod/transhuman/vox) && active_br.speciesname == "Vox")
+		else if(!istype(selected_pod,/obj/machinery/clonepod/transhuman/vox) && active_br.speciesname == "Vox") // snowflake check due to specialized sleever
+			can_grow_active = 0
+			set_temp("Error: Cannot grow [active_br.mydna.name] due to incompatible cloning hardware, please use correct pod.", "danger")
+		else if(active_br.toocomplex)
 			can_grow_active = 0
 			set_temp("Error: Cannot grow [active_br.mydna.name] due to species complexity.", "danger")
+		else if(active_br.hiderecord)
+			can_grow_active = 0
+			set_temp("Error: Cannot grow [active_br.mydna.name] due to incompatible data structures.", "danger")
 		var/list/payload = list(
 			activerecord = "\ref[active_br]",
 			realname = sanitize(active_br.mydna.name),

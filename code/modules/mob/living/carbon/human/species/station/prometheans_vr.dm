@@ -19,7 +19,7 @@
 	color_mult = 1
 	mob_size = MOB_MEDIUM //As of writing, original was MOB_SMALL - Allows normal swapping
 	//var/mob/living/simple_mob/slime/promethean/stored_blob = null
-	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR
+	appearance_flags = NO_SCAN | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/shapeshifter_select_shape,

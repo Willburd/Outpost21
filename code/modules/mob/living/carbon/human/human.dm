@@ -1797,6 +1797,6 @@
 				// the rest should set their block on mob creation only!
 				dna.SetSEState(T.linked_gene_block,1,1) // force on
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
-				gene.initial_activation(src, null ,0) // forces antigenes off, and calls apply() on trait
+				gene.initial_activation(src, null , MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) // forces antigenes off, and calls apply() on trait
 
 	dna.UpdateSE()

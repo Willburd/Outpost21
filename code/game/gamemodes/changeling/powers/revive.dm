@@ -77,7 +77,7 @@
 	if(C.dna)
 		C.dna.UpdateSE()
 		C.dna.UpdateUI()
-		domutcheck(C,null,GENE_INITIAL_ACTIVATION)
+		domutcheck(C,null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		H.sync_organ_dna()

@@ -27,7 +27,7 @@
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = NO_SCAN | HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest, "descriptor" = "torso"),

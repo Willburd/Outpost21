@@ -115,9 +115,21 @@
 		var/bodyrecords_list_ui[0]
 		for(var/N in our_db.body_scans)
 			var/datum/transhuman/body_record/BR = our_db.body_scans[N]
-			bodyrecords_list_ui[++bodyrecords_list_ui.len] = list("name" = N, "recref" = "\ref[BR]")
+			var/datum/species/S = GLOB.all_species["[BR.mydna.dna.species]"]
+			if(S)
+				if((S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED))
+					continue // NOPE
+				if(S.flags & NO_SCAN)
+					continue
+				if(!BR.hiderecord)
+					bodyrecords_list_ui[++bodyrecords_list_ui.len] = list("name" = N, "recref" = "\ref[BR]")
+			else
+				// if we don't have a species, something sure is wrong!
+				continue
 		if(bodyrecords_list_ui.len)
 			data["bodyrecords"] = bodyrecords_list_ui
+		else
+			data["bodyrecords"] = list()
 
 	if(menu == MENU_STOCKRECORDS)
 		var/stock_bodyrecords_list_ui[0]
@@ -126,7 +138,7 @@
 			if(S)
 				if((S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED))
 					continue
-				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW || S.name == SPECIES_PROMETHEAN)
+				if(S.flags & NO_SCAN)
 					continue
 			else
 				// if we don't have a species, something sure is wrong!
@@ -134,6 +146,8 @@
 			stock_bodyrecords_list_ui += N
 		if(stock_bodyrecords_list_ui.len)
 			data["stock_bodyrecords"] = stock_bodyrecords_list_ui
+		else
+			data["stock_bodyrecords"] = list()
 
 	var/list/temp
 	if(active_br)
@@ -264,8 +278,7 @@
 			var/datum/species/S = GLOB.all_species[params["view_stock_brec"]]
 			var/toocomplex = FALSE
 			if(S)
-				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED)
-				if(S.name == SPECIES_DIONA || S.name == SPECIES_SHADEKIN || S.name == SPECIES_SHADEKIN_CREW || S.name == SPECIES_PROMETHEAN)
+				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED) || (S.flags & NO_SCAN)
 					toocomplex = TRUE // no DNA species, or not compatible with machinery
 			else
 				// if we don't have a species, something sure is wrong!

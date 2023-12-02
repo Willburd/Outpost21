@@ -195,8 +195,11 @@
 
 		usr.visible_message("[usr] begins scanning [target]'s mind.","<span class='notice'>You begin scanning [target]'s mind.</span>")
 		if(do_after(usr,8 SECONDS,target))
-			our_db.m_backup( target.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
-			to_chat(usr,"<span class='notice'>Mind backed up!</span>")
+			var/success = our_db.m_backup( target.mind, null, TRUE) //mind,nif,one_time = TRUE) outpost 21  edit - nif removal
+			if(success)
+				to_chat(usr,"<span class='notice'>Mind backed up!</span>")
+			else
+				to_chat(usr,"<span class='notice'>Error: Mind is incompatible with resleeving equipment!</span>")
 		else
 			to_chat(usr,"<span class='warning'>You must remain close to your target!</span>")
 
@@ -213,7 +216,10 @@
 		if(do_after(usr,8 SECONDS,target))
 			var/datum/transhuman/body_record/BR = new()
 			BR.init_from_mob(H, TRUE, TRUE, database_key = db_key)
-			to_chat(usr,"<span class='notice'>Body scanned!</span>")
+			if(!BR.hiderecord)
+				to_chat(usr,"<span class='notice'>Body scanned!</span>")
+			else
+				to_chat(usr,"<span class='notice'>Error: incompatible species!</span>")
 		else
 			to_chat(usr,"<span class='warning'>You must remain close to your target!</span>")
 
@@ -233,6 +239,12 @@
 
 			usr.visible_message("<span class='warning'>[usr] begins downloading [target]'s mind!</span>","<span class='notice'>You begin downloading [target]'s mind!</span>")
 			if(do_after(usr,35 SECONDS,target)) //This is powerful, yo.
+				if(ishuman(target))
+					var/mob/living/carbon/human/H = target
+					if(H.species && H.species.flags & NO_SCAN)
+						to_chat(usr,"<span class='notice'>Error: Mind is incompatible with resleeving equipment!</span>")
+					return
+
 				if(!stored_mind && target.mind)
 					get_mind(target)
 					to_chat(usr,"<span class='notice'>Mind downloaded!</span>")

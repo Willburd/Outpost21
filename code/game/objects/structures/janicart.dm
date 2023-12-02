@@ -368,7 +368,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 
 
 
-
+/* outpost 21 edit - replaced by /obj/vehicle/train/janicart
 //old style retardo-cart
 /obj/structure/bed/chair/janicart
 	name = "janicart"
@@ -497,3 +497,4 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "keys"
 	w_class = ITEMSIZE_TINY
+*/

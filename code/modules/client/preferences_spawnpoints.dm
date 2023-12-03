@@ -92,7 +92,6 @@ var/list/spawntypes = list()
 /obj/effect/landmark/arrivals/New()
 	latejoin += loc
 	..()
-*/
 var/global/list/latejoin_tram   = list()
 
 /obj/effect/landmark/tram
@@ -110,3 +109,5 @@ var/global/list/latejoin_tram   = list()
 /datum/spawnpoint/tram/New()
 	..()
 	turfs = latejoin_tram
+
+*/

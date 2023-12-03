@@ -153,6 +153,7 @@ export class NanoMap extends Component {
 }
 
 const NanoMapMarker = (props, context) => {
+  const { config } = useBackend(context);
   const { x, y, zoom = 1, icon, tooltip, color, onClick } = props;
 
   const handleOnClick = (e) => {
@@ -162,7 +163,7 @@ const NanoMapMarker = (props, context) => {
     }
   };
 
-  const rx = x * 2 * zoom - zoom - 3;
+  const rx = (x * 2 * zoom - zoom - 3) / (0.5 + config.mapWidthRatio);
   const ry = y * 2 * zoom - zoom - 3;
   return (
     <div>

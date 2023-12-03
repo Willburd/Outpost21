@@ -37,7 +37,7 @@ var/list/preferences_datums = list()
 	var/be_random_name = 0				//whether we are a random name every round
 	var/nickname						//our character's nickname
 	var/age = 30						//age of character
-	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
+	var/spawnpoint = "Elevator" 		//where this character will spawn (0-2). // outpost 21 edit - new default
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
 	var/pdachoice = 1					//PDA type

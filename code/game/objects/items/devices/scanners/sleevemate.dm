@@ -243,7 +243,7 @@
 					var/mob/living/carbon/human/H = target
 					if(H.species && H.species.flags & NO_SCAN)
 						to_chat(usr,"<span class='notice'>Error: Mind is incompatible with resleeving equipment!</span>")
-					return
+						return
 
 				if(!stored_mind && target.mind)
 					get_mind(target)

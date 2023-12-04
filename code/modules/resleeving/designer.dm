@@ -161,7 +161,7 @@
 			"canusecustomicon" = GLOB.all_species[active_br.mydna.dna.species].selects_bodytype,
 			"gender" = active_br.bodygender,
 			"synthetic" = active_br.synthetic ? "Yes" : "No",
-			"locked" = active_br.locked ? "Low" : "High",
+			"locked" = active_br.locked,
 			"scale" = "[player_size_name(active_br.sizemult)]\[[active_br.sizemult * 100]%\]",
 			"booc" = active_br.body_oocnotes,
 			"blood_type" = active_br.mydna.dna.b_type,
@@ -279,7 +279,6 @@
 			var/toocomplex = FALSE
 			if(S)
 				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED) || (S.flags & NO_SCAN)
-					toocomplex = TRUE // no DNA species, or not compatible with machinery
 			else
 				// if we don't have a species, something sure is wrong!
 				toocomplex = TRUE
@@ -291,12 +290,13 @@
 				mannequin.dna.real_name = mannequin.real_name
 				mannequin.dna.base_species = mannequin.species.base_species
 				active_br = new(mannequin, FALSE, FALSE)
+				active_br.locked = FALSE // allow any
 				active_br.speciesname = "Custom Sleeve"
 				update_preview_icon(TRUE)
 				menu = MENU_SPECIFICRECORD
 			else
 				active_br = null
-				to_chat(usr, "<span class='warning'>ERROR: Stock Record missing.</span>")
+				to_chat(usr, "<span class='warning'>ERROR: Stock Record access is restricted.</span>")
 
 		if("boocnotes")
 			menu = MENU_OOCNOTES
@@ -311,12 +311,19 @@
 		if("savetodisk")
 			playsound(src, "keyboard", 40) // into console
 			if(disk && active_br)
-				disk.stored = new /datum/transhuman/body_record(active_br) // Saves a COPY!
-				disk.name = "[initial(disk.name)] ([active_br.mydna.name])"
-				/* // why would it eject? There is a perfectly good eject button right beside it.
-				disk.forceMove(get_turf(src))
-				disk = null
-				*/
+				if(active_br.locked)
+					var/answer = tgui_alert(usr,"This body record will be reformatted to allow any mind to inhabit it. This is against the current body owner's configured preferences. Please confirm that you have permission to do this, and are sure!","Mind Compatability",list("No","Yes"))
+					if(answer == "No")
+						to_chat(usr, "<span class='warning'>ERROR: This body record is restricted.</span>")
+						return
+				if(disk && active_br)
+					active_br.locked = FALSE // remove lock
+					disk.stored = new /datum/transhuman/body_record(active_br) // Saves a COPY!
+					disk.name = "[initial(disk.name)] ([active_br.mydna.name])"
+					/* // why would it eject? There is a perfectly good eject button right beside it.
+					disk.forceMove(get_turf(src))
+					disk = null
+					*/
 
 		if("ejectdisk")
 			disk.forceMove(get_turf(src))

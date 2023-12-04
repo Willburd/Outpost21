@@ -98,6 +98,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={activeBodyRecord.real_name}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'rename',
@@ -111,6 +112,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={activeBodyRecord.speciescustom}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'custom_species',
@@ -123,7 +125,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={activeBodyRecord.speciesicon}
-                    disabled={!activeBodyRecord.canusecustomicon}
+                    disabled={!activeBodyRecord.canusecustomicon || activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'custom_base',
@@ -136,6 +138,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={capitalize(activeBodyRecord.gender)}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'bio_gender',
@@ -146,7 +149,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                 </LabeledList.Item>
                 <LabeledList.Item label="Synthetic">{activeBodyRecord.synthetic}</LabeledList.Item>
                 <LabeledList.Item label="Mind Compat">
-                  {activeBodyRecord.locked}
+                  {activeBodyRecord.locked ? 'Low' : 'High'}
                   <Button
                     ml={1}
                     icon="eye"
@@ -159,6 +162,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={activeBodyRecord.weight}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'weight',
@@ -171,6 +175,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={capitalize(activeBodyRecord.blood_type)}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'blood_type',
@@ -182,6 +187,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                     icon="pen"
                     content="Color"
                     backgroundColor={activeBodyRecord.blood_color}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'blood_color',
@@ -216,6 +222,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="pen"
                     content={activeBodyRecord.scale}
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'size_multiplier',
@@ -232,6 +239,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                         <Button
                           icon="pen"
                           content={style.style}
+                          disabled={activeBodyRecord.locked === 1}
                           onClick={() =>
                             act('href_conversion', {
                               target_href: style.styleHref,
@@ -245,6 +253,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                           <Button
                             icon="pen"
                             content={style.color}
+                            disabled={activeBodyRecord.locked === 1}
                             onClick={() =>
                               act('href_conversion', {
                                 target_href: style.colorHref,
@@ -268,6 +277,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                           <Button
                             icon="pen"
                             content={style.color2}
+                            disabled={activeBodyRecord.locked === 1}
                             onClick={() =>
                               act('href_conversion', {
                                 target_href: style.colorHref2,
@@ -291,6 +301,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                           <Button
                             icon="pen"
                             content={style.color3}
+                            disabled={activeBodyRecord.locked === 1}
                             onClick={() =>
                               act('href_conversion', {
                                 target_href: style.colorHref3,
@@ -303,6 +314,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                             width="32px"
                             height="20px"
                             color={style.color3}
+                            disabled={activeBodyRecord.locked === 1}
                             style={{
                               border: '1px solid #fff',
                             }}
@@ -322,6 +334,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                   <Button
                     icon="plus"
                     content="Add Marking"
+                    disabled={activeBodyRecord.locked === 1}
                     onClick={() =>
                       act('href_conversion', {
                         target_href: 'marking_style',
@@ -341,6 +354,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                                 fluid
                                 icon="times"
                                 color="red"
+                                disabled={activeBodyRecord.locked === 1}
                                 onClick={() =>
                                   act('href_conversion', {
                                     target_href: 'marking_remove',
@@ -355,6 +369,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                                 fluid
                                 icon="sort-up"
                                 color="blue"
+                                disabled={activeBodyRecord.locked === 1}
                                 onClick={() =>
                                   act('href_conversion', {
                                     target_href: 'marking_up',
@@ -369,6 +384,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                                 fluid
                                 icon="sort-down"
                                 color="blue"
+                                disabled={activeBodyRecord.locked === 1}
                                 onClick={() =>
                                   act('href_conversion', {
                                     target_href: 'marking_down',
@@ -382,6 +398,7 @@ const BodyDesignerSpecificRecord = (props, context) => {
                                 fluid
                                 backgroundColor={marking}
                                 content={key}
+                                disabled={activeBodyRecord.locked === 1}
                                 onClick={() =>
                                   act('href_conversion', {
                                     target_href: 'marking_color',

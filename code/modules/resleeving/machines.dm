@@ -539,6 +539,8 @@
 
 /obj/machinery/transhuman/resleever/proc/putmind(var/datum/transhuman/mind_record/MR, mode = 1, var/mob/living/carbon/human/override = null, var/db_key)
 	if((!occupant || !istype(occupant) || occupant.stat >= DEAD) && mode == 1)
+		if(occupant && occupant.stat >= DEAD)
+			to_chat(occupant, "<span class='warning'>Occupant is dead.</span>")
 		return 0
 
 	/* outpost 21  edit - nif removal

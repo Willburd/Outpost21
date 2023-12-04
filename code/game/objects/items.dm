@@ -677,7 +677,7 @@ GLOBAL_LIST_EMPTY(blood_overlays_by_type)
 
 /mob/living/carbon/verb/showoff()
 	set name = "Show Held Item"
-	set category = VERBTAB_IC
+	set category = VERBTAB_OBJECT
 
 	var/obj/item/I = get_active_hand()
 	if(I && !I.abstract)

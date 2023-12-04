@@ -1,7 +1,7 @@
 /mob/living/proc/vertical_nom()
 	set name = "Nom from Above"
 	set desc = "Allows you to eat people who are below your tile or adjacent one. Requires passability."
-	set category = VERBTAB_IC
+	set category = VERBTAB_POWERS
 
 	if(stat == DEAD || paralysis || weakened || stunned)
 		to_chat(src, "<span class='notice'>You cannot do that while in your current state.</span>")

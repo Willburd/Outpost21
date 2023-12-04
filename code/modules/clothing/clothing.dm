@@ -621,7 +621,7 @@
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
 	set desc = "Pull out your boot knife."
-	set category = VERBTAB_IC
+	set category = VERBTAB_OBJECT
 	set src in usr
 
 	if(usr.stat || usr.restrained() || usr.incapacitated())

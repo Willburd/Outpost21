@@ -34,7 +34,7 @@
 			to_chat(src, "<span class ='notice'>You're already using that style.</span>")
 
 /mob/living/carbon/human/proc/tackle()
-	set category = VERBTAB_IC
+	set category = VERBTAB_POWERS
 	set name = "Tackle"
 	set desc = "Tackle someone down."
 
@@ -119,7 +119,7 @@
 /mob/living/carbon/human/proc/regurgitate()
 	set name = "Regurgitate"
 	set desc = "Empties the contents of your stomach"
-	set category = VERBTAB_IC
+	set category = VERBTAB_POWERS
 
 	if(stomach_contents.len)
 		for(var/mob/M in src)

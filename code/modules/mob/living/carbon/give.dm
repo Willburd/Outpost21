@@ -1,5 +1,5 @@
 /mob/living/verb/give(var/mob/living/target in living_mobs(1))
-	set category = VERBTAB_IC
+	set category = VERBTAB_OBJECT
 	set name = "Give"
 
 	do_give(target)

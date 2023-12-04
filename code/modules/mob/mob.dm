@@ -240,7 +240,7 @@
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = VERBTAB_IC
+	set category = VERBTAB_OBJECT
 	set src = usr
 
 	return
@@ -508,7 +508,7 @@
 /mob/verb/stop_pulling()
 
 	set name = "Stop Pulling"
-	set category = VERBTAB_IC
+	set category = VERBTAB_OBJECT
 
 	if(pulling)
 		if(ishuman(pulling))

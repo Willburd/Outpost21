@@ -18,6 +18,8 @@
 	var/datum/mind/stored_mind
 
 	var/ooc_notes = null //For holding prefs
+	var/list/langs_stored = list()
+	var/genderident_stored = null
 
 	// Resleeving database this machine interacts with. Blank for default database
 	// Needs a matching /datum/transcore_db with key defined in code
@@ -32,11 +34,17 @@
 /obj/item/device/sleevemate/proc/clear_mind()
 	stored_mind = null
 	ooc_notes = null
+	langs_stored = list()
+	genderident_stored = null
 	update_icon()
 
 /obj/item/device/sleevemate/proc/get_mind(mob/living/M)
 	ASSERT(M.mind)
 	ooc_notes = M.ooc_notes
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		langs_stored = H.languages.Copy()
+		genderident_stored = H.identifying_gender
 	stored_mind = M.mind
 	M.ghostize()
 	M.mind = null
@@ -47,7 +55,9 @@
 /obj/item/device/sleevemate/proc/put_mind(mob/living/M)
 	stored_mind.active = TRUE
 	stored_mind.transfer_to(M)
-	M.ooc_notes = ooc_notes
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.transfer_mental_traits( genderident_stored, null, ooc_notes, langs_stored)
 	clear_mind()
 
 

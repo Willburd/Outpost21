@@ -1800,3 +1800,22 @@
 				gene.initial_activation(src, null , MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) // forces antigenes off, and calls apply() on trait
 
 	dna.UpdateSE()
+
+/mob/living/carbon/human/proc/transfer_mental_traits(var/identigender, var/flavor, var/ooc, var/langsreplace)
+	// transfers languages and ooc
+	if(ooc)
+		ooc_notes = ooc
+
+	if(flavor)
+		flavor_texts = flavor
+
+	if(identigender)
+		identifying_gender = identigender
+
+	if(langsreplace)
+		languages.Cut()
+		for(var/datum/language/L in langsreplace)
+			add_language(L.name)
+
+	// This is pretty important for pref transfer
+	apply_vore_prefs()

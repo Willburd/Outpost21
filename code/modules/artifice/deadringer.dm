@@ -158,8 +158,6 @@
 		var/obj/item/clothing/c_type = H.get_equipped_item(slot_back)
 		temp.disguise(c_type.type)
 		temp.canremove = FALSE
-	corpse.identifying_gender = H.identifying_gender
-	corpse.flavor_texts = H.flavor_texts.Copy()
 	corpse.real_name = H.real_name
 	corpse.name = H.name
 	corpse.set_species(corpse.dna.species)
@@ -172,6 +170,7 @@
 	corpse.change_skin_color(H.r_skin, H.g_skin, H.b_skin)
 	corpse.adjustFireLoss(H.getFireLoss())
 	corpse.adjustBruteLoss(H.getBruteLoss())
+	corpse.transfer_mental_traits( H.identifying_gender, H.flavor_texts.Copy(), null, null)
 	corpse.UpdateAppearance()
 	corpse.ApplySpeciesAndTraits()
 	if(corpse.dna)

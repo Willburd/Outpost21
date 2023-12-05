@@ -166,10 +166,11 @@
 		playsound(src, 'sound/machines/defib_zap.ogg', 50, 1, -1)
 
 		//Inform them and make them a little dizzy.
+		var/how_long = round((world.time - recordM.last_update)/10/60)
 		if(confuse_amount + blur_amount <= 16)
-			to_chat(new_character, "<span class='notice'>Your eyes open as you wake up in the tube, remembering only your last scan. Your new body feels comfortable, however.</span>")
+			to_chat(new_character, "<span class='notice'>Your eyes open as you wake up in the tube, remembering only your last scan in \the [recordM.last_scan_area], [how_long] minutes ago. Your new body feels comfortable, however.</span>")
 		else
-			to_chat(new_character, "<span class='warning'>Your eyes wince at the light as you try to remember what happened, weren't you just in \the [recordM.last_scan_area]? It's disorienting.</span>")
+			to_chat(new_character, "<span class='warning'>Your eyes wince at the light as you try to remember what happened, weren't you just in \the [recordM.last_scan_area], [how_long] minutes ago? It's disorienting.</span>")
 
 	spawn(5 SECONDS)
 		new_character.forceMove(spawnloc)

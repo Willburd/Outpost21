@@ -167,8 +167,12 @@
 			"blood_type" = active_br.mydna.dna.b_type,
 			"blood_color" = active_br.mydna.dna.blood_color,
 			"weight" = active_br.weight,
-			"styles" = list()
+			"styles" = list(),
+			"flavors" = list()
 		)
+
+		var/list/flavors = data["activeBodyRecord"]["flavors"]
+		flavors += active_br.mydna.flavor.Copy()
 
 		var/list/styles = data["activeBodyRecord"]["styles"]
 		temp = list("styleHref" = "ear_style", "style" = "Normal")
@@ -422,6 +426,7 @@
 
 	// Apply DNA
 	mannequin.dna = R.dna.Clone()
+	mannequin.transfer_mental_traits( null, active_br.mydna.flavor.Copy(), null, null)
 	mannequin.UpdateAppearance() // Update all appearance stuff from the DNA record
 	mannequin.ApplySpeciesAndTraits()
 	if(mannequin.dna)
@@ -432,11 +437,8 @@
 	//Apply genetic modifiers
 	for(var/modifier_type in R.genetic_modifiers)
 		mannequin.add_modifier(modifier_type)
-	mannequin.resize(active_br.sizemult, FALSE)
 
 	//Basically all the VORE stuff
-	// mannequin.ooc_notes = active_br.body_oocnotes // Intentionally remove these, once you start editing, it's basically a fresh body for someone else...
-	mannequin.flavor_texts = active_br.mydna.flavor.Copy()
 	mannequin.resize(active_br.sizemult, FALSE)
 	mannequin.appearance_flags = active_br.aflags
 	mannequin.weight = active_br.weight
@@ -484,6 +486,8 @@
 	ASSERT(istype(B))
 	var/datum/category_item/player_setup_item/general/basic/G = CG.items_by_name["Basic"]
 	ASSERT(istype(G))
+	var/datum/category_item/player_setup_item/general/flavor/F = CG.items_by_name["Flavor"]
+	ASSERT(istype(F))
 
 	if(params["target_href"] == "rename")
 		var/raw_name = tgui_input_text(user, "Choose your character's name:", "Character Name")
@@ -549,6 +553,13 @@
 	var/href_list = list()
 	href_list["src"] = "\ref[src]"
 	href_list["[params["target_href"]]"] = params["target_value"]
+
+	if(params["target_href"] == "flavor_text")
+		F.OnTopic(list2params(href_list), href_list, user)
+		F.copy_to_mob(mannequin)
+		active_br.init_from_mob(mannequin, FALSE, FALSE) // reinit
+		update_preview_icon()
+		return
 
 	var/action = 0
 	action = B.OnTopic(list2params(href_list), href_list, user)

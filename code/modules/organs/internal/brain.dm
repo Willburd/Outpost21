@@ -248,6 +248,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	else
 		H.dna = R.dna
 
+	H.transfer_mental_traits(null, R.flavor.Copy(), brainmob.ooc_notes, R.languages)
 	H.UpdateAppearance()
 	H.ApplySpeciesAndTraits()
 	if(H.dna)
@@ -261,7 +262,6 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	if(!R.dna.real_name)	//to prevent null names
 		R.dna.real_name = "promethean ([rand(0,999)])"
 	H.real_name = R.dna.real_name
-	H.ooc_notes = brainmob.ooc_notes // VOREStation Edit
 
 	H.nutrition = 260 //Enough to try to regenerate ONCE.
 	H.adjustBruteLoss(40)
@@ -277,10 +277,6 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	clonemind.transfer_to(H)
 	for(var/modifier_type in R.genetic_modifiers)
 		H.add_modifier(modifier_type)
-
-	for(var/datum/language/L in R.languages)
-		H.add_language(L.name)
-	H.flavor_texts = R.flavor.Copy()
 	qdel(src)
 	return 1
 

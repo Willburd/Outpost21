@@ -42,12 +42,10 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		H.b_type = "AB+" //For some reason we have two blood types on the mob.
-		H.identifying_gender = chosen_dna.identifying_gender
 		//Basically all the VORE stuff
-		H.flavor_texts = chosen_dna.flavour_texts ? chosen_dna.flavour_texts.Copy() : null
-		H.ooc_notes = chosen_dna.ooc_notes ? chosen_dna.ooc_notes : null
 		H.appearance_flags = chosen_dna.appearance_flags ? chosen_dna.appearance_flags : null
 		H.weight = chosen_dna.weight ? chosen_dna.weight : null
+		H.transfer_mental_traits( chosen_dna.identifying_gender, chosen_dna.flavour_texts ? chosen_dna.flavour_texts.Copy() : null, chosen_dna.ooc_notes ? chosen_dna.ooc_notes : null, null)
 		H.UpdateAppearance()
 		H.ApplySpeciesAndTraits()
 		if(H.dna)

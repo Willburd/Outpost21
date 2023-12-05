@@ -183,6 +183,17 @@
 	prefs.b_wing3 =    character.b_wing3
 	prefs.g_wing3 =    character.g_wing3
 
+	// get flavors
+	prefs.flavor_texts["general"]	= character.flavor_texts["general"]
+	prefs.flavor_texts["head"]		= character.flavor_texts["head"]
+	prefs.flavor_texts["face"]		= character.flavor_texts["face"]
+	prefs.flavor_texts["eyes"]		= character.flavor_texts["eyes"]
+	prefs.flavor_texts["torso"]		= character.flavor_texts["torso"]
+	prefs.flavor_texts["arms"]		= character.flavor_texts["arms"]
+	prefs.flavor_texts["hands"]		= character.flavor_texts["hands"]
+	prefs.flavor_texts["legs"]		= character.flavor_texts["legs"]
+	prefs.flavor_texts["feet"]		= character.flavor_texts["feet"]
+
 /* outpost 21 edit - these were all only used by the code\modules\resleeving\designer.dm, replaced by apply_mob_to_prefs() above
 // Saves mob's current coloration state to prefs
 // This basically needs to be the reverse of /datum/category_item/player_setup_item/general/body/copy_to_mob() ~Leshana

@@ -80,6 +80,7 @@
 	//Apply DNA
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
+	H.transfer_mental_traits( null, current_project.mydna.flavor.Copy(), current_project.body_oocnotes, null)
 	H.UpdateAppearance() //Update appearance
 	H.ApplySpeciesAndTraits()
 	if(H.dna)
@@ -101,8 +102,6 @@
 	H.updatehealth()
 
 	//Basically all the VORE stuff
-	H.ooc_notes = current_project.body_oocnotes
-	H.flavor_texts = current_project.mydna.flavor.Copy()
 	H.resize(current_project.sizemult, FALSE)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
@@ -310,6 +309,7 @@
 	//Apply DNA
 	H.original_player = current_project.ckey
 	H.dna = R.dna.Clone()
+	H.transfer_mental_traits( null, current_project.mydna.flavor.Copy(), current_project.body_oocnotes, null)
 	H.UpdateAppearance() //Update appearance
 	H.ApplySpeciesAndTraits()
 	if(H.dna)
@@ -327,8 +327,6 @@
 	H.updatehealth()
 
 	//Basically all the VORE stuff
-	H.ooc_notes = current_project.body_oocnotes
-	H.flavor_texts = current_project.mydna.flavor.Copy()
 	H.resize(current_project.sizemult)
 	H.appearance_flags = current_project.aflags
 	H.weight = current_project.weight
@@ -575,9 +573,7 @@
 			occupant.add_language(L.name)
 		MR.mind_ref.active = 1 //Well, it's about to be.
 		MR.mind_ref.transfer_to(occupant) //Does mind+ckey+client.
-		occupant.identifying_gender = MR.id_gender
-		occupant.ooc_notes = MR.mind_oocnotes
-		occupant.apply_vore_prefs() //Cheap hack for now to give them SOME bellies.
+		occupant.transfer_mental_traits( MR.id_gender, null, MR.mind_oocnotes, null)
 
 	else
 		var/findclient = null
@@ -594,14 +590,12 @@
 		else
 			log_debug("[occupant] could not locate a client for preference data. Cancel sleeving")
 			return 0
-		occupant.identifying_gender = MR.id_gender
-		occupant.ooc_notes = MR.mind_oocnotes
-		occupant.apply_vore_prefs() //Cheap hack for now to give them SOME bellies.
+		occupant.transfer_mental_traits( MR.id_gender, null, MR.mind_oocnotes, null)
 
 	if(MR.one_time)
 		var/how_long = round((world.time - MR.last_update)/10/60)
 		to_chat(occupant, "<span class='danger'>Your mind backup was a 'one-time' backup. \
-		You will not be able to remember anything since the backup, [how_long] minutes ago.</span>")
+		You will not be able to remember anything since the backup, [how_long] minutes ago, in \the [MR.last_scan_area].</span>")
 
 	/* outpost 21  edit - nif removal
 	//Re-supply a NIF if one was backed up with them.

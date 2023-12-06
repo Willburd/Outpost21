@@ -95,3 +95,40 @@
 	projectile_type = /obj/item/projectile/bullet/kyshell
 	caliber = "rocket"
 	matter = list(MAT_STEEL = 10000)
+
+
+// internal machines
+/obj/machinery/ammo_storage
+	name = "ammunition storage"
+	desc = "It's a secure, armored storage unit embedded into the floor."
+	icon = 'icons/obj/machines/self_destruct.dmi'
+	icon_state = "base"
+	anchored = TRUE
+	density = FALSE
+	var/ammo_path = /obj/item/tank_shell
+	var/list/ammo_count = 50
+
+/obj/machinery/ammo_storage/MouseDrop(atom/over)
+	if(!CanMouseDrop(over, usr))
+		return
+	if(over == usr && ammo_count > 0)
+		usr.visible_message("[usr] begins to extract a shell.", "You begin to extract a shell.")
+		if(do_after(usr, 50, src) && ammo_count > 0)
+			ammo_count--
+			var/obj/item/thing = new ammo_path
+			usr.visible_message("[usr] picks up \the [thing].", "You pick up \the [thing].")
+			usr.put_in_hands(thing)
+		add_fingerprint(usr)
+
+/obj/item/tank_shell
+	name = "railgun shell"
+	desc = "Heavy ammunition, meant to be fired from a mounted gun."
+	icon = 'icons/obj/nuclear_cylinder.dmi'
+	icon_state = "nuclear_cylinder"
+	item_state = "nuclear"
+	force = 10.0
+	w_class = ITEMSIZE_HUGE
+	throwforce = 15.0
+	throw_speed = 2
+	throw_range = 4
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 4)

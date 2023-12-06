@@ -64,8 +64,8 @@
 	var/turf/exitpos = null // where to place atoms that enter the interior
 	var/obj/machinery/door/vehicle_interior_hatch/entrance_hatch = null
 	var/obj/machinery/computer/vehicle_interior_console/interior_helm = null // driving console
-	var/feed_machine = null // ammo is put into this and used up by mainguns
 	var/list/internal_weapons_list = list()
+	var/list/internal_loaders_list = list() // ammo is put into this and used up by mainguns
 	var/cached_dir // used for weapon position being retained in moved()
 
 	var/haskey = TRUE
@@ -74,12 +74,13 @@
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/has_interior/controller/New()
-	..()
+	. = ..()
 	cell = new /obj/item/weapon/cell/high(src)
 	if(haskey)
 		key = new key_type(src)
 	for(var/weapon_type in weapons_equiped)
-		internal_weapons_list.Add( new weapon_type(loc))
+		internal_weapons_list.Add(new weapon_type(loc))
+		internal_loaders_list.Add(null)
 
 /obj/vehicle/has_interior/controller/Initialize()
 	// find interior entrypos
@@ -118,6 +119,9 @@
 							W.control_console = C // link weapon to console
 							// rotate weapon to facing angle of vehicle
 							W.dir = dir
+					// scan for loaders
+					for(var/obj/machinery/ammo_loader/L in T.contents)
+						internal_loaders_list[L.weapon_index] = L
 
 	// set exit pos
 	update_exit_pos()
@@ -802,7 +806,7 @@
 	var/obj/machinery/computer/vehicle_interior_console/paired_console = null
 
 /obj/structure/bed/chair/vehicle_interior_seat/New(var/newloc, var/new_material, var/new_padding_material)
-	..(newloc, MAT_STEEL, padding)
+	. = ..(newloc, MAT_STEEL, padding)
 
 /obj/structure/bed/chair/vehicle_interior_seat/post_buckle_mob()
 	playsound(src,buckling_sound,75,1)
@@ -985,7 +989,10 @@
 /obj/structure/bed/chair/vehicle_interior_seat/proc/click_action(atom/target,mob/user, params)
 	if(paired_console.controls_weapon_index > 0)
 		var/obj/item/vehicle_interior_weapon/W = paired_console.interior_controller.internal_weapons_list[paired_console.controls_weapon_index]
-		W.action(target, params, user)
+		if(!W)
+			to_chat(user, "<span class='warning'>Weapon is inoperable!</span>")
+		else
+			W.action(target, params, user)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Vehicle weaponry
@@ -1067,6 +1074,17 @@
 		to_chat(user_calling, "<span class='warning'>You refrain from firing the mounted \the [src] as your intent is set to help.</span>")
 		return
 
+	// check if loaded
+	var/obj/machinery/ammo_loader/L
+	if(weapon_index <= control_console.interior_controller.internal_loaders_list.len)
+		L = control_console.interior_controller.internal_loaders_list[weapon_index]
+	if(L)
+		if(!L.loaded)
+			to_chat(user_calling, "<span class='warning'>You are unable to fire \the [src] as there is no shell loaded.</span>")
+			return
+		else
+			L.fire()
+
 	// ACTUALLY fire
 	control_console.interior_controller.visible_message("<span class='warning'>[user_calling] fires [src]!</span>")
 	to_chat(user_calling,"<span class='warning'>You fire [src]!</span>")
@@ -1143,3 +1161,122 @@
 	// find current direction's angle, find rotation direction, add 45+1 to it, then return the new dir we want to be!
 	var/startdir = dir2angle(dir)
 	dir = angle2dir(360 + startdir + (SIGN(closer_angle_difference(startdir,dir2angle(goaldir))) * 46))
+
+//-------------------------------------------
+// Internal machines, mostly weapon linked machinery
+//-------------------------------------------
+
+/obj/machinery/ammo_storage
+	name = "ammunition storage"
+	desc = "It's a secure, armored storage unit embedded into the floor. Shells must be dragged out manually."
+	icon = 'icons/obj/machines/vehicle_weapons.dmi'
+	icon_state = "storage"
+	anchored = TRUE
+	density = FALSE
+	var/ammo_path = /obj/item/tank_shell
+	var/ammo_count = 50
+
+/obj/machinery/ammo_storage/MouseDrop(atom/over)
+	if(!CanMouseDrop(over, usr))
+		return
+	if(over == usr)
+		if(ammo_count > 0)
+			usr.visible_message("[usr] begins to extract a shell.", "You begin to extract a shell.")
+			playsound(src, 'sound/items/electronic_assembly_empty.ogg', 100, 1)
+			if(do_after(usr, 60, src) && ammo_count > 0)
+				ammo_count--
+				var/obj/item/thing = new ammo_path(usr.loc)
+				usr.visible_message("[usr] picks up \the [thing].", "You pick up \the [thing].")
+				usr.put_in_hands(thing)
+		else
+			to_chat( usr, "No shells remain!")
+		add_fingerprint(usr)
+
+/obj/machinery/ammo_storage/ex_act(severity)
+	return 0 // no explosive act
+
+/obj/machinery/ammo_storage/attackby(obj/item/I as obj, mob/user as mob)
+	if(ammo_count > 0)
+		if(ammo_count == 1)
+			to_chat( usr, "A single shell remains!")
+		else
+			to_chat( usr, "[ammo_count] shells remain!")
+	else
+		to_chat( usr, "No shells remain!")
+
+
+/obj/machinery/ammo_loader
+	name = "ammunition loader"
+	desc = "Loading mechanism for vehicle mounted weapon."
+	icon = 'icons/obj/machines/vehicle_weapons.dmi'
+	icon_state = "loader"
+	anchored = TRUE
+	density = TRUE
+	var/weapon_index = -1 // set by the init!
+	var/ammo_path = /obj/item/tank_shell
+	var/loaded = FALSE
+
+/obj/machinery/ammo_loader/New(l, d=0)
+	. = ..(l, d)
+	update_icon()
+
+/obj/machinery/ammo_loader/ex_act(severity)
+	return 0 // no explosive act
+
+/obj/machinery/ammo_loader/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,ammo_path))
+		if(loaded)
+			to_chat( user, "A shell is already loaded.")
+			return
+		else if(do_after(usr, 20, src) && !loaded)
+			loaded = TRUE
+			user.visible_message("[user] loads a shell into \the [src].", "You load a shell into \the [src].")
+			I.Destroy()
+			playsound(src, 'sound/machines/turrets/turret_deploy.ogg', 100, 1)
+			update_icon()
+
+/obj/machinery/ammo_loader/MouseDrop(atom/over)
+	if(!CanMouseDrop(over, usr))
+		return
+	if(over == usr)
+		usr.visible_message("[usr] unloads \the [src].", "You unload \the [src].")
+		loaded = FALSE
+		var/obj/item/thing = new ammo_path(usr.loc)
+		usr.put_in_hands(thing)
+		playsound(src, 'sound/items/electronic_assembly_empty.ogg', 100, 1)
+		update_icon()
+
+/obj/machinery/ammo_loader/proc/fire()
+	loaded = FALSE
+	update_icon()
+	flick("loader_fire",src)
+	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+	sparks.set_up(5, 0, src)
+	sparks.attach(loc)
+	sparks.start()
+	playsound(src, 'sound/machines/hiss.ogg', 50, 1)
+	playsound(src, 'sound/machines/machine_die_short.ogg', 100, 1)
+
+/obj/machinery/ammo_loader/update_icon()
+	. = ..()
+	if(!loaded)
+		icon_state = "loader"
+	else
+		icon_state = "loader_loaded"
+	overlays.Cut()
+	add_overlay("loader_top")
+
+
+// weapon shells
+/obj/item/tank_shell
+	name = "railgun shell"
+	desc = "Heavy ammunition, meant to be fired from a mounted gun."
+	icon = 'icons/obj/machines/vehicle_weapons.dmi'
+	icon_state = "weapon_shell"
+	item_state = "weapon_shell"
+	force = 10.0
+	w_class = ITEMSIZE_HUGE
+	throwforce = 15.0
+	throw_speed = 2
+	throw_range = 4
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 4)

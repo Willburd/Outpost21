@@ -8,6 +8,8 @@
 	var_changes = list("slowdown" = 0.5)
 /datum/dna/gene/trait_linked/speed_slow/New() // Genetically linked trait
 	block = TRAITBLOCK_SLOWDOWN
+	activation_messages=list("You feel slower.")
+	deactivation_messages=list("You get a bit faster.")
 	linked_trait_path = /datum/trait/negative/speed_slow
 	. = ..()
 
@@ -19,6 +21,8 @@
 	var_changes = list("slowdown" = 1.0)
 /datum/dna/gene/trait_linked/speed_slow_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_SLOWDOWNEX
+	activation_messages=list("You feel a lot slower.")
+	deactivation_messages=list("You get a bit faster.")
 	linked_trait_path = /datum/trait/negative/speed_slow_plus
 	. = ..()
 
@@ -30,6 +34,8 @@
 	var_changes = list("item_slowdown_mod" = 1.5)
 /datum/dna/gene/trait_linked/weakling/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAK
+	activation_messages=list("You feel weaker.")
+	deactivation_messages=list("You get a bit stronger.")
 	linked_trait_path = /datum/trait/negative/weakling
 	. = ..()
 
@@ -41,6 +47,8 @@
 	var_changes = list("item_slowdown_mod" = 2.0)
 /datum/dna/gene/trait_linked/weakling_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAKEX
+	activation_messages=list("You feel a lot weaker.")
+	deactivation_messages=list("You get a bit stronger.")
 	linked_trait_path = /datum/trait/negative/weakling_plus
 	. = ..()
 
@@ -52,6 +60,8 @@
 	var_changes = list("total_health" = 75)
 /datum/dna/gene/trait_linked/endurance_low/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURLOW
+	activation_messages=list("You feel more frail.")
+	deactivation_messages=list("You feel a bit less frail.")
 	linked_trait_path = /datum/trait/negative/endurance_low
 	. = ..()
 
@@ -71,6 +81,8 @@
 	var_changes = list("total_health" = 50)
 /datum/dna/gene/trait_linked/endurance_very_low/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURLOWEX
+	activation_messages=list("You feel a lot more frail.")
+	deactivation_messages=list("You feel a bit less frail.")
 	linked_trait_path = /datum/trait/negative/endurance_very_low
 	. = ..()
 
@@ -91,6 +103,8 @@
 	var_changes = list("total_health" = 25)
 /datum/dna/gene/trait_linked/endurance_glass/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURLOWEST
+	activation_messages=list("You feel like a breeze could break your bones.")
+	deactivation_messages=list("You feel a lot less frail.")
 	linked_trait_path = /datum/trait/negative/endurance_glass
 	. = ..()
 
@@ -212,6 +226,8 @@
 	var_changes = list("pain_mod" = 1.25)
 /datum/dna/gene/trait_linked/pain_intolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_PAININTOL
+	activation_messages=list("Everything feels more sensitive.")
+	deactivation_messages=list("You feel less sensitive.")
 	linked_trait_path = /datum/trait/negative/pain_intolerance_basic
 	. = ..()
 
@@ -222,6 +238,8 @@
 	var_changes = list("pain_mod" = 1.5) //this makes you extremely vulnerable to most sources of pain, a stunbaton bop or shotgun beanbag will do around 90 agony, almost enough to drop you in one hit
 /datum/dna/gene/trait_linked/pain_intolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_PAININTOLEX
+	activation_messages=list("Everything feels a lot more sensitive.")
+	deactivation_messages=list("You feel less sensitive.")
 	linked_trait_path = /datum/trait/negative/pain_intolerance_advanced
 	. = ..()
 //YW ADDITIONS: END
@@ -279,6 +297,8 @@
 	cost = -3 // increased due to medical intervention needed. :YW EDIT
 /datum/dna/gene/trait_linked/hollow/New() // Genetically linked trait
 	block = TRAITBLOCK_HOLLOW
+	activation_messages=list("You feel like you're made of glass.")
+	deactivation_messages=list("You feel less fragile.")
 	linked_trait_path = /datum/trait/negative/hollow
 	. = ..()
 
@@ -302,6 +322,8 @@
 	var_changes = list("lightweight" = 1)
 /datum/dna/gene/trait_linked/lightweight/New() // Genetically linked trait
 	block = TRAITBLOCK_LIGHTWEIGHT
+	activation_messages=list("The world feels like it's trying to push you over.")
+	deactivation_messages=list("Everything feels less overwhelming.")
 	linked_trait_path = /datum/trait/negative/lightweight
 	. = ..()
 
@@ -313,6 +335,8 @@
 	var_changes = list("trauma_mod" = 2)
 /datum/dna/gene/trait_linked/neural_hypersensitivity/New() // Genetically linked trait
 	block = TRAITBLOCK_HYPERSENSITIVE
+	activation_messages=list("Everything feels more intense.")
+	deactivation_messages=list("Everything feels less intense.")
 	linked_trait_path = /datum/trait/negative/neural_hypersensitivity
 	. = ..()
 
@@ -369,6 +393,8 @@
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 /datum/dna/gene/trait_linked/dark_blind/New() // Genetically linked trait
 	block = TRAITBLOCK_DARKBLIND
+	activation_messages=list("The darkness is blinding.")
+	deactivation_messages=list("You can see in the dark again.")
 	linked_trait_path = /datum/trait/negative/dark_blind
 	. = ..()
 
@@ -389,6 +415,8 @@
 	var_changes = list("flash_mod" = 1.5)
 /datum/dna/gene/trait_linked/light_sensitivity/New() // Genetically linked trait
 	block = TRAITBLOCK_LIGHTSENSITIVE
+	activation_messages=list("The world feels more bright.")
+	deactivation_messages=list("The world feels less bright.")
 	linked_trait_path = /datum/trait/negative/light_sensitivity
 	. = ..()
 
@@ -400,6 +428,8 @@
 	var_changes = list("flash_mod" = 2.0)
 /datum/dna/gene/trait_linked/light_sensitivity_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_LIGHTSENSITIVEEX
+	activation_messages=list("The world feels way too bright.")
+	deactivation_messages=list("The world feels less bright.")
 	linked_trait_path = /datum/trait/negative/light_sensitivity_plus
 	. = ..()
 //YW ADDITIONS: END
@@ -413,6 +443,8 @@
 	var_changes = list("wingdings" = 1)
 /datum/dna/gene/trait_linked/wingdings/New() // Genetically linked trait
 	block = TRAITBLOCK_WINGDINGS
+	activation_messages=list("You feel like your !?#X! is #X!???")
+	deactivation_messages=list("You feel a lot less dingy wingy.")
 	linked_trait_path = /datum/trait/negative/wingdings
 	. = ..()
 
@@ -423,6 +455,8 @@
 	cost = -3
 /datum/dna/gene/trait_linked/deteriorate/New() // Genetically linked trait
 	block = TRAITBLOCK_DETERIORATE
+	activation_messages=list("You feel like you aren't long for this world.")
+	deactivation_messages=list("Your body stops rejecting existance.")
 	linked_trait_path = /datum/trait/negative/deteriorate
 	. = ..()
 // outpost 21 additions end

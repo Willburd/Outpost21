@@ -172,7 +172,7 @@
 	corpse.adjustBruteLoss(H.getBruteLoss())
 	corpse.transfer_mental_traits( H.identifying_gender, H.flavor_texts.Copy(), null, null)
 	corpse.UpdateAppearance()
-	corpse.ApplySpeciesAndTraits()
+	corpse.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(corpse.dna)
 		corpse.dna.UpdateSE()
 		corpse.dna.UpdateUI()

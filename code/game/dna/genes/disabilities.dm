@@ -18,12 +18,6 @@
 	// SDisability to give (or 0)
 	var/sdisability=0
 
-	// Activation message
-	var/activation_message=""
-
-	// Yay, you're no longer growing 3 arms
-	var/deactivation_message=""
-
 /datum/dna/gene/disability/can_activate(var/mob/M,var/flags)
 	return 1 // Always set!
 
@@ -34,9 +28,10 @@
 		M.disabilities|=disability
 	if(sdisability)
 		M.sdisabilities|=sdisability
-	if(activation_message)
+	if(activation_messages.len)
 		if(!(flags & GENE_INITIAL_ACTIVATION))
-			to_chat(M, "<span class='warning'>[activation_message]</span>")
+			var/msg = pick(activation_messages)
+			to_chat(M, "<span class='warning'>[msg]</span>")
 	else
 		testing("[name] has no activation message.")
 
@@ -47,9 +42,10 @@
 		M.disabilities &= (~disability)
 	if(sdisability)
 		M.sdisabilities &= (~sdisability)
-	if(deactivation_message)
+	if(deactivation_messages.len)
 		if(!(flags & GENE_INITIAL_ACTIVATION))
-			to_chat(M, "<span class='warning'>[deactivation_message]</span>")
+			var/msg = pick(deactivation_messages)
+			to_chat(M, "<span class='warning'>[msg]</span>")
 	else
 		testing("[name] has no deactivation message.")
 
@@ -57,7 +53,7 @@
 // Note: Doesn't seem to do squat, at the moment.
 /datum/dna/gene/disability/hallucinate
 	name="Hallucinate"
-	activation_message="Your mind says 'Hello'."
+	activation_messages="Your mind says 'Hello'."
 	mutation=mHallucination
 
 /datum/dna/gene/disability/hallucinate/New()
@@ -66,7 +62,8 @@
 
 /datum/dna/gene/disability/epilepsy
 	name="Epilepsy"
-	activation_message="You get a headache."
+	activation_messages=list("You get a headache.")
+	deactivation_messages=list("Your headache stops.")
 	disability=EPILEPSY
 
 /datum/dna/gene/disability/epilepsy/New()
@@ -74,7 +71,8 @@
 
 /datum/dna/gene/disability/cough
 	name="Coughing"
-	activation_message="You start coughing."
+	activation_messages=list("You start coughing.")
+	deactivation_messages=list("You stop couching.")
 	disability=COUGHING
 
 /datum/dna/gene/disability/cough/New()
@@ -83,7 +81,7 @@
 /* outpost 21 edit - disabling due to lots of genes
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
-	activation_message="You feel lightheaded."
+	activation_messages="You feel lightheaded."
 	mutation=CLUMSY
 
 /datum/dna/gene/disability/clumsy/New()
@@ -92,7 +90,8 @@
 
 /datum/dna/gene/disability/tourettes
 	name="Tourettes"
-	activation_message="You twitch."
+	activation_messages=list("You twitch.")
+	deactivation_messages=list("You feel less unstable.")
 	disability=TOURETTES
 
 /datum/dna/gene/disability/tourettes/New()
@@ -100,7 +99,8 @@
 
 /datum/dna/gene/disability/nervousness
 	name="Nervousness"
-	activation_message="You feel nervous."
+	activation_messages=list("You feel nervous.")
+	deactivation_messages=list("You feel more calm.")
 	disability=NERVOUS
 
 /datum/dna/gene/disability/nervousness/New()
@@ -108,7 +108,8 @@
 
 /datum/dna/gene/disability/vertigo
 	name="Vertigo"
-	activation_message="You feel like the world could start spinning."
+	activation_messages=list("You feel like the world could start spinning.")
+	deactivation_messages=list("The world feels more stable.")
 	disability=VERTIGO
 
 /datum/dna/gene/disability/vertigo/New()
@@ -116,7 +117,8 @@
 
 /datum/dna/gene/disability/blindness
 	name="Blindness"
-	activation_message="You can't seem to see anything."
+	activation_messages=list("You can't seem to see anything.")
+	deactivation_messages=list("Your vision returns.")
 	sdisability=BLIND
 
 /datum/dna/gene/disability/blindness/New()
@@ -124,7 +126,8 @@
 
 /datum/dna/gene/disability/deaf
 	name="Deafness"
-	activation_message="It's kinda quiet."
+	activation_messages=list("It's kinda quiet.")
+	deactivation_messages=list("You can hear again.")
 	sdisability=DEAF
 
 /datum/dna/gene/disability/deaf/New()
@@ -136,7 +139,8 @@
 
 /datum/dna/gene/disability/nearsighted
 	name="Nearsightedness"
-	activation_message="Your eyes feel weird..."
+	activation_messages=list("Your eyes feel weird...")
+	deactivation_messages=list("Everything comes back into focus.")
 	disability=NEARSIGHTED
 
 /datum/dna/gene/disability/nearsighted/New()

@@ -138,7 +138,7 @@
 		randmutb(H) //Sometimes the clones come out wrong.
 
 	H.UpdateAppearance()
-	H.ApplySpeciesAndTraits()
+	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()

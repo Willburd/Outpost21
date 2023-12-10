@@ -73,7 +73,7 @@
 			SJ.dropped(H)
 			H.wear_suit = null
 	C.UpdateAppearance()
-	C.ApplySpeciesAndTraits()
+	C.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(C.dna)
 		C.dna.UpdateSE()
 		C.dna.UpdateUI()

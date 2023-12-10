@@ -82,7 +82,7 @@
 	H.dna = R.dna.Clone()
 	H.transfer_mental_traits( null, current_project.mydna.flavor.Copy(), current_project.body_oocnotes, null)
 	H.UpdateAppearance() //Update appearance
-	H.ApplySpeciesAndTraits()
+	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()
@@ -311,7 +311,7 @@
 	H.dna = R.dna.Clone()
 	H.transfer_mental_traits( null, current_project.mydna.flavor.Copy(), current_project.body_oocnotes, null)
 	H.UpdateAppearance() //Update appearance
-	H.ApplySpeciesAndTraits()
+	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()

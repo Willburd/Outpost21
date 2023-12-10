@@ -5,6 +5,7 @@
 /datum/dna/gene/basic/nobreath
 	name="No Breathing"
 	activation_messages=list("You feel no need to breathe.")
+	deactivation_messages=list("You need to breathe!")
 	mutation=mNobreath
 
 /datum/dna/gene/basic/nobreath/New()
@@ -13,6 +14,7 @@
 /datum/dna/gene/basic/remoteview
 	name="Remote Viewing"
 	activation_messages=list("Your mind expands.")
+	deactivation_messages=list("Your mind contracts.")
 	mutation=mRemote
 
 /datum/dna/gene/basic/remoteview/New()
@@ -25,6 +27,7 @@
 /datum/dna/gene/basic/regenerate
 	name="Regenerate"
 	activation_messages=list("You feel better.")
+	deactivation_messages=list("You feel normal.")
 	mutation=mRegen
 
 /datum/dna/gene/basic/regenerate/New()
@@ -42,7 +45,8 @@
 
 /datum/dna/gene/basic/remotetalk
 	name="Telepathy"
-	activation_messages=list("You expand your mind outwards.")
+	activation_messages=list("You expand your mind outwards to others like you.")
+	deactivation_messages=list("You feel your mind disconnect from the others.")
 	mutation=mRemotetalk
 
 /datum/dna/gene/basic/remotetalk/New()
@@ -69,6 +73,7 @@
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
+	deactivation_messages=list("Your body feels colder.")
 	mutation=COLD_RESISTANCE
 
 /datum/dna/gene/basic/cold_resist/New()
@@ -87,6 +92,7 @@
 /datum/dna/gene/basic/noprints
 	name="No Prints"
 	activation_messages=list("Your fingers feel numb.")
+	deactivation_messages=list("Your fingers return to normal.")
 	mutation=mFingerprints
 
 /datum/dna/gene/basic/noprints/New()
@@ -156,6 +162,7 @@
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"
 	activation_messages=list("The walls suddenly disappear.")
+	deactivation_messages=list("The walls fade back into view.")
 	mutation=XRAY
 
 /datum/dna/gene/basic/xray/New()
@@ -164,6 +171,7 @@
 /datum/dna/gene/basic/tk
 	name="Telekenesis"
 	activation_messages=list("You feel smarter.")
+	deactivation_messages=list("Your telekinetic grasp fails.")
 	mutation=TK
 	activation_prob=15
 

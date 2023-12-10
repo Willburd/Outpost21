@@ -338,9 +338,9 @@
 
 	H.health = H.maxHealth
 
-/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE)
+/datum/species/shadekin/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE, var/geneflags = 0)
 
-	var/datum/species/shadekin/new_copy = ..( traits, H, custom_base, resetdna)
+	var/datum/species/shadekin/new_copy = ..( traits, H, custom_base, resetdna, geneflags)
 
 	new_copy.total_health = total_health
 

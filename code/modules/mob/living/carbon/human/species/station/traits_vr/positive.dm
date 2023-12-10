@@ -8,6 +8,8 @@
 	var_changes = list("slowdown" = -0.5)
 /datum/dna/gene/trait_linked/speed_fast/New() // Genetically linked trait
 	block = TRAITBLOCK_SPEEDFAST
+	activation_messages=list("You feel faster.")
+	deactivation_messages=list("You feel less quick.")
 	linked_trait_path = /datum/trait/positive/speed_fast
 	. = ..()
 
@@ -21,6 +23,8 @@
 	var_changes = list("slowdown" = -1.0)
 /datum/dna/gene/trait_linked/speed_fast_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_SPEEDFASTEX
+	activation_messages=list("You feel a lot faster.")
+	deactivation_messages=list("You feel less quick.")
 	linked_trait_path = /datum/trait/positive/speed_fast_plus
 	. = ..()
 //YW ADDITION: END
@@ -33,6 +37,8 @@
 	var_changes = list("item_slowdown_mod" = 0.5)
 /datum/dna/gene/trait_linked/hardy/New() // Genetically linked trait
 	block = TRAITBLOCK_HARDY
+	activation_messages=list("You feel hardy.")
+	deactivation_messages=list("You feel less hardy.")
 	linked_trait_path = /datum/trait/positive/hardy
 	. = ..()
 
@@ -45,6 +51,8 @@
 	var_changes = list("item_slowdown_mod" = 0.25)
 /datum/dna/gene/trait_linked/hardy_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_HARDYEX
+	activation_messages=list("You feel a lot more hardy.")
+	deactivation_messages=list("You feel less hardy.")
 	linked_trait_path = /datum/trait/positive/hardy_plus
 	. = ..()
 
@@ -56,6 +64,8 @@
 	var_changes = list("total_health" = 125)
 /datum/dna/gene/trait_linked/endurance_high/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURANCE
+	activation_messages=list("You feel sturdier.")
+	deactivation_messages=list("You feel less sturdy.")
 	linked_trait_path = /datum/trait/positive/endurance_high
 	. = ..()
 
@@ -77,6 +87,8 @@
 	var_changes = list("total_health" = 150)
 /datum/dna/gene/trait_linked/endurance_very_high/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURANCE_MAJOR
+	activation_messages=list("You feel a lot more sturdy.")
+	deactivation_messages=list("You feel less sturdy.")
 	linked_trait_path = /datum/trait/positive/endurance_very_high
 	. = ..()
 
@@ -97,6 +109,8 @@
 	var_changes = list("total_health" = 175)
 /datum/dna/gene/trait_linked/endurance_extremely_high/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURANCEEX
+	activation_messages=list("You feel indestructable.")
+	deactivation_messages=list("You don't feel indestructable anymore.")
 	linked_trait_path = /datum/trait/positive/endurance_extremely_high
 	. = ..()
 
@@ -151,6 +165,8 @@
 	var_changes = list("darksight" = 5, "flash_mod" = 1.1)
 /datum/dna/gene/trait_linked/darksight/New() // Genetically linked trait
 	block = TRAITBLOCK_DARKSIGHT
+	activation_messages=list("The darkness fades away.")
+	deactivation_messages=list("The darkness returns.")
 	linked_trait_path = /datum/trait/positive/darksight
 	. = ..()
 
@@ -163,6 +179,8 @@
 	var_changes = list("darksight" = 8, "flash_mod" = 1.2)
 /datum/dna/gene/trait_linked/darksight_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_DARKSIGHTEX
+	activation_messages=list("The darkness vanishes.")
+	deactivation_messages=list("The darkness returns.")
 	linked_trait_path = /datum/trait/positive/darksight_plus
 	. = ..()
 
@@ -281,6 +299,8 @@
 	var_changes = list("alcohol_mod" = 0.5)
 /datum/dna/gene/trait_linked/alcohol_tolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_TOLEX
+	activation_messages=list("You feel like your can drink anything.")
+	deactivation_messages=list("You feel less confident.")
 	linked_trait_path = /datum/trait/positive/alcohol_tolerance_advanced
 	. = ..()
 
@@ -292,6 +312,8 @@
 	var_changes = list("alcohol_mod" = 0.25)
 /datum/dna/gene/trait_linked/alcohol_immunity/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_IMMUNE
+	activation_messages=list("You feel like there isn't a drink in the universe that you can't take.")
+	deactivation_messages=list("You feel less confident.")
 	linked_trait_path = /datum/trait/positive/alcohol_immunity
 	. = ..()
 
@@ -303,6 +325,8 @@
 	var_changes = list("pain_mod" = 0.9)
 /datum/dna/gene/trait_linked/pain_tolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_PAIN_TOLLER_BASIC
+	activation_messages=list("You much less sensitive.")
+	deactivation_messages=list("You feel more sensitive.")
 	linked_trait_path = /datum/trait/positive/pain_tolerance_basic
 	. = ..()
 
@@ -314,6 +338,8 @@
 	var_changes = list("pain_mod" = 0.8)
 /datum/dna/gene/trait_linked/pain_tolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_PAIN_TOLLEREX
+	activation_messages=list("You can't feel anything.")
+	deactivation_messages=list("You feel more sensitive.")
 	linked_trait_path = /datum/trait/positive/pain_tolerance_advanced
 	. = ..()
 //YW ADDITIONS: END
@@ -326,6 +352,8 @@
 	var_changes = list("flash_mod" = 0.75) //YW EDIT
 /datum/dna/gene/trait_linked/photoresistant/New() // Genetically linked trait
 	block = TRAITBLOCK_PHOTORESIST
+	activation_messages=list("Was everything always this dim?")
+	deactivation_messages=list("The world feels less dim.")
 	linked_trait_path = /datum/trait/positive/photoresistant
 	. = ..()
 
@@ -338,6 +366,8 @@
 	var_changes = list("flash_mod" = 0.5) //YW EDIT
 /datum/dna/gene/trait_linked/photoresistant_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_PHOTORESISTEX
+	activation_messages=list("Was everything always this dark?")
+	deactivation_messages=list("The world feels less dark.")
 	linked_trait_path = /datum/trait/positive/photoresistant_plus
 	. = ..()
 //YW ADDITION: END
@@ -349,6 +379,8 @@
 	cost = 1 //YW EDIT
 /datum/dna/gene/trait_linked/winged_flight/New() // Genetically linked trait
 	block = TRAITBLOCK_WINGFLIGHT
+	activation_messages=list("You feel like you could take flight")
+	deactivation_messages=list("The sky is out of your reach.")
 	linked_trait_path = /datum/trait/positive/winged_flight
 	. = ..()
 
@@ -372,6 +404,8 @@
 	var_changes = list("soft_landing" = TRUE)
 /datum/dna/gene/trait_linked/soft_landing/New() // Genetically linked trait
 	block = TRAITBLOCK_SOFTLAND
+	activation_messages=list("You feel more nimble.")
+	deactivation_messages=list("You feel less nimble.")
 	linked_trait_path = /datum/trait/positive/soft_landing
 	. = ..()
 
@@ -389,6 +423,8 @@
 	cost = 1
 /datum/dna/gene/trait_linked/antiseptic_saliva/New() // Genetically linked trait
 	block = TRAITBLOCK_ANTISEPTIC
+	activation_messages=list("Your mouth tastes different.")
+	deactivation_messages=list("Your mouth returns to normal.")
 	linked_trait_path = /datum/trait/positive/antiseptic_saliva
 	. = ..()
 
@@ -409,6 +445,8 @@
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
 /datum/dna/gene/trait_linked/traceur/New() // Genetically linked trait
 	block = TRAITBLOCK_SPRINGSTEP
+	activation_messages=list("You feel more acrobatic.")
+	deactivation_messages=list("You feel less acrobatic.")
 	linked_trait_path = /datum/trait/positive/traceur
 	. = ..()
 
@@ -423,6 +461,8 @@
 	excludes = list(/datum/trait/neutral/bloodsucker)
 /datum/dna/gene/trait_linked/bloodsucker_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BLOODSUCKEREX
+	activation_messages=list("You feel really thirsty for metal?")
+	deactivation_messages=list("Your thirst for blood ends.")
 	linked_trait_path = /datum/trait/positive/bloodsucker_plus
 	. = ..()
 
@@ -441,6 +481,8 @@
 	cost = 1
 /datum/dna/gene/trait_linked/sonar/New() // Genetically linked trait
 	block = TRAITBLOCK_SONAR
+	activation_messages=list("You hear EVERYTHING.")
+	deactivation_messages=list("Your hearing returns to normal.")
 	linked_trait_path = /datum/trait/positive/sonar
 	. = ..()
 
@@ -462,6 +504,8 @@
 	can_take = ORGANICS
 /datum/dna/gene/trait_linked/coldadapt/New() // Genetically linked trait
 	block = TRAITBLOCK_COLDADAPT
+	activation_messages=list("The world feels warmer.")
+	deactivation_messages=list("Everything feels less warm.")
 	linked_trait_path = /datum/trait/positive/coldadapt
 	. = ..()
 
@@ -475,6 +519,8 @@
 	can_take = ORGANICS
 /datum/dna/gene/trait_linked/hotadapt/New() // Genetically linked trait
 	block = TRAITBLOCK_HOTADAPT
+	activation_messages=list("The world feels colder.")
+	deactivation_messages=list("Everything feels less cold.")
 	linked_trait_path = /datum/trait/positive/hotadapt
 	. = ..()
 //YW ADDITIONS: END
@@ -494,6 +540,8 @@
 	var_changes = list("is_weaver" = 1)
 /datum/dna/gene/trait_linked/weaver/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAVER
+	activation_messages=list("You start to leak silk.")
+	deactivation_messages=list("You forget how to shot web.")
 	linked_trait_path = /datum/trait/positive/weaver
 	. = ..()
 
@@ -521,6 +569,8 @@
 	var_changes = list("water_breather" = 1, "water_movement" = -4) //Negate shallow water. Half the speed in deep water.
 /datum/dna/gene/trait_linked/aquatic/New() // Genetically linked trait
 	block = TRAITBLOCK_AQUATIC
+	activation_messages=list("You feel like you belong under the sea.")
+	deactivation_messages=list("You no longer want to live in the sea.")
 	linked_trait_path = /datum/trait/positive/aquatic
 	. = ..()
 
@@ -580,6 +630,8 @@
 	can_take = ORGANICS
 /datum/dna/gene/trait_linked/pain_tolerance/New() // Genetically linked trait
 	block = TRAITBLOCK_PAINTOLLERANT
+	activation_messages=list("You feel like the world can't hurt you.")
+	deactivation_messages=list("You feel more vulnerable.")
 	linked_trait_path = /datum/trait/positive/pain_tolerance
 	. = ..()
 
@@ -591,5 +643,7 @@
 	var_changes = list("phoron_contact_mod" = 0)
 /datum/dna/gene/trait_linked/phoron_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_PHORONEXPOSED
+	activation_messages=list("You feel like your skin is made of wax.")
+	deactivation_messages=list("You feel less waxy.")
 	linked_trait_path = /datum/trait/positive/phoron_resist
 	. = ..()

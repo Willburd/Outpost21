@@ -58,7 +58,7 @@
 		if (!(NOCLONE in L.mutations)) // prevents drained people from having their DNA changed
 			/* // do not do UI changes anymore
 			if (buf.types & DNA2_BUF_UI)
-				if (!block) //isolated block?
+				if (!block) //no block defined!
 					L.UpdateAppearance(buf.dna.UI.Copy())
 					if (buf.types & DNA2_BUF_UE) //unique enzymes? yes
 						L.real_name = buf.dna.real_name
@@ -70,12 +70,14 @@
 					uses--
 			*/
 			if(buf.types & DNA2_BUF_SE)
-				if (!block) //isolated block?
+				if (!block) //no block defined!
 					L.dna.SE = buf.dna.SE.Copy()
 					L.dna.UpdateSE()
+					domutcheck(L, null, GENE_INITIAL_ACTIVATION) // TOO MANY MUTATIONS FOR MESSAGES
+					to_chat(L, "<span class='warning'>Your body stings as it wildly changes!</span>")
 				else
 					L.dna.SetSEValue(block,src.GetValue(block))
-				domutcheck(L, null, block!=null)
+					domutcheck(L, null, 0)
 				// apply genes
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L

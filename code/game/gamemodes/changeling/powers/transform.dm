@@ -47,7 +47,7 @@
 		H.weight = chosen_dna.weight ? chosen_dna.weight : null
 		H.transfer_mental_traits( chosen_dna.identifying_gender, chosen_dna.flavour_texts ? chosen_dna.flavour_texts.Copy() : null, chosen_dna.ooc_notes ? chosen_dna.ooc_notes : null, null)
 		H.UpdateAppearance()
-		H.ApplySpeciesAndTraits()
+		H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 		if(H.dna)
 			H.dna.UpdateSE()
 			H.dna.UpdateUI()
@@ -55,7 +55,7 @@
 		H.resize(chosen_dna.sizemult, TRUE)
 	else
 		src.UpdateAppearance()
-		src.ApplySpeciesAndTraits()
+		src.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	src.real_name = chosen_dna.name ? chosen_dna.name : null
 
 	domutcheck(src, null)

@@ -57,7 +57,7 @@
 	else
 	*/
 	..()
-/datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE) // outpost 21 edit - custom species removal
+/datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE, var/geneflags = 0) // outpost 21 edit - custom species removal
 	ASSERT(src)
 	ASSERT(istype(H))
 	var/datum/species/new_copy = new src.type()
@@ -93,7 +93,7 @@
 				// the rest should set their block on mob creation only!
 				H.dna.SetSEState(T.linked_gene_block,1,1) // force on
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
-				gene.initial_activation( H ,null ,0) // forces antigenes off, and calls apply() on trait
+				gene.initial_activation( H ,null , geneflags) // forces antigenes off, and calls apply() on trait
 	H.dna.UpdateSE() // sync!
 
 	return new_copy

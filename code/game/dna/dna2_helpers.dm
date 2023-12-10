@@ -325,7 +325,7 @@
 		return 0
 
 
-/mob/proc/ApplySpeciesAndTraits()
+/mob/proc/ApplySpeciesAndTraits(var/geneflags = 0)
 	// this is often called near UpdateAppearance()
 	// Updates species and trait controlled data, lots of genes use this for initalizing!
 	if(ishuman(src))
@@ -339,7 +339,7 @@
 		H.custom_exclaim = dna.custom_exclaim
 		H.species.blood_color = dna.blood_color
 		var/datum/species/S = H.species
-		S.produceCopy(dna.species_traits, H, dna.base_species, FALSE)
+		S.produceCopy(dna.species_traits, H, dna.base_species, FALSE, geneflags)
 
 		H.force_update_organs() //VOREStation Add - Gotta do this too
 		H.force_update_limbs()

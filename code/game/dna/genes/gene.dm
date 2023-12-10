@@ -23,6 +23,12 @@
 	// Any of a number of GENE_ flags.
 	var/flags=0
 
+	// Possible activation messages
+	var/list/activation_messages=list()
+
+	// Possible deactivation messages
+	var/list/deactivation_messages=list()
+
 /**
 * Is the gene active in this mob's DNA?
 */
@@ -97,26 +103,26 @@
 	// Activation probability
 	var/activation_prob=45
 
-	// Possible activation messages
-	var/list/activation_messages=list()
-
-	// Possible deactivation messages
-	var/list/deactivation_messages=list()
-
 /datum/dna/gene/basic/can_activate(var/mob/M,var/flags)
 	if(flags & MUTCHK_FORCED)
 		return 1
 	// Probability check
 	return probinj(activation_prob,(flags&MUTCHK_FORCED))
 
-/datum/dna/gene/basic/activate(var/mob/M)
+/datum/dna/gene/basic/activate(var/mob/M, var/connected, var/flags)
 	M.mutations.Add(mutation)
-	if(activation_messages.len && !(flags & GENE_INITIAL_ACTIVATION))
-		var/msg = pick(activation_messages)
-		to_chat(M, "<span class='notice'>[msg]</span>")
+	if(activation_messages.len)
+		if(!(flags & GENE_INITIAL_ACTIVATION))
+			var/msg = pick(activation_messages)
+			to_chat(M, "<span class='notice'>[msg]</span>")
+	else
+		testing("[name] has no activation message.")
 
-/datum/dna/gene/basic/deactivate(var/mob/M)
+/datum/dna/gene/basic/deactivate(var/mob/M, var/connected, var/flags)
 	M.mutations.Remove(mutation)
-	if(deactivation_messages.len && !(flags & GENE_INITIAL_ACTIVATION))
-		var/msg = pick(deactivation_messages)
-		to_chat(M, "<span class='warning'>[msg]</span>")
+	if(deactivation_messages.len)
+		if(!(flags & GENE_INITIAL_ACTIVATION))
+			var/msg = pick(deactivation_messages)
+			to_chat(M, "<span class='warning'>[msg]</span>")
+	else
+		testing("[name] has no deactivation message.")

@@ -747,7 +747,8 @@
 						// Apply SEs only to the current occupant!
 						connected.occupant.dna.SE = buf.mydna.dna.SE.Copy()
 						connected.occupant.dna.UpdateSE()
-						domutcheck(connected.occupant,connected)
+						domutcheck(connected.occupant,connected, GENE_INITIAL_ACTIVATION) // TOO MANY MUTATIONS FOR MESSAGES
+						to_chat(connected.occupant, "<span class='warning'>Your body stings as it wildly changes!</span>")
 
 						// apply genes
 						if(ishuman(connected.occupant))

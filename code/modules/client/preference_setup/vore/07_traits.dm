@@ -156,7 +156,7 @@
 		pref.dirty_synth = 0
 
 	var/datum/species/S = character.species
-	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, pref.custom_base, TRUE)
+	var/datum/species/new_S = S.produceCopy(pref.pos_traits + pref.neu_traits + pref.neg_traits, character, pref.custom_base, TRUE, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 
 	for(var/datum/trait/T in new_S.traits)
 		T.apply_pref(src)

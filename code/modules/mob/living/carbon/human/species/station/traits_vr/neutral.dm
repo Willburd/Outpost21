@@ -9,6 +9,8 @@
 	excludes = list(/datum/trait/neutral/metabolism_down, /datum/trait/neutral/metabolism_apex)
 /datum/dna/gene/trait_linked/metabolism_up/New() // Genetically linked trait
 	block = TRAITBLOCK_METABOLISM_UP
+	activation_messages=list("You feel hungry.")
+	deactivation_messages=list("You feel less hungry.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -21,6 +23,8 @@
 	excludes = list(/datum/trait/neutral/metabolism_up, /datum/trait/neutral/metabolism_apex)
 /datum/dna/gene/trait_linked/metabolism_down/New() // Genetically linked trait
 	block = TRAITBLOCK_METABOLISM_DOWN
+	activation_messages=list("You feel less hungry.")
+	deactivation_messages=list("You feel hungry.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -33,6 +37,8 @@
 	excludes = list(/datum/trait/neutral/metabolism_up, /datum/trait/neutral/metabolism_down)
 /datum/dna/gene/trait_linked/metabolism_apex/New() // Genetically linked trait
 	block = TRAITBLOCK_METABOLISM_APEX
+	activation_messages=list("You feel like you are starving.")
+	deactivation_messages=list("The endless hunger is gone.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -45,6 +51,8 @@
 	var_changes = list("alcohol_mod" = 2)
 /datum/dna/gene/trait_linked/alcohol_intolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_INTOL_BASIC
+	activation_messages=list("You feel woozy.")
+	deactivation_messages=list("You feel less woozy.")
 	linked_trait_path = /datum/trait/neutral/alcohol_intolerance_basic
 	. = ..()
 
@@ -56,6 +64,8 @@
 	var_changes = list("alcohol_mod" = 0.75)
 /datum/dna/gene/trait_linked/alcohol_tolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_TOL_BASIC
+	activation_messages=list("You feel like your can drink anything.")
+	deactivation_messages=list("You feel less confident.")
 	linked_trait_path = /datum/trait/neutral/alcohol_tolerance_basic
 	. = ..()
 
@@ -76,8 +86,8 @@
 	excludes = list(/datum/trait/neutral/cold_blood, /datum/trait/neutral/extreme_cold_blood)
 /datum/dna/gene/trait_linked/hot_blood/New() // Genetically linked trait
 	block = TRAITBLOCK_HOT_BLOOD
-	activation_messages=list("You feel warmer...")
-	deactivation_messages=list("You cool off...")
+	activation_messages=list("You feel warmer.")
+	deactivation_messages=list("You cool off.")
 	linked_trait_path = /datum/trait/neutral/hot_blood
 	. = ..()
 
@@ -90,8 +100,8 @@
 	excludes = list(/datum/trait/neutral/hot_blood, /datum/trait/neutral/cold_blood)
 /datum/dna/gene/trait_linked/cold_blood/New() // Genetically linked trait
 	block = TRAITBLOCK_COLD_BLOOD
-	activation_messages=list("You feel colder...")
-	deactivation_messages=list("You heat back up...")
+	activation_messages=list("You feel colder.")
+	deactivation_messages=list("You heat back up.")
 	linked_trait_path = /datum/trait/neutral/cold_blood
 	. = ..()
 
@@ -104,8 +114,8 @@
 	excludes = list(/datum/trait/neutral/hot_blood, /datum/trait/neutral/cold_blood)
 /datum/dna/gene/trait_linked/extreme_cold_blood/New() // Genetically linked trait
 	block = TRAITBLOCK_ICE_BLOOD
-	activation_messages=list("You feel ice cold...")
-	deactivation_messages=list("You heat back up...")
+	activation_messages=list("You feel ice cold.")
+	deactivation_messages=list("You heat back up.")
 	linked_trait_path = /datum/trait/neutral/extreme_cold_blood
 	. = ..()
 
@@ -203,6 +213,8 @@ YW change end */
 	excludes = list(/datum/trait/positive/bloodsucker_plus) //YW EDIT: /datum/trait/positive/bloodsucker_plus
 /datum/dna/gene/trait_linked/bloodsucker/New() // Genetically linked trait
 	block = TRAITBLOCK_BLOODSUCKER
+	activation_messages=list("You feel thirsty for metal?")
+	deactivation_messages=list("Your thirst for blood ends.")
 	linked_trait_path = /datum/trait/neutral/bloodsucker
 	. = ..()
 
@@ -233,6 +245,8 @@ YW change end */
 	cost = 0
 /datum/dna/gene/trait_linked/succubus_drain/New() // Genetically linked trait
 	block = TRAITBLOCK_SUCCUBUS
+	activation_messages=list("You feel more lustful.")
+	deactivation_messages=list("You feel less needy.")
 	linked_trait_path = /datum/trait/neutral/succubus_drain
 	. = ..()
 
@@ -275,6 +289,8 @@ YW change end */
 	cost = 0
 /datum/dna/gene/trait_linked/feeder/New() // Genetically linked trait
 	block = TRAITBLOCK_FEEDER
+	activation_messages=list("You start leaking something.")
+	deactivation_messages=list("You stop leaking.")
 	linked_trait_path = /datum/trait/neutral/feeder
 	. = ..()
 
@@ -308,6 +324,8 @@ YW change end */
 	var_changes = list("trashcan" = 1)
 /datum/dna/gene/trait_linked/trashcan/New() // Genetically linked trait
 	block = TRAITBLOCK_TRASHCAN
+	activation_messages=list("You feel like a trashman.")
+	deactivation_messages=list("You don't want to eat garbage.")
 	linked_trait_path = /datum/trait/neutral/trashcan
 	. = ..()
 
@@ -327,6 +345,8 @@ YW change end */
 	var_changes = list("organic_food_coeff" = 0, "eat_minerals" = 1)
 /datum/dna/gene/trait_linked/gem_eater/New() // Genetically linked trait
 	block = TRAITBLOCK_GEMEATER
+	activation_messages=list("You have more expensive tastes... Where is the steel kept?")
+	deactivation_messages=list("Your munchies for crunchies ends.")
 	linked_trait_path = /datum/trait/neutral/gem_eater
 	. = ..()
 
@@ -495,6 +515,8 @@ YW change end */
 	allergen = ALLERGEN_MEAT
 /datum/dna/gene/trait_linked/allergy/meat/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_MEAT
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/meat
 	. = ..()
 
@@ -506,6 +528,8 @@ YW change end */
 	allergen = ALLERGEN_FISH
 /datum/dna/gene/trait_linked/allergy/fish/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_FISH
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/fish
 	. = ..()
 
@@ -517,6 +541,8 @@ YW change end */
 	allergen = ALLERGEN_POLLEN
 /datum/dna/gene/trait_linked/allergy/pollen/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_POLLEN
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/pollen
 	. = ..()
 
@@ -528,6 +554,8 @@ YW change end */
 	allergen = ALLERGEN_FRUIT
 /datum/dna/gene/trait_linked/allergy/fruit/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_FRUIT
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/fruit
 	. = ..()
 
@@ -539,6 +567,8 @@ YW change end */
 	allergen = ALLERGEN_VEGETABLE
 /datum/dna/gene/trait_linked/allergy/vegetable/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_VEGI
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/vegetable
 	. = ..()
 
@@ -549,6 +579,8 @@ YW change end */
 	allergen = ALLERGEN_SEEDS
 /datum/dna/gene/trait_linked/allergy/nuts/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_NUTS
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/nuts
 	. = ..()
 
@@ -560,6 +592,8 @@ YW change end */
 	allergen = ALLERGEN_BEANS
 /datum/dna/gene/trait_linked/allergy/soy/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_SOY
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/soy
 	. = ..()
 
@@ -571,6 +605,8 @@ YW change end */
 	allergen = ALLERGEN_DAIRY
 /datum/dna/gene/trait_linked/allergy/dairy/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_DAIRY
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/dairy
 	. = ..()
 
@@ -582,6 +618,8 @@ YW change end */
 	allergen = ALLERGEN_FUNGI
 /datum/dna/gene/trait_linked/allergy/fungi/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_FUNGI
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/fungi
 	. = ..()
 
@@ -593,6 +631,8 @@ YW change end */
 	allergen = ALLERGEN_COFFEE
 /datum/dna/gene/trait_linked/allergy/coffee/New() // Genetically linked trait
 	block = TRAITBLOCK_ALLERGY_COFFEE
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
 	linked_trait_path = /datum/trait/neutral/allergy/coffee
 	. = ..()
 
@@ -621,6 +661,8 @@ YW change end */
 	var_changes = list("spice_mod" = 3) // 300% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_intolerance_extreme/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_INTOL_EXTREME
+	activation_messages=list("Everything is way too spicey.")
+	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_extreme
 	. = ..()
 
@@ -632,6 +674,8 @@ YW change end */
 	var_changes = list("spice_mod" = 2) // 200% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_intolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_INTOL_BASIC
+	activation_messages=list("Everything is too spicey.")
+	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_basic
 	. = ..()
 
@@ -643,6 +687,8 @@ YW change end */
 	var_changes = list("spice_mod" = 1.5) // 150% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_intolerance_slight/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_INTOL_SLIGHT
+	activation_messages=list("Everything is a bit too spicey.")
+	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_slight
 	. = ..()
 
@@ -654,6 +700,8 @@ YW change end */
 	var_changes = list("spice_mod" = 0.75) // 75% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_tolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_TOL_BASIC
+	activation_messages=list("Everything feels a little bland.")
+	deactivation_messages=list("Did everything get a bit spicier?")
 	linked_trait_path = /datum/trait/neutral/spice_tolerance_basic
 	. = ..()
 
@@ -664,6 +712,8 @@ YW change end */
 	var_changes = list("spice_mod" = 0.5) // 50% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_tolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_TOL_ADVANCED
+	activation_messages=list("Everything feels a more bland.")
+	deactivation_messages=list("Did everything get a bit spicier?")
 	linked_trait_path = /datum/trait/neutral/spice_tolerance_advanced
 	. = ..()
 
@@ -674,6 +724,8 @@ YW change end */
 	var_changes = list("spice_mod" = 0.25) // 25% as effective if spice_mod is set to 1. If it's not 1 in species.dm, update this!
 /datum/dna/gene/trait_linked/spice_immunity/New() // Genetically linked trait
 	block = TRAITBLOCK_SPICE_TOL_IMMUNE
+	activation_messages=list("Everything feels tasteless.")
+	deactivation_messages=list("Did everything get a bit spicier?")
 	linked_trait_path = /datum/trait/neutral/spice_immunity
 	. = ..()
 
@@ -723,6 +775,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/colorblind/mono/New() // Genetically linked trait
 	block = TRAITBLOCK_COLORBLIND_MONO
+	activation_messages=list("Was everything always so colorless?")
+	deactivation_messages=list("The colors return!")
 	linked_trait_path = /datum/trait/neutral/colorblind/mono
 	. = ..()
 
@@ -741,6 +795,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/colorblind/para_vulp/New() // Genetically linked trait
 	block = TRAITBLOCK_COLORBLIND_VULP
+	activation_messages=list("Was everything always so colorless?")
+	deactivation_messages=list("The colors return!")
 	linked_trait_path = /datum/trait/neutral/colorblind/para_vulp
 	. = ..()
 
@@ -759,6 +815,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/colorblind/para_taj/New() // Genetically linked trait
 	block = TRAITBLOCK_COLORBLIND_TAJ
+	activation_messages=list("Was everything always so colorless?")
+	deactivation_messages=list("The colors return!")
 	linked_trait_path = /datum/trait/neutral/colorblind/para_taj
 	. = ..()
 
@@ -781,6 +839,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/tall, /datum/trait/neutral/short, /datum/trait/neutral/shorter)
 /datum/dna/gene/trait_linked/taller/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_TALLER
+	activation_messages=list("You feel taller.")
+	deactivation_messages=list("You feel shorter.")
 	linked_trait_path = /datum/trait/neutral/taller
 	. = ..()
 
@@ -802,6 +862,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/short, /datum/trait/neutral/shorter)
 /datum/dna/gene/trait_linked/tall/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_TALL
+	activation_messages=list("You feel much taller.")
+	deactivation_messages=list("You feel shorter.")
 	linked_trait_path = /datum/trait/neutral/tall
 	. = ..()
 
@@ -823,6 +885,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/tall, /datum/trait/neutral/shorter)
 /datum/dna/gene/trait_linked/short/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_SHORT
+	activation_messages=list("You feel a bit shorter.")
+	deactivation_messages=list("You feel taller.")
 	linked_trait_path = /datum/trait/neutral/short
 	. = ..()
 
@@ -844,6 +908,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/taller, /datum/trait/neutral/tall, /datum/trait/neutral/short)
 /datum/dna/gene/trait_linked/shorter/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_SHORTER
+	activation_messages=list("You feel shorter.")
+	deactivation_messages=list("You feel taller.")
 	linked_trait_path = /datum/trait/neutral/shorter
 	. = ..()
 
@@ -865,6 +931,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/thin, /datum/trait/neutral/thinner)
 /datum/dna/gene/trait_linked/obese/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_OBESE
+	activation_messages=list("You feel much wider.")
+	deactivation_messages=list("You feel thinner.")
 	linked_trait_path = /datum/trait/neutral/obese
 	. = ..()
 
@@ -886,6 +954,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/obese, /datum/trait/neutral/thin, /datum/trait/neutral/thinner)
 /datum/dna/gene/trait_linked/fat/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_FAT
+	activation_messages=list("You feel wider.")
+	deactivation_messages=list("You feel thinner.")
 	linked_trait_path = /datum/trait/neutral/fat
 	. = ..()
 
@@ -907,6 +977,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/obese, /datum/trait/neutral/thinner)
 /datum/dna/gene/trait_linked/thin/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_THIN
+	activation_messages=list("You feel thinner.")
+	deactivation_messages=list("You feel wider.")
 	linked_trait_path = /datum/trait/neutral/thin
 	. = ..()
 
@@ -928,6 +1000,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/fat, /datum/trait/neutral/obese, /datum/trait/neutral/thin)
 /datum/dna/gene/trait_linked/thinner/New() // Genetically linked trait
 	block = TRAITBLOCK_BODY_THINNER
+	activation_messages=list("You feel much thinner.")
+	deactivation_messages=list("You feel wider.")
 	linked_trait_path = /datum/trait/neutral/thinner
 	. = ..()
 
@@ -946,6 +1020,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/dominate_predator/New() // Genetically linked trait
 	block = TRAITBLOCK_VORE_DOMPRED
+	activation_messages=list("Your ego feels stronger.")
+	deactivation_messages=list("Your ego returns to normal.")
 	linked_trait_path = /datum/trait/neutral/dominate_predator
 	. = ..()
 
@@ -964,6 +1040,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/dominate_prey/New() // Genetically linked trait
 	block = TRAITBLOCK_VORE_DOMPREY
+	activation_messages=list("Your ego feels overwhelming.")
+	deactivation_messages=list("Your ego returns to normal.")
 	linked_trait_path = /datum/trait/neutral/dominate_prey
 	. = ..()
 
@@ -982,6 +1060,8 @@ YW CHANGE STOP*/
 	cost = 0
 /datum/dna/gene/trait_linked/submit_to_prey/New() // Genetically linked trait
 	block = TRAITBLOCK_VORE_SUBTOPREY
+	activation_messages=list("Your ego feels vulnerable.")
+	deactivation_messages=list("Your ego returns to normal.")
 	linked_trait_path = /datum/trait/neutral/submit_to_prey
 	. = ..()
 
@@ -1015,6 +1095,8 @@ YW CHANGE STOP*/
 	var_changes = list("micro_size_mod" = -0.15)
 /datum/dna/gene/trait_linked/micro_size_down/New() // Genetically linked trait
 	block = TRAITBLOCK_MICRO_SIZEDOWN
+	activation_messages=list("You feel smaller than you really are.")
+	deactivation_messages=list("Your size feels just right.")
 	linked_trait_path = /datum/trait/neutral/micro_size_down
 	. = ..()
 
@@ -1026,6 +1108,8 @@ YW CHANGE STOP*/
 	var_changes = list("micro_size_mod" = 0.15)
 /datum/dna/gene/trait_linked/micro_size_up/New() // Genetically linked trait
 	block = TRAITBLOCK_MICRO_SIZEUP
+	activation_messages=list("You feel bigger than you really are.")
+	deactivation_messages=list("Your size feels just right.")
 	linked_trait_path = /datum/trait/neutral/micro_size_up
 	. = ..()
 
@@ -1064,6 +1148,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/bloodsucker)
 /datum/dna/gene/trait_linked/food_value_down/New() // Genetically linked trait
 	block = TRAITBLOCK_INSATIABLE
+	activation_messages=list("You feel like you'll never be full.")
+	deactivation_messages=list("You finally feel satiated.")
 	linked_trait_path = /datum/trait/neutral/food_value_down
 	. = ..()
 
@@ -1077,6 +1163,8 @@ YW CHANGE STOP*/
 	excludes = list(/datum/trait/neutral/bloodsucker, /datum/trait/neutral/food_value_down)
 /datum/dna/gene/trait_linked/food_value_down/New() // Genetically linked trait
 	block = TRAITBLOCK_INSATIABLEEX
+	activation_messages=list("You feel like you'll never be full, the hunger is endless.")
+	deactivation_messages=list("You finally feel satiated.")
 	linked_trait_path = /datum/trait/neutral/food_value_down
 	. = ..()
 
@@ -1110,6 +1198,8 @@ YW CHANGE STOP*/
 	var_changes = list("drippy" = 1)
 /datum/dna/gene/trait_linked/drippy/New() // Genetically linked trait
 	block = TRAITBLOCK_DRIPPY
+	activation_messages=list("Your skin begins to melt.")
+	deactivation_messages=list("You stop melting.")
 	linked_trait_path = /datum/trait/neutral/drippy
 	. = ..()
 // outpost 21 additions end

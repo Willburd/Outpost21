@@ -250,7 +250,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 
 	H.transfer_mental_traits(null, R.flavor.Copy(), brainmob.ooc_notes, R.languages)
 	H.UpdateAppearance()
-	H.ApplySpeciesAndTraits()
+	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
 	if(H.dna)
 		H.dna.UpdateSE()
 		H.dna.UpdateUI()

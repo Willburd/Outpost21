@@ -39,6 +39,7 @@
 	var/true_name = null						// String used when speaking among other worms.
 	var/controlling = FALSE						// Used in human death ceck.
 	var/docile = FALSE							// Sugar can stop borers from acting.
+	var/docile_counter
 
 	var/has_reproduced = FALSE
 	var/used_dominate							// world.time when the dominate power was last used.
@@ -70,12 +71,17 @@
 /mob/living/simple_mob/animal/borer/handle_special()
 	if(host && stat != DEAD && host.stat != DEAD)
 		// Handle docility.
-		if(host.ingested.has_reagent("sugar") && !docile)
-			var/message = "You feel the soporific flow of sugar in your host's blood, lulling you into docility."
-			var/target = controlling ? host : src
-			to_chat(target, span("warning", message))
-			docile = TRUE
-
+		docile_counter--
+		if(host.ingested.has_reagent("sugar"))
+			docile_counter = 1 SECONDS
+		if(docile_counter < 0)
+			docile_counter = 0
+		if(docile_counter > 0)
+			if(!docile)
+				var/message = "You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+				var/target = controlling ? host : src
+				to_chat(target, span("warning", message))
+				docile = TRUE
 		else if(docile)
 			var/message = "You shake off your lethargy as the sugar leaves your host's blood."
 			var/target = controlling ? host : src

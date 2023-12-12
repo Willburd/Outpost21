@@ -103,7 +103,7 @@
 
 		if(12)	//Dec
 			if(DD < 26)
-				return new /obj/item/toy/xmastree(here)							// CRIMBO
+				return new /obj/structure/flora/pottedplant/xmas(here)							// CRIMBO
 
 	// default plant spawn
 	return new /obj/machinery/holoplant(here)

@@ -1819,3 +1819,28 @@
 
 	// This is pretty important for pref transfer
 	apply_vore_prefs()
+
+
+/mob/living/carbon/human/proc/equip_survival_tanks(var/forceback = FALSE)
+	if(!isnull(species) && !isnull(species.breath_type) && species.breath_type != "oxygen")
+		// configure tank
+		var/obj/item/weapon/tank/gastank = null
+		if(species.breath_type == "phoron")
+			gastank = new /obj/item/weapon/tank/vox(src)
+		if(species.breath_type == "nitrogen")
+			gastank = new /obj/item/weapon/tank/nitrogen(src)
+		if(species.breath_type == "carbon_dioxide")
+			gastank = new /obj/item/weapon/tank/carbon_dioxide(src)
+
+		// back, or hand...
+		equip_to_slot_or_del(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
+		if(forceback || backbag == 1)
+			equip_to_slot_or_del(gastank, slot_back)
+		else
+			equip_to_slot_or_del(gastank, slot_r_hand)
+			if(!(gastank in contents))
+				equip_to_slot_or_del(gastank, slot_l_hand)
+
+		internal = locate(/obj/item/weapon/tank) in contents
+		if(istype(internal,/obj/item/weapon/tank) && internals)
+			internals.icon_state = "internal1"

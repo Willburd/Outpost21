@@ -465,28 +465,7 @@ var/global/datum/controller/occupations/job_master
 					spawn_in_storage += thing
 
 		// initialize internal tanks, doing last for maximum safety
-		if(!isnull(H.species.breath_type) && H.species.breath_type != "oxygen")
-			// configure tank
-			var/obj/item/weapon/tank/gastank = null
-			if(H.species.breath_type == "phoron")
-				gastank = new /obj/item/weapon/tank/vox(H)
-			if(H.species.breath_type == "nitrogen")
-				gastank = new /obj/item/weapon/tank/nitrogen(H)
-			if(H.species.breath_type == "carbon_dioxide")
-				gastank = new /obj/item/weapon/tank/carbon_dioxide(H)
-
-			// back, or hand...
-			H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-			if(H.backbag == 1)
-				H.equip_to_slot_or_del(gastank, slot_back)
-			else
-				H.equip_to_slot_or_del(gastank, slot_r_hand)
-				if(!(gastank in H.contents))
-					H.equip_to_slot_or_del(gastank, slot_l_hand)
-
-			H.internal = locate(/obj/item/weapon/tank) in H.contents
-			if(istype(H.internal,/obj/item/weapon/tank) && H.internals)
-				H.internals.icon_state = "internal1"
+		H.equip_survival_tanks(FALSE)
 	else
 		to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 

@@ -253,6 +253,7 @@
 		avatar.revive()
 		avatar.verbs += /mob/living/carbon/human/proc/exit_vr //ahealing removes the prommie verbs and the VR verbs, giving it back
 		avatar.Sleeping(1)
+		avatar.equip_survival_tanks(TRUE) // so non-oxy breathers don't die horribly
 
 		// Prompt for username after they've enterred the body.
 		var/newname = sanitize(tgui_input_text(avatar, "You are entering virtual reality. Your username is currently [src.name]. Would you like to change it to something else?", "Name change", null, MAX_NAME_LEN), MAX_NAME_LEN)

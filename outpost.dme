@@ -866,6 +866,7 @@
 #include "code\game\machinery\frame.dm"
 #include "code\game\machinery\gear_dispenser.dm"
 #include "code\game\machinery\hologram.dm"
+#include "code\game\machinery\hologram_tutorials.dm"
 #include "code\game\machinery\holoposter.dm"
 #include "code\game\machinery\holosign.dm"
 #include "code\game\machinery\igniter.dm"

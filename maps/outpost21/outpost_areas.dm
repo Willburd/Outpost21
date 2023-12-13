@@ -421,6 +421,11 @@
 	icon_state = "yellow"
 	holomap_color = HOLOMAP_AREACOLOR_CIV
 
+/area/muriki/crew/vr_train
+	name = "\improper Virtual Reality Training"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	icon_state = "blublatri"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
 
 
 //Hallways-------

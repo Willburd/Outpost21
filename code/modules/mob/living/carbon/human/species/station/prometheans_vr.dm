@@ -7,7 +7,7 @@
 	//water_damage_mod = 0		YW Edit
 	valid_transform_species = list(
 		"Human", "Unathi", "Tajara", "Skrell",
-		"Diona", "Teshari", "Monkey","Sergal",
+		"Diona", "Teshari", "Vox", "Monkey","Sergal",
 		/*"Akula",*/"Nevrean"/*,"Zorren"*/, //outpost 21 - race removal
 		"Fennec", "Vulpkanin", "Vasilissan",
 		/*"Rapala",*/ "Neaera", "Stok", "Farwa", "Sobaka", //outpost 21 - race removal

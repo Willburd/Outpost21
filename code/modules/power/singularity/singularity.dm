@@ -268,6 +268,8 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 	for(var/atom/X as anything in orange(grav_pull, src))
 		if(!X.simulated)
 			continue
+		if(istype(X,/turf/unsimulated/wall/supermatter))
+			continue
 		var/dist = get_dist(X, src)
 		if(dist > consume_range)
 			X.singularity_pull(src, current_size)

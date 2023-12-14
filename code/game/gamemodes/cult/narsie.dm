@@ -184,6 +184,9 @@ var/global/list/narsie_list = list()
 	else if (isturf(A))
 		var/dist = get_dist(A, src)
 
+		if(istype(A,/turf/unsimulated/wall/supermatter))
+			return 0
+
 		for (var/atom/movable/AM in A.contents)
 			if (dist <= consume_range)
 				consume(AM)
@@ -214,6 +217,9 @@ var/global/list/narsie_list = list()
 			qdel(A)
 	else if (isturf(A))
 		var/dist = get_dist(A, src)
+
+		if(istype(A,/turf/unsimulated/wall/supermatter))
+			return 0
 
 		for (var/atom/movable/AM2 in A.contents)
 			if (AM2 == src) // This is the snowflake.

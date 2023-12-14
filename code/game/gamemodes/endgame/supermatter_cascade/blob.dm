@@ -38,7 +38,7 @@
 	// Choose a direction.
 	var/pdir = pick(avail_dirs)
 	avail_dirs -= pdir
-	var/turf/T=get_step(src,pdir)
+	var/turf/T=get_step(get_turf(src),pdir)
 
 	// EXPAND
 	if(!istype(T,type))

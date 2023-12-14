@@ -80,6 +80,14 @@
 		prints = ", all touchers : " + src.fingerprintshidden
 
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
+
+	// spawn the bluespace void
+	var/turf/our = get_turf(src)
+	if(our)
+		for(var/level in using_map.event_levels)
+			var/turf/T = get_turf(locate(our.x,our.y,level))
+			new /turf/unsimulated/wall/supermatter(T)
+
 	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	qdel(src)

@@ -436,10 +436,13 @@
 /obj/vehicle/has_interior/controller/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
 		return 0
+	if(!Adjacent(user))
+		return 0
 	if(entrance_hatch == null || !entrance_hatch.locked)
 		user.visible_message("<span class='notice'>[user] begins to climb into \the [src].</span>", "<span class='notice'>You begin to climb into \the [src].</span>")
 		if(do_after(user, 20))
-			enter_interior(user)
+			if(Adjacent(user))
+				enter_interior(user)
 	else
 		entrance_hatch.do_animate("deny")
 		playsound(src, entrance_hatch.denied_sound, 50, 0, 3)
@@ -447,9 +450,21 @@
 /obj/vehicle/has_interior/controller/attack_hand(mob/user as mob)
 	// nothing YET, used for attacks
 
+/obj/vehicle/has_interior/controller/attack_generic(mob/user as mob)
+	// aliens/borers
+	attack_hand(user)
+
 /obj/vehicle/has_interior/controller/proc/enter_interior(var/atom/movable/C)
 	// moves atom to interior access point of tank
 	if(istype(entrypos,/turf/))
+		var/turf/T = entrypos
+		if(!T.CanPass( C, entrypos))
+			to_chat(C, "<span class='notice'>Entrance is blocked by \the [T]!</span>")
+			return
+		for(var/atom/A in T.contents)
+			if(!A.CanPass( C, entrypos) && !istype( C, /mob/living))
+				to_chat(C, "<span class='notice'>Entrance is blocked by \the [A]!</span>")
+				return
 		transfer_to( C, entrypos)
 	else
 		C.visible_message("<span class='notice'>Interior inaccessible...</span>")
@@ -465,11 +480,11 @@
 	if(istype(exitpos,/turf/))
 		var/turf/T = exitpos
 		if(!T.CanPass( C, exitpos))
-			to_chat(C, "<span class='notice'>Exit is blocked!</span>")
+			to_chat(C, "<span class='notice'>Exit is blocked by \the [T]!</span>")
 			return
 		for(var/atom/A in T.contents)
-			if(!A.CanPass( C, exitpos))
-				to_chat(C, "<span class='notice'>Exit is blocked!</span>")
+			if(!A.CanPass( C, exitpos) && !istype( C, /mob/living))
+				to_chat(C, "<span class='notice'>Exit is blocked by \the [A]!</span>")
 				return
 		transfer_to( C, exitpos)
 	else
@@ -557,14 +572,24 @@
 	if(locked)
 		do_animate("deny")
 		return
+	if(!Adjacent(user))
+		return
 
 	// successful, begin exit!
 	user.visible_message("<span class='notice'>[user] starts leaving the [interior_controller].</span>", "<span class='notice'>You start leaving the [interior_controller].</span>")
 	if(do_after(user, 20))
-		interior_controller.exit_interior(user)
+		if(Adjacent(user))
+			interior_controller.exit_interior(user)
+
+/obj/machinery/door/vehicle_interior_hatch/attack_robot(mob/living/user)
+	attackby( null, user)
 
 /obj/machinery/door/vehicle_interior_hatch/attack_ai(mob/user)
 	// no behavior
+
+/obj/machinery/door/vehicle_interior_hatch/attack_generic(mob/user as mob)
+	// aliens/borers
+	attackby( null, user)
 
 /obj/machinery/door/vehicle_interior_hatch/emag_act(var/remaining_charges)
     // no behavior
@@ -660,7 +685,12 @@
 
 /obj/machinery/computer/vehicle_interior_console/attack_ai(mob/user)
 	to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
-	return
+
+/obj/machinery/computer/vehicle_interior_console/attack_robot(mob/living/user)
+	attack_hand( null, user)
+
+/obj/machinery/computer/vehicle_interior_console/attack_generic(mob/user as mob)
+	attack_hand( null, user)
 
 /obj/machinery/computer/vehicle_interior_console/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -818,8 +848,13 @@
 
 /obj/structure/bed/chair/vehicle_interior_seat/update_icon()
 	..()
+	var/image/I = image(icon, "[base_icon]_over")
+	I.layer = ABOVE_MOB_LAYER
+	I.plane = MOB_PLANE
+	I.color = material.icon_colour
+	add_overlay(I)
 	if(!has_buckled_mobs())
-		var/image/I = image(icon, "[base_icon]_special")
+		I = image(icon, "[base_icon]_special")
 		I.plane = MOB_PLANE
 		I.layer = ABOVE_MOB_LAYER
 		if(applies_material_colour)

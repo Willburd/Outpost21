@@ -87,7 +87,7 @@ var/obj/screen/robot_inventory
 	healths.icon_state = "health0"
 	healths.alpha = HUD.ui_alpha
 	healths.name = "health"
-	healths.screen_loc = ui_borg_health
+	healths.screen_loc = ui_health
 	other += healths
 
 //Installed Module

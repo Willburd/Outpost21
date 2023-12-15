@@ -22,7 +22,7 @@
 	healths.icon = HUD.ui_style
 	healths.icon_state = "health0"
 	healths.name = "health"
-	healths.screen_loc = ui_alien_health
+	healths.screen_loc = ui_health
 
 	if(client && apply_to_client)
 		client.screen = list()

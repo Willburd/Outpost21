@@ -421,6 +421,13 @@
 		..()
 	return
 
+/obj/item/stack/attack(mob/living/M as mob, mob/living/user as mob)
+	// prodding on help intent, ignored for borgs and bots because of endless coding stupidity.
+	if(M != user && !issilicon(M) && !isbot(M) && user.a_intent == I_HELP)
+		user.visible_message("<span class='notice'>[user] prods [M] with \the [src.name].</span>")
+		return 0
+	. = ..(M,user)
+
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W

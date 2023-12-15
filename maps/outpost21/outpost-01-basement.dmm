@@ -3399,7 +3399,7 @@
 "bnv" = (/obj/structure/bed/chair/comfy/brown{dir = 1},/obj/structure/sign/christmas/lights,/turf/simulated/floor/carpet/bcarpet,/area/quartermaster/breakroom)
 "bnw" = (/obj/effect/floor_decal/spline/plain{dir = 4},/obj/machinery/camera/network/cargo{c_tag = "CRG - Lower Rec Room"; dir = 1},/obj/structure/sign/christmas/lights,/turf/simulated/floor/carpet/bcarpet,/area/quartermaster/breakroom)
 "bnx" = (/obj/effect/floor_decal/spline/fancy/wood,/obj/machinery/power/apc{name = "south bump"; pixel_y = -26},/obj/structure/cable/green,/obj/structure/sign/christmas/lights,/turf/simulated/floor/wood,/area/quartermaster/breakroom)
-"bny" = (/obj/machinery/light,/obj/machinery/vending/cola{dir = 1; pixel_y = -1},/obj/effect/floor_decal/spline/fancy/wood,/obj/structure/sign/christmas/lights,/turf/simulated/floor/wood,/area/quartermaster/breakroom)
+"bny" = (/obj/machinery/light,/obj/effect/floor_decal/spline/fancy/wood,/obj/structure/sign/christmas/lights,/obj/machinery/vending/foodfast{dir = 1},/turf/simulated/floor/wood,/area/quartermaster/breakroom)
 "bnz" = (/obj/machinery/vending/cigarette{dir = 1; pixel_y = -1},/obj/effect/floor_decal/spline/fancy/wood,/obj/structure/sign/christmas/lights,/turf/simulated/floor/wood,/area/quartermaster/breakroom)
 "bnA" = (/obj/machinery/vending/coffee{dir = 1; pixel_y = -1},/obj/effect/floor_decal/spline/fancy/wood{dir = 6},/obj/structure/sign/christmas/lights,/turf/simulated/floor/wood,/area/quartermaster/breakroom)
 "bnB" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark/muriki,/area/mine/explored/muriki/cave/cargo)

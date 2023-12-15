@@ -1071,7 +1071,8 @@
 	src.modules += new /obj/item/weapon/material/kitchen/rollingpin(src)
 	src.modules += new /obj/item/device/multitool(src) //to freeze trays
 	src.modules += new /obj/item/weapon/dogborg/jaws/small(src)
-	src.modules += new /obj/item/weapon/tray/robotray
+	//src.modules += new /obj/item/weapon/tray/robotray
+
 	src.modules += new /obj/item/device/dogborg/boop_module(src)
 	src.modules += new /obj/item/device/dogborg/sleeper/compactor/brewer(src)
 	src.emag 	 = new /obj/item/weapon/dogborg/pounce(src)

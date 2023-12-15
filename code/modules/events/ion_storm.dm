@@ -32,14 +32,16 @@
 
 
 	// Ionize AI
+	var/AIlaw
 	var/AIisSet = FALSE
 	for (var/mob/living/silicon/ai/target in silicon_mob_list)
 		if(!(target.z in affecting_z))
 			continue
-		var/law = target.generate_ion_law()
+		if(!AIlaw)
+			AIlaw = target.generate_ion_law()
 		to_chat(target, "<span class='danger'>You have detected a change in your laws information:</span>")
-		to_chat(target, law)
-		target.add_ion_law(law)
+		to_chat(target, AIlaw)
+		target.add_ion_law(AIlaw)
 		target.show_laws()
 		AIisSet = TRUE
 
@@ -72,11 +74,15 @@
 			S.confused += ionbug
 			S.eye_blurry += (ionbug - 1)
 			// funni laws!
-			to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
 			if(!AIisSet)
+				to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
 				var/law = S.generate_ion_law()
-				to_chat(S, law)
 				S.add_ion_law(law)
+				to_chat(S, law)
+			else
+				to_chat(S, "<span class='danger'>You have detected a change to your owner AI's laws information:</span>")
+				S.add_ion_law(AIlaw)
+				to_chat(S, AIlaw)
 			S.show_laws()
 
 

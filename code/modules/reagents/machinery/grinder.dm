@@ -149,9 +149,7 @@
 
 /obj/machinery/reagentgrinder/AltClick(var/mob/user)
 	. = ..()
-	if(inuse || user.incapacitated() || !Adjacent(user))
-		return
-	replace_beaker(user)
+	grind_verb()
 
 /obj/machinery/reagentgrinder/attack_hand(var/mob/user)
 	//interact(user) // outpost 21 edit - removing radial menu

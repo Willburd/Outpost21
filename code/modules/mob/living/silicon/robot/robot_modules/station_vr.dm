@@ -1091,6 +1091,18 @@
 	src.modules += new /obj/item/weapon/tray/robotray(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/service(src)
 
+	var/datum/matter_synth/water = new /datum/matter_synth(500)
+	water.name = "Water reserves"
+	water.recharge_rate = 0
+	water.max_energy = 1000
+	water.energy = 0
+	R.water_res = water
+	synths += water
+
+	var/obj/item/device/dogborg/tongue/T = new /obj/item/device/dogborg/tongue(src)
+	T.water = water
+	src.modules += T
+
 	// Assign wideborg department icon, DO NOT SET THE ICON MANUALLY vr_sprite_check() DOES THIS
 	R.wideborg = TRUE
 	R.wideborg_dept = 'icons/mob/widerobot_colors_yw.dmi'

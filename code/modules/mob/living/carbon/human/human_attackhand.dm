@@ -113,10 +113,18 @@
 				H.visible_message("<span class='danger'>\The [H] performs CPR on \the [src]!</span>")
 				to_chat(H, "<span class='warning'>Repeat at least every 7 seconds.</span>")
 
-				if(istype(H) && health > config.health_threshold_dead)
-					adjustOxyLoss(-(min(getOxyLoss(), 5)))
-					updatehealth()
-					to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
+				if(istype(H))
+					// Allows medical to circulate chems on mostly dead bodies without dialysis Extreme hackjob medical ahead!
+					var/tempstat = stat
+					stat = CONSCIOUS
+					handle_chemicals_in_body() // extremely hacky way of chem circulation, most chems require you to be alive to do stuff to the body...
+					stat = tempstat
+
+					// standard CPR ahead, adjust oxy and refresh health
+					if(health > config.health_threshold_dead)
+						adjustOxyLoss(-(min(getOxyLoss(), 5)))
+						updatehealth()
+						to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 
 			else if(!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)

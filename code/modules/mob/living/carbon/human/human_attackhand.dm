@@ -117,7 +117,10 @@
 					// Allows medical to circulate chems on mostly dead bodies without dialysis Extreme hackjob medical ahead!
 					var/tempstat = stat
 					stat = CONSCIOUS
-					handle_chemicals_in_body() // extremely hacky way of chem circulation, most chems require you to be alive to do stuff to the body...
+					// extremely hacky way of chem circulation, most chems require you to be alive to do stuff to the body... Done multiple times to increase speed.
+					var/i = 8
+					while(i-- > 0)
+						handle_chemicals_in_body()
 					stat = tempstat
 
 					// standard CPR ahead, adjust oxy and refresh health

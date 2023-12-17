@@ -57,11 +57,28 @@
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
-	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		step(H, pick(cardinal))
-	if(prob(1))
-		H.emote(pick("scratch","jump","roll","tail"))
+	if(!H.pulledby && H.canmove && isturf(H.loc)) //won't move if being pulled
+		if(prob(33))
+			step(H, pick(cardinal))
+		if(prob(4))
+			// Handle gene expression emotes
+			var/geneexpression
+			if(H.dna)
+				var/i = 0
+				while(i++ < 10)
+					// try random genes
+					var/gene_index = rand(1,DNA_SE_LENGTH)
+					var/datum/dna/gene/gene = dna_genes_by_block[gene_index]
+					if(gene && H.dna.GetSEState(gene_index))
+						// we have a gene, try to express it!
+						if(gene.primitive_expression_messages.len)
+							geneexpression = pick(gene.primitive_expression_messages)
+						break // lets not be too desperate...
 
+			if(!geneexpression)
+				H.emote(pick("scratch","jump","roll","tail"))
+			else
+				H.custom_emote(VISIBLE_MESSAGE, "[geneexpression]")
 	..()
 
 /datum/species/monkey/get_random_name()

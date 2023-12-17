@@ -10,6 +10,7 @@
 	block = TRAITBLOCK_SLOWDOWN
 	activation_messages=list("You feel slower.")
 	deactivation_messages=list("You get a bit faster.")
+	primitive_expression_messages=list("looks slow.")
 	linked_trait_path = /datum/trait/negative/speed_slow
 	. = ..()
 
@@ -23,6 +24,7 @@
 	block = TRAITBLOCK_SLOWDOWNEX
 	activation_messages=list("You feel a lot slower.")
 	deactivation_messages=list("You get a bit faster.")
+	primitive_expression_messages=list("slugishly moves.")
 	linked_trait_path = /datum/trait/negative/speed_slow_plus
 	. = ..()
 
@@ -62,6 +64,7 @@
 	block = TRAITBLOCK_ENDURLOW
 	activation_messages=list("You feel more frail.")
 	deactivation_messages=list("You feel a bit less frail.")
+	primitive_expression_messages=list("wheezes.")
 	linked_trait_path = /datum/trait/negative/endurance_low
 	. = ..()
 
@@ -83,6 +86,7 @@
 	block = TRAITBLOCK_ENDURLOWEX
 	activation_messages=list("You feel a lot more frail.")
 	deactivation_messages=list("You feel a bit less frail.")
+	primitive_expression_messages=list("wheezes.")
 	linked_trait_path = /datum/trait/negative/endurance_very_low
 	. = ..()
 
@@ -105,6 +109,7 @@
 	block = TRAITBLOCK_ENDURLOWEST
 	activation_messages=list("You feel like a breeze could break your bones.")
 	deactivation_messages=list("You feel a lot less frail.")
+	primitive_expression_messages=list("wheezes.")
 	linked_trait_path = /datum/trait/negative/endurance_glass
 	. = ..()
 
@@ -271,6 +276,7 @@
 	block = TRAITBLOCK_CONDUCTIVE
 	activation_messages=list("You can feel a tingle in the air.")
 	deactivation_messages=list("You a little more resistant.")
+	primitive_expression_messages=list("twitches at a shock.")
 	linked_trait_path = /datum/trait/negative/conductive
 	. = ..()
 
@@ -284,6 +290,7 @@
 	block = TRAITBLOCK_CONDUCTIVE_MAJOR
 	activation_messages=list("You can feel the static in the air.")
 	deactivation_messages=list("You a little more resistant.")
+	primitive_expression_messages=list("twitches at a shock.")
 	linked_trait_path = /datum/trait/negative/conductive_plus
 	. = ..()
 
@@ -297,6 +304,7 @@
 	block = TRAITBLOCK_CONDUCTIVE_EXTREME
 	activation_messages=list("You can feel the current in the wires nearby.")
 	deactivation_messages=list("You a little more resistant.")
+	primitive_expression_messages=list("twitches at a shock.")
 	linked_trait_path = /datum/trait/negative/conductive_extreme
 	. = ..()
 //YW ADDITIONS: END
@@ -323,6 +331,7 @@
 	block = TRAITBLOCK_HOLLOW
 	activation_messages=list("You feel like you're made of glass.")
 	deactivation_messages=list("You feel less fragile.")
+	primitive_expression_messages=list("hops around.")
 	linked_trait_path = /datum/trait/negative/hollow
 	. = ..()
 
@@ -348,6 +357,7 @@
 	block = TRAITBLOCK_LIGHTWEIGHT
 	activation_messages=list("The world feels like it's trying to push you over.")
 	deactivation_messages=list("Everything feels less overwhelming.")
+	primitive_expression_messages=list("leans back and forth.")
 	linked_trait_path = /datum/trait/negative/lightweight
 	. = ..()
 
@@ -447,6 +457,7 @@
 	block = TRAITBLOCK_LIGHTSENSITIVE
 	activation_messages=list("The world feels more bright.")
 	deactivation_messages=list("The world feels less bright.")
+	primitive_expression_messages=list("squints in the light.")
 	linked_trait_path = /datum/trait/negative/light_sensitivity
 	. = ..()
 
@@ -460,6 +471,7 @@
 	block = TRAITBLOCK_LIGHTSENSITIVEEX
 	activation_messages=list("The world feels way too bright.")
 	deactivation_messages=list("The world feels less bright.")
+	primitive_expression_messages=list("squints in the light.")
 	linked_trait_path = /datum/trait/negative/light_sensitivity_plus
 	. = ..()
 //YW ADDITIONS: END
@@ -475,6 +487,7 @@
 	block = TRAITBLOCK_WINGDINGS
 	activation_messages=list("You feel like your !?#X! is #X!???")
 	deactivation_messages=list("You feel a lot less dingy wingy.")
+	primitive_expression_messages=list("makes a weird face.")
 	linked_trait_path = /datum/trait/negative/wingdings
 	. = ..()
 
@@ -487,6 +500,7 @@
 	block = TRAITBLOCK_DETERIORATE
 	activation_messages=list("You feel like you aren't long for this world.")
 	deactivation_messages=list("Your body stops rejecting existance.")
+	primitive_expression_messages=list("deteriorates.")
 	linked_trait_path = /datum/trait/negative/deteriorate
 	. = ..()
 // outpost 21 additions end

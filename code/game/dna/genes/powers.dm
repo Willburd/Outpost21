@@ -6,6 +6,7 @@
 	name="No Breathing"
 	activation_messages=list("You feel no need to breathe.")
 	deactivation_messages=list("You need to breathe!")
+	primitive_expression_messages=list("isn't breathing.")
 	mutation=mNobreath
 
 /datum/dna/gene/basic/nobreath/New()
@@ -15,6 +16,7 @@
 	name="Remote Viewing"
 	activation_messages=list("Your mind expands.")
 	deactivation_messages=list("Your mind contracts.")
+	primitive_expression_messages=list("makes noises to itself.")
 	mutation=mRemote
 
 /datum/dna/gene/basic/remoteview/New()
@@ -28,6 +30,7 @@
 	name="Regenerate"
 	activation_messages=list("You feel better.")
 	deactivation_messages=list("You feel normal.")
+	primitive_expression_messages=list("'s skin shift's strangely.")
 	mutation=mRegen
 
 /datum/dna/gene/basic/regenerate/New()
@@ -47,6 +50,7 @@
 	name="Telepathy"
 	activation_messages=list("You expand your mind outwards to others like you.")
 	deactivation_messages=list("You feel your mind disconnect from the others.")
+	primitive_expression_messages=list("makes noises to itself.")
 	mutation=mRemotetalk
 
 /datum/dna/gene/basic/remotetalk/New()
@@ -74,6 +78,7 @@
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
 	deactivation_messages=list("Your body feels colder.")
+	primitive_expression_messages=list("shivers.")
 	mutation=COLD_RESISTANCE
 
 /datum/dna/gene/basic/cold_resist/New()
@@ -93,6 +98,7 @@
 	name="No Prints"
 	activation_messages=list("Your fingers feel numb.")
 	deactivation_messages=list("Your fingers return to normal.")
+	primitive_expression_messages=list("flexes its digits.")
 	mutation=mFingerprints
 
 /datum/dna/gene/basic/noprints/New()
@@ -163,6 +169,7 @@
 	name="X-Ray Vision"
 	activation_messages=list("The walls suddenly disappear.")
 	deactivation_messages=list("The walls fade back into view.")
+	primitive_expression_messages=list("stares at something it cannot see.")
 	mutation=XRAY
 
 /datum/dna/gene/basic/xray/New()
@@ -172,6 +179,7 @@
 	name="Telekenesis"
 	activation_messages=list("You feel smarter.")
 	deactivation_messages=list("Your telekinetic grasp fails.")
+	primitive_expression_messages=list("grabs at something it cannot reach.")
 	mutation=TK
 	activation_prob=15
 

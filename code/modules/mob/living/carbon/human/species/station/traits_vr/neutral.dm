@@ -11,6 +11,7 @@
 	block = TRAITBLOCK_METABOLISM_UP
 	activation_messages=list("You feel hungry.")
 	deactivation_messages=list("You feel less hungry.")
+	primitive_expression_messages=list("rubs their belly.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -25,6 +26,7 @@
 	block = TRAITBLOCK_METABOLISM_DOWN
 	activation_messages=list("You feel less hungry.")
 	deactivation_messages=list("You feel hungry.")
+	primitive_expression_messages=list("rubs their belly.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -39,6 +41,7 @@
 	block = TRAITBLOCK_METABOLISM_APEX
 	activation_messages=list("You feel like you are starving.")
 	deactivation_messages=list("The endless hunger is gone.")
+	primitive_expression_messages=list("rubs their belly.")
 	linked_trait_path = /datum/trait/neutral/metabolism_up
 	. = ..()
 
@@ -88,6 +91,7 @@
 	block = TRAITBLOCK_HOT_BLOOD
 	activation_messages=list("You feel warmer.")
 	deactivation_messages=list("You cool off.")
+	primitive_expression_messages=list("looks uncomfortably hot.")
 	linked_trait_path = /datum/trait/neutral/hot_blood
 	. = ..()
 
@@ -102,6 +106,7 @@
 	block = TRAITBLOCK_COLD_BLOOD
 	activation_messages=list("You feel colder.")
 	deactivation_messages=list("You heat back up.")
+	primitive_expression_messages=list("looks uncomfortably cold.")
 	linked_trait_path = /datum/trait/neutral/cold_blood
 	. = ..()
 
@@ -116,6 +121,7 @@
 	block = TRAITBLOCK_ICE_BLOOD
 	activation_messages=list("You feel ice cold.")
 	deactivation_messages=list("You heat back up.")
+	primitive_expression_messages=list("looks uncomfortably cold.")
 	linked_trait_path = /datum/trait/neutral/extreme_cold_blood
 	. = ..()
 
@@ -151,7 +157,7 @@ YW change end */
 			"x" = list("ks", "kss", "ksss")
 		),
 	autohiss_exempt = list(LANGUAGE_UNATHI))
-	excludes = list(/datum/trait/neutral/autohiss_tajaran/*, /datum/trait/neutral/autohiss_zaddat*/)
+	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat)
 
 
 /datum/trait/neutral/autohiss_tajaran
@@ -163,10 +169,9 @@ YW change end */
 			"r" = list("rr", "rrr", "rrrr")
 		),
 	autohiss_exempt = list(LANGUAGE_SIIK,LANGUAGE_AKHANI,LANGUAGE_ALAI))
-	excludes = list(/datum/trait/neutral/autohiss_unathi/*, /datum/trait/neutral/autohiss_zaddat*/)
+	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_zaddat)
 
 
-/* outpost 21 - race removal
 /datum/trait/neutral/autohiss_zaddat
 	name = "Autohiss (Zaddat)"
 	desc = "You buzz your S's and F's."
@@ -181,10 +186,10 @@ YW change end */
 			"ce" = list("z", "zz"),
 			"ci" = list("z", "zz"),
 			"v" = list("vv", "vvv")
-		),
-	autohiss_exempt = list(LANGUAGE_ZADDAT,LANGUAGE_VESPINAE))
+		)/*,
+	autohiss_exempt = list(LANGUAGE_ZADDAT,LANGUAGE_VESPINAE)*/)
 	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi)
-*/
+
 
 ///YW ADDITION: START
 /datum/trait/neutral/autohiss_vassilian
@@ -215,6 +220,7 @@ YW change end */
 	block = TRAITBLOCK_BLOODSUCKER
 	activation_messages=list("You feel thirsty for metal?")
 	deactivation_messages=list("Your thirst for blood ends.")
+	primitive_expression_messages=list("looks thirsty.")
 	linked_trait_path = /datum/trait/neutral/bloodsucker
 	. = ..()
 
@@ -247,6 +253,7 @@ YW change end */
 	block = TRAITBLOCK_SUCCUBUS
 	activation_messages=list("You feel more lustful.")
 	deactivation_messages=list("You feel less needy.")
+	primitive_expression_messages=list("looks thirsty.")
 	linked_trait_path = /datum/trait/neutral/succubus_drain
 	. = ..()
 
@@ -271,6 +278,7 @@ YW change end */
 	block = TRAITBLOCK_TONGUE
 	activation_messages=list("Your tongue extends...")
 	deactivation_messages=list("Your tongue retracts...")
+	primitive_expression_messages=list("tongue hangs out.")
 	linked_trait_path = /datum/trait/neutral/long_vore
 	. = ..()
 
@@ -291,6 +299,7 @@ YW change end */
 	block = TRAITBLOCK_FEEDER
 	activation_messages=list("You start leaking something.")
 	deactivation_messages=list("You stop leaking.")
+	primitive_expression_messages=list("leaks.")
 	linked_trait_path = /datum/trait/neutral/feeder
 	. = ..()
 
@@ -326,6 +335,7 @@ YW change end */
 	block = TRAITBLOCK_TRASHCAN
 	activation_messages=list("You feel like a trashman.")
 	deactivation_messages=list("You don't want to eat garbage.")
+	primitive_expression_messages=list("eats something off the floor.")
 	linked_trait_path = /datum/trait/neutral/trashcan
 	. = ..()
 
@@ -377,6 +387,7 @@ YW change end */
 	block = TRAITBLOCK_EYEGLOW
 	activation_messages=list("Things look a bit brighter...")
 	deactivation_messages=list("Things dim back down...")
+	primitive_expression_messages=list("eyes twinkle.")
 	linked_trait_path = /datum/trait/neutral/glowing_eyes
 	. = ..()
 
@@ -397,6 +408,7 @@ YW change end */
 	block = TRAITBLOCK_BODYGLOW
 	activation_messages=list("You feel a bit brighter...")
 	deactivation_messages=list("You dim back down...")
+	primitive_expression_messages=list("flickers.")
 	linked_trait_path = /datum/trait/neutral/glowing_body
 	. = ..()
 
@@ -663,6 +675,7 @@ YW change end */
 	block = TRAITBLOCK_SPICE_INTOL_EXTREME
 	activation_messages=list("Everything is way too spicey.")
 	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
+	primitive_expression_messages=list("pants.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_extreme
 	. = ..()
 
@@ -676,6 +689,7 @@ YW change end */
 	block = TRAITBLOCK_SPICE_INTOL_BASIC
 	activation_messages=list("Everything is too spicey.")
 	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
+	primitive_expression_messages=list("pants.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_basic
 	. = ..()
 
@@ -689,6 +703,7 @@ YW change end */
 	block = TRAITBLOCK_SPICE_INTOL_SLIGHT
 	activation_messages=list("Everything is a bit too spicey.")
 	deactivation_messages=list("You feel like you can tollerate a hot meal again.")
+	primitive_expression_messages=list("pants.")
 	linked_trait_path = /datum/trait/neutral/spice_intolerance_slight
 	. = ..()
 
@@ -777,6 +792,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_COLORBLIND_MONO
 	activation_messages=list("Was everything always so colorless?")
 	deactivation_messages=list("The colors return!")
+	primitive_expression_messages=list("stares at something.")
 	linked_trait_path = /datum/trait/neutral/colorblind/mono
 	. = ..()
 
@@ -797,6 +813,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_COLORBLIND_VULP
 	activation_messages=list("Was everything always so colorless?")
 	deactivation_messages=list("The colors return!")
+	primitive_expression_messages=list("stares at something.")
 	linked_trait_path = /datum/trait/neutral/colorblind/para_vulp
 	. = ..()
 
@@ -817,6 +834,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_COLORBLIND_TAJ
 	activation_messages=list("Was everything always so colorless?")
 	deactivation_messages=list("The colors return!")
+	primitive_expression_messages=list("stares at something.")
 	linked_trait_path = /datum/trait/neutral/colorblind/para_taj
 	. = ..()
 
@@ -1097,6 +1115,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_MICRO_SIZEDOWN
 	activation_messages=list("You feel smaller than you really are.")
 	deactivation_messages=list("Your size feels just right.")
+	primitive_expression_messages=list("jumps up and down.")
 	linked_trait_path = /datum/trait/neutral/micro_size_down
 	. = ..()
 
@@ -1110,6 +1129,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_MICRO_SIZEUP
 	activation_messages=list("You feel bigger than you really are.")
 	deactivation_messages=list("Your size feels just right.")
+	primitive_expression_messages=list("shakes their weight around.")
 	linked_trait_path = /datum/trait/neutral/micro_size_up
 	. = ..()
 
@@ -1150,6 +1170,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_INSATIABLE
 	activation_messages=list("You feel like you'll never be full.")
 	deactivation_messages=list("You finally feel satiated.")
+	primitive_expression_messages=list("looks very hungry.")
 	linked_trait_path = /datum/trait/neutral/food_value_down
 	. = ..()
 
@@ -1165,6 +1186,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_INSATIABLEEX
 	activation_messages=list("You feel like you'll never be full, the hunger is endless.")
 	deactivation_messages=list("You finally feel satiated.")
+	primitive_expression_messages=list("looks desperate to eat.")
 	linked_trait_path = /datum/trait/neutral/food_value_down
 	. = ..()
 
@@ -1200,6 +1222,7 @@ YW CHANGE STOP*/
 	block = TRAITBLOCK_DRIPPY
 	activation_messages=list("Your skin begins to melt.")
 	deactivation_messages=list("You stop melting.")
+	primitive_expression_messages=list("drips a strangly.")
 	linked_trait_path = /datum/trait/neutral/drippy
 	. = ..()
 // outpost 21 additions end

@@ -10,6 +10,7 @@
 	block = TRAITBLOCK_SPEEDFAST
 	activation_messages=list("You feel faster.")
 	deactivation_messages=list("You feel less quick.")
+	primitive_expression_messages=list("dances around.")
 	linked_trait_path = /datum/trait/positive/speed_fast
 	. = ..()
 
@@ -25,6 +26,7 @@
 	block = TRAITBLOCK_SPEEDFASTEX
 	activation_messages=list("You feel a lot faster.")
 	deactivation_messages=list("You feel less quick.")
+	primitive_expression_messages=list("moves like a blur.")
 	linked_trait_path = /datum/trait/positive/speed_fast_plus
 	. = ..()
 //YW ADDITION: END
@@ -66,6 +68,7 @@
 	block = TRAITBLOCK_ENDURANCE
 	activation_messages=list("You feel sturdier.")
 	deactivation_messages=list("You feel less sturdy.")
+	primitive_expression_messages=list("wiggles around.")
 	linked_trait_path = /datum/trait/positive/endurance_high
 	. = ..()
 
@@ -89,6 +92,7 @@
 	block = TRAITBLOCK_ENDURANCE_MAJOR
 	activation_messages=list("You feel a lot more sturdy.")
 	deactivation_messages=list("You feel less sturdy.")
+	primitive_expression_messages=list("wiggles around a bunch.")
 	linked_trait_path = /datum/trait/positive/endurance_very_high
 	. = ..()
 
@@ -111,6 +115,7 @@
 	block = TRAITBLOCK_ENDURANCEEX
 	activation_messages=list("You feel indestructable.")
 	deactivation_messages=list("You don't feel indestructable anymore.")
+	primitive_expression_messages=list("wiggles around excitedly.")
 	linked_trait_path = /datum/trait/positive/endurance_extremely_high
 	. = ..()
 
@@ -133,6 +138,7 @@
 	block = TRAITBLOCK_NONCONDUCT
 	activation_messages=list("You feel a little more rubbery.")
 	deactivation_messages=list("You feel less rubbery.")
+	primitive_expression_messages=list("looks a little shiny.")
 	linked_trait_path = /datum/trait/positive/nonconductive
 	. = ..()
 
@@ -146,6 +152,7 @@
 	block = TRAITBLOCK_NONCONDUCT_MAJOR
 	activation_messages=list("You feel more rubbery.")
 	deactivation_messages=list("You feel less rubbery.")
+	primitive_expression_messages=list("looks shiny.")
 	linked_trait_path = /datum/trait/positive/nonconductive_plus
 	. = ..()
 
@@ -160,6 +167,7 @@
 	block = TRAITBLOCK_NONCONDUCTEX
 	activation_messages=list("You feel a lot more rubbery.")
 	deactivation_messages=list("You feel less rubbery.")
+	primitive_expression_messages=list("looks very shiny.")
 	linked_trait_path = /datum/trait/positive/nonconductive_robust
 	. = ..()
 //YW ADDITION: END
@@ -173,6 +181,7 @@
 	block = TRAITBLOCK_DARKSIGHT
 	activation_messages=list("The darkness fades away.")
 	deactivation_messages=list("The darkness returns.")
+	primitive_expression_messages=list("squints at the light.")
 	linked_trait_path = /datum/trait/positive/darksight
 	. = ..()
 
@@ -187,6 +196,7 @@
 	block = TRAITBLOCK_DARKSIGHTEX
 	activation_messages=list("The darkness vanishes.")
 	deactivation_messages=list("The darkness returns.")
+	primitive_expression_messages=list("looks blinded by the light.")
 	linked_trait_path = /datum/trait/positive/darksight_plus
 	. = ..()
 
@@ -374,6 +384,7 @@
 	block = TRAITBLOCK_PHOTORESIST
 	activation_messages=list("Was everything always this dim?")
 	deactivation_messages=list("The world feels less dim.")
+	primitive_expression_messages=list("stares blankly.")
 	linked_trait_path = /datum/trait/positive/photoresistant
 	. = ..()
 
@@ -388,6 +399,7 @@
 	block = TRAITBLOCK_PHOTORESISTEX
 	activation_messages=list("Was everything always this dark?")
 	deactivation_messages=list("The world feels less dark.")
+	primitive_expression_messages=list("stares blankly.")
 	linked_trait_path = /datum/trait/positive/photoresistant_plus
 	. = ..()
 //YW ADDITION: END
@@ -401,6 +413,7 @@
 	block = TRAITBLOCK_WINGFLIGHT
 	activation_messages=list("You feel like you could take flight")
 	deactivation_messages=list("The sky is out of your reach.")
+	primitive_expression_messages=list("jumps around happily.")
 	linked_trait_path = /datum/trait/positive/winged_flight
 	. = ..()
 
@@ -426,6 +439,7 @@
 	block = TRAITBLOCK_SOFTLAND
 	activation_messages=list("You feel more nimble.")
 	deactivation_messages=list("You feel less nimble.")
+	primitive_expression_messages=list("hops in the air.")
 	linked_trait_path = /datum/trait/positive/soft_landing
 	. = ..()
 
@@ -445,6 +459,7 @@
 	block = TRAITBLOCK_ANTISEPTIC
 	activation_messages=list("Your mouth tastes different.")
 	deactivation_messages=list("Your mouth returns to normal.")
+	primitive_expression_messages=list("drools.")
 	linked_trait_path = /datum/trait/positive/antiseptic_saliva
 	. = ..()
 
@@ -467,6 +482,7 @@
 	block = TRAITBLOCK_SPRINGSTEP
 	activation_messages=list("You feel more acrobatic.")
 	deactivation_messages=list("You feel less acrobatic.")
+	primitive_expression_messages=list("does a flip.")
 	linked_trait_path = /datum/trait/positive/traceur
 	. = ..()
 
@@ -483,6 +499,7 @@
 	block = TRAITBLOCK_BLOODSUCKEREX
 	activation_messages=list("You feel really thirsty for metal?")
 	deactivation_messages=list("Your thirst for blood ends.")
+	primitive_expression_messages=list("looks thirsty.")
 	linked_trait_path = /datum/trait/positive/bloodsucker_plus
 	. = ..()
 
@@ -503,6 +520,7 @@
 	block = TRAITBLOCK_SONAR
 	activation_messages=list("You hear EVERYTHING.")
 	deactivation_messages=list("Your hearing returns to normal.")
+	primitive_expression_messages=list("looks around surprised.")
 	linked_trait_path = /datum/trait/positive/sonar
 	. = ..()
 
@@ -526,6 +544,7 @@
 	block = TRAITBLOCK_COLDADAPT
 	activation_messages=list("The world feels warmer.")
 	deactivation_messages=list("Everything feels less warm.")
+	primitive_expression_messages=list("fluffs up.")
 	linked_trait_path = /datum/trait/positive/coldadapt
 	. = ..()
 
@@ -541,6 +560,7 @@
 	block = TRAITBLOCK_HOTADAPT
 	activation_messages=list("The world feels colder.")
 	deactivation_messages=list("Everything feels less cold.")
+	primitive_expression_messages=list("a bit cold.")
 	linked_trait_path = /datum/trait/positive/hotadapt
 	. = ..()
 //YW ADDITIONS: END
@@ -562,6 +582,7 @@
 	block = TRAITBLOCK_WEAVER
 	activation_messages=list("You start to leak silk.")
 	deactivation_messages=list("You forget how to shot web.")
+	primitive_expression_messages=list("leaks silk.")
 	linked_trait_path = /datum/trait/positive/weaver
 	. = ..()
 
@@ -591,6 +612,7 @@
 	block = TRAITBLOCK_AQUATIC
 	activation_messages=list("You feel like you belong under the sea.")
 	deactivation_messages=list("You no longer want to live in the sea.")
+	primitive_expression_messages=list("blubs.")
 	linked_trait_path = /datum/trait/positive/aquatic
 	. = ..()
 

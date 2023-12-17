@@ -29,6 +29,9 @@
 	// Possible deactivation messages
 	var/list/deactivation_messages=list()
 
+	// Possible monkey expressions. Monkey's emote when they have this gene!
+	var/list/primitive_expression_messages=list()
+
 /**
 * Is the gene active in this mob's DNA?
 */

@@ -64,6 +64,7 @@
 	name="Epilepsy"
 	activation_messages=list("You get a headache.")
 	deactivation_messages=list("Your headache stops.")
+	primitive_expression_messages=list("shudders and twitches.")
 	disability=EPILEPSY
 
 /datum/dna/gene/disability/epilepsy/New()
@@ -73,6 +74,7 @@
 	name="Coughing"
 	activation_messages=list("You start coughing.")
 	deactivation_messages=list("You stop couching.")
+	primitive_expression_messages=list("coughs.")
 	disability=COUGHING
 
 /datum/dna/gene/disability/cough/New()
@@ -92,6 +94,7 @@
 	name="Tourettes"
 	activation_messages=list("You twitch.")
 	deactivation_messages=list("You feel less unstable.")
+	primitive_expression_messages=list("twitches and chitters.")
 	disability=TOURETTES
 
 /datum/dna/gene/disability/tourettes/New()
@@ -101,6 +104,7 @@
 	name="Nervousness"
 	activation_messages=list("You feel nervous.")
 	deactivation_messages=list("You feel more calm.")
+	primitive_expression_messages=list("anxiously chitters.")
 	disability=NERVOUS
 
 /datum/dna/gene/disability/nervousness/New()
@@ -110,6 +114,7 @@
 	name="Vertigo"
 	activation_messages=list("You feel like the world could start spinning.")
 	deactivation_messages=list("The world feels more stable.")
+	primitive_expression_messages=list("looks dizzy.")
 	disability=VERTIGO
 
 /datum/dna/gene/disability/vertigo/New()
@@ -119,6 +124,7 @@
 	name="Blindness"
 	activation_messages=list("You can't seem to see anything.")
 	deactivation_messages=list("Your vision returns.")
+	primitive_expression_messages=list("stumbles aimlessly.")
 	sdisability=BLIND
 
 /datum/dna/gene/disability/blindness/New()
@@ -128,6 +134,7 @@
 	name="Deafness"
 	activation_messages=list("It's kinda quiet.")
 	deactivation_messages=list("You can hear again.")
+	primitive_expression_messages=list("stares blanky.")
 	sdisability=DEAF
 
 /datum/dna/gene/disability/deaf/New()
@@ -141,6 +148,7 @@
 	name="Nearsightedness"
 	activation_messages=list("Your eyes feel weird...")
 	deactivation_messages=list("Everything comes back into focus.")
+	primitive_expression_messages=list("squints and stares.")
 	disability=NEARSIGHTED
 
 /datum/dna/gene/disability/nearsighted/New()

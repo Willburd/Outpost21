@@ -1062,6 +1062,11 @@
 	name = "\improper Research Elevator Maintenance Foundation"
 	icon_state = "pmaint"
 
+/area/maintenance/research/geneticshole
+	name = "\improper Research Genetics Hole"
+	icon_state = "pmaint"
+	base_turf = /turf/simulated/open
+
 /area/maintenance/crewelev
 	name = "\improper Civilian Elevator Maintenance Shaft"
 	base_turf = /turf/simulated/open
@@ -1547,6 +1552,11 @@
 	name = "\improper Research Mailing"
 	base_turf = /turf/simulated/open
 	holomap_color = HOLOMAP_AREACOLOR_CARGO
+
+/area/rnd/research/oldrd
+	name = "\improper Old RDs office"
+	base_turf = /turf/simulated/open
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/rnd/research/laundry
 	name = "\improper Xenolab Laundry"
@@ -2078,7 +2088,7 @@
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/genetics
-	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/genetics_cloning
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
@@ -2203,6 +2213,9 @@
 	base_turf = /turf/simulated/open
 
 /area/maintenance/medbay_fore
+	base_turf = /turf/simulated/open
+
+/area/maintenance/medbay_roof
 	base_turf = /turf/simulated/open
 
 /area/maintenance/substation/medical

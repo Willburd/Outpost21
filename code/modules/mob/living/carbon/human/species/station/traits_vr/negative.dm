@@ -126,6 +126,8 @@
 	var_changes = list("brute_mod" = 1.1) //YW EDIT
 /datum/dna/gene/trait_linked/minor_brute_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK_MINOR
+	activation_messages=list("Everything feels a little more dangerous.")
+	deactivation_messages=list("You feel less vulnerable.")
 	linked_trait_path = /datum/trait/negative/minor_brute_weak
 	. = ..()
 
@@ -137,6 +139,8 @@
 	var_changes = list("brute_mod" = 1.2) //YW EDIT
 /datum/dna/gene/trait_linked/brute_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK
+	activation_messages=list("Everything feels more dangerous.")
+	deactivation_messages=list("You feel less vulnerable.")
 	linked_trait_path = /datum/trait/negative/brute_weak
 	. = ..()
 
@@ -148,6 +152,8 @@
 	var_changes = list("brute_mod" = 1.4) //YW EDIT
 /datum/dna/gene/trait_linked/brute_weak_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK_MAJOR
+	activation_messages=list("Everything feels a lot more dangerous.")
+	deactivation_messages=list("You feel less vulnerable.")
 	linked_trait_path = /datum/trait/negative/brute_weak_plus
 	. = ..()
 
@@ -159,6 +165,8 @@
 	var_changes = list("burn_mod" = 1.1) //YW EDIT
 /datum/dna/gene/trait_linked/minor_burn_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNWEAK_MINOR
+	activation_messages=list("You feel a little more flammable.")
+	deactivation_messages=list("You feel less flammable.")
 	linked_trait_path = /datum/trait/negative/minor_burn_weak
 	. = ..()
 
@@ -170,6 +178,8 @@
 	var_changes = list("burn_mod" = 1.2) //YW EDIT
 /datum/dna/gene/trait_linked/burn_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNWEAK
+	activation_messages=list("You feel more flammable.")
+	deactivation_messages=list("You feel less flammable.")
 	linked_trait_path = /datum/trait/negative/burn_weak
 	. = ..()
 
@@ -181,6 +191,8 @@
 	var_changes = list("burn_mod" = 1.4) //YW EDIT
 /datum/dna/gene/trait_linked/burn_weak_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNWEAK_MAJOR
+	activation_messages=list("You feel a lot more flammable.")
+	deactivation_messages=list("You feel less flammable.")
 	linked_trait_path = /datum/trait/negative/burn_weak_plus
 	. = ..()
 
@@ -193,6 +205,8 @@
 	var_changes = list("chem_strength_heal" = 0.8)
 /datum/dna/gene/trait_linked/reduced_biocompat/New() // Genetically linked trait
 	block = TRAITBLOCK_REDUCEDCHEM
+	activation_messages=list("You feel your body slowing down.")
+	deactivation_messages=list("You feel your body speeding up.")
 	linked_trait_path = /datum/trait/negative/reduced_biocompat
 	. = ..()
 
@@ -204,6 +218,8 @@
 	var_changes = list("chem_strength_tox" = 1.25)
 /datum/dna/gene/trait_linked/sensitive_biochem/New() // Genetically linked trait
 	block = TRAITBLOCK_RAISEDCHEM
+	activation_messages=list("You feel a little uneasy.")
+	deactivation_messages=list("You feel less uneasy.")
 	linked_trait_path = /datum/trait/negative/sensitive_biochem
 	. = ..()
 
@@ -215,6 +231,8 @@
 	var_changes = list("alcohol_mod" = 3)
 /datum/dna/gene/trait_linked/alcohol_intolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_AIRLIVER
+	activation_messages=list("You feel like a glass of water could make you tipsy.")
+	deactivation_messages=list("You feel like less of a lightweight.")
 	linked_trait_path = /datum/trait/negative/alcohol_intolerance_advanced
 	. = ..()
 
@@ -251,6 +269,8 @@
 	var_changes = list("siemens_coefficient" = 1.25) //This makes you a lot weaker to tasers. :YW EDIT
 /datum/dna/gene/trait_linked/conductive/New() // Genetically linked trait
 	block = TRAITBLOCK_CONDUCTIVE
+	activation_messages=list("You can feel a tingle in the air.")
+	deactivation_messages=list("You a little more resistant.")
 	linked_trait_path = /datum/trait/negative/conductive
 	. = ..()
 
@@ -262,6 +282,8 @@
 	varchange_type = TRAIT_VARCHANGE_LESS_BETTER
 /datum/dna/gene/trait_linked/conductive_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_CONDUCTIVE_MAJOR
+	activation_messages=list("You can feel the static in the air.")
+	deactivation_messages=list("You a little more resistant.")
 	linked_trait_path = /datum/trait/negative/conductive_plus
 	. = ..()
 
@@ -273,6 +295,8 @@
 	var_changes = list("siemens_coefficient" = 2.0) //This makes you extremely weak to tasers.
 /datum/dna/gene/trait_linked/conductive_extreme/New() // Genetically linked trait
 	block = TRAITBLOCK_CONDUCTIVE_EXTREME
+	activation_messages=list("You can feel the current in the wires nearby.")
+	deactivation_messages=list("You a little more resistant.")
 	linked_trait_path = /datum/trait/negative/conductive_extreme
 	. = ..()
 //YW ADDITIONS: END
@@ -352,6 +376,8 @@
 	var_changes = list("breath_type" = "phoron", "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/vox)
 /datum/dna/gene/trait_linked/breathes/phoron/New() // Genetically linked trait
 	block = TRAITBLOCK_BREATH_PHORON
+	activation_messages=list("The air hurts to breath, your body craves phoron!")
+	deactivation_messages=list("It no longer hurts to breath.")
 	linked_trait_path = /datum/trait/negative/breathes/phoron
 	. = ..()
 
@@ -362,6 +388,8 @@
 	var_changes = list("breath_type" = "nitrogen", "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/nitrogen_breather)
 /datum/dna/gene/trait_linked/breathes/nitrogen/New() // Genetically linked trait
 	block = TRAITBLOCK_BREATH_NITROGEN
+	activation_messages=list("The air hurts to breath, your body craves nitrogen!")
+	deactivation_messages=list("It no longer hurts to breath.")
 	linked_trait_path = /datum/trait/negative/breathes/nitrogen
 	. = ..()
 
@@ -372,6 +400,8 @@
 	var_changes = list("breath_type" = "carbon_dioxide", "exhale_type" = null, "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/carbon_breather)
 /datum/dna/gene/trait_linked/breathes/carbon/New() // Genetically linked trait
 	block = TRAITBLOCK_BREATH_CARBON
+	activation_messages=list("The air hurts to breath, your body craves carbon dioxide!")
+	deactivation_messages=list("It no longer hurts to breath.")
 	linked_trait_path = /datum/trait/negative/breathes/carbon
 	. = ..()
 

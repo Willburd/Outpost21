@@ -131,6 +131,8 @@
 	var_changes = list("siemens_coefficient" = 0.75) //YW EDIT
 /datum/dna/gene/trait_linked/nonconductive/New() // Genetically linked trait
 	block = TRAITBLOCK_NONCONDUCT
+	activation_messages=list("You feel a little more rubbery.")
+	deactivation_messages=list("You feel less rubbery.")
 	linked_trait_path = /datum/trait/positive/nonconductive
 	. = ..()
 
@@ -142,6 +144,8 @@
 	var_changes = list("siemens_coefficient" = 0.5) //YW EDIT
 /datum/dna/gene/trait_linked/nonconductive_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_NONCONDUCT_MAJOR
+	activation_messages=list("You feel more rubbery.")
+	deactivation_messages=list("You feel less rubbery.")
 	linked_trait_path = /datum/trait/positive/nonconductive_plus
 	. = ..()
 
@@ -154,6 +158,8 @@
 	var_changes = list("siemens_coefficient" = 0.25)
 /datum/dna/gene/trait_linked/nonconductive_robust/New() // Genetically linked trait
 	block = TRAITBLOCK_NONCONDUCTEX
+	activation_messages=list("You feel a lot more rubbery.")
+	deactivation_messages=list("You feel less rubbery.")
 	linked_trait_path = /datum/trait/positive/nonconductive_robust
 	. = ..()
 //YW ADDITION: END
@@ -215,6 +221,8 @@
 	var_changes = list("brute_mod" = 0.9) //YW EDIT
 /datum/dna/gene/trait_linked/minor_brute_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTERESIST_MINOR
+	activation_messages=list("You feel a little more durable.")
+	deactivation_messages=list("You feel less durable.")
 	linked_trait_path = /datum/trait/positive/minor_brute_resist
 	. = ..()
 
@@ -227,6 +235,8 @@
 	var_changes = list("brute_mod" = 0.8)
 /datum/dna/gene/trait_linked/brute_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTERESIST
+	activation_messages=list("You feel more durable.")
+	deactivation_messages=list("You feel less durable.")
 	linked_trait_path = /datum/trait/positive/brute_resist
 	. = ..()
 
@@ -240,6 +250,8 @@
 	var_changes = list("brute_mod" = 0.6) //YW EDIT
 /datum/dna/gene/trait_linked/brute_resist_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTERESIST_MAJOR
+	activation_messages=list("You feel a lot more durable.")
+	deactivation_messages=list("You feel less durable.")
 	linked_trait_path = /datum/trait/positive/brute_resist_plus
 	. = ..()
 // YW ADDITION: END
@@ -252,6 +264,8 @@
 	var_changes = list("burn_mod" = 0.9) //YW EDIT
 /datum/dna/gene/trait_linked/minor_burn_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNRESIST_MINOR
+	activation_messages=list("Your skin feels a little waxy.")
+	deactivation_messages=list("You skin feels less waxy.")
 	linked_trait_path = /datum/trait/positive/minor_burn_resist
 	. = ..()
 
@@ -264,6 +278,8 @@
 	var_changes = list("burn_mod" = 0.8) //YW EDIT
 /datum/dna/gene/trait_linked/burn_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNRESIST
+	activation_messages=list("Your skin feels waxy.")
+	deactivation_messages=list("You skin feels less waxy.")
 	linked_trait_path = /datum/trait/positive/burn_resist
 	. = ..()
 
@@ -277,6 +293,8 @@
 	var_changes = list("burn_mod" = 0.6)
 /datum/dna/gene/trait_linked/burn_resist_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BURNRESIST_MAJOR
+	activation_messages=list("Your skin feels like wax.")
+	deactivation_messages=list("You skin feels less waxy.")
 	linked_trait_path = /datum/trait/positive/burn_resist_plus
 	. = ..()
 
@@ -288,6 +306,8 @@
 	var_changes = list("chem_strength_heal" = 1.2)
 /datum/dna/gene/trait_linked/improved_biocompat/New() // Genetically linked trait
 	block = TRAITBLOCK_CHEMADVANCED
+	activation_messages=list("You feel your body speed up.")
+	deactivation_messages=list("You feel your body slow down.")
 	linked_trait_path = /datum/trait/positive/improved_biocompat
 	. = ..()
 

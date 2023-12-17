@@ -356,7 +356,7 @@
 					for(var/datum/reagent/x in occupant.reagents.reagent_list)
 						occupant.reagents.trans_to_obj(beaker, 3)
 						pumped++
-					if(ishuman(occupant))
+					if(ishuman(occupant) && prob(25)) // outpost 21 edit - reduced the hazard of this thing
 						occupant.vessel.trans_to_obj(beaker, pumped + 1)
 			else
 				toggle_filter()

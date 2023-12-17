@@ -120,28 +120,28 @@
 	title = "Pharmacist"
 	title_blurb = "A Pharmacist focuses on the chemical needs of the Medical Department, and often offers to fill crew prescriptions at their discretion."
 
-/* I'm commenting out Geneticist so you can't actually see it in the job menu, given that you can't play as one - Jon.
 //////////////////////////////////
 //			Geneticist
 //////////////////////////////////
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_RESEARCH)
+	departments = list(DEPARTMENT_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
-	supervisors = "the Chief Medical Officer and Research Director"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
 	economic_modifier = 7
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
-	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
+	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+	minimal_access = list(access_medical, access_morgue, access_genetics)
+	minimal_player_age = 3
+	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
 	job_description = "A Geneticist operates genetic manipulation equipment to repair any genetic defects encountered in crew, from cloning or radiation as examples. \
 						When required, geneticists have the skills to clone, and are the superior choice when available for doing so."
-*/
 
 //////////////////////////////////
 //			Psychiatrist

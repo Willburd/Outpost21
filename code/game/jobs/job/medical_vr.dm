@@ -90,3 +90,13 @@
 
 /datum/alt_title/sar
 	title = "Search and Rescue"
+
+/datum/job/geneticist
+	pto_type = PTO_MEDICAL
+	alt_titles = list("Gene Therapist" = /datum/alt_title/genetherapy, "Sleeve Engineer" = /datum/alt_title/sleeveengineer)
+
+/datum/alt_title/genetherapy
+	title = "Gene Therapist"
+
+/datum/alt_title/sleeveengineer
+	title = "Sleeve Engineer"

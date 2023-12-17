@@ -68,7 +68,7 @@
 	job_description = "A Scientist is a generalist working in the Research department, with general knowledge of the scientific process, as well as \
 						the principles and requirements of Research and Development. They may also formulate experiments of their own devising, if \
 						they find an appropriate topic."
-	alt_titles = list("Xenoarchaeologist" = /datum/alt_title/xenoarch, "Anomalist" = /datum/alt_title/anomalist, "Geneticist" = /datum/alt_title/geneticist /*, \
+	alt_titles = list("Xenoarchaeologist" = /datum/alt_title/xenoarch, "Anomalist" = /datum/alt_title/anomalist /*, \
 						"Phoron Researcher" = /datum/alt_title/phoron_research*/) // outpost 21 edit - disabled phoron research
 
 // Scientist Alt Titles
@@ -81,11 +81,6 @@
 	title = "Anomalist"
 	title_blurb = "An Anomalist is a Scientist whose expertise is analyzing alien artifacts. They are familar with the most common methods of testing artifact \
 					function. They work closely with Xenoarchaeologists, or Miners, if either role is present."
-
-/datum/alt_title/geneticist
-	title = "Geneticist"
-	title_blurb = "A geneticist is a biological engineering specialist. Using the wonders of modern science to alter the body, and even unlock it's hidden potential."
-	title_outfit = /decl/hierarchy/outfit/job/science/geneticist
 
 /* outpost 21 edit - disabled phoron research
 /datum/alt_title/phoron_research

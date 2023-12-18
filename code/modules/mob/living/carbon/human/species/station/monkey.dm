@@ -80,6 +80,7 @@
 					H.emote(pick("scratch","jump","roll","tail"))
 				else
 					H.custom_emote(VISIBLE_MESSAGE, "[geneexpression]")
+		// More... intense, expressions.
 		if(prob(5) && H.mutations.len)
 			if((LASER in H.mutations))
 				// zappy monkeys
@@ -88,6 +89,8 @@
 					targs.Add(X)
 				if(targs.len)
 					H.LaserEyes(pick(targs))
+		if(prob(3) && H.dna && H.dna.GetSEState(FARTBLOCK))
+			H.super_fart()
 	..()
 
 /datum/species/monkey/get_random_name()

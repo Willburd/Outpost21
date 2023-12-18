@@ -210,6 +210,8 @@
 
 /datum/dna/gene/basic/superfart/activate(var/mob/M, var/connected, var/flags)
 	. = ..(M,connected,flags)
+	M.verbs |= /mob/living/proc/super_fart
 
 /datum/dna/gene/basic/superfart/deactivate(mob/M, connected, flags)
 	. = ..(M, connected, flags)
+	M.verbs -= /mob/living/proc/super_fart

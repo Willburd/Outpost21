@@ -228,9 +228,13 @@
 			var/dist = get_dist(source, A)
 			var/mob/living/L = A
 			if(dist <= zap_range && (dist < closest_dist || !closest_mob) && L.stat != DEAD && !(L.status_flags & GODMODE))
-				closest_mob = L
-				closest_atom = A
-				closest_dist = dist
+				if(isturf(L.loc))
+					var/turf/flr = L.loc
+					// being indoors will save you, also stops department pets dying to zaps out a window
+					if(flr.outdoors > -1)
+						closest_mob = L
+						closest_atom = A
+						closest_dist = dist
 
 		else if(closest_mob)
 			continue

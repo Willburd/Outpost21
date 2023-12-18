@@ -136,6 +136,11 @@
 /obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to clone people without external assistance
 	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
 		return
+	if(target.buckled)
+		return 0
+	if(target.has_buckled_mobs())
+		to_chat(user, span("warning", "\The [target] has other entities attached to it. Remove them first."))
+		return
 	put_in(target)
 
 /obj/machinery/dna_scannernew/verb/move_inside()

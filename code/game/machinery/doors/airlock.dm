@@ -1117,7 +1117,7 @@ About the new airlock wires panel:
 		return // cannot interact with doors at all
 
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
-	if(brace && C && istype(C, /obj/item/weapon/tool/crowbar/brace_jack))
+	if(brace && C && istype(C, /obj/item/weapon/tool/crowbar/brace_jack) && user.a_intent == I_HELP)
 		return brace.attackby(C, user)
 
 	if(!brace && istype(C, /obj/item/airlock_brace))
@@ -1225,7 +1225,7 @@ About the new airlock wires panel:
 	// Check if we're using a crowbar or armblade, and if the airlock's unpowered for whatever reason (off, broken, etc).
 	else if(istype(C, /obj/item/weapon))
 		var/obj/item/weapon/W = C
-		if((W.pry == 1) && !arePowerSystemsOn())
+		if((W.pry == 1) && !arePowerSystemsOn() && !brace)
 			if(locked)
 				to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
 			else if( !welded && !operating )

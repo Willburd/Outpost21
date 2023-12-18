@@ -76,7 +76,7 @@
 
 /obj/item/airlock_brace/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(W, /obj/item/weapon/tool/crowbar/brace_jack) && user.a_intent != I_HELP)
+	if (istype(W, /obj/item/weapon/tool/crowbar/brace_jack) && user.a_intent == I_HELP)
 		if(!airlock)
 			return
 		var/obj/item/weapon/tool/crowbar/brace_jack/C = W

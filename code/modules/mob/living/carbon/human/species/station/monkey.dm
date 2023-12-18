@@ -60,7 +60,7 @@
 	if(!H.pulledby && H.canmove && isturf(H.loc)) //won't move if being pulled
 		if(prob(33))
 			step(H, pick(cardinal))
-		if(prob(4))
+		if(prob(5))
 			// Handle gene expression emotes
 			var/geneexpression
 			if(H.dna)

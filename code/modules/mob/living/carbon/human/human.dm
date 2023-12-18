@@ -1101,7 +1101,7 @@
 
 	if(species)
 
-		if(species.name && species.name == new_species && species.name != "Custom Species") //VOREStation Edit
+		if(species.name && species.name == new_species) // && species.name != "Custom Species") //VOREStation Edit // outpost 21 edit - custom species removal
 			return
 		if(species.language)
 			remove_language(species.language)
@@ -1114,7 +1114,9 @@
 		holder_type = null
 		hunger_rate = initial(hunger_rate) //VOREStation Add
 
-	species = GLOB.all_species[new_species]
+	// this used to be just GLOB.all_species[new_species]. This means every monkey on the station would update the original monkey species datum... - Willbird
+	var/new_species_path = GLOB.all_species[new_species].type
+	species = new new_species_path()
 
 	if(species.language)
 		add_language(species.language)

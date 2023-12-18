@@ -724,7 +724,13 @@
 					buffers[bufferId] = new /datum/transhuman/body_record()
 				if("changeLabel")
 					playsound(src, "keyboard", 40) // into console
-					tgui_modal_input(src, "changeBufferLabel", "Please enter the new buffer label:", null, list("id" = bufferId), buffer.mydna.name, TGUI_MODAL_INPUT_MAX_LENGTH_NAME)
+					if(bufferId > 0 && bufferId <= length(buffers))
+						var/datum/transhuman/body_record/buf = buffers[bufferId]
+						var/newname = tgui_input_text( usr, "Please enter the new buffer label:", "changeBufferLabel", buf.mydna.name)
+						newname = sanitizeSafe(newname,TGUI_MODAL_INPUT_MAX_LENGTH_NAME)
+						if(newname)
+							buf.mydna.name = newname
+							buffers[bufferId] = buf
 				if("transfer")
 					if(!connected.occupant || (NOCLONE in connected.occupant.mutations) || !connected.occupant.dna)
 						return
@@ -865,9 +871,11 @@
 					var/datum/transhuman/body_record/buf = buffers[buffer_id]
 					var/obj/item/weapon/dnainjector/I = create_injector(buffer_id)
 					setInjectorBlock(I, answer, buf.mydna.copy())
-					var/blockindex = ((I.block-1) * 3) + 1
-					var/blockdat = copytext(buf.mydna.dna.struc_enzymes, blockindex, blockindex + 3)
-					I.name = "\improper DNA block injector ([I.block] - 0x[blockdat])"
+					// as neat as auto-naming is, it messes with antag fun
+					// var/blockindex = ((I.block-1) * 3) + 1
+					// var/blockdat = copytext(buf.mydna.dna.struc_enzymes, blockindex, blockindex + 3)
+					// I.name += " ([I.block]:0x[blockdat])"
+				/* // old, replaced by standard TGUI input
 				if("changeBufferLabel")
 					var/buffer_id = text2num(arguments["id"])
 					if(buffer_id < 1 || buffer_id > length(buffers))
@@ -875,6 +883,7 @@
 					var/datum/transhuman/body_record/buf = buffers[buffer_id]
 					buf.mydna.name = answer
 					buffers[buffer_id] = buf
+				*/
 				else
 					return FALSE
 		else

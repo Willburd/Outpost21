@@ -865,6 +865,9 @@
 					var/datum/transhuman/body_record/buf = buffers[buffer_id]
 					var/obj/item/weapon/dnainjector/I = create_injector(buffer_id)
 					setInjectorBlock(I, answer, buf.mydna.copy())
+					var/blockindex = ((I.block-1) * 3) + 1
+					var/blockdat = copytext(buf.mydna.dna.struc_enzymes, blockindex, blockindex + 3)
+					I.name = "\improper DNA block injector ([I.block] - 0x[blockdat])"
 				if("changeBufferLabel")
 					var/buffer_id = text2num(arguments["id"])
 					if(buffer_id < 1 || buffer_id > length(buffers))

@@ -7,7 +7,7 @@
 
 /datum/event/chu_infestation/setup()
 	announceWhen = rand(announceWhen, announceWhen + rand(60,100))
-	spawncount = rand(3 * severity, 5 * severity)
+	spawncount = rand(7 * severity, 8 * severity)
 	sent_chus_to_station = 1
 
 /datum/event/chu_infestation/announce()

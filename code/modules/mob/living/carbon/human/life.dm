@@ -37,6 +37,7 @@
 /mob/living/carbon/human
 	var/in_stasis = 0
 	var/heartbeat = 0
+	var/gutdeathpressure = 0 // for superfart and gibbing
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -320,6 +321,23 @@
 			make_dizzy(9)
 			Confuse(12)
 			make_jittery(15)
+	// gibbing gene
+	if(dna && dna.GetSEState(GIBBINGBLOCK))
+		gutdeathpressure += 0.01
+		if(gutdeathpressure > 0 && prob(gutdeathpressure))
+			emote(pick("whimper","belch","belch","belch","choke","shiver"))
+			Weaken(gutdeathpressure / 3)
+		if((gutdeathpressure/3) >= 1 && prob(gutdeathpressure/3))
+			gutdeathpressure = 0 // to stop retriggering
+			spawn(1)
+				emote(pick("whimper","shiver"))
+			spawn(3)
+				emote(pick("whimper","belch","shiver"))
+			spawn(4)
+				emote(pick("whimper","shiver"))
+			spawn(6)
+				emote(pick("belch"))
+				gib()
 	// outpost 21 edit end
 
 	var/rn = rand(0, 200)

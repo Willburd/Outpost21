@@ -43,6 +43,9 @@
 	REGENERATEBLOCK    = getAssignedBlock("REGENERATE",    numsToAssign, DNA_HARDER_BOUNDS)
 	NOPRINTSBLOCK      = getAssignedBlock("NOPRINTS",      numsToAssign, DNA_HARD_BOUNDS)
 	HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
+	GIBBINGBLOCK   	   = getAssignedBlock("GIBBING",      numsToAssign)
+	LASERBLOCK    	   = getAssignedBlock("LASERS",      numsToAssign, DNA_HARDER_BOUNDS)
+	FARTBLOCK    	   = getAssignedBlock("FART",      numsToAssign, DNA_HARD_BOUNDS)
 
 	// Trait linked gene blocks! see code\game\dna\genes\traits.dm for info!
 	// NEGATIVE

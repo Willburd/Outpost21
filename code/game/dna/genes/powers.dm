@@ -187,3 +187,29 @@
 	block=TELEBLOCK
 /datum/dna/gene/basic/tk/OnDrawUnderlays(var/mob/M,var/g,var/fat)
 	return "telekinesishead[fat]_s"
+
+/datum/dna/gene/basic/laser
+	name="Laser Vision"
+	activation_messages=list("Your eyes spark with energy.")
+	deactivation_messages=list("The energy in your eyes dissipates.")
+	primitive_expression_messages=list()
+	mutation=LASER
+
+/datum/dna/gene/basic/laser/New()
+	block=LASERBLOCK
+
+/datum/dna/gene/basic/superfart
+	name="Super Fart"
+	activation_messages=list("You feel incredible pressure inside of you.")
+	deactivation_messages=list("The pressure inside of you vanishes.")
+	primitive_expression_messages=list("toots.")
+	mutation=mFingerprints
+
+/datum/dna/gene/basic/superfart/New()
+	block=FARTBLOCK
+
+/datum/dna/gene/basic/superfart/activate(var/mob/M, var/connected, var/flags)
+	. = ..(M,connected,flags)
+
+/datum/dna/gene/basic/superfart/deactivate(mob/M, connected, flags)
+	. = ..(M, connected, flags)

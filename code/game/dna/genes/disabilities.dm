@@ -153,3 +153,13 @@
 
 /datum/dna/gene/disability/nearsighted/New()
 	block=GLASSESBLOCK
+
+/datum/dna/gene/basic/gibbing
+	name="Gibbing"
+	activation_messages=list("You feel incredible pressure inside of you.")
+	deactivation_messages=list("The pressure inside of you vanishes.")
+	primitive_expression_messages=list("shudders.","gasps.","chokes.")
+	mutation=mFingerprints
+
+/datum/dna/gene/basic/gibbing/New()
+	block=GIBBINGBLOCK

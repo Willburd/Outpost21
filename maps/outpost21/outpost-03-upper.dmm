@@ -1017,7 +1017,7 @@
 "gAt" = (/obj/structure/cliff{dir = 4},/turf/simulated/mineral/alt/ignore_mapgen/muriki,/area/muriki/crystal)
 "gBl" = (/obj/item/weapon/coin/gold,/obj/fiftyspawner/platinum,/turf/simulated/floor/indoorrocks/muriki{icon_state = "rock_grey"},/area/muriki/crystal)
 "gBy" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 26},/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/monotile{color = "#999999"},/area/chapel/main)
-"gCh" = (/obj/structure/lattice,/obj/structure/disposalpipe/down{dir = 1},/obj/machinery/light/small{dir = 4},/turf/simulated/open/muriki,/area/maintenance/medbay_roof)
+"gCh" = (/obj/structure/lattice,/obj/structure/disposalpipe/down{dir = 1},/obj/machinery/light/small{dir = 4},/turf/simulated/open,/area/maintenance/medbay_roof)
 "gCO" = (/obj/effect/floor_decal/corner/lime{dir = 6},/obj/machinery/doorbell_chime{id_tag = "kitchending"; name = "Kitchen Bell"; pixel_x = 32},/turf/simulated/floor/tiled/hydro,/area/hydroponics/hallway)
 "gCP" = (/turf/simulated/floor/flesh,/area/muriki/processor/gland/nitrogen)
 "gDc" = (/obj/structure/sink/kitchen{dir = 4; pixel_x = 12},/obj/effect/floor_decal/spline/plain{dir = 5},/turf/simulated/floor/grass,/area/hydroponics/apiary)

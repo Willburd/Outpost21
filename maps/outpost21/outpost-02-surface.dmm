@@ -1073,7 +1073,7 @@
 "bNV" = (/obj/machinery/conveyor{dir = 1; id = "QMLoad"},/obj/machinery/light{dir = 4},/obj/structure/sign/christmas/lights{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/storage)
 "bNY" = (/obj/effect/floor_decal/borderfloor/corner{dir = 8},/obj/effect/floor_decal/corner/beige/bordercorner{dir = 8},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled,/area/quartermaster/foyer)
 "bOh" = (/obj/effect/floor_decal/corner/blue/border{dir = 4},/turf/simulated/floor/tiled/white,/area/medical/chemistry)
-"bOw" = (/obj/structure/lattice,/obj/structure/disposalpipe/down{dir = 4},/turf/simulated/open/muriki,/area/maintenance/medbay_roof)
+"bOw" = (/obj/structure/lattice,/obj/structure/disposalpipe/down{dir = 4},/turf/simulated/open,/area/maintenance/medbay_roof)
 "bOK" = (/obj/machinery/door/airlock/glass_security{name = "Security Lobby"; req_one_access = 0},/obj/machinery/door/firedoor/glass,/obj/machinery/door/blast/gate/thin/open{dir = 2; icon_state = "shutter2_0"; id = "security_lockdown"; name = "Security Lockdown"},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/sign/christmas/wreath,/turf/simulated/floor/tiled/steel_grid,/area/security/lobby)
 "bOX" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/regular{pixel_x = 5; pixel_y = 5},/obj/effect/floor_decal/corner/blue/full{dir = 8},/obj/item/weapon/storage/firstaid/fire,/obj/structure/sign/christmas/lights{dir = 8},/obj/structure/sign/christmas/lights{dir = 1},/turf/simulated/floor/tiled/old_tile/white,/area/security/security_aid_station)
 "bOZ" = (/obj/effect/landmark/start{name = "Head of Security"},/obj/structure/bed/chair/backed_red,/turf/simulated/floor/wood,/area/security/briefing_room)

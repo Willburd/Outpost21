@@ -35,6 +35,11 @@
 				hellexitlist += R
 			if(R.name == "redentrance")
 				redexitlist += R
+		// shakey
+		for(var/mob/M in living_mobs(range))
+			shake_camera(M, 5, 3)
+			if(M != src)
+				M.Stun(3)
 		// sparky
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(5, 0, src)
@@ -47,10 +52,6 @@
 			C.forceMove(pick(redexitlist).loc)
 		else
 			C.gib()
-		for(var/mob/M in living_mobs(range))
-			shake_camera(M, 5, 3)
-			if(M != src)
-				M.Stun(3)
 		deathmessage = " and toots out of time and space"
 	// death toot
 	else if(C.gutdeathpressure > 5)

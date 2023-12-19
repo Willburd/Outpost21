@@ -107,6 +107,8 @@
 		return
 	if(inuse)
 		return 0
+	if(!M.Adjacent(user))
+		return 0
 
 	user.visible_message("<span class='danger'>\The [user] is trying to inject \the [M] with \the [src]!</span>")
 	inuse = 1
@@ -116,6 +118,9 @@
 
 	if(!do_after(user,50))
 		return
+
+	if(!M.Adjacent(user))
+		return 0
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)

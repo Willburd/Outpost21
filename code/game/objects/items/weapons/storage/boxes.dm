@@ -151,7 +151,7 @@
 	icon_state = "dna"
 	starts_with = list(/obj/item/weapon/dnainjector/nullifier)
 
-/obj/item/weapon/storage/box/injectors/New()
+/obj/item/weapon/storage/box/injectors/Initialize()
 	. = ..()
 	spawn_dna_injector_random(src)
 	spawn_dna_injector_random(src)

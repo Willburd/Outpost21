@@ -231,6 +231,14 @@
 	base_turf = /turf/simulated/mineral/floor/muriki
 	holomap_color = HOLOMAP_AREACOLOR_CIV
 
+//
+// Medical ---------------------------------------------------------
+//
+
+/area/maintenance/medbay_roof
+	name = "\improper Medical Roof Maintenance"
+	base_turf = /turf/simulated/open
+	sound_env = SMALL_ENCLOSED
 
 //
 // Cargo ---------------------------------------------------------
@@ -2213,9 +2221,6 @@
 	base_turf = /turf/simulated/open
 
 /area/maintenance/medbay_fore
-	base_turf = /turf/simulated/open
-
-/area/maintenance/medbay_roof
 	base_turf = /turf/simulated/open
 
 /area/maintenance/substation/medical

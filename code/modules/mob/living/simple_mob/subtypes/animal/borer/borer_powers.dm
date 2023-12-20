@@ -241,6 +241,8 @@
 					tastemessage += taste + ", "
 				else
 					tastemessage += " and " + taste + ". "
+					break
+				bigtaste -= taste
 		else
 			// single
 			tastemessage += bigtaste[1] + ". "
@@ -258,6 +260,8 @@
 					tastemessage += taste + ", "
 				else
 					tastemessage += " and " + taste + ". "
+					break
+				smalltaste -= taste
 		else
 			// single
 			tastemessage += smalltaste[1] + ". "

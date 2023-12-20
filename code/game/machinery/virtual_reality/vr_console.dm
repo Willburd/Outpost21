@@ -170,12 +170,16 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.loc = src
-		update_use_power(USE_POWER_ACTIVE)
 		occupant = M
 
 		update_icon()
 
-		enter_vr()
+		if(!M.has_brain_worms())
+			update_use_power(USE_POWER_ACTIVE)
+			enter_vr()
+		else
+			// crashes borers, byond does not like moving the weirdly bound client that borers become. So lets just prevent it altogether
+			to_chat(user, "<span class='warning'>\The [src] rejects [M] with a sharp beep.</span>")
 	return
 
 /obj/machinery/vr_sleeper/proc/go_out(var/forced = TRUE)

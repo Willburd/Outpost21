@@ -18,7 +18,7 @@
 
 /datum/event/spider_migration/start()
 	if(severity == EVENT_LEVEL_MAJOR)
-		spawn_spider(landmarks_list.len)
+		spawn_spider(min(12,landmarks_list.len)) // number of spawners total, but max of 12
 	else if(severity == EVENT_LEVEL_MODERATE)
 		spawn_spider(rand(4, 6)) 			//12 to 30 spider, in small groups
 	else
@@ -28,7 +28,7 @@
 	var/list/spawn_locations = list()
 
 	for(var/obj/effect/landmark/C in landmarks_list)
-		if(C.name == "carpspawn")
+		if(C.name == "spiderspawn")
 			spawn_locations.Add(C.loc)
 	spawn_locations = shuffle(spawn_locations)
 	num_groups = min(num_groups, spawn_locations.len)

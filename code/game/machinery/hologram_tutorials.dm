@@ -257,7 +257,14 @@
 /obj/machinery/hologram/holo_tutorial/hazard_1
 	dialog = list(	"Welcome, to the hazard training course.",
 					"This training course expects you to already have basic training, and will only provide assistance when absolutely required to.",
-					"If you still required assistance, the hologram emitters found within the hazard course will provide recorded messages from the basic training course. These messages will be relevant to the current task required of you during the course.",
+					"The first section of this course will present you with a virtual station to explore. Experiment with what you have learned, and progress further into the course at your own pace.",
 					"The course ahead will present you with simulated dangers, and death. The experience of pain is only virtual. If you die, simply begin the hazard course again. You may loot your previous body, please do not loot the bodies of other virtual crew members.",
-					"Continue down the stairs, grab the items from a table of your choice, and prepare to experience danger. This course will remain mostly unassisted. Use your own skills to survive, and help other crew members you encounter."
+					"Continue down the stairs, grab the items from a table of your choice. This course will remain mostly unassisted. Use your own skills to survive, and help other crew members you encounter."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_2
+	dialog = list(	"This region of the hazard course is experiencing an electrical failure.",
+					"While a door is unpowered, you can use a crowbar, prybar, or maintenance jack to force the door open.",
+					"All crew are provided with a prybar in their standard issue survival kit. To aid them in the event of power failure.",
+					"A flashlight is advisable, the next areas will be significantly more dangerous."
 					)

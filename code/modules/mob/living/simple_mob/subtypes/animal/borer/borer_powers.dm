@@ -4,11 +4,11 @@
 	set desc = "Slither out of your host."
 
 	if(!host)
-		to_chat(src, "You are not inside a host body.")
+		to_chat(src, "<span class='notice'>You are not inside a host body.</span>")
 		return
 
 	if(stat)
-		to_chat(src, "You cannot leave your host in your current state.")
+		to_chat(src, "<span class='notice'>You cannot leave your host in your current state.</span>")
 
 	if(docile)
 		to_chat(src, "<font color='blue'>You are feeling far too docile to do that.</font>")
@@ -16,20 +16,20 @@
 
 	if(!host || !src) return
 
-	to_chat(src, "You begin disconnecting from [host]'s synapses and prodding at their internal ear canal.")
+	to_chat(src, "<span class='notice'>You begin disconnecting from [host]'s synapses and prodding at their internal ear canal.</span>")
 
 	if(!host.stat)
-		to_chat(host, "An odd, uncomfortable pressure begins to build inside your skull, behind your ear...")
+		to_chat(host, "<span class='warning'>An odd, uncomfortable pressure begins to build inside your skull, behind your ear...</span>")
 
 	spawn(100)
 
 		if(!host || !src) return
 
 		if(src.stat)
-			to_chat(src, "You cannot release your host in your current state.")
+			to_chat(src, "<span class='notice'>You cannot release your host in your current state.</span>")
 			return
 
-		to_chat(src, "You wiggle out of [host]'s ear and plop to the ground.")
+		to_chat(src, "<span class='notice'>You wiggle out of [host]'s ear and plop to the ground.</span>")
 		if(host.mind)
 			if(!host.stat)
 				to_chat(host, "<span class='danger'>Something slimy wiggles out of your ear and plops to the ground!</span>")
@@ -44,11 +44,11 @@
 	set desc = "Infest a suitable humanoid host."
 
 	if(host)
-		to_chat(src, "You are already within a host.")
+		to_chat(src, "<span class='notice'>You are already within a host.</span>")
 		return
 
 	if(stat)
-		to_chat(src, "You cannot infest a target in your current state.")
+		to_chat(src, "<span class='notice'>You cannot infest a target in your current state.</span>")
 		return
 
 	var/list/choices = list()
@@ -57,7 +57,7 @@
 			choices += C
 
 	if(!choices.len)
-		to_chat(src, "There are no viable hosts within range...")
+		to_chat(src, "<span class='notice'>There are no viable hosts within range...</span>")
 		return
 
 	var/mob/living/carbon/M = choices[1]
@@ -68,11 +68,11 @@
 		return
 
 	if(!(src.Adjacent(M)))
-		to_chat(src, "\The [M] has escaped your range...")
+		to_chat(src, "<span class='warning'>\The [M] has escaped your range...</span>")
 		return
 
 	if(M.has_brain_worms())
-		to_chat(src, "You cannot infest someone who is already infested!")
+		to_chat(src, "<span class='notice'>You cannot infest someone who is already infested!</span>")
 		return
 
 	if(ishuman(M))
@@ -80,33 +80,33 @@
 
 		var/obj/item/organ/external/E = H.organs_by_name[BP_HEAD]
 		if(!E || E.is_stump())
-			to_chat(src, "\The [H] does not have a head!")
+			to_chat(src, "<span class='notice'>\The [H] does not have a head!</span>")
 
 		if(!H.should_have_organ("brain"))
-			to_chat(src, "\The [H] does not seem to have an ear canal to breach.")
+			to_chat(src, "<span class='notice'>\The [H] does not seem to have an ear canal to breach.</span>")
 			return
 
 		if(H.check_head_coverage())
-			to_chat(src, "You cannot get through that host's protective gear.")
+			to_chat(src, "<span class='warning'>You cannot get through that host's protective gear.</span>")
 			return
 
-	to_chat(M, "Something slimy begins probing at the opening of your ear canal...")
-	to_chat(src, "You slither up [M] and begin probing at their ear canal...")
+	to_chat(M, "<span class='warning'>Something slimy begins probing at the opening of your ear canal...</span>")
+	to_chat(src, "<span class='notice'>You slither up [M] and begin probing at their ear canal...</span>")
 
 	if(!do_after(src,30))
-		to_chat(src, "As [M] moves away, you are dislodged and fall to the ground.")
+		to_chat(src, "<span class='warning'>As [M] moves away, you are dislodged and fall to the ground.</span>")
 		return
 
 	if(!M || !src) return
 
 	if(src.stat)
-		to_chat(src, "You cannot infest a target in your current state.")
+		to_chat(src, "<span class='notice'>You cannot infest a target in your current state.</span>")
 		return
 
 	if(M in view(1, src))
 		to_chat(src, "You wiggle into [M]'s ear.")
 		if(!M.stat)
-			to_chat(M, "Something disgusting and slimy wiggles into your ear!")
+			to_chat(M, "<span class='danger'>Something disgusting and slimy wiggles into your ear!</span>")
 
 		src.host = M
 		src.forceMove(M)
@@ -127,7 +127,7 @@
 
 		return
 	else
-		to_chat(src, "They are no longer in range!")
+		to_chat(src, "<span class='warning'>They are no longer in range!</span>")
 		return
 
 /*
@@ -162,10 +162,10 @@
 	var/mob/living/carbon/human/H = host
 
 	if(!istype(host))
-		to_chat(src, "This host does not have a suitable brain.")
+		to_chat(src, "<span class='notice'>This host does not have a suitable brain.</span>")
 		return
 
-	to_chat(src, "<span class = 'danger'>You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H].</span>")
+	to_chat(src, "<span class='danger'>You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H].</span>")
 
 	H.add_language("Cortical Link")
 
@@ -204,32 +204,131 @@
 	if(!H.lastKnownIP)
 		H.lastKnownIP = s2h_ip
 
+/mob/living/simple_mob/animal/borer/verb/taste_chemicals()
+	set category = VERBTAB_POWERS
+	set name = "Taste Blood"
+	set desc = "Tastes the chemicals in your host's bloodstream."
+
+	if(!host)
+		to_chat(src, "<span class='notice'>You are not inside a host body.</span>")
+		return
+
+	if(stat)
+		to_chat(src, "<span class='notice'>You cannot taste your host's blood while in your current state.</span>")
+		return
+
+	if(docile)
+		to_chat(src, "<font color='blue'>All you can sense is the overwhelming taste of sugar.</font>")
+		return
+
+	var/list/bigtaste = list()
+	var/list/smalltaste = list()
+
+	for(var/datum/reagent/current in host.bloodstr.reagent_list)
+		if(current.volume > 3)
+			bigtaste.Add(current.name)
+		else
+			smalltaste.Add(current.name)
+
+	var/tastemessage = ""
+	if(bigtaste.len > 0)
+		tastemessage = "You can taste the flavor of "
+		if(bigtaste.len > 1)
+			while(bigtaste.len > 0)
+				// multiple
+				var/taste = bigtaste[1]
+				if(bigtaste.len > 1)
+					tastemessage += taste + ", "
+				else
+					tastemessage += " and " + taste + ". "
+		else
+			// single
+			tastemessage += bigtaste[1] + ". "
+
+	if(smalltaste.len > 0)
+		if(tastemessage == "")
+			tastemessage += "You taste a hint of "
+		else
+			tastemessage += "With a hint of "
+		if(smalltaste.len > 1)
+			// multiple
+			while(smalltaste.len > 0)
+				var/taste = smalltaste[1]
+				if(smalltaste.len > 1)
+					tastemessage += taste + ", "
+				else
+					tastemessage += " and " + taste + ". "
+		else
+			// single
+			tastemessage += smalltaste[1] + ". "
+
+	if(bigtaste.len == 0 && smalltaste.len == 0)
+		tastemessage = "You taste nothing in particular."
+	to_chat(src, "<span class='notice'>[tastemessage]</span>")
+
+
 /mob/living/simple_mob/animal/borer/verb/secrete_chemicals()
 	set category = VERBTAB_POWERS
 	set name = "Secrete Chemicals"
 	set desc = "Push some chemicals into your host's bloodstream."
 
 	if(!host)
-		to_chat(src, "You are not inside a host body.")
+		to_chat(src, "<span class='notice'>You are not inside a host body.</span>")
 		return
 
 	if(stat)
-		to_chat(src, "You cannot secrete chemicals in your current state.")
+		to_chat(src, "<span class='notice'>You cannot secrete chemicals in your current state.</span>")
+		return
 
 	if(docile)
 		to_chat(src, "<font color='blue'>You are feeling far too docile to do that.</font>")
 		return
 
 	if(chemicals < 50)
-		to_chat(src, "You don't have enough chemicals!")
+		to_chat(src, "<span class='warning'>You don't have enough chemicals!</span>")
+		return
 
-	var/chem = tgui_input_list(usr, "Select a chemical to secrete.", "Chemicals", list("alkysine","bicaridine","hyperzine","tramadol"))
+	var/injectsize = 10
+	var/chem = tgui_input_list(usr	, "Select a chemical to secrete."
+									, "Chemicals", list("Repair Brain Tissue (alkysine)"
+									,"Repair Body (bicaridine)"
+									,"Make Drunk (ethanol)"
+									,"Cure Drunk (ethylredoxrazine)"
+									,"Enhance Speed (hyperzine)"
+									,"Pain Killer (tramadol)"
+									,"Euphoric High (bliss)"
+									,"Stablize Mind (citalopram)"
+								))
+	switch(chem) // scan for simplified name
+		if("Repair Brain Tissue (alkysine)")
+			chem = "alkysine"
+		if("Repair Body (bicaridine)")
+			chem = "bicaridine"
+		if("Make Drunk (ethanol)")
+			chem = "ethanol"
+			injectsize = 5
+		if("Cure Drunk (ethylredoxrazine)")
+			chem = "ethylredoxrazine"
+		if("Enhance Speed (hyperzine)")
+			chem = "hyperzine"
+		if("Pain Killer (tramadol)")
+			chem = "tramadol"
+		if("Euphoric High (bliss)")
+			chem = "bliss"
+			injectsize = 5
+		if("Stablize Mind (citalopram)")
+			chem = "citalopram"
+		else
+			if(!chem)
+				// why did this happen?
+				to_chat(src, "<font color='red'><B>The option [chem] did not link to any valid option, inform a dev that the switch in borer_powers.dm/secrete_chemicals() is broken</B></font>")
+				chem = null
 
 	if(!chem || chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
 
 	to_chat(src, "<font color='red'><B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B></font>")
-	host.reagents.add_reagent(chem, 10)
+	host.reagents.add_reagent(chem, injectsize)
 	chemicals -= 50
 
 /mob/living/simple_mob/animal/borer/verb/dominate_victim()
@@ -238,15 +337,15 @@
 	set desc = "Freeze the limbs of a potential host with supernatural fear."
 
 	if(world.time - used_dominate < 150)
-		to_chat(src, "You cannot use that ability again so soon.")
+		to_chat(src, "<span class='warning'>You cannot use that ability again so soon.</span>")
 		return
 
 	if(host)
-		to_chat(src, "You cannot do that from within a host body.")
+		to_chat(src, "<span class='notice'>You cannot do that from within a host body.</span>")
 		return
 
 	if(src.stat)
-		to_chat(src, "You cannot do that in your current state.")
+		to_chat(src, "<span class='notice'>You cannot do that in your current state.</span>")
 		return
 
 	var/list/choices = list()
@@ -255,11 +354,11 @@
 			choices += C
 
 	if(world.time - used_dominate < 150)
-		to_chat(src, "You cannot use that ability again so soon.")
+		to_chat(src, "<span class='warning'>You cannot use that ability again so soon.</span>")
 		return
 
 	if(!choices.len)
-		to_chat(src, "There are no viable targets within range...")
+		to_chat(src, "<span class='notice'>There are no viable targets within range...</span>")
 		return
 
 	var/mob/living/carbon/M = choices[1]
@@ -269,11 +368,11 @@
 	if(!M || !src) return
 
 	if(!(M in view(3,src)))
-		to_chat(src, "\The [M] escaped your influence...")
+		to_chat(src, "<span class='warning'>\The [M] escaped your influence...</span>")
 		return
 
 	if(M.has_brain_worms())
-		to_chat(src, "You cannot infest someone who is already infested!")
+		to_chat(src, "<span class='notice'>You cannot infest someone who is already infested!</span>")
 		return
 
 	to_chat(src, "<font color='red'>You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread.</font>")
@@ -288,18 +387,18 @@
 	set desc = "Fully connect to the brain of your host."
 
 	if(!host)
-		to_chat(src, "You are not inside a host body.")
+		to_chat(src, "<span class='notice'>You are not inside a host body.</span>")
 		return
 
 	if(src.stat)
-		to_chat(src, "You cannot do that in your current state.")
+		to_chat(src, "<span class='notice'>You cannot do that in your current state.</span>")
 		return
 
 	if(docile)
 		to_chat(src, "<font color='blue'>You are feeling far too docile to do that.</font>")
 		return
 
-	to_chat(src, "You begin delicately adjusting your connection to the host brain...")
+	to_chat(src, "<span class='notice'>You begin delicately adjusting your connection to the host brain...</span>")
 
 	spawn(100+(host.brainloss*5))
 
@@ -358,8 +457,8 @@
 	set name = "Revive Host"
 	set desc = "Send a jolt of electricity through your host, reviving them."
 
-	if(stat != 2)
-		to_chat(usr, "Your host is already alive.")
+	if(stat != DEAD)
+		to_chat(usr, "<span class='notice'>Your host is already alive.</span>")
 		return
 
 	verbs -= /mob/living/carbon/human/proc/jumpstart

@@ -319,7 +319,7 @@
 		if("Stablize Mind (citalopram)")
 			chem = "citalopram"
 		else
-			if(!chem)
+			if(chem)
 				// why did this happen?
 				to_chat(src, "<font color='red'><B>The option [chem] did not link to any valid option, inform a dev that the switch in borer_powers.dm/secrete_chemicals() is broken</B></font>")
 				chem = null

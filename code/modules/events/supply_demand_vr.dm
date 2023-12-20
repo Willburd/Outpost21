@@ -240,7 +240,7 @@
 	for(var/gas in mixture.gas)
 		var/targetPercent = round((mixture.gas[gas] / mixture.total_moles) * 100)
 		var/canPercent = round((canmix.gas[gas] / canmix.total_moles) * 100)
-		if(abs(targetPercent-canPercent) > 1)
+		if(abs(targetPercent-canPercent) > 3)
 			log_debug("supply_demand event: canister fails to match because '[gas]': [canPercent] != [targetPercent]")
 			return // Fail!
 	// Huh, it actually matches!

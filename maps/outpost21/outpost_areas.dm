@@ -1853,6 +1853,13 @@
 	music = 'sound/ambience/approaching_planet.ogg'
 	requires_power = FALSE
 
+/area/virtual_reality/lighting // virtual reality, but cooler
+	dynamic_lighting = 1 // literally the only change, I just wanted neat lights for the hazard course.
+
+/area/virtual_reality/requirespower // virtual reality, but for doors that are pried open, and lights that are dead
+	dynamic_lighting = 1
+	requires_power = TRUE
+
 //
 // Outpost holomap modifications, or base turf fixes ONLY. !!!OVERRIDES!!! ---------------------------------------------------------------------
 //

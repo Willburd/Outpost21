@@ -63,7 +63,7 @@
 	if(loop_requests > 0)
 		speechphase = 1
 		loop_requests -= 1
-	else
+	else if(holo_range > 0)
 		// trigger on nearby humans
 		var/list/humans = human_mobs(holo_range)
 		if(!humans.len)
@@ -136,10 +136,128 @@
 					"If there is nothing in your hand, you will instead perform a basic interaction, as explained to you earlier!",
 					"You can drop objects in your current active hand, by clicking the drop icon at the bottom right of your screen. You can also press Q.",
 					"To swap your current active hand, click the background of the hand slot. You can also press X.",
-					"Many objects will only respond to empty hands, or have unique interactions with specific objects."
+					"Many objects will only respond to empty hands, or have unique interactions with specific objects.",
+					"For example; The locker will only open and close if you use empty hands, and can be bolted and unbolted from the floor with a wrench."
 					)
 
 /obj/machinery/hologram/holo_tutorial/intro_6
 	dialog = list(	"Clicking the throw icon, in the bottom right of your screen will make your next click throw the object in your active hand. You can also press R.",
 					"If you are prepared to throw, and do not have anything in your hand. You will catch anything being thrown at you!"
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_7
+	dialog = list(	"Small containers are a common sight on station. They are able to store multiple smaller objects, including other containers!",
+					"You can open a container by picking it up, and clicking on it while it is in your active hand. A menu will appear above your hands, showing what is inside the container.",
+					"Containers will also show this menu, if you alt-click them. Just like how you can see all the objects in a location by alt-clicking, as you were taught earlier.",
+					"If you click a container with an object in your active hand, you will place it inside of the container.",
+					"Try experimenting with the backpacks, boxes, and medical kits in this room, move on when you are comfortable with container interactions.",
+					"Remember, if a container is already inside of another container or your are not beside that container, you will not be able to take items out from it or put items into it."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_8
+	dialog = list(	"Intents, and how to stop beating yourself to death with a candybar!",
+					"In the bottom right of your screen, there are four colored boxes. This is your intent menu.",
+					"The four intents are: GREEN, help; BLUE, disarm; YELLOW, grab; RED, harm.",
+					"You can click each intent at the bottom of your screen to change to it. You can also press F or G to cycle between intents.",
+					"Help intent will perform friendly actions, such as feeding yourself or someone else food. Applying bandages, or giving hugs if you are unarmed.",
+					"Disarm intent will try to knock over, or remove items from any person you click, even yourself.",
+					"Grab intent will restrain a target, dragging them with you if successful. You can click the grab icon that appears in your hands UI to strengthen the grab. You can release a grab by dropping it, as if it was an item.",
+					"Finally, Harm intent. This is used for combat, and will use any item in your hand as a weapon. Be careful, because this includes you as well if you click yourself!",
+					"If you have accidentally harmed yourself, try using the contents of the medical kits in the previous room to bandage yourself.",
+					"The creatures in this room are virtual and are not real. Experiment with your intents, pet, grab or harm them. Until you feel comfortable with the intent system."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_9
+	dialog = list(	"Many areas of the station are dangerous, and you may be on your own for extended periods of time during emergencies.",
+					"Employees are expected to recognize dangers, and to return to safe areas of the station when possible.",
+					"Seek the safety of your crewmates, or contact medical and security personal if you become lost, or hurt.",
+					"Pressing T will allow you to speak, and anyone nearby will hear you.",
+					"Typing ; at the start of your message will say it over the common radio channel, if you are wearing a headset radio. All departments start wearing one.",
+					"You can also press Y to whisper a message to anyone directly next to you."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_10
+	dialog = list(	"Using T to speak, you can also type * before an action to perform an emote.",
+					"Type *help to get a list of emotes you can perform, some examples of emotes are *spin, *belch, *flip, and *dance.",
+					"You can also press 5 to begin typing a custom emote. This will display to others as a physical action you have performed.",
+					"Pressing 6 will allow you to do a subtle emote. It behaves the same as a custom emote, but only others directly beside you will see it."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_11
+	dialog = list(	"Some actions are performed by dragging yourself onto an object. Such as buckling yourself to a seat.",
+					"Once you are buckled to something, you can unbuckle yourself by clicking the icon in the top right of the screen, or by pressing b to resist.",
+					"If you are ever trapped inside of an object, or restrained, using resist is a reliable way to break free."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_12
+	dialog = list(	"Your verb tabs, and how to use them.",
+					"The tabs in the top right of your window contain all possible interactions you can do. These are called Verbs.",
+					"Many interactions are only possible from these tabs, many also have hotkeys to do them quickly.",
+					"Your most important tabs are: IC, in character actions; Objects, interactions with simple objects; Equipment, interactions with worn or ridden objects and Powers, special abilities that are innate to your body.",
+					"IC, or in character actions allow you to rest, sleep, resist, climbing up or down, and even saying things!",
+					"Objects, this tab will show any interactions that you can perform with nearby objects. In most cases, all of these interactions will be accessible by right clicking the object itself. Like you learned to do so before.",
+					"Equipment, similar to the objects tab, it contains interactions with objects. However these objects are usually worn, or ridden. Equipment such as hardsuits, mechs, or vehicles will have their interactions in this tab.",
+					"Finally your Powers tab is where you can use, or toggle, various abilities your species or genetics allows you to perform. For example: Teshari can use this tab to toggle their agility, and promethean may enter their blob form."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_13
+	dialog = list(	"This vehicle is called a cargo tug. To operate it, you will need to perform several interactions.",
+					"First, you must be buckled to it.",
+					"Second, you must turn on the engine, using the equipment tab.",
+					"If you cannot start the engine, the keys may be missing. Click the vehicle while holding the keys to put them in.",
+					"You may then move the tug.",
+					"Finally, to properly shutdown the tug. Turn off the engine, and optionally remove the keys.",
+					"Please, leave the keys in this room, or in the tug. Once you are comfortable interacting with a vehicle, move onto the next room."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_14
+	dialog = list(	"To pass through these plastic flaps, you must be laying on the ground.",
+					"Step onto the conveyor, while it is moving, and use the rest verb in your IC tab."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_15
+	dialog = list(	"Objects may be pulled behind you. This is helpful for many large containers that you cannot pick up.",
+					"Right click the object, and click pull, or control click the object to begin pulling it.",
+					"To stop pulling, press the release pull button that appears in the bottom right of your screen, the drop item button near it, or press Q.",
+					"You can also push the object, this will stop pulling it.",
+					"If you trap yourself in a corner. Right click, and use the climb structure interaction to escape. You can also use this to climb over tables. Dragging yourself onto a table will also work.",
+					"Once you are comfortable pulling these carts, please leave the room, and climb over the tables in your way to move on.",
+					"Please note: Pulling unconcious crew members will injure them. Please ask medical, for the proper training needed to transport injured and unconcious crew members safely."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_16
+	dialog = list(	"Finally, you are now ready to perform a mundane, yet surprisingly complex task, expected of an entry level job.",
+					"Please, mop the floor. To do so, you will first need to fill a bucket with water, and then transfer that water into the mopping cart.",
+					"Then, pick up the mop, and use it on the mopping cart to wet your mop. Then clean the floor.",
+					"You will also need to pull the mopping cart behind you, regularly wet your mop, and refill your cart when it runs out of water.",
+					"This basic training course has taught you how to perform all of these actions. Return to earlier rooms if you need to listen to an earlier lesson."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_17
+	dialog = list(	"This is a medical kiosk. You may use this to backup your memories and body record.",
+					"When you die you will eventually be resleeved by medical staff, or the automatic resleeving system.",
+					"You will only have the memories you had, from the last time you performed a mind scan.",
+					"Dying is often disorienting for crew, and will impact station safety and productivity. Please avoid dying."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_18
+	dialog = list(	"Some items, such as clothing can be equiped. Your equipment slots can be found at the bottom left of your screen, by clicking the bag icon to expand them.",
+					"Each equipment slot may have a single item in it. Such as an oxygen mask over your face, your department jumpsuit, a hardsuit, or even your headset radio.",
+					"Several equipable items and clothing are presented in this room. Please equip them, and move on when your are comfortable."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_19
+	dialog = list(	"The next door will take you into the hazard course.",
+					"If you have only completed basic training, it is highly encouraged to continue, and put your newly learned skills to the test.",
+					"However, if you wish to leave virtual reality. Open your IC tab, and press exit virtual reality, to return to your body in the real world.",
+					"Remember to have a safe day, make regular backups, and that the rain and surface water on station will digest your flesh on contact!",
+					"If you were unaware that the water did this, please enter the next room and begin the hazard course."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_1
+	dialog = list(	"Welcome, to the hazard training course.",
+					"This training course expects you to already have basic training, and will only provide assistance when absolutely required to.",
+					"If you still required assistance, the hologram emitters found within the hazard course will provide recorded messages from the basic training course. These messages will be relevant to the current task required of you during the course.",
+					"The course ahead will present you with simulated dangers, and death. The experience of pain is only virtual. If you die, simply begin the hazard course again. You may loot your previous body, please do not loot the bodies of other virtual crew members.",
+					"Continue down the stairs, grab the items from a table of your choice, and prepare to experience danger. This course will remain mostly unassisted. Use your own skills to survive, and help other crew members you encounter."
 					)

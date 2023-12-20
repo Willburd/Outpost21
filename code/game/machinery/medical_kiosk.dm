@@ -179,6 +179,9 @@
 		return "<br><span class='warning'>Unable to perform full scan. Please see a medical professional.</span>"
 	if(!user.mind)
 		return "<br><span class='warning'>Unable to perform full scan. Please see a medical professional.</span>"
+	if(istype(get_area(src), /area/virtual_reality))
+		return "<br><span class='warning'>Backup simulation performed. Remember to backup when you leave virtual reality!</span>"
+
 
 	/* outpost 21  edit - nif removal
 	var/nif = user.nif

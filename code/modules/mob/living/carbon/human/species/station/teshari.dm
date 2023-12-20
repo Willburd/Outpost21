@@ -233,6 +233,10 @@
 		if(H.mind && H.mind.changeling)
 			H.loneliness_stage = 0
 			return
+		// Brain friends!
+		if(H.has_brain_worms())
+			H.loneliness_stage = 0
+			return
 		// Vored? Not gonna get frightened.
 		if(isbelly(H.loc))
 			if(H.loneliness_stage > 0)

@@ -118,6 +118,7 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Medical",		/datum/event/bluespace_shelling/medical		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Waste",			/datum/event/bluespace_shelling/waste		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Psychic Screach",		/datum/event/psychic_screach				,1	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10), 1, min_jobs = list(ASSIGNMENT_ENGINEER = 1)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration				,10	, list(ASSIGNMENT_SECURITY = 5), 1) //YW shifted to spider migration
 	)
 	add_disabled_events(list(

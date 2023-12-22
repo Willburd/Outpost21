@@ -322,22 +322,42 @@
 			Confuse(12)
 			make_jittery(15)
 	// gibbing gene
-	if(dna && dna.GetSEState(GIBBINGBLOCK))
-		gutdeathpressure += 0.01
-		if(gutdeathpressure > 0 && prob(gutdeathpressure))
-			emote(pick("whimper","belch","belch","belch","choke","shiver"))
-			Weaken(gutdeathpressure / 3)
-		if((gutdeathpressure/3) >= 1 && prob(gutdeathpressure/3))
-			gutdeathpressure = 0 // to stop retriggering
-			spawn(1)
-				emote(pick("whimper","shiver"))
-			spawn(3)
-				emote(pick("whimper","belch","shiver"))
-			spawn(4)
-				emote(pick("whimper","shiver"))
-			spawn(6)
-				emote(pick("belch"))
-				gib()
+	if(dna)
+		if(dna.GetSEState(TRAITBLOCK_DETERIORATE) && prob(2) && prob(3)) // stacked percents for rarity
+			// random strange symptoms from organ/limb
+			custom_emote(VISIBLE_MESSAGE, "flinches slightly.")
+			switch(rand(1,4))
+				if(1)
+					adjustToxLoss(rand(2,8))
+				if(2)
+					adjustCloneLoss(rand(1,2))
+				if(3)
+					add_chemical_effect(CE_PAINKILLER, rand(8,28))
+				else
+					adjustOxyLoss(rand(13,26))
+			// external organs need to fall off if damaged enough
+			var/obj/item/organ/O = pick(organs)
+			if(O && !(O.organ_tag == BP_GROIN || O.organ_tag == BP_TORSO) && istype(O,/obj/item/organ/external))
+				var/obj/item/organ/external/E = O
+				if(O.damage >= O.min_broken_damage && O.robotic <= ORGAN_ASSISTED && prob(70))
+					add_chemical_effect(CE_PAINKILLER, 120) // what limb? Extreme nerve damage. Can't feel a thing + shock
+					E.droplimb(TRUE, DROPLIMB_ACID)
+		if(dna.GetSEState(GIBBINGBLOCK))
+			gutdeathpressure += 0.01
+			if(gutdeathpressure > 0 && prob(gutdeathpressure))
+				emote(pick("whimper","belch","belch","belch","choke","shiver"))
+				Weaken(gutdeathpressure / 3)
+			if((gutdeathpressure/3) >= 1 && prob(gutdeathpressure/3))
+				gutdeathpressure = 0 // to stop retriggering
+				spawn(1)
+					emote(pick("whimper","shiver"))
+				spawn(3)
+					emote(pick("whimper","belch","shiver"))
+				spawn(4)
+					emote(pick("whimper","shiver"))
+				spawn(6)
+					emote(pick("belch"))
+					gib()
 	// outpost 21 edit end
 
 	var/rn = rand(0, 200)

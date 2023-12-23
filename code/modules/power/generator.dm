@@ -261,8 +261,8 @@ GLOBAL_LIST_EMPTY(all_turbines)
 
 	src.set_dir(turn(src.dir, 90))
 
-/obj/machinery/power/generator/power_spike(var/announce_prob = 30)
-	if(!(effective_gen >= max_power / 2 && powernet)) // Don't make a spike if we're not making a whole lot of power.
+/obj/machinery/power/generator/power_spike(var/announce_prob = 30, var/forced = FALSE)
+	if(!(effective_gen >= max_power / 2 && powernet) && !forced) // Don't make a spike if we're not making a whole lot of power.
 		return
 
 	var/list/powernet_union = powernet.nodes.Copy()

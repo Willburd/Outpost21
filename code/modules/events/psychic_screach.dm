@@ -2,7 +2,7 @@
 	announceWhen = -1 // Never (setup may override)
 
 /datum/event/psychic_screach/setup()
-	endWhen = rand(8, 12)
+	endWhen = rand(5, 10)
 	announceWhen = endWhen + rand( 20, 30)
 
 /datum/event/psychic_screach/announce()
@@ -63,7 +63,7 @@
 	// This sets off a chain of events that lead to the actual grid check (or perhaps worse).
 	// First, the Supermatter engine makes a power spike.
 	for(var/obj/machinery/power/generator/engine in machines)
-		engine.power_spike(80)
+		engine.power_spike(80,TRUE)
 		break // Just one engine, please.
 
 /datum/event/psychic_screach/proc/Sound(var/sound, var/list/zlevels)

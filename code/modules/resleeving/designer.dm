@@ -283,6 +283,8 @@
 			var/toocomplex = FALSE
 			if(S)
 				toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED) || (S.flags & NO_SCAN)
+				if(istype(S,/datum/species/monkey))
+					toocomplex = FALSE // Ook-ooks allowed
 			else
 				// if we don't have a species, something sure is wrong!
 				toocomplex = TRUE

@@ -365,8 +365,10 @@
 	base_color = "#EECEB3"
 	wikilink="https://yawn.izac.live/Human"
 
+/* outpost 21 edit - species removal
 /datum/species/human/vatgrown
 	spawn_flags = SPECIES_IS_RESTRICTED
+*/
 
 /datum/species/vox
 	gluttonous = 1

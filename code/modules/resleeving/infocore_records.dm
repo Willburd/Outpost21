@@ -126,6 +126,8 @@
 	var/datum/species/S = GLOB.all_species["[M.dna.species]"]
 	if(S)
 		toocomplex = (S.spawn_flags & SPECIES_IS_WHITELISTED) || (S.spawn_flags & SPECIES_IS_RESTRICTED) || (S.flags & NO_SCAN)
+		if(istype(S,/datum/species/monkey))
+			toocomplex = FALSE // Ook-ooks allowed
 		hiderecord = (S.flags & NO_SCAN) // hidden from editing or selection
 
 	//General stuff about them

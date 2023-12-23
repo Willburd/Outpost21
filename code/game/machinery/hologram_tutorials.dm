@@ -337,8 +337,8 @@
 
 /obj/machinery/hologram/holo_tutorial/eva_3
 	dialog = list(	"Basic airlock interaction.",
-					"Airlocks are equiped with three automatic cycling buttons. One on the outside of each door, and one within the chamber.",
-					"Pressing a button outside a door will cycle the airlock to that door. Pressing the chamber button will cycle between the two doors.",
+					"Airlocks are equiped with two automatic cycling buttons. One on the outside of each door.",
+					"Pressing a button outside a door will cycle the airlock to that door.",
 					"Finally, the chamber controller may be used to cycle to either door, or force doors to open in an emergency.",
 					"Please, prepare you suit for space, turn on your internal air supply, and cycle the airlock."
 					)

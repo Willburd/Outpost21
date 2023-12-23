@@ -158,7 +158,7 @@
 	dialog = list(	"Intents, and how to stop beating yourself to death with a candybar!",
 					"In the bottom right of your screen, there are four colored boxes. This is your intent menu.",
 					"The four intents are: GREEN, help; BLUE, disarm; YELLOW, grab; RED, harm.",
-					"You can click each intent at the bottom of your screen to change to it. You can also press F or G to cycle between intents.",
+					"You can click each intent at the bottom of your screen to change to it. You can also press F or G to cycle between intents, or 1, 2, 3, 4 to change to each intent directly.",
 					"Help intent will perform friendly actions, such as feeding yourself or someone else food. Applying bandages, or giving hugs if you are unarmed.",
 					"Disarm intent will try to knock over, or remove items from any person you click, even yourself.",
 					"Grab intent will restrain a target, dragging them with you if successful. You can click the grab icon that appears in your hands UI to strengthen the grab. You can release a grab by dropping it, as if it was an item.",
@@ -234,24 +234,51 @@
 					)
 
 /obj/machinery/hologram/holo_tutorial/intro_17
-	dialog = list(	"This is a medical kiosk. You may use this to backup your memories and body record.",
-					"When you die you will eventually be resleeved by medical staff, or the automatic resleeving system.",
-					"You will only have the memories you had, from the last time you performed a mind scan.",
-					"Dying is often disorienting for crew, and will impact station safety and productivity. Please avoid dying."
+	dialog = list(	"Some items, such as clothing can be equiped. Your equipment slots can be found at the bottom left of your screen, by clicking the bag icon to expand them.",
+					"Each equipment slot may have a single item in it. Such as an oxygen mask over your face, your department jumpsuit, a hardsuit, or even your headset radio.",
+					"Several equipable items and clothing are presented in this room. Please equip them, and move on when your are comfortable.",
+					"Your equipment slots are as follows: Head, eyes, each ear, mask, clothing, suit, hands, and shoes.",
+					"The other slots along the bottom of your hud are: Suit storage, ID, toolbelt, backpack, both hands, and the pockets of your clothing.",
+					"Some clothing also has its own storage space, seperate from your pockets. These behave in a similar way to other types of storage.",
+					"Some items can also be equiped to clothing as accessories. To remove an accessory, right click the clothing, and click remove accessory from the menu."
 					)
 
 /obj/machinery/hologram/holo_tutorial/intro_18
-	dialog = list(	"Some items, such as clothing can be equiped. Your equipment slots can be found at the bottom left of your screen, by clicking the bag icon to expand them.",
-					"Each equipment slot may have a single item in it. Such as an oxygen mask over your face, your department jumpsuit, a hardsuit, or even your headset radio.",
-					"Several equipable items and clothing are presented in this room. Please equip them, and move on when your are comfortable."
+	dialog = list(	"Weapons, and equipment.",
+					"These lasertag guns will only fire under specific conditions.",
+					"Firstly, you must click with the gun in your active hand.",
+					"Secondly, you must not be on help intent, or you will refrain from firing the weapon.",
+					"Finally, the lasertag gun requires you to wear a lasertag vest to power the gun. Similar to how most guns require ammunition, or a battery.",
+					"The lasertag vest can be equiped to the suit slot. The same way you equiped the jumpsuit to your clothing slot.",
+					"While the lasertag guns do not require reloading. Some guns will require that you remove the spent round manually, and then load a new one. The next room will provide an example of such weapons."
 					)
 
 /obj/machinery/hologram/holo_tutorial/intro_19
+	dialog = list(	"Weapons, items, and unarmed interactions may all be aimed at specific body parts.",
+					"This is done by clicking each body part of the small figure in the bottom right of your screen, or by pressing 8,4,5,6,1,2 and 3 on your numpad for each limb.",
+					"You can aim at a target's head, chest, groin, legs, arms, hands, feet, or at their eyes and mouth. If you are using the numpad, press a key multiple times to cycle through each possible target on a limb.",
+					"While this is often used for aiming weapons, many items have unique interactions with specific limbs. Such as using the items in firstaid kits. You can only bandage a wound, if you aim at the location where that wound is.",
+					"This knowledge is critical if you plan to learn advanced skills, such as surgeries performed in medical, or if you want to improve your combat effectiveness as security."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_20
+	dialog = list(	"This is a medical kiosk. You may use this to backup your memories and body record.",
+					"When you die you will eventually be resleeved by medical staff, or the automatic resleeving system.",
+					"You will only have the memories you had, from the last time you performed a mind scan.",
+					"Dying is often disorienting for crew, and will impact station safety and productivity. Please avoid dying.",
+					"In the event that you die, it is important for medical staff to know where you are, and how you died.",
+					"To do this, you can enable your suit sensors. Right click your jumpsuit, and click toggle suit sensors from the menu.",
+					"Sensors can be set to: Off, to show no information; Binary sensors, show if you are alive or dead; Vitals tracker, show the types of damage you have sustained; And finally tracking beacon, which shows medical staff all the prior information and your location.",
+					"It is advisable to set your suit sensors to the tracking beacon configuration, to allow medical staff to react quickly, and find your body if you cannot be rescued."
+					)
+
+/obj/machinery/hologram/holo_tutorial/intro_end
 	dialog = list(	"The next door will take you into the hazard course.",
 					"If you have only completed basic training, it is highly encouraged to continue, and put your newly learned skills to the test.",
 					"However, if you wish to leave virtual reality. Open your IC tab, and press exit virtual reality, to return to your body in the real world.",
 					"Remember to have a safe day, make regular backups, and that the rain and surface water on station will digest your flesh on contact!",
-					"If you were unaware that the water did this, please enter the next room and begin the hazard course."
+					"If you were unaware that the water did this, please enter the next room and begin the hazard course.",
+					"Any hotkeys mentioned during these tutorials can be found in the help menu at the top of the window."
 					)
 
 /obj/machinery/hologram/holo_tutorial/hazard_1
@@ -267,4 +294,59 @@
 					"While a door is unpowered, you can use a crowbar, prybar, or maintenance jack to force the door open.",
 					"All crew are provided with a prybar in their standard issue survival kit. To aid them in the event of power failure.",
 					"A flashlight is advisable, the next areas will be significantly more dangerous."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_3
+	dialog = list(	"Remember basic training. If you become wounded, the bandages and salves in a medical kit must be applied to the location of the wound you are trying to tend to.",
+					"For example, if your right arm hurts, you must be targeting the right arm, as you click yourself with the bandage. Otherwise the item will not bandage the wound.",
+					"Pills, and autoinjectors do not require you to target any location for them to function. You simply click yourself or your target with the item to use it."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_4
+	dialog = list(	"Many hazards on station are marked by signs. Right click and examine, or shift click, a sign to read it",
+					"For example, these signs are a warning that this is a secure area. Protected by lethal turrets.",
+					"Of course, this is not the way forward. You should not be entering secure areas without authorization."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_5
+	dialog = list(	"You are very stuborn, congratulations!",
+					"Please, do not try to enter secure areas without authorization. Your only reward will be termination."
+					)
+
+/obj/machinery/hologram/holo_tutorial/hazard_end
+	dialog = list(	"Congratulations! You have completed the hazard course!",
+					"You have demonstrated a basic grasp of station survival.",
+					"Beyond this hallway is the EVA basics course.",
+					"To leave virtual reality, open your IC tab, and click exit virtual reality."
+					)
+
+/obj/machinery/hologram/holo_tutorial/eva_1
+	dialog = list(	"Welcome, to the EVA basics course.",
+					"This short course will ensure you understand how to properly use your emergency oxygen supply and softsuit.",
+					"You will also learn basic airlock interaction. Proceed to the next room when you are ready."
+					)
+
+/obj/machinery/hologram/holo_tutorial/eva_2
+	dialog = list(	"First, you must equip an oxygen mask to your mask slot. This is required to use an oxygen tank.",
+					"Second, equip the softsuit to your suit slot, and then the softsuit helmet to your head slot.",
+					"Once you are wearing all parts of the suit. Pick up an emergency oxygen tank, and put it onto the suit storage slot, back slot, or into the suit's pockets.",
+					"Finally, you will activate your suit's internal oxygen supply. To the right side of your screen is a blue oxygen tank icon. Click this icon to enable internals.",
+					"Once internals are enabled, you will breath through your oxygen mask, from the oxygen tank connected to it.",
+					"It is critical that you do not drop the oxygen tank, or place it into a container. This will disconnect it, and require you to turn back on internals."
+					)
+
+/obj/machinery/hologram/holo_tutorial/eva_3
+	dialog = list(	"Basic airlock interaction.",
+					"Airlocks are equiped with three automatic cycling buttons. One on the outside of each door, and one within the chamber.",
+					"Pressing a button outside a door will cycle the airlock to that door. Pressing the chamber button will cycle between the two doors.",
+					"Finally, the chamber controller may be used to cycle to either door, or force doors to open in an emergency.",
+					"Please, prepare you suit for space, turn on your internal air supply, and cycle the airlock."
+					)
+
+/obj/machinery/hologram/holo_tutorial/eva_end
+	dialog = list(	"In zero gravity you will float. You can only control your movement while near a floor or wall.",
+					"Once you have left a solid surface, you will begin floating uncontrollably in the direction you moved.",
+					"Throwing objects will allow you to change direction, however it is recomended to find zero-G equipment, such as a jetpack before entering zero-G areas.",
+					"This concludes the EVA basics training course. When you have finished experiencing virtual space. Please, return your suit.",
+					"To leave virtual reality, open your IC tab, and click exit virtual reality."
 					)

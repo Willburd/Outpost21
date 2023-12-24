@@ -8,7 +8,7 @@
 	if(!istype(target))
 		return
 
-	var/list/smite_types = list(SMITE_SHADEKIN_ATTACK,SMITE_SHADEKIN_NOMF,SMITE_REDSPACE_ABDUCT,SMITE_AUTOSAVE,SMITE_AUTOSAVE_WIDE)
+	var/list/smite_types = list(SMITE_SHADEKIN_ATTACK,SMITE_SHADEKIN_NOMF,SMITE_REDSPACE_ABDUCT,SMITE_HELL,SMITE_AUTOSAVE,SMITE_AUTOSAVE_WIDE)
 
 	var/smite_choice = tgui_input_list(usr, "Select the type of SMITE for [target]","SMITE Type Choice", smite_types)
 	if(!smite_choice)
@@ -122,6 +122,9 @@
 		if(SMITE_REDSPACE_ABDUCT)
 			redspace_abduction(target, src)
 
+		if(SMITE_HELL)
+			hell_abduction(target, src)
+
 		if(SMITE_AUTOSAVE)
 			fake_autosave(target, src)
 
@@ -169,7 +172,7 @@ var/redspace_abduction_z
 		var/size_of_square = 26
 		var/halfbox = round(size_of_square*0.5)
 		target.transforming = TRUE
-		to_chat(target,"<span class='danger'>You feel a strange tug, deep inside. You're frozen in momentarily...</span>")
+		to_chat(target,"<span class='danger'>You feel a strange tug, deep inside. You're frozen momentarily...</span>")
 		to_chat(user,"<span class='notice'>Beginning vis_contents copy to abduction site, player mob is frozen.</span>")
 		sleep(1 SECOND)
 		//Lower left corner of a working box
@@ -229,6 +232,17 @@ var/redspace_abduction_z
 	to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
 
 	target.transforming = FALSE
+
+/proc/hell_abduction(mob/living/target, user)
+	to_chat(target,"<span class='danger'>You feel a strange tug, deep inside. You're frozen momentarily...</span>")
+	var/list/hellexitlist = list()
+	for(var/obj/effect/landmark/R in landmarks_list)
+		if(R.name == "hell")
+			hellexitlist += R
+	if(hellexitlist.len)
+		target.forceMove(pick(hellexitlist).loc)
+		to_chat(target,"<span class='danger'>The tug relaxes, but everything around you looks... hellish.</span>")
+		to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
 
 /proc/fake_autosave(var/mob/living/target, var/client/user, var/wide)
 	if(!istype(target) || !target.client)

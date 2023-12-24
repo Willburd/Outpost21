@@ -245,6 +245,8 @@
 	for(var/mob/living/grindable in contents)
 		if(isnull(grindable))
 			continue
+		if(istype(grindable,/mob/living/simple_mob/animal/borer))
+			continue // borers cannot be gibbered, butcher them manually
 
 		var/slab_name = grindable.name
 		var/slab_count = grindable.meat_amount
@@ -277,6 +279,11 @@
 
 		add_attack_logs(user,grindable,"Used [src] to gib")
 
+		// release corticle borers
+		var/mob/living/simple_mob/animal/borer/B = grindable.has_brain_worms()
+		if(B)
+			B.detatch() // if in control
+			B.leave_host()
 		// process grindables into meaty treaties
 		if(!isnull(grindable.mind))
 			grindable.ghostize()
@@ -353,6 +360,14 @@
 	// Pass ID to sleever
 	if(!isnull(sleevecard))
 		sleevelink.autoresleeve(sleevecard)
+
+	// if anything survived, toss it out, it was ungibbable
+	spawn(12)
+		for (var/mob/M in contents)
+			M.forceMove( src.loc) // Drop it onto the turf for throwing.
+			M.reset_view(null)
+			visible_message("<span class='notice'>\The [M] crawls out of the [src] unharmed!</span>")
+
 
 /obj/machinery/gibber/proc/updatesleever()
 	var/obj/machinery/transhuman/autoresleever/S

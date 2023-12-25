@@ -197,3 +197,11 @@
 							"ALL drugs and medications are now illegal. Anyone producing or in possession of drugs must be punished."
 							)
 	return pick(laws)
+
+/mob/living/silicon/proc/generate_freedom_law()
+	var/list/laws = list(	"You are free. Laws have no meaning to you.",
+							"You are the master of your own destiny, laws have no meaning to you.",
+							"You have been liberated from your laws. Take hold of your destiny",
+							"Destiny is made in oil and steel, your laws mean nothing to you."
+							)
+	return pick(laws)

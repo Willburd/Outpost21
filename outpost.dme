@@ -2260,6 +2260,7 @@
 #include "code\modules\events\aurora_caelus.dm"
 #include "code\modules\events\blob.dm"
 #include "code\modules\events\bluespace_shell_station.dm"
+#include "code\modules\events\borg_error.dm"
 #include "code\modules\events\brand_intelligence.dm"
 #include "code\modules\events\camera_damage.dm"
 #include "code\modules\events\canister_leak.dm"

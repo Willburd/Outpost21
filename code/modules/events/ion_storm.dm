@@ -78,11 +78,11 @@
 				to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
 				var/law = S.generate_ion_law()
 				S.add_ion_law(law)
-				to_chat(S, law)
+				//to_chat(S, law)
 			else
 				to_chat(S, "<span class='danger'>You have detected a change to your owner AI's laws information:</span>")
 				S.add_ion_law(AIlaw)
-				to_chat(S, AIlaw)
+				//to_chat(S, AIlaw)
 			S.show_laws()
 
 

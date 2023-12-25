@@ -1164,7 +1164,6 @@
 		P.dispersion = deviation
 		process_accuracy(P, user, target)
 		P.launch_projectile_from_turf(target, get_pilot_zone_sel(user), user, params, angle_override)
-		P.does_spin = FALSE //weird bug...
 	else if(istype(A, /atom/movable))
 		var/atom/movable/AM = A
 		AM.throw_at(target, 7, 1, control_console.interior_controller)
@@ -1230,7 +1229,7 @@
 /obj/machinery/ammo_storage/ex_act(severity)
 	return 0 // no explosive act
 
-/obj/machinery/ammo_storage/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/ammo_storage/attack_hand(mob/user)
 	if(ammo_count > 0)
 		if(ammo_count == 1)
 			to_chat( usr, "A single shell remains!")
@@ -1238,6 +1237,18 @@
 			to_chat( usr, "[ammo_count] shells remain!")
 	else
 		to_chat( usr, "No shells remain!")
+
+/obj/machinery/ammo_storage/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,ammo_path))
+		if(ammo_count >= initial(ammo_count))
+			to_chat( usr, "\The [src] is full!")
+		else if(do_after(usr, 20, src))
+			if(ammo_count < initial(ammo_count))
+				ammo_count++
+				user.visible_message("[user] loads a shell into \the [src].", "You load a shell into \the [src].")
+				I.Destroy()
+		return
+	attack_hand(user)
 
 
 /obj/machinery/ammo_loader

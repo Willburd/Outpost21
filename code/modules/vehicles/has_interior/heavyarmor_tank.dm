@@ -69,24 +69,27 @@
 	icon = 'icons/obj/grenade_op.dmi'
 	icon_state = "shell"
 	damage = 35 // Bonk
+	range = 90
 	sharp = FALSE
-	does_spin = FALSE
+	nondirectional_sprite = TRUE
 	hud_state = "rocket_he"
 	hud_state_empty = "rocket_empty"
 
 /obj/item/projectile/bullet/kyshell/on_hit(atom/target, blocked=0)
-	if(!isliving(target)) //if the target isn't alive, so is a wall or something
-		explosion(target, 1, 2, 2, 4)
-	else
-		explosion(target, 0, 0, 2, 4)
+	explosion(target, 1, 2, 2, 4)
 	return 1
 
 /obj/item/projectile/bullet/kyshell/throw_impact(atom/target, var/speed)
-	if(!isliving(target)) //if the target isn't alive, so is a wall or something
-		explosion(target, 1, 2, 2, 4)
-	else
-		explosion(target, 0, 0, 2, 4)
+	explosion(target, 1, 2, 2, 4)
 	qdel(src)
+
+/obj/item/projectile/bullet/kyshell/on_range()
+	. = ..()
+	explosion(loc, 1, 2, 2, 4)
+
+/obj/item/projectile/bullet/kyshell/on_impact(atom/A)
+	. = ..()
+	explosion(loc, 1, 2, 2, 4)
 
 /obj/item/ammo_casing/kyshell
 	name = "TD Type-L \"Reclaimer\" Shell"

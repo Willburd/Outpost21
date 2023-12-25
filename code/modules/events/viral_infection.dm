@@ -46,6 +46,10 @@ var/global/list/event_viruses = list() // so that event viruses are kept around 
 	var/list/used_candidates = list()
 	severity = max(EVENT_LEVEL_MUNDANE, severity - 1)
 	var/actual_severity = severity * rand(1, 3)
+	if(player_list.len <= (EVENT_LEVEL_MAJOR * 3)) // low pop(under 9) uses half of candidate list
+		actual_severity = rand(1, candidates.len / 2)
+		actual_severity = FLOOR(actual_severity)
+		actual_severity = max(actual_severity,1)
 	while(actual_severity > 0 && candidates.len)
 		var/datum/disease2/disease/D = pick(viruses)
 		infect_mob(candidates[1], D.getcopy())

@@ -14,10 +14,10 @@ var/datum/antagonist/hungers/hungryones
 	role_type = BE_DEEPHUNGER
 	antag_indicator = "deephunger"
 	flags = ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	victory_text = "The Deep Hunger wins! Dragging all those it consumed with it, back into the abyss."
-	loss_text = "The Deep Hunger's desires were denied! Unable to maintain its hold on our world, its voices fall silent once more!"
-	victory_feedback_tag = "win - deep hunger win"
-	loss_feedback_tag = "loss - staff stopped the deep hunger"
+	victory_text = "The Deep Hunger wins! Dragging all those it consumed with it, back into the abyss. Sparing it's hosts the same fate."
+	loss_text = "The Deep Hunger's desires were denied! Unable to maintain its hold on our world, its voices fall silent once more. Dragging its hosts with it..."
+	victory_feedback_tag = "win - the hunger's desires were stated, and its hosts were spared."
+	loss_feedback_tag = "loss - the hunger's desires were ignored, and a price was paid"
 	can_speak_aooc = TRUE	// Kind of a hivemind, you are possessed by a demonic spirit that desires to watch the consumption of others, but not it's own hosts.
 
 /datum/antagonist/hungers/New()
@@ -51,3 +51,18 @@ var/datum/antagonist/hungers/hungryones
 	to_chat(killer, "<b>Your laws have been changed!</b>")
 	killer.set_zeroth_law(law, law_borg)
 	to_chat(killer, "New law: 0. [law]")
+
+
+/datum/antagonist/hungers/check_victory()
+	. = ..()
+	// redspace abduct hosts on failure
+	if(config.objectives_disabled)
+		return .
+	if(global_objectives && global_objectives.len)
+		for(var/datum/objective/O in global_objectives)
+			if(!O.completed && !O.check_completion())
+				result = 0
+		if(!result)
+			for(var/datum/mind/M in faction_members)
+				if(M.current)
+					redspace_abduction(M,null)

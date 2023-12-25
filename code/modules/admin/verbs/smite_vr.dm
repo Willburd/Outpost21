@@ -229,7 +229,7 @@ var/redspace_abduction_z
 		target.forceMove(pick(redexitlist).loc)
 
 	to_chat(target,"<span class='danger'>The tug relaxes, but everything around you looks... slightly off.</span>")
-	to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
+	if(user) to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
 
 	target.transforming = FALSE
 
@@ -242,7 +242,7 @@ var/redspace_abduction_z
 	if(hellexitlist.len)
 		target.forceMove(pick(hellexitlist).loc)
 		to_chat(target,"<span class='danger'>The tug relaxes, but everything around you looks... hellish.</span>")
-		to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
+		if(user) to_chat(user,"<span class='notice'>The mob has been moved. ([admin_jump_link(target,usr.client.holder)])</span>")
 
 /proc/fake_autosave(var/mob/living/target, var/client/user, var/wide)
 	if(!istype(target) || !target.client)

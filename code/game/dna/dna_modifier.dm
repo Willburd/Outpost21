@@ -526,10 +526,7 @@
 				else
 					randmuti(connected.occupant)
 			else
-				if(prob(95))
-					randmutg(connected.occupant)
-				else
-					randmuti(connected.occupant)
+				randmutg(connected.occupant)
 			domutcheck(connected.occupant, null)
 			connected.occupant.UpdateAppearance()
 			connected.occupant.dna.UpdateSE()
@@ -645,9 +642,9 @@
 						randmutb(connected.occupant)
 						domutcheck(connected.occupant,connected)
 					else
-						randmuti(connected.occupant)
+						//testing("Random good mut!")
+						randmutg(connected.occupant)
 						domutcheck(connected.occupant)
-						//testing("Random identity mut!")
 				connected.occupant.UpdateAppearance()
 				connected.occupant.dna.UpdateSE()
 				connected.occupant.dna.UpdateUI()

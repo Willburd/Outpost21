@@ -81,11 +81,12 @@
 						TRAITBLOCK_GEMEATER)
 	M.dna.SetSEState(block, 1)
 
-// Random Appearance Mutation
+// Random Appearance Mutation -> Is now just a random mutation
+// outpost 21 edit - we don't mess with cosmetics anymore, as it breaks a lot. So we do a random SE mutation instead!
 /proc/randmuti(var/mob/living/M)
 	if(!M || !(M.dna)) return
 	M.dna.check_integrity()
-	M.dna.SetUIValue(rand(1,DNA_UI_LENGTH),rand(1,4095))
+	M.dna.SetSEValue(rand(1,DNA_SE_LENGTH),rand(1,4095)) // M.dna.SetUIValue(rand(1,DNA_UI_LENGTH),rand(1,4095)) < old
 
 // Scramble UI or SE.
 /proc/scramble(var/UI, var/mob/M, var/prob)

@@ -520,13 +520,21 @@
 			if(!connected.occupant)
 				return
 
-			if(prob(95))
-				if(prob(75))
-					randmutb(connected.occupant)
+			// Get more good mutations if you use stronger rads, longer durations causes more mutations
+			var/mutations = rand(radiation_duration / 2, radiation_duration) // radiation duration is 1-20
+			if(mutations < 1)
+				mutations = 1
+			while(mutations-- > 0)
+				if(prob(20 + (radiation_intensity * 6))) // 20 to 80%
+					// guarenteed mutations from the two mutation lists
+					if(prob(40 + (radiation_intensity * 2))) // 40 to 60%
+						randmutg(connected.occupant)
+					else
+						randmutb(connected.occupant)
 				else
+					// completely random values
 					randmuti(connected.occupant)
-			else
-				randmutg(connected.occupant)
+
 			domutcheck(connected.occupant, null)
 			connected.occupant.UpdateAppearance()
 			connected.occupant.dna.UpdateSE()

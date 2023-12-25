@@ -71,10 +71,13 @@
 	if(!istype(T))
 		return
 
-	if(!powered())
+	if(welded)
+		scrubber_icon += "weld"
+	else if(!powered())
 		scrubber_icon += "off"
 	else
 		scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
+
 
 	add_overlay(icon_manager.get_atmos_icon("device", , , scrubber_icon))
 
@@ -147,6 +150,13 @@
 		update_use_power(USE_POWER_OFF)
 	//broadcast_status()
 	if(!use_power || (stat & (NOPOWER|BROKEN)))
+		return 0
+
+	if(welded)
+		//Fucking hibernate because you ain't doing shit.
+		hibernate = 1
+		spawn(rand(100,200))	//hibernate for 10 or 20 seconds randomly
+			hibernate = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -273,6 +283,26 @@
 		update_icon()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if (WT.remove_fuel(0,user))
+			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
+			if(do_after(user, 20 * WT.toolspeed))
+				if(!src || !WT.isOn()) return
+				playsound(src, WT.usesound, 50, 1)
+				if(!welded)
+					user.visible_message("<b>\The [user]</b> welds the vent shut.", "<span class='notice'>You weld the vent shut.</span>", "You hear welding.")
+					welded = 1
+					update_icon()
+				else
+					user.visible_message("<span class='notice'>[user] unwelds the vent.</span>", "<span class='notice'>You unweld the vent.</span>", "You hear welding.")
+					welded = 0
+					update_icon()
+			else
+				to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")
+		else
+			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+			return 1
 	if (!W.is_wrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
@@ -281,6 +311,9 @@
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
+		return 1
+	if (welded)
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is welded down firmly.</span>")
 		return 1
 	if(!can_unwrench())
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
@@ -301,3 +334,5 @@
 		. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
 		. += "You are too far away to read the gauge."
+	if(welded)
+		. += "It seems welded shut."

@@ -441,6 +441,9 @@
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return 1
+	if (welded)
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is welded down firmly.</span>")
+		return 1
 	if(!can_unwrench())
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)

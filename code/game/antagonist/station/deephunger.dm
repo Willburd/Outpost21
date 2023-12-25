@@ -59,9 +59,11 @@ var/datum/antagonist/hungers/hungryones
 	if(config.objectives_disabled)
 		return .
 	if(global_objectives && global_objectives.len)
+		var/result = TRUE
 		for(var/datum/objective/O in global_objectives)
 			if(!O.completed && !O.check_completion())
-				result = 0
+				result = FALSE
+				break
 		if(!result)
 			for(var/datum/mind/M in faction_members)
 				if(M.current)

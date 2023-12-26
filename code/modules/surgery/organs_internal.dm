@@ -390,9 +390,14 @@
 		return SURGERY_FAILURE
 
 	if(O && istype(O,/obj/item/organ/internal/malignant))
-		// malignants can be put back anywhere
-		O.parent_organ = affected.organ_tag
-		organ_compatible = 1
+		// malignants can be put back in several locations
+		var/obj/item/organ/internal/malignant/ML = O
+		if(affected.organ_tag in ML.surgeryAllowedSites)
+			ML.parent_organ = affected.organ_tag
+			organ_compatible = 1
+		else
+			to_chat(user, "<span class='warning'>\The [ML.name] [o_do] normally go in \the [affected.name].</span>")
+			return SURGERY_FAILURE
 
 	else if(O && affected.organ_tag == O.parent_organ)
 		organ_compatible = 1

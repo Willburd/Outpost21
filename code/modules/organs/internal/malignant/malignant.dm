@@ -2,32 +2,41 @@
 /obj/item/organ/internal/malignant
 	organ_tag = "malignant" // gets a random number after, to allow multiple organs!
 	icon = 'icons/obj/surgery_op.dmi'
-	var/validBPsites = list(BP_GROIN, BP_TORSO, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG) // copy of BP_ALL
+	var/validBPspawns = list(BP_GROIN, BP_TORSO, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG) // copy of BP_ALL
+	var/surgeryAllowedSites = list(BP_GROIN, BP_TORSO, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG) // everything except engineered uses a BP_ALL copy
 
 	var/cooldown = 0
 	var/cooldownmin = 0
 	var/cooldownmax = 0
 
-/obj/item/organ/internal/malignant/New(var/mob/living/holder, var/internal, var/force_location = null)
-	// choose a random site for us to grow in before calling parent
-	organ_tag = "[initial(organ_tag)]_[rand(999,9999)]"
-	var/i = 0
-	if(!force_location)
-		while(++i < 10)
-			// done here, because New() does all the setup for placing the organ...
-			// attempt to select a valid exterior organ that isn't synthetic!
-			parent_organ = pick(validBPsites)
-			if(isliving(holder))
-				var/obj/item/organ/checklimb = holder.organs_by_name[parent_organ]
-				if(checklimb)
-					// valid limb, check if organic!
-					if(checklimb.status == 0 && checklimb.robotic < ORGAN_ROBOT)
-						return ..( holder, internal)
+/obj/item/organ/internal/malignant/New(var/mob/living/holder, var/internal, var/force_location = null, var/forcetag = null)
+	organ_tag = "[initial(organ_tag)]_[rand(1,9999)]"
+	if(forcetag)
+		organ_tag = forcetag
+	if(!istype(src,/obj/item/organ/internal/malignant/engineered))
+		// choose a random site for us to grow in before calling parent
+		var/i = 0
+		if(!force_location)
+			while(++i < 10)
+				// done here, because New() does all the setup for placing the organ...
+				// attempt to select a valid exterior organ that isn't synthetic!
+				parent_organ = pick(validBPspawns)
+				if(isliving(holder))
+					var/obj/item/organ/checklimb = holder.organs_by_name[parent_organ]
+					if(checklimb)
+						// valid limb, check if organic!
+						if(checklimb.status == 0 && checklimb.robotic < ORGAN_ROBOT)
+							return ..( holder, internal)
+		else
+			parent_organ = force_location
+			return ..( holder, internal)
+		// invalid, spawn as dead...
+		status = ORGAN_DEAD
 	else
-		parent_organ = force_location
+		// engineered ones don't do all of the above
+		if(force_location)
+			parent_organ = force_location
 		return ..( holder, internal)
-	// invalid, spawn as dead...
-	status = ORGAN_DEAD
 
 /mob/living/carbon/human/proc/malignant_organ_spawn( var/allowtumors = TRUE, var/allowparasites = TRUE)
 	if(stat == DEAD)
@@ -71,7 +80,7 @@
 	icon_state = "parasite"
 	dead_icon = "parasite-dead"
 
-	validBPsites = list(BP_GROIN, BP_TORSO, BP_HEAD) // unlike tumors, we like certain other places!
+	validBPspawns = list(BP_GROIN, BP_TORSO, BP_HEAD) // unlike tumors, we like certain other places!
 	can_reject = 0
 
 	var/feedchance = 1 	// fixed chance that parasite will feed this loop
@@ -105,12 +114,23 @@
 	return FALSE
 
 
-
 /obj/item/organ/internal/malignant/engineered
 	name = "engineered"
 	icon_state = "engineered"
 	dead_icon = "engineered-dead"
 	can_reject = 0
+	surgeryAllowedSites = list(BP_GROIN, BP_TORSO) // Lets keep these a little more restricted, due to size and complexity
+
+/obj/item/organ/internal/malignant/engineered/proc/update_degeneration(var/degradechance, var/intensity)
+	if(prob(degradechance))
+		add_autopsy_data("Programmed degeneration", intensity)
+	if(prob(damage * 4))
+		return TRUE // do degeneration proc
+	return FALSE
+
+/obj/item/organ/internal/malignant/engineered/proc/handle_sideeffects()
+	if(damage < 10)
+		return
 
 
 /****************************************************
@@ -177,7 +197,7 @@
 /obj/item/organ/internal/malignant/tumor/potato
 	name = "mimetic potato"
 	icon_state = "potato"
-	validBPsites = list(BP_GROIN, BP_TORSO)
+	validBPspawns = list(BP_GROIN, BP_TORSO)
 	cooldownmin = 15
 	cooldownmax = 35
 
@@ -202,6 +222,19 @@
 		to_chat(user, "<span class='notice'>You cut the mimetic potato.</span>")
 		qdel(src)
 		return
+	if(istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
+		if(C.use(5))
+			//TODO: generalize this.
+			to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
+			var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(get_turf(user))
+			if(src.loc == user && ishuman(user))
+				user.put_in_hands(pocell)
+			pocell.maxcharge = 2000 // same as potato
+			pocell.charge = pocell.maxcharge
+			qdel(src)
+			return
+
 	. = ..()
 
 
@@ -266,13 +299,13 @@
 	var/turf/T = loc
 	if(owner)
 		// SURPRISE!
-		playsound(owner, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(owner, 'sound/items/confetti.ogg', 75, 1)
 		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 		owner.gib()
 		T = owner.loc
 	else
 		// only the organ pops!
-		playsound(src, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(src, 'sound/items/confetti.ogg', 75, 1)
 		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 
 	// YAYYYYY
@@ -285,8 +318,8 @@
 // Teleports you randomly, until it gets you killed
 /obj/item/organ/internal/malignant/tumor/bluespace
 	name = "bluespace tumor"
-	icon_state = "tumor"
-	validBPsites = list(BP_GROIN, BP_TORSO)
+	icon_state = "bluetumor"
+	validBPspawns = list(BP_GROIN, BP_TORSO)
 	cooldownmin = 25
 	cooldownmax = 65
 
@@ -331,8 +364,8 @@
 // Get you drunk constantly until liver failure
 /obj/item/organ/internal/malignant/tumor/beerbelly
 	name = "beerbelly"
-	icon_state = "tumor"
-	validBPsites = list(BP_GROIN)
+	icon_state = "beerbelly"
+	validBPspawns = list(BP_GROIN)
 	cooldownmin = 25
 	cooldownmax = 95
 
@@ -359,10 +392,10 @@
 		cooldown = rand(cooldownmin,cooldownmax)
 
 
-// Get you drunk constantly until liver failure
+// Prints money until you explode
 /obj/item/organ/internal/malignant/tumor/moneyorgan
 	name = "crypto-cache"
-	icon_state = "tumor"
+	icon_state = "crypto"
 	cooldownmin = 15
 	cooldownmax = 25
 	var/thalers = 0
@@ -482,15 +515,23 @@
 /obj/item/organ/internal/malignant/parasite/honker/feed()
 	..()
 	if(prob(80))
-		var/sound = pick( list('sound/misc/sadtrombone.ogg','sound/items/bikehorn.ogg'))
+		var/sound = pick( list('sound/misc/sadtrombone.ogg','sound/items/bikehorn.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg'))
 		playsound(owner, sound, 50, 1)
 	else
+		// obnoxious, terrible jokes that'll get you punched by a vox
 		var/jokelist = list("honk", \
 							"hehe", \
-							"beep", \
-							"boing", \
-							"wowzers")
-		owner.say(pick(jokelist))
+							"Don't worry, my jokes have the same opinion about you!", \
+							"Wowie, was that yours or the space asshole's?",
+							"Space lube the airlock, engineers love it!", \
+							"What does a vox choir sound like? ... Sorry I can't hear you.", \
+							"How many teshari does it take to screw in a lightbulb? However many it takes to fit on the ladder.", \
+							"Why does security wear red? So your blood stains won't get noticed!", \
+							"I got some space wind for ya!", \
+							"Honk ya mother!", \
+							"Nice medbay! Now where's the survivors, doc?", \
+							"What's that borgi? The captain fell down the well!? Quickly, to the bar!")
+		owner.say((prob(40) ? ";" : "") + "[pick(jokelist)]")
 	return prob(5) && growth < 3
 
 
@@ -515,3 +556,163 @@
 	Will find lots of use with abductors in the future!
 	These are not randomly given!
 ****************************************************/
+
+// Basic lattice, needs to grow in a host for a bit
+/obj/item/organ/internal/malignant/engineered/lattice
+	name = "organ lattice"
+	icon_state = "lattice"
+	desc = "A cellular framework made for engineering organs, requires radium to properly grow."
+	var/growth = 0 		// grows until it hits trigger
+	var/chemsoak = 0 	// if it's been fed the amount of chems it wants, counts DOWN when being satisfied
+	var/growth_trigger = 1
+	var/prepared = FALSE
+	var/mutating = FALSE
+
+/obj/item/organ/internal/malignant/engineered/lattice/New(var/mob/living/holder, var/internal, var/force_location = null, var/forcetag = null)
+	growth_trigger = rand(150,200)
+	chemsoak = rand(50,90)
+	return ..( holder, internal, force_location, forcetag)
+
+/obj/item/organ/internal/malignant/engineered/lattice/process()
+	. = ..()
+	if(cooldown > 0)
+		cooldown--
+		return
+	if(!owner)
+		return
+	if(mutating)
+		// finished, ready to TRANSFORM
+		growth++
+
+		// check bloodstream for reagents, see if we're being chemically trained
+		var/list/possibletraining = list() // adds the chemid if present, then picks a random one once training is finished
+
+		if(owner.radiation > 400)
+			// check for radiation training options?
+			//var/list/radlist = list() // used like chemlist is, once we have rad trained organs
+			chemsoak -= 1
+			if(growth > growth_trigger)
+				add_autopsy_data("Radiation degenerated training cells", 3)
+				cooldown = rand(5,10)
+		else
+			// check for reagents that we can train on
+			var/anychecks = FALSE
+			var/list/chemlist = list("phoron","tricordrazine","tramadol","anti_toxin","citalopram")
+			for(var/chem in chemlist)
+				if(owner.bloodstr.get_reagent_amount(chem) > 0)
+					anychecks = TRUE
+					possibletraining.Add(chem)
+			if(anychecks)
+				chemsoak -= 1
+			else if(growth > growth_trigger)
+				add_autopsy_data("Apoptotic training cells", 3)
+				cooldown = rand(5,10)
+
+		// TRAINING FINISHED
+		if(chemsoak <= 0)
+			if(possibletraining.len == 0)
+				add_autopsy_data("Apoptotic training cells", 5) // quickly dies if you mess this up
+				cooldown = rand(5,10)
+				return
+			var/newpath = null
+			var/trainingpick = pick(possibletraining)
+			switch(trainingpick)
+				if("phoron")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/phoron
+				if("tricordrazine")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/tricord
+				if("tramadol")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/tramadol
+				if("anti_toxin")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/dylovene
+				if("citalopram")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/citalopram
+			// spawn new organ, delete us
+			if(newpath)
+				var/ourowner = owner
+				var/ourloc = parent_organ
+				var/ourtag = organ_tag
+				Destroy()
+				new newpath(ourowner, TRUE, ourloc, ourtag)
+	else if(prepared)
+		if(chemsoak > 0)
+			if(owner.bloodstr.get_reagent_amount("mutagen") > 0)
+				// soak the organ till ready for mutation
+				chemsoak -= 1
+		else
+			// BEGIN MUTATION PROCESS
+			mutating = TRUE
+			name = "mutoid"
+			icon_state = "lattice-mutated"
+			desc = "A fully grown mutoid ready for chemical or radiation training."
+			growth = 0
+			growth_trigger = rand(160,210) // we will quickly start dying now unless trained
+			chemsoak = rand(80,150) // chemical training time
+			update_icon()
+	else
+		if(chemsoak > 0 && owner.bloodstr.get_reagent_amount("radium") > 0)
+			// soak the organ till grown
+			chemsoak -= 1
+		growth++
+		if(growth > growth_trigger)
+			if(chemsoak <= 0)
+				name = "proto-organ"
+				icon_state = "lattice-grown"
+				desc = "A half grown proto-organ ready for initial mutation."
+				prepared = TRUE
+				growth = 0
+				chemsoak = rand(40,60) // mutagen soak time
+				update_icon()
+			else
+				// breaks organ
+				add_autopsy_data("Early development radium starvation", 1)
+				cooldown = rand(5,10)
+
+
+// Chemical dispensing organs, USES SUB TYPES
+/obj/item/organ/internal/malignant/engineered/chemorgan
+	name = "chem organ DO NOT USE THIS"
+	var/chemid = null
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/process()
+	. = ..()
+	if(cooldown > 0)
+		cooldown--
+		return
+	if(!owner)
+		return
+	if(!chemid)
+		return
+	if(update_degeneration( 2, 1))
+		handle_sideeffects()
+	else
+		if(owner.bloodstr.get_reagent_amount(chemid) < 1)
+			if(prob(50))
+				owner.nutrition = max(owner.nutrition - 1,0) // num num
+			owner.bloodstr.add_reagent(chemid,rand(3,5))
+			cooldown = 50
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/phoron
+	name = "phoroketic gland"
+	icon_state = "chem_phoron"
+	chemid = "phoron"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/tricord
+	name = "trioketic gland"
+	icon_state = "chem_tricord"
+	chemid = "tricordrazine"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/tramadol
+	name = "tramoketic gland"
+	icon_state = "chem_tramadol"
+	chemid = "tramadol"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/dylovene
+	name = "dylovetic gland"
+	icon_state = "chem_dylo"
+	chemid = "anti_toxin"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/citalopram
+	name = "citometic gland"
+	icon_state = "chem_cita"
+	chemid = "citalopram"

@@ -25,6 +25,8 @@
 
 	var/anomalous_organs = FALSE	// Can it print anomalous organs?
 
+	var/engineered_organs = FALSE  // Can it print advanced engineered organs that any species can use (Abductor gameplay)
+
 	// These should be subtypes of /obj/item/organ
 	// Costs roughly 20u Phoron (1 sheet) per internal organ, limbs are 60u for limb and extremity
 	var/list/products = list(
@@ -42,7 +44,8 @@
 		"Foot, Left"   = list(/obj/item/organ/external/foot,  20),
 		"Foot, Right"   = list(/obj/item/organ/external/foot/right,  20),
 		"Hand, Left"   = list(/obj/item/organ/external/hand,  20),
-		"Hand, Right"   = list(/obj/item/organ/external/hand/right,  20)
+		"Hand, Right"   = list(/obj/item/organ/external/hand/right,  20),
+		"Lattice"  = list(/obj/item/organ/internal/malignant/engineered/lattice, 40)
 		)
 
 	var/list/complex_products = list(
@@ -55,6 +58,14 @@
 		"Lymphatic Complex" = list(/obj/item/organ/internal/immunehub, 120),
 		"Respiration Nexus" = list(/obj/item/organ/internal/lungs/replicant/mending, 80),
 		"Adrenal Valve Cluster" = list(/obj/item/organ/internal/heart/replicant/rage, 80)
+		)
+
+	var/list/engineered_products = list(
+		"Phoroketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/phoron, 90),
+		"Trioketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/tricord, 90),
+		"Tramoketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/tramadol, 90),
+		"Dylovetic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/dylovene, 90),
+		"Citometic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/citalopram, 90)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
@@ -149,6 +160,9 @@
 
 	if(anomalous_organs)
 		possible_list |= anomalous_products
+
+	if(engineered_organs)
+		possible_list |= engineered_products
 
 	var/choice = tgui_input_list(usr, "What would you like to print?", "Print Choice", possible_list)
 

@@ -344,7 +344,7 @@ const BodyScannerMainOrgansExternal = (props) => {
                 <Box float="left" inline>
                   {!!o.bruteLoss && (
                     <Box inline position="relative">
-                      <Icon name="bone" />
+                      <Icon name="wrench" />
                       {round(o.bruteLoss, 0)}&nbsp;
                       <Tooltip position="top" content="Brute damage" />
                     </Box>

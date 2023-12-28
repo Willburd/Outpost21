@@ -103,6 +103,7 @@
 	matter = list(MAT_STEEL = 10000, MAT_GLASS = 5000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	drop_sound = 'sound/items/drop/knife.ogg'
+	var/clamp_chance = 0 // chance that the scalple will perform cautery on its own
 
 /*
  * Researchable Scalpels
@@ -112,6 +113,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
+	clamp_chance = 75
 
 /obj/item/weapon/surgical/scalpel/laser2
 	name = "laser scalpel"
@@ -119,6 +121,7 @@
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
+	clamp_chance = 85
 
 /obj/item/weapon/surgical/scalpel/laser3
 	name = "laser scalpel"
@@ -126,12 +129,14 @@
 	icon_state = "scalpel_laser3_on"
 	damtype = "fire"
 	force = 15.0
+	clamp_chance = 95
 
 /obj/item/weapon/surgical/scalpel/manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
 	force = 7.5
+	clamp_chance = 100 // this is really just a formality, uses a different surgery step from laser scalples
 
 /obj/item/weapon/surgical/scalpel/ripper
 	name = "jagged scalpel"
@@ -141,6 +146,7 @@
 	force = 15.0
 	toolspeed = 0.75
 	origin_tech = list(TECH_MATERIAL = 5, TECH_BIO = 3, TECH_ILLEGAL = 2)
+	clamp_chance = 0
 
 /*
  * Circular Saw
@@ -231,6 +237,7 @@
 
 /obj/item/weapon/surgical/scalpel/cyborg
 	toolspeed = 0.5
+	clamp_chance = 0
 
 /obj/item/weapon/surgical/circular_saw/cyborg
 	toolspeed = 0.5
@@ -268,6 +275,7 @@
 /obj/item/weapon/surgical/scalpel/alien
 	icon = 'icons/obj/abductor.dmi'
 	toolspeed = 0.25
+	clamp_chance = 100
 
 /obj/item/weapon/surgical/circular_saw/alien
 	icon = 'icons/obj/abductor.dmi'

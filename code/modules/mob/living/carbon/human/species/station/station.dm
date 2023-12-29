@@ -36,7 +36,8 @@
 		O_SPLEEN = 		/obj/item/organ/internal/spleen,
 		O_EYES =		/obj/item/organ/internal/eyes,
 		O_STOMACH =		/obj/item/organ/internal/stomach,
-		O_INTESTINE =	/obj/item/organ/internal/intestine
+		O_INTESTINE =	/obj/item/organ/internal/intestine,
+		O_BUTT = 		/obj/item/organ/internal/butt
 		)
 
 	inherent_verbs = list(
@@ -137,7 +138,8 @@
 		O_BRAIN =    /obj/item/organ/internal/brain/unathi,
 		O_EYES =     /obj/item/organ/internal/eyes/unathi,
 		O_STOMACH =		/obj/item/organ/internal/stomach/unathi,
-		O_INTESTINE =	/obj/item/organ/internal/intestine/unathi
+		O_INTESTINE =	/obj/item/organ/internal/intestine/unathi,
+		O_BUTT = 		/obj/item/organ/internal/butt
 		)
 
 
@@ -257,7 +259,8 @@
 		O_BRAIN =    /obj/item/organ/internal/brain,
 		O_EYES =     /obj/item/organ/internal/eyes/tajaran,
 		O_STOMACH =		/obj/item/organ/internal/stomach/tajaran,
-		O_INTESTINE =	/obj/item/organ/internal/intestine
+		O_INTESTINE =	/obj/item/organ/internal/intestine,
+		O_BUTT = 		/obj/item/organ/internal/butt
 		)
 
 	default_emotes = list(
@@ -355,7 +358,7 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
-		
+
 	has_organ = list(
 		O_HEART =		/obj/item/organ/internal/heart/skrell,
 		O_LUNGS =		/obj/item/organ/internal/lungs/skrell,
@@ -367,7 +370,8 @@
 		O_SPLEEN = 		/obj/item/organ/internal/spleen/skrell,
 		O_EYES =		/obj/item/organ/internal/eyes/skrell,
 		O_STOMACH =		/obj/item/organ/internal/stomach/skrell,
-		O_INTESTINE =	/obj/item/organ/internal/intestine/skrell
+		O_INTESTINE =	/obj/item/organ/internal/intestine/skrell,
+		O_BUTT = 		/obj/item/organ/internal/butt
 		)
 
 /datum/species/skrell/can_breathe_water()
@@ -449,7 +453,8 @@
 	O_BRAIN =    /obj/item/organ/internal/brain,
 	O_EYES =     /obj/item/organ/internal/eyes,
 	O_STOMACH =	 /obj/item/organ/internal/stomach,
-	O_INTESTINE =/obj/item/organ/internal/intestine
+	O_INTESTINE =/obj/item/organ/internal/intestine,
+	O_BUTT = 		/obj/item/organ/internal/butt
 	)
 
 	descriptors = list(
@@ -487,7 +492,7 @@
 	else if(isturf(H.loc)) //else, there's considered to be no light
 		var/turf/T = H.loc
 		light_amount = T.get_lumcount() * 5
-	
+
 	for(var/K in damageable)
 		if(!(K in covered))
 			H.apply_damage(light_amount/4, BURN, K, 0, 0, "Abnormal growths")

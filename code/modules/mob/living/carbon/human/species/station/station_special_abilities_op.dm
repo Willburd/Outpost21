@@ -9,6 +9,15 @@
 		to_chat(C,"<span class='notice'>The dead cannot toot!</span>")
 		return
 
+	// find butt
+	var/obj/item/organ/internal/butt/Bu = locate() in C.internal_organs
+	if(!Bu)
+		to_chat(C,"<span class='notice'>Try as you might, you cannot toot without a butt to toot toots from!</span>")
+		return
+	Bu.structural_integrity -= rand(1,6)
+	if(Bu.structural_integrity < 0)
+		Bu.structural_integrity = 0
+
 	var/deathmessage = ""
 	C.gutdeathpressure += 1
 	var/range = 5 + C.gutdeathpressure
@@ -54,14 +63,21 @@
 			C.gib()
 		deathmessage = " and toots out of time and space"
 	// death toot
-	else if(C.gutdeathpressure > 5)
-		if(prob(C.gutdeathpressure))
+	else if(Bu.structural_integrity < 75)
+		if(prob((100 - Bu.structural_integrity) / 5))
 			for(var/mob/M in living_mobs(range))
 				shake_camera(M, 5, 3)
 				if(M != src)
 					M.Stun(8)
-			C.gib()
-			deathmessage = " and explodes"
+			if(Bu.structural_integrity < 20)
+				C.gib()
+				deathmessage = " and explodes"
+			else
+				Bu.assblasted()
+				C.AdjustWeakened(10)
+				C.halloss = 30
+				C.emote("scream")
+				deathmessage = " and explodes their butt off"
 	// lights rattled or bursted
 	for(var/obj/machinery/light/L in orange(10, C))
 		if(prob(C.gutdeathpressure * 2))

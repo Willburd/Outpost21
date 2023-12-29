@@ -55,6 +55,8 @@
 			<A href='byond://?src=\ref[src];spell_choice=knock'>Knock</A> (10)<BR>
 			<I>This spell opens nearby doors and does not require wizard garb.</I><BR>
 			<A href='byond://?src=\ref[src];spell_choice=noclothes'>Remove Clothes Requirement</A> <b>Warning: this takes away 2 spell choices.</b><BR>
+			<A href='byond://?src=\ref[src];spell_choice=buttblast'>Buttblast</A> (10)<BR>
+			<I>This spell removes a target's butt instantly.</I><BR>
 			<HR>
 			<B>Artefacts:</B><BR>
 			Powerful items imbued with eldritch magics. Summoning one will count towards your maximum number of spells.<BR>
@@ -232,6 +234,11 @@
 								to_chat(H, "<span class='notice'>The walls suddenly disappear.</span>")
 							temp = "You have purchased a scrying orb, and gained x-ray vision."
 							max_uses--
+						if("buttblast")
+							feedback_add_details("wizard_spell_learned","BB") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
+							H.add_spell(new/spell/targeted/buttblast)
+							temp = "You have learned buttblast."
+
 		else
 			if(href_list["temp"])
 				temp = null
@@ -426,3 +433,20 @@
 	..()
 	to_chat(user, "<span class='warning'>[src] suddenly feels very warm!</span>")
 	empulse(src, 1, 1, 1, 1)
+
+
+/obj/item/weapon/spellbook/oneuse/buttblast
+	spell = /spell/targeted/buttblast
+	spellname = "buttblast"
+	icon_state ="bookknock"
+	desc = "This book seems indecent."
+
+/obj/item/weapon/spellbook/oneuse/buttblast/recoil(mob/user as mob)
+	..()
+	to_chat(user, "<span class='warning'>You're knocked down!</span>")
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		user.Weaken(20)
+		var/obj/item/organ/internal/butt/Bu = locate() in H.internal_organs
+		if(Bu)
+			Bu.assblasted(user)

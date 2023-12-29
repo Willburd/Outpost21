@@ -56,7 +56,7 @@
 		nif.nifsofts = nifsofts
 	else
 	*/
-	..()
+	. = ..()
 /datum/species/proc/produceCopy(var/list/traits, var/mob/living/carbon/human/H, var/custom_base, var/resetdna = TRUE, var/geneflags = 0) // outpost 21 edit - custom species removal
 	ASSERT(src)
 	ASSERT(istype(H))

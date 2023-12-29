@@ -8,7 +8,7 @@
 	if(!istype(target))
 		return
 
-	var/list/smite_types = list(SMITE_SHADEKIN_ATTACK,SMITE_SHADEKIN_NOMF,SMITE_REDSPACE_ABDUCT,SMITE_HELL,SMITE_AUTOSAVE,SMITE_AUTOSAVE_WIDE)
+	var/list/smite_types = list(SMITE_SHADEKIN_ATTACK,SMITE_SHADEKIN_NOMF,SMITE_REDSPACE_ABDUCT,SMITE_HELL,SMITE_AUTOSAVE,SMITE_AUTOSAVE_WIDE,SMITE_BUTTREMOVE)
 
 	var/smite_choice = tgui_input_list(usr, "Select the type of SMITE for [target]","SMITE Type Choice", smite_types)
 	if(!smite_choice)
@@ -130,6 +130,9 @@
 
 		if(SMITE_AUTOSAVE_WIDE)
 			fake_autosave(target, src, TRUE)
+
+		if(SMITE_BUTTREMOVE)
+			butt_remover(target, src)
 
 		else
 			return //Injection? Don't print any messages.
@@ -286,3 +289,17 @@ var/redspace_abduction_z
 			to_chat(target, "<span class='notice' style='font: small-caps bold large monospace!important'>Autosave complete!</span>")
 			if(target.client)
 				target.client.screen -= loader
+
+/proc/butt_remover(mob/living/target, user)
+	var/obj/item/organ/internal/butt/Bu = locate() in target.internal_organs
+	if(!Bu)
+		to_chat(user,"<span class='notice'>Try as you might, [target] has no butt to smite!</span>")
+		return
+	Bu.assblasted(user)
+	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+	sparks.set_up(5, 0, target)
+	sparks.attach(target.loc)
+	sparks.start()
+	playsound(target, 'sound/effects/tape.ogg', 50)
+	to_chat(target,"<span class='danger'>Your butt blasts off!</span>")
+	to_chat(user,"<span class='warning'>You blast [target]'s butt off!</span>")

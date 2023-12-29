@@ -4,3 +4,4 @@
 #define SMITE_HELL					"Send To Hell"
 #define SMITE_AUTOSAVE				"10 Second Autosave"
 #define SMITE_AUTOSAVE_WIDE			"10 Second Autosave (AoE)"
+#define SMITE_BUTTREMOVE			"Remove Butt"

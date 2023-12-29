@@ -302,13 +302,13 @@
 			*/
 			if(SPECIES_FENNEC)
 				temp_img = icon('icons/obj/butts_vr.dmi', "vulp") // placeholder until we get fennec butts.
-			/* 
+			/*
 			if(SPECIES_AKULA) outpost 21 - race removal
 				temp_img = icon('icons/obj/butts_vr.dmi', "xeno") // placeholder until we get proper sharkbutt. AKULA BE THICC ASS SHARKS MMMMMMMMMMMMMMKAY?
 			*/
-			/* // Commented out because no icons exist, BUT if someone wants to sprite some more ASSCHEEKS, then just uncomment these and you have asses for each species. - Rykka.
 			if(SPECIES_TESHARI)
 				temp_img = icon('icons/obj/butts_vr.dmi', "tesh")
+			/* // Commented out because no icons exist, BUT if someone wants to sprite some more ASSCHEEKS, then just uncomment these and you have asses for each species. - Rykka.
 			if(SPECIES_SHADEKIN || SPECIES_SHADEKIN_CREW)
 				temp_img = icon('icons/obj/butts_vr.dmi', "shadekin")
 			if(SPECIES_ALRAUNE)

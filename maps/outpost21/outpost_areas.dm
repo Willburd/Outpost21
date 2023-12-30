@@ -1853,6 +1853,16 @@
 	music = 'sound/ambience/approaching_planet.ogg'
 	requires_power = FALSE
 
+/area/specialty/thedarkplace // halucination punishment zone
+	name = "\improper Unknown"
+	base_turf = /turf/simulated/floor/weird_things/dark
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "blue"
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	sound_env = SPACE
+	ambience = AMBIENCE_FOREBODING
+	music = 'sound/ambience/ambisin1.ogg'
+
 /area/virtual_reality/lighting // virtual reality, but cooler
 	dynamic_lighting = 1 // literally the only change, I just wanted neat lights for the hazard course.
 

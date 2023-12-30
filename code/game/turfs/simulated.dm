@@ -130,12 +130,12 @@
 			switch(src.wet)
 				if(2) // Lube
 					floor_type = "slippery"
-					slip_dist = 4
+					slip_dist = rand(12,20) // outpost 21  edit - increased from 4
 					slip_stun = 10
 				if(3) // Ice
 					floor_type = "icy"
 					slip_stun = 4
-					slip_dist = 2
+					slip_dist = rand(1,3) // outpost 21  edit - increased from 2
 
 			if(M.slip("the [floor_type] floor", slip_stun))
 				for(var/i = 1 to slip_dist)

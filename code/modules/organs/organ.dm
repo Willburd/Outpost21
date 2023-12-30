@@ -261,12 +261,12 @@ var/list/organ_cache = list()
 	// immunosuppressant that changes transplant data to make it match.
 	if(dna && can_reject)
 		if(!rejecting)
-			if(owner && owner.bloodstr.get_reagent_amount("immunosuprizine") > 0)
+			if(owner && (owner.bloodstr.get_reagent_amount("immunosuprizine") > 0 || owner.bloodstr.get_reagent_amount("malish-qualem")))
 				rejecting = 0
 			else if(blood_incompatible(dna.b_type, owner.dna.b_type, species.name, owner.species.name)) //VOREStation Edit - Process species by name.
 				rejecting = 1
 		else
-			if(owner && owner.bloodstr.get_reagent_amount("immunosuprizine") > 0)
+			if(owner && (owner.bloodstr.get_reagent_amount("immunosuprizine") > 0 || owner.bloodstr.get_reagent_amount("malish-qualem")))
 				rejecting = 0
 			else
 				rejecting++ //Rejection severity increases over time.

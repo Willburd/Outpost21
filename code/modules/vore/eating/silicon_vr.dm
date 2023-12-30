@@ -11,6 +11,9 @@
 	alpha = HOLO_ORIGINAL_ALPHA //Half alpha here rather than in the icon so we can toggle it easily.
 	color = HOLO_ORIGINAL_COLOR //This is the blue from icons.dm that it was before.
 	desc = "A hologram representing an AI persona."
+	// finally, people know the AI is talking!
+	var/typing
+	var/obj/effect/decal/typing_indicator
 
 /obj/effect/overlay/aiholo/Destroy()
 	drop_prey()
@@ -106,3 +109,27 @@
 
 		if(master.ooc_notes)
 			. += "<span class = 'deptradio'>OOC Notes:</span> <a href='?src=\ref[master];ooc_notes=1'>\[View\]</a>"
+
+// Imagine copypasting code again!
+/obj/effect/overlay/aiholo/proc/init_typing_indicator(var/set_state = "typing")
+	typing_indicator = new
+	typing_indicator.appearance = generate_speech_bubble(null, set_state)
+	typing_indicator.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)			//VOREStation Edit
+
+/obj/effect/overlay/aiholo/proc/set_typing_indicator(var/state)
+	if(!master.is_preference_enabled(/datum/client_preference/show_typing_indicator))
+		if(typing_indicator)
+			cut_overlay(typing_indicator, TRUE)
+		return
+
+	if(!typing_indicator)
+		init_typing_indicator("[master.speech_bubble_appearance()]_typing")
+
+	if(state && !typing)
+		add_overlay(typing_indicator, TRUE)
+		typing = TRUE
+	else if(typing)
+		cut_overlay(typing_indicator, TRUE)
+		typing = FALSE
+
+	return state

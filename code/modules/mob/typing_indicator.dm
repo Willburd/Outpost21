@@ -33,6 +33,12 @@
 		cut_overlay(typing_indicator, TRUE)
 		typing = FALSE
 
+	if(isAI(src)) // used to forward ai typing indicator to holograms - Willbird
+		var/mob/living/silicon/ai/A = src
+		if(A.holo && istype(A.holo.masters[A],/obj/effect/overlay/aiholo/))
+			var/obj/effect/overlay/aiholo/holo = A.holo.masters[A]
+			holo.set_typing_indicator(state)
+
 	return state
 
 /mob/verb/say_wrapper()

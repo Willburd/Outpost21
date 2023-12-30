@@ -6,6 +6,7 @@
 #define RADIATION_DAMAGE 0x20
 #define TOXIN_DAMAGE 0x40
 #define OXY_DAMAGE 0x80
+#define WEIRD_ORGANS 0x100
 
 /datum/category_item/catalogue/technology/medical_kiosk
 	name = "Medical Kiosk"
@@ -138,6 +139,8 @@
 			problems |= SERIOUS_INTERNAL_DAMAGE
 		if(I.status & ORGAN_BLEEDING)
 			problems |= INTERNAL_BLEEDING
+		if(istype(I,/obj/item/organ/internal/malignant))
+			problems |= WEIRD_ORGANS
 
 	if(user.getToxLoss() > 0)
 		problems |= TOXIN_DAMAGE
@@ -171,6 +174,8 @@
 		problem_text += "<br><span class='warning'>Exposure to toxic materials detected - induce vomiting if you have consumed anything recently, and seek medical attention.</span>"
 	if(problems & OXY_DAMAGE)
 		problem_text += "<br><span class='warning'>Blood/air perfusion level is below acceptable norms - use concentrated oxygen if necessary.</span>"
+	if(problems & WEIRD_ORGANS)
+		problem_text += "<br><span class='warning'>Anatomical irregularities detected - Please see a medical professional.</span>"
 
 	return problem_text
 
@@ -287,3 +292,4 @@
 #undef RADIATION_DAMAGE
 #undef TOXIN_DAMAGE
 #undef OXY_DAMAGE
+#undef WEIRD_ORGANS

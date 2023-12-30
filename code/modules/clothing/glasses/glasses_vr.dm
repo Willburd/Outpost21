@@ -126,7 +126,8 @@
 /obj/item/clothing/glasses
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/eyes/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/eyes/mob_vox.dmi') /*,
+		SPECIES_VOX = 'icons/inventory/eyes/mob_vox.dmi',
+		/*
 		SPECIES_WEREBEAST = 'icons/inventory/eyes/mob_werebeast.dmi', outpost 21 - custom race removal
 		*/
-		//SPECIES_GREY_YW = 'icons/mob/species/grey/eyes.dmi'/*ywedit*/ outpost 21 - race removal
+		SPECIES_GREY_YW = 'icons/mob/species/grey/eyes.dmi'/*ywedit*/)

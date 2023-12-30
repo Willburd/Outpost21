@@ -157,7 +157,7 @@
 		SPECIES_VULPKANIN 	= 'icons/inventory/face/mob_vr_vulpkanin.dmi',
 		SPECIES_XENOCHIMERA	= 'icons/inventory/face/mob_vr_tajaran.dmi',
 		//SPECIES_WEREBEAST	= 'icons/inventory/face/mob_vr_werebeast.dmi', //YW EDIT: temporary fix outpost 21 - custom race removal
-		//SPECIES_GREY_YW     = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/ outpost 21 - race removal
+		SPECIES_GREY_YW     = 'icons/inventory/face/mob_grey.dmi'
 		)
 //"Spider" 		= 'icons/inventory/mask/mob_spider.dmi' Add this later when they have custom mask sprites and everything.
 
@@ -173,10 +173,11 @@
 	var/sensorpref = 5
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/uniform/mob_teshari.dmi',
-		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi')/*,
+		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi',
+		/*
 		SPECIES_WEREBEAST = 'icons/inventory/uniform/mob_vr_werebeast.dmi') //YW EDIT: temporary fix outpost 21 - custom race removal
 		*/
-		//SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*ywedit*/) outpost 21 - race removal
+		SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*ywedit*/)
 
 /obj/item/clothing/under/New(var/mob/living/carbon/human/H)
 	..()

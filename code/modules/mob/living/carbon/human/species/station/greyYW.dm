@@ -35,7 +35,7 @@
 
 	health_hud_intensity = 1.5
 
-	spawn_flags = SPECIES_CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_WHITELIST_SELECTABLE // outpost 21 edit - these are mostly used for our abductors and admemes
 	appearance_flags = HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	has_organ = list(

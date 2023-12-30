@@ -144,8 +144,8 @@
 	switch(target_species)
 		// outpost 21 edit - redid this list code due to broken refitting access
 		// logic is based on if someone could fit inside the suit even with discomfort, or if the suit requires unique construction to hold them
-		if(SPECIES_HUMAN, SPECIES_PROMETHEAN)	//humanoid bodytypes
-			species_restricted = list( SPECIES_HUMAN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_PROMETHEAN) // no tail, four limbs, humanish sized
+		if(SPECIES_HUMAN, SPECIES_GREY_YW, SPECIES_PROMETHEAN)	//humanoid bodytypes
+			species_restricted = list( SPECIES_HUMAN, SPECIES_GREY_YW, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_PROMETHEAN) // no tail, four limbs, humanish sized
 		if(SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_NEVREAN)
 			species_restricted = list( SPECIES_TAJ, SPECIES_VULPKANIN, SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW, SPECIES_NEVREAN, SPECIES_HUMAN, SPECIES_PROMETHEAN) // has simple tail, four limbs, humanish sized
 		if(SPECIES_SERGAL, SPECIES_SKRELL, SPECIES_VOX, SPECIES_UNATHI, SPECIES_DIONA)
@@ -561,7 +561,7 @@
 		SPECIES_VOX = 'icons/inventory/face/mob_vox.dmi',
 		SPECIES_TAJ = 'icons/inventory/face/mob_tajaran.dmi',
 		SPECIES_UNATHI = 'icons/inventory/face/mob_unathi.dmi',
-		//SPECIES_GREY_YW = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/ outpost 21 - race removal
+		SPECIES_GREY_YW = 'icons/inventory/face/mob_grey.dmi'/*ywedit*/
 		)
 
 	var/voicechange = 0
@@ -823,7 +823,7 @@
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/inventory/uniform/mob_teshari.dmi',
 		SPECIES_VOX = 'icons/inventory/uniform/mob_vox.dmi',
-		//SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*YWedit*/ outpost 21 - race removal
+		SPECIES_GREY_YW = 'icons/inventory/uniform/mob_grey.dmi'/*YWedit*/
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.

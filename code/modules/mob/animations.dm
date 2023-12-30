@@ -296,6 +296,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return TRUE //Found an item, doing item attack animation.
 
 /mob/proc/spin(spintime, speed)
+	if(istype(buckled,/obj/structure/bed/chair/office))
+		playsound(src, 'sound/effects/roll.ogg', 100, 1) // weeeee
 	spawn()
 		var/D = dir
 		while(spintime >= speed)
@@ -310,5 +312,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 				if(WEST)
 					D = NORTH
 			set_dir(D)
+			if(istype(buckled,/obj/structure/bed/chair/office))
+				var/obj/structure/bed/chair/office/O = buckled
+				O.dir = D
+				O.set_dir(D)
 			spintime -= speed
 	return

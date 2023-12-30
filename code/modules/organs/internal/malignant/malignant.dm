@@ -123,15 +123,24 @@
 
 /obj/item/organ/internal/malignant/engineered/proc/update_degeneration(var/degradechance, var/intensity)
 	if(prob(degradechance))
+		damage += intensity
 		add_autopsy_data("Programmed degeneration", intensity)
 	if(prob(damage * 4))
-		return TRUE // do degeneration proc
+		return TRUE // do handle_sideeffects proc
 	return FALSE
 
-/obj/item/organ/internal/malignant/engineered/proc/handle_sideeffects()
-	if(damage < 10)
+/obj/item/organ/internal/malignant/engineered/proc/handle_sideeffects(var/base_mult)
+	if(damage < min_bruised_damage)
+		// skip any major effects if under bruise damage
 		return
-
+	else
+		if(prob(45))
+			owner.AdjustWeakened(3 * base_mult)
+		if(prob(75))
+			owner.AdjustConfused(4 * base_mult)
+		if(damage >= min_broken_damage)
+			owner.AdjustBlinded(6 * base_mult)
+			owner.adjustToxLoss(4 * base_mult)
 
 /****************************************************
 				Tumor varients
@@ -592,12 +601,13 @@
 			//var/list/radlist = list() // used like chemlist is, once we have rad trained organs
 			chemsoak -= 1
 			if(growth > growth_trigger)
+				damage += 3
 				add_autopsy_data("Radiation degenerated training cells", 3)
 				cooldown = rand(5,10)
 		else
 			// check for reagents that we can train on
 			var/anychecks = FALSE
-			var/list/chemlist = list("phoron","tricordrazine","tramadol","anti_toxin","citalopram")
+			var/list/chemlist = list("phoron","tricordrazine","tramadol","anti_toxin","citalopram","bicaridine","dermaline","kelotane","dexalin","hyperzine","spaceacillin","inaprovaline","bliss")
 			for(var/chem in chemlist)
 				if(owner.bloodstr.get_reagent_amount(chem) > 0)
 					anychecks = TRUE
@@ -605,12 +615,14 @@
 			if(anychecks)
 				chemsoak -= 1
 			else if(growth > growth_trigger)
+				damage += 3
 				add_autopsy_data("Apoptotic training cells", 3)
 				cooldown = rand(5,10)
 
 		// TRAINING FINISHED
 		if(chemsoak <= 0)
 			if(possibletraining.len == 0)
+				damage += 5
 				add_autopsy_data("Apoptotic training cells", 5) // quickly dies if you mess this up
 				cooldown = rand(5,10)
 				return
@@ -627,6 +639,22 @@
 					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/dylovene
 				if("citalopram")
 					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/citalopram
+				if("bicaridine")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/bicaridine
+				if("dermaline")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/dermaline
+				if("kelotane")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/kelotane
+				if("dexalin")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/dexalin
+				if("hyperzine")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/hyperzine
+				if("spaceacillin")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/spaceacillin
+				if("inaprovaline")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/inaprovaline
+				if("bliss")
+					newpath = /obj/item/organ/internal/malignant/engineered/chemorgan/bliss
 			// spawn new organ, delete us
 			if(newpath)
 				var/ourowner = owner
@@ -665,6 +693,7 @@
 				update_icon()
 			else
 				// breaks organ
+				damage += 1
 				add_autopsy_data("Early development radium starvation", 1)
 				cooldown = rand(5,10)
 
@@ -673,6 +702,9 @@
 /obj/item/organ/internal/malignant/engineered/chemorgan
 	name = "chem organ DO NOT USE THIS"
 	var/chemid = null
+	var/deg_chance = 2
+	var/deg_intensity = 1
+	var/side_effect_multiplier = 1
 
 /obj/item/organ/internal/malignant/engineered/chemorgan/process()
 	. = ..()
@@ -683,9 +715,12 @@
 		return
 	if(!chemid)
 		return
-	if(update_degeneration( 2, 1))
-		handle_sideeffects()
+	if(prob(15))
+		// stacked rng to lower the damage over the round
+		if(update_degeneration( deg_chance, deg_intensity))
+			handle_sideeffects(side_effect_multiplier)
 	else
+		// process the chems!
 		if(owner.bloodstr.get_reagent_amount(chemid) < 1)
 			if(prob(50))
 				owner.nutrition = max(owner.nutrition - 1,0) // num num
@@ -706,6 +741,9 @@
 	name = "tramoketic gland"
 	icon_state = "chem_tramadol"
 	chemid = "tramadol"
+	deg_chance = 3
+	deg_intensity = 2
+	side_effect_multiplier = 1
 
 /obj/item/organ/internal/malignant/engineered/chemorgan/dylovene
 	name = "dylovetic gland"
@@ -716,3 +754,49 @@
 	name = "citometic gland"
 	icon_state = "chem_cita"
 	chemid = "citalopram"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/bicaridine
+	name = "bicordic gland"
+	icon_state = "chem_bicar"
+	chemid = "bicaridine"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/dermaline
+	name = "dermalic gland"
+	icon_state = "chem_derma"
+	chemid = "dermaline"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/kelotane
+	name = "kelovetic gland"
+	icon_state = "chem_kelo"
+	chemid = "kelotane"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/dexalin
+	name = "dexalic gland"
+	icon_state = "chem_dexa"
+	chemid = "dexalin"
+	deg_chance = 5
+	deg_intensity = 1
+	side_effect_multiplier = 2
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/hyperzine
+	name = "hypalic gland"
+	icon_state = "chem_hyper"
+	chemid = "hyperzine"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/spaceacillin
+	name = "spaceacilic gland"
+	icon_state = "chem_cillin"
+	chemid = "spaceacillin"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/inaprovaline
+	name = "inaprovic gland"
+	icon_state = "chem_inapro"
+	chemid = "inaprovaline"
+
+/obj/item/organ/internal/malignant/engineered/chemorgan/bliss
+	name = "euphorian"
+	icon_state = "chem_bliss"
+	chemid = "bliss"
+	deg_chance = 5
+	deg_intensity = 3
+	side_effect_multiplier = 2

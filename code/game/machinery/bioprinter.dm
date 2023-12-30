@@ -63,10 +63,18 @@
 
 	var/list/engineered_products = list(
 		"Phoroketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/phoron, 90),
-		"Trioketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/tricord, 90),
+		"Trioketic Gland"  	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/tricord, 90),
 		"Tramoketic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/tramadol, 90),
-		"Dylovetic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/dylovene, 90),
-		"Citometic Gland"  = list(/obj/item/organ/internal/malignant/engineered/chemorgan/citalopram, 90)
+		"Dylovetic Gland"  	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/dylovene, 90),
+		"Citometic Gland"  	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/citalopram, 90),
+		"Bicordic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/bicaridine, 90),
+		"Dermalic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/dermaline, 90),
+		"Kelovetic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/kelotane, 90),
+		"Dexalic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/dexalin, 90),
+		"Hypalic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/hyperzine, 90),
+		"Spaceacilic Gland" = list(/obj/item/organ/internal/malignant/engineered/chemorgan/spaceacillin, 90),
+		"Inaprovic Gland" 	= list(/obj/item/organ/internal/malignant/engineered/chemorgan/inaprovaline, 90),
+		"Euphorian" 		= list(/obj/item/organ/internal/malignant/engineered/chemorgan/bliss, 90)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)

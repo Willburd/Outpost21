@@ -122,10 +122,12 @@
 	surgeryAllowedSites = list(BP_GROIN, BP_TORSO) // Lets keep these a little more restricted, due to size and complexity
 
 /obj/item/organ/internal/malignant/engineered/proc/update_degeneration(var/degradechance, var/intensity)
+	if(degradechance == 0)
+		return FALSE
 	if(prob(degradechance))
 		damage += intensity
 		add_autopsy_data("Programmed degeneration", intensity)
-	if(prob(damage * 4))
+	if(prob(damage * 2))
 		return TRUE // do handle_sideeffects proc
 	return FALSE
 
@@ -139,8 +141,11 @@
 		if(prob(75))
 			owner.AdjustConfused(4 * base_mult)
 		if(damage >= min_broken_damage)
+			owner.custom_pain("<span class='warning'>You feel a painful sensation in your [owner.organs_by_name[parent_organ].name].</span>",damage,TRUE)
 			owner.AdjustBlinded(6 * base_mult)
 			owner.adjustToxLoss(4 * base_mult)
+		else
+			owner.custom_pain("<span class='warning'>You feel a strange sensation in your [owner.organs_by_name[parent_organ].name].</span>",damage / 10,TRUE)
 
 /****************************************************
 				Tumor varients
@@ -282,14 +287,14 @@
 
 	if(prob(2))
 		if(stage_progress > 200)
-			to_chat(owner, "<span class='danger'>The pressure inside you hurts.</span>")
-			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
+			owner.custom_pain("<span class='warning'>You feel bloated. The pain in your [owner.organs_by_name[parent_organ].name] is agonizing.</span>",20,TRUE)
+			owner.custom_emote(VISIBLE_MESSAGE, "winces slightly.")
 		else if(stage_progress > 100)
-			to_chat(owner, "<span class='warning'>You feel a pressure inside you.</span>")
+			owner.custom_pain("<span class='warning'>You feel a pressure inside your [owner.organs_by_name[parent_organ].name].</span>",5,TRUE)
 			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
 		else
-			to_chat(owner, "<span class='warning'>You feel bloated.</span>")
-			owner.custom_emote(VISIBLE_MESSAGE, "winces slightly.")
+			owner.custom_pain("<span class='danger'>The pressure inside your [owner.organs_by_name[parent_organ].name] hurts.</span>",1,TRUE)
+			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
 
 /obj/item/organ/internal/malignant/tumor/pinata/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(can_puncture(W))
@@ -431,10 +436,10 @@
 		if(thalers < 100)
 
 		else if(thalers < 500)
-			to_chat(owner, "<span class='warning'>You feel bloated.</span>")
+			owner.custom_pain("<span class='warning'>You feel bloated.</span>",1,TRUE)
 			owner.custom_emote(VISIBLE_MESSAGE, "winces slightly.")
 		else if(thalers < 1000)
-			to_chat(owner, "<span class='warning'>You feel a pressure inside you.</span>")
+			owner.custom_pain("<span class='warning'>You feel a pressure inside your [owner.organs_by_name[parent_organ].name].</span>",6,TRUE)
 			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
 			if(prob(30))
 				owner.vomit()
@@ -443,7 +448,7 @@
 			else
 				owner.Confuse(15)
 		else if(thalers < 5000)
-			to_chat(owner, "<span class='danger'>The pressure inside you hurts.</span>")
+			owner.custom_pain("<span class='danger'>The pressure inside your [owner.organs_by_name[parent_organ].name] hurts.</span>",15,TRUE)
 			owner.custom_emote(VISIBLE_MESSAGE, "winces painfully.")
 			owner.Weaken(3)
 			if(prob(30))

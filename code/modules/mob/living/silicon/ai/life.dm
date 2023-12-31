@@ -122,9 +122,9 @@
 									break
 							if (!theAPC)
 								switch(PRP)
-									if (1) 
+									if (1)
 										to_chat(src, "Unable to locate APC!")
-									else 
+									else
 										to_chat(src, "Lost connection with the APC!")
 								src:aiRestorePowerRoutine = 2
 								return
@@ -135,11 +135,11 @@
 									clear_fullscreen("blind") //This, too, is a fix to issue 603
 									return
 							switch(PRP)
-								if (1) 
+								if (1)
 									to_chat(src, "APC located. Optimizing route to APC to avoid needless power waste.")
-								if (2) 
+								if (2)
 									to_chat(src, "Best route identified. Hacking offline APC power port.")
-								if (3) 
+								if (3)
 									to_chat(src, "Power port upload access confirmed. Loading control program into APC power port software.")
 								if (4)
 									to_chat(src, "Transfer complete. Forcing APC to execute program.")
@@ -155,6 +155,9 @@
 									updateicon()
 							sleep(50)
 							theAPC = null
+
+	if(client && !(client.prefs.ambience_freq == 0))	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them, and do not have repeating ambience disabled.
+		handle_ambience()
 
 	process_queued_alarms()
 	handle_regular_hud_updates()
@@ -179,3 +182,12 @@
 	..()
 	add_ai_verbs(src)
 
+/mob/living/silicon/ai/handle_ambience(var/forced) // If you're in an ambient area and have not moved out of it for x time as configured per-client, and do not have it disabled, we're going to play ambience again to you, to help break up the silence.
+	var/atom/sourcmob = src
+	if(holo && istype(holo.masters[src],/obj/effect/overlay/aiholo/))
+		sourcmob = holo.masters[src]
+	if(world.time >= (lastareachange + client.prefs.ambience_freq MINUTES) || forced) // Every 5 minutes (by default, set per-client), we're going to run a 35% chance (by default, also set per-client) to play ambience.
+		var/area/A = get_area(sourcmob.loc)
+		if(A)
+			lastareachange = world.time // This will refresh the last area change to prevent this call happening LITERALLY every life tick.
+			A.play_ambience(src, initial = FALSE)

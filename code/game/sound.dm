@@ -14,10 +14,17 @@
 	var/sound/S = sound(get_sfx(soundin))
 	var/maxdistance = (world.view + extrarange) * 2  //VOREStation Edit - 3 to 2
 	var/list/listeners = player_list.Copy()
+	var/list/holo_listeners = list() // sorry for the duped bits of code ahead, but this is somewhat required to have AI holograms listen to game sounds - Willbird
+	for(var/mob/living/silicon/ai/A in listeners)
+		if(A.holo && istype(A.holo.masters[A],/obj/effect/overlay/aiholo/) && (get_turf(A.holo.masters[A]) in hear(maxdistance,source)))
+			holo_listeners += A.holo.masters[A]
 	if(!ignore_walls) //these sounds don't carry through walls
 		for(var/mob/listen in listeners)
 			if(!(get_turf(listen) in hear(maxdistance,source)))
 				listeners -= listen
+		for(var/mob/listen in holo_listeners)
+			if(!(get_turf(listen) in hear(maxdistance,source)))
+				holo_listeners -= listen
 	for(var/mob/M as anything in listeners)
 		if(!M || !M.client)
 			continue
@@ -32,6 +39,20 @@
 		if(distance <= maxdistance)
 			if(T && T.z == turf_source.z)
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, channel, pressure_affected, S, preference, volume_channel)
+	for(var/obj/effect/overlay/aiholo/H as anything in holo_listeners)
+		if(!H.master || !H.master.client)
+			continue
+		var/turf/T = get_turf(H)
+		if(!T)
+			continue
+		var/area/A = T.loc
+		if((A.soundproofed || area_source.soundproofed) && (A != area_source))
+			continue
+		var/distance = get_dist(T, turf_source)
+
+		if(distance <= maxdistance)
+			if(T && T.z == turf_source.z)
+				H.master.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, channel, pressure_affected, S, preference, volume_channel, T)
 
 /mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, channel = 0, pressure_affected = TRUE, sound/S, preference, volume_channel = null)
 	if(!client || ear_deaf > 0)
@@ -57,9 +78,15 @@
 		else
 			S.frequency = get_rand_frequency()
 
+	var/listener_position = src // used exclusively for sound_env stuff
+	var/turf/T = get_turf(src)
+	if(isAI(src))
+		// AI is silly, and we'd be doing a distance check across the station. Make it use the hologram's location... even if it makes more sense to use the emitter's. - Willbird
+		var/mob/living/silicon/ai/A = src
+		if(A.holo && istype(A.holo.masters[A],/obj/effect/overlay/aiholo))
+			T = get_turf(A.holo.masters[A])
+			listener_position = A.holo.masters[A]
 	if(isturf(turf_source))
-		var/turf/T = get_turf(src)
-
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -90,7 +117,7 @@
 
 		//Apply a sound environment.
 		if(!is_global)
-			S.environment = get_sound_env(pressure_factor)
+			S.environment = get_sound_env(listener_position,pressure_factor)
 
 		var/dx = turf_source.x - T.x // Hearing from the right/left
 		S.x = dx
@@ -100,7 +127,7 @@
 		S.y = 1
 		S.falloff = (falloff ? falloff : FALLOFF_SOUNDS)
 
-	src << S
+	SEND_SOUND(src,S)
 
 /proc/sound_to_playing_players(sound, volume = 100, vary)
 	sound = get_sfx(sound)
@@ -110,12 +137,12 @@
 			MO.playsound_local(get_turf(MO), sound, volume, vary, pressure_affected = FALSE)
 
 /mob/proc/stop_sound_channel(chan)
-	src << sound(null, repeat = 0, wait = 0, channel = chan)
+	SEND_SOUND(src,sound(null, repeat = 0, wait = 0, channel = chan))
 
 /mob/proc/set_sound_channel_volume(channel, volume)
 	var/sound/S = sound(null, FALSE, FALSE, channel, volume)
 	S.status = SOUND_UPDATE
-	src << S
+	SEND_SOUND(src,S)
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.

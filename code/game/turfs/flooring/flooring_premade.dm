@@ -331,6 +331,7 @@
 /turf/simulated/floor/reinforced/n20
 	oxygen = 0
 	nitrogen = 0
+	nitrous_oxide = ATMOSTANK_NITROUSOXIDE
 
 /turf/simulated/floor/reinforced/n20/Initialize()
 	. = ..()

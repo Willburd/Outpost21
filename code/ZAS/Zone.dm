@@ -167,11 +167,32 @@ Class Procs:
 		if(E.sleeping)
 			E.recheck()
 
+	update_planet_surface()
+
+/zone/proc/update_planet_surface()
+	// Planet airmix cannot be saturated by station antics, slowly bleed this to base air if an outside turf is in our contents. - Willbird
+	// It's advisable to not mix multiple different kinds of outside flagged turfs, if they have different initial atmos, thankfully this probably never happens.
+	// Most planets only have one atmosphere, and all other areas are indoor contained areas, or simply exposed to it. If your zlevel is that funky, just don't use MAP_LEVEL_AIRMIX_CLEANS
+	var/turf/T = pick(contents)
+	if(istype(T) && T.outdoors > -1 && (T.z in using_map.forced_airmix_levels))
+		// slowly drain gasses back to atmospheric levels, rates are pulled out of my ass.
+		var/rate = rand(1,8) / 500
+		air.gas["oxygen"] 			= LERP(air.gas["oxygen"]			,T.oxygen			,rate)
+		air.gas["carbon_dioxide"] 	= LERP(air.gas["carbon_dioxide"]	,T.carbon_dioxide	,rate)
+		air.gas["nitrogen"] 		= LERP(air.gas["nitrogen"]			,T.nitrogen			,rate)
+		air.gas["phoron"] 			= LERP(air.gas["phoron"]			,T.phoron			,rate)
+		air.gas["nitrous_oxide"] 	= LERP(air.gas["nitrous_oxide"]		,T.nitrous_oxide	,rate)
+		// now... lets do temp a lil different, high temps should persist for a bit for a nice blastwave effect!
+		// Causes a few knockovers from air rushes if the explosion is particularly massive and atmo-involved (like every tank in atmos getting blownup at once)
+		rate = rand(6,12) / max(90,air.temperature / 2)
+		air.temperature = LERP(air.temperature, T.temperature, rate)
+		air.update_values()
+
 /zone/proc/dbg_data(mob/M)
 	to_chat(M,name)
 	for(var/g in air.gas)
 		to_chat(M, "[gas_data.name[g]]: [air.gas[g]]")
-	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
+	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]ï¿½K ([air.temperature - T0C]ï¿½C)")
 	to_chat(M, "O2 per N2: [(air.gas["nitrogen"] ? air.gas["oxygen"]/air.gas["nitrogen"] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
 	//to_chat(M, "Unsimulated: [unsimulated_contents.len]")

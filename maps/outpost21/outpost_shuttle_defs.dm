@@ -299,16 +299,42 @@
 	base_area = /area/muriki/station/trawler_dock
 
 /obj/effect/shuttle_landmark/premade/trawler/beltmine
-	name = "Debris Reclaimation Yard (Trawler bay)"
+	name = "Reclaimation Yard (Trawler bay)"
 	landmark_tag = "trawler_yard"
 	base_turf = /turf/simulated/floor
 	base_area = /area/offworld/asteroidyard/station/dockingbay
 
 /obj/effect/shuttle_landmark/premade/generic/beltmine
-	name = "Debris Reclaimation Yard (Civilian Dock)"
+	name = "Reclaimation Yard (Civilian Dock)"
 	landmark_tag = "orbitalyard_civ"
 	base_turf = /turf/space
 	base_area = /area/offworld/asteroidyard
+
+/obj/effect/shuttle_landmark/premade/generic/beltmine_north
+	name = "Reclaimation Yard (North)"
+	landmark_tag = "orbitalyard_north"
+	base_turf = /turf/space
+	base_area = /area/offworld/asteroidyard
+
+/obj/effect/shuttle_landmark/premade/generic/beltmine_south
+	name = "Reclaimation Yard (South)"
+	landmark_tag = "orbitalyard_south"
+	base_turf = /turf/space
+	base_area = /area/offworld/asteroidyard
+
+/obj/effect/shuttle_landmark/premade/generic/beltmine_east
+	name = "Reclaimation Yard (East)"
+	landmark_tag = "orbitalyard_east"
+	base_turf = /turf/space
+	base_area = /area/offworld/asteroidyard
+
+/obj/effect/shuttle_landmark/premade/generic/beltmine_west
+	name = "Reclaimation Yard (West)"
+	landmark_tag = "orbitalyard_west"
+	base_turf = /turf/space
+	base_area = /area/offworld/asteroidyard
+
+
 
 //////////////////////////////////////////////////////////////
 // Generic landings

@@ -156,7 +156,7 @@
 
 
 /obj/effect/overmap/visitable/sector/murkiki_space/orbital_yard
-	initial_generic_waypoints = list("orbitalyard_civ")
+	initial_generic_waypoints = list("orbitalyard_civ","orbitalyard_north","orbitalyard_south","orbitalyard_east","orbitalyard_west")
 	initial_restricted_waypoints = list("Mining Trawler" = list("trawler_yard"))
 	name = "Orbital Reclamation Yard"
 	scanner_desc = @{"[i]Registration[/i]: ES Orbital 21-03

@@ -38,8 +38,3 @@
 	filename = "The Sleepy Sergal vol. 2"
 	server_file_path = 'news_articles/the_sleepy_sergal_2.html'
 	archived = 1
-
-//Outpost 21 adds
-/datum/computer_file/data/news_article/outpost/vol_one
-	filename = "The Out-Post vol. 1"
-	server_file_path = 'news_articles/outpost_1.html'

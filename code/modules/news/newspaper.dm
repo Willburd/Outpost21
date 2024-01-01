@@ -62,8 +62,8 @@
 						var/i = 0
 						for(var/datum/feed_message/MESSAGE in C.messages)
 							i++
-							dat+="[MESSAGE.title] <BR>"
-							dat+="-[MESSAGE.body] <BR>"
+							dat+="<B><I>[MESSAGE.title]</I></B> <BR>"
+							dat+="[MESSAGE.body] <BR>"
 							if(MESSAGE.img)
 								user << browse_rsc(MESSAGE.img, "tmp_photo[i].png")
 								dat+="<img src='tmp_photo[i].png' width = '180'><BR>"

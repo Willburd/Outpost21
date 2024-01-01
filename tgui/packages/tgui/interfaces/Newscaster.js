@@ -1,3 +1,4 @@
+/* eslint react/no-danger: "off" */
 import { decodeHtmlEntities } from 'common/string';
 import { Fragment } from 'inferno';
 import { useBackend, useSharedState } from '../backend';
@@ -183,11 +184,6 @@ const NewscasterNewStory = (props, context) => {
         </LabeledList.Item>
         <LabeledList.Item label="Message Title" verticalAlign="top">
           <Flex>
-            <Flex.Item grow={1}>
-              <Section width="99%" inline>
-                {title || '(no title yet)'}
-              </Section>
-            </Flex.Item>
             <Flex.Item>
               <Button
                 verticalAlign="top"
@@ -197,15 +193,15 @@ const NewscasterNewStory = (props, context) => {
                 tooltipPosition="left"
               />
             </Flex.Item>
+            <Flex.Item grow={1}>
+              <Section width="99%" inline>
+                {title || '(no title yet)'}
+              </Section>
+            </Flex.Item>
           </Flex>
         </LabeledList.Item>
         <LabeledList.Item label="Message Body" verticalAlign="top">
           <Flex>
-            <Flex.Item grow={1}>
-              <Section width="99%" inline>
-                {msg || '(no message yet)'}
-              </Section>
-            </Flex.Item>
             <Flex.Item>
               <Button
                 verticalAlign="top"
@@ -214,6 +210,11 @@ const NewscasterNewStory = (props, context) => {
                 tooltip="Edit Message"
                 tooltipPosition="left"
               />
+            </Flex.Item>
+            <Flex.Item grow={1}>
+              <Section width="99%" inline>
+                {msg || '(no message yet)'}
+              </Section>
             </Flex.Item>
           </Flex>
         </LabeledList.Item>
@@ -430,8 +431,11 @@ const NewscasterViewSelected = (props, context) => {
       )}
       {(!!viewing_channel.messages.length &&
         viewing_channel.messages.map((message) => (
-          <Section key={message.ref}>
-            - {decodeHtmlEntities(message.body)}
+          <Section key={message.ref} title={message.title}>
+            {/* This did not originally use html injection.
+            however, the newspapers already did, and this appears
+            to be fed sanitizied data. */}
+            <div dangerouslySetInnerHTML={{ __html: message.body }} />
             {!!message.img && (
               <Box>
                 <img src={'data:image/png;base64,' + message.img} />

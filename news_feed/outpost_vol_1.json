@@ -1,0 +1,14 @@
+[
+	{
+	"title": "REPLACE ME",
+	"body": "REPLACE ME",
+	"author": "Jim Jimmy Joans Jamison",
+	"message_type": "Story"
+	},
+	{
+	"title": "Automated Response",
+	"body": "<p>Node relay confirms response.</p><p>Please wait for content to finish uploading to your newscast network...</p>",
+	"author": "ES-Net-Test",
+	"message_type": "System Test"
+	}
+]

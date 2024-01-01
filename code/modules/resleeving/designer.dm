@@ -353,13 +353,13 @@
 /obj/machinery/computer/transhuman/designer/proc/update_preview_icon(var/forced)
 	update_preview_mob(forced)
 
-	south_preview.appearance = getFlatIcon(mannequin,defdir = SOUTH)
+	south_preview.appearance = getFlatIcon(mannequin,defdir = SOUTH,overlay_alt_behavior=flatIconOverlayAltBehaviors(mannequin))
 	south_preview.screen_loc = "[map_name]:2,1"
 	south_preview.name = ""
-	east_preview.appearance = getFlatIcon(mannequin,defdir = EAST)
+	east_preview.appearance = getFlatIcon(mannequin,defdir = EAST,overlay_alt_behavior=flatIconOverlayAltBehaviors(mannequin))
 	east_preview.screen_loc = "[map_name]:4,1"
 	east_preview.name = ""
-	west_preview.appearance = getFlatIcon(mannequin,defdir = WEST)
+	west_preview.appearance = getFlatIcon(mannequin,defdir = WEST,overlay_alt_behavior=flatIconOverlayAltBehaviors(mannequin))
 	west_preview.screen_loc = "[map_name]:0,1"
 	west_preview.name = ""
 

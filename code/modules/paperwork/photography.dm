@@ -185,8 +185,9 @@ var/global/photo_count = 0
 		atoms.Add(the_turf);
 		// As well as anything that isn't invisible.
 		for(var/atom/A in the_turf)
-			if(A.invisibility) continue
-			if(A.plane > 0 && !(A.plane in picture_planes)) continue
+			if(!istype(A,/mob/observer/dead))
+				if(A.invisibility) continue
+				if(A.plane > 0 && !(A.plane in picture_planes)) continue
 			atoms.Add(A)
 
 	// Sort the atoms into their layers
@@ -195,7 +196,7 @@ var/global/photo_count = 0
 	for(var/i; i <= sorted.len; i++)
 		var/atom/A = sorted[i]
 		if(A)
-			var/icon/img = getFlatIcon(A, no_anim = TRUE)//, picture_planes = picture_planes)//build_composite_icon(A) //VOREStation Edit
+			var/icon/img = getFlatIcon(A, defdir = A.dir, no_anim = TRUE, overlay_alt_behavior = flatIconOverlayAltBehaviors(A))//, picture_planes = picture_planes)//build_composite_icon(A) //VOREStation Edit
 
 			// If what we got back is actually a picture, draw it.
 			if(istype(img, /icon))
@@ -207,8 +208,8 @@ var/global/photo_count = 0
 				var/xoff = (A.x - center.x) * 32 + center_offset
 				var/yoff = (A.y - center.y) * 32 + center_offset
 				if (istype(A,/atom/movable))
-					xoff+=A:pixel_x
-					yoff+=A:pixel_y
+					xoff+=A:pixel_x / 32
+					yoff+=A:pixel_y / 32
 				res.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
 
 	// Lastly, render any contained effects on top.

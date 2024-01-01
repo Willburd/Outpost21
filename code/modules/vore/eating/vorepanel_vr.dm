@@ -77,7 +77,7 @@
 	if(nom_icons[key])
 		. = nom_icons[key]
 	else
-		. = icon2base64(getFlatIcon(target,defdir=SOUTH,no_anim=TRUE))
+		. = icon2base64(getFlatIcon(target,defdir=SOUTH,no_anim=TRUE,overlay_alt_behavior=flatIconOverlayAltBehaviors(target)))
 		nom_icons[key] = .
 
 

@@ -95,9 +95,26 @@
 
 	return isnull(alpha) ? rgb(r, g, b) : rgb(r, g, b, alpha)
 
+
+/proc/flatIconOverlayAltBehaviors(var/atom/A)
+	// because overlay directions are handled differently between certain objects when recorded on camera
+	// this proc now exists to filter and check for those conditions, in most cases it won't be needed
+	// everyday i ask why awful things in our code need to exist - Willbird
+
+	// the issue could be that this needs to check if an icon has directions, but i don't know of any way to do that...
+	if(istype(A,/mob/))
+		return TRUE
+	if(istype(A,/obj/structure/railing))
+		return TRUE
+	if(istype(A,/obj/structure/bed/chair))
+		return TRUE
+	if(istype(A,/obj/machinery))
+		return TRUE
+	return FALSE
+
 // Ported from /tg/station
 // Creates a single icon from a given /atom or /image.  Only the first argument is required.
-/proc/getFlatIcon(image/A, defdir, deficon, defstate, defblend, start = TRUE, no_anim = FALSE)
+/proc/getFlatIcon(image/A, defdir, deficon, defstate, defblend, start = TRUE, no_anim = FALSE, overlay_alt_behavior = FALSE)
 	//Define... defines.
 	var/static/icon/flat_template = icon('icons/effects/effects.dmi', "nothing")
 
@@ -233,7 +250,7 @@
 				curblend = BLEND_OVERLAY
 				add = icon(I.icon, I.icon_state, base_icon_dir)
 			else // 'I' is an appearance object.
-				add = getFlatIcon(image(I), curdir, curicon, curstate, curblend, FALSE, no_anim)
+				add = getFlatIcon(image(I), overlay_alt_behavior ? (curdir) : (I.dir||curdir) , curicon, curstate, curblend, FALSE, no_anim)
 			if(!add)
 				continue
 			// Find the new dimensions of the flat icon to fit the added overlay
@@ -306,10 +323,11 @@
 
 //getFlatIcon but generates an icon that can face ALL four directions. The only four.
 /proc/getCompoundIcon(atom/A)
-	var/icon/north = getFlatIcon(A,defdir=NORTH)
-	var/icon/south = getFlatIcon(A,defdir=SOUTH)
-	var/icon/east = getFlatIcon(A,defdir=EAST)
-	var/icon/west = getFlatIcon(A,defdir=WEST)
+	var/overlay_behavior = flatIconOverlayAltBehaviors(A)
+	var/icon/north = getFlatIcon(A,defdir=NORTH,overlay_alt_behavior = overlay_behavior)
+	var/icon/south = getFlatIcon(A,defdir=SOUTH,overlay_alt_behavior = overlay_behavior)
+	var/icon/east = getFlatIcon(A,defdir=EAST,overlay_alt_behavior = overlay_behavior)
+	var/icon/west = getFlatIcon(A,defdir=WEST,overlay_alt_behavior = overlay_behavior)
 
 	//Starts with a blank icon because of byond bugs.
 	var/icon/full = icon('icons/effects/effects.dmi', "icon_state"="nothing")
@@ -325,7 +343,7 @@
 	return full
 
 /proc/downloadImage(atom/A, dir)
-	var/icon/this_icon = getFlatIcon(A,defdir=dir)
+	var/icon/this_icon = getFlatIcon(A,defdir=dir,ismob=istype(A,/mob/))
 
 	usr << ftp(this_icon,"[A.name].png")
 

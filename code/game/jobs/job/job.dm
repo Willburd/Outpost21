@@ -148,7 +148,7 @@
 		dress_mannequin(mannequin)
 		mannequin.dir = SOUTH
 		mannequin.ImmediateOverlayUpdate()
-		var/icon/preview_icon = getFlatIcon(mannequin)
+		var/icon/preview_icon = getFlatIcon(mannequin,overlay_alt_behavior=flatIconOverlayAltBehaviors(mannequin))
 
 		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
 		job_master.job_icons[title] = preview_icon

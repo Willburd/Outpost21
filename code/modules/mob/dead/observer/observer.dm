@@ -168,7 +168,7 @@
 /mob/observer/dead/examine_icon()
 	var/icon/I = get_cached_examine_icon(src)
 	if(!I)
-		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE)
+		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE,overlay_alt_behavior=flatIconOverlayAltBehaviors(src))
 		set_cached_examine_icon(src, I, 200 SECONDS)
 	return I
 

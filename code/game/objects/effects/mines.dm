@@ -100,8 +100,9 @@
 
 	if(istype(M, /mob/living/))
 		var/mob/living/mob = M
-		if(!mob.hovering || !mob.flying)
-			explode(M)
+		if(mob.hovering || mob.flying || mob.is_incorporeal())
+			return
+		explode(M)
 
 /obj/effect/mine/attackby(obj/item/W as obj, mob/living/user as mob)
 	if(W.is_screwdriver())
@@ -402,6 +403,6 @@
 
 // This tells AI mobs to not be dumb and step on mines willingly.
 /obj/item/weapon/mine/is_safe_to_step(mob/living/L)
-	if(!L.hovering || !L.flying)
-		return FALSE
-	return ..()
+	if(L.hovering || L.flying || L.is_incorporeal())
+		return ..()
+	return FALSE

@@ -135,7 +135,7 @@
 /mob/living/proc/check_submerged()
 	if(buckled)
 		return 0
-	if(hovering || flying)
+	if(hovering || flying || is_incorporeal())
 		if(flying)
 			adjust_nutrition(-0.5)
 		return 0

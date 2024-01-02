@@ -101,7 +101,7 @@
 	if(!istype(H))
 		return .
 
-	if(istype(L.buckled, /obj/vehicle) || L.hovering || L.flying) // Ignore people hovering or on boats.
+	if(istype(L.buckled, /obj/vehicle) || L.hovering || L.flying || L.is_incorporeal()) // Ignore people hovering or on boats.
 		return TRUE
 
 	if(!.)

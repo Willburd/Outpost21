@@ -27,6 +27,8 @@
 				pair_juke( M, null)
 				unanchor()
 				anchor()
+				name = "\improper BoomTown cordless micro speaker"
+				icon = 'icons/obj/device_op.dmi' // Use smaller icon. kinda hacky, but I'd rather not make this a while new object.
 				break
 	return ..()
 

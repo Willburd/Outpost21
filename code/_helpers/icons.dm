@@ -343,7 +343,7 @@
 	return full
 
 /proc/downloadImage(atom/A, dir)
-	var/icon/this_icon = getFlatIcon(A,defdir=dir,ismob=istype(A,/mob/))
+	var/icon/this_icon = getFlatIcon(A,defdir=dir,,overlay_alt_behavior=flatIconOverlayAltBehaviors(A))
 
 	usr << ftp(this_icon,"[A.name].png")
 

@@ -94,3 +94,5 @@
 	name = "Talon Pilot"
 /obj/effect/landmark/start/talonminer
 	name = "Talon Miner"
+/obj/effect/landmark/start/stowaway
+	name = "Stowaway"

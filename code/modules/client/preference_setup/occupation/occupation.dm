@@ -83,6 +83,8 @@
 	var/list/all_valid_jobs = list()
 	// If the occupation window gets opened before SSJob initializes, then it'll just be blank, with no runtimes.
 	// It will work once init is finished.
+	if(!SSjob || !SSjob.department_datums || !SSjob.department_datums.len)
+		. += "<b>Job controller is still initializing, please wait...<br>"
 
 	for(var/D in SSjob.department_datums)
 		var/datum/department/department = SSjob.department_datums[D]

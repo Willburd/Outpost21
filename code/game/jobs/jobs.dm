@@ -54,6 +54,7 @@ var/const/LAWYER			=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
+var/const/STOWAWAY			=(1<<13) //Outpost 21 Add
 /* outpost 21 - job removals
 var/const/PILOT 			=(1<<13) //VOREStation Add
 */

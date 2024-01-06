@@ -160,19 +160,23 @@ var/list/outfits_decls_by_type_
 		for(var/i=0,i<number,i++)
 			H.equip_to_slot_or_del(new path(H), slot_tie)
 
-	if((!J || J.spawn_with_emergencykit) && H.species)
-		// standard emergency kit (not breathing equipment for stuff like vox, only emergency air/crowbar)
-		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
-	else if(J.use_backup_items)
-		// a few jobs don't spawn an emergency kit, but can have a backup prybar
+	if((!J || J.spawn_with_emergencykit))
+		if(H.species)
+			// standard emergency kit (not breathing equipment for stuff like vox, only emergency air/crowbar)
+			H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
+	else
+		// a few jobs don't spawn an emergency kit, but can have a backup crowbar, and bonus item
 		var/obj/item/weapon/tool/crowbar/red/bar = new(H)
-		var/obj/item/weapon/reagent_containers/food/snacks/liquidfood/food = new(H)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(bar, slot_r_hand)
-			H.equip_to_slot_or_del(food, slot_l_hand)
 		else
 			H.equip_to_slot_or_del(bar, slot_in_backpack)
-			H.equip_to_slot_or_del(food, slot_in_backpack)
+		if(J.backup_item)
+			var/obj/item/extra = new J.backup_item(H)
+			if(H.backbag == 1)
+				H.equip_to_slot_or_del(extra, slot_l_hand)
+			else
+				H.equip_to_slot_or_del(extra, slot_in_backpack)
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)

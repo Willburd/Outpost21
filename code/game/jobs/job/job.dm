@@ -28,7 +28,7 @@
 	var/list/banned_job_species = null
 	var/show_join_message = TRUE		  //If joining the round late shows a message
 	var/spawn_with_emergencykit = TRUE	  //If job spawns with an emergency supply kit
-	var/use_backup_items = TRUE	  		  //If spawn_with_emergencykit is true, spawn with a crowbar instead of nothing
+	var/backup_item = null	  		  	  //If spawn_with_emergencykit is false, spawn with a crowbar and this item(by path) if not null
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?

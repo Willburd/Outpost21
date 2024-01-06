@@ -23,7 +23,7 @@
 	economic_modifier = 1
 	show_join_message = FALSE
 	spawn_with_emergencykit = FALSE
-	use_backup_items = TRUE
+	backup_item = /obj/item/device/flashlight/glowstick
 	alt_titles = list("Gremlin" = /datum/alt_title/gremlin, "Hunter" = /datum/alt_title/hunter, "Scavenger" = /datum/alt_title/scavenger, "Moss Collector" = /datum/alt_title/moss_collector)
 	outfit_type = /decl/hierarchy/outfit/job/stowaway
 

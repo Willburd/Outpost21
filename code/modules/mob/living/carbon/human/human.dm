@@ -1797,10 +1797,9 @@
 			var/datum/trait/T = all_traits[trait]
 			if(T.linked_gene_block)
 				// the rest should set their block on mob creation only!
-				dna.SetSEState(T.linked_gene_block,1,1) // force on
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
-				gene.initial_activation(src, null , MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) // forces antigenes off, and calls apply() on trait
-
+				gene.disable_antigenes(src, null , MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) // forces antigenes off, and calls apply() on trait
+				dna.SetSEState(T.linked_gene_block,1,1) // force on
 	dna.UpdateSE()
 
 /mob/living/carbon/human/proc/transfer_mental_traits(var/identigender, var/flavor, var/ooc, var/langsreplace)

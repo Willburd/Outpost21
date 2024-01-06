@@ -602,7 +602,6 @@
 	new_character.key = client.key // actually tell the client we are ready
 
 	// enable mutations on spawn
-	domutcheck( new_character, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	new_character.regenerate_icons()
 
 	if(client && client.media)

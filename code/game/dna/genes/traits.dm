@@ -59,13 +59,12 @@
 		return TRUE
 	return FALSE
 
-/datum/dna/gene/trait_linked/proc/initial_activation(var/mob/M, var/connected, var/flags)
+/datum/dna/gene/trait_linked/proc/disable_antigenes(var/mob/M, var/connected, var/flags)
 	// used to disable anti-gene blocks so we're assured that we can stay active!
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/ex in exclude_blocks)
 			H.dna.SetSEState(ex,FALSE,TRUE)
-	activate(M, connected, flags)
 
 /datum/dna/gene/trait_linked/activate(var/mob/M, var/connected, var/flags)
 	if(ishuman(M))

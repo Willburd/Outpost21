@@ -83,10 +83,6 @@
 	H.transfer_mental_traits( null, current_project.mydna.flavor.Copy(), current_project.body_oocnotes, null)
 	H.UpdateAppearance() //Update appearance
 	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
-	if(H.dna)
-		H.dna.UpdateSE()
-		H.dna.UpdateUI()
-		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 
 	//Apply genetic modifiers

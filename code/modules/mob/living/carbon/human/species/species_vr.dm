@@ -93,9 +93,12 @@
 				// the rest should set their block on mob creation only!
 				H.dna.SetSEState(T.linked_gene_block,1,1) // force on
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
-				gene.initial_activation( H ,null , geneflags) // forces antigenes off, and calls apply() on trait
-	H.dna.UpdateSE() // sync!
-
+				gene.disable_antigenes( H ,null , geneflags)
+				H.dna.SetSEState(T.linked_gene_block,1,1) // force on
+	// final integ stuff
+	domutcheck(H,null,geneflags)
+	H.dna.UpdateUI()
+	H.dna.UpdateSE()
 	return new_copy
 
 /datum/species/proc/copy_variables(var/datum/species/S, var/list/whitelist)

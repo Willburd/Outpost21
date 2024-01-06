@@ -48,9 +48,6 @@
 		H.transfer_mental_traits( chosen_dna.identifying_gender, chosen_dna.flavour_texts ? chosen_dna.flavour_texts.Copy() : null, chosen_dna.ooc_notes ? chosen_dna.ooc_notes : null, null)
 		H.UpdateAppearance()
 		H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
-		if(H.dna)
-			H.dna.UpdateSE()
-			H.dna.UpdateUI()
 		H.sync_organ_dna()
 		H.resize(chosen_dna.sizemult, TRUE)
 	else

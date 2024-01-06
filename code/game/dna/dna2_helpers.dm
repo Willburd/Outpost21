@@ -343,7 +343,6 @@
 		H.species.blood_color = dna.blood_color
 		var/datum/species/S = H.species
 		S.produceCopy(dna.species_traits, H, dna.base_species, FALSE, geneflags)
-
 		H.force_update_organs() //VOREStation Add - Gotta do this too
 		H.force_update_limbs()
 		//H.update_body(0) //VOREStation Edit - Done in force_update_limbs already

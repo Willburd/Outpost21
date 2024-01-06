@@ -139,10 +139,6 @@
 
 	H.UpdateAppearance()
 	H.ApplySpeciesAndTraits(GENE_INITIAL_ACTIVATION)
-	if(H.dna)
-		H.dna.UpdateSE()
-		H.dna.UpdateUI()
-		domutcheck(H,null,MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 	H.sync_organ_dna()
 	H.set_cloned_appearance()
 	H.regenerate_icons()

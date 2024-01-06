@@ -18,28 +18,26 @@
 
 		// Current state
 		var/gene_active = (gene.flags & GENE_ALWAYS_ACTIVATE)
-		if(!gene_active)
+		if(!gene_active || (flags & GENE_INITIAL_ACTIVATION))
 			gene_active = M.dna.GetSEState(gene.block)
 
 		// Prior state
-		var/gene_prior_status = (gene.type in M.active_genes)
-		var/changed = gene_active != gene_prior_status || (gene.flags & GENE_ALWAYS_ACTIVATE)
-		if(flags & GENE_INITIAL_ACTIVATION)
-			changed = TRUE // Always on first activation! Avoid problems where a gene was already on and doesn't think it needs to be enabled!
+		var/gene_prior_status = (gene.block in M.active_genes)
+		var/changed = gene_active != gene_prior_status || (gene.flags & GENE_ALWAYS_ACTIVATE) || (flags & GENE_INITIAL_ACTIVATION)
 
 		// If gene state has changed:
 		if(changed)
-			// Gene active (or ALWAYS ACTIVATE)
-			if(gene_active || (gene.flags & GENE_ALWAYS_ACTIVATE))
+			// Gene active (or ALWAYS ACTIVATE), also always activates on GENE_INITIAL_ACTIVATION mutation call
+			if(gene_active)
 				//testing("[gene.name] activated!")
 				gene.activate(M,connected,flags)
 				if(M)
-					M.active_genes |= gene.type
+					M.active_genes |= gene.block
 					M.update_icon = 1
 			// If Gene is NOT active:
 			else
 				//testing("[gene.name] deactivated!")
 				gene.deactivate(M,connected,flags)
 				if(M)
-					M.active_genes -= gene.type
+					M.active_genes -= gene.block
 					M.update_icon = 1

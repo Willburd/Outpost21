@@ -454,6 +454,7 @@
 	outfit.equip(H)
 	log_and_message_admins("changed the equipment of [key_name(H)] to [outfit.name].")
 
+
 /client/proc/startSinglo()
 
 	set category = VERBTAB_DEBUG

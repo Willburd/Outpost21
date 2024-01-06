@@ -27,6 +27,8 @@
 	var/list/ideal_age_by_species = null
 	var/list/banned_job_species = null
 	var/show_join_message = TRUE		  //If joining the round late shows a message
+	var/spawn_with_emergencykit = TRUE	  //If job spawns with an emergency supply kit
+	var/use_backup_items = TRUE	  		  //If spawn_with_emergencykit is true, spawn with a crowbar instead of nothing
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
@@ -49,7 +51,7 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip(H, title, alt_title)
+	. = outfit.equip(H, src, alt_title)
 	return 1
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)

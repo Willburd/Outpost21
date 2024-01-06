@@ -22,7 +22,7 @@
 	pda_type = /obj/item/device/pda/centcom
 	flags = OUTFIT_EXTENDED_SURVIVAL|OUTFIT_COMPREHENSIVE_SURVIVAL
 
-/decl/hierarchy/outfit/job/emergency_responder/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/emergency_responder/post_equip(var/mob/living/carbon/human/H, var/datum/job/J)
 	..()
 	ert.add_antagonist(H.mind)
 
@@ -47,7 +47,7 @@
 	id_type = /obj/item/weapon/card/id/civilian/mime
 	pda_type = /obj/item/device/pda/mime
 
-/decl/hierarchy/outfit/job/mime/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/mime/post_equip(var/mob/living/carbon/human/H, var/datum/job/J)
 	..()
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(new /obj/item/weapon/pen/crayon/mime(H), slot_l_hand)

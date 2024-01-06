@@ -10,7 +10,7 @@
 	id_type = /obj/item/weapon/card/id/gold
 	pda_type = /obj/item/device/pda/captain
 
-/decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H, var/datum/job/J)
 	..()
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this

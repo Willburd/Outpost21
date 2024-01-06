@@ -41,7 +41,7 @@ var/list/outfits_decls_by_type_
 	var/l_hand = null
 	// In the list(path=count,otherpath=count) format
 	var/list/uniform_accessories = list() // webbing, armbands etc - fits in slot_tie
-	var/list/backpack_contents = list() 
+	var/list/backpack_contents = list()
 
 	var/id_type
 	var/id_desc
@@ -82,17 +82,20 @@ var/list/outfits_decls_by_type_
 			if(7) back = satchel_three
 			else back = null
 
-/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H, var/datum/job/J)
 	if(flags & OUTFIT_HAS_JETPACK)
-		var/obj/item/weapon/tank/jetpack/J = locate(/obj/item/weapon/tank/jetpack) in H
-		if(!J)
+		var/obj/item/weapon/tank/jetpack/Jet = locate(/obj/item/weapon/tank/jetpack) in H
+		if(!Jet)
 			return
-		J.toggle()
-		J.toggle_valve()
+		Jet.toggle()
+		Jet.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
-	equip_base(H)
+/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/datum/job/J, var/assignment)
+	equip_base(H,J)
 
+	var/rank = null
+	if(J)
+		rank = J.title
 	rank = rank || id_pda_assignment
 	assignment = id_pda_assignment || assignment || rank
 	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
@@ -106,13 +109,13 @@ var/list/outfits_decls_by_type_
 		for(var/i=0,i<number,i++)
 			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
 
-	post_equip(H)
+	post_equip(H,J)
 
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
 	return 1
 
-/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/datum/job/J)
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
@@ -157,8 +160,19 @@ var/list/outfits_decls_by_type_
 		for(var/i=0,i<number,i++)
 			H.equip_to_slot_or_del(new path(H), slot_tie)
 
-	if(H.species)
+	if((!J || J.spawn_with_emergencykit) && H.species)
+		// standard emergency kit (not breathing equipment for stuff like vox, only emergency air/crowbar)
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
+	else if(J.use_backup_items)
+		// a few jobs don't spawn an emergency kit, but can have a backup prybar
+		var/obj/item/weapon/tool/crowbar/red/bar = new(H)
+		var/obj/item/weapon/reagent_containers/food/snacks/liquidfood/food = new(H)
+		if(H.backbag == 1)
+			H.equip_to_slot_or_del(bar, slot_r_hand)
+			H.equip_to_slot_or_del(food, slot_l_hand)
+		else
+			H.equip_to_slot_or_del(bar, slot_in_backpack)
+			H.equip_to_slot_or_del(food, slot_in_backpack)
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)

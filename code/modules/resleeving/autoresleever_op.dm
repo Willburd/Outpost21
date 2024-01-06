@@ -90,7 +90,7 @@
 	if(!spawnloc)
 		return
 
-	if(tgui_alert(ghost, "Autoresleever has received the ID of '[D.registered_name]' for processing. Would you like to be resleeved? Remember to have that character loaded, or it will fail! This is your only chance to change slots!", "Resleeve", list("No","Yes")) == "No")
+	if(tgui_alert(ghost, "Autoresleever has received the ID of '[D.registered_name]' for processing. Would you like to be resleeved? Remember to have that character loaded, or it will fail! This is your only chance to change slots!", "Resleeve", list("Yes","No")) == "No")
 		if(isliving(ghost))
 			src.visible_message("[src] flashes 'Was unable to resleeve [D.registered_name]. Potential ethical violation detected!', and lets out a loud incorrect sounding beep!")
 			playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)

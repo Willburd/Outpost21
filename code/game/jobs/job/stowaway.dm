@@ -26,6 +26,8 @@
 	backup_item = /obj/item/device/flashlight/glowstick
 	alt_titles = list("Gremlin" = /datum/alt_title/gremlin, "Hunter" = /datum/alt_title/hunter, "Scavenger" = /datum/alt_title/scavenger, "Moss Collector" = /datum/alt_title/moss_collector)
 	outfit_type = /decl/hierarchy/outfit/job/stowaway
+	access = list()
+	minimal_access = list()
 
 /datum/job/stowaway/New()
 	..()

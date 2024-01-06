@@ -15,11 +15,13 @@
 	timeoff_factor = 0
 	requestable = FALSE
 	offmap_spawn = TRUE // spawns in unique spots only, and doesn't show up on regular datacore
+	forced_offmap_latejoin = TRUE // ALWAYS SPAWNS FROM ROUND START LOCATIONS
 	has_headset = FALSE
 	selection_color = "#353535"
 	total_positions = 3
 	spawn_positions = 2
 	economic_modifier = 1
+	show_join_message = FALSE
 	alt_titles = list("Gremlin" = /datum/alt_title/gremlin, "Hunter" = /datum/alt_title/hunter, "Scavenger" = /datum/alt_title/scavenger, "Moss Collector" = /datum/alt_title/moss_collector)
 	outfit_type = /decl/hierarchy/outfit/job/stowaway
 

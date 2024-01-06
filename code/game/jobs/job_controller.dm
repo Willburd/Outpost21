@@ -707,7 +707,29 @@ var/global/datum/controller/occupations/job_master
 			.["channel"] = spawnpos.announce_channel
 		else
 			if(fail_deadly)
-				to_chat(C, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Please correct your spawn point choice.</span>")
+				if(J && J.forced_offmap_latejoin)
+					var/list/safespawns = list();
+					var/list/spawnlist = list();
+					for(var/obj/effect/landmark/start/S in landmarks_list)
+						if(J.title == S.name)
+							spawnlist += S
+							var/mob/living/scan = (locate() in view("7x7", S.loc))
+							if(!scan)
+								safespawns += S
+					if(safespawns.len > 0)
+						var/spawning = pick(safespawns)
+						.["turf"] = get_turf(spawning)
+						.["msg"] = "will arrive at the station shortly"
+						return
+					if(spawnlist.len > 0)
+						var/spawning = pick(spawnlist)
+						.["turf"] = get_turf(spawning)
+						.["msg"] = "will arrive at the station shortly"
+					else
+						to_chat(C, "<span class='warning'>All spawnpoints for your current job are unavailable.</span>")
+					return
+				else
+					to_chat(C, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Please correct your spawn point choice.</span>")
 				return
 			to_chat(C, "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead.")
 			var/spawning = pick(latejoin)

@@ -26,6 +26,7 @@
 	var/ideal_character_age = 30
 	var/list/ideal_age_by_species = null
 	var/list/banned_job_species = null
+	var/show_join_message = TRUE		  //If joining the round late shows a message
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
@@ -34,6 +35,7 @@
 	var/outfit_type						  // What outfit datum does this job use in its default title?
 
 	var/offmap_spawn = FALSE			  // Do we require weird and special spawning and datacore handling?
+	var/forced_offmap_latejoin = FALSE	  // If true, latejoins will use their round start spawns instead of default spawns
 	var/mob_type = JOB_CARBON 		      // Bitflags representing mob type this job spawns
 
 	// Description of the job's role and minimum responsibilities.

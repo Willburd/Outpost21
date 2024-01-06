@@ -480,7 +480,8 @@
 		// AIize the character, but don't move them yet
 		character = character.AIize(move = FALSE) // Dupe of code in /datum/controller/subsystem/ticker/proc/create_characters() for non-latespawn, unify?
 
-		AnnounceCyborg(character, rank, "has been transferred to the empty core in \the [character.loc.loc]")
+		if(J.show_join_message)
+			AnnounceCyborg(character, rank, "has been transferred to the empty core in \the [character.loc.loc]")
 		ticker.mode.latespawn(character)
 
 		qdel(C) //Deletes empty core (really?)
@@ -500,9 +501,11 @@
 	ticker.mode.latespawn(character)
 
 	if(J.mob_type & JOB_SILICON)
-		AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
+		if(J.show_join_message) // hackiest crap ever for invisible job announcements
+			AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
 	else
-		AnnounceArrival(character, rank, join_message, announce_channel, character.z)
+		if(J.show_join_message) // hackiest crap ever for invisible job announcements
+			AnnounceArrival(character, rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 

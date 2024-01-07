@@ -431,9 +431,6 @@
 	mannequin.transfer_mental_traits( null, active_br.mydna.flavor.Copy(), null, null)
 	mannequin.UpdateAppearance() // Update all appearance stuff from the DNA record
 	mannequin.ApplySpeciesAndTraits()
-	if(mannequin.dna)
-		mannequin.dna.UpdateSE()
-		mannequin.dna.UpdateUI()
 	mannequin.sync_organ_dna() // Do this because sprites depend on DNA-gender of organs (chest etc)
 
 	//Apply genetic modifiers

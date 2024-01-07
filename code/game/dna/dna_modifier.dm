@@ -537,8 +537,6 @@
 
 			domutcheck(connected.occupant, null)
 			connected.occupant.UpdateAppearance()
-			connected.occupant.dna.UpdateSE()
-			connected.occupant.dna.UpdateUI()
 			if(ishuman(connected.occupant))
 				var/mob/living/carbon/human/H = connected.occupant
 				H.sync_organ_dna()
@@ -654,8 +652,6 @@
 						randmutg(connected.occupant)
 						domutcheck(connected.occupant)
 				connected.occupant.UpdateAppearance()
-				connected.occupant.dna.UpdateSE()
-				connected.occupant.dna.UpdateUI()
 				if(ishuman(connected.occupant))
 					var/mob/living/carbon/human/H = connected.occupant
 					H.sync_organ_dna()

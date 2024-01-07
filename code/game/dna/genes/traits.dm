@@ -69,9 +69,8 @@
 /datum/dna/gene/trait_linked/activate(var/mob/M, var/connected, var/flags)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/S = H.species
 		var/datum/trait/Tr = all_traits[linked_trait_path]
-		Tr.apply(S,H) // apply active traits!
+		Tr.apply(H.species,H) // apply active traits!
 		if(activation_messages.len)
 			if(!(flags & GENE_INITIAL_ACTIVATION))
 				var/msg = pick(activation_messages)
@@ -82,9 +81,8 @@
 /datum/dna/gene/trait_linked/deactivate(var/mob/M, var/connected, var/flags)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/S = H.species
 		var/datum/trait/Tr = all_traits[linked_trait_path]
-		Tr.unapply(S,H) // apply active traits!
+		Tr.unapply(H.species,H) // apply active traits!
 		if(deactivation_messages.len)
 			if(!(flags & GENE_INITIAL_ACTIVATION))
 				var/msg = pick(deactivation_messages)

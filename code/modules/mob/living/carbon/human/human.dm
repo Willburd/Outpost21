@@ -923,7 +923,6 @@
 		V.cure(src)
 
 	losebreath = 0
-	domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 
 	..()
 
@@ -1695,6 +1694,7 @@
 		dna.b_type = client.prefs.b_type
 		if(!isnull(forceddna))
 			dna = forceddna.Clone()
+			domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 		else
 			sync_dna_blocks_from_client_setup(client);
 		sync_organ_dna()
@@ -1708,11 +1708,11 @@
 		// dna setup
 		if(!isnull(forceddna))
 			dna = forceddna.Clone()
+			domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 		else
 			dna.ResetUIFrom(src)
 			sync_dna_blocks_from_client_setup(client);
 		sync_organ_dna()
-
 
 	// persistance links and antag setup
 	if(mind)
@@ -1745,9 +1745,6 @@
 				mind.assigned_role = charjob
 				mind.role_alt_title = job_master.GetPlayerAltTitle(src, charjob)
 		//equip_custom_items(src)	//VOREStation Removal
-
-	// enable mutations on spawn
-	domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 
 	// Apply belly configs
 	apply_vore_prefs()
@@ -1800,7 +1797,8 @@
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
 				gene.disable_antigenes(src, null , MUTCHK_FORCED|GENE_INITIAL_ACTIVATION) // forces antigenes off, and calls apply() on trait
 				dna.SetSEState(T.linked_gene_block,1,1) // force on
-	dna.UpdateSE()
+		dna.UpdateSE()
+		domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 
 /mob/living/carbon/human/proc/transfer_mental_traits(var/identigender, var/flavor, var/ooc, var/langsreplace)
 	// transfers languages and ooc

@@ -83,8 +83,6 @@
 					var/mob/living/carbon/human/H = L
 					//Apply genetic modifiers
 					H.UpdateAppearance()
-					H.dna.UpdateSE()
-					H.dna.UpdateUI()
 					H.sync_organ_dna()
 				L.dna.genetic_modifiers.Cut() // clear em!
 				for(var/modifier_type in buf.genetic_modifiers)

@@ -95,10 +95,9 @@
 				var/datum/dna/gene/trait_linked/gene = dna_genes_by_block[T.linked_gene_block]
 				gene.disable_antigenes( H ,null , geneflags)
 				H.dna.SetSEState(T.linked_gene_block,1,1) // force on
+		H.dna.UpdateSE() // finish defered update
 	// final integ stuff
 	domutcheck(H,null,geneflags)
-	H.dna.UpdateUI()
-	H.dna.UpdateSE()
 	return new_copy
 
 /datum/species/proc/copy_variables(var/datum/species/S, var/list/whitelist)

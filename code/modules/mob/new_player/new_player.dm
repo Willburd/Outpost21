@@ -594,8 +594,6 @@
 		client.prefs.randomize_appearance_and_body_for(new_character)
 	else
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
-		if(new_character.dna)
-			new_character.sync_dna_blocks_from_client_setup(client);
 
 	// setup initial body and prefs
 	new_character.syncronize_to_client(client, FALSE, null, mind, TRUE, null, FALSE, FALSE)

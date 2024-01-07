@@ -15,73 +15,73 @@
 	if (!islist && !istype(D))
 		return
 
-	var/title = ""
-	var/refid = "\ref[D]"
-	var/icon/sprite
-	var/hash
+	spawn(0)//For some reason, without this being async, VVing will cause client to disconnect on certain objects. Likely just lag.
+		var/title = ""
+		var/refid = "\ref[D]"
+		var/icon/sprite
+		var/hash
 
-	var/type = /list
-	if (!islist)
-		type = D.type
+		var/type = /list
+		if (!islist)
+			type = D.type
 
-	if(istype(D, /atom))
-		var/atom/AT = D
-		if(AT.icon && AT.icon_state)
-			sprite = new /icon(AT.icon, AT.icon_state)
-			hash = md5(AT.icon)
-			hash = md5(hash + AT.icon_state)
-			src << browse_rsc(sprite, "vv[hash].png")
+		if(istype(D, /atom))
+			var/atom/AT = D
+			if(AT.icon && AT.icon_state)
+				sprite = new /icon(AT.icon, AT.icon_state)
+				hash = md5(AT.icon)
+				hash = md5(hash + AT.icon_state)
+				src << browse_rsc(sprite, "vv[hash].png")
 
-	title = "[D] (\ref[D]) = [type]"
-	var/formatted_type = replacetext("[type]", "/", "<wbr>/")
+		title = "[D] (\ref[D]) = [type]"
+		var/formatted_type = replacetext("[type]", "/", "<wbr>/")
 
-	var/sprite_text
-	if(sprite)
-		sprite_text = "<img src='vv[hash].png'></td><td>"
-	var/list/header = islist(D)? list("<b>/list</b>") : D.vv_get_header()
+		var/sprite_text
+		if(sprite)
+			sprite_text = "<img src='vv[hash].png'></td><td>"
+		var/list/header = islist(D)? list("<b>/list</b>") : D.vv_get_header()
 
-	var/marked
-	if(holder && holder.marked_datum && holder.marked_datum == D)
-		marked = VV_MSG_MARKED
-	var/varedited_line = ""
-	if(!islist && (D.datum_flags & DF_VAR_EDITED))
-		varedited_line = VV_MSG_EDITED
-	var/deleted_line
-	if(!islist && D.gc_destroyed)
-		deleted_line = VV_MSG_DELETED
+		var/marked
+		if(holder && holder.marked_datum && holder.marked_datum == D)
+			marked = VV_MSG_MARKED
+		var/varedited_line = ""
+		if(!islist && (D.datum_flags & DF_VAR_EDITED))
+			varedited_line = VV_MSG_EDITED
+		var/deleted_line
+		if(!islist && D.gc_destroyed)
+			deleted_line = VV_MSG_DELETED
 
-	var/list/dropdownoptions = list()
-	var/autoconvert_dropdown = FALSE
-	if (islist)
-		dropdownoptions = list(
-			"---",
-			"Add Item" = "?_src_=vars;[VV_HK_LIST_ADD]=TRUE;target=[refid]",
-			"Remove Nulls" = "?_src_=vars;[VV_HK_LIST_ERASE_NULLS]=TRUE;target=[refid]",
-			"Remove Dupes" = "?_src_=vars;[VV_HK_LIST_ERASE_DUPES]=TRUE;target=[refid]",
-			"Set len" = "?_src_=vars;[VV_HK_LIST_SET_LENGTH]=TRUE;target=[refid]",
-			"Shuffle" = "?_src_=vars;[VV_HK_LIST_SHUFFLE]=TRUE;target=[refid]",
-			// "Show VV To Player" = "?_src_=vars;[VV_HK_EXPOSE]=TRUE;target=[refid]" // TODO - Not yet implemented for lists
-			)
-		autoconvert_dropdown = TRUE
-	else
-		dropdownoptions = D.vv_get_dropdown()
-	var/list/dropdownoptions_html = list()
-	if(autoconvert_dropdown)
-		for (var/name in dropdownoptions)
-			var/link = dropdownoptions[name]
-			if (link)
-				dropdownoptions_html += "<option value='[link]'>[name]</option>"
-			else
-				dropdownoptions_html += "<option value>[name]</option>"
-	else
-		dropdownoptions_html = dropdownoptions + D.get_view_variables_options()
+		var/list/dropdownoptions = list()
+		var/autoconvert_dropdown = FALSE
+		if (islist)
+			dropdownoptions = list(
+				"---",
+				"Add Item" = "?_src_=vars;[VV_HK_LIST_ADD]=TRUE;target=[refid]",
+				"Remove Nulls" = "?_src_=vars;[VV_HK_LIST_ERASE_NULLS]=TRUE;target=[refid]",
+				"Remove Dupes" = "?_src_=vars;[VV_HK_LIST_ERASE_DUPES]=TRUE;target=[refid]",
+				"Set len" = "?_src_=vars;[VV_HK_LIST_SET_LENGTH]=TRUE;target=[refid]",
+				"Shuffle" = "?_src_=vars;[VV_HK_LIST_SHUFFLE]=TRUE;target=[refid]",
+				// "Show VV To Player" = "?_src_=vars;[VV_HK_EXPOSE]=TRUE;target=[refid]" // TODO - Not yet implemented for lists
+				)
+			autoconvert_dropdown = TRUE
+		else
+			dropdownoptions = D.vv_get_dropdown()
+		var/list/dropdownoptions_html = list()
+		if(autoconvert_dropdown)
+			for (var/name in dropdownoptions)
+				var/link = dropdownoptions[name]
+				if (link)
+					dropdownoptions_html += "<option value='[link]'>[name]</option>"
+				else
+					dropdownoptions_html += "<option value>[name]</option>"
+		else
+			dropdownoptions_html = dropdownoptions + D.get_view_variables_options()
 
-	var/list/names = list()
-	if (!islist)
-		names = D.get_variables()
+		var/list/names = list()
+		if (!islist)
+			names = D.get_variables()
 
-	var/list/variable_html = list()
-	spawn(1)//For some reason, without this sleep, VVing will cause client to disconnect on certain objects.
+		var/list/variable_html = list()
 		if (islist)
 			var/list/L = D
 			for (var/i in 1 to L.len)

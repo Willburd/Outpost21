@@ -5,6 +5,7 @@
 // flags: See below, bitfield.
 #define MUTCHK_FORCED        1
 /proc/domutcheck(var/mob/living/M, var/connected=null, var/flags=0)
+	var/list/activation_queue = list()
 	for(var/datum/dna/gene/gene in dna_genes)
 		if(!M || !M.dna)
 			return
@@ -30,10 +31,7 @@
 			// Gene active (or ALWAYS ACTIVATE), also always activates on GENE_INITIAL_ACTIVATION mutation call
 			if(gene_active)
 				//testing("[gene.name] activated!")
-				gene.activate(M,connected,flags)
-				if(M)
-					M.active_genes |= gene.block
-					M.update_icon = 1
+				activation_queue.Add(gene)
 			// If Gene is NOT active:
 			else
 				//testing("[gene.name] deactivated!")
@@ -41,3 +39,9 @@
 				if(M)
 					M.active_genes -= gene.block
 					M.update_icon = 1
+	// activated genes turn on last, as they could be wiped out by genes deactivating prior if they share varchanges!
+	for(var/datum/dna/gene/gene in activation_queue)
+		gene.activate(M,connected,flags)
+		if(M)
+			M.active_genes |= gene.block
+			M.update_icon = 1

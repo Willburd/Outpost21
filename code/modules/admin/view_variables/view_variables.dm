@@ -79,25 +79,23 @@
 	var/list/names = list()
 	if (!islist)
 		names = D.get_variables()
-	sleep(1)//For some reason, without this sleep, VVing will cause client to disconnect on certain objects.
 
 	var/list/variable_html = list()
-	if (islist)
-		var/list/L = D
-		for (var/i in 1 to L.len)
-			var/key = L[i]
-			var/value
-			if (IS_NORMAL_LIST(L) && IS_VALID_ASSOC_KEY(key))
-				value = L[key]
-			variable_html += debug_variable(i, value, 0, D)
-	else
-
-		names = sortList(names)
-		for (var/V in names)
-			if(D.can_vv_get(V))
-				variable_html += D.vv_get_var(V)
-
-	var/html = {"
+	spawn(1)//For some reason, without this sleep, VVing will cause client to disconnect on certain objects.
+		if (islist)
+			var/list/L = D
+			for (var/i in 1 to L.len)
+				var/key = L[i]
+				var/value
+				if (IS_NORMAL_LIST(L) && IS_VALID_ASSOC_KEY(key))
+					value = L[key]
+				variable_html += debug_variable(i, value, 0, D)
+		else
+			names = sortList(names)
+			for (var/V in names)
+				if(D.can_vv_get(V))
+					variable_html += D.vv_get_var(V)
+		var/html = {"
 <html>
 	<head>
 		<title>[title]</title>
@@ -277,7 +275,7 @@ datumrefresh=[refid]'>Refresh</a>
 	</body>
 </html>
 "}
-	src << browse(html, "window=variables[refid];size=475x650")
+		src << browse(html, "window=variables[refid];size=475x650")
 
 /client/proc/vv_update_display(datum/D, span, content)
 	src << output("[span]:[content]", "variables\ref[D].browser:replace_span")

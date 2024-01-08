@@ -2278,3 +2278,6 @@
 
 /area/maintenance/security_starboard
 	base_turf = /turf/simulated/open
+
+/area/maintenance/bar
+	base_turf = /turf/simulated/open

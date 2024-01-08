@@ -220,6 +220,7 @@
 /datum/trait/positive/fangs
 	name = "Special Attack: Numbing Fangs" // Trait Organization for easier browsing. TODO: Proper categorization of 'health/ability/resist/etc'
 	desc = "Provides fangs that makes the person bit unable to feel their body or pain."
+	allowed_species = list(SPECIES_XENOCHIMERA) // outpost 21 edit - most extreme traits are xenochimera locked
 	cost = 1
 	var_changes = list("unarmed_types" = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp/numbing))
 

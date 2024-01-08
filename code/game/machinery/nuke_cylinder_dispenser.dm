@@ -9,12 +9,11 @@
 
 	var/locked = TRUE
 	var/open = FALSE
-	var/list/cylinders = list() //Should only hold 6
 
 /obj/machinery/nuke_cylinder_dispenser/Initialize()
 	. = ..()
 	for(var/i in 1 to 6)
-		cylinders += new /obj/item/nuclear_cylinder
+		new /obj/item/nuclear_cylinder(src)
 	update_icon()
 
 /obj/machinery/nuke_cylinder_dispenser/emag_act(var/remaining_charges, var/mob/user)
@@ -48,30 +47,31 @@
 		else
 			to_chat(user, SPAN_WARNING("Access denied."))
 		return
-	if(open && istype(O, /obj/item/nuclear_cylinder) && (length(cylinders) < 6))
+	if(open && istype(O, /obj/item/nuclear_cylinder) && (contents.len < 6))
 		user.visible_message("[user] begins inserting \the [O] into storage.", "You begin inserting \the [O] into storage.")
-		if(do_after(user, 80, src) && open && (length(cylinders) < 6) && user.unEquip(O, src))
+		if(do_after(user, 80, src) && open && (contents.len < 6) && user.unEquip(O, src))
 			user.visible_message("[user] places \the [O] into storage.", "You place \the [O] into storage.")
-			cylinders.Add(O)
+			O.forceMove(src)
 			update_icon()
 		add_fingerprint(user)
 
 /obj/machinery/nuke_cylinder_dispenser/MouseDrop(atom/over)
 	if(!CanMouseDrop(over, usr))
 		return
-	if(over == usr && open && length(cylinders))
-		usr.visible_message("[usr] begins to extract \the [cylinders[1]].", "You begin to extract \the [cylinders[1]].")
-		if(do_after(usr, 70, src) && open && length(cylinders))
-			usr.visible_message("[usr] picks up \the [cylinders[1]].", "You pick up \the [cylinders[1]].")
-			usr.put_in_hands(cylinders[length(cylinders)])
-			cylinders.Cut(length(cylinders))
+	if(over == usr && open && contents.len)
+		var/obj/item/nuclear_cylinder/C = (locate() in contents)
+		usr.visible_message("[usr] begins to extract \the [C].", "You begin to extract \the [C].")
+		if(do_after(usr, 70, src) && open && contents.len)
+			usr.visible_message("[usr] picks up \the [C].", "You pick up \the [C].")
+
+			usr.put_in_hands(C)
 			update_icon()
 		add_fingerprint(usr)
 
 /obj/machinery/nuke_cylinder_dispenser/update_icon()
 	overlays.Cut()
-	if(length(cylinders))
-		overlays += "rods_[length(cylinders)]"
+	if(contents.len)
+		overlays += "rods_[contents.len]"
 	if(!open)
 		overlays += "hatch"
 	if(powered())

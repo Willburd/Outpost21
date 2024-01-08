@@ -332,7 +332,26 @@
 
 /datum/ai_holder/simple_mob/intentional/jil/post_melee_attack(atom/A)
 	if(istype(A, /obj/item) && !holder.get_active_hand() && holder.Adjacent(A))
-		if(istype(A, /obj/item/device))
+		if(istype(A, /obj/item/weapon/flame/lighter))
+			var/obj/item/weapon/flame/lighter/R = A
+			var/obj/item/I = A
+			I.attack_hand(holder)
+			spawn(5)
+				if(!R.lit)
+					R.attack_self(src)
+				if(R.lit)
+					holder.visible_message("<span class='danger'>\The [holder] bursts into flames!</span>")
+					holder.add_modifier(/datum/modifier/fire/stack_managed/weak, 60 SECONDS)
+					holder.light_range = 2
+					holder.make_jittery(115)
+					fear_run = 60
+					playsound( holder, 'sound/voice/ragescree.ogg', 35, 1)
+					spawn(9 SECONDS)
+						holder.drop_l_hand()
+						holder.drop_r_hand()
+						new /obj/effect/decal/cleanable/ash(holder.loc) // Turn it to ashes!
+						holder.Destroy()
+		else if(istype(A, /obj/item/device))
 			var/obj/item/device/D = A
 			if(!D.anchored)
 				// attempt grab of target!

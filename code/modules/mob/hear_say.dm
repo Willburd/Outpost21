@@ -110,6 +110,11 @@
 		track = "([ghost_follow_link(speaker, src)]) "
 		if(is_preference_enabled(/datum/client_preference/ghost_ears) && (speaker in view(src)))
 			message = "<b>[message]</b>"
+	if(ishuman(speaker))
+		// hide phased shadekin names
+		var/mob/living/carbon/human/H = speaker
+		if(H.is_incorporeal())
+			speaker_name = "Something"
 
 	if(is_deaf())
 		if(speaker == src)

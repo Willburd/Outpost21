@@ -271,43 +271,50 @@
 	// and not for sneezy stuff!
 	if(antihistaminescount == 0)
 		if(species.allergens & ALLERGEN_POLLEN) // this behaves in a funny way compared to all other allergens! Behaves like a disability
-			var/isirritated = FALSE
-			var/things = list()
-			if(prob(22))
-				if(!isnull(r_hand))
-					things += r_hand
-				if(!isnull(l_hand))
-					things += l_hand
+			var/masked = FALSE
+			if(wear_mask) // masks block it entirely
+				if(wear_mask.item_flags & AIRTIGHT)
+					masked = !isnull(internal) // gas on
+				if(wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT)
+					masked = TRUE
+			if(!masked)
+				var/isirritated = FALSE
+				var/things = list()
+				if(prob(22))
+					if(!isnull(r_hand))
+						things += r_hand
+					if(!isnull(l_hand))
+						things += l_hand
 
-			if(isturf(src.loc))
-				// terrain tests
-				things += src.loc.contents
-				if(prob(8))
-					if(istype(src.loc,/turf/simulated/floor/grass))
-						isirritated = TRUE // auto irritate!
+				if(isturf(src.loc))
+					// terrain tests
+					things += src.loc.contents
+					if(prob(8))
+						if(istype(src.loc,/turf/simulated/floor/grass))
+							isirritated = TRUE // auto irritate!
 
+					if(!isirritated)
+						if(prob(12)) // ranged laggier check
+							things += orange(2,src.loc)
+
+				// scan irritants!
 				if(!isirritated)
-					if(prob(12)) // ranged laggier check
-						things += orange(2,src.loc)
-
-			// scan irritants!
-			if(!isirritated)
-				for(var/obj/machinery/portable_atmospherics/hydroponics/irritanttray in things)
-					if(!irritanttray.dead && !isnull(irritanttray.seed))
+					for(var/obj/machinery/portable_atmospherics/hydroponics/irritanttray in things)
+						if(!irritanttray.dead && !isnull(irritanttray.seed))
+							isirritated = TRUE
+							break
+				if(!isirritated)
+					for(var/obj/effect/plant/irritant in things)
 						isirritated = TRUE
 						break
-			if(!isirritated)
-				for(var/obj/effect/plant/irritant in things)
-					isirritated = TRUE
-					break
-			if(!isirritated)
-				for(var/obj/item/toy/bouquet/irritant in things)
-					isirritated = TRUE
-					break
+				if(!isirritated)
+					for(var/obj/item/toy/bouquet/irritant in things)
+						isirritated = TRUE
+						break
 
-			if(isirritated)
-				to_chat(src, "<font color='red'>[pick("The air feels itchy!","Your face feels uncomfortable!","Your body tingles!")]</font>")
-				add_chemical_effect(CE_ALLERGEN, rand(5,20) * REM)
+				if(isirritated)
+					to_chat(src, "<font color='red'>[pick("The air feels itchy!","Your face feels uncomfortable!","Your body tingles!")]</font>")
+					add_chemical_effect(CE_ALLERGEN, rand(5,20) * REM)
 		// may as well allow this to be handled in it's own way too
 		if (disabilities & COUGHING)
 			if ((prob(10) && prob(8) && paralysis <= 1))

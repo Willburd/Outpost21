@@ -203,7 +203,8 @@
 		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Your body is incompatible with station resleeving equipment. Please ask medical personal for details."
 
 	// what a mean halucination
-	if((user.hallucination > 20 && prob(5)) || istype(get_area(src), /area/specialty/redspace))
+	var/area/A = get_area(src)
+	if((user.hallucination > 20 && prob(5)) || (A && A.haunted))
 		return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Backup scan erased. Body scan erased. You deserve to die."
 
 	return "<br><span class='notice'>Backup scan completed!</span><br><b>Note:</b> Please ensure your suit's sensors are properly configured to alert medical and security personal to your current status."
@@ -217,6 +218,7 @@
 		msgcooldown--
 		return
 
+	var/area/AR = get_area(src)
 	if(prob(1))
 		var/mob/living/carbon/halucinateTarget = null
 		var/count = 0
@@ -224,10 +226,10 @@
 			if(istype(A, /mob/living/carbon))
 				count += 1
 				var/mob/living/carbon/C = A
-				if((C.hallucination > 20 && prob(5)) || istype(get_area(src), /area/specialty/redspace))
+				if((C.hallucination > 20 && prob(5)) || (AR && AR.haunted))
 					halucinateTarget = C
 
-		if((count == 1 && istype(halucinateTarget,/mob/living/carbon)) || istype(get_area(src), /area/specialty/redspace))
+		if((count == 1 && istype(halucinateTarget,/mob/living/carbon)) || (AR && AR.haunted))
 			// halucination replies
 			visible_message(halu_text(halucinateTarget))
 			msgcooldown = 60 SECONDS

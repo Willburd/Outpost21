@@ -1139,6 +1139,8 @@
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "bridge"
+	broken_light_chance = 85
+	haunted = TRUE
 
 //Cavern maintenance
 /area/maintenance/cave
@@ -1858,6 +1860,8 @@
 	ambience = AMBIENCE_MEATZONE
 	music = 'sound/ambience/approaching_planet.ogg'
 	requires_power = FALSE
+	broken_light_chance = 75
+	haunted = TRUE
 
 /area/specialty/thedarkplace // halucination punishment zone
 	name = "\improper Unknown"

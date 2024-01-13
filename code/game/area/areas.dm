@@ -55,6 +55,9 @@
 	var/no_spoilers = FALSE // If true, makes it much more difficult to see what is inside an area with things like mesons.
 	var/soundproofed = FALSE // If true, blocks sounds from other areas and prevents hearers on other areas from hearing the sounds within.
 
+	var/broken_light_chance = -1 // if -1 use light's own breaking chance, if above use this instead, including 0.
+	var/haunted = FALSE // area has unique behaviors for certain objects. Makes it scary!
+
 /area/Initialize()
 	. = ..()
 	luminosity = !(dynamic_lighting)

@@ -136,6 +136,21 @@
 	src.set_dir(turn(src.dir, 270))
 	update()
 
+/obj/structure/disposalconstruct/verb/rotate_counterclockwise()
+	set category = VERBTAB_OBJECT
+	set name = "Rotate Pipe Counterclockwise"
+	set src in view(1)
+
+	if(usr.stat)
+		return
+
+	if(anchored)
+		to_chat(usr, "You must unfasten the pipe before rotating it.")
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	update()
+
 /obj/structure/disposalconstruct/verb/flip()
 	set category = VERBTAB_OBJECT
 	set name = "Flip Pipe"

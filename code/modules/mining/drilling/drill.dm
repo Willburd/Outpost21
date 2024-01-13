@@ -499,3 +499,17 @@
 
 	src.set_dir(turn(src.dir, 270))
 	return 1
+
+/obj/machinery/mining/brace/verb/rotate_counterclockwise()
+	set name = "Rotate Brace Counterclockwise"
+	set category = VERBTAB_OBJECT
+	set src in oview(1)
+
+	if(usr.stat) return
+
+	if (src.anchored)
+		to_chat(usr, "It is anchored in place!")
+		return 0
+
+	src.set_dir(turn(src.dir, 90))
+	return 1

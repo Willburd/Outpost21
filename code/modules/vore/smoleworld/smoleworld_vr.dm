@@ -132,6 +132,14 @@
 		return
 	src.set_dir(turn(src.dir, 270))
 
+/obj/structure/smoletrack/verb/rotate_counterclockwise()
+	set name = "Rotate Road Counterclockwise"
+	set category = VERBTAB_OBJECT
+	set src in oview(1)
+	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		return
+	src.set_dir(turn(src.dir, 90))
+
 //color roads
 /obj/structure/smoletrack/verb/colorpieces()
 	set name = "Use Color Pieces"

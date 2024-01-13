@@ -42,6 +42,17 @@
 	src.set_dir(turn(src.dir, 270))
 	return 1
 
+/obj/machinery/power/emitter/verb/rotate_counterclockwise()
+	set name = "Rotate Emitter Counterclockwise"
+	set category = VERBTAB_OBJECT
+	set src in oview(1)
+
+	if (src.anchored || usr:stat)
+		to_chat(usr, "It is fastened to the floor!")
+		return 0
+	src.set_dir(turn(src.dir, 90))
+	return 1
+
 /obj/machinery/power/emitter/Initialize()
 	. = ..()
 	if(state == 2 && anchored)

@@ -684,6 +684,21 @@ GLOBAL_LIST_EMPTY(vending_products)
 	src.set_dir(turn(src.dir, 270))
 	return 1
 
+/obj/machinery/vending/verb/rotate_counterclockwise()
+	set name = "Rotate Vending Machine Counterclockwise"
+	set category = VERBTAB_OBJECT
+	set src in oview(1)
+
+	if (src.can_rotate == 0)
+		to_chat(usr, "<span class='warning'>\The [src] cannot be rotated.</span>")
+		return 0
+
+	if (src.anchored || usr:stat)
+		to_chat(usr, "It is bolted down!")
+		return 0
+	src.set_dir(turn(src.dir, 90))
+	return 1
+
 /obj/machinery/vending/verb/check_logs()
 	set name = "Check Vending Logs"
 	set category = VERBTAB_OBJECT

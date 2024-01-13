@@ -1134,6 +1134,12 @@
 	base_turf = /turf/simulated/open
 	icon_state = "blue"
 
+/area/maintenance/oldbridge
+	name = "\improper Abandoned Bridge"
+	base_turf = /turf/simulated/mineral/floor/muriki
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "bridge"
+
 //Cavern maintenance
 /area/maintenance/cave
 	name = "\improper Facility Lower Maintenance"

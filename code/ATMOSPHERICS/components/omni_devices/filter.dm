@@ -18,6 +18,8 @@
 	var/max_flow_rate = 200
 	var/set_flow_rate = 200
 
+	var/initial_icon_updated = FALSE
+
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 
 /obj/machinery/atmospherics/omni/atmos_filter/New()
@@ -89,6 +91,12 @@
 			if(P.network)
 				P.network.update = 1
 
+	if(!initial_icon_updated)
+		// so mapspawn filters actually have their overlays
+		initial_icon_updated = TRUE
+		spawn(50) // sometimes first update isn't enough, wait a bit longer
+			update_icon()
+
 	return 1
 
 /obj/machinery/atmospherics/omni/atmos_filter/tgui_interact(mob/user,datum/tgui/ui = null)
@@ -154,7 +162,7 @@
 /obj/machinery/atmospherics/omni/atmos_filter/tgui_act(action, params)
 	if(..())
 		return TRUE
-	
+
 	switch(action)
 		if("power")
 			if(!configuring)

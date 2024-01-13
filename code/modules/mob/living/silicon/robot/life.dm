@@ -61,6 +61,15 @@
 	else
 		if (src.has_power)
 			to_chat(src, "<font color='red'>You are now running on emergency backup power.</font>")
+			// disable all items so that they don't vanish from your inventory
+			var/current_selection_index = get_selected_module() // Will be 0 if nothing is selected.
+			var/i = 0
+			for(var/thing in list(module_state_1, module_state_2, module_state_3))
+				i++
+				select_module(i)
+				uneq_active()
+			if(current_selection_index) // Select what the player had before if possible.
+				select_module(current_selection_index)
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
@@ -151,7 +160,7 @@
 	// outpost 21 addition - lockers are dark and spooky!
 	if(istype(loc, /obj/structure/closet))
 		src.blinded = 1
-	
+
 	return 1
 
 /mob/living/silicon/robot/handle_regular_hud_updates()

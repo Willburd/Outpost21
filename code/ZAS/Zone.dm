@@ -182,10 +182,6 @@ Class Procs:
 		air.gas["nitrogen"] 		= LERP(air.gas["nitrogen"]			,T.nitrogen			,rate)
 		air.gas["phoron"] 			= LERP(air.gas["phoron"]			,T.phoron			,rate)
 		air.gas["nitrous_oxide"] 	= LERP(air.gas["nitrous_oxide"]		,T.nitrous_oxide	,rate)
-		// now... lets do temp a lil different, high temps should persist for a bit for a nice blastwave effect!
-		// Causes a few knockovers from air rushes if the explosion is particularly massive and atmo-involved (like every tank in atmos getting blownup at once)
-		rate = rand(6,12) / max(90,air.temperature / 2)
-		air.temperature = LERP(air.temperature, T.temperature, rate)
 		air.update_values()
 
 /zone/proc/dbg_data(mob/M)

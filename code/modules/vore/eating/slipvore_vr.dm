@@ -39,17 +39,29 @@
 	..()
 	var/mob/living/target = AM
 	if(istype(target) && !target.incorporeal_move && !src.incorporeal_move)	//The slip vore begins
-		if(can_slip_vore(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress)	//If we can vore them go for it
-			perform_the_nom(src,target,src,src.vore_selected,1)
-			target.slip_vore_in_progress = FALSE
-			target.is_slipping = FALSE
-			return
-		else if(can_be_slip_vored_by(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress) //Otherwise, if they can vore us, make it happen.
-			perform_the_nom(target,src,target,target.vore_selected,1)
-			slip_vore_in_progress = FALSE
-			is_slipping = FALSE
-			return
-
+		if(prob(50))
+			if(can_slip_vore(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress)	//If we can vore them go for it
+				perform_the_nom(src,target,src,src.vore_selected,1)
+				target.slip_vore_in_progress = FALSE
+				target.is_slipping = FALSE
+				return
+			else if(can_be_slip_vored_by(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress) //Otherwise, if they can vore us, make it happen.
+				perform_the_nom(target,src,target,target.vore_selected,1)
+				slip_vore_in_progress = FALSE
+				is_slipping = FALSE
+				return
+		else
+			// same as above, just swapped to allow for some randomness of who preds
+			if(can_be_slip_vored_by(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress) //Otherwise, if they can vore us, make it happen.
+				perform_the_nom(target,src,target,target.vore_selected,1)
+				slip_vore_in_progress = FALSE
+				is_slipping = FALSE
+				return
+			else if(can_slip_vore(target) && !src.slip_vore_in_progress && !target.slip_vore_in_progress)	//If we can vore them go for it
+				perform_the_nom(src,target,src,src.vore_selected,1)
+				target.slip_vore_in_progress = FALSE
+				target.is_slipping = FALSE
+				return
 
 /mob/living/carbon/slip(var/slipped_on,stun_duration=8)
 	. = ..()

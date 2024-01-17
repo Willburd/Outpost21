@@ -760,7 +760,8 @@
 				//YawnWider Add End
 				//Outpost Add Start
 				/obj/item/toy/plushie/tinytin,
-				/obj/item/toy/plushie/jil)
+				/obj/item/toy/plushie/jil,
+				/obj/item/toy/plushie/chu)
 				//Outpost Add End
 
 /obj/random/plushielarge

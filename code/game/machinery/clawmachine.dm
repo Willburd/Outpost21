@@ -63,7 +63,8 @@
 						/obj/item/toy/plushie/otter,
 						//Outpost 21 add start
 						/obj/item/toy/plushie/tinytin,
-						/obj/item/toy/plushie/jil
+						/obj/item/toy/plushie/jil,
+						/obj/item/toy/plushie/chu
 						//Outpost 21 add end
 						)
 

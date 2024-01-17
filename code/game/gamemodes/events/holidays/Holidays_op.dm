@@ -77,7 +77,8 @@
 						//YawnWider Add End
 						//Outpost Add Start
 						/obj/item/toy/plushie/tinytin,
-						/obj/item/toy/plushie/jil)
+						/obj/item/toy/plushie/jil,
+						/obj/item/toy/plushie/chu)
 						//Outpost Add End
 					return new randomplush(here)						// hug a friend day
 

@@ -25,7 +25,7 @@
 
 /obj/item/toy/plushie/tinytin/attack_self(mob/user as mob)
 	if(!cooldown)
-		playsound(user, 'sound/voice/peep.ogg', 10, 0)
+		playsound(user, 'sound/voice/peep.ogg', 30, 0)
 		src.visible_message("<span class='danger'>Peep peep!</span>")
 		cooldown = 1
 		addtimer(CALLBACK(src, .proc/cooldownreset), 50)
@@ -49,6 +49,25 @@
 		cooldown = 1
 		addtimer(CALLBACK(src, .proc/cooldownreset), 50)
 	return ..()
+
+
+/obj/item/toy/plushie/chu
+	name = "Chu plushie"
+	desc = "With a smile like that, who wouldn't be their friend!"
+	icon = 'icons/obj/toy_op.dmi'
+	icon_state = "plushie_chu"
+	var/cooldown = 0
+
+/obj/item/toy/plushie/chu/attack_self(mob/user as mob)
+	if(!cooldown)
+		playsound(user, pick('sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg') , 50, 0)
+		src.visible_message("<span class='danger'>Chitter!</span>")
+		cooldown = 1
+		addtimer(CALLBACK(src, .proc/cooldownreset), 50)
+	return ..()
+
+/obj/item/toy/plushie/chu/proc/cooldownreset()
+	cooldown = 0
 
 
 /obj/item/toy/plushie/pillow

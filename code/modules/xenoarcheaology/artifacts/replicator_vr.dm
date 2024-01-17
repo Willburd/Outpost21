@@ -380,7 +380,8 @@
 	/obj/item/weapon/bedsheet/rainbowdouble,
 	//Outpost 21 add start
 	/obj/item/toy/plushie/tinytin,
-	/obj/item/toy/plushie/jil
+	/obj/item/toy/plushie/jil,
+	/obj/item/toy/plushie/chu
 	//Outpost 21 add end
 	) 	// Currently: 3 gloves, 5 undersuits, 3 oversuits, 5 plushies, 5 headwear, 7 shoes, 7 misc. = 35
 		//Fishing hat was going to be added, but it was simply too powerful for this world.

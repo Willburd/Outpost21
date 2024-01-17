@@ -4,6 +4,12 @@
 	density = FALSE
 	vis_flags = NONE
 
+	// use visualnets for observer spoiler hiding
+	var/list/visibleChunks = list()
+	var/datum/visualnet/visualnet
+	var/use_static = TRUE
+	var/static_visibility_range = 16
+
 /mob/observer/dead
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
@@ -102,6 +108,8 @@
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = world.view //I mean. I don't even know if byond has occlusion culling... but...
+
+	visualnet = cameranet
 
 	var/turf/T
 	if(ismob(body))
@@ -448,6 +456,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return ..()
 
+/mob/observer/dead/Moved(atom/old_loc, direction, forced)
+	. = ..()
+	use_static = !(check_rights(R_ADMIN|R_FUN|R_EVENT, 0, src) || client.buildmode)
+	if(config.ghosts_see_everything)
+		use_static = FALSE
+	if(visualnet && use_static)
+		visualnet.visibility(src, client)
+
 // This is the ghost's follow verb with an argument
 /mob/observer/dead/proc/ManualFollow(var/atom/movable/target)
 	if(!target)
@@ -712,10 +728,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (usr != src)
 		return 0 //something is terribly wrong
 
-	var/ghosts_can_write
+	var/ghosts_can_write = TRUE
+	/* outpost 21 edit - always allow ghost writing, our station is innately haunted!
 	if(ticker.mode.name == "cult")
 		if(cult.current_antagonists.len > config.cult_ghostwriter_req_cultists)
 			ghosts_can_write = 1
+	*/
 
 	if(!ghosts_can_write && !check_rights(R_ADMIN|R_EVENT|R_FUN, 0)) //Let's allow for admins to write in blood for events and the such.
 		to_chat(src, "<font color='red'>The veil is not thin enough for you to do that.</font>")

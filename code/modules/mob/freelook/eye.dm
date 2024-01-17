@@ -19,12 +19,7 @@
 	plane = PLANE_AI_EYE
 
 	var/mob/owner = null
-	var/list/visibleChunks = list()
-
 	var/ghostimage = null
-	var/datum/visualnet/visualnet
-	var/use_static = TRUE
-	var/static_visibility_range = 16
 
 /mob/observer/eye/Destroy()
 	if(owner)
@@ -85,7 +80,7 @@
 		return
 
 	return eyeobj.EyeMove(n, direct)
-	
+
 /mob/observer/eye/proc/GetViewerClient()
     if(owner)
         return owner.client

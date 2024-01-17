@@ -93,6 +93,8 @@ var/list/gamemode_cache = list()
 	var/static/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/static/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
+	var/static/ghosts_see_everything = 0         //Allows ghosts to see without cameras (old observer behavior)
+
 	var/static/character_slots = 10				// The number of available character slots
 	var/static/loadout_slots = 3					// The number of loadout slots per character
 
@@ -790,6 +792,9 @@ var/list/gamemode_cache = list()
 
 				if("use_lib_nudge")
 					config.use_lib_nudge = 1
+
+				if("old_observer_vision")
+					ghosts_see_everything = 1
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1

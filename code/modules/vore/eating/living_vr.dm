@@ -547,23 +547,38 @@
 // Eating procs depending on who clicked what
 //
 /mob/living/proc/feed_grabbed_to_self(mob/living/user, mob/living/prey)
-	var/belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", user.vore_organs) // user.vore_selected // outpost 21 edit - just select the belly...
+	var/belly
+	if(user.vore_organs.len > 0)
+		belly = user.vore_organs[1]
+	if(user.vore_organs.len > 1)
+		belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", user.vore_organs) // user.vore_selected // outpost 21 edit - just select the belly...
 	return perform_the_nom(user, prey, user, belly)
 
 /mob/living/proc/eat_held_mob(mob/living/user, mob/living/prey, mob/living/pred)
 	var/belly
 	//if(user != pred) // outpost 21 edit - just select the belly...
-	belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
+	if(pred.vore_organs.len > 0)
+		belly = pred.vore_organs[1]
+	if(pred.vore_organs.len > 1)
+		belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
 	//else
 	//	belly = pred.vore_selected
 	return perform_the_nom(user, prey, pred, belly)
 
 /mob/living/proc/feed_self_to_grabbed(mob/living/user, mob/living/pred)
-	var/belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
+	var/belly
+	if(pred.vore_organs.len > 0)
+		belly = pred.vore_organs[1]
+	if(pred.vore_organs.len > 1)
+		belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
 	return perform_the_nom(user, user, pred, belly)
 
 /mob/living/proc/feed_grabbed_to_other(mob/living/user, mob/living/prey, mob/living/pred)
-	var/belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
+	var/belly
+	if(pred.vore_organs.len > 0)
+		belly = pred.vore_organs[1]
+	if(pred.vore_organs.len > 1)
+		belly = tgui_input_list(usr, "Choose Belly", "Belly Choice", pred.vore_organs)
 	return perform_the_nom(user, prey, pred, belly)
 
 //

@@ -171,29 +171,20 @@
 	to_chat(src, "<span class='notice'>You have infested [foundprey]!</span>")
 	to_chat(foundprey, "<span class='danger'>You have been infested by \the [src]!</span>")
 
+	var/allowghost = FALSE
 	var/mob/living/simple_mob/vore/alienanimals/chu/CC = null
 	if(ishuman(foundprey))
 		// human infesting
 		CC = T.chuify()
 		CC.tt_desc = "Reminds you of [hostname]..."
 		CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
-		CC.update_icon()
 	else
 		// simple conversion
-		var/key = null
-		if(!isnull(foundprey.key))
-			key = foundprey.key
 		CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
-		if(isnull(key))
-			// ghost request
-			var/datum/ghost_query/Q = new /datum/ghost_query/chu()
-			var/list/winner = Q.query()
-			if(winner.len)
-				var/mob/observer/dead/D = winner[1]
-				CC.key = D.key
+		if(!isnull(foundprey.key))
+			CC.key = foundprey.key
 		else
-			// pass on mob
-			CC.key = key
+			allowghost = TRUE
 
 	if(!isnull(CC))
 		// transfer contents of prey to new body
@@ -210,10 +201,21 @@
 		foundbelly.release_specific_contents(CC)
 		foundprey.Destroy()
 		CC.update_icon()
+		update_icon() // self too
 
 		// emote a bit
 		sleep(rand(2,6))
 		CC.emote(pick("choke","gasp"))
+
+		// ghost check
+		if(allowghost && isnull(CC.key))
+			// ghost request
+			var/datum/ghost_query/Q = new /datum/ghost_query/chu()
+			var/list/winner = Q.query()
+			if(winner.len)
+				var/mob/observer/dead/D = winner[1]
+				CC.key = D.key
+
 	else if(!isnull(T))
 		// what happened?
 		foundbelly.release_specific_contents(T)

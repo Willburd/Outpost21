@@ -409,9 +409,10 @@
 	t = replacetext(t, "\[/grid\]", "</td></tr></table>")
 	t = replacetext(t, "\[row\]", "</td><tr>")
 	t = replacetext(t, "\[cell\]", "<td>")
-	t = replacetext(t, "\[logo\]", "<img src = ntlogo.png>")
+	t = replacetext(t, "\[logo\]", "<img src = eslogo.png>")
 	t = replacetext(t, "\[redlogo\]", "<img src = redntlogo.png>")
 	t = replacetext(t, "\[sglogo\]", "<img src = sglogo.png>")
+	t = replacetext(t, "\[ntlogo\]", "<img src = ntlogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
@@ -459,9 +460,10 @@
 	t = replacetext(t, "</table>", "\[/grid\]")
 	t = replacetext(t, "<tr>", "\[row\]")
 	t = replacetext(t, "<td>", "\[cell\]")
-	t = replacetext(t, "<img src = ntlogo.png>", "\[logo\]")
+	t = replacetext(t, "<img src = eslogo.png>", "\[logo\]")
 	t = replacetext(t, "<img src = redntlogo.png>", "\[redlogo\]")
 	t = replacetext(t, "<img src = sglogo.png>", "\[sglogo\]")
+	t = replacetext(t, "<img src = ntlogo.png>", "\[ntlogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
 	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)

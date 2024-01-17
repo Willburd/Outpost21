@@ -28,7 +28,7 @@
 		var/new_body = sanitize(tgui_input_text(src,"Write the body of the news update here. Note: HTML is NOT supported, however paper markup is supported.  \n\
 		Hitting enter will automatically add a line break.  \n\
 		Valid markup includes: \[b\], \[i\], \[u\], \[large\], \[h1\], \[h2\], \[h3\]\ \[*\], \[hr\], \[small\], \[list\], \[table\], \[grid\], \
-		\[row\], \[cell\], \[logo\], \[sglogo\].","Write News", body, multiline = TRUE, prevent_enter = TRUE), extra = 0)
+		\[row\], \[cell\], \[logo\], \[ntlogo\], \[sglogo\].","Write News", body, multiline = TRUE, prevent_enter = TRUE), extra = 0)
 
 		new_body = paper_markup2html(new_body)
 
@@ -77,7 +77,8 @@
 	text = replacetext(text, "\[/grid\]", "</td></tr></table>")
 	text = replacetext(text, "\[row\]", "</td><tr>")
 	text = replacetext(text, "\[cell\]", "<td>")
-	text = replacetext(text, "\[logo\]", "<img src = ntlogo.png>") // Not sure if these would get used but why not
+	text = replacetext(text, "\[logo\]", "<img src = eslogo.png>")
+	text = replacetext(text, "\[ntlogo\]", "<img src = ntlogo.png>") // Not sure if these would get used but why not
 	text = replacetext(text, "\[sglogo\]", "<img src = sglogo.png>")
 	return text
 
@@ -114,7 +115,8 @@
 	text = replacetext(text, "</td></tr></table>", "\[/grid\]")
 	text = replacetext(text, "</td><tr>", "\[row\]")
 	text = replacetext(text, "<td>", "\[cell\]")
-	text = replacetext(text, "<img src = ntlogo.png>", "\[logo\]") // Not sure if these would get used but why not
+	text = replacetext(text, "<img src = eslogo.png>", "\[logo\]")
+	text = replacetext(text, "<img src = ntlogo.png>", "\[ntlogo\]") // Not sure if these would get used but why not
 	text = replacetext(text, "<img src = sglogo.png>", "\[sglogo\]")
 	return text
 

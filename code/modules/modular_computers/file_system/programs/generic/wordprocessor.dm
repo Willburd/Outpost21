@@ -100,7 +100,8 @@
 			\[grid\] - \[/grid\] : Table without visible borders, for layouts.
 			\[row\] - New table row.
 			\[cell\] - New table cell.
-			\[logo\] - Inserts NT logo image.
+			\[logo\] - Inserts ESHUI logo image.
+			\[ntlogo\] - Inserts NT logo image.
 			\[redlogo\] - Inserts red NT logo image.
 			\[sglogo\] - Inserts Solgov insignia image."}
 

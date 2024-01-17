@@ -77,6 +77,21 @@
 	icon_splat = "jil_cargo_splat"
 	icon_rest = "jil_cargo_sleep"
 
+/mob/living/simple_mob/vore/alienanimals/jil/bean
+	name = "jilly-bean"
+	real_name = "jilly-bean"
+	desc = "They smell like diet cherry bepis..."
+	tt_desc = "Crinitus Latrunculus"
+
+	faction = "cargonia"
+
+	// tiny suit!
+	icon_state = "jil_bean"
+	icon_living = "jil_bean"
+	icon_dead = "jil_bean_dead"
+	icon_splat = "jil_bean_splat"
+	icon_rest = "jil_bean_sleep"
+
 /mob/living/simple_mob/vore/alienanimals/jil/jillioth
 	name = "jillioth"
 	real_name = "jillioth"

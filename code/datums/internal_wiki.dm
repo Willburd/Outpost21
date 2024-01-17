@@ -1,0 +1,457 @@
+/*
+	This is a self assembled wiki for chemical reagents, food recipies,
+	and other information that should be assembled from game files.
+	Instead of being shoved in an outdated wiki that no one updates.
+*/
+
+GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
+
+/datum/internal_wiki/main
+	var/list/pages = list()
+
+	var/list/materials = list()
+	var/list/foodreact = list()
+	var/list/drinkreact = list()
+	var/list/phororeact = list()
+	var/list/chemreact = list()
+
+	var/list/foodrecipe = list()
+	var/list/drinkrecipe = list()
+
+	var/list/spoilermat = list()
+	var/list/spoilerreact = list()
+
+	var/list/catalogs = list()
+
+	var/list/searchcache_foodrecipe = list()
+	var/list/searchcache_drinkrecipe = list()
+	var/list/searchcache_chemreact = list()
+	var/list/searchcache_catalogs = list()
+
+/datum/internal_wiki/main/proc/init_wiki_data()
+	if(pages.len)
+		return // already init
+	log_world("Init game built wiki")
+	// assemble material wiki
+	for(var/datum/material/M in name_to_material)
+		var/datum/internal_wiki/page/P = new()
+		if(!M.spoiler)
+			P.material_assemble(M)
+			materials["[M.name]"] = P
+		else
+			spoilermat["[M.name]"] = P
+		pages.Add(P)
+	// assemble chemical reactions wiki
+	for(var/reagent in SSchemistry.chemical_reagents)
+		if(allow_reagent(reagent))
+			var/datum/internal_wiki/page/P = new()
+			var/datum/reagent/R = SSchemistry.chemical_reagents[reagent]
+			if(!R.spoiler)
+				if(R.is_food)
+					P.food_assemble(R)
+					foodreact["[R.name]"] = P
+				if(R.is_drink)
+					P.drink_assemble(R)
+					drinkreact["[R.name]"] = P
+				if(R.is_phoro)
+					P.chemical_assemble(R)
+					phororeact["[R.name]"] = P
+				if(!R.is_food && !R.is_drink && !R.is_phoro)
+					P.chemical_assemble(R)
+					searchcache_chemreact.Add("[R.name]")
+					chemreact["[R.name]"] = P
+			else
+				P.chemical_assemble(R)
+				spoilerreact["[R.name]"] = P
+			pages.Add(P)
+	init_kitchen_data()
+	// assemble low reward catalog entries
+	for(var/datum/category_group/G in GLOB.catalogue_data.categories)
+		for(var/datum/category_item/catalogue/item in G.items)
+			if(istype(item,/datum/category_item/catalogue/anomalous))
+				continue // lets always consider these spoilers
+			if(istype(item,/datum/category_item/catalogue/fauna/catslug/custom))
+				continue // too many silly entries
+			if(item.value > CATALOGUER_REWARD_TRIVIAL)
+				continue
+			var/datum/internal_wiki/page/catalog/P = new()
+			P.title = item.name
+			P.catalog_record = item
+			catalogs["[item.name]"] = P
+			searchcache_catalogs.Add("[item.name]")
+			pages.Add(P)
+	log_world("Wiki page count [pages.len]")
+
+/datum/internal_wiki/main/proc/init_kitchen_data()
+	// this is basically a clone of code\modules\food\recipe_dump.dm
+	// drinks
+	var/list/drink_recipes = list()
+	for(var/decl/chemical_reaction/instant/drinks/CR in SSchemistry.chemical_reactions)
+		var/datum/reagent/Rd = SSchemistry.chemical_reagents[CR.result]
+		if(!isnull(Rd))
+			drink_recipes[CR.type] = list("Result" = "[CR.name]",
+									"Desc" = "[Rd.description]",
+									"Flavor" = "[Rd.taste_description]",
+									"ResAmt" = CR.result_amount,
+									"Reagents" = CR.required_reagents,
+									"Catalysts" = CR.catalysts,
+									"Spoiler" = CR.spoiler)
+	// Build the kitchen recipe lists
+	var/list/food_recipes = subtypesof(/datum/recipe)
+	for(var/Rp in food_recipes)
+		//Lists don't work with datum-stealing no-instance initial() so we have to.
+		var/datum/recipe/R = new Rp()
+		var/obj/res = new R.result()
+		food_recipes[Rp] = list(
+						"Result" = "[res.name]",
+						"Desc" = "[res.desc]",
+						"Flavor" = "",
+						"ResAmt" = "1",
+						"Reagents" = R.reagents,
+						"Catalysts" = list(),
+						"Fruit" = R.fruit,
+						"Ingredients" = R.items,
+						"Coating" = R.coating,
+						"Appliance" = R.appliance,
+						"Allergens" = 0,
+						"Spoiler" = R.spoiler
+						)
+		qdel(res)
+		qdel(R)
+	// basically condiments, tofu, cheese, soysauce, etc
+	for(var/decl/chemical_reaction/instant/food/CR in SSchemistry.chemical_reactions)
+		food_recipes[CR.type] = list("Result" = CR.name,
+								"ResAmt" = CR.result_amount,
+								"Reagents" = CR.required_reagents,
+								"Catalysts" = CR.catalysts,
+								"Fruit" = list(),
+								"Ingredients" = list(),
+								"Allergens" = 0)
+	//Items needs further processing into human-readability.
+	for(var/Rp in food_recipes)
+		var/working_ing_list = list()
+		food_recipes[Rp]["has_coatable_items"] = FALSE
+		for(var/I in food_recipes[Rp]["Ingredients"])
+			var/atom/ing = new I()
+			if(istype(ing, /obj/item/weapon/reagent_containers/food/snacks)) // only subtypes of this have a coating variable and are checked for it (fruit are a subtype of this, so there's a check for them too later)
+				food_recipes[Rp]["has_coatable_items"] = TRUE
+
+			//So now we add something like "Bread" = 3
+			if(ing.name in working_ing_list)
+				var/sofar = working_ing_list[ing.name]
+				working_ing_list[ing.name] = sofar+1
+			else
+				working_ing_list[ing.name] = 1
+
+		if(LAZYLEN(food_recipes[Rp]["Fruit"]))
+			food_recipes[Rp]["has_coatable_items"] = TRUE
+		food_recipes[Rp]["Ingredients"] = working_ing_list
+
+	//Reagents can be resolved to nicer names as well
+	for(var/Rp in food_recipes)
+		for(var/rid in food_recipes[Rp]["Reagents"])
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
+			if(!Rd) // Leaving this here in the event that if rd is ever invalid or there's a recipe issue, it'll be skipped and recipe dumps can still be ran.
+				log_runtime(EXCEPTION("Food \"[Rp]\" had an invalid RID: \"[rid]\"! Check your reagents list for a missing or mistyped reagent!"))
+				continue // This allows the dump to still continue, and it will skip the invalid recipes.
+			var/R_name = Rd.name
+			var/amt = food_recipes[Rp]["Reagents"][rid]
+			food_recipes[Rp]["Reagents"] -= rid
+			food_recipes[Rp]["Reagents"][R_name] = amt
+			food_recipes[Rp]["Allergens"] |= Rd.allergen_type
+		for(var/rid in food_recipes[Rp]["Catalysts"])
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
+			if(!Rd) // Leaving this here in the event that if rd is ever invalid or there's a recipe issue, it'll be skipped and recipe dumps can still be ran.
+				log_runtime(EXCEPTION("Food \"[Rp]\" had an invalid RID: \"[rid]\"! Check your reagents list for a missing or mistyped reagent!"))
+				continue // This allows the dump to still continue, and it will skip the invalid recipes.
+			var/R_name = Rd.name
+			var/amt = food_recipes[Rp]["Catalysts"][rid]
+			food_recipes[Rp]["Catalysts"] -= rid
+			food_recipes[Rp]["Catalysts"][R_name] = amt
+	for(var/Rp in drink_recipes)
+		for(var/rid in drink_recipes[Rp]["Reagents"])
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
+			if(!Rd) // Leaving this here in the event that if rd is ever invalid or there's a recipe issue, it'll be skipped and recipe dumps can still be ran.
+				log_runtime(EXCEPTION("Food \"[Rp]\" had an invalid RID: \"[rid]\"! Check your reagents list for a missing or mistyped reagent!"))
+				continue // This allows the dump to still continue, and it will skip the invalid recipes.
+			var/R_name = Rd.name
+			var/amt = drink_recipes[Rp]["Reagents"][rid]
+			drink_recipes[Rp]["Reagents"] -= rid
+			drink_recipes[Rp]["Reagents"][R_name] = amt
+			drink_recipes[Rp]["Allergens"] |= Rd.allergen_type
+		for(var/rid in drink_recipes[Rp]["Catalysts"])
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
+			if(!Rd) // Leaving this here in the event that if rd is ever invalid or there's a recipe issue, it'll be skipped and recipe dumps can still be ran.
+				log_runtime(EXCEPTION("Food \"[Rp]\" had an invalid RID: \"[rid]\"! Check your reagents list for a missing or mistyped reagent!"))
+				continue // This allows the dump to still continue, and it will skip the invalid recipes.
+			var/R_name = Rd.name
+			var/amt = drink_recipes[Rp]["Catalysts"][rid]
+			drink_recipes[Rp]["Catalysts"] -= rid
+			drink_recipes[Rp]["Catalysts"][R_name] = amt
+
+	//We can also change the appliance to its proper name.
+	for(var/Rp in food_recipes)
+		switch(food_recipes[Rp]["Appliance"])
+			if(1)
+				food_recipes[Rp]["Appliance"] = "Microwave"
+			if(2)
+				food_recipes[Rp]["Appliance"] = "Fryer"
+			if(4)
+				food_recipes[Rp]["Appliance"] = "Oven"
+			if(8)
+				food_recipes[Rp]["Appliance"] = "Grill"
+			if(16)
+				food_recipes[Rp]["Appliance"] = "Candy Maker"
+			if(32)
+				food_recipes[Rp]["Appliance"] = "Cereal Maker"
+
+	//////////////////////// SORTING
+	var/list/foods_to_paths = list()
+	var/list/drinks_to_paths = list()
+	for(var/Rp in food_recipes) // "Appliance" will sort the list by APPLIANCES first. Items without an appliance will append to the top of the list. The old method was "Result", which sorts the list by the name of the result.
+		foods_to_paths["[food_recipes[Rp]["Appliance"]] [Rp]"] = Rp //Append recipe datum path to keep uniqueness
+	for(var/Rp in drink_recipes)
+		drinks_to_paths["[drink_recipes[Rp]["Result"]] [Rp]"] = Rp
+	foods_to_paths = sortAssoc(foods_to_paths)
+	drinks_to_paths = sortAssoc(drinks_to_paths)
+
+	var/list/foods_newly_sorted = list()
+	var/list/drinks_newly_sorted = list()
+	for(var/Rr in foods_to_paths)
+		var/Rp = foods_to_paths[Rr]
+		foods_newly_sorted[Rp] = food_recipes[Rp]
+	for(var/Rr in drinks_to_paths)
+		var/Rp = drinks_to_paths[Rr]
+		drinks_newly_sorted[Rp] = drink_recipes[Rp]
+	food_recipes = foods_newly_sorted
+	drink_recipes = drinks_newly_sorted
+
+	// assemble output page
+	for(var/Rp in food_recipes)
+		if(food_recipes[Rp] && !food_recipes[Rp]["Spoiler"])
+			var/datum/internal_wiki/page/P = new()
+			P.recipe_assemble(food_recipes[Rp])
+			foodrecipe["[P.title]"] = P
+			searchcache_foodrecipe.Add("[P.title]")
+			pages.Add(P)
+	for(var/Rp in drink_recipes)
+		if(drink_recipes[Rp] && !drink_recipes[Rp]["Spoiler"])
+			var/datum/internal_wiki/page/P = new()
+			P.recipe_assemble(drink_recipes[Rp])
+			drinkrecipe["[P.title]"] = P
+			searchcache_drinkrecipe.Add("[P.title]")
+			pages.Add(P)
+
+/datum/internal_wiki/main/proc/allow_reagent(var/reagent)
+	// This is used to filter out some of the base reagent types, such as "drink", without putting spoiler tags on base types...
+	if(reagent == "reagent")
+		return FALSE
+	if(reagent == "drugs")
+		return FALSE
+	if(reagent == "drink")
+		return FALSE
+	return TRUE
+
+/datum/internal_wiki/page
+	var/title = ""
+	var/body = ""
+
+/datum/internal_wiki/page/proc/get_data()
+	// this is so we can override these for catalog records viewing
+	return body
+
+/datum/internal_wiki/page/proc/material_assemble(var/datum/material/M)
+	title = M.name
+	body  = "<b>Description: </b><br>"
+
+/datum/internal_wiki/page/proc/chemical_assemble(var/datum/reagent/R)
+	title = R.name
+	body  = "<b>Description: </b>[R.description]<br>"
+	if(R.overdose > 0)
+		body += "<b>Overdose: </b>[R.overdose]U<br>"
+	body += "<b>Flavor: </b>[R.taste_description]<br>"
+	body += "<br>"
+	body += allergen_assemble(R.allergen_type)
+	body += "<br>"
+	if(SSchemistry.chemical_reactions_by_product[R.id] != null && SSchemistry.chemical_reactions_by_product[R.id].len > 0)
+		var/segment = 1
+
+		var/list/display_reactions = list()
+		for(var/decl/chemical_reaction/CR in SSchemistry.chemical_reactions_by_product[R.id])
+			if(!CR.spoiler)
+				display_reactions.Add(CR)
+		for(var/decl/chemical_reaction/CR in display_reactions)
+			if(display_reactions.len == 1)
+				body += "<b>Potential Chemical breakdown: </b><br>"
+			else
+				body += "<b>Potential Chemical breakdown [segment]: </b><br>"
+			segment += 1
+
+			for(var/RQ in CR.required_reagents)
+				body += " <b>-Component: </b>[SSchemistry.chemical_reagents[RQ].name]<br>"
+			for(var/IH in CR.inhibitors)
+				body += " <b>-Inhibitor: </b>[SSchemistry.chemical_reagents[IH].name]<br>"
+			for(var/CL in CR.catalysts)
+				body += " <b>-Catalyst: </b>[SSchemistry.chemical_reagents[CL].name]<br>"
+	else
+		body += "<b>Potential Chemical breakdown: </b>UNKNOWN OR BASE-REAGENT<br>"
+
+/datum/internal_wiki/page/proc/food_assemble(var/datum/reagent/R)
+	title = R.name
+	body  = "<b>Description: </b>[R.description]<br>"
+	body += "<b>Flavor: </b>[R.taste_description]<br>"
+	body += "<br>"
+	body += allergen_assemble(R.allergen_type)
+	body += "<br>"
+	if(SSchemistry.chemical_reactions_by_product[R.id] != null && SSchemistry.chemical_reactions_by_product[R.id].len > 0)
+		var/segment = 1
+		var/list/display_reactions = list()
+		for(var/decl/chemical_reaction/CR in SSchemistry.chemical_reactions_by_product[R.id])
+			if(!CR.spoiler)
+				display_reactions.Add(CR)
+		for(var/decl/chemical_reaction/CR in display_reactions)
+			if(display_reactions.len == 1)
+				body += "<b>Recipe: </b><br>"
+			else
+				body += "<b>Recipe </b>[segment]: <br>"
+			segment += 1
+
+			for(var/RQ in CR.required_reagents)
+				body += " <b>-Component: </b>[SSchemistry.chemical_reagents[RQ].name]<br>"
+			for(var/IH in CR.inhibitors)
+				body += " <b>-Inhibitor: </b>[SSchemistry.chemical_reagents[IH].name]<br>"
+			for(var/CL in CR.catalysts)
+				body += " <b>-Catalyst: </b>[SSchemistry.chemical_reagents[CL].name]<br>"
+	else
+		body += "<b>Recipe: </b>UNKNOWN<br>"
+
+/datum/internal_wiki/page/proc/drink_assemble(var/datum/reagent/R)
+	title = R.name
+	body  = "<b>Description: </b>[R.description]<br>"
+	body += "<b>Flavor: </b>[R.taste_description]<br>"
+	body += "<br>"
+	body += allergen_assemble(R.allergen_type)
+	body += "<br>"
+	if(SSchemistry.chemical_reactions_by_product[R.id] != null && SSchemistry.chemical_reactions_by_product[R.id].len > 0)
+		var/segment = 1
+		var/list/display_reactions = list()
+		for(var/decl/chemical_reaction/CR in SSchemistry.chemical_reactions_by_product[R.id])
+			if(!CR.spoiler)
+				display_reactions.Add(CR)
+		for(var/decl/chemical_reaction/CR in display_reactions)
+			if(display_reactions.len == 1)
+				body += "Mix: <br>"
+			else
+				body += "Mix [segment]: <br>"
+			segment += 1
+
+			for(var/RQ in CR.required_reagents)
+				body += " <b>-Component: </b>[SSchemistry.chemical_reagents[RQ].name]<br>"
+			for(var/IH in CR.inhibitors)
+				body += " <b>-Inhibitor: </b>[SSchemistry.chemical_reagents[IH].name]<br>"
+			for(var/CL in CR.catalysts)
+				body += " <b>-Catalyst: </b>[SSchemistry.chemical_reagents[CL].name]<br>"
+	else
+		body += "<b>Mix: </b>UNKNOWN<br>"
+
+/datum/internal_wiki/page/proc/allergen_assemble(var/allergens)
+	var/body = ""
+	body += "<b>Allergens: </b><br>"
+	if(allergens > 0)
+		if(allergens & ALLERGEN_MEAT)
+			body += "-Meat protein<br>"
+		if(allergens & ALLERGEN_FISH)
+			body += "-Fish protein<br>"
+		if(allergens & ALLERGEN_FRUIT)
+			body += "-Fruit<br>"
+		if(allergens & ALLERGEN_VEGETABLE)
+			body += "-Vegetable<br>"
+		if(allergens & ALLERGEN_GRAINS)
+			body += "-Grain<br>"
+		if(allergens & ALLERGEN_BEANS)
+			body += "-Bean<br>"
+		if(allergens & ALLERGEN_SEEDS)
+			body += "-Nut<br>"
+		if(allergens & ALLERGEN_DAIRY)
+			body += "-Dairy<br>"
+		if(allergens & ALLERGEN_FUNGI)
+			body += "-Fungi<br>"
+		if(allergens & ALLERGEN_COFFEE)
+			body += "-Caffeine<br>"
+		if(allergens & ALLERGEN_SUGARS)
+			body += "-Sugar<br>"
+		if(allergens & ALLERGEN_EGGS)
+			body += "-Egg<br>"
+		if(allergens & ALLERGEN_STIMULANT)
+			body += "-Stimulant<br>"
+		if(allergens & ALLERGEN_POLLEN)
+			body += "-Pollen<br>"
+		body += "<br>"
+	return body
+
+/datum/internal_wiki/page/proc/recipe_assemble(var/list/recipe)
+	title = recipe["Result"]
+	body  = "<b>Description: </b>[recipe["Desc"]]<br>"
+	if(length(recipe["Flavor"]) > 0)
+		body += "<b>Flavor: </b>[recipe["Flavor"]]<br>"
+	body += allergen_assemble(recipe["Allergens"])
+	body += "<br>"
+	if(recipe["Appliance"])
+		body += "<b>Appliance: </b>[recipe["Appliance"]]<br><br>"
+
+	var/count //For those commas. Not sure of a great other way to do it.
+	//For each large ingredient
+	var/pretty_ing = ""
+	count = 0
+	for(var/ing in recipe["Ingredients"])
+		pretty_ing += "[count == 0 ? "" : ", "][recipe["Ingredients"][ing]]x [ing]"
+		count++
+	if(pretty_ing != "")
+		body +=  "<b>Ingredients: </b>[pretty_ing]<br>"
+
+	//Coating
+	if(!recipe["has_coatable_items"])
+		body += "<b>Coating: </b>N/A, no coatable items<br>"
+	else if(recipe["Coating"] == -1)
+		body += "<b>Coating: </b>Optionally, any coating<br>"
+	else if(isnull(recipe["Coating"]))
+		body += "<b>Coating: </b> Must be uncoated<br>"
+	else
+		var/coatingtype = recipe["Coating"]
+		var/datum/reagent/coating = new coatingtype()
+		body += "<b>Coating: </b> [coating.name]<br>"
+
+	//For each fruit... why are they named this when it can be vegis too?
+	var/pretty_fru = ""
+	count = 0
+	for(var/fru in recipe["Fruit"])
+		pretty_fru += "[count == 0 ? "" : ", "][recipe["Fruit"][fru]]x [fru]"
+		count++
+	if(pretty_fru != "")
+		body += "<b>Components: </b> [pretty_fru]<br>"
+
+	//For each reagent
+	var/pretty_rea = ""
+	count = 0
+	for(var/rea in recipe["Reagents"])
+		pretty_rea += "[count == 0 ? "" : ", "][recipe["Reagents"][rea]]u [rea]"
+		count++
+	if(pretty_rea != "")
+		body += "<b>Mix in: </b> [pretty_rea]<br>"
+
+	//For each catalyst
+	var/pretty_cat = ""
+	count = 0
+	for(var/cat in recipe["Catalysts"])
+		pretty_cat += "[count == 0 ? "" : ", "][recipe["Catalysts"][cat]]u [cat]"
+		count++
+	if(pretty_cat != "")
+		body += "<b>Catalysts: </b> [pretty_cat]<br>"
+
+
+
+/datum/internal_wiki/page/catalog
+	var/datum/category_item/catalogue/catalog_record
+
+/datum/internal_wiki/page/catalog/get_data()
+	return catalog_record.desc

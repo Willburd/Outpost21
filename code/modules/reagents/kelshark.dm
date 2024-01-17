@@ -6,6 +6,7 @@
 	taste_mult = 0.4
 	metabolism = REM * 2.5
 	color = "#929292"
+	spoiler = TRUE
 
 /datum/reagent/phenethylamine
 	name = "Phenethylamine"
@@ -13,6 +14,7 @@
 	description = "Just looking at this makes you feel odd. Whether or not this would be good to consume is likely a gamble."
 	color = "#463667"
 	data = list("count"=1)
+	spoiler = TRUE
 
 /datum/reagent/phenethylamine/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom

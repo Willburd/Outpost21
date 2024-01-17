@@ -3,7 +3,7 @@
 	name = "Invasive Fauna - Fish"
 	desc = "This fish is considered an invasive species according \
 	to Sivian wildlife regulations. Removal or relocation is advised."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_EASY
 
 /mob/living/simple_mob/animal/passive/fish
 	name = "fish"
@@ -310,7 +310,7 @@
 	The murkfish earns its name from the fact its dense meat tastes like mud \
 	thanks to a specially formed protein, most likely an adaptation to \
 	protect the species from predation."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_EASY
 
 /mob/living/simple_mob/animal/passive/fish/murkin
 	name = "murkin"

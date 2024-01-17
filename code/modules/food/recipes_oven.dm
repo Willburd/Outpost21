@@ -15,6 +15,7 @@
 	items = list(/obj/item/weapon/holder/diona)
 	result = /obj/item/weapon/reagent_containers/food/snacks/dionaroast
 	reagent_mix = RECIPE_REAGENT_REPLACE //No eating polyacid
+	spoiler = TRUE
 
 /datum/recipe/monkeysdelight
 	appliance = OVEN

@@ -12,6 +12,13 @@
 	required_reagents = list("water" = 5, "teapowder" = 1)
 	result_amount = 5
 
+/decl/chemical_reaction/instant/drinks/decaftea
+	name = "Decaf tea"
+	id = "decaftea"
+	result = "decaftea"
+	required_reagents = list("water" = 5, "decafteapowder" = 1)
+	result_amount = 5
+
 /decl/chemical_reaction/instant/drinks/hot_coco
 	name = "Hot Coco"
 	id = "hot_coco"

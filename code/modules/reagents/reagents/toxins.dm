@@ -73,6 +73,7 @@
 	color = "#005555"
 	strength = 8
 	skin_danger = 0.4
+	spoiler = TRUE
 
 /datum/reagent/toxin/neurotoxic_protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_CHIMERA)
@@ -202,6 +203,8 @@
 	reagent_state = SOLID
 	strength = 5
 
+	spoiler = TRUE
+
 /datum/reagent/toxin/mold/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(prob(5))
@@ -215,6 +218,8 @@
 	reagent_state = LIQUID
 	strength = 5
 	filtered_organs = list(O_SPLEEN)
+
+	spoiler = TRUE
 
 /datum/reagent/toxin/expired_medicine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -342,6 +347,8 @@
 	strength = 2
 	mrate_static = TRUE
 
+	spoiler = TRUE
+
 /datum/reagent/toxin/lichpowder/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
@@ -445,6 +452,8 @@
 	strength = 2
 	overdose = 20
 
+	spoiler = TRUE
+
 /datum/reagent/toxin/sifslurry/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA) // Symbiotic bacteria.
 		M.adjust_nutrition(strength * removed)
@@ -485,6 +494,8 @@
 	power = 2
 	meltdose = 30
 
+	spoiler = TRUE
+
 /datum/reagent/thermite/venom
 	name = "Pyrotoxin"
 	id = "thermite_v"
@@ -493,6 +504,8 @@
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50
+
+	spoiler = TRUE
 
 /datum/reagent/thermite/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
@@ -514,6 +527,8 @@
 	taste_description = "fire"
 	color = "#B31008"
 	filtered_organs = list(O_SPLEEN)
+
+	spoiler = TRUE
 
 /datum/reagent/condensedcapsaicin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -639,6 +654,7 @@
 	taste_mult = 1.3
 	reagent_state = LIQUID
 	color = "#801E28"
+	spoiler = TRUE
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -765,6 +781,8 @@
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
+	spoiler = TRUE
+
 /* Drugs */
 
 /datum/reagent/serotrotium
@@ -776,6 +794,8 @@
 	color = "#202040"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
+
+	spoiler = TRUE
 
 /datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -790,6 +810,8 @@
 	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans. This appears to be a biologically produced form, resulting in a specifically toxic nature."
 	taste_description = "chalky bitterness"
 	filtered_organs = list(O_SPLEEN)
+
+	spoiler = TRUE
 
 /datum/reagent/serotrotium/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -834,6 +856,8 @@
 	overdose = REAGENTS_OVERDOSE
 	filtered_organs = list(O_SPLEEN)
 
+	spoiler = TRUE
+
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -854,6 +878,8 @@
 	color = "#B31008"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
+
+	spoiler = TRUE
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -878,6 +904,7 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#13BC5E"
+	spoiler = TRUE
 
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.isSynthetic())
@@ -912,6 +939,7 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#FF69B4"
+	spoiler = TRUE
 
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
 	if(M.isSynthetic())
@@ -953,6 +981,7 @@
 	color = "#555555"
 	metabolism = REM * 4 // Nanomachines. Fast.
 	affects_robots = TRUE
+	spoiler = TRUE
 
 /datum/reagent/shredding_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustBruteLoss(4 * removed)
@@ -967,6 +996,7 @@
 	color = "#555555"
 	metabolism = REM * 4
 	affects_robots = TRUE
+	spoiler = TRUE
 
 /datum/reagent/irradiated_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	SSradiation.radiate(get_turf(M), 20)	// Irradiate people around you.
@@ -982,6 +1012,7 @@
 	metabolism = REM * 4
 	filtered_organs = list(O_SPLEEN)
 	affects_robots = TRUE
+	spoiler = TRUE
 
 /datum/reagent/neurophage_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustBrainLoss(2 * removed)	// Their job is to give you a bad time.

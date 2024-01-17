@@ -53,8 +53,12 @@
 				to_chat(user, span("notice", "Contains [R.volume]u of <b>[R.name]</b>.<br>[R.description]<br><br>"))
 				if(SSchemistry.chemical_reactions_by_product[R.id] != null && SSchemistry.chemical_reactions_by_product[R.id].len > 0)
 					var/segment = 1
+					var/list/display_reactions = list()
 					for(var/decl/chemical_reaction/CR in SSchemistry.chemical_reactions_by_product[R.id])
-						if(SSchemistry.chemical_reactions_by_product[R.id].len == 1)
+						if(!CR.spoiler)
+							display_reactions.Add(CR)
+					for(var/decl/chemical_reaction/CR in display_reactions)
+						if(display_reactions.len == 1)
 							to_chat(user, span("notice", "Potential Chemical breakdown: <br>"))
 						else
 							to_chat(user, span("notice", "Potential Chemical breakdown [segment]: <br>"))

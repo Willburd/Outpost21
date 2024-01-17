@@ -29,7 +29,7 @@
  *  /datum/recipe/proc/check_items(var/obj/container as obj)
  *
  * */
- 
+
 // Recipe type defines. Used to determine what machine makes them.
 #define MICROWAVE			0x1
 #define FRYER				0x2
@@ -50,7 +50,7 @@
 	var/result				// Example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 	var/result_quantity = 1 // Number of instances of result that are created.
 	var/time = 100			// 1/10 part of second
-	
+
 	#define RECIPE_REAGENT_REPLACE		0 //Reagents in the ingredients are discarded.
 	//Only the reagents present in the result at compiletime are used
 	#define RECIPE_REAGENT_MAX	1 //The result will contain the maximum of each reagent present between the two pools. Compiletime result, and sum of ingredients
@@ -71,10 +71,12 @@
 	// This is a bitfield, more than one type can be used
 	// Grill is presently unused and not listed
 
+	var/spoiler = FALSE // prevents this recipie from appearing on the ingame wiki
+
 /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents, var/exact = FALSE)
 	if(!reagents || !reagents.len)
 		return TRUE
-	
+
 	if(!avail_reagents)
 		return FALSE
 
@@ -86,7 +88,7 @@
 				. = FALSE
 		else
 			return FALSE
-	
+
 	if((reagents?(reagents.len):(0)) < avail_reagents.reagent_list.len)
 		return FALSE
 	return .
@@ -117,7 +119,7 @@
 /datum/recipe/proc/check_items(var/obj/container as obj, var/exact = FALSE)
 	if(!items || !items.len)
 		return TRUE
-	
+
 	. = TRUE
 	if(items && items.len)
 		var/list/checklist = list()

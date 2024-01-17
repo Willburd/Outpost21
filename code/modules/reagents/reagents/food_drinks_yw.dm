@@ -24,6 +24,7 @@
 	glass_center_of_mass = list("x"=16, "y"=8)
 	glass_icon_file = 'icons/obj/drinks_yw.dmi'
 
+	spoiler = TRUE
 
 
 

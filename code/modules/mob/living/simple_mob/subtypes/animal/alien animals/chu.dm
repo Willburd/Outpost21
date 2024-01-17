@@ -1,7 +1,7 @@
 /datum/category_item/catalogue/fauna/chu
-	name = "Chu'uraka Parasite"
+	name = "Majoraes Fauna - Chu'uraka Parasite"
 	desc = "TODO - chu description"
-	value = CATALOGUER_REWARD_SUPERHARD
+	value = CATALOGUER_REWARD_HARD
 
 // Chu noises
 /datum/say_list/chu

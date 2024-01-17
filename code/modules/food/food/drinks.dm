@@ -237,7 +237,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/decaf_tea/Initialize()
 	. = ..()
-	reagents.add_reagent("teadecaf", 30)
+	reagents.add_reagent("decaftea", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "cup of ice"
@@ -422,4 +422,3 @@
 	icon_state = "vacuumflask"
 	volume = 60
 	center_of_mass = list("x"=15, "y"=4)
-

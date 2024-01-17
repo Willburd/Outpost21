@@ -12,6 +12,7 @@
 	var/injectable = 0
 	color = "#664330"
 	affects_robots = 1	//VOREStation Edit
+	is_food = TRUE
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -350,6 +351,7 @@
 	taste_description = "sweetness"
 	nutriment_factor = 10
 	color = "#FFFF00"
+	allergen_type = ALLERGEN_SUGARS
 
 /datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -616,6 +618,8 @@
 	color = "#899613"
 	allergen_type = ALLERGEN_DAIRY	//incase anyone is dumb enough to drink it - it does contain milk!
 
+	is_food = FALSE // so it's sorted with the other chems
+
 /datum/reagent/nutriment/sprinkles
 	name = "Sprinkles"
 	id = "sprinkles"
@@ -623,6 +627,7 @@
 	taste_description = "sugar"
 	nutriment_factor = 1
 	color = "#FF00FF"
+	allergen_type = ALLERGEN_SUGARS	//incase anyone is dumb enough to drink it - it does contain milk!
 
 /datum/reagent/nutriment/mint
 	name = "Mint"
@@ -655,6 +660,7 @@
 	color = "#FFFFFF"
 	overdose = REAGENTS_OVERDOSE
 	ingest_met = REM
+	is_food = TRUE
 
 /datum/reagent/sodiumchloride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -674,6 +680,7 @@
 	reagent_state = SOLID
 	ingest_met = REM
 	color = "#000000"
+	is_food = TRUE
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -684,6 +691,7 @@
 	reagent_state = LIQUID
 	color = "#365E30"
 	overdose = REAGENTS_OVERDOSE
+	is_food = TRUE
 
 /datum/reagent/spacespice
 	name = "Wurmwoad"
@@ -691,6 +699,7 @@
 	description = "An exotic blend of spices for cooking. Definitely not worms."
 	reagent_state = SOLID
 	color = "#e08702"
+	is_food = TRUE
 
 /datum/reagent/browniemix
 	name = "Brownie Mix"
@@ -698,6 +707,7 @@
 	description = "A dry mix for making delicious brownies."
 	reagent_state = SOLID
 	color = "#441a03"
+	is_food = TRUE
 
 /datum/reagent/cakebatter
 	name = "Cake Batter"
@@ -705,6 +715,7 @@
 	description = "A batter for making delicious cakes."
 	reagent_state = LIQUID
 	color = "#F0EDDA"
+	is_food = TRUE
 
 /datum/reagent/frostoil
 	name = "Frost Oil"
@@ -715,6 +726,7 @@
 	reagent_state = LIQUID
 	ingest_met = REM
 	color = "#B31008"
+	is_food = TRUE
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -765,6 +777,7 @@
 	reagent_state = LIQUID
 	ingest_met = REM
 	color = "#B31008"
+	is_food = TRUE
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -806,6 +819,7 @@
 	touch_met = 50 // Get rid of it quickly
 	ingest_met = REM
 	color = "#B31008"
+	is_food = TRUE
 
 /datum/reagent/condensedcapsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -955,6 +969,8 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	var/water_based = TRUE
+
+	is_drink = TRUE
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
@@ -1143,6 +1159,8 @@
 	color = "#863353"
 	strength = 5
 
+	is_drink = TRUE
+
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
 
@@ -1306,7 +1324,7 @@
 
 /datum/reagent/drink/tea/decaf
 	name = "Decaf Tea"
-	id = "teadecaf"
+	id = "decaftea"
 	description = "Tasty black tea, it has antioxidants, it's good for you, and won't keep you up at night!"
 	color = "#832700"
 	adj_dizzy = 0
@@ -1515,7 +1533,7 @@
 	name = "Decaf Chai Tea"
 	glass_name = "decaf chai tea"
 	cup_name = "cup of decaf chai tea"
-	id = "chaiteadecaf"
+	id = "chaidecaftea"
 	adj_dizzy = 0
 	adj_drowsy = 0
 	adj_sleepy = 0

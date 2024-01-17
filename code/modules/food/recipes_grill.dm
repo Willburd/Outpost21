@@ -118,6 +118,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/human/kabob
+	spoiler = TRUE
 
 /datum/recipe/kabob	//Do not put before humankabob
 	appliance = GRILL
@@ -162,6 +163,7 @@
 		/obj/item/clothing/head/wizard/fake,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
+	spoiler = TRUE
 
 /datum/recipe/spellburger
 	appliance = GRILL
@@ -170,6 +172,7 @@
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
+	spoiler = TRUE
 
 /datum/recipe/bigbiteburger
 	appliance = GRILL

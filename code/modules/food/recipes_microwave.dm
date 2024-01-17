@@ -49,6 +49,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/meatball
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donkpocket //SPECIAL
+	spoiler = TRUE
 
 /datum/recipe/donkpocket/proc/warm_up(var/obj/item/weapon/reagent_containers/food/snacks/donkpocket/being_cooked)
 	being_cooked.heat()
@@ -65,6 +66,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/donkpocket
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donkpocket //SPECIAL
+	spoiler = TRUE
 
 /datum/recipe/muffin
 	reagents = list("milk" = 5, "sugar" = 5)
@@ -469,6 +471,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/doughslice
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donkpocket/dankpocket
+	spoiler = TRUE
 
 /datum/recipe/validsalad/make_food(var/obj/container as obj)
 	. = ..(container)
@@ -503,6 +506,7 @@ I said no!
 		/obj/item/weapon/virusdish
 	)
 	result = /obj/item/weapon/ruinedvirusdish
+	spoiler = TRUE
 
 
 /datum/recipe/onionsoup
@@ -1126,6 +1130,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/egg
 		)
 	result = /obj/item/weapon/reagent_containers/food/snacks/gigapuddi/happy
+	spoiler = TRUE
 
 /datum/recipe/gigapuddi/anger
 	reagents = list("milk" = 15, "sodiumchloride" = 5)
@@ -1134,3 +1139,4 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/egg
 		)
 	result = /obj/item/weapon/reagent_containers/food/snacks/gigapuddi/anger
+	spoiler = TRUE

@@ -1,6 +1,6 @@
 // Possum catalog entry.
 /datum/category_item/catalogue/fauna/opossum
-	name = "Opossums"
+	name = "Wildlife - Opossums"
 	desc = "The opossum is a small, scavenging marsupial of the order Didelphimorphia, previously \
 	endemic to the Americas of Earth, but now inexplicably found across settled space. Nobody is \
 	entirely sure how they travel to such disparate locations, with the leading theories including \

@@ -102,6 +102,8 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
+	is_drink = TRUE
+
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 	allergen_factor = 1	//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
@@ -473,6 +475,9 @@
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
+
+	allergen_type = ALLERGEN_SUGARS
+	is_food = TRUE
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(removed * 3)

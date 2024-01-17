@@ -291,7 +291,7 @@
 	unison, having formed a symbiotic relationship over countless years of evolution.\
 	<br><br>\
 	Wood-like material can be obtained from this by cutting it down with a bladed tool."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_MEDIUM
 
 /obj/structure/flora/tree/sif
 	name = "glowing tree"
@@ -330,4 +330,3 @@
 		set_light(bulbs, 1, "#33ccff")	// 5 variants, missing bulbs. 5th has no bulbs, so no glow.
 		add_overlay(mutable_appearance(icon, "[base_state][bulbs]_glow"))
 		add_overlay(emissive_appearance(icon, "[base_state][bulbs]_glow"))
-	

@@ -6,6 +6,7 @@ var/induromol_code = rand(1, 50)
 	id = "unknown"
 	description = "Currently unknown"
 	reagent_state = LIQUID
+	is_phoro = TRUE
 
 	//called by phorochemputer.dm, returns special message upon creating reagent
 	//mostly dangerous initial reactions, to ensure protective gear is worn

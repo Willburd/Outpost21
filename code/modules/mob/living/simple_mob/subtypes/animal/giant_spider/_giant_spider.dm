@@ -6,7 +6,7 @@
 
 // Obtained by scanning any giant spider.
 /datum/category_item/catalogue/fauna/giant_spider/giant_spiders
-	name = "Giant Spiders"
+	name = "Wildlife - Giant Spiders"
 	desc = "Giant Spiders are massive arachnids genetically descended from conventional Earth spiders, \
 	however what caused ordinary arachnids to evolve into these are disputed. \
 	Different initial species of spider have co-evolved and interbred to produce a robust biological caste system \

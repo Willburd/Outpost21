@@ -19,6 +19,7 @@
 
 /*
  * Library Public Computer
+ * Outpost 21 edit - Complete recode of this into a search engine for recipes and reagents
  */
 /obj/machinery/librarypubliccomp
 	name = "visitor computer"
@@ -26,87 +27,179 @@
 	icon_state = "computer"
 	anchored = TRUE
 	density = TRUE
-	var/screenstate = 0
-	var/title
-	var/category = "Any"
-	var/author
-	var/SQLquery
 
-/obj/machinery/librarypubliccomp/attack_hand(var/mob/user as mob)
-	usr.set_machine(src)
-	var/dat = "<HEAD><TITLE>Library Visitor</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
-	switch(screenstate)
-		if(0)
-			dat += {"<h2>Search Settings</h2><br>
-			<A href='?src=\ref[src];settitle=1'>Filter by Title: [title]</A><BR>
-			<A href='?src=\ref[src];setcategory=1'>Filter by Category: [category]</A><BR>
-			<A href='?src=\ref[src];setauthor=1'>Filter by Author: [author]</A><BR>
-			<A href='?src=\ref[src];search=1'>\[Start Search\]</A><BR>"}
-		if(1)
-			establish_old_db_connection()
-			if(!dbcon_old.IsConnected())
-				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font><BR>"
-			else if(!SQLquery)
-				dat += "<font color=red><b>ERROR</b>: Malformed search request. Please contact your system administrator for assistance.</font><BR>"
-			else
-				dat += {"<table>
-				<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td>SS<sup>13</sup>BN</td></tr>"}
+	var/doc_title = "Click a search entry!"
+	var/doc_body = ""
+	var/searchmode = null
+	var/crash = FALSE
 
-				var/DBQuery/query = dbcon_old.NewQuery(SQLquery)
-				query.Execute()
+	var/current_ad1 = ""
+	var/current_ad2 = ""
 
-				while(query.NextRow())
-					var/author = query.item[1]
-					var/title = query.item[2]
-					var/category = query.item[3]
-					var/id = query.item[4]
-					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td>[id]</td></tr>"
-				dat += "</table><BR>"
-			dat += "<A href='?src=\ref[src];back=1'>\[Go Back\]</A><BR>"
-	user << browse(dat, "window=publiclibrary")
-	onclose(user, "publiclibrary")
+/obj/machinery/librarypubliccomp/Initialize()
+	. = ..()
+	GLOB.game_wiki.init_wiki_data() // self-prevents multiple reinitilizations
+	current_ad1 = get_ad()
+	current_ad2 = get_ad()
 
-/obj/machinery/librarypubliccomp/Topic(href, href_list)
+/obj/machinery/librarypubliccomp/attack_hand(mob/user)
 	if(..())
-		usr << browse(null, "window=publiclibrary")
-		onclose(usr, "publiclibrary")
-		return
+		return 1
+	if(crash)
+		user.visible_message("[user] performs percussive maintenance on \the [src].", "You try to smack some sense into \the [src].")
+		if(prob(10))
+			crash = FALSE
+	if(!crash)
+		tgui_interact(user)
+		playsound(src, "keyboard", 40) // into console
 
-	if(href_list["settitle"])
-		var/newtitle = tgui_input_text(usr, "Enter a title to search for:")
-		if(newtitle)
-			title = sanitize(newtitle)
-		else
-			title = null
-		title = sanitizeSQL(title)
-	if(href_list["setcategory"])
-		var/newcategory = tgui_input_list(usr, "Choose a category to search for:", "Category", list("Any", "Fiction", "Non-Fiction", "Adult", "Reference", "Religion"))
-		if(newcategory)
-			category = sanitize(newcategory)
-		else
-			category = "Any"
-		category = sanitizeSQL(category)
-	if(href_list["setauthor"])
-		var/newauthor = tgui_input_text(usr, "Enter an author to search for:")
-		if(newauthor)
-			author = sanitize(newauthor)
-		else
-			author = null
-		author = sanitizeSQL(author)
-	if(href_list["search"])
-		SQLquery = "SELECT author, title, category, id FROM library WHERE "
-		if(category == "Any")
-			SQLquery += "author LIKE '%[author]%' AND title LIKE '%[title]%'"
-		else
-			SQLquery += "author LIKE '%[author]%' AND title LIKE '%[title]%' AND category='[category]'"
-		screenstate = 1
+/obj/machinery/librarypubliccomp/tgui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "PublicLibrary", name)
+		ui.open()
 
-	if(href_list["back"])
-		screenstate = 0
+/obj/machinery/librarypubliccomp/tgui_data(mob/user)
+	var/data[0]
+	if(GLOB.game_wiki)
+		if(!crash)
+			// search page
+			data["errorText"] = ""
+			data["searchmode"] = searchmode
+			data["ad_string1"] = current_ad1
+			data["ad_string2"] = current_ad2
+			// get searches
+			data["search"] = list()
+			if(searchmode == "Food Recipes")
+				data["search"] = GLOB.game_wiki.searchcache_foodrecipe
+			if(searchmode == "Drink Recipes")
+				data["search"] = GLOB.game_wiki.searchcache_drinkrecipe
+			if(searchmode == "Chemistry")
+				data["search"] = GLOB.game_wiki.searchcache_chemreact
+			if(searchmode == "Catalogs")
+				data["search"] = GLOB.game_wiki.searchcache_catalogs
+			// display message
+			data["title"] = doc_title
+			data["body"] = doc_body
+			data["print"] = (doc_body && length(doc_body) > 0)
+		else
+			// intentional TGUI crash, amazingly awful
+			data["searchmode"] = "Error"
+			data["search"] = -1
+	else
+		data["errorText"] = "Database unreachable."
+	return data
 
-	src.add_fingerprint(usr)
-	src.updateUsrDialog()
-	return
+/obj/machinery/librarypubliccomp/tgui_act(action, params)
+	if(..())
+		return TRUE
+	add_fingerprint(usr)
+	playsound(src, "keyboard", 40) // into console
+
+	current_ad1 = get_ad()
+	current_ad2 = get_ad()
+
+	switch(action)
+		if("closesearch")
+			if(!crash)
+				searchmode = null
+				doc_title = "Click a search entry!"
+				doc_body = ""
+			. = TRUE
+
+		if("foodsearch")
+			if(!crash)
+				searchmode = "Food Recipes"
+			. = TRUE
+
+		if("drinksearch")
+			if(!crash)
+				searchmode = "Drink Recipes"
+			. = TRUE
+
+		if("chemsearch")
+			if(!crash)
+				searchmode = "Chemistry"
+			. = TRUE
+
+		if("catalogsearch")
+			if(!crash)
+				searchmode = "Catalogs"
+			. = TRUE
+
+		if("crash")
+			// intentional TGUI crash, amazingly awful
+			if(!crash)
+				crash = TRUE
+				spawn(rand(1000,4000))
+					// crashes till it fixes itself
+					crash = FALSE
+			. = TRUE
+
+		if("print")
+			if(!crash && doc_title && doc_body)
+				visible_message("<span class='notice'>[src] rattles and prints out a sheet of paper.</span>")
+				// playsound(loc, 'sound/goonstation/machines/printer_dotmatrix.ogg', 50, 1)
+
+				var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+				P.name = doc_title
+				P.info = doc_body
+			. = TRUE
+
+		// final search
+		if("search")
+			if(!crash)
+				var/search = params["data"]
+				var/datum/internal_wiki/page/P
+				if(searchmode == "Food Recipes")
+					P = GLOB.game_wiki.foodrecipe[search]
+				if(searchmode == "Drink Recipes")
+					P = GLOB.game_wiki.drinkrecipe[search]
+				if(searchmode == "Chemistry")
+					P = GLOB.game_wiki.chemreact[search]
+				if(searchmode == "Catalogs")
+					P = GLOB.game_wiki.catalogs[search]
+				if(P)
+					doc_title = P.title
+					doc_body = P.get_data()
+				else
+					doc_title = "Error"
+					doc_body = "Invalid data."
+			. = TRUE
+
+/obj/machinery/librarypubliccomp/proc/get_ad()
+	switch(rand(1,10))
+		if(1)
+			return "Inferior ears? Teshari enhancement surgeries might be for you!"
+		if(2)
+			return "Phoron huffers anonymous group chat. Join Today!"
+		if(3)
+			return "Hot and single Vox raiders near your system!"
+		if(4)
+			return "Need company? Holographic NIF friends! FREE DOWNLOAD!"
+		if(5)
+			return "LostSpagetti.sol your one stop SYNX DATING website!"
+		if(6)
+			return "HONK.bonk clown-only social media. Sign up TODAY!"
+		if(7)
+			return "FREE ORGANS! FREE ORGANS! FREE ORGANS! Terms apply."
+		if(8)
+			return "Smile.me.com.net.skrell.node.exe.js DOWNLOAD NOW!"
+		if(9)
+			return "Bankrupt? We can help! Buy uranium coins today!"
+		else
+			return "Hot skrell babes in your area!"
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

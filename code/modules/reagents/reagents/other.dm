@@ -9,6 +9,8 @@
 	color = "#888888"
 	overdose = 5
 
+	spoiler = TRUE
+
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
 	id = "crayon_dust_red"
@@ -57,6 +59,8 @@
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
+
+	spoiler = TRUE
 
 /datum/reagent/marker_ink/black
 	name = "Black marker ink"
@@ -112,6 +116,7 @@
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 20
+	spoiler = TRUE
 
 /datum/reagent/paint/touch_turf(var/turf/T)
 	..()
@@ -176,6 +181,8 @@
 
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
+
+	spoiler = TRUE
 
 /datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed)
@@ -316,6 +323,7 @@
 	affects_robots = TRUE
 	description = "The immense power of a supermatter crystal, in liquid form. You're not entirely sure how that's possible, but it's probably best handled with care."
 	taste_description = "taffy" // 0. The supermatter is tasty, tasty taffy.
+	spoiler = TRUE
 
 // Same as if you boop it wrong. It touches you, you die
 /datum/reagent/supermatter/affect_touch(mob/living/carbon/M, alien, removed)
@@ -357,6 +365,8 @@
 
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
+
+	spoiler = TRUE
 
 /datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -588,6 +598,7 @@
 	description = "An extremely powerful bonding agent."
 	taste_description = "a special education class"
 	color = "#FFFFCC"
+	spoiler = TRUE
 
 /datum/reagent/woodpulp
 	name = "Wood Pulp"
@@ -596,6 +607,7 @@
 	taste_description = "wood"
 	reagent_state = LIQUID
 	color = "#B97A57"
+	spoiler = TRUE
 
 /datum/reagent/luminol
 	name = "Luminol"
@@ -628,6 +640,7 @@
 	taste_description = "salt"
 	reagent_state = LIQUID
 	color = "#ff205255"
+	spoiler = TRUE
 
 // The opposite to healing nanites, exists to make unidentified hypos implied to have nanites not be 100% safe.
 /datum/reagent/defective_nanites
@@ -639,6 +652,7 @@
 	color = "#333333"
 	metabolism = REM * 3 // Broken nanomachines go a bit slower.
 	scannable = 1
+	spoiler = TRUE
 
 /datum/reagent/defective_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(2 * removed, 2 * removed)
@@ -654,6 +668,7 @@
 	reagent_state = LIQUID
 	color = "#62764E"
 	nutriment_factor = 15
+	spoiler = TRUE
 
 /datum/reagent/carpet
 	name = "Liquid Carpet"
@@ -662,6 +677,8 @@
 	reagent_state = LIQUID
 	color = "#b51d05"
 	taste_description = "carpet"
+
+	spoiler = TRUE
 
 /datum/reagent/carpet/black
 	name = "Liquid Black Carpet"

@@ -42,6 +42,11 @@
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
 
+	var/spoiler = FALSE // if hidden from wiki
+	var/is_phoro = FALSE // hidden reactions from phoronics
+	var/is_food = FALSE // if it shows up in the food recipe wiki
+	var/is_drink = FALSE // if it shows up in the drink recipe wiki
+
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	if(holder)
 		holder.remove_reagent(id, amount)

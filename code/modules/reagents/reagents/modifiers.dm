@@ -11,6 +11,8 @@
 	color = "#ff5555"
 	metabolism = REM
 
+	spoiler = TRUE
+
 	var/modifier_to_add = /datum/modifier/berserk
 	var/modifier_duration = 3 SECONDS	// How long, per unit dose, will this last?
 										// 2 SECONDS is the resolution of life code, and the modifier will expire before chemical processing tries to re-add it

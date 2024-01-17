@@ -194,6 +194,7 @@
 	description = "A slimy liquid which appears to rapidly clot internal hemorrhages by increasing the effectiveness of platelets at low quantities.  Toxic in high quantities."
 	taste_description = "slime"
 	overdose = 5
+	spoiler = TRUE
 
 /datum/reagent/osteodaxon/slime
 	name = "Agent B"
@@ -201,6 +202,7 @@
 	description = "A slimy liquid which can be used to heal bone fractures at low quantities.  Toxic in high quantities."
 	taste_description = "slime"
 	overdose = 5
+	spoiler = TRUE
 
 /datum/reagent/peridaxon/slime
 	name = "Agent C"
@@ -208,6 +210,7 @@
 	description = "A slimy liquid which is used to encourage recovery of internal organs and nervous systems in low quantities.  Toxic in high quantities."
 	taste_description = "slime"
 	overdose = 5
+	spoiler = TRUE
 
 /datum/reagent/nutriment/glucose/slime
 	name = "Slime Goop"
@@ -216,3 +219,4 @@
 	color = "#FABA3A"
 	nutriment_factor = 30
 	taste_description = "slimy nectar"
+	spoiler = TRUE

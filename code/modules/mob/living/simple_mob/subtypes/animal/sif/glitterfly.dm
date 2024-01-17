@@ -10,7 +10,7 @@
 	the ambient light to provide a measure of camouflage. \
 	Their wings appearance does not come free, causing them to \
 	produce large amounts of reflective flake-like dandruff."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_EASY
 
 /datum/category_item/catalogue/fauna/glitterfly_rare
 	name = "Sivian Fauna - Adela's Glitterfly"

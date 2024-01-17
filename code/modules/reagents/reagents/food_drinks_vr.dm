@@ -523,6 +523,7 @@
 	id = "brain_protein"
 	taste_description = "fatty, mushy meat and allspice"
 	color = "#caa3c9"
+	spoiler = TRUE
 
 /datum/reagent/nutriment/protein/brainzsnax/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()

@@ -54,6 +54,7 @@
 	sober_message_list = list("Everything feels a little more grounded.",
 	"Colors seem... flatter.",
 	"Everything feels a little dull, now.")
+	spoiler = TRUE
 
 /datum/reagent/drugs/bliss/affect_blood(mob/living/carbon/M, var/alien, var/removed)
 	..()

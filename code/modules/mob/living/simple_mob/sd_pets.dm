@@ -4,7 +4,7 @@
 	devourable = 0
 	digestable = 0
 
-/datum/category_item/catalogue/fauna/catslug/tulidaan
+/datum/category_item/catalogue/fauna/catslug/custom/tulidaan
 	name = "Alien Wildlife - Catslug - Tulidaan"
 	desc = "A resident of the Stellar Delight. Tulidaan usually\
 	inhabits the reading rooms. - \
@@ -27,7 +27,7 @@
 	icon_rest = "tulidaan_rest"
 	icon_dead = "tulidaan_dead"
 	digestable = 0
-	catalogue_data = list(/datum/category_item/catalogue/fauna/catslug/tulidaan)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/catslug/custom/tulidaan)
 	holder_type = /obj/item/weapon/holder/catslug/tulidaan
 
 /obj/item/weapon/holder/catslug/tulidaan
@@ -101,7 +101,7 @@
 	especially long ones. They are black-and-grey furred, typically, and tanky, hard to kill. \
 	They seem hostile at first, but are also tame-able if you can approach one. Nipnipnip-ACK \
 	**the catalogue entry ends here.**"
-	value = CATALOGUER_REWARD_TRIVIAL	//Worth less points since it lives on the ship
+	value = CATALOGUER_REWARD_EASY
 
 
 /mob/living/simple_mob/otie/red/chubby/cocoa
@@ -113,7 +113,7 @@
 	mob_bump_flag = 32
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive/otie/cocoa
 	catalogue_data = list(/datum/category_item/catalogue/fauna/otie/cocoa)
-	
+
 
 /datum/ai_holder/simple_mob/melee/evasive/otie/cocoa
 	hostile = 0

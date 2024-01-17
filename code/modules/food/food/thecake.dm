@@ -10,6 +10,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/meat/
 		)
 	result = /obj/structure/chaoscake
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layertwo
 	reagents = list("flour" = 30, "milk" = 20, "sugar" = 10, "egg" = 9, )
@@ -21,6 +22,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/dough
 		)
 	result = /obj/item/weapon/chaoscake_layer
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layerthree
 	reagents = list("flour" = 25, "milk" = 15, "sugar" = 10, "egg" = 6, "deathbell" = 10)
@@ -31,6 +33,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/dough
 		)
 	result = /obj/item/weapon/chaoscake_layer/three
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layerfour
 	reagents = list("flour" = 25, "milk" = 15, "sugar" = 10, "egg" = 6, "milkshake" = 30)
@@ -41,12 +44,14 @@
 			/obj/item/weapon/reagent_containers/food/snacks/dough
 		)
 	result = /obj/item/weapon/chaoscake_layer/four
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layerfive
 	reagents = list("flour" = 20, "milk" = 10, "sugar" = 10, "egg" = 6, "blood" = 30)
 	fruit = list("tomato" = 2)
 	items = list() //supposed to be made with lobster, still has to be ported.
 	result = /obj/item/weapon/chaoscake_layer/five
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layersix
 	reagents = list("flour" = 20, "milk" = 10, "sugar" = 10, "egg" = 6, "sprinkles" = 5)
@@ -60,6 +65,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/chocolatebar
 		)
 	result = /obj/item/weapon/chaoscake_layer/six
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layerseven
 	reagents = list("flour" = 15, "milk" = 10, "sugar" = 5, "egg" = 3, "devilskiss" = 20)
@@ -70,6 +76,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/dough
 		)
 	result = /obj/item/weapon/chaoscake_layer/seven
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layereight
 	reagents = list("flour" = 15, "milk" = 10, "sugar" = 5, "egg" = 3, "cream" = 20)
@@ -80,12 +87,14 @@
 			/obj/item/weapon/reagent_containers/food/snacks/dough
 		)
 	result = /obj/item/weapon/chaoscake_layer/eight
+	spoiler = TRUE
 
 /datum/recipe/chaoscake_layernine
 	reagents = list("water" = 10, "blood" = 10)
 	fruit = list("goldapple" = 1)
 	items = list()
 	result = /obj/item/weapon/chaoscake_layer/nine
+	spoiler = TRUE
 
 /obj/structure/chaoscake
 	name = "An unfinished cake"

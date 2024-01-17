@@ -168,6 +168,7 @@
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/chaos
 	result_quantity = 2
+	spoiler = TRUE
 
 /datum/recipe/funnelcake
 	appliance = FRYER

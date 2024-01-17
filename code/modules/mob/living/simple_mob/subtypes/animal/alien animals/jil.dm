@@ -1,10 +1,10 @@
 /datum/category_item/catalogue/fauna/jil
-	name = "Jil"
+	name = "Muriki Fauna - Jil"
 	desc = "TODO - jil description"
 	value = CATALOGUER_REWARD_TRIVIAL
 
 /datum/category_item/catalogue/fauna/jil/jillioth
-	name = "Jillioth"
+	name = "Muriki Fauna - Jillioth"
 	desc = "TODO - giant jil description"
 	value = CATALOGUER_REWARD_MEDIUM
 

@@ -142,7 +142,7 @@
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/chaitea
 	spawn_reagent = "chaitea"
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/decafchai
-	spawn_reagent = "chaiteadecaf"
+	spawn_reagent = "chaidecaftea"
 
 // ERT
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/inaprov

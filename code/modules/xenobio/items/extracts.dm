@@ -124,6 +124,7 @@
 	reagent_state = LIQUID
 	color = "#666666"
 	strength = 20
+	spoiler = TRUE
 
 /decl/chemical_reaction/instant/slime/metal_metamorphic
 	name = "Slime Metal"
@@ -208,6 +209,7 @@
 	reagent_state = LIQUID
 	color = "#666666"
 	strength = 20
+	spoiler = TRUE
 
 /obj/item/weapon/reagent_containers/glass/bottle/binding
 	name = "Binding Metal Bottle"
@@ -988,6 +990,3 @@
 /decl/chemical_reaction/instant/slime/rainbow_unity/on_reaction(var/datum/reagents/holder)
 	new /obj/item/slimepotion/unity(get_turf(holder.my_atom))
 	..()
-
-
-

@@ -529,7 +529,7 @@
 	to emit low, but consistant amounts of light made them desirable to the settlers. They would often cultivate \
 	this plant inside man-made tunnels and mines to act as a backup source of light that would not need \
 	electricity. This technique has saved many lost miners, and this practice continues to this day."
-	value = CATALOGUER_REWARD_EASY
+	value = CATALOGUER_REWARD_MEDIUM
 
 /obj/structure/flora/sif/subterranean
 	name = "subterranean bulbs"
@@ -554,7 +554,7 @@
 	desc = "A plant native to Sif. On the end of its stems are bulbs which visually resemble \
 	eyes, which shrink when touched. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
 	These plants have no known use."
-	value = CATALOGUER_REWARD_EASY
+	value = CATALOGUER_REWARD_MEDIUM
 
 /obj/structure/flora/sif/eyes
 	name = "eyebulbs"
@@ -575,7 +575,7 @@
 	desc = "A plant native to Sif. The plant is most closely related to the common, dense moss found covering Sif's terrain. \
 	It has evolved a method of camouflage utilizing white hairs on its dorsal sides to make it appear as a small mound of snow from \
 	above. It has no known use, though it is a common furnishing in contemporary homes."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_MEDIUM
 
 /obj/structure/flora/sif/tendrils
 	name = "wabback tendrils"

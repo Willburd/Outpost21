@@ -4,6 +4,7 @@
 	description = "A corruptive toxin produced by slimes. Turns the subject of the chemical into a Promethean."
 	reagent_state = LIQUID
 	color = "#13BC5E"
+	spoiler = TRUE
 
 /datum/reagent/advmutationtoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
@@ -37,6 +38,7 @@
 	color = "#333333"
 	scannable = 1
 	affects_robots = TRUE
+	spoiler = TRUE
 
 /* outpost 21  edit - nif removal
 /datum/reagent/nif_repair_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

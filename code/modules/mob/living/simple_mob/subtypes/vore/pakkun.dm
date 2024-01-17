@@ -7,7 +7,7 @@
 	despite the occasional accidents that can occur as a result of staff becoming overly friendly and triggering their playfighting instincts. \
 	More mature specimens are identifiable by a greener tint to their skin, and eventually the development of frills \
 	around their neck and along the backs of their heads."
-	value = CATALOGUER_REWARD_TRIVIAL
+	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/vore/pakkun
 	name = "pakkun"

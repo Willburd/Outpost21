@@ -591,7 +591,13 @@ var/global/datum/controller/occupations/job_master
 	if(!isnull(Bag))
 		//Gives medications for neurological disabilities
 		if(H.disabilities & NERVOUS || H.disabilities & EPILEPSY || H.disabilities & TOURETTES)
-			var/perscrip = new /obj/item/weapon/storage/pill_bottle/citalopram() //currently the only reasonable med, also one of the few with an actual pill bottle
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/citalopram() // currently the only reasonable med, also one of the few with an actual pill bottle
+			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
+			Bag.contents += perscrip
+
+		// allergy meds!
+		if(H.species.allergens & ALLERGEN_POLLEN)
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/inaprovaline() // because anaphylactic shock from grass is overwhelming
 			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
 			Bag.contents += perscrip
 

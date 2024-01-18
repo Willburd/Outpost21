@@ -1,6 +1,8 @@
 /spell/targeted/buttblast
 	name = "Butt blaster"
 	desc = "Blasts the booty off of your target."
+	invocation = "PHUK BYUK KER"
+	invocation_type = SpI_SHOUT
 
 /spell/targeted/buttblast/cast(list/targets)
 	..()

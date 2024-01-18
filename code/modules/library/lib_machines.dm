@@ -28,6 +28,8 @@
 	anchored = TRUE
 	density = TRUE
 
+	desc = "Used for research, I swear!"
+
 	var/doc_title = "Click a search entry!"
 	var/doc_body = ""
 	var/searchmode = null
@@ -192,7 +194,7 @@
 			. = TRUE
 
 /obj/machinery/librarypubliccomp/proc/get_ad()
-	switch(rand(1,10))
+	switch(rand(1,20))
 		if(1)
 			return "Inferior ears? Teshari enhancement surgeries might be for you!"
 		if(2)
@@ -211,11 +213,33 @@
 			return "Smile.me.com.net.skrell.node.exe.js DOWNLOAD NOW!"
 		if(9)
 			return "Bankrupt? We can help! Buy uranium coins today!"
+		if(10)
+			return "CONGRATULATIONS, you're our [rand(1,10000)]TH visitor! DOWNLOAD!"
+		if(11)
+			return "Your system is out of date, DOWNLOAD DRIVERS!"
+		if(12)
+			return "Ms.Kitty can't hang in there long, click here to support FELINE INDEPENDENCE!"
+		if(13)
+			return "Cortical borer therapy! Treats anxiety, stress, and impending sense of univeral collapse!"
+		if(14)
+			return "Help I licked the supermatter! And other strange stories from Nanotrasen. FREE PDF!"
+		if(15)
+			return "TIME IS COMING TO AN END, BUY GOLD NOW!"
+		if(16)
+			return "Your own pet clown? It sounds too REAL to be TRUE! VIEW ARTICLE!"
+		if(17)
+			return "Are you a BIGSHOT? Investment opportunities inside!"
+		if(18)
+			return "Spacestation13.exe FREE DOWNLOAD NOW!"
+		if(19)
+			return "Bored and alone? Date a wizard today! WIZZBIZZ.KAZAM!"
 		else
 			return "Hot skrell babes in your area!"
 
-
-
+// mapper varient for dorms and residences
+/obj/machinery/librarypubliccomp/personal
+	name = "personal computer"
+	desc = "Have you Bingled THAT today?"
 
 
 

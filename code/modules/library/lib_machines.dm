@@ -31,6 +31,7 @@
 	var/doc_title = "Click a search entry!"
 	var/doc_body = ""
 	var/searchmode = null
+	var/appliance = null //sublists for food menu
 	var/crash = FALSE
 
 	var/current_ad1 = ""
@@ -70,14 +71,23 @@
 			data["ad_string2"] = current_ad2
 			// get searches
 			data["search"] = list()
+			data["appliance"] = appliance
 			if(searchmode == "Food Recipes")
-				data["search"] = GLOB.game_wiki.searchcache_foodrecipe
+				if(appliance)
+					data["search"] = GLOB.game_wiki.searchcache_foodrecipe[appliance]
+				else
+					var/list/options = list()
+					for(var/app in list("Simple","Microwave","Fryer","Oven","Grill","Candy Maker","Cereal Maker"))
+						if(!isnull(GLOB.game_wiki.searchcache_foodrecipe["[app]"]))
+							options.Add("[app]")
+					data["search"] = options
 			if(searchmode == "Drink Recipes")
 				data["search"] = GLOB.game_wiki.searchcache_drinkrecipe
 			if(searchmode == "Chemistry")
 				data["search"] = GLOB.game_wiki.searchcache_chemreact
 			if(searchmode == "Catalogs")
 				data["search"] = GLOB.game_wiki.searchcache_catalogs
+
 			// display message
 			data["title"] = doc_title
 			data["body"] = doc_body
@@ -105,6 +115,13 @@
 				searchmode = null
 				doc_title = "Click a search entry!"
 				doc_body = ""
+			. = TRUE
+
+		if("closeappliance")
+			if(!crash)
+				doc_title = "Click a search entry!"
+				doc_body = ""
+				appliance = null
 			. = TRUE
 
 		if("foodsearch")
@@ -151,20 +168,27 @@
 			if(!crash)
 				var/search = params["data"]
 				var/datum/internal_wiki/page/P
+				var/setpage = TRUE
 				if(searchmode == "Food Recipes")
-					P = GLOB.game_wiki.foodrecipe[search]
+					if(!appliance)
+						appliance = params["data"] // have not selected it yet
+						setpage = FALSE
+					else
+						P = GLOB.game_wiki.foodrecipe[search]
 				if(searchmode == "Drink Recipes")
 					P = GLOB.game_wiki.drinkrecipe[search]
 				if(searchmode == "Chemistry")
 					P = GLOB.game_wiki.chemreact[search]
 				if(searchmode == "Catalogs")
 					P = GLOB.game_wiki.catalogs[search]
-				if(P)
-					doc_title = P.title
-					doc_body = P.get_data()
-				else
-					doc_title = "Error"
-					doc_body = "Invalid data."
+
+				if(setpage)
+					if(P)
+						doc_title = P.title
+						doc_body = P.get_data()
+					else
+						doc_title = "Error"
+						doc_body = "Invalid data."
 			. = TRUE
 
 /obj/machinery/librarypubliccomp/proc/get_ad()

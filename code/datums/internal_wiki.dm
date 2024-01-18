@@ -132,16 +132,35 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 		var/working_ing_list = list()
 		food_recipes[Rp]["has_coatable_items"] = FALSE
 		for(var/I in food_recipes[Rp]["Ingredients"])
-			var/atom/ing = new I()
-			if(istype(ing, /obj/item/weapon/reagent_containers/food/snacks)) // only subtypes of this have a coating variable and are checked for it (fruit are a subtype of this, so there's a check for them too later)
-				food_recipes[Rp]["has_coatable_items"] = TRUE
-
-			//So now we add something like "Bread" = 3
-			if(ing.name in working_ing_list)
-				var/sofar = working_ing_list[ing.name]
-				working_ing_list[ing.name] = sofar+1
+			if(I == /obj/item/weapon/holder/mouse) // amazing snowflake runtime fix, initilizing a holder makes it flip out because it's not in a mob.
+				if("mouse" in working_ing_list)
+					var/sofar = working_ing_list["mouse"]
+					working_ing_list["mouse"] = sofar+1
+				else
+					working_ing_list["mouse"] = 1
+			else if(I == /obj/item/weapon/holder/diona) // YOU TOO
+				if("diona" in working_ing_list)
+					var/sofar = working_ing_list["diona"]
+					working_ing_list["diona"] = sofar+1
+				else
+					working_ing_list["diona"] = 1
+			else if(I == /obj/item/weapon/holder) // And you especially, needed for "splat" microwave recipe
+				if("micro" in working_ing_list)
+					var/sofar = working_ing_list["micro"]
+					working_ing_list["micro"] = sofar+1
+				else
+					working_ing_list["micro"] = 1
 			else
-				working_ing_list[ing.name] = 1
+				var/atom/ing = new I()
+				if(istype(ing, /obj/item/weapon/reagent_containers/food/snacks)) // only subtypes of this have a coating variable and are checked for it (fruit are a subtype of this, so there's a check for them too later)
+					food_recipes[Rp]["has_coatable_items"] = TRUE
+
+				//So now we add something like "Bread" = 3
+				if(ing.name in working_ing_list)
+					var/sofar = working_ing_list[ing.name]
+					working_ing_list[ing.name] = sofar+1
+				else
+					working_ing_list[ing.name] = 1
 
 		if(LAZYLEN(food_recipes[Rp]["Fruit"]))
 			food_recipes[Rp]["has_coatable_items"] = TRUE
@@ -228,14 +247,20 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 
 	// assemble output page
 	for(var/Rp in food_recipes)
-		if(food_recipes[Rp] && !food_recipes[Rp]["Spoiler"])
+		if(food_recipes[Rp] && !food_recipes[Rp]["Spoiler"] && !isnull(food_recipes[Rp]["Result"]))
 			var/datum/internal_wiki/page/P = new()
 			P.recipe_assemble(food_recipes[Rp])
 			foodrecipe["[P.title]"] = P
-			searchcache_foodrecipe.Add("[P.title]")
+			// organize into sublists
+			var/app = food_recipes[Rp]["Appliance"]
+			if(!app || app == "")
+				app = "Simple"
+			if(!searchcache_foodrecipe[app])
+				searchcache_foodrecipe[app] = list()
+			searchcache_foodrecipe[app].Add("[P.title]")
 			pages.Add(P)
 	for(var/Rp in drink_recipes)
-		if(drink_recipes[Rp] && !drink_recipes[Rp]["Spoiler"])
+		if(drink_recipes[Rp] && !drink_recipes[Rp]["Spoiler"] && !isnull(drink_recipes[Rp]["Result"]))
 			var/datum/internal_wiki/page/P = new()
 			P.recipe_assemble(drink_recipes[Rp])
 			drinkrecipe["[P.title]"] = P
@@ -299,7 +324,6 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 /datum/internal_wiki/page/proc/food_assemble(var/datum/reagent/R)
 	title = R.name
 	body  = "<b>Description: </b>[R.description]<br>"
-	body += "<b>Flavor: </b>[R.taste_description]<br>"
 	body += "<br>"
 	body += allergen_assemble(R.allergen_type)
 	body += "<br>"
@@ -356,8 +380,8 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 
 /datum/internal_wiki/page/proc/allergen_assemble(var/allergens)
 	var/body = ""
-	body += "<b>Allergens: </b><br>"
 	if(allergens > 0)
+		body += "<b>Allergens: </b><br>"
 		if(allergens & ALLERGEN_MEAT)
 			body += "-Meat protein<br>"
 		if(allergens & ALLERGEN_FISH)
@@ -391,7 +415,9 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 
 /datum/internal_wiki/page/proc/recipe_assemble(var/list/recipe)
 	title = recipe["Result"]
-	body  = "<b>Description: </b>[recipe["Desc"]]<br>"
+	body  = ""
+	if(recipe["Desc"])
+		body  += "<b>Description: </b>[recipe["Desc"]]<br>"
 	if(length(recipe["Flavor"]) > 0)
 		body += "<b>Flavor: </b>[recipe["Flavor"]]<br>"
 	body += allergen_assemble(recipe["Allergens"])

@@ -101,6 +101,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/bun
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/bunbun
+	spoiler = TRUE // I've no idea why this one breaks
 
 /datum/recipe/hotdog
 	appliance = GRILL

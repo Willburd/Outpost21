@@ -640,6 +640,7 @@
 		/obj/item/weapon/holder
 	)
 	result = /obj/effect/decal/cleanable/blood/gibs
+	spoiler = TRUE
 
 /datum/recipe/splat/before_cook(obj/container)
 	if(istype(container, /obj/machinery/microwave))

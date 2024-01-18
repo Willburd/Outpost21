@@ -5,7 +5,7 @@ import { Window } from '../layouts';
 
 export const PublicLibrary = (props, context) => {
   const { act, data } = useBackend(context);
-  const { errorText, searchmode, search, title, body, ad_string1, ad_string2, print } = data;
+  const { errorText, searchmode, search, title, body, ad_string1, ad_string2, print, appliance } = data;
 
   return (
     <Window width={900} height={600} resizable>
@@ -20,7 +20,9 @@ export const PublicLibrary = (props, context) => {
         <Section title="Bingle Search">
           {(!!searchmode && (
             <Section>
-              <Button icon="arrow-left" content="Back" onClick={() => act('closesearch')} />
+              {(!!appliance && <Button icon="arrow-left" content="Back" onClick={() => act('closeappliance')} />) || (
+                <Button icon="arrow-left" content="Back" onClick={() => act('closesearch')} />
+              )}
               {!!print && <Button icon="print" content="Print" onClick={() => act('print')} />}
               <Section title={title}>
                 <div dangerouslySetInnerHTML={{ __html: body }} />

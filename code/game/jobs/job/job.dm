@@ -51,7 +51,7 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip(H, src, alt_title)
+	. = outfit.equip(H, src, title, alt_title)
 	return 1
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
@@ -98,7 +98,7 @@
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip_base(H, title, alt_title)
+	. = outfit.equip_base(H)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)

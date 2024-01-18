@@ -82,7 +82,7 @@ var/list/outfits_decls_by_type_
 			if(7) back = satchel_three
 			else back = null
 
-/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H, var/datum/job/J)
+/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
 		var/obj/item/weapon/tank/jetpack/Jet = locate(/obj/item/weapon/tank/jetpack) in H
 		if(!Jet)
@@ -90,12 +90,10 @@ var/list/outfits_decls_by_type_
 		Jet.toggle()
 		Jet.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/datum/job/J, var/assignment)
-	equip_base(H,J)
+/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/datum/job/J, var/rank, var/assignment)
+	equip_base(H)
+	equip_emergencygear(H,J)
 
-	var/rank = null
-	if(J)
-		rank = J.title
 	rank = rank || id_pda_assignment
 	assignment = id_pda_assignment || assignment || rank
 	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
@@ -109,13 +107,13 @@ var/list/outfits_decls_by_type_
 		for(var/i=0,i<number,i++)
 			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
 
-	post_equip(H,J)
+	post_equip(H)
 
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
 	return 1
 
-/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/datum/job/J)
+/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
@@ -160,7 +158,8 @@ var/list/outfits_decls_by_type_
 		for(var/i=0,i<number,i++)
 			H.equip_to_slot_or_del(new path(H), slot_tie)
 
-	if((!J || J.spawn_with_emergencykit))
+/decl/hierarchy/outfit/proc/equip_emergencygear(mob/living/carbon/human/H, var/datum/job/J)
+	if(!J || J.spawn_with_emergencykit)
 		if(H.species)
 			// standard emergency kit (not breathing equipment for stuff like vox, only emergency air/crowbar)
 			H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
@@ -177,6 +176,7 @@ var/list/outfits_decls_by_type_
 				H.equip_to_slot_or_del(extra, slot_l_hand)
 			else
 				H.equip_to_slot_or_del(extra, slot_in_backpack)
+
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)

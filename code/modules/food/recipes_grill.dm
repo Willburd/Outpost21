@@ -173,7 +173,6 @@
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
-	spoiler = TRUE
 
 /datum/recipe/bigbiteburger
 	appliance = GRILL

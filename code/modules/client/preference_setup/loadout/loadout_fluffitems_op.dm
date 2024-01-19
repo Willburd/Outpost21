@@ -28,43 +28,52 @@
 	..()
 	gear_tweaks += gear_tweak_collar_tag
 
+// global fluff medals
+/datum/gear/fluff/ESHUI_surveypatch
+	display_name = "ESHUI Survey Corps Patch"
+	path = /obj/item/clothing/accessory/solgov/ec_patch
+	ckeywhitelist = list("buckwildwolf","darklord92","drakefrostpaw","jademanique","nadyr","remthebold","seagha","wdf71","synxplushy")
+	character_name = null
+
+/datum/gear/fluff/ESHUI_medalval
+	display_name = "ESHUI Medal of Valor"
+	path = /obj/item/clothing/accessory/medal/solgov/silver/sol
+	ckeywhitelist = list("darklord92","remthebold")
+	character_name = list("Tesum Shari","Trashfire")
+
+/datum/gear/fluff/ESHUI_ironstar
+	display_name = "ESHUI Station Expeditionary Medal"
+	path = /obj/item/clothing/accessory/medal/solgov/iron/star
+	ckeywhitelist = list("drakefrostpaw","nadyr","Ozydev","remthebold","synxplushy","wdf71")
+	character_name = list("Drake Frostpaw","Taaa","Ecise Nei","Papin Vandalia","Me Eep","Mitz")
+
+/datum/gear/fluff/ESHUI_flightpin
+	display_name = "ESHUI Pilot's Qualification Pin"
+	path = /obj/item/clothing/accessory/solgov/specialty/pilot
+	ckeywhitelist = list("remthebold","seagha")
+	character_name = list("Trashfire","Schale Vam")
+
+/datum/gear/fluff/ESHUI_rankpin
+	display_name = "ESHUI Officer's Qualification Pin"
+	path = /obj/item/clothing/accessory/solgov/specialty/officer
+	ckeywhitelist = list("remthebold","seagha")
+	character_name = list("Trashfire","Schale Vam")
+
+/datum/gear/fluff/ESHUI_whiteheart
+	display_name = "ESHUI Medical Medal"
+	path = /obj/item/clothing/accessory/medal/solgov/heart
+	ckeywhitelist = list("seagha")
+	character_name = list("Schale Vam")
+
 //  0-9 CKEYS
 
 //  A CKEYS
 
 //  B CKEYS
 
-//buckwildwolf (cormac)
-/datum/gear/fluff/surveypatch_buck
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("buckwildwolf")
-	character_name = null
-
 //  C CKEYS
 
 //  D CKEYS
-
-//darklord92
-/datum/gear/fluff/surveypatch_dark
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("darklord92")
-	character_name = null
-
-/datum/gear/fluff/medalval_dark
-	path = /obj/item/clothing/accessory/medal/solgov/silver/sol
-	ckeywhitelist = list("darklord92")
-	character_name = list("Tesum Shari")
-
-//drakefrostpaw
-/datum/gear/fluff/surveypatch_drake
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("drakefrostpaw")
-	character_name = null
-
-/datum/gear/fluff/ironstar_drake
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("drakefrostpaw")
-	character_name = list("Drake Frostpaw")
 
 //  E CKEYS
 
@@ -77,11 +86,6 @@
 //  I CKEYS
 
 //  J CKEYS
-//jademanique (etheo)
-/datum/gear/fluff/surveypatch_eth
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("jademanique")
-	character_name = null
 
 //  K CKEYS
 
@@ -90,23 +94,8 @@
 //  M CKEYS
 
 //  N CKEYS
-//Nadyr
-/datum/gear/fluff/surveypatch_nad
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("nadyr")
-	character_name = null
-
-/datum/gear/fluff/ironstar_nad
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("nadyr")
-	character_name = list("Taaa")
 
 //  O CKEYS
-//Ozydev
-/datum/gear/fluff/ironstar_ozy
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("Ozydev")
-	character_name = list("Ecise Nei")
 
 //  P CKEYS
 
@@ -114,65 +103,7 @@
 
 //  R CKEYS
 
-//remthebold
-/datum/gear/fluff/surveypatch_rem
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("remthebold")
-	character_name = null
-
-/datum/gear/fluff/flightpin_rem
-	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	ckeywhitelist = list("remthebold")
-	character_name = list("Trashfire")
-
-/datum/gear/fluff/medalval_rem
-	path = /obj/item/clothing/accessory/medal/solgov/silver/sol
-	ckeywhitelist = list("remthebold")
-	character_name = list("Trashfire")
-
-/datum/gear/fluff/ironstar_rempap
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("remthebold")
-	character_name = list("Papin Vandalia")
-
-/datum/gear/fluff/rankpin_rem
-	path = /obj/item/clothing/accessory/solgov/specialty/officer
-	ckeywhitelist = list("remthebold")
-	character_name = list("Trashfire")
-
 //  S CKEYS
-
-//Seagha (iggy)
-/datum/gear/fluff/surveypatch_seag
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("seagha")
-	character_name = null
-
-/datum/gear/fluff/flightpin_seag
-	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	ckeywhitelist = list("seagha")
-	character_name = list("Schale Vam")
-
-/datum/gear/fluff/whiteheart_seag
-	path = /obj/item/clothing/accessory/medal/solgov/heart
-	ckeywhitelist = list("seagha")
-	character_name = list("Schale Vam")
-
-/datum/gear/fluff/rankpin_seag
-	path = /obj/item/clothing/accessory/solgov/specialty/officer
-	ckeywhitelist = list("seagha")
-	character_name = list("Schale Vam")
-
-//Synxplushy
-/datum/gear/fluff/surveypatch_synx
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("synxplushy")
-	character_name = null
-
-/datum/gear/fluff/ironstar_synx
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("synxplushy")
-	character_name = list("Me Eep")
 
 //  T CKEYS
 
@@ -181,16 +112,6 @@
 //  V CKEYS
 
 //  W CKEYS
-//wdf71 (darmah)
-/datum/gear/fluff/surveypatch_darm
-	path = /obj/item/clothing/accessory/solgov/ec_patch
-	ckeywhitelist = list("wdf71")
-	character_name = null
-
-/datum/gear/fluff/ironstar_darm
-	path = /obj/item/clothing/accessory/medal/solgov/iron/star
-	ckeywhitelist = list("wdf71")
-	character_name = list("Mitz")
 
 //  X CKEYS
 

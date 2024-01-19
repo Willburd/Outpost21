@@ -112,6 +112,7 @@
 			<br/>5. All crew must be decently clothed. If a crew member has been issued a nudity permit, they must display it prominently on their chest or hip.\
 			<br/>6. No crew member is to wear a hardsuit without appropriate need. Paranoia of weather is not an appropriate need. Crew members wearing hardsuits, soft suits, or other armor without appropriate, immediate need, are grounds for immediate full search and seizure of the inappropriate equipment by security.\
 			<br/>7. Only security is authorized to wear any form of tactical armor. Any other crew member wearing armor is to be treated as a code-yellow threat.\
+			<br/>8. Nudity permits are only authorized to crew members with no visible genitalia or provocative body markings while undergoing normal work activities. \
 			<hr/> \
 			<center><b> Contractual Review. As signed by all E-Shui personnel on <i>OUTPOST-21</i> </center></b> <br/> \
 			<br/> By signing on with E-Shui, you verify that you are of legal working age under Sol-Gov Regulation 473-22A, defined as 'One year past that of one's species' normal age of biological maturity.' You agree that you cannot be forced to work any job or operation that is beyond your skill level or job requirement.\

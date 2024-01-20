@@ -95,7 +95,7 @@
 		domutcheck(mob, null, MUTCHK_FORCED)
 
 /datum/disease2/effect/colorblind_dark
-	name = "Ocular Cone Degeneration"
+	name = "Ocular Rod Degeneration"
 	stage = 3
 	chance_maxm = 12
 

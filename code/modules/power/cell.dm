@@ -58,7 +58,7 @@
 			if(istype(loc, /obj/item/weapon/gun/energy)) // Are we in a gun currently?
 				var/obj/item/weapon/gun/energy/gun = loc
 				var/mob/living/user = gun.loc
-				if(istype(user))
+				if(istype(user) && user.hud_used)
 					user?.hud_used.update_ammo_hud(user, gun) // Update the HUD
 	else
 		return PROCESS_KILL

@@ -458,7 +458,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/dead/Moved(atom/old_loc, direction, forced)
 	. = ..()
-	use_static = !(check_rights(R_ADMIN|R_FUN|R_EVENT, 0, src) || client.buildmode)
+	use_static = !(check_rights(R_ADMIN|R_FUN|R_EVENT, 0, src) || (client && client.buildmode))
 	if(config.ghosts_see_everything)
 		use_static = FALSE
 	if(visualnet && use_static)

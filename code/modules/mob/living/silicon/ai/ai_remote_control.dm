@@ -26,7 +26,14 @@
 	var/list/possible = list()
 
 	for(var/mob/living/silicon/robot/R as anything in GLOB.available_ai_shells)
-		if(R.shell && !R.deployed && (R.stat != DEAD) && (!R.connected_ai || (R.connected_ai == src) )  && !(using_map.ai_shell_restricted && !(R.z in using_map.ai_shell_allowed_levels)) )	//VOREStation Edit: shell restrictions
+		var/inZ = FALSE
+		if(istype(loc,/obj/))
+			// likely in a charger or closet, use its Z level instead, as ours will be forced to 0.
+			inZ = (loc.z in using_map.ai_shell_allowed_levels)
+		else
+			// standard check, if it's just standing around the station somewhere.
+			inZ = (z in using_map.ai_shell_allowed_levels)
+		if(R.shell && !R.deployed && (R.stat != DEAD) && (!R.connected_ai || (R.connected_ai == src) ) && !(using_map.ai_shell_restricted && !inZ) )	//VOREStation Edit: shell restrictions
 			possible += R
 
 	if(!LAZYLEN(possible))

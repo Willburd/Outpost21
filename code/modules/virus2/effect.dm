@@ -260,8 +260,10 @@
 /datum/disease2/effect/telepathic
 	name = "Pineal Gland Decalcification"
 	stage = 3
+	chance_maxm = 2
 
 /datum/disease2/effect/telepathic/activate(var/mob/living/carbon/mob,var/multiplier)
+	if(!mob.dna.GetSEState(REMOTETALKBLOCK))
 		mob.dna.SetSEState(REMOTETALKBLOCK,1)
 		domutcheck(mob, null, MUTCHK_FORCED)
 

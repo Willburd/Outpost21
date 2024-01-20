@@ -93,8 +93,8 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 									"Desc" = "[Rd.description]",
 									"Flavor" = "[Rd.taste_description]",
 									"ResAmt" = CR.result_amount,
-									"Reagents" = CR.required_reagents,
-									"Catalysts" = CR.catalysts,
+									"Reagents" = CR.required_reagents ? CR.required_reagents.Copy() : list(),
+									"Catalysts" = CR.catalysts ? CR.catalysts.Copy() : list(),
 									"Spoiler" = CR.spoiler)
 	// Build the kitchen recipe lists
 	var/list/food_recipes = subtypesof(/datum/recipe)
@@ -107,10 +107,10 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 						"Desc" = "[res.desc]",
 						"Flavor" = "",
 						"ResAmt" = "1",
-						"Reagents" = R.reagents,
+						"Reagents" = R.reagents ? R.reagents.Copy() : list(),
 						"Catalysts" = list(),
-						"Fruit" = R.fruit,
-						"Ingredients" = R.items,
+						"Fruit" = R.fruit ? R.fruit.Copy() : list(),
+						"Ingredients" = R.items ? R.items.Copy() : list(),
 						"Coating" = R.coating,
 						"Appliance" = R.appliance,
 						"Allergens" = 0,
@@ -122,8 +122,8 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	for(var/decl/chemical_reaction/instant/food/CR in SSchemistry.chemical_reactions)
 		food_recipes[CR.type] = list("Result" = CR.name,
 								"ResAmt" = CR.result_amount,
-								"Reagents" = CR.required_reagents,
-								"Catalysts" = CR.catalysts,
+								"Reagents" = CR.required_reagents ? CR.required_reagents.Copy() : list(),
+								"Catalysts" = CR.catalysts ? CR.catalysts.Copy() : list(),
 								"Fruit" = list(),
 								"Ingredients" = list(),
 								"Allergens" = 0)

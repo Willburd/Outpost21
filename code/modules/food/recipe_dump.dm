@@ -11,8 +11,8 @@
 	for(var/decl/chemical_reaction/instant/drinks/CR in SSchemistry.chemical_reactions)
 		drink_recipes[CR.type] = list("Result" = CR.name,
         						"ResAmt" = CR.result_amount,
-        						"Reagents" = CR.required_reagents,
-								"Catalysts" = CR.catalysts)
+        						"Reagents" = CR.required_reagents ? CR.required_reagents.Copy() : list(),
+								"Catalysts" = CR.catalysts ? CR.catalysts.Copy() : list())
 
 	//////////////////////// FOOD
 	var/list/food_recipes = subtypesof(/datum/recipe)
@@ -28,15 +28,14 @@
 		food_recipes[Rp] = list(
 						"Result" = "[res.name]",
 						"ResAmt" = "1",
-						"Reagents" = R.reagents,
+						"Reagents" = R.reagents ? R.reagents.Copy() : list(),
 						"Catalysts" = list(),
-						"Fruit" = R.fruit,
-						"Ingredients" = R.items,
+						"Fruit" = R.fruit ? R.fruit.Copy() : list(),
+						"Ingredients" = R.items ? R.items.Copy() : list(),
 						"Coating" = R.coating,
 						"Appliance" = R.appliance,
 						"Image" = result_icon
 						)
-
 		qdel(res)
 		qdel(R)
 
@@ -44,8 +43,8 @@
 	for(var/decl/chemical_reaction/instant/food/CR in SSchemistry.chemical_reactions)
 		food_recipes[CR.type] = list("Result" = CR.name,
 								"ResAmt" = CR.result_amount,
-								"Reagents" = CR.required_reagents,
-								"Catalysts" = CR.catalysts,
+								"Reagents" = CR.required_reagents ? CR.required_reagents.Copy() : list(),
+								"Catalysts" = CR.catalysts ? CR.catalysts.Copy() : list(),
 								"Fruit" = list(),
 								"Ingredients" = list(),
 								"Image" = null)

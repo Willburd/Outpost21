@@ -22,6 +22,8 @@
 	var/produced_power
 	var/energy_to_raise = 32
 	var/energy_to_lower = -20
+	plane = PLANE_LIGHTING_ABOVE
+	light_system = STATIC_LIGHT
 
 /obj/singularity/energy_ball/New(loc, starting_energy = 50, is_miniball = FALSE)
 	..()
@@ -30,7 +32,8 @@
 /obj/singularity/energy_ball/Initialize()
 	. = ..()
 	if(!miniball)
-		set_light(10, 7, "#EEEEFF")
+		set_light(5, 5, "#EEEEFF")
+		update_light()
 
 /obj/singularity/energy_ball/ex_act(severity, target)
 	return
@@ -326,3 +329,9 @@
 		if (EB.energy > 0)
 			EB.energy -= min(EB.energy, max(10, round(EB.energy * 0.05)))
 	// VOREStation Edit End
+
+/obj/singularity/energy_ball/Moved(atom/old_loc, direction, forced, movetime)
+	. = ..()
+	// update the light, less laggy then dynamic lights
+	if(!miniball && prob(30))
+		update_light()

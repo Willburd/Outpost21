@@ -34,6 +34,8 @@
 	if(!miniball)
 		set_light(5, 5, "#EEEEFF")
 		update_light()
+	else
+		light_on = FALSE // MAKE SURE OF THIS
 
 /obj/singularity/energy_ball/ex_act(severity, target)
 	return
@@ -332,6 +334,17 @@
 
 /obj/singularity/energy_ball/Moved(atom/old_loc, direction, forced, movetime)
 	. = ..()
-	// update the light, less laggy then dynamic lights
+	// update the light manually as a static, less laggy then dynamic lights
 	if(!miniball && prob(30))
+		var/list/tesla_list = (/obj/singularity/energy_ball in orange(4,src.loc))
+		if(light_on)
+			// we have our light on, disable all other teslas nearby! We are DOMINANT!
+			// The next processed tesla will be off and won't run this, instead they'll
+			// try to turn on when they are no longer near other teslas...
+			// The lighting lag fix is worth the object scanning...
+			for(var/obj/singularity/energy_ball/E in tesla_list)
+				if(E.light_on)
+					E.light_on = FALSE
+		else if(tesla_list.len == 0)
+			light_on = TRUE
 		update_light()

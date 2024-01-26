@@ -39,7 +39,7 @@
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Space Dust",		/datum/event/dust,	 			0, 		list(ASSIGNMENT_ENGINEER = 20), 0, 0, 50, min_jobs = list(ASSIGNMENT_ENGINEER = 2)),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Economic News",		/datum/event/economic_event,	90),
 
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Lost Spiders",		/datum/event/spider_migration, 	10, 		list(ASSIGNMENT_ANY = 1), 1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Lost Spiders",		/datum/event/spider_migration, 	10, 	list(ASSIGNMENT_ANY = 1), 1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Money Hacker",		/datum/event/money_hacker, 		0, 		list(ASSIGNMENT_ANY = 4), 1, 10, 25),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Money Lotto",		/datum/event/money_lotto, 		0, 		list(ASSIGNMENT_ANY = 1), 1, 5, 15),
 		//new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Mundane News", 	/datum/event/mundane_news, 		300),
@@ -50,7 +50,8 @@
 		// Spawns mice, lizards, or dud spiderlings
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation",/datum/event/infestation, 		50,		list(ASSIGNMENT_JANITOR = 5), 1),
 		// Rot only weakens walls, not destroy them
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			10,		list(ASSIGNMENT_ENGINEER = 30), 1)
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			10,		list(ASSIGNMENT_ENGINEER = 10), 1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Disposal Damage",	/datum/event/disposal_damage,	10, 	list(ASSIGNMENT_ANY = 1))
 	)
 	add_disabled_events(list(
 	))
@@ -95,7 +96,8 @@
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Chu Pack",					/datum/event/chu_infestation,			3, 		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Jil Pack",					/datum/event/jil_infestation,			2, 		list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Virus Outbreak", 			/datum/event/viral_infection,			5, 		list(ASSIGNMENT_MEDICAL = 10) , 10, min_jobs = list(ASSIGNMENT_MEDICAL = 2)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Escaped Slimes",			/datum/event/escaped_slimes, 			0,		list(ASSIGNMENT_SCIENCE = 10, ASSIGNMENT_ENGINEER = 40, ASSIGNMENT_SECURITY = 30), 1, min_jobs = list(ASSIGNMENT_MEDICAL = 3))
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Escaped Slimes",			/datum/event/escaped_slimes, 			0,		list(ASSIGNMENT_SCIENCE = 10, ASSIGNMENT_ENGINEER = 40, ASSIGNMENT_SECURITY = 30), 1, min_jobs = list(ASSIGNMENT_MEDICAL = 3)),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Disposal Damage",			/datum/event/disposal_damage,			0, 		list(ASSIGNMENT_ANY = 3))
 	)
 	add_disabled_events(list(
 	))
@@ -123,7 +125,8 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Medical",		/datum/event/bluespace_shelling/medical		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Waste",			/datum/event/bluespace_shelling/waste		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration				,10	, list(ASSIGNMENT_SECURITY = 5), 1) //YW shifted to spider migration
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration				,10	, list(ASSIGNMENT_SECURITY = 5), 1), //YW shifted to spider migration
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Disposal Damage",		/datum/event/disposal_damage				,0	, list(ASSIGNMENT_ENGINEER = 1), 1)
 	)
 	add_disabled_events(list(
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean,					 0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),

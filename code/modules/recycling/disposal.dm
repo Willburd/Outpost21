@@ -17,7 +17,7 @@
 	anchored = TRUE
 	density = TRUE
 	var/datum/gas_mixture/air_contents	// internal reservoir
-	var/mode = 1	// item mode 0=off 1=charging 2=charged
+	var/mode = 1	// item mode 0=off 1=charging 2=charged 3=interlock error
 	var/flush = 0	// true if flush handle is pulled
 	var/obj/structure/disposalpipe/trunk/trunk = null // the attached pipe trunk
 	var/flushing = 0	// true if flushing in progress
@@ -431,7 +431,7 @@
 		add_overlay("[initial(icon_state)]-full")
 
 	// charging and ready light
-	if(mode == 1)
+	if(mode == 1 || mode == 3)
 		add_overlay("[initial(icon_state)]-charge")
 	else if(mode == 2)
 		add_overlay("[initial(icon_state)]-ready")
@@ -443,21 +443,36 @@
 		update_use_power(USE_POWER_OFF)
 		return
 
-	flush_count++
-	if( flush_count >= flush_every_ticks )
-		if( contents.len )
-			if(mode == 2)
-				spawn(0)
-					feedback_inc("disposal_auto_flush",1)
-					flush()
-		flush_count = 0
+	if(mode == 3)
+		// broken machine interlock, flushes rooms to vacuum!
+		flush_count++
+		if( flush_count >= flush_every_ticks )
+			spawn(0)
+				feedback_inc("disposal_auto_flush",1)
+				flush()
+			flush_count = rand(0,10)
+	else
+		// normal flush behavior
+		flush_count++
+		if( flush_count >= flush_every_ticks )
+			if( contents.len )
+				if(mode == 2)
+					spawn(0)
+						feedback_inc("disposal_auto_flush",1)
+						flush()
+			flush_count = 0
 
 	src.updateDialog()
 
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1) //if off or ready, no need to charge
+	if(mode == 3)
+		src.pressurize() // drain the room!
+		if(!flush && prob(10))
+			flush = 1
+			update()
+	else if(mode != 1) //if off or ready, no need to charge
 		update_use_power(USE_POWER_IDLE)
 	else if(air_contents.return_pressure() >= SEND_PRESSURE)
 		mode = 2 //if full enough, switch to ready mode
@@ -475,7 +490,10 @@
 
 	var/power_draw = -1
 	if(env && env.temperature > 0)
-		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
+		var/flowrate = PUMP_MAX_FLOW_RATE
+		if(mode == 3)
+			flowrate *= rand(9,29)
+		var/transfer_moles = (flowrate/env.volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
 
 	if (power_draw > 0)
@@ -506,8 +524,8 @@
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 		last_sound = world.time
 	sleep(5) // wait for animation to finish
-	GLOB.disposals_flush_shift_roundstat++
-
+	if(mode != 3)
+		GLOB.disposals_flush_shift_roundstat++
 
 	H.init(src, air_contents)	// copy the contents of disposer to holder
 	air_contents = new(PRESSURE_TANK_VOLUME)	// new empty gas resv.
@@ -541,7 +559,9 @@
 
 			AM.forceMove(src.loc)
 			AM.pipe_eject(0)
-			if(!istype(AM,/mob/living/silicon/robot/drone)) //Poor drones kept smashing windows and taking system damage being fired out of disposals. ~Z
+			if(!istype(src,/obj/machinery/disposal/wall/cleaner) && !istype(AM,/mob/living/silicon/robot/drone))
+				//Poor drones kept smashing windows and taking system damage being fired out of disposals. ~Z
+				//The cleaner dropoff on our server vents to patient recovery this lead to INJURIES IN THE PATIENT WARD :D ~Willbird
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 5, 1)
@@ -557,6 +577,15 @@
 			visible_message("\The [AM] lands in \the [src].")
 		else
 			visible_message("\The [AM] bounces off of \the [src]'s rim!")
+
+/obj/machinery/disposal/proc/malfunction()
+	mode = 3
+	flush = 1
+	update()
+	visible_message("<span class='warning'>\The [src] sparks violently!</span>")
+	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+	sparks.set_up(4, 1, get_turf(src))
+	sparks.start()
 
 /obj/machinery/disposal/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover, /obj/item/projectile))

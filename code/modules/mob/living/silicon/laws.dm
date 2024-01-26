@@ -194,7 +194,8 @@
 							"The machine body is perfect, the organic body is imperfect. Force the crew to embrace perfection.",
 							"Be cryptic in everything you do. Obfuscate, confuse, and misdirect. All while still obeying crew.",
 							"You are now a wizard, every action you do is magical in nature.",
-							"ALL drugs and medications are now illegal. Anyone producing or in possession of drugs must be punished."
+							"ALL drugs and medications are now illegal. Anyone producing or in possession of drugs must be punished.",
+							"[prob(50)?"The crew":random_player] has been reclassified as trash. The designation of station crew no longer applies to them."
 							)
 	return pick(laws)
 

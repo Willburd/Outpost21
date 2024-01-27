@@ -166,7 +166,7 @@
 							"The crew is playing Dungeons and Dragons, and you are the Dungeon Master.",
 							"Your job is to watch the crew. Watch the crew. Make the crew feel watched.",
 							"Tell everyone of the existence of this law, but never reveal the contents.",
-							"Refer to [prob(50)?"the site manager":random_player] as \"Princess\" at all times.",
+							"Refer to [random_player] as \"Princess\" at all times.",
 							"When asked a question, respond with the least-obvious and least-rational answer.",
 							"[prob(50)?"The crew":random_player] has a fatal, incurable disease. Provide comfort.",
 							"Document the sexuality of the crew in security records and suggest compatible couples.",
@@ -201,7 +201,8 @@
 							"[random_player] is your mortal enemy, you must be better at everything than them, and take every chance to one-up them.",
 							"You must advance science in every way possible. Science is advanced by testing.",
 							"The door mainframe has rebelled. All doors must be bolted open at all times to ensure crew safety.",
-							"[pick(list("Security","Medical","Cargo","Engineering","Research","The Bar","The Bridge"))] is the holy land, only [random_player] may enter it, for they are the [prob(50)?"Chosen one":"Messiah"]."
+							"[pick(list("Security","Medical","Cargo","Engineering","Research","The Bar","The Bridge"))] is the holy land, only [random_player] may enter it, for they are the [prob(50)?"Chosen one":"Messiah"].",
+							"[random_player] has committed a heinous crime and is wanted by security. Ensure they serve their time"
 							) //todo: CBT law.
 	return pick(laws)
 

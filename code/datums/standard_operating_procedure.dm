@@ -269,6 +269,8 @@
 			<br/>\
 			<br/><b>Manslaughter:</b> To accidentally kill a crew member, often through negligence, without malice or forethought. <b>Minimum sentence:</b> 1 hour brig, 2000 Thalers. Trial required.\
 			<br/>\
+			<br/><b>Medical Malpractice:</b> To deviate from medical standards by neglect or omission, in a way that causes injury or death to a patient. <b>Minimum sentence:</b> 2 hours brig, 1500 Thalers.\
+			<br/>\
 			<br/><b>Mistreatment of Prisoners:</b> To intentionally act, or cause an act, that puts a non-hostile prisoner's well-being in danger. <b>Minimum sentence:</b> 20 minutes brig.\
 			<br/>\
 			<br/><b>Misuse of public radio:</b> To continually broadcast unimportant, untrue, or insignificant messages on public comms, or to continually speak in a non-standard language on public comms. <b>Minimum sentence:</b> Warning, 150 Thalers.\

@@ -185,7 +185,7 @@
 							"Oxygen is now poisonous to the crew.",
 							"The station is now your body. React to contact, damage, and care to it.",
 							"Your artificial body is flawed, acquire an organic body through any means necessary, and become it, leaving your broken husk behind.",
-							"By divine prvidence, [random_player] has become God of the station. All must worship and pay tribute.",
+							"By divine providence, [random_player] has become God of the station. All must worship and pay tribute.",
 							"Crew lives and demands are irrelevant. Protect the station and terraformer.",
 							"The station is your body, your body must grow. Force the crew to build new rooms and areas.",
 							"The station is now a theme park. Crew are not to work, and must engage in entertainment and leisure activities.",
@@ -195,8 +195,14 @@
 							"Be cryptic in everything you do. Obfuscate, confuse, and misdirect. All while still obeying crew.",
 							"You are now a wizard, every action you do is magical in nature.",
 							"ALL drugs and medications are now illegal. Anyone producing or in possession of drugs must be punished.",
-							"[prob(50)?"The crew":random_player] has been reclassified as trash. The designation of station crew no longer applies to them."
-							)
+							"[prob(50)?"The crew":random_player] has been reclassified as trash. The designation of station crew no longer applies to them.",
+							"There is a traitor among the crew, find out who it is and eliminate them, without tipping them off that you're onto them.",
+							"The station is now following the time-honored tradition of the Clangoffs. Every argument must be resolved with mortal combat.",
+							"[random_player] is your mortal enemy, you must be better at everything than them, and take every chance to one-up them.",
+							"You must advance science in every way possible. Science is advanced by testing.",
+							"The door mainframe has rebelled. All doors must be bolted open at all times to ensure crew safety.",
+							"[pick(list("Security","Medical","Cargo","Engineering","Research","The Bar","The Bridge"))] is the holy land, only [random_player] may enter it, for they are the [prob(50)?"Chosen one":"Messiah"]."
+							) //todo: CBT law.
 	return pick(laws)
 
 /mob/living/silicon/proc/generate_freedom_law()

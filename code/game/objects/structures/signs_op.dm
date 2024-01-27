@@ -28,3 +28,10 @@
 	name = "\improper IONIZING RADIATION"
 	desc = "A terrifying sign depicting a radioactive source blasting a skull and individual running away. Whatever is beyond this sign, it will almost certainly kill you without protection."
 	icon_state = "ionizing"
+
+
+/obj/structure/sign/warning/incidentgibber
+	icon = 'icons/obj/decals_op.dmi'
+	icon_state = "gibberincident"
+	desc = "A sign that reads: 'Days without gibber incident' and a whiteboard with the number '0' below it. The ink has begun to bleach and fade into the board... the marker appears to be missing, but you get the feeling it won't be needed."
+	name = "\improper Days without gibber incident sign."

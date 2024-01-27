@@ -1234,7 +1234,7 @@
 	desc = "The nerd's best friends."
 	icon_state = "box"
 /obj/item/weapon/storage/box/characters/starts_with = list(
-//	/obj/item/toy/character/alien,
+	/obj/item/toy/character/alien,
 	/obj/item/toy/character/cleric,
 	/obj/item/toy/character/warrior,
 	/obj/item/toy/character/thief,

@@ -24,6 +24,13 @@
 	base_state = "pflash"
 	density = TRUE
 
+/obj/machinery/flasher/portable/Initialize()
+	. = ..()
+	// if already anchored, setup the proxity check
+	if(anchored)
+		add_overlay("[base_state]-s")
+		sense_proximity(callback = /atom/proc/HasProximity)
+
 /obj/machinery/flasher/power_change()
 	..()
 	if(!(stat & NOPOWER))

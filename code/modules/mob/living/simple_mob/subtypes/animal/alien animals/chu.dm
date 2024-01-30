@@ -33,8 +33,8 @@
 	can_be_antagged = TRUE
 
 	// durable...
-	maxHealth = 75
-	health = 75
+	maxHealth = 90
+	health = 90
 	enzyme_affect = FALSE
 
 	universal_understand = 1
@@ -52,7 +52,9 @@
 
 	vore_default_mode = DM_HOLD
 	vore_active = TRUE
-	vore_pounce_chance = 10
+	vore_standing_too = TRUE // horrifying
+	vore_capacity = 4
+	vore_pounce_chance = 20
 
 	nutrition = 300 // to prevent hunger issues at start
 
@@ -157,7 +159,7 @@
 						T.UpdateDamageIcon()
 				add_attack_logs(src,T,"Infest (chu)")
 
-		if(!do_mob(src, foundprey, 150))
+		if(!do_mob(src, foundprey, 90))
 			to_chat(src, "<span class='warning'>Your infestation of [foundprey] has been interrupted!</span>")
 			isinfesting = FALSE
 			return
@@ -173,18 +175,18 @@
 
 	var/allowghost = FALSE
 	var/mob/living/simple_mob/vore/alienanimals/chu/CC = null
-	if(ishuman(foundprey))
-		// human infesting
-		CC = T.chuify()
-		CC.tt_desc = "Reminds you of [hostname]..."
-		CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
-	else
+	if(!ishuman(foundprey) || !isnull(T.species.greater_form)) // Kinda hacky monkey check
 		// simple conversion
 		CC = new /mob/living/simple_mob/vore/alienanimals/chu(foundprey.loc)
 		if(!isnull(foundprey.key))
 			CC.key = foundprey.key
 		else
 			allowghost = TRUE
+	else
+		// human infesting
+		CC = T.chuify()
+		CC.tt_desc = "Reminds you of [hostname]..."
+		CC.desc = "A \"friendly\" creature that wanders maintenance. Has a superficial resemblance to [hostname]..."
 
 	if(!isnull(CC))
 		// transfer contents of prey to new body

@@ -25,11 +25,15 @@
 		spawn(15)
 			if(ishuman(owner))
 				H = owner
-				desc = initial(desc) + " It looks like it might be [H.name]'s."
-				if(allowcolor)
-					color = rgb(H.r_skin,H.g_skin,H.b_skin)
-					if(istype(H,/mob/living/carbon/human/monkey))
-						color = "#e9d9b6"
+				if(!isnull(H.species.greater_form)) // Kinda hacky monkey check
+					desc = initial(desc) + " How vulgar!"
+					if(allowcolor)
+						color = "#f1acac"
+				else
+					desc = initial(desc) + " It looks like it might be [H.name]'s."
+					if(allowcolor)
+						color = rgb(H.r_skin,H.g_skin,H.b_skin)
+
 
 /obj/item/organ/internal/butt/robotize()
 	. = ..()

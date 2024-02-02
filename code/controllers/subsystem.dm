@@ -8,6 +8,8 @@
 	var/flags = 0			//see MC.dm in __DEFINES Most flags must be set on world start to take full effect. (You can also restart the mc to force them to process again)
 	var/subsystem_initialized = FALSE	//set to TRUE after it has been initialized, will obviously never be set if the subsystem doesn't initialize
 	var/runlevels = RUNLEVELS_DEFAULT	//points of the game at which the SS can fire
+	var/tick_limit_multiplier = 1 		// lag force-pause limit for subsystem, multiplies the Master.current_ticklimit when checking if it's overrun the tick count
+	var/tick_overrun_divider = 100 		// used to calculate the delay time from lag overruns, default 100. Formula is usually (world.tick_lag * (queue_node.tick_overrun/ X ))
 
 	//set to 0 to prevent fire() calls, mostly for admin use or subsystems that may be resumed later
 	//	use the SS_NO_FIRE flag instead for systems that never fire to keep it from even being added to the list
@@ -210,7 +212,7 @@
 	can_fire = FALSE
 	// Safely sleep in a loop until the subsystem is idle, (or its been un-suspended somehow)
 	while(can_fire <= 0 && state != SS_IDLE)
-		stoplag() // Safely sleep in a loop until 
+		stoplag() // Safely sleep in a loop until
 
 // Wakes a suspended subsystem.
 /datum/controller/subsystem/proc/wake()

@@ -1,4 +1,4 @@
-#define MC_TICK_CHECK ( ( TICK_USAGE > Master.current_ticklimit || src.state != SS_RUNNING ) ? pause() : 0 )
+#define MC_TICK_CHECK ( ( TICK_USAGE > (Master.current_ticklimit * src.tick_limit_multiplier) || src.state != SS_RUNNING ) ? pause() : 0 )
 #define CURRENT_RUNLEVEL (2 ** (Master.current_runlevel - 1))
 
 #define MC_SPLIT_TICK_INIT(phase_count) var/original_tick_limit = Master.current_ticklimit; var/split_tick_phases = ##phase_count

@@ -23,7 +23,6 @@
 	var/energy_to_raise = 32
 	var/energy_to_lower = -20
 	plane = PLANE_LIGHTING_ABOVE
-	light_system = STATIC_LIGHT
 
 /obj/singularity/energy_ball/New(loc, starting_energy = 50, is_miniball = FALSE)
 	..()
@@ -31,11 +30,6 @@
 
 /obj/singularity/energy_ball/Initialize()
 	. = ..()
-	if(!miniball)
-		set_light(5, 5, "#EEEEFF")
-		update_light()
-	else
-		light_on = FALSE // MAKE SURE OF THIS
 
 /obj/singularity/energy_ball/ex_act(severity, target)
 	return
@@ -331,20 +325,3 @@
 		if (EB.energy > 0)
 			EB.energy -= min(EB.energy, max(10, round(EB.energy * 0.05)))
 	// VOREStation Edit End
-
-/obj/singularity/energy_ball/Moved(atom/old_loc, direction, forced, movetime)
-	. = ..()
-	// update the light manually as a static, less laggy then dynamic lights
-	if(!miniball && prob(30))
-		var/list/tesla_list = (/obj/singularity/energy_ball in orange(4,src.loc))
-		if(light_on)
-			// we have our light on, disable all other teslas nearby! We are DOMINANT!
-			// The next processed tesla will be off and won't run this, instead they'll
-			// try to turn on when they are no longer near other teslas...
-			// The lighting lag fix is worth the object scanning...
-			for(var/obj/singularity/energy_ball/E in tesla_list)
-				if(E.light_on)
-					E.light_on = FALSE
-		else if(tesla_list.len == 0)
-			light_on = TRUE
-		update_light()

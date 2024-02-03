@@ -56,9 +56,30 @@
 	var/list/blacklisted_types = list()
 	// look if theres a better way to do this im all ears
 	blacklisted_types += subtypesof(/obj/item/toy/plushie/therapy)
+	blacklisted_types += /obj/item/toy/plushie/fluff
 	blacklisted_types += subtypesof(/obj/item/toy/plushie/fluff)
+	// replaced by /datum/gear/plushie_teshlifelike
+	blacklisted_types += /obj/item/toy/plushie/teshari
+	blacklisted_types += subtypesof(/obj/item/toy/plushie/teshari)
+	/obj/item/clothing/under/suit_jacket/female/fluff
 	for(var/obj/item/toy/plushie/plushie_type as anything in subtypesof(/obj/item/toy/plushie) - blacklisted_types)
 		plushies[initial(plushie_type.name)] = plushie_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(plushies))
+
+/datum/gear/plushie_teshlifelike
+	display_name = "lifelike plushie selection"
+	path = /obj/item/toy/plushie/teshari
+
+/datum/gear/plushie_teshlifelike/New()
+	..()
+	var/list/plushies = list()
+	var/list/blacklisted_types = list()
+	// look if theres a better way to do this im all ears
+	for(var/obj/item/toy/plushie/teshari/plushie_type as anything in subtypesof(/obj/item/toy/plushie/teshari) - blacklisted_types)
+		plushies[initial(plushie_type.name)] = plushie_type
+	// and initial teshplush
+	var/obj/item/toy/plushie/teshari/plushie_type = /obj/item/toy/plushie/teshari
+	plushies[initial(plushie_type.name)] = plushie_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(plushies))
 
 /datum/gear/figure

@@ -1444,7 +1444,18 @@
 			blinded = 1
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
+
+			// Slowly heal overtime while sleeping, will not unbreak organs
 			adjustHalLoss(-3)
+			if(prob(2))
+				if(prob(50))
+					adjustBruteLoss(-1)
+				else
+					adjustFireLoss(-1)
+				if(bad_external_organs.len && prob(25))
+					var/obj/item/organ/badorgan = pick(bad_external_organs)
+					if(!badorgan.is_broken() && badorgan.is_bruised())
+						badorgan.damage -= 1
 
 			if(sleeping)
 				handle_dreams()

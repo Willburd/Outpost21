@@ -8,8 +8,8 @@ SUBSYSTEM_DEF(lighting)
 	var/static/list/objects_queue = list() // List of lighting objects queued for update.
 
 	// lighting system lag bandaids
-	tick_limit_multiplier = 3	// less chances to trigger hard-stop pausing from MC
-	tick_overrun_divider = 500  // overruns mean less to this system, default 100
+	tick_limit_multiplier = 2	// less chances to trigger hard-stop pausing from MC
+	tick_overrun_divider = 200  // overruns mean less to this system, default 100
 
 
 /datum/controller/subsystem/lighting/stat_entry(msg)

@@ -139,7 +139,7 @@
 	icon = 'icons/inventory/suit/item_vr.dmi'
 	default_worn_icon = 'icons/inventory/suit/mob_vr.dmi'
 	icon_state = "cyberpunk"
-	armor = list("melee" = 10, "bullet" = 20, "laser" = 10, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0)
+	armor = list("melee" = 2, "bullet" = 5, "laser" = 2, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0)
 
 // Cyberpunk recolorable vest
 /obj/item/clothing/suit/cyberpunk/recolorable

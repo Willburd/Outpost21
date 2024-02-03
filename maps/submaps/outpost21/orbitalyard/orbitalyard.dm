@@ -131,9 +131,15 @@
 	ambience = AMBIENCE_OUTPOST21_SPACE
 	base_turf = /turf/space
 
+/area/submap/outpost21/asteroid_generic/has_gravity()
+	return 0
+
 /area/submap/outpost21/structure_generic
 	name = "\improper Ruined Facility"
 	icon_state = "red2"
 	has_gravity = 0
 	ambience = AMBIENCE_OUTPOST21_SPACE
 	base_turf = /turf/space
+
+/area/submap/outpost21/structure_generic/has_gravity()
+	return 0

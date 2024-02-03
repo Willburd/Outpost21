@@ -1652,6 +1652,9 @@
 	base_turf = /turf/space
 	ambience = AMBIENCE_SPACE
 
+/area/offworld/asteroidyard/external/has_gravity()
+	return 0
+
 /area/offworld/asteroidyard/external/yardzone
 	icon_state = "construction"
 

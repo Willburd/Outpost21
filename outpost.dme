@@ -1194,6 +1194,7 @@
 #include "code\game\objects\items\contraband.dm"
 #include "code\game\objects\items\contraband_vr.dm"
 #include "code\game\objects\items\crayons.dm"
+#include "code\game\objects\items\crayons_op.dm"
 #include "code\game\objects\items\falling_object_attack_vr.dm"
 #include "code\game\objects\items\falling_object_vr.dm"
 #include "code\game\objects\items\glassjar.dm"

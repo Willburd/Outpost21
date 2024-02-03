@@ -22,6 +22,11 @@
 	var/camo_net = FALSE
 	var/stun_length = 0.25 SECONDS
 
+/obj/item/weapon/beartrap/Initialize()
+	. = ..()
+	// for mapset
+	update_icon()
+
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 

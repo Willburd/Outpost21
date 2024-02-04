@@ -113,3 +113,74 @@
 	anchored = FALSE
 	density = TRUE
 	phrase = "Chirp!"
+
+// Teshari plushes
+/obj/item/toy/plushie/teshari/trashfire
+	name = "Trashfire"
+	desc = "This is Trashfire the plushie Teshari. Very soft, and looking grumpy! The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
+	icon_state = "teshariplushie_trashfire"
+	item_state = "teshariplushie_trashfire"
+	pokephrase = "Rya!"
+	slot_flags = SLOT_BACK | SLOT_HEAD
+	icon = 'icons/obj/toy_op.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_toys_op.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_toys_op.dmi',
+		slot_back_str = 'icons/mob/toy_worn_op.dmi',
+		slot_head_str = 'icons/mob/toy_worn_op.dmi')
+
+/obj/item/toy/plushie/teshari/schale
+	name = "Schale"
+	desc = "This is Schale the plushie Teshari. Very soft, and on the verge of a mental breakdown! The toy is made well, as if alive. Looks like she is sleeping. Shhh! Floorpills not included."
+	icon_state = "teshariplushie_schale"
+	item_state = "teshariplushie_schale"
+	pokephrase = "Rya!"
+	slot_flags = SLOT_BACK | SLOT_HEAD
+	icon = 'icons/obj/toy_op.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_toys_op.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_toys_op.dmi',
+		slot_back_str = 'icons/mob/toy_worn_op.dmi',
+		slot_head_str = 'icons/mob/toy_worn_op.dmi')
+
+/obj/item/toy/plushie/teshari/tesum
+	name = "Tesum"
+	desc = "This is Tesum the plushie Teshari. The toy is made well, it's so lifelike it's started to deteriorate like its namesake! Looks like he is sleeping. Shhh!"
+	icon_state = "teshariplushie_tesum"
+	item_state = "teshariplushie_tesum"
+	pokephrase = "Rya!"
+	slot_flags = SLOT_BACK | SLOT_HEAD
+	icon = 'icons/obj/toy_op.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_toys_op.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_toys_op.dmi',
+		slot_back_str = 'icons/mob/toy_worn_op.dmi',
+		slot_head_str = 'icons/mob/toy_worn_op.dmi')
+
+/obj/item/toy/plushie/teshari/mitz
+	name = "Mitz"
+	desc = "This is Mitz the plushie Teshari. The amount of detail makes it almost look lifelike! Looks like he is sleeping. Shhh!"
+	icon_state = "teshariplushie_mitz"
+	item_state = "teshariplushie_mitz"
+	pokephrase = "Rya!"
+	slot_flags = SLOT_BACK | SLOT_HEAD
+	icon = 'icons/obj/toy_op.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_toys_op.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_toys_op.dmi',
+		slot_back_str = 'icons/mob/toy_worn_op.dmi',
+		slot_head_str = 'icons/mob/toy_worn_op.dmi')
+
+/obj/item/toy/plushie/teshari/taaa
+	name = "Taaa"
+	desc = "This is Taaa the plushie Teshari. The amount of detail makes it almost look lifelike! Looks like he is sleeping. Shhh!"
+	icon_state = "teshariplushie_taaa"
+	item_state = "teshariplushie_taaa"
+	pokephrase = "Rya!"
+	slot_flags = SLOT_BACK | SLOT_HEAD
+	icon = 'icons/obj/toy_op.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_toys_op.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_toys_op.dmi',
+		slot_back_str = 'icons/mob/toy_worn_op.dmi',
+		slot_head_str = 'icons/mob/toy_worn_op.dmi')

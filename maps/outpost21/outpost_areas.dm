@@ -240,6 +240,11 @@
 	base_turf = /turf/simulated/open
 	sound_env = SMALL_ENCLOSED
 
+/area/maintenance/cargobay_roof
+	name = "\improper Disposal Pressure Management"
+	base_turf = /turf/simulated/open
+	sound_env = SMALL_ENCLOSED
+
 //
 // Cargo ---------------------------------------------------------
 //

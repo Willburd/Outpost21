@@ -78,7 +78,8 @@
 						TRAITBLOCK_ALCOHOL_TOL_BASIC,
 						TRAITBLOCK_EYEGLOW,
 						TRAITBLOCK_TRASHCAN,
-						TRAITBLOCK_GEMEATER)
+						TRAITBLOCK_GEMEATER,
+						TRAITBLOCK_ENZYME)
 	M.dna.SetSEState(block, 1)
 
 // Random Appearance Mutation -> Is now just a random mutation

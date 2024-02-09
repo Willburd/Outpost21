@@ -690,3 +690,16 @@
 	deactivation_messages=list("You feel less waxy.")
 	linked_trait_path = /datum/trait/positive/phoron_resist
 	. = ..()
+
+
+/datum/trait/positive/enzyme_immune
+	name = "Enzyme Immune"
+	desc = "Allows contact exposure to terraforming enzymes."
+	cost = 3
+	var_changes = list("enzyme_contact_mod" = 0)
+/datum/dna/gene/trait_linked/phoron_resist/New() // Genetically linked trait
+	block = TRAITBLOCK_ENZYME
+	activation_messages=list("You feel oddly slimey.")
+	deactivation_messages=list("You feel less slimey.")
+	linked_trait_path = /datum/trait/positive/enzyme_immune
+	. = ..()

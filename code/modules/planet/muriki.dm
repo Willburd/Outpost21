@@ -433,9 +433,17 @@ var/datum/planet/muriki/planet_muriki = null
 		return
 
 	// We find this to be pleasant weather~
+	var/probmod = 1
 	var/mob/living/carbon/human/H = L
-	if(istype(H) && H.mind && H.mind.changeling)
-		return
+	if(istype(H))
+		if(H.mind && H.mind.changeling)
+			return
+		if(H.species)
+			probmod = H.species.enzyme_contact_mod
+		if(probmod == 0)
+			return
+		if(!prob(100 * probmod))
+			return
 
 	// acid burn time!
 	var/min_permeability = 0.15;
@@ -469,13 +477,13 @@ var/datum/planet/muriki/planet_muriki = null
 	//burn their eyes!
 	if(burn_eyes)
 		var/obj/item/organ/internal/eyes/O = L.internal_organs_by_name[O_EYES]
-		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
+		if(O && prob(20 * probmod) && O.robotic <= ORGAN_ASSISTED)
 			O.damage += 8
 			to_chat(L,  "<span class='danger'>Your eyes burn!</span>")
 	//burn their lungs!
 	if(burn_lungs)
 		var/obj/item/organ/internal/lungs/O = L.internal_organs_by_name[O_LUNGS]
-		if(O && prob(20) && O.robotic <= ORGAN_ASSISTED)
+		if(O && prob(20 * probmod) && O.robotic <= ORGAN_ASSISTED)
 			O.damage += 12
 			to_chat(L,  "<span class='danger'>Your lungs burn!</span>")
 
@@ -532,7 +540,7 @@ var/datum/planet/muriki/planet_muriki = null
 				org.wounds +=  new /datum/wound/cut/small(mist ? 5 : 3)
 				applied_damage = TRUE
 
-		else if(prob(65))
+		else if(prob(65 * probmod))
 			if(!istype(H) || !protection) // no protection!
 				to_chat(L, "<span class='danger'>The acidic pool is digesting your [L.get_bodypart_name(pick_zone)]!</span>")
 				L.apply_damage( 1.8 * multiplier,  BURN, pick_zone) // note, water passes the acid depth as the multiplier, 5 or 10 depending on depth!

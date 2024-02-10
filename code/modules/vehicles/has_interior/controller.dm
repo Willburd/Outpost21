@@ -70,6 +70,9 @@
 
 	var/haskey = TRUE
 
+	var/has_camera = TRUE
+	var/obj/machinery/camera/camera = null
+
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
@@ -81,6 +84,10 @@
 	for(var/weapon_type in weapons_equiped)
 		internal_weapons_list.Add(new weapon_type(loc))
 		internal_loaders_list.Add(null)
+	if(has_camera && !camera)
+		camera = new /obj/machinery/camera(src)
+		camera.c_tag = "[name] ([rand(1000,9999)])" // camera bullshit needs unique name
+		camera.replace_networks(list(NETWORK_DEFAULT,NETWORK_ROBOTS))
 
 /obj/vehicle/has_interior/controller/Initialize()
 	// find interior entrypos

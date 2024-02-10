@@ -147,12 +147,9 @@
 	// creates stuff like ruptured gas tanks, and landmines
 	switch(rand(1,4))
 		if(1)
-			var/newpath = pick(/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/obj/machinery/portable_atmospherics/canister/nitrous_oxide,/obj/machinery/portable_atmospherics/canister/phoron)
+			var/newpath = pick(/obj/machinery/portable_atmospherics/canister/carbon_dioxide/broken,/obj/machinery/portable_atmospherics/canister/nitrous_oxide/broken,/obj/machinery/portable_atmospherics/canister/phoron/broken)
 			var/obj/machinery/portable_atmospherics/canister/tank = new newpath()
 			tank.loc = src.loc
-
-			if(!isnull(tank))
-				tank.take_damage(10000) // BANG
 
 		if(2)
 			var/newpath = pick(prob(30);/obj/effect/mine,

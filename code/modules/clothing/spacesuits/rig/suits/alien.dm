@@ -9,8 +9,8 @@
 	icon_state = "breacher_rig_cheap"
 	armor = list(melee = 60, bullet = 45, laser = 35, energy = 35, bomb = 70, bio = 100, rad = 50)
 	emp_protection = -20
-	slowdown = 6
-	offline_slowdown = 10
+	slowdown = 10 // outpost 21 edit - swapped slowdowns
+	offline_slowdown = 6
 	vision_restriction = 1
 	offline_vision_restriction = 2
 	siemens_coefficient = 0.75
@@ -50,7 +50,8 @@
 	flags = PHORONGUARD
 	item_flags = THICKMATERIAL
 	siemens_coefficient = 0.2
-	offline_slowdown = 2.5
+	slowdown = 1.5 // outpost 21 edit - slowdown tweak
+	offline_slowdown = 1.2
 	allowed = list(
 		/obj/item/weapon/gun,
 		/obj/item/device/flashlight,

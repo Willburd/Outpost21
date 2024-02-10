@@ -187,8 +187,21 @@
 	loot_list = list(/obj/item/clothing/glasses/sunglasses/sechud,/obj/item/clothing/suit/armor/vest/alt)
 	vore_pounce_chance = 60 // Good boys don't do too much police brutality.
 
+	var/obj/item/weapon/card/id/idcard
+
 	var/check_records = 0 // If true, arrests people without a record.
 	var/check_arrest = 1 // If true, arrests people who are set to arrest.
+
+/mob/living/simple_mob/otie/security/New()
+	. = ..()
+	idcard = new /obj/item/weapon/card/id/security(src)
+	idcard.access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks) // Minimal access officer
+	set_id_info(idcard)
+
+/mob/living/simple_mob/otie/security/GetIdCard()
+	if(stat == CONSCIOUS && friend)
+		return idcard
+	return null
 
 /mob/living/simple_mob/otie/security/chubby
 	name = "chubby guard otie"

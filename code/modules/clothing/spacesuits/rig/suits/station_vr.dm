@@ -68,7 +68,7 @@
 /obj/item/weapon/rig/focalpoint
 	name = "\improper F.P.E. hardsuit control module"
 	desc = "A high-end hardsuit produced by Focal Point Energistics, focused around repair and construction."
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "techno_rig"
@@ -85,7 +85,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // so it's like a rig firesuit
 	armor = list("melee" = 40, "bullet" = 10, "laser" = 30, "energy" = 55, "bomb" = 70, "bio" = 100, "rad" = 100)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/backpack)
-	
+
 	chest_type = /obj/item/clothing/suit/space/rig/focalpoint
 	helm_type = /obj/item/clothing/head/helmet/space/rig/focalpoint
 	boot_type = /obj/item/clothing/shoes/magboots/rig/ce/focalpoint
@@ -136,7 +136,7 @@
 /obj/item/weapon/rig/hephaestus
 	name = "\improper Hephaestus hardsuit control module"
 	desc = "A high-end hardsuit produced by Hephaestus Industries, focused on destroying the competition. Literally."
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "ihs_rig"
@@ -148,7 +148,7 @@
 	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/backpack,/obj/item/device/bluespaceradio, /obj/item/device/defib_kit)
 
 	armor = list("melee" = 70, "bullet" = 70, "laser" = 70, "energy" = 50, "bomb" = 60, "bio" = 100, "rad" = 20)
-	
+
 	chest_type = /obj/item/clothing/suit/space/rig/hephaestus
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hephaestus
 	boot_type = /obj/item/clothing/shoes/magboots/rig/hephaestus
@@ -198,7 +198,7 @@
 /obj/item/weapon/rig/zero
 	name = "null hardsuit control module"
 	desc = "A very lightweight suit designed to allow use inside mechs and starfighters. It feels like you're wearing nothing at all."
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "null_rig"
@@ -211,9 +211,9 @@
 	glove_type = null
 
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/backpack, /obj/item/device/bluespaceradio, /obj/item/device/defib_kit)
-	
-	slowdown = 0
-	offline_slowdown = 1
+
+	slowdown = 1 // outpost 21 edit - slowdown tweak
+	offline_slowdown = 0
 	offline_vision_restriction = 2
 	armor = list("melee" = 20, "bullet" = 5, "laser" = 10, "energy" = 5, "bomb" = 35, "bio" = 100, "rad" = 20)
 
@@ -244,7 +244,7 @@
 /obj/item/weapon/rig/baymed
 	name = "\improper SolGov medical hardsuit control module" //YW EDIT
 	desc = "A lightweight first responder hardsuit from the SolGov. Not suitable for combat use, but advanced myomer fibers can push the user to incredible speeds." //YW EDIT
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "medical_rig_bay"
@@ -273,7 +273,7 @@
 	armor = list("melee" = 10, "bullet" = 5, "laser" = 10, "energy" = 5, "bomb" = 25, "bio" = 100, "rad" = 20)
 
 /obj/item/weapon/rig/baymed/equipped
-	
+
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/sprinter,
@@ -318,7 +318,7 @@
 /obj/item/weapon/rig/bayeng
 	name = "\improper SolGov engineering hardsuit control module" //YW EDIT
 	desc = "An advanced construction hardsuit from the SolGov. Built like a tank. Don't expect to be taking any tight corners while running." //YW EDIT
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "engineering_rig_bay"
@@ -343,8 +343,8 @@
 		/obj/item/device/defib_kit
 		)
 
-	slowdown = 0
-	offline_slowdown = 5 // very bulky
+	slowdown = 1.5 // outpost 21 edit - slowdown tweak
+	offline_slowdown = 1 // very bulky
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 100, rad = 50)
 
 /obj/item/weapon/rig/bayeng/equipped
@@ -394,7 +394,7 @@
 /obj/item/weapon/rig/pathfinder
 	name = "\improper SolGov pathfinder hardsuit control module" //YW EDIT
 	desc = "A SolGov pathfinder hardsuit is hard to come by... how'd this end up on the frontier?" //YW EDIT
-	
+
 	icon = 'icons/obj/rig_modules_vr.dmi' // the item
 	default_mob_icon = 'icons/mob/rig_back_vr.dmi' // the onmob
 	icon_state = "pathfinder_rig_bay"
@@ -407,8 +407,8 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/pathfinder
 	glove_type = /obj/item/clothing/gloves/gauntlets/rig/pathfinder
 
-	slowdown = 0.5
-	offline_slowdown = 4 // bulky
+	slowdown = 1.2 // outpost 21 edit - slowdown tweak
+	offline_slowdown = 1 // bulky
 	offline_vision_restriction = 2 // doesn't even have a way to see out without power
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 100, rad = 50)
 

@@ -119,8 +119,9 @@
 		M.last_bumped = world.time
 		if(M.restrained() && !check_access(null))
 			return
-		else if(istype(M, /mob/living/simple_mob/animal/passive/mouse) && !(M.ckey))	//VOREStation Edit: Make wild mice
-			return																		//VOREStation Edit: unable to open doors
+		// outpost 21 edit - made mice able to open doors again, roaches and lizards can do it anyway so this was pointless.
+		//else if(istype(M, /mob/living/simple_mob/animal/passive/mouse) && !(M.ckey))	//VOREStation Edit: Make wild mice
+		//	return																		//VOREStation Edit: unable to open doors
 		else
 			bumpopen(M)
 	/* outpost 21 - modular computer removal

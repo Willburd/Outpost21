@@ -6,8 +6,8 @@
 	icon_state = "void_explorer2"
 	slot_flags = SLOT_BELT
 	armor = list(melee = 40, bullet = 30, laser = 20, energy = 15, bomb = 30, bio = 100, rad = 50)
-	slowdown = 0.5
-	offline_slowdown = 1
+	slowdown = 0.8 // outpost 21 edit - slowdown tweak
+	offline_slowdown = 0.5
 	offline_vision_restriction = 0
 	emp_protection = -20
 	siemens_coefficient= 0.75

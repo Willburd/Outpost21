@@ -82,7 +82,8 @@
 	var/seal_delay = SEAL_DELAY
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
-	var/offline_slowdown = 1.5                                  // If the suit is deployed and unpowered, it sets slowdown to this.
+	slowdown = 1.1 // outpost 21 edit (added slowdown)
+	var/offline_slowdown = 1 // outpost 21 edit (was 1.5)     // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
 	var/airtight = 1 //If set, will adjust AIRTIGHT flag and pressure protections on components. Otherwise it should leave them untouched.

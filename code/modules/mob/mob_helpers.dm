@@ -559,8 +559,12 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(check_records && !R)
 			threatcount += 4
 
-		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
-			threatcount += 4
+		if(check_arrest)
+			if(R && (R.fields["criminal"] == "*Arrest*"))
+				threatcount += 4
+			// Dumb hardcoding, because they're in hidden records, but should always be arrest on sight. Unless IA blesses them with an identity
+			if(job == "Stowaway" && (!id || id.registered_name != name))
+				threatcount += 4
 
 	return threatcount
 

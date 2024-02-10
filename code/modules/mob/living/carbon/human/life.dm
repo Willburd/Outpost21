@@ -2278,6 +2278,11 @@
 			if(I)
 				perpname = I.registered_name
 
+		// Dumb hardcoding, because they're in hidden records, but should always be arrest on sight. Unless IA blesses them with an identity
+		var/obj/item/weapon/card/id/id = GetIdCard()
+		if(job == "Stowaway" && (!id || id.registered_name != name))
+			holder.icon_state = "hudwanted"
+
 		for(var/datum/data/record/E in data_core.general)
 			if(E.fields["name"] == perpname)
 				for (var/datum/data/record/R in data_core.security)

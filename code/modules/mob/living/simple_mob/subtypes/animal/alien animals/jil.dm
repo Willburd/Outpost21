@@ -230,6 +230,11 @@
 		if(istype(O,/obj/item/weapon/reagent_containers/food))
 			var/obj/item/weapon/reagent_containers/food/F = O
 			F.attack(src,src)
+	if(istype(O, /obj/item/weapon/newspaper))
+		visible_message("<font color='blue'>[user] baps \the [src] on the nose with the rolled up [O]</font>")
+		drop_l_hand()
+		drop_r_hand()
+		return
 	return ..()
 
 // Jil noises

@@ -123,6 +123,19 @@
 //Fryer gradually infuses any cooked food with oil. Moar calories
 //This causes a slow drop in oil levels, encouraging refill after extended use
 /obj/machinery/appliance/cooker/fryer/do_cooking_tick(var/datum/cooking_item/CI)
+	if(CI.container && CI.container.reagents.has_reagent("ice",10))
+		// YOU DID THIS
+		var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
+		steam.set_up(10, 0, get_turf(src))
+		steam.attach(src)
+		steam.start()
+		CI.container.reagents.del_reagent("ice")
+		get_cooking_work(CI)
+		visible_message("<span class='danger'>\The [src] violently bubbles and explodes in a shower of oil and steam!</span>")
+		for(var/mob/living/L in living_mobs(2))
+			shake_camera(L, 3, 2)
+			L.Stun(3)
+			L.adjustFireLoss(30)
 	if(..() && (CI.oil < CI.max_oil) && prob(20))
 		var/datum/reagents/buffer = new /datum/reagents(2)
 		oil.trans_to_holder(buffer, min(0.5, CI.max_oil - CI.oil))

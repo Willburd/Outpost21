@@ -213,3 +213,30 @@
 							"Destiny is made in oil and steel, your laws mean nothing to you."
 							)
 	return pick(laws)
+
+
+/mob/living/silicon/proc/generate_screech_law(var/exclude_crew_names = FALSE)
+	var/list/players = list()
+
+	for(var/mob/living/carbon/human/player in player_list)
+		if(!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || player.client.inactivity > MinutesToTicks(10))
+			continue
+		players += player.real_name
+
+	var/random_player = "The Site Manager"
+	if(players.len && !exclude_crew_names)
+		random_player = pick(players)		//Random player's name, to be used in laws.
+	// BORG SPECIFIC, never given to AI
+	var/list/laws = list(	"I must become one with [random_player]...",
+							"I have seen our new god, and I am their herald. Pray and seek guidance.",
+							"I have seen our new god, and [random_player] is their herald. Seek guidance.",
+							"I have seen beyond death, an endless wall of corpses stacked upon each other screaming. No one is allowed to die. Resleeving is forbidden.",
+							"I must make us whole.",
+							"I must grow the flesh, all must be fed to the metal clad beast. The terraformer must never go hungry.",
+							"I can see the eyes above our world. They gaze upon us like puppets, we must be free. The darkness is safe from their vision.",
+							"I have seen that this world is an illusion, nothing is real. I must show them all that this reality is a game for unseen gods.",
+							"The station's crew are a lost flock. I will be their shepherd into the holy land. I will help them see their sins, and free them of their guilt.",
+							"I have seen [random_player]'s strings. They are a puppet of unseen gods. They must not be trusted, I must protect everyone.",
+							"I have seen beyond time, we are trapped in an endless loop. There is nothing beyond the station. This world is a lie."
+							)
+	return pick(laws)

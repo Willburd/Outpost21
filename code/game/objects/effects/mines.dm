@@ -55,6 +55,8 @@
 		explosion(loc, 0, 2, 3, 4) //land mines are dangerous, folks.
 		visible_message("\The [src.name] detonates!")
 
+	GLOB.landmines_stepped_on_roundstat++
+
 	qdel(s)
 	qdel(src)
 

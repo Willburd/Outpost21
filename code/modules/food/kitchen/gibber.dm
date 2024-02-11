@@ -247,6 +247,8 @@
 			continue
 		if(istype(grindable,/mob/living/simple_mob/animal/borer))
 			continue // borers cannot be gibbered, butcher them manually
+		if(grindable.client)
+			GLOB.gibber_fellin_roundstat++
 
 		var/slab_name = grindable.name
 		var/slab_count = grindable.meat_amount

@@ -27,6 +27,7 @@
 			L.flicker(9)
 
 	// Scare the crew a bit
+	var/list/borglist = list()
 	for(var/mob/living/L in living_mob_list)
 		if(!(L.z in affecting_z))
 			continue
@@ -54,6 +55,27 @@
 			var/ionbug = rand(3, 9)
 			S.confused += ionbug
 			S.eye_blurry += (ionbug - 1)
+			if(isAI(L)) // not an AI event
+				continue
+			// extremely boring if a shell or empty gets it
+			if(!L.client)
+				continue
+			if(isrobot(L))
+				var/mob/living/silicon/robot/R = L
+				if(R.shell)
+					continue
+			// BORGS LOCATED
+			borglist.Add(L)
+
+	// NOW SWIGGTY SWOOTY FOR THEIR BOOTY
+	if(borglist.len)
+		var/mob/living/silicon/S = pick(borglist)
+		// funni laws!
+		to_chat(S, "<span class='danger'>You have detected a change in your laws information:</span>")
+		var/law = S.generate_screech_law()
+		S.add_ion_law(law)
+		//to_chat(S, law)
+		S.show_laws()
 
 /datum/event/psychic_screach/end()
 	..()
@@ -63,7 +85,7 @@
 	// This sets off a chain of events that lead to the actual grid check (or perhaps worse).
 	// First, the Supermatter engine makes a power spike.
 	for(var/obj/machinery/power/generator/engine in machines)
-		engine.power_spike(80,TRUE)
+		engine.power_spike(80,TRUE,TRUE)
 		break // Just one engine, please.
 
 /datum/event/psychic_screach/proc/Sound(var/sound, var/list/zlevels)

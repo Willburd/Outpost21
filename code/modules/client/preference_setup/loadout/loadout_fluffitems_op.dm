@@ -57,7 +57,7 @@
 	display_name = "ESHUI Officer's Qualification Pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/officer
 	ckeywhitelist = list("remthebold","seagha")
-	character_name = list("Trashfire","Schale Vam","Aiektaaknell")
+	character_name = list("Trashfire","Schale Vam","Aiektaaknell","Khrutch Yizhnera","Qrill", "Janik Vam")
 
 /datum/gear/fluff/ESHUI_whiteheart
 	display_name = "ESHUI Medical Medal"

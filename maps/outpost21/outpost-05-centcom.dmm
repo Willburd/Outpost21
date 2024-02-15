@@ -2018,7 +2018,7 @@
 "iKv" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/unsimulated/floor/steel,/area/centcom/suppy)
 "iLC" = (/obj/structure/artilleryplaceholder/decorative{icon_state = "11"},/turf/unsimulated/floor/techfloor_grid,/area/centcom/specops)
 "iLV" = (/obj/structure/bed{desc = "This is a bed..It says something close to the bottom 'I fuck the cat here too'."},/obj/item/weapon/bedsheet/orange,/obj/item/weapon/handcuffs/legcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled/dark,/area/centcom/holding)
-"iMg" = (/obj/structure/table/reinforced,/obj/item/weapon/card/id/centcom/station,/turf/simulated/floor/tiled,/area/centcom/control)
+"iMg" = (/obj/structure/table/reinforced,/obj/item/weapon/card/id/centcom/station,/obj/item/gunbox/centcom,/turf/simulated/floor/tiled,/area/centcom/control)
 "iMu" = (/turf/unsimulated/elevator_shaft{desc = "That's a long way down"},/area/centcom/holding)
 "iMy" = (/obj/structure/bed/chair/shuttle{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tiled/milspec,/area/shuttle/tram)
 "iMz" = (/turf/simulated/floor/lava,/area/centcom/control)

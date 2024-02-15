@@ -37,6 +37,7 @@
 #define CE_SLOWDOWN "goslow" // Slowdown
 #define CE_ANTACID "nopuke" // Don't puke.
 #define CE_ALLERGEN "allergyreaction" // Self explanatory
+#define CE_WITHDRAWL "withdrawl" // Withdrawl symptoms
 
 #define REAGENTS_PER_SHEET 20
 
@@ -50,6 +51,7 @@ var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglyce
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "bliss", "stoxin", "ambrosia_extract")   // Decrease heart rate.
 var/list/heartstopper  = list("potassium_chlorophoride", "zombiepowder") // This stops the heart.
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
+var/list/addictives	   = list("oxycodone","nicotine","hyperzine","bliss","ambrosia_extract","talum_quem","methylphenidate","tramadol")
 
 #define MAX_PILL_SPRITE 24 //max icon state of the pill sprites
 #define MAX_BOTTLE_SPRITE 4 //max icon state of the pill sprites

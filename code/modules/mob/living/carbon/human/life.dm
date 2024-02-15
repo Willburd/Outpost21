@@ -38,6 +38,8 @@
 	var/in_stasis = 0
 	var/heartbeat = 0
 	var/gutdeathpressure = 0 // for superfart and gibbing
+	var/list/addictions = list() // contains currently addicted chems
+	var/list/addiction_counters = list() // contains ID sorted counters
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -1558,6 +1560,66 @@
 				Sleeping(1)
 				Paralyse(5)
 
+
+		// All addictions start at 0.
+		// If you have an addictive chem in you, it will count down from 0 to -100.
+		// Once -100 is reached you will become addicted, and the counter will jump to 100.
+		var/addiction_peak = 120
+		var/addiction_proc = -900
+		var/list/addict = list()
+		for(var/datum/reagent/R in bloodstr.reagent_list)
+			if(R.id in addictives)
+				addict.Add(R.id)
+		for(var/A in addict)
+			if(!(A in addictions))
+				addictions.Add(A)
+				addiction_counters[A] = 0
+			addiction_counters[A] -= rand(1,3)
+			// Addiction proced.
+			if(addiction_counters[A] > 0 && addiction_counters[A] < addiction_peak)
+				addiction_counters[A] += rand(8,13)
+			if(addiction_counters[A] <= addiction_proc)
+				addiction_counters[A] = addiction_peak
+
+		// For all counters above 100, count down
+		// For all under 0, count up to 0 randomly, reducing initial addiction buildup if you didn't proc it
+		if(addictions.len)
+			var/C = pick(addictions)
+			if(addiction_counters[C] < 0)
+				// return to normal... we didn't get addicted yet, but we shouldn't become addicted instantly next time if it's been a few hours!
+				if(prob(12))
+					addiction_counters[C]  += 1
+			if(addiction_counters[C] > 0)
+				// slow degrade
+				if(prob(6))
+					addiction_counters[C]  -= 1
+				// withdrawl mechanics
+				if(prob(3) && addiction_counters[C]  > 20)
+					// send a message
+					if(addiction_counters[C] < 40)
+						to_chat(src, "<span class='danger'>You're dying for some [SSchemistry.chemical_reagents[C].name]!</span>")
+					else if(addiction_counters[C] < 60)
+						to_chat(src, "<span class='warning'>You're really craving some [SSchemistry.chemical_reagents[C].name].</span>")
+					else if(addiction_counters[C] < 80)
+						to_chat(src, "<span class='notice'>You're feeling the need for some [SSchemistry.chemical_reagents[C].name].</span>")
+					emote(pick("pale","shiver","twitch"))
+				if(addiction_counters[C] > 10)
+					// proc side effect
+					if(addiction_counters[C] < 30)
+						if(prob(6))
+							Weaken(2)
+							emote("vomit")
+							add_chemical_effect(CE_WITHDRAWL, rand(5,7) * REM)
+					else if(addiction_counters[C] < 50)
+						if(prob(4))
+							emote("vomit")
+							add_chemical_effect(CE_WITHDRAWL, rand(3,6) * REM)
+					else if(addiction_counters[C] < 70)
+						if(prob(3))
+							emote("vomit")
+			if(addiction_counters[C] == 0)
+				addictions.Remove(C)
+
 		// If you're dirty, your gloves will become dirty, too.
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
@@ -1961,7 +2023,6 @@
 			var/turf/T = loc
 			if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD && rand(1,1000) <= 1)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
-
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)

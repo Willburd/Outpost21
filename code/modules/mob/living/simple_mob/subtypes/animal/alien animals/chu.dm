@@ -56,7 +56,7 @@
 	vore_capacity = 4
 	vore_pounce_chance = 20
 
-	nutrition = 300 // to prevent hunger issues at start
+	nutrition = 500 // to prevent hunger issues at start
 
 	has_hands = FALSE
 	response_help  = "pets"

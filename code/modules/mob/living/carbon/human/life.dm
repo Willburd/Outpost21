@@ -1570,8 +1570,16 @@
 		// All addictions start at 0.
 		var/list/addict = list()
 		for(var/datum/reagent/R in bloodstr.reagent_list)
-			if(R.id in addictives)
-				addict.Add(R.id)
+			var/reagentid = R.id
+			if(istype( SSchemistry.chemical_reagents[reagentid], /datum/reagent/ethanol))
+				reagentid = "ethanol"
+			if(reagentid in addictives && !(reagentid in addict))
+				addict.Add(reagentid)
+		// Only needed for alcohols, will interfere with pills if you detect other things!
+		for(var/datum/reagent/R in ingested.reagent_list)
+			if(istype( SSchemistry.chemical_reagents[R.id], /datum/reagent/ethanol) && !(R.id in addict))
+				addict.Add("ethanol")
+
 		for(var/A in addict)
 			if(!(A in addictions))
 				addictions.Add(A)
@@ -1581,14 +1589,13 @@
 			if(addiction_counters[A] > 0 && addiction_counters[A] < ADDICTION_PEAK)
 				if(addiction_counters[A] < 80)
 					addiction_counters[A] = 80
-
+					to_chat(src, "<span class='notice'>You feel rejuvenated as the [SSchemistry.chemical_reagents[A].name] rushes through you.</span>")
 				addiction_counters[A] += rand(8,13)
 			// Addiction proced.
 			if(A in fast_addictives)
 				// quickly addict to these drugs, bliss, oxyco etc
 				if(addiction_counters[A] <= FASTADDICT_PROC)
 					addict_to_reagent(A)
-				to_chat(src, "<span class='notice'>You feel rejuvenated as the [SSchemistry.chemical_reagents[A].name] rushes through you.</span>")
 			else
 				// slower addiction over a longer period, cigs and painkillers mostly
 				if(addiction_counters[A] <= ADDICTION_PROC)

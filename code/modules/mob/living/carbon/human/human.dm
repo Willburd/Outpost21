@@ -1799,6 +1799,8 @@
 		addict_to_reagent("oxycodone")
 	if(cli.prefs.addictions & ADDICT_HYPER)
 		addict_to_reagent("hyperzine")
+	if(cli.prefs.addictions & ADDICT_ALCOHOL)
+		addict_to_reagent("ethanol")
 
 	// Auto enable trait based genes, otherwise we'd have to deal with the random activation chance...
 	if(species.traits)

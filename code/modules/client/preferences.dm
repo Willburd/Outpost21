@@ -133,6 +133,7 @@ var/list/preferences_datums = list()
 	var/exploit_record = ""
 	var/disabilities = 0
 	var/sdisabilities = 0
+	var/addictions = 0
 
 	var/economic_status = "Average"
 

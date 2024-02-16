@@ -101,6 +101,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_blue"]			>> pref.b_eyes
 	S["b_type"]				>> pref.b_type
 	S["disabilities"]		>> pref.disabilities
+	S["addictions"]			>> pref.addictions
 	S["organ_data"]			>> pref.organ_data
 	S["rlimb_data"]			>> pref.rlimb_data
 	S["body_markings"]		>> pref.body_markings
@@ -175,6 +176,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_blue"]			<< pref.b_eyes
 	S["b_type"]				<< pref.b_type
 	S["disabilities"]		<< pref.disabilities
+	S["addictions"]			<< pref.addictions
 	S["organ_data"]			<< pref.organ_data
 	S["rlimb_data"]			<< pref.rlimb_data
 	S["body_markings"]		<< pref.body_markings
@@ -251,6 +253,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
+	pref.addictions		= sanitize_integer(pref.addictions, 0, 65535, initial(pref.addictions))
 	if(!pref.organ_data) pref.organ_data = list()
 	if(!pref.rlimb_data) pref.rlimb_data = list()
 	if(!pref.body_markings) pref.body_markings = list()
@@ -1104,6 +1107,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["sdisabilities"])
 		var/disability_flag = text2num(href_list["sdisabilities"])
 		pref.sdisabilities ^= disability_flag
+		Disabilities_YW(usr) //YW Edit
+
+	else if(href_list["addictions"])
+		var/addiction_flag = text2num(href_list["addictions"])
+		pref.addictions ^= addiction_flag
 		Disabilities_YW(usr) //YW Edit
 
 	else if(href_list["toggle_preview_value"])

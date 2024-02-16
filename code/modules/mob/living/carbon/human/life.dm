@@ -34,6 +34,10 @@
 #define RADIATION_SPEED_COEFFICIENT 0.1
 #define HUMAN_COMBUSTION_TEMP 524 //524k is the sustained combustion temperature of human fat
 
+#define ADDICTION_PROC -625 // point where addiction triggers, starts counting down from 0 to here!
+#define FASTADDICT_PROC -100 // point where certain chems with super addictive traits will kick in
+#define ADDICTION_PEAK 100 // point where addicted mobs reset to upon getting their addiction satiated... Decays over time,triggering messages and sideeffects
+
 /mob/living/carbon/human
 	var/in_stasis = 0
 	var/heartbeat = 0
@@ -216,6 +220,8 @@
 		seizuremedcount += 1;
 	if( bloodstr.get_reagent_amount("methylphenidate") > 0)
 		anxietymedcount += 1;
+		seizuremedcount += 1;
+	if( bloodstr.get_reagent_amount("tricordrazine") > 0) // startrek wiki says so
 		seizuremedcount += 1;
 	// lets check for any one of these... Faster than doing each one, as it'll trigger on the first one it finds instead of checking them all every time
 	if( bloodstr.get_reagent_amount("inaprovaline") > 0 || bloodstr.get_reagent_amount("menthol") > 0 || bloodstr.get_reagent_amount("adranol") > 0 || bloodstr.get_reagent_amount("immunosuprizine") > 0 || bloodstr.get_reagent_amount("malish-qualem") > 0)
@@ -1562,10 +1568,6 @@
 
 
 		// All addictions start at 0.
-		// If you have an addictive chem in you, it will count down from 0 to -100.
-		// Once -100 is reached you will become addicted, and the counter will jump to 100.
-		var/addiction_peak = 120
-		var/addiction_proc = -900
 		var/list/addict = list()
 		for(var/datum/reagent/R in bloodstr.reagent_list)
 			if(R.id in addictives)
@@ -1575,11 +1577,22 @@
 				addictions.Add(A)
 				addiction_counters[A] = 0
 			addiction_counters[A] -= rand(1,3)
-			// Addiction proced.
-			if(addiction_counters[A] > 0 && addiction_counters[A] < addiction_peak)
+			// satiating addiction
+			if(addiction_counters[A] > 0 && addiction_counters[A] < ADDICTION_PEAK)
+				if(addiction_counters[A] < 80)
+					addiction_counters[A] = 80
+
 				addiction_counters[A] += rand(8,13)
-			if(addiction_counters[A] <= addiction_proc)
-				addiction_counters[A] = addiction_peak
+			// Addiction proced.
+			if(A in fast_addictives)
+				// quickly addict to these drugs, bliss, oxyco etc
+				if(addiction_counters[A] <= FASTADDICT_PROC)
+					addict_to_reagent(A)
+				to_chat(src, "<span class='notice'>You feel rejuvenated as the [SSchemistry.chemical_reagents[A].name] rushes through you.</span>")
+			else
+				// slower addiction over a longer period, cigs and painkillers mostly
+				if(addiction_counters[A] <= ADDICTION_PROC)
+					addict_to_reagent(A)
 
 		// For all counters above 100, count down
 		// For all under 0, count up to 0 randomly, reducing initial addiction buildup if you didn't proc it
@@ -1594,31 +1607,38 @@
 				if(prob(6))
 					addiction_counters[C]  -= 1
 				// withdrawl mechanics
-				if(prob(3) && addiction_counters[C]  > 20)
-					// send a message
-					if(addiction_counters[C] < 40)
-						to_chat(src, "<span class='danger'>You're dying for some [SSchemistry.chemical_reagents[C].name]!</span>")
-					else if(addiction_counters[C] < 60)
-						to_chat(src, "<span class='warning'>You're really craving some [SSchemistry.chemical_reagents[C].name].</span>")
-					else if(addiction_counters[C] < 80)
-						to_chat(src, "<span class='notice'>You're feeling the need for some [SSchemistry.chemical_reagents[C].name].</span>")
-					emote(pick("pale","shiver","twitch"))
-				if(addiction_counters[C] > 10)
+				if(addiction_counters[C] < 10)
+					if(prob(2))
+						Weaken(1)
+				else if(addiction_counters[C] > 10)
+					if(prob(2))
+						// send a message
+						if(addiction_counters[C] < 40)
+							to_chat(src, "<span class='danger'>You're dying for some [SSchemistry.chemical_reagents[C].name]!</span>")
+						else if(addiction_counters[C] < 60)
+							to_chat(src, "<span class='warning'>You're really craving some [SSchemistry.chemical_reagents[C].name].</span>")
+						else if(addiction_counters[C] < 80)
+							to_chat(src, "<span class='notice'>You're feeling the need for some [SSchemistry.chemical_reagents[C].name].</span>")
+						// effects
+						if(addiction_counters[C] < 80 && prob(20))
+							emote(pick("pale","shiver","twitch"))
 					// proc side effect
 					if(addiction_counters[C] < 30)
-						if(prob(6))
+						if(prob(3))
 							Weaken(2)
 							emote("vomit")
-							add_chemical_effect(CE_WITHDRAWL, rand(5,7) * REM)
+							add_chemical_effect(CE_WITHDRAWL, rand(2,4) * REM)
 					else if(addiction_counters[C] < 50)
-						if(prob(4))
-							emote("vomit")
-							add_chemical_effect(CE_WITHDRAWL, rand(3,6) * REM)
-					else if(addiction_counters[C] < 70)
 						if(prob(3))
+							emote("vomit")
+							add_chemical_effect(CE_WITHDRAWL, rand(1,3) * REM)
+					else if(addiction_counters[C] < 70)
+						if(prob(2))
 							emote("vomit")
 			if(addiction_counters[C] == 0)
 				addictions.Remove(C)
+				if(addictions.len == 0)
+					to_chat(src, "<span class='notice'>You feel your shakes and cold chills stop.</span>")
 
 		// If you're dirty, your gloves will become dirty, too.
 		if(gloves && germ_level > gloves.germ_level && prob(10))
@@ -2439,5 +2459,14 @@
 
 	brain.tick_defib_timer()
 
+/mob/living/carbon/human/proc/addict_to_reagent(var/reagentid)
+	if(!(reagentid in addictions))
+		addictions.Add(reagentid)
+	addiction_counters[reagentid] = ADDICTION_PEAK
+
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS
+
+#undef ADDICTION_PROC
+#undef FASTADDICT_PROC
+#undef ADDICTION_PEAK

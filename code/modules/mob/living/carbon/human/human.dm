@@ -1788,6 +1788,18 @@
 		dna.SetSEState(VERTIGOBLOCK,1,1)
 		disabilities |= VERTIGO
 
+	// automatic addictions
+	if(cli.prefs.addictions & ADDICT_NICOTINE)
+		addict_to_reagent("nicotine")
+	if(cli.prefs.addictions & ADDICT_PAINKILLER)
+		addict_to_reagent("paracetamol")
+	if(cli.prefs.addictions & ADDICT_BLISS)
+		addict_to_reagent("bliss")
+	if(cli.prefs.addictions & ADDICT_OXY)
+		addict_to_reagent("oxycodone")
+	if(cli.prefs.addictions & ADDICT_HYPER)
+		addict_to_reagent("hyperzine")
+
 	// Auto enable trait based genes, otherwise we'd have to deal with the random activation chance...
 	if(species.traits)
 		for(var/trait in species.traits)

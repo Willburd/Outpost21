@@ -18,6 +18,12 @@
 	dat += "Genetically Deaf: <a href='?src=\ref[src];sdisabilities=[DEAF]'><b>[pref.sdisabilities & DEAF ? "Yes" : "No"]</b></a><br>"
 	dat += "Epilepsy: <a href='?src=\ref[src];disabilities=[EPILEPSY]'><b>[pref.disabilities & EPILEPSY ? "Yes" : "No"]</b></a><br>"
 	dat += "Vertigo: <a href='?src=\ref[src];disabilities=[VERTIGO]'><b>[pref.disabilities & VERTIGO ? "Yes" : "No"]</b></a><br>"
+	dat += "<hr>"
+	dat += "Nicotine addiction: <a href='?src=\ref[src];addictions=[ADDICT_NICOTINE]'><b>[pref.addictions & ADDICT_NICOTINE ? "Yes" : "No"]</b></a><br>"
+	dat += "Painkiller addiction: <a href='?src=\ref[src];addictions=[ADDICT_PAINKILLER]'><b>[pref.addictions & ADDICT_PAINKILLER ? "Yes" : "No"]</b></a><br>"
+	dat += "Bliss addiction: <a href='?src=\ref[src];addictions=[ADDICT_BLISS]'><b>[pref.addictions & ADDICT_BLISS ? "Yes" : "No"]</b></a><br>"
+	dat += "Oxycodone addiction: <a href='?src=\ref[src];addictions=[ADDICT_OXY]'><b>[pref.addictions & ADDICT_OXY ? "Yes" : "No"]</b></a><br>"
+	dat += "Hyperzine addiction: <a href='?src=\ref[src];addictions=[ADDICT_HYPER]'><b>[pref.addictions & ADDICT_HYPER ? "Yes" : "No"]</b></a><br>"
 	dat += "<hr><br>"
 	dat += "<a href='?src=\ref[src];reset_disabilities=1'>Reset</a><br>"
 	// outpost 21 edit end

@@ -51,7 +51,8 @@ var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglyce
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "bliss", "stoxin", "ambrosia_extract")   // Decrease heart rate.
 var/list/heartstopper  = list("potassium_chlorophoride", "zombiepowder") // This stops the heart.
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
-var/list/addictives	   = list("oxycodone","nicotine","hyperzine","bliss","ambrosia_extract","talum_quem","methylphenidate","tramadol")
+var/list/addictives	    = list("oxycodone","nicotine","hyperzine","bliss","ambrosia_extract","talum_quem","methylphenidate","paracetamol","tricordrazine")
+var/list/fast_addictives= list("oxycodone","hyperzine","bliss","methylphenidate") // needs to be in above list too
 
 #define MAX_PILL_SPRITE 24 //max icon state of the pill sprites
 #define MAX_BOTTLE_SPRITE 4 //max icon state of the pill sprites

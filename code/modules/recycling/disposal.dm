@@ -30,7 +30,12 @@
 /obj/machinery/disposal/mail_reciever
 	name = "disposal mail destination()"
 	desc = "A pneumatic waste disposal unit. This unit is marked for receiving mail."
-	icon = 'icons/obj/pipes/disposal_op.dmi'
+	icon = 'icons/obj/pipes/disposal_mail.dmi'
+
+/obj/machinery/disposal/burn_pit
+	name = "incinerator disposal"
+	desc = "A pneumatic waste disposal unit. This unit is connected directly to the station's incinerator."
+	icon = 'icons/obj/pipes/disposal_burn.dmi'
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.

@@ -1573,33 +1573,35 @@
 			var/reagentid = R.id
 			if(istype( SSchemistry.chemical_reagents[reagentid], /datum/reagent/ethanol))
 				reagentid = "ethanol"
-			if(reagentid in addictives && !(reagentid in addict))
+			if(reagentid in addictives)
 				addict.Add(reagentid)
 		// Only needed for alcohols, will interfere with pills if you detect other things!
 		for(var/datum/reagent/R in ingested.reagent_list)
-			if(istype( SSchemistry.chemical_reagents[R.id], /datum/reagent/ethanol) && !(R.id in addict))
+			if(istype( SSchemistry.chemical_reagents[R.id], /datum/reagent/ethanol))
 				addict.Add("ethanol")
 
 		for(var/A in addict)
 			if(!(A in addictions))
 				addictions.Add(A)
 				addiction_counters[A] = 0
-			addiction_counters[A] -= rand(1,3)
-			// satiating addiction
-			if(addiction_counters[A] > 0 && addiction_counters[A] < ADDICTION_PEAK)
-				if(addiction_counters[A] < 80)
-					addiction_counters[A] = 80
-					to_chat(src, "<span class='notice'>You feel rejuvenated as the [SSchemistry.chemical_reagents[A].name] rushes through you.</span>")
-				addiction_counters[A] += rand(8,13)
-			// Addiction proced.
-			if(A in fast_addictives)
-				// quickly addict to these drugs, bliss, oxyco etc
-				if(addiction_counters[A] <= FASTADDICT_PROC)
-					addict_to_reagent(A)
+			if(addiction_counters[A] <= 0)
+				// Build addiction until it procs
+				addiction_counters[A] -= rand(1,3)
+				if(A in fast_addictives)
+					// quickly addict to these drugs, bliss, oxyco etc
+					if(addiction_counters[A] <= FASTADDICT_PROC)
+						addict_to_reagent(A)
+				else
+					// slower addiction over a longer period, cigs and painkillers mostly
+					if(addiction_counters[A] <= ADDICTION_PROC)
+						addict_to_reagent(A)
 			else
-				// slower addiction over a longer period, cigs and painkillers mostly
-				if(addiction_counters[A] <= ADDICTION_PROC)
-					addict_to_reagent(A)
+				// satiating addiction we already have
+				if(addiction_counters[A] < ADDICTION_PEAK)
+					if(addiction_counters[A] < 80)
+						addiction_counters[A] = 80
+						to_chat(src, "<span class='notice'>You feel rejuvenated as the [SSchemistry.chemical_reagents[A].name] rushes through you.</span>")
+					addiction_counters[A] += rand(8,13)
 
 		// For all counters above 100, count down
 		// For all under 0, count up to 0 randomly, reducing initial addiction buildup if you didn't proc it
@@ -1607,11 +1609,11 @@
 			var/C = pick(addictions)
 			if(addiction_counters[C] < 0)
 				// return to normal... we didn't get addicted yet, but we shouldn't become addicted instantly next time if it's been a few hours!
-				if(prob(12))
+				if(prob(15))
 					addiction_counters[C]  += 1
 			if(addiction_counters[C] > 0)
 				// slow degrade
-				if(prob(6))
+				if(prob(8))
 					addiction_counters[C]  -= 1
 				// withdrawl mechanics
 				if(addiction_counters[C] < 10)

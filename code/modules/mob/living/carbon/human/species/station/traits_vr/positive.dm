@@ -697,7 +697,7 @@
 	desc = "Allows contact exposure to terraforming enzymes."
 	cost = 3
 	var_changes = list("enzyme_contact_mod" = 0)
-/datum/dna/gene/trait_linked/phoron_resist/New() // Genetically linked trait
+/datum/dna/gene/trait_linked/enzyme_immune/New() // Genetically linked trait
 	block = TRAITBLOCK_ENZYME
 	activation_messages=list("You feel oddly slimey.")
 	deactivation_messages=list("You feel less slimey.")

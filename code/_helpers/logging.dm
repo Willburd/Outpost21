@@ -105,7 +105,7 @@
 		GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>EMOTE:</u> - <span style=\"color:#CCBADC\">[text]</span>"
 
 /proc/log_attack(attacker, defender, message)
-	if (config.log_attack)
+	if (config.log_attack && !isturf(defender)) // massive spam if we include turf attacks
 		WRITE_LOG(diary, "ATTACK: [attacker] against [defender]: [message]")
 
 /proc/log_adminsay(text, mob/speaker)

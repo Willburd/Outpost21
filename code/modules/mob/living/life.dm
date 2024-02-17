@@ -62,6 +62,7 @@
 
 	if(handle_regular_status_updates()) // Status & health update, are we dead or alive etc.
 		handle_disabilities() // eye, ear, brain damages
+		handle_addictions() // dwugs
 		handle_statuses() //all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
 
 	handle_actions()
@@ -207,6 +208,10 @@
 		// deafness heals slowly over time, unless ear_damage is over 100
 		if(ear_damage < 100)
 			adjustEarDamage(-0.05,-1)
+
+/mob/living/proc/handle_addictions()
+	// meant to be overriden for humans
+	return
 
 /mob/living/handle_regular_hud_updates()
 	if(!client)

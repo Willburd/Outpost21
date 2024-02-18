@@ -228,6 +228,16 @@
 		mob.dna.SetSEState(TRAITBLOCK_BREATH_CARBON,1)
 		domutcheck(mob, null, MUTCHK_FORCED)
 
+/datum/disease2/effect/breathe_methane
+	name = "Methane Respiration"
+	stage = 4
+	chance_maxm = 12
+
+/datum/disease2/effect/breathe_methane/activate(var/mob/living/carbon/mob,var/multiplier)
+	if(!mob.dna.GetSEState(TRAITBLOCK_BREATH_METHANE))
+		mob.dna.SetSEState(TRAITBLOCK_BREATH_METHANE,1)
+		domutcheck(mob, null, MUTCHK_FORCED)
+
 /datum/disease2/effect/darkvision
 	name = "Ocular Lowlight Adaption"
 	stage = 4

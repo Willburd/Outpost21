@@ -225,6 +225,15 @@
 	. = ..()
 	src.air_contents.adjust_gas("carbon_dioxide", (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
+/obj/item/weapon/tank/emergency/methane
+	name = "emergency methane tank"
+	desc = "An emergency air tank hastily painted yellow."
+	icon_state = "emergency_tst"
+	gauge_icon = "indicator_emergency"
+
+/obj/item/weapon/tank/emergency/methane/Initialize()
+	. = ..()
+	src.air_contents.adjust_gas("methane", (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /*
  * Nitrogen
@@ -273,4 +282,23 @@
 	. = ..()
 	if(loc == user && (air_contents.gas["carbon_dioxide"] < 10))
 		. += "<span class='danger'>The meter on \the [src] indicates you are almost out of carbon dioxide!</span>"
+		//playsound(user, 'sound/effects/alert.ogg', 50, 1)
+
+/*
+ * Methane
+ */
+/obj/item/weapon/tank/methane
+	name = "methane tank"
+	desc = "A tank of methane."
+	icon_state = "methane"
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+
+/obj/item/weapon/tank/methane/Initialize()
+	. = ..()
+	src.air_contents.adjust_gas("methane", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/weapon/tank/methane/examine(mob/user)
+	. = ..()
+	if(loc == user && (air_contents.gas["methane"] < 10))
+		. += "<span class='danger'>The meter on \the [src] indicates you are almost out of methane!</span>"
 		//playsound(user, 'sound/effects/alert.ogg', 50, 1)

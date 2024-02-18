@@ -1844,6 +1844,8 @@
 			gastank = new /obj/item/weapon/tank/nitrogen(src)
 		if(species.breath_type == "carbon_dioxide")
 			gastank = new /obj/item/weapon/tank/carbon_dioxide(src)
+		if(species.breath_type == "methane")
+			gastank = new /obj/item/weapon/tank/methane(src)
 
 		// back, or hand...
 		equip_to_slot_or_del(new /obj/item/clothing/mask/breath(src), slot_wear_mask)

@@ -14,7 +14,7 @@
 		var/datum/gas_mixture/air_contents = T.return_air()
 		T.air = new/datum/gas_mixture
 		T.air.temperature = air_contents.temperature
-		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", 0)
+		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", 0, "methane", 0)
 		T.air.group_multiplier = air_contents.group_multiplier
 		T.air.volume = air_contents.volume
 
@@ -36,7 +36,7 @@
 		var/datum/gas_mixture/air_contents = T.return_air()
 		T.air = new/datum/gas_mixture
 		T.air.temperature = air_contents.temperature
-		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", ONE_ATMOSPHERE, "phoron", 0)
+		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", ONE_ATMOSPHERE, "phoron", 0, "methane", 0)
 		T.air.group_multiplier = air_contents.group_multiplier
 		T.air.volume = air_contents.volume
 
@@ -49,7 +49,7 @@
 		var/datum/gas_mixture/air_contents = T.return_air()
 		T.air = new/datum/gas_mixture
 		T.air.temperature = air_contents.temperature
-		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", ONE_ATMOSPHERE, "nitrogen", 0, "phoron", 0)
+		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", ONE_ATMOSPHERE, "nitrogen", 0, "phoron", 0, "methane", 0)
 		T.air.group_multiplier = air_contents.group_multiplier
 		T.air.volume = air_contents.volume
 
@@ -62,6 +62,19 @@
 		var/datum/gas_mixture/air_contents = T.return_air()
 		T.air = new/datum/gas_mixture
 		T.air.temperature = air_contents.temperature
-		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", ONE_ATMOSPHERE)
+		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", ONE_ATMOSPHERE, "methane", 0)
+		T.air.group_multiplier = air_contents.group_multiplier
+		T.air.volume = air_contents.volume
+
+/obj/effect/map_effect/interval/atmogland/methane
+	name = "atmogland methane"
+
+/obj/effect/map_effect/interval/atmogland/phoron/trigger()
+	var/turf/simulated/T = loc
+	if(T)
+		var/datum/gas_mixture/air_contents = T.return_air()
+		T.air = new/datum/gas_mixture
+		T.air.temperature = air_contents.temperature
+		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", 0, "methane", ONE_ATMOSPHERE)
 		T.air.group_multiplier = air_contents.group_multiplier
 		T.air.volume = air_contents.volume

@@ -286,10 +286,12 @@
 				my_mob.min_tox = gaslist["phoron"] * 0.8
 				my_mob.min_n2 = gaslist["nitrogen"] * 0.8
 				my_mob.min_co2 = gaslist["carbon_dioxide"] * 0.8
+				my_mob.min_ch4 = gaslist["methane"] * 0.8
 				my_mob.max_oxy = gaslist["oxygen"] * 1.2
 				my_mob.max_tox = gaslist["phoron"] * 1.2
 				my_mob.max_n2 = gaslist["nitrogen"] * 1.2
 				my_mob.max_co2 = gaslist["carbon_dioxide"] * 1.2
+				my_mob.max_ch4 = gaslist["methane"] * 1.2
 /* //VORESTATION AI TEMPORARY REMOVAL
 		if(guard)
 			my_mob.returns_home = TRUE
@@ -475,4 +477,4 @@
 	name = "Talon"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_PERSIST|MAP_LEVEL_MAPPABLE
 	base_turf = /turf/space
-	z = Z_LEVEL_OFFMAP1 
+	z = Z_LEVEL_OFFMAP1

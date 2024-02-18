@@ -50,6 +50,10 @@
 	gauge_cap = 3
 	gauge_icon = "indicator_double"
 
+/obj/item/weapon/tank/methane
+	icon = 'icons/obj/tank_vr.dmi'
+	icon_state = "methane"
+
 /obj/item/weapon/tank/emergency
 	icon = 'icons/obj/tank_vr.dmi'
 	icon_state = "emergency"
@@ -98,4 +102,10 @@
 	icon = 'icons/obj/tank_vr.dmi'
 	icon_state = "oxygen_fr"
 	gauge_icon = "indicator_bigtank"
+	gauge_cap = 3
+
+/obj/item/weapon/tank/emergency/methane
+	icon = 'icons/obj/tank_vr.dmi'
+	icon_state = "emergency_methane"
+	gauge_icon = "indicator_smalltank"
 	gauge_cap = 3

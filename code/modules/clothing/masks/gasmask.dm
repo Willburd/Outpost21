@@ -11,7 +11,7 @@
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 	var/gas_filter_strength = 1			//For gas mask filters
-	var/list/filtered_gases = list("phoron", "nitrous_oxide")
+	var/list/filtered_gases = list("phoron", "nitrous_oxide", "methane")
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 75, rad = 0)
 	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
@@ -116,7 +116,7 @@
 	//body_parts_covered = 0
 	species_restricted = list(SPECIES_ZADDAT)
 	flags_inv = HIDEEARS //semi-transparent
-	filtered_gases = list("phoron", "nitrogen", "nitrous_oxide")
+	filtered_gases = list("phoron", "nitrogen", "nitrous_oxide","methane")
 */
 
 /obj/item/clothing/mask/gas/syndicate

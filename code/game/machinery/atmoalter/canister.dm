@@ -71,6 +71,12 @@
 	canister_color = "purple"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/methane
+	name = "Canister: \[CH4\]"
+	icon_state = "green"
+	canister_color = "green"
+	can_label = 0
+
 /obj/machinery/portable_atmospherics/canister/air/airlock
 	start_pressure = 3 * ONE_ATMOSPHERE
 
@@ -102,6 +108,10 @@
 	name = "Canister \[PN2O\]"
 	icon_state = "purple"
 	canister_color = "purple"
+/obj/machinery/portable_atmospherics/canister/empty/methane
+	name = "Canister \[CH4\]"
+	icon_state = "green"
+	canister_color = "green"
 
 
 
@@ -413,6 +423,13 @@ update_flag
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("phoron", air_mix["oxygen"], "nitrous_oxide", air_mix["nitrogen"])
 
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/methane/New()
+	..()
+
+	src.air_contents.adjust_gas("methane", MolesForPressure())
 	src.update_icon()
 	return 1
 

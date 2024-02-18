@@ -25,6 +25,7 @@
 	 2: Nitrogen: Nitrogen ONLY
 	 3: Carbon Dioxide: Carbon Dioxide ONLY
 	 4: Nitrous Oxide (Formerly called Sleeping Agent) (N2O)
+	 5: Methane: Methane only
 	*/
 	var/filter_type = -1
 	var/list/filtered_out = list()
@@ -52,6 +53,8 @@
 			filtered_out = list("carbon_dioxide")
 		if(4)//removing N2O
 			filtered_out = list("nitrous_oxide")
+		if(5)//removing CH4
+			filtered_out = list("methane")
 
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -134,6 +137,8 @@
 	// 		current_filter_type = "Carbon Dioxide"
 	// 	if(4)
 	// 		current_filter_type = "Nitrous Oxide"
+	// 	if(5)
+	// 		current_filter_type = "Methane"
 	// 	if(-1)
 	// 		current_filter_type = "Nothing"
 	// 	else
@@ -157,7 +162,7 @@
 
 	// user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmos_filter")
 	// onclose(user, "atmos_filter")
-	
+
 
 
 /obj/machinery/atmospherics/trinary/atmos_filter/tgui_interact(mob/user, datum/tgui/ui)
@@ -181,6 +186,7 @@
 	data["filter_types"] += list(list("name" = "Nitrogen", "f_type" = 2, "selected" = filter_type == 2))
 	data["filter_types"] += list(list("name" = "Carbon Dioxide", "f_type" = 3, "selected" = filter_type == 3))
 	data["filter_types"] += list(list("name" = "Nitrous Oxide", "f_type" = 4, "selected" = filter_type == 4))
+	data["filter_types"] += list(list("name" = "Methane", "f_type" = 5, "selected" = filter_type == 5))
 
 	return data
 
@@ -217,6 +223,8 @@
 					filtered_out += "carbon_dioxide"
 				if(4)//removing N2O
 					filtered_out += "nitrous_oxide"
+				if(5)//removing CH4
+					filtered_out += "methane"
 
 	add_fingerprint(usr)
 	update_icon()

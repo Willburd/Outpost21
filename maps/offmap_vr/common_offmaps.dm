@@ -396,6 +396,8 @@
 					my_mob.min_n2 = gaslist["nitrogen"] * 0.8
 				if(my_mob.min_co2)
 					my_mob.min_co2 = gaslist["carbon_dioxide"] * 0.8
+				if(my_mob.min_ch4)
+					my_mob.min_ch4 = gaslist["methane"] * 0.8
 				if(my_mob.max_oxy)
 					my_mob.max_oxy = gaslist["oxygen"] * 1.2
 				if(my_mob.max_tox)
@@ -404,6 +406,8 @@
 					my_mob.max_n2 = gaslist["nitrogen"] * 1.2
 				if(my_mob.max_co2)
 					my_mob.max_co2 = gaslist["carbon_dioxide"] * 1.2
+				if(my_mob.max_ch4)
+					my_mob.max_ch4 = gaslist["methane"] * 1.2
 /* //VORESTATION AI TEMPORARY REMOVAL
 		if(guard)
 			my_mob.returns_home = TRUE

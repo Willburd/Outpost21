@@ -52,7 +52,7 @@
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_N2O)
+				if(ATM_O2 to ATM_METHANE)
 					atmos_filters += P
 	if(any_updated)
 		rebuild_filtering_list()
@@ -127,7 +127,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 				atmo_filter = 0
-			if(ATM_O2 to ATM_N2O)
+			if(ATM_O2 to ATM_METHANE)
 				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -156,6 +156,8 @@
 			return "Phoron" //*cough* Plasma *cough*
 		if(ATM_N2O)
 			return "Nitrous Oxide"
+		if(ATM_METHANE)
+			return "Methane"
 		else
 			return null
 
@@ -189,7 +191,7 @@
 		if("switch_filter")
 			if(!configuring || use_power)
 				return
-			var/new_filter = tgui_input_list(usr, "Select filter mode:", "Change filter", list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide"))
+			var/new_filter = tgui_input_list(usr, "Select filter mode:", "Change filter", list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide", "Methane"))
 			if(!new_filter)
 				return
 			switch_filter(dir_flag(params["dir"]), mode_return_switch(new_filter))
@@ -209,6 +211,8 @@
 			return ATM_P
 		if("Nitrous Oxide")
 			return ATM_N2O
+		if("Methane")
+			return ATM_METHANE
 		if("in")
 			return ATM_INPUT
 		if("out")

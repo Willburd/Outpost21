@@ -29,10 +29,15 @@
 		if(M != src)
 			M.Stun(1)
 
-	// hell toot
 	var/findholybook
 	if(isturf(C.loc))
 		var/turf/T = C.loc
+		// release gas
+		var/datum/gas_mixture/air_contents = new
+		air_contents.temperature = C.bodytemperature
+		air_contents.gas["methane"] = 0.07 * MOLES_CELLSTANDARD
+		T.assume_air(air_contents)
+		// hell toot
 		for(var/obj/item/weapon/storage/bible/B in T.contents)
 			findholybook = B
 			break

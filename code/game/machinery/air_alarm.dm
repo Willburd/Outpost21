@@ -689,6 +689,7 @@
 					list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]),
 					list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]),
 					list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]),
+					list("name" = "Methane"	, 		"command" = "ch4_scrub","val" = info["filter_ch4"]),
 					list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]),
 					list("name" = "Fuel",			"command" = "fuel_scrub","val" = info["filter_fuel"])
 				)
@@ -787,6 +788,7 @@
 			"tox_scrub",
 			"n2o_scrub",
 			"fuel_scrub",
+			"ch4_scrub",
 			"panic_siphon",
 			"scrubbing",
 			"direction")

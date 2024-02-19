@@ -51,11 +51,14 @@
 					signal.data["nitrogen"] = round(100*air_sample.gas["nitrogen"]/total_moles,0.1)
 				if(output&32)
 					signal.data["carbon_dioxide"] = round(100*air_sample.gas["carbon_dioxide"]/total_moles,0.1)
+				if(output&64)
+					signal.data["methane"] = round(100*air_sample.gas["methane"]/total_moles,0.1)
 			else
 				signal.data["oxygen"] = 0
 				signal.data["phoron"] = 0
 				signal.data["nitrogen"] = 0
 				signal.data["carbon_dioxide"] = 0
+				signal.data["methane"] = 0
 		signal.data["sigtype"]="status"
 		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
@@ -399,7 +402,7 @@
 /obj/machinery/computer/general_air_control/fuel_injection/tgui_act(action, params)
 	if(..())
 		return TRUE
-	
+
 	switch(action)
 		if("refresh_status")
 			device_info = null

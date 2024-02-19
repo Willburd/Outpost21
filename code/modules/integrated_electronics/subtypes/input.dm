@@ -745,6 +745,7 @@
 		"nitrogen"          = IC_PINTYPE_NUMBER,
 		"carbon dioxide"           = IC_PINTYPE_NUMBER,
 		"phoron"           = IC_PINTYPE_NUMBER,
+		"methane"           = IC_PINTYPE_NUMBER,
 		"other"           = IC_PINTYPE_NUMBER
 	)
 	activators = list("scan" = IC_PINTYPE_PULSE_IN, "on scanned" = IC_PINTYPE_PULSE_OUT)
@@ -766,6 +767,7 @@
 		var/n2_level = environment.gas["nitrogen"]/total_moles
 		var/co2_level = environment.gas["carbon_dioxide"]/total_moles
 		var/phoron_level = environment.gas["phoron"]/total_moles
+		var/methane_level = environment.gas["methane"]/total_moles
 		var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 		set_pin_data(IC_OUTPUT, 1, pressure)
 		set_pin_data(IC_OUTPUT, 2, round(environment.temperature-T0C,0.1))
@@ -773,7 +775,8 @@
 		set_pin_data(IC_OUTPUT, 4, round(n2_level*100,0.1))
 		set_pin_data(IC_OUTPUT, 5, round(co2_level*100,0.1))
 		set_pin_data(IC_OUTPUT, 6, round(phoron_level*100,0.01))
-		set_pin_data(IC_OUTPUT, 7, round(unknown_level, 0.01))
+		set_pin_data(IC_OUTPUT, 7, round(methane_level*100,0.01))
+		set_pin_data(IC_OUTPUT, 8, round(unknown_level, 0.01))
 	else
 		set_pin_data(IC_OUTPUT, 1, 0)
 		set_pin_data(IC_OUTPUT, 2, -273.15)
@@ -782,6 +785,7 @@
 		set_pin_data(IC_OUTPUT, 5, 0)
 		set_pin_data(IC_OUTPUT, 6, 0)
 		set_pin_data(IC_OUTPUT, 7, 0)
+		set_pin_data(IC_OUTPUT, 8, 0)
 	push_data()
 	activate_pin(2)
 

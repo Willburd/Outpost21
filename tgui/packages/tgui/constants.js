@@ -255,6 +255,12 @@ const GASES = [
     'color': 'white',
   },
   {
+    'id': 'methane',
+    'name': 'Methane',
+    'label': 'CH₄',
+    'color': 'green',
+  },
+  {
     'id': 'other',
     'name': 'Other',
     'label': 'Other',

@@ -390,6 +390,11 @@
 											else
 												contents.Add(0)
 
+										if ("methane")
+											if(t.air_contents.gas["methane"] && !t.air_contents.gas["oxygen"])
+												contents.Add(t.air_contents.gas["methane"])
+											else
+												contents.Add(0)
 
 								else
 									//no tank so we set contents to 0

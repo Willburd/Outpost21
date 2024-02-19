@@ -838,6 +838,7 @@
 						rupture_lung()
 
 	var/safe_exhaled_max = 10
+	var/safe_toxins_min = 0.01
 	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
@@ -846,7 +847,8 @@
 	var/breath_pressure = (breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
 
 	var/inhaling
-	var/poison
+	var/poison_toxin
+	var/poison_methane
 	var/exhaling
 
 	var/breath_type
@@ -866,7 +868,11 @@
 		poison_type = species.poison_type
 	else
 		poison_type = "phoron"
-	poison = breath.gas[poison_type]
+	poison_toxin = breath.gas[poison_type]
+
+	// hacky methane code, always poison unless you are a methane breather, species poisons needs a refactor to support multiple gasses
+	if(species.breath_type != "methane" )
+		poison_methane = breath.gas["methane"]
 
 	if(species.exhale_type)
 		exhale_type = species.exhale_type
@@ -875,7 +881,8 @@
 		exhaling = 0
 
 	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
-	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
+	var/toxins_pp = (poison_toxin/breath.total_moles)*breath_pressure
+	var/methane_pp = (poison_methane/breath.total_moles)*breath_pressure
 	// To be clear, this isn't how much they're exhaling -- it's the amount of the species exhale_gas that they just
 	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
 
@@ -902,6 +909,8 @@
 				throw_alert("oxy", /obj/screen/alert/not_enough_fuel)
 			if("nitrous_oxide")
 				throw_alert("oxy", /obj/screen/alert/not_enough_n2o)
+			if("methane")
+				throw_alert("oxy", /obj/screen/alert/not_enough_methane)
 
 	else
 		// We're in safe limits
@@ -943,13 +952,30 @@
 
 	// Too much poison in the air.
 	if(toxins_pp > safe_toxins_max)
-		var/ratio = (poison/safe_toxins_max) * 10
+		var/ratio = (poison_toxin/safe_toxins_max) * 10
 		if(reagents)
 			reagents.add_reagent("toxin", CLAMP(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-			breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
+			breath.adjust_gas(poison_type, -poison_toxin/6, update = 0) //update after
 		throw_alert("tox_in_air", /obj/screen/alert/tox_in_air)
 	else
 		clear_alert("tox_in_air")
+
+
+	if(methane_pp > safe_toxins_min)
+		var/SA_pp = (breath.gas["methane"] / breath.total_moles) * breath_pressure
+		if(SA_pp > 0.15)
+			if(prob(4))
+				spawn(0) to_chat(src,"<span class='warning'>You smell rotten eggs.</span>")
+	if(methane_pp > safe_toxins_max)
+		var/ratio = (poison_methane/safe_toxins_max) * 10
+		if(reagents)
+			reagents.add_reagent("toxin", CLAMP(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+			breath.adjust_gas("methane", -poison_methane/6, update = 0) //update after
+
+		breath.adjust_gas("methane", -breath.gas["methane"]/6, update = 0) //update after
+		throw_alert("methane_in_air", /obj/screen/alert/methane_in_air)
+	else
+		clear_alert("methane_in_air")
 
 	// If there's some other shit in the air lets deal with it here.
 	if(breath.gas["nitrous_oxide"])
@@ -970,6 +996,8 @@
 			if(prob(20))
 				spawn(0) emote(pick("giggle", "laugh"))
 		breath.adjust_gas("nitrous_oxide", -breath.gas["nitrous_oxide"]/6, update = 0) //update after
+
+
 
 	// Were we able to breathe?
 	if (failed_inhale || failed_exhale)

@@ -358,6 +358,7 @@ const ShuttleControlConsoleWeb = (props, context) => {
                     <LabeledList.Item label="Nitrogen">{sensor.nitrogen}%</LabeledList.Item>
                     <LabeledList.Item label="Carbon Dioxide">{sensor.carbon_dioxide}%</LabeledList.Item>
                     <LabeledList.Item label="Phoron">{sensor.phoron}%</LabeledList.Item>
+                    <LabeledList.Item label="Methane">{sensor.methane}%</LabeledList.Item>
                     {(sensor.other && <LabeledList.Item label="Other">{sensor.other}%</LabeledList.Item>) || null}
                   </LabeledList>
                 </LabeledList.Item>

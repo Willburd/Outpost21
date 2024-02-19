@@ -64,10 +64,10 @@
 		if(-INFINITY to 50)
 			throw_alert("nutrition", /obj/screen/alert/starving)
 
-//VOREStation ADD START - I made this for catslugs but tbh it's probably cool to give to everything. 
+//VOREStation ADD START - I made this for catslugs but tbh it's probably cool to give to everything.
 //Gives all simplemobs passive healing as long as they can find food.
 //Slow enough that it should affect combat basically not at all
-	
+
 /mob/living/simple_mob/proc/do_healing()
 	if(nutrition < 150)
 		return
@@ -152,6 +152,15 @@
 				throw_alert("co2", /obj/screen/alert/too_much_co2)
 			else
 				clear_alert("co2")
+
+			if(min_ch4 && Environment.gas["methane"] < min_ch4)
+				atmos_unsuitable = 2
+				throw_alert("methane_in_air", /obj/screen/alert/not_enough_methane)
+			else if(max_tox && Environment.gas["methane"] > max_ch4)
+				atmos_unsuitable = 2
+				throw_alert("methane_in_air", /obj/screen/alert/methane_in_air)
+			else
+				clear_alert("methane_in_air")
 
 	//Atmos effect
 	if(bodytemperature < minbodytemp)

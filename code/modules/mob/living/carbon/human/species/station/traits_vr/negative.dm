@@ -416,6 +416,18 @@
 	. = ..()
 
 
+/datum/trait/negative/breathes/methane
+	name = "Methane Breather"
+	desc = "You breathe methane instead of oxygen (which is poisonous to you)."
+	var_changes = list("breath_type" = "methane", "poison_type" = "oxygen", "ideal_air_type" = /datum/gas_mixture/belly_air/methane)
+/datum/dna/gene/trait_linked/breathes/methane/New() // Genetically linked trait
+	block = TRAITBLOCK_BREATH_METHANE
+	activation_messages=list("The air hurts to breath, your body craves methane!")
+	deactivation_messages=list("It no longer hurts to breath.")
+	linked_trait_path = /datum/trait/negative/breathes/methane
+	. = ..()
+
+
 /datum/trait/negative/monolingual
 	name = "Monolingual"
 	desc = "You are not good at learning languages."

@@ -111,6 +111,7 @@
 	TLV["oxygen"] =			list(-1.0, -1.0,-1.0,-1.0) // Partial pressure, kpa
 	TLV["carbon dioxide"] = list(-1.0, -1.0,   5,  10) // Partial pressure, kpa
 	TLV["phoron"] =			list(-1.0, -1.0, 0, 0.5) // Partial pressure, kpa
+	TLV["methane"] =		list(-1.0, -1.0, 0, 0.5) // Partial pressure, kpa
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(0,ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
 	TLV["temperature"] =	list(20, 40, 140, 160) // K
@@ -149,6 +150,7 @@
 	TLV["nitrogen"] =		list(0, 0, 135, 140) // Partial pressure, kpa
 	TLV["carbon dioxide"] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
 	TLV["phoron"] =			list(-1.0, -1.0, 0, 0.5) // Partial pressure, kpa
+	TLV["methane"] =		list(-1.0, -1.0, 0, 0.5) // Partial pressure, kpa
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
@@ -157,7 +159,7 @@
 	if(!master_is_operating())
 		elect_master()
 
-	// Mappers messed up, and have alarms with different frequencies in areas. 
+	// Mappers messed up, and have alarms with different frequencies in areas.
 	// This outright does not work, does nothing special, and makes any alarms on other freqs braindead.
 	// 1437 for atmospherics/fire alerts
 	// 1439 for air pumps, air scrubbers, atmo control
@@ -172,7 +174,7 @@
 		return
 
 	var/turf/simulated/location = loc
-	if(!istype(location))	
+	if(!istype(location))
 		return
 	var/datum/gas_mixture/environment = location.return_air()
 
@@ -292,6 +294,8 @@
 	var/co2_dangerlevel = TEST_TLV_VALUES
 	LOAD_TLV_VALUES(TLV["phoron"], environment.gas["phoron"]*partial_pressure)
 	var/phoron_dangerlevel = TEST_TLV_VALUES
+	LOAD_TLV_VALUES(TLV["methane"], environment.gas["methane"]*partial_pressure)
+	var/methane_dangerlevel = TEST_TLV_VALUES
 	LOAD_TLV_VALUES(TLV["temperature"], environment.temperature)
 	var/temperature_dangerlevel = TEST_TLV_VALUES
 	LOAD_TLV_VALUES(TLV["other"], other_moles*partial_pressure)
@@ -302,6 +306,7 @@
 		oxygen_dangerlevel,
 		co2_dangerlevel,
 		phoron_dangerlevel,
+		methane_dangerlevel,
 		other_dangerlevel,
 		temperature_dangerlevel
 		)
@@ -331,7 +336,7 @@
 
 /obj/machinery/alarm/proc/elect_master(exclude_self = FALSE)
 	if(!alarm_area)
-		return 
+		return
 
 	// loop through all sensors to update the area's sensor list as well
 	alarm_area.master_air_alarm = null
@@ -342,8 +347,8 @@
 			continue
 		if(!alarm_area.master_air_alarm && !(AA.stat & (NOPOWER|BROKEN)))
 			alarm_area.master_air_alarm = AA
-	
-	if(alarm_area.master_air_alarm) 
+
+	if(alarm_area.master_air_alarm)
 		// new master found!
 		alarm_area.master_air_alarm.update_icon() // ensure all alarms update icon with new master
 		return 1
@@ -684,6 +689,7 @@
 					list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]),
 					list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]),
 					list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]),
+					list("name" = "Methane"	, 		"command" = "ch4_scrub","val" = info["filter_ch4"]),
 					list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]),
 					list("name" = "Fuel",			"command" = "fuel_scrub","val" = info["filter_fuel"])
 				)
@@ -704,7 +710,7 @@
 		var/list/selected
 		var/list/thresholds = list()
 
-		var/list/gas_names = list("oxygen", "carbon dioxide", "phoron", "other")
+		var/list/gas_names = list("oxygen", "carbon dioxide", "phoron", "methane", "other")
 		for(var/g in gas_names)
 			thresholds[++thresholds.len] = list("name" = g, "settings" = list())
 			selected = TLV[g]
@@ -782,6 +788,7 @@
 			"tox_scrub",
 			"n2o_scrub",
 			"fuel_scrub",
+			"ch4_scrub",
 			"panic_siphon",
 			"scrubbing",
 			"direction")
@@ -930,6 +937,7 @@
 	TLV["nitrogen"] =		list(0, 0, 135, 140) // Partial pressure, kpa
 	TLV["carbon dioxide"] = list(-1.0, -1.0, 5, 10) // Partial pressure, kpa
 	TLV["phoron"] =			list(16, 19, 135, 140) // Partial pressure, kpa
+	TLV["methane"] =		list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K

@@ -18,7 +18,7 @@
 	var/minrate = 0
 	var/maxrate = 10 * ONE_ATMOSPHERE
 
-	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "nitrous_oxide", "volatile_fuel")
+	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "nitrous_oxide", "volatile_fuel", "methane")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/New()
 	..()
@@ -109,7 +109,7 @@
 	data["on"] = on ? 1 : 0
 	data["connected"] = connected_port ? 1 : 0
 	data["pressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
-	
+
 	data["rate"] = round(volume_rate)
 	data["minrate"] = round(minrate)
 	data["maxrate"] = round(maxrate)
@@ -201,7 +201,7 @@
 		update_use_power(new_use_power)
 	if(!on)
 		return
-	
+
 	var/power_draw = -1
 
 	var/datum/gas_mixture/environment = loc.return_air()

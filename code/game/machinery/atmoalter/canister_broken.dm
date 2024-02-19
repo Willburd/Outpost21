@@ -10,6 +10,8 @@
 	icon_state = "redws-1"
 /obj/machinery/portable_atmospherics/canister/nitrophoric_oxide/broken
 	icon_state = "purple-1"
+/obj/machinery/portable_atmospherics/canister/methane/broken
+	icon_state = "green-1"
 
 /obj/machinery/portable_atmospherics/canister/oxygen/broken/process()
 	if (!destroyed)
@@ -37,6 +39,11 @@
 	. = ..()
 
 /obj/machinery/portable_atmospherics/canister/nitrophoric_oxide/broken/process()
+	if (!destroyed)
+		take_damage(10000) // BANG
+	. = ..()
+
+/obj/machinery/portable_atmospherics/canister/methane/broken/process()
 	if (!destroyed)
 		take_damage(10000) // BANG
 	. = ..()

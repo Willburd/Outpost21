@@ -16,10 +16,12 @@
 	var/supported = 0
 	var/active = 0
 	var/list/resource_field = list()
+	var/list/gas_field = list()
 	var/obj/item/device/radio/intercom/faultreporter
 	var/drill_range = 5
 	var/offset = 2
 	var/current_capacity = 0
+	var/drill_moles_per_tick = 0 // for gasses
 
 	var/list/stored_ore = list(
 		"sand" = 0,
@@ -148,7 +150,18 @@
 	if(istype(get_turf(src), /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = get_turf(src)
 		M.GetDrilled()
+	// extract gasses!
+	else if(istype(get_turf(src), /turf/simulated/floor/gas_crack))
+		if(gas_field.len)
+			//Create gas mixture to hold data for passing
+			var/datum/gas_mixture/GM = new
+			for(var/gas in gas_field)
+				GM.adjust_multi(gas, drill_moles_per_tick)
+			GM.temperature = 423  // ~150C
 
+			var/atom/location = src.loc
+			location.assume_air(GM)
+	// break plating
 	else if(istype(get_turf(src), /turf/simulated))
 		var/turf/simulated/T = get_turf(src)
 		T.ex_act(2.0)
@@ -206,7 +219,8 @@
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-	else
+	// won't stop digging if gas pressure is detected
+	else if(!gas_field.len)
 		active = 0
 		need_player_check = 1
 		update_icon()
@@ -357,9 +371,10 @@
 	update_icon()
 
 /obj/machinery/mining/drill/proc/get_resource_field()
-
 	resource_field = list()
+	gas_field = list()
 	need_update_field = 0
+	drill_moles_per_tick = 0
 
 	var/turf/T = get_turf(src)
 	if(!istype(T)) return
@@ -373,8 +388,22 @@
 			if(!istype(mine_turf, /turf/space/))
 				if(mine_turf && mine_turf.has_resources)
 					resource_field += mine_turf
+				if(istype(mine_turf,/turf/simulated/floor/gas_crack))
+					drill_moles_per_tick += 2
+					if(mine_turf.oxygen && !("oxygen" in gas_field))
+						gas_field.Add("oxygen")
+					if(mine_turf.nitrogen && !("nitrogen" in gas_field))
+						gas_field.Add("nitrogen")
+					if(mine_turf.carbon_dioxide && !("carbon_dioxide" in gas_field))
+						gas_field.Add("carbon_dioxide")
+					if(mine_turf.phoron && !("phoron" in gas_field))
+						gas_field.Add("phoron")
+					if(mine_turf.nitrous_oxide && !("nitrous_oxide" in gas_field))
+						gas_field.Add("nitrous_oxide")
+					if(mine_turf.methane && !("methane" in gas_field))
+						gas_field.Add("methane")
 
-	if(!resource_field.len)
+	if(!resource_field.len && !gas_field.len)
 		system_error("Resources depleted.")
 
 /obj/machinery/mining/drill/proc/use_cell_power()

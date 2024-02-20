@@ -2,7 +2,7 @@
 	name = MAT_PLASTEEL
 	stack_type = /obj/item/stack/material/plasteel
 	integrity = 400
-	melting_point = 6000
+	melting_point = 8000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#777777"

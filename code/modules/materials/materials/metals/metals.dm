@@ -7,7 +7,7 @@
 	name = "durasteel"
 	stack_type = /obj/item/stack/material/durasteel
 	integrity = 600
-	melting_point = 7000
+	melting_point = 10000
 	icon_base = "metal"
 	icon_reinf = "reinf_metal"
 	icon_colour = "#6EA7BE"

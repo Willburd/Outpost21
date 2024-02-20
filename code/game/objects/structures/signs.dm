@@ -1014,6 +1014,12 @@
 	desc = "WARNING! Waste flow tube. Ensure the flow is disengaged before working."
 	icon_state = "atmos_waste"
 
+/obj/structure/sign/atmos_ch4
+	icon = 'icons/obj/decals_op.dmi'
+	name = "CH4 warning sign"
+	desc = "WARNING! CH4 flow tube. Ensure the flow is disengaged before working."
+	icon_state = "atmos_ch4"
+
 /obj/structure/sign/deck1
 	icon = 'icons/obj/decals_vr.dmi'
 	desc = "A silver sign which reads 'DECK I'."
@@ -1412,6 +1418,11 @@
 /obj/structure/sign/atmos/air
 	name = "\improper AIR"
 	icon_state = "atmos_air"
+
+/obj/structure/sign/atmos/ch4
+	name = "\improper METHANE"
+	icon = 'icons/obj/decals_op.dmi'
+	icon_state = "atmos_ch4"
 
 /obj/structure/sign/scenery/engineleft
 	name = "I.C.V."

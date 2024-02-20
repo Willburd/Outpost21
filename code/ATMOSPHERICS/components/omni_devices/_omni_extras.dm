@@ -11,6 +11,7 @@
 #define ATM_P		6	//Phoron
 #define ATM_N2O		7
 #define ATM_METHANE	8
+#define ATM_LASTGAS	8   //Used to be whatever gas was last, use this instead so it's less butts to update with new atmos
 
 //--------------------------------------------
 // Omni port datum

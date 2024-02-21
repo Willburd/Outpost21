@@ -7,6 +7,8 @@
 	var/mirrored = FALSE
 	var/tee = FALSE
 
+	var/initial_icon_updated = FALSE
+
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
 	var/datum/gas_mixture/air3

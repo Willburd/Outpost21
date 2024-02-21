@@ -122,6 +122,12 @@
 		if(output.network)
 			output.network.update = 1
 
+	if(!initial_icon_updated)
+		// so mapspawn filters actually have their overlays
+		initial_icon_updated = TRUE
+		spawn(50) // sometimes first update isn't enough, wait a bit longer
+			update_icon()
+
 	return 1
 
 /obj/machinery/atmospherics/omni/mixer/tgui_interact(mob/user,datum/tgui/ui = null)

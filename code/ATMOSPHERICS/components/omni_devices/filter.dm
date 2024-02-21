@@ -18,8 +18,6 @@
 	var/max_flow_rate = 200
 	var/set_flow_rate = 200
 
-	var/initial_icon_updated = FALSE
-
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 
 /obj/machinery/atmospherics/omni/atmos_filter/New()

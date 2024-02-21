@@ -30,7 +30,6 @@
 	var/filter_type = -1
 	var/list/filtered_out = list()
 
-
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
 
@@ -106,6 +105,12 @@
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power(power_draw)
+
+	if(!initial_icon_updated)
+		// so mapspawn filters actually have their overlays
+		initial_icon_updated = TRUE
+		spawn(50) // sometimes first update isn't enough, wait a bit longer
+			update_icon()
 
 	return 1
 

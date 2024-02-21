@@ -75,6 +75,12 @@
 		last_power_draw = power_draw
 		use_power(power_draw)
 
+	if(!initial_icon_updated)
+		// so mapspawn filters actually have their overlays
+		initial_icon_updated = TRUE
+		spawn(50) // sometimes first update isn't enough, wait a bit longer
+			update_icon()
+
 	return 1
 
 /obj/machinery/atmospherics/trinary/mixer/tgui_interact(mob/user, datum/tgui/ui)

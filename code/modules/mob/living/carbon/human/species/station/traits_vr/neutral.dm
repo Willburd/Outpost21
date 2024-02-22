@@ -221,7 +221,8 @@ YW change end */
 			"tha" = list("z")
 		),
 	autohiss_extra_map = list(
-			"the" = list("z")
+			"the" = list("z"),
+			"so" = list("z")
 		),
 	autohiss_exempt = list(LANGUAGE_UNATHI))
 	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat)

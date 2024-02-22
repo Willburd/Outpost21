@@ -222,7 +222,16 @@
 		if(I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			attached_organs[I.name] = organ
 
-	var/organ_to_remove = tgui_input_list(user, "Which organ do you want to prepare for removal?", "Organ Choice", attached_organs)
+	var/organ_to_remove
+	if(!istype(user,/mob/living/carbon/human/monkey/auto_doc))
+		organ_to_remove = tgui_input_list(user, "Which organ do you want to prepare for removal?", "Organ Choice", attached_organs)
+	else
+		// autodoc code
+		var/mob/living/carbon/human/monkey/auto_doc/D = user
+		var/obj/machinery/auto_doc/mach = D.owner_machine
+		if(mach.internal_organ_target in attached_organs)
+			organ_to_remove = mach.internal_organ_target
+
 	if(!organ_to_remove)
 		return 0
 	if(!attached_organs[organ_to_remove])
@@ -302,7 +311,18 @@
 		if(istype(I) && (I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			removable_organs[I.name] = organ
 
-	var/organ_to_remove = tgui_input_list(user, "Which organ do you want to remove?", "Organ Choice", removable_organs)
+	var/organ_to_remove
+	if(istype(user,/mob/living/carbon/human/monkey/auto_doc))
+		// autodoc magic
+		var/mob/living/carbon/human/monkey/auto_doc/doc = user
+		var/obj/machinery/auto_doc/mach = doc.owner_machine
+		if(mach)
+			var/obj/item/organ/internal/I = target.internal_organs_by_name[mach.internal_organ_target]
+			if(istype(I) && (I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
+				organ_to_remove = I.name
+	else
+		// normal input
+		organ_to_remove = tgui_input_list(user, "Which organ do you want to remove?", "Organ Choice", removable_organs)
 	if(!organ_to_remove) //They chose cancel!
 		to_chat(user, "<span class='notice'>You decide against preparing any organs for removal.</span>")
 		user.visible_message("[user] starts pulling \the [tool] from [target]'s [affected.name]", \

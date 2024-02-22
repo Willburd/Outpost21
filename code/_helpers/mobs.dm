@@ -196,7 +196,7 @@ Proc for attack log creation, because really why not
 			. = FALSE
 			break
 
-		if(target_zone && user.zone_sel.selecting != target_zone)
+		if(user.zone_sel && target_zone && user.zone_sel.selecting != target_zone)
 			. = FALSE
 			break
 

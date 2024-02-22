@@ -164,10 +164,14 @@
 	// get surgery
 	var/list/surgery_type = list("Remove Organ","Insert Organ","Repair Internal Bleeding","Repair Bone")
 	var/surgery = tgui_input_list(user, "Choose surgery:", "Surgery Type", surgery_type)
-	var/obj/item/organ/EO = destinationlist[aim_choice]
+	var/obj/item/organ/external/EO = destinationlist[aim_choice]
 	switch(surgery)
 		if("Remove Organ")
 			operation_type = "remove_organ"
+			if(EO.encased)
+				src.visible_message("\The [src] flashes 'Target location requires complex bone manipulation, a surgical professional is required for organ removal'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+				return
 			// if organ removal, select target organ
 			var/list/internallist = list()
 			var/list/internaldestinationlist = list()
@@ -188,6 +192,10 @@
 				src.visible_message("\The [src] flashes 'Beginning operation: Remove Organ [target_organ.name]'.")
 		if("Insert Organ")
 			operation_type = "insert_organ"
+			if(EO.encased)
+				src.visible_message("\The [src] flashes 'Target location requires complex bone manipulation, a surgical professional is required for organ transplant'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+				return
 			// if organ insertion, NEED an organ to insert!
 			if(!tools[TOOL_TRANSPLANT])
 				src.visible_message("\The [src] flashes 'Please load organ into storage chamber'.")
@@ -202,6 +210,10 @@
 				src.visible_message("\The [src] flashes 'Beginning operation: Transplant [I.name] into [EO.name]'.")
 		if("Repair Internal Bleeding")
 			operation_type = "internal_bleeding"
+			if(EO.encased)
+				src.visible_message("\The [src] flashes 'Target location requires complex bone manipulation, a surgical professional is required to repair internal bleeding'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+				return
 			src.visible_message("\The [src] flashes 'Beginning operation: Repair Internal Bleeding in [EO.name]'.")
 		if("Repair Bone")
 			operation_type = "repair_bone"

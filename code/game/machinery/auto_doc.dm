@@ -10,6 +10,7 @@
 /mob/living/carbon/human/monkey/auto_doc/set_species(new_species, default_colour, regen_icons, mob/living/carbon/human/example)
 	. = ..()
 	species.has_fine_manipulation = TRUE // advanced monkey
+	status_flags &= GODMODE
 
 /mob/living/carbon/human/monkey/auto_doc/Initialize(new_loc)
 	. = ..()
@@ -95,7 +96,7 @@
 	var/obj/machinery/optable/linked_table
 	linked_table = locate() in loc
 	if(!linked_table)
-		src.visible_message("[src] flashes 'No operation table detected'.")
+		src.visible_message("\The [src] flashes 'No operation table detected'.")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		return null
 	return linked_table.victim
@@ -142,8 +143,10 @@
 	// get target surgical zone
 	var/mob/living/carbon/human/victim = get_victim()
 	if(!victim)
-		src.visible_message("[src] flashes 'Please prepare subject for surgery, reminder to place N2O mask over their face before operation begins'.")
+		src.visible_message("\The [src] flashes 'Please position subject for surgery on operating table'.")
 		return
+	else
+		src.visible_message("\The [src] flashes 'Please prepare subject for surgery, reminder to place N2O mask over their face before operation begins'.")
 	var/list/targetlist = list()
 	var/list/destinationlist = list()
 	for(var/organ_name in BP_ALL)
@@ -165,10 +168,6 @@
 	switch(surgery)
 		if("Remove Organ")
 			operation_type = "remove_organ"
-			// check if space for organ storage!
-			if(tools[TOOL_TRANSPLANT])
-				src.visible_message("[src] flashes 'Please remove organ from storage chamber'.")
-				return
 			// if organ removal, select target organ
 			var/list/internallist = list()
 			var/list/internaldestinationlist = list()
@@ -177,33 +176,41 @@
 					internallist.Add(O.name)
 					internaldestinationlist[O.name] = O
 			if(internallist.len == 0)
-				src.visible_message("[src] flashes 'Target location has no internal organs'.")
+				src.visible_message("\The [src] flashes 'Target location has no internal organs'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 				return
 			var/organremove = tgui_input_list(user, "Choose organ to remove:", "Organ Target", internallist)
-			if(organremove && victim)
-				var/obj/item/organ/target_organ = internaldestinationlist[organremove]
-				if(target_organ)
-					internal_organ_target = target_organ.organ_tag
-					src.visible_message("[src] flashes 'Beginning operation: Remove Organ [target_organ.name]'.")
+			if(!organremove || !victim)
+				return
+			var/obj/item/organ/target_organ = internaldestinationlist[organremove]
+			if(target_organ)
+				internal_organ_target = target_organ.organ_tag
+				src.visible_message("\The [src] flashes 'Beginning operation: Remove Organ [target_organ.name]'.")
 		if("Insert Organ")
 			operation_type = "insert_organ"
 			// if organ insertion, NEED an organ to insert!
 			if(!tools[TOOL_TRANSPLANT])
-				src.visible_message("[src] flashes 'Please load organ into storage chamber'.")
+				src.visible_message("\The [src] flashes 'Please load organ into storage chamber'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 				return
 			else
-				var/obj/item/I = tools[TOOL_TRANSPLANT]
-				src.visible_message("[src] flashes 'Beginning operation: Transplant [I.name] into [EO.name]'.")
+				var/obj/item/organ/I = tools[TOOL_TRANSPLANT]
+				if(I.status & ORGAN_DEAD)
+					src.visible_message("\The [src] flashes 'Organ has decayed beyond safety treshold'.")
+					playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+					return
+				src.visible_message("\The [src] flashes 'Beginning operation: Transplant [I.name] into [EO.name]'.")
 		if("Repair Internal Bleeding")
 			operation_type = "internal_bleeding"
-			src.visible_message("[src] flashes 'Beginning operation: Repair Internal Bleeding in [EO.name]'.")
+			src.visible_message("\The [src] flashes 'Beginning operation: Repair Internal Bleeding in [EO.name]'.")
 		if("Repair Bone")
 			operation_type = "repair_bone"
 			if(EO.status & ORGAN_BROKEN)
-				src.visible_message("[src] flashes 'Target bodypart is too damaged for this operation to proceed safely'.")
+				src.visible_message("\The [src] flashes 'Target bodypart is too damaged for this operation to proceed safely'.")
+				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 				return
 			else
-				src.visible_message("[src] flashes 'Beginning operation: Repair Bones in [EO.name] bicardine injection advised'.")
+				src.visible_message("\The [src] flashes 'Beginning operation: Repair Bones in [EO.name], bicardine injection advised. A damaged limb will result in surgical complications'.")
 		else
 			return
 	// BEGIN
@@ -216,7 +223,7 @@
 	var/mob/living/carbon/human/victim = get_victim()
 	// Someone stole our occupant!
 	if(!victim)
-		src.visible_message("[src] flashes 'Surgery interupted'.")
+		src.visible_message("\The [src] flashes 'Surgery interupted'.")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		end_operation(FALSE)
 		return
@@ -224,14 +231,14 @@
 	// check everything is ready...
 	var/list/op_list = operations[operation_type]
 	if(!op_list)
-		src.visible_message("[src] flashes 'Invalid operation'.")
+		src.visible_message("\The [src] flashes 'Invalid operation'.")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		end_operation(FALSE)
 		return
 	var/toolid = op_list[operation_stage]
 	var/obj/item/tool = tools[toolid]
 	if(!tool)
-		src.visible_message("[src] flashes 'Machinery inoperable, tool damaged or missing'.")
+		src.visible_message("\The [src] flashes 'Machinery inoperable, tool damaged or missing'.")
 		playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 		end_operation(FALSE)
 	// RELEASE LAST OBJECT
@@ -249,7 +256,7 @@
 	operation_stage += 1
 	if(operation_stage > op_list.len)
 		end_operation(TRUE)
-		src.visible_message("[src] flashes 'Operation Complete'.")
+		src.visible_message("\The [src] flashes 'Operation Complete'.")
 		playsound(src,  'sound/machines/boobeebeep.ogg', 100, 0)
 
 	// NEXT
@@ -264,6 +271,7 @@
 /obj/machinery/auto_doc/proc/insert_organ(mob/user as mob, var/obj/item/organ/O)
 	if(operation_active)
 		to_chat(user, "<span class='notice'>You cannot insert the [O.name] while the [src] is operating.</span>")
+		return
 	if(!O)
 		return
 	if(tools[TOOL_TRANSPLANT])
@@ -275,6 +283,7 @@
 /obj/machinery/auto_doc/proc/remove_organ(mob/user as mob)
 	if(operation_active)
 		to_chat(user, "<span class='notice'>You cannot open the organ storage while the [src] is operating.</span>")
+		return
 	if(!tools[TOOL_TRANSPLANT])
 		return null
 	var/obj/item/I = tools[TOOL_TRANSPLANT]

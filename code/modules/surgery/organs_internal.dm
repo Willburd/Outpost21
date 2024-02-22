@@ -224,6 +224,7 @@
 
 	var/organ_to_remove
 	if(!istype(user,/mob/living/carbon/human/monkey/auto_doc))
+		// normal player input
 		organ_to_remove = tgui_input_list(user, "Which organ do you want to prepare for removal?", "Organ Choice", attached_organs)
 	else
 		// autodoc code
@@ -426,6 +427,12 @@
 		to_chat(user, "<span class='warning'>\The [O.name] [o_do] normally go in \the [affected.name].</span>")
 		return SURGERY_FAILURE
 
+	// autodoc needs to release it's current stored organ
+	if(istype(user,/mob/living/carbon/human/monkey/auto_doc))
+		var/mob/living/carbon/human/monkey/auto_doc/D = user
+		var/obj/machinery/auto_doc/mach = D.owner_machine
+		mach.finish_transplant()
+
 	return ..() && organ_missing && organ_compatible
 
 /datum/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -480,7 +487,12 @@
 		if(istype(I) && (I.status & ORGAN_CUT_AWAY) && !(I.robotic >= ORGAN_ROBOT) && I.parent_organ == target_zone)
 			removable_organs[I.name] = organ
 
-	var/organ_to_replace = tgui_input_list(user, "Which organ do you want to reattach?", "Organ Choice", removable_organs)
+	var/organ_to_replace
+	if(!istype(user,/mob/living/carbon/human/monkey/auto_doc))
+		organ_to_replace = tgui_input_list(user, "Which organ do you want to reattach?", "Organ Choice", removable_organs)
+	else
+		if(removable_organs.len > 0)
+			organ_to_replace = pick(removable_organs)  // autodoc just picks any, because in most cases it will be the only one!
 	if(!organ_to_replace)
 		return 0
 	if(!removable_organs[organ_to_replace])

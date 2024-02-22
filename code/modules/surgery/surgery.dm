@@ -194,7 +194,7 @@
 		var/mob/living/carbon/human/monkey/auto_doc/D = user
 		var/obj/machinery/auto_doc/mach = D.owner_machine
 		for(var/surgery in available_surgeries)
-			if(surgery in mach.whitelisted_steps)
+			if(surgery in mach.get_step_whitelist())
 				selected_surgery = surgery
 				break
 

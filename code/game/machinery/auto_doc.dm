@@ -30,7 +30,6 @@
 	var/mob/living/carbon/human/monkey/auto_doc/doctor
 	var/list/operations
 	var/list/tools
-	var/list/whitelisted_steps // list of steps the autodoc may perform, this stops it getting stuck in places with multiple options for the same tool... Keep it simple.
 
 	var/delay_time = 10 SECONDS
 	var/next_time = 0
@@ -47,7 +46,6 @@
 	. = ..()
 	create_tools()
 	create_operations()
-	create_step_whitelist()
 	// setup the good doctor
 	doctor = new(src)
 	doctor.owner_machine = src
@@ -75,8 +73,10 @@
 	tools[TOOL_CAUTERY] 	= new /obj/item/weapon/surgical/cautery(src)
 	tools[TOOL_TRANSPLANT]  = null // special
 
-/obj/machinery/auto_doc/proc/create_step_whitelist()
-	whitelisted_steps = list()
+/obj/machinery/auto_doc/proc/get_step_whitelist()
+	// list of steps the autodoc may perform, this stops it getting stuck in places with multiple options for the same tool... Keep it simple.
+	// different states of the machine may allow different things someday, like allowing implants if one is loaded into storage?...
+	var/list/whitelisted_steps = list()
 	whitelisted_steps.Add("Create Incision")
 	whitelisted_steps.Add("Clamp Bleeders")
 	whitelisted_steps.Add("Retract Skin")
@@ -89,6 +89,7 @@
 	whitelisted_steps.Add("Set Bone")
 	whitelisted_steps.Add("Mend Skull")
 	whitelisted_steps.Add("Finish Mending Bone")
+	return whitelisted_steps
 
 /obj/machinery/auto_doc/proc/get_victim()
 	var/obj/machinery/optable/linked_table
@@ -160,6 +161,7 @@
 	// get surgery
 	var/list/surgery_type = list("Remove Organ","Insert Organ","Repair Internal Bleeding","Repair Bone")
 	var/surgery = tgui_input_list(user, "Choose surgery:", "Surgery Type", surgery_type)
+	var/obj/item/organ/EO = destinationlist[aim_choice]
 	switch(surgery)
 		if("Remove Organ")
 			operation_type = "remove_organ"
@@ -168,11 +170,10 @@
 				src.visible_message("[src] flashes 'Please remove organ from storage chamber'.")
 				return
 			// if organ removal, select target organ
-			var/obj/item/organ/external/bodypart = destinationlist[aim_choice]
 			var/list/internallist = list()
 			var/list/internaldestinationlist = list()
 			for(var/obj/item/organ/internal/O in victim.internal_organs)
-				if(O.parent_organ == bodypart.organ_tag)
+				if(O.parent_organ == EO.organ_tag)
 					internallist.Add(O.name)
 					internaldestinationlist[O.name] = O
 			if(internallist.len == 0)
@@ -183,24 +184,29 @@
 				var/obj/item/organ/target_organ = internaldestinationlist[organremove]
 				if(target_organ)
 					internal_organ_target = target_organ.organ_tag
+					src.visible_message("[src] flashes 'Beginning operation: Remove Organ [target_organ.name]'.")
 		if("Insert Organ")
 			operation_type = "insert_organ"
 			// if organ insertion, NEED an organ to insert!
 			if(!tools[TOOL_TRANSPLANT])
 				src.visible_message("[src] flashes 'Please load organ into storage chamber'.")
 				return
+			else
+				var/obj/item/I = tools[TOOL_TRANSPLANT]
+				src.visible_message("[src] flashes 'Beginning operation: Transplant [I.name] into [EO.name]'.")
 		if("Repair Internal Bleeding")
 			operation_type = "internal_bleeding"
+			src.visible_message("[src] flashes 'Beginning operation: Repair Internal Bleeding in [EO.name]'.")
 		if("Repair Bone")
 			operation_type = "repair_bone"
-			var/obj/item/organ/EO = destinationlist[aim_choice]
 			if(EO.status & ORGAN_BROKEN)
 				src.visible_message("[src] flashes 'Target bodypart is too damaged for this operation to proceed safely'.")
 				return
+			else
+				src.visible_message("[src] flashes 'Beginning operation: Repair Bones in [EO.name] bicardine injection advised'.")
 		else
 			return
 	// BEGIN
-	src.visible_message("[src] flashes 'Beginning operation'.")
 	playsound(src,  'sound/machines/boobeebeep.ogg', 100, 0)
 	operation_active = TRUE
 	next_time = world.time + delay_time
@@ -234,6 +240,7 @@
 	// EQUIP DR.NANERS PHD
 	doctor.put_in_active_hand(tool)
 	doctor.a_intent = I_HELP
+	doctor.germ_level = 0 // forced clean
 
 	// PERFORM THE MAGIC
 	tool.do_surgery( victim, doctor, external_organ_target)
@@ -253,6 +260,8 @@
 	operation_stage = 1
 
 /obj/machinery/auto_doc/proc/insert_organ(mob/user as mob, var/obj/item/organ/O)
+	if(operation_active)
+		to_chat(user, "<span class='notice'>You cannot insert the [O.name] while the [src] is operating.</span>")
 	if(!O)
 		return
 	if(tools[TOOL_TRANSPLANT])
@@ -262,6 +271,8 @@
 	playsound(src, 'sound/items/drop/flesh.ogg', 100, 0)
 
 /obj/machinery/auto_doc/proc/remove_organ(mob/user as mob)
+	if(operation_active)
+		to_chat(user, "<span class='notice'>You cannot open the organ storage while the [src] is operating.</span>")
 	if(!tools[TOOL_TRANSPLANT])
 		return null
 	var/obj/item/I = tools[TOOL_TRANSPLANT]
@@ -269,6 +280,9 @@
 	tools[TOOL_TRANSPLANT] = null
 	to_chat(user, "<span class='notice'>You remove \The [I.name] from the [src]'s organ storage unit.</span>")
 	playsound(src, 'sound/items/drop/flesh.ogg', 100, 0)
+
+/obj/machinery/auto_doc/proc/finish_transplant()
+	tools[TOOL_TRANSPLANT] = null
 
 #undef TOOL_FIXVEIN
 #undef TOOL_BONEGEL

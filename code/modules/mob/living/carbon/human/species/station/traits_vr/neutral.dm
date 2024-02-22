@@ -218,6 +218,7 @@ YW change end */
 	var_changes = list(
 	autohiss_basic_map = list(
 			"thi" = list("z"),
+			"shi" = list("z"),
 			"tha" = list("z")
 		),
 	autohiss_extra_map = list(

@@ -196,7 +196,9 @@
 	. = ..()
 	idcard = new /obj/item/weapon/card/id/security(src)
 	idcard.access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks) // Minimal access officer
-	set_id_info(idcard)
+	idcard.age = 0
+	idcard.registered_name		= name
+	idcard.sex 				= capitalize(gender)
 
 /mob/living/simple_mob/otie/security/GetIdCard()
 	if(stat == CONSCIOUS && friend)

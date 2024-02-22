@@ -1,0 +1,6 @@
+#define ADDICT_NICOTINE 	0x1
+#define ADDICT_PAINKILLER 	0x2
+#define ADDICT_BLISS		0x4
+#define ADDICT_OXY			0x8
+#define ADDICT_HYPER		0x10
+#define ADDICT_ALCOHOL		0x20

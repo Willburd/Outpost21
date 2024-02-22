@@ -43,14 +43,6 @@
 #define MUTE  0x2
 #define DEAF  0x4
 
-// addictions
-#define ADDICT_NICOTINE 	0x1
-#define ADDICT_PAINKILLER 	0x2
-#define ADDICT_BLISS		0x4
-#define ADDICT_OXY			0x8
-#define ADDICT_HYPER		0x10
-#define ADDICT_ALCOHOL		0x20
-
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.
 var/BLINDBLOCK    = 0

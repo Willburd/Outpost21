@@ -34,6 +34,7 @@
 #define RADIATION_SPEED_COEFFICIENT 0.1
 #define HUMAN_COMBUSTION_TEMP 524 //524k is the sustained combustion temperature of human fat
 
+// addictions
 #define ADDICTION_PROC -625 // point where addiction triggers, starts counting down from 0 to here!
 #define FASTADDICT_PROC -100 // point where certain chems with super addictive traits will kick in
 #define ADDICTION_PEAK 200 // point where addicted mobs reset to upon getting their addiction satiated... Decays over time,triggering messages and sideeffects if under 80
@@ -42,8 +43,6 @@
 	var/in_stasis = 0
 	var/heartbeat = 0
 	var/gutdeathpressure = 0 // for superfart and gibbing
-	var/list/addictions = list() // contains currently addicted chems
-	var/list/addiction_counters = list() // contains ID sorted counters
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -437,47 +436,17 @@
 	// For all under 0, count up to 0 randomly, reducing initial addiction buildup if you didn't proc it
 	if(addictions.len)
 		var/C = pick(addictions)
+		// return to normal... we didn't haven't been addicted yet, but we shouldn't become addicted instantly next time if it's been a few hours!
 		if(addiction_counters[C] < 0)
-			// return to normal... we didn't get addicted yet, but we shouldn't become addicted instantly next time if it's been a few hours!
 			if(prob(15))
-				addiction_counters[C]  += 1
+				addiction_counters[C] += 1
+		// proc reagent's withdrawl
 		if(addiction_counters[C] > 0)
-			// slow degrade
-			if(prob(8))
-				addiction_counters[C]  -= 1
-			// withdrawl mechanics
-			if(addiction_counters[C] < 10)
-				if(prob(2))
-					Weaken(1)
-			else if(addiction_counters[C] > 10)
-				if(prob(2))
-					// send a message
-					if(addiction_counters[C] < 40)
-						to_chat(src, "<span class='danger'>You're dying for some [SSchemistry.chemical_reagents[C].name]!</span>")
-					else if(addiction_counters[C] < 60)
-						to_chat(src, "<span class='warning'>You're really craving some [SSchemistry.chemical_reagents[C].name].</span>")
-					else if(addiction_counters[C] < 100)
-						to_chat(src, "<span class='notice'>You're feeling the need for some [SSchemistry.chemical_reagents[C].name].</span>")
-					// effects
-					if(addiction_counters[C] < 100 && prob(20))
-						emote(pick("pale","shiver","twitch"))
-				// proc side effect
-				if(addiction_counters[C] < 30)
-					if(prob(3))
-						Weaken(2)
-						emote("vomit")
-						add_chemical_effect(CE_WITHDRAWL, rand(2,4) * REM)
-				else if(addiction_counters[C] < 50)
-					if(prob(3))
-						emote("vomit")
-						add_chemical_effect(CE_WITHDRAWL, rand(1,3) * REM)
-				else if(addiction_counters[C] < 70)
-					if(prob(2))
-						emote("vomit")
+			var/datum/reagent/RE = SSchemistry.chemical_reagents[C]
+			addiction_counters[C] = RE.withdrawl(src,species.reagent_tag)
+		// remove if finished
 		if(addiction_counters[C] == 0)
 			addictions.Remove(C)
-			if(addictions.len == 0)
-				to_chat(src, "<span class='notice'>You feel your shakes and cold chills stop.</span>")
 
 // RADIATION! Everyone's favorite thing in the world! So let's get some numbers down off the bat.
 // 50 rads = 1Bq. This means 1 rad = 0.02Bq.

@@ -22,6 +22,9 @@
 	var/datum/reagents/metabolism/ingested/ingested = null
 	var/datum/reagents/metabolism/touch/touching = null
 
+	var/list/addictions = list() // contains currently addicted chems
+	var/list/addiction_counters = list() // contains ID sorted counters
+
 	var/pulse = PULSE_NORM	//current pulse level
 
 	var/does_not_breathe = 0 //Used for specific mobs that can't take advantage of the species flags (changelings)

@@ -157,7 +157,7 @@ YW change end */
 			"x" = list("ks", "kss", "ksss")
 		),
 	autohiss_exempt = list(LANGUAGE_UNATHI))
-	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat)
+	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat,/datum/trait/neutral/autohiss_yinglet)
 
 
 /datum/trait/neutral/autohiss_tajaran
@@ -169,7 +169,7 @@ YW change end */
 			"r" = list("rr", "rrr", "rrrr")
 		),
 	autohiss_exempt = list(LANGUAGE_SIIK,LANGUAGE_AKHANI,LANGUAGE_ALAI))
-	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_zaddat)
+	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_zaddat,/datum/trait/neutral/autohiss_yinglet)
 
 
 /datum/trait/neutral/autohiss_zaddat
@@ -188,7 +188,7 @@ YW change end */
 			"v" = list("vv", "vvv")
 		)/*,
 	autohiss_exempt = list(LANGUAGE_ZADDAT,LANGUAGE_VESPINAE)*/)
-	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi)
+	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi,/datum/trait/neutral/autohiss_yinglet)
 
 
 ///YW ADDITION: START
@@ -206,9 +206,26 @@ YW change end */
         "r" = list("rk")
 	),
 	autohiss_exempt = list("Vespinae"))
-	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi)
+	excludes = list(/datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_unathi,/datum/trait/neutral/autohiss_yinglet)
 //YW ADDITION: END
 
+
+///OUTPOST 21 ADDITION: START
+/datum/trait/neutral/autohiss_yinglet
+	name = "Autohiss (Yinglet)"
+	desc = "You pronounce th's with a lisp"
+	cost = 0
+	var_changes = list(
+	autohiss_basic_map = list(
+			"thi" = list("z"),
+			"tha" = list("z")
+		),
+	autohiss_extra_map = list(
+			"the" = list("z")
+		),
+	autohiss_exempt = list(LANGUAGE_UNATHI))
+	excludes = list(/datum/trait/neutral/autohiss_unathi, /datum/trait/neutral/autohiss_tajaran, /datum/trait/neutral/autohiss_zaddat)
+//OUTPOST 21 ADDITION: END
 
 /datum/trait/neutral/bloodsucker
 	name = "Bloodsucker, Obligate"

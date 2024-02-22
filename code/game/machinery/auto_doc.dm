@@ -249,6 +249,8 @@
 	operation_stage += 1
 	if(operation_stage > op_list.len)
 		end_operation(TRUE)
+		src.visible_message("[src] flashes 'Operation Complete'.")
+		playsound(src,  'sound/machines/boobeebeep.ogg', 100, 0)
 
 	// NEXT
 	next_time = world.time + delay_time

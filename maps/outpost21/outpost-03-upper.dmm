@@ -3580,7 +3580,7 @@
 "wTy" = (/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor,/area/maintenance/substation/research)
 "wUq" = (/obj/machinery/shower,/obj/structure/window/reinforced/tinted/frosted{dir = 8},/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/kafel_full,/area/medical/recovlaund)
 "wUy" = (/obj/effect/floor_decal/corner/purple{dir = 10},/turf/simulated/floor/tiled/white,/area/rnd/misc_lab)
-"wUV" = (/obj/effect/floor_decal/corner/blue/full{dir = 8},/turf/simulated/floor/tiled/white,/area/medical/patient_wing)
+"wUV" = (/obj/effect/floor_decal/corner/blue/full{dir = 8},/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/medical/patient_wing)
 "wVk" = (/obj/structure/grille,/obj/structure/window/reinforced/polarized/full{id = "resleeve_tint"},/obj/machinery/door/firedoor/glass,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/medical/genetics)
 "wVn" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -26},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/kafel_full,/area/muriki/bathroom/chapel)
 "wVL" = (/obj/structure/sign/warning/lethal_turrets,/turf/simulated/wall/r_wall,/area/maintenance/secelev)

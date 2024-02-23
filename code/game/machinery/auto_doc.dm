@@ -238,12 +238,7 @@
 			src.visible_message("\The [src] flashes 'Beginning operation: Repair Internal Bleeding in [EO.name]'.")
 		if("Repair Bone")
 			operation_type = "repair_bone"
-			if(EO.status & ORGAN_BROKEN)
-				src.visible_message("\The [src] flashes 'Target bodypart is too damaged for this operation to proceed safely'.")
-				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
-				return
-			else
-				src.visible_message("\The [src] flashes 'Beginning operation: Repair Bones in [EO.name], bicardine injection advised. A damaged limb will result in surgical complications'.")
+			src.visible_message("\The [src] flashes 'Beginning operation: Repair Bones in [EO.name], bicardine injection advised. A damaged limb will result in surgical complications'.")
 		else
 			return
 	// BEGIN

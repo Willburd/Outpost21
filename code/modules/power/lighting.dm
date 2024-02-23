@@ -796,6 +796,7 @@ var/global/list/light_type_cache = list()
 			return
 
 	// make it burn hands if not wearing fire-insulated gloves
+	var/drop_on_ground = FALSE
 	if(on)
 		var/prot = 0
 		var/mob/living/carbon/human/H = user
@@ -813,8 +814,9 @@ var/global/list/light_type_cache = list()
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
 			to_chat(user, "You remove the light [get_fitting_name()]")
-		else if(TK in user.mutations)
+		else if(user.has_telegrip())
 			to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
+			drop_on_ground = TRUE
 		else
 			to_chat(user, "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
 			return				// if burned, don't remove the light
@@ -823,7 +825,10 @@ var/global/list/light_type_cache = list()
 
 	//Let's actually put the real bulb in their hand.
 	installed_light.status = status //Update the bulb they're being given. If it's broken, the bulb should be as well!
-	user.put_in_active_hand(installed_light)	//puts it in our active hand
+	if(drop_on_ground)
+		installed_light.forceMove(src.loc)
+	else
+		user.put_in_active_hand(installed_light)	//puts it in our active hand
 	installed_light.update_icon()
 	remove_bulb()
 

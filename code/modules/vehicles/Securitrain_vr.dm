@@ -196,7 +196,8 @@
 /obj/vehicle/train/security/engine/relaymove(mob/user, direction)
 	if(user != load)
 		return 0
-
+	if(user.stat != CONSCIOUS)
+		return
 	if(is_train_head())
 		if(direction == reverse_direction(dir) && tow)
 			return 0

@@ -127,6 +127,8 @@
 		to_chat(user, "You buckle yourself to \the [src].")
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
+	if(user.stat != CONSCIOUS)
+		return
 	if(user != load || !on)
 		return 0
 	if(vehicle_move(get_step(src, direction),direction))

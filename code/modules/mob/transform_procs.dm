@@ -4,8 +4,6 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		if (W==w_uniform) // will be torn
-			continue
 		drop_from_inventory(W)
 	regenerate_icons()
 	transforming = 1
@@ -345,8 +343,6 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		if (W==w_uniform) // will be torn
-			continue
 		drop_from_inventory(W)
 	regenerate_icons()
 	transforming = 1

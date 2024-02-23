@@ -24,7 +24,7 @@
 /mob/living/carbon/human/monkey/auto_doc/handle_statuses()
 	// autodoc says NO
 	stunned = 0
-	weakend = 0
+	weakened = 0
 	paralysis = 0
 	stuttering = 0
 	silent = 0

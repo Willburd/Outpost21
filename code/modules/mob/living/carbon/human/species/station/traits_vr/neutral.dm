@@ -219,7 +219,8 @@ YW change end */
 	autohiss_basic_map = list(
 			"thi" = list("z"),
 			"shi" = list("z"),
-			"tha" = list("z")
+			"tha" = list("z"),
+			"tho" = list("z")
 		),
 	autohiss_extra_map = list(
 			"the" = list("z"),

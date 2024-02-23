@@ -158,8 +158,9 @@ Class Procs:
 		for(var/atom/A in contents)
 			if(ishuman(A))
 				var/mob/living/carbon/human/H = A
-				H.client.eye = H.client.mob
-				H.client.perspective = MOB_PERSPECTIVE
+				if(H.client)
+					H.client.eye = H.client.mob
+					H.client.perspective = MOB_PERSPECTIVE
 				H.loc = src.loc
 			else
 				qdel(A)

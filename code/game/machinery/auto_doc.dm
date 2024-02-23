@@ -12,10 +12,25 @@
 	species.has_fine_manipulation = TRUE // advanced monkey
 	status_flags &= GODMODE
 
-/mob/living/carbon/human/monkey/auto_doc/Initialize(new_loc)
-	. = ..()
-	name =  "\improper [owner_machine.name]"
-	real_name = "\improper [owner_machine.name]" //
+/mob/living/carbon/human/monkey/auto_doc/rad_act(severity)
+	return
+
+/mob/living/carbon/human/monkey/auto_doc/handle_disabilities()
+	return
+
+/mob/living/carbon/human/monkey/auto_doc/handle_addictions()
+	return
+
+/mob/living/carbon/human/monkey/auto_doc/handle_statuses()
+	// autodoc says NO
+	stunned = 0
+	weakend = 0
+	paralysis = 0
+	stuttering = 0
+	silent = 0
+	druggy = 0
+	slurring = 0
+	confused = 0
 
 /obj/machinery/auto_doc
 	name = "Auto-Doc"
@@ -137,7 +152,13 @@
 
 /obj/machinery/auto_doc/Destroy()
 	. = ..()
+	doctor.drop_item(src)
 	doctor.Destroy()
+	for(var/obj/item/I in contents)
+		if(istype(I,/obj/item/weapon/surgical))
+			I.Destroy()
+		else
+			I.forceMove(loc)
 
 /obj/machinery/auto_doc/proc/start_operation(mob/user as mob)
 	// get target surgical zone
@@ -257,6 +278,9 @@
 	doctor.drop_item(src)
 
 	// EQUIP DR.NANERS PHD
+	doctor.owner_machine = src
+	doctor.name =  "\improper [name]"
+	doctor.real_name = "\improper [name]"
 	doctor.put_in_active_hand(tool)
 	doctor.a_intent = I_HELP
 	doctor.germ_level = 0 // forced clean

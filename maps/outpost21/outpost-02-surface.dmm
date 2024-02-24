@@ -3978,7 +3978,7 @@
 "mdv" = (/obj/structure/table/reinforced,/obj/item/weapon/folder{pixel_x = -4},/obj/item/weapon/folder/red{pixel_y = 3},/obj/item/weapon/folder/blue{pixel_x = 5},/obj/item/weapon/folder/yellow,/obj/item/weapon/stamp/internalaffairs,/obj/item/weapon/stamp/denied{pixel_x = 4; pixel_y = -2},/obj/effect/floor_decal/spline/fancy/wood{dir = 1},/turf/simulated/floor/wood,/area/lawoffice)
 "mdE" = (/obj/effect/floor_decal/industrial/danger/corner{dir = 1},/turf/simulated/floor/tiled,/area/muriki/tramstation/civ)
 "mdL" = (/obj/effect/floor_decal/borderfloor/corner,/obj/effect/floor_decal/corner/blue/bordercorner,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/white,/area/medical/medbay3)
-"mea" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = 32},/obj/effect/floor_decal/corner/blue/border{dir = 1},/turf/simulated/floor/tiled/milspec/sterile,/area/medical/surgery)
+"mea" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = 32},/obj/effect/floor_decal/corner/blue/border{dir = 1},/obj/machinery/auto_doc{pixel_y = 3},/turf/simulated/floor/tiled/milspec/sterile,/area/medical/surgery)
 "mej" = (/obj/machinery/camera/network/outside{c_tag = "EXT - Terraformer Artery Station"; dir = 8},/turf/simulated/floor/outdoors/newdirt_nograss/muriki,/area/muriki/grounds/engi)
 "mem" = (/obj/effect/landmark{name = "spiderspawn"},/turf/simulated/floor/outdoors/mud/muriki,/area/mine/unexplored/muriki/valleywest)
 "meo" = (/obj/structure/railing{dir = 8},/obj/structure/railing,/turf/simulated/open,/area/mine/unexplored/muriki/mountainnorth)

@@ -440,6 +440,11 @@
 	icon_state = "blublatri"
 	holomap_color = HOLOMAP_AREACOLOR_CIV
 
+/area/muriki/crew/civmail
+	name = "\improper Civilian Mail Room"
+	icon_state = "orablasqu"
+	holomap_color = HOLOMAP_AREACOLOR_CIV
+
 
 //Hallways-------
 /area/muriki/crewstairwell
@@ -2299,3 +2304,6 @@
 
 /area/maintenance/bar
 	base_turf = /turf/simulated/open
+
+/area/medical/sleeper
+    flags = 0 //Makes it FILTHY again

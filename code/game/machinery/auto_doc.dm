@@ -7,11 +7,6 @@
 	// Steps that check for a target limb or organ check the machine, if they see it's an autodoc monkey
 	var/obj/machinery/auto_doc/owner_machine
 
-/mob/living/carbon/human/monkey/auto_doc/set_species(new_species, default_colour, regen_icons, mob/living/carbon/human/example)
-	. = ..()
-	species.has_fine_manipulation = TRUE // advanced monkey
-	status_flags &= GODMODE
-
 /mob/living/carbon/human/monkey/auto_doc/rad_act(severity)
 	return
 
@@ -53,7 +48,6 @@
 	var/operation_active = FALSE
 	var/operation_type = ""
 	var/operation_stage = 1
-
 
 	var/external_organ_target = BP_GROIN
 	var/internal_organ_target = O_APPENDIX
@@ -117,6 +111,8 @@
 	return linked_table.victim
 
 /obj/machinery/auto_doc/process()
+	if(!(doctor.status_flags & GODMODE))
+		handle_doctor() // force reset doctor
 	if(operation_active && next_time > 0 && world.time > next_time)
 		next_time = 0
 		perform_operation()
@@ -273,12 +269,8 @@
 	doctor.drop_item(src)
 
 	// EQUIP DR.NANERS PHD
-	doctor.owner_machine = src
-	doctor.name =  "\improper [name]"
-	doctor.real_name = "\improper [name]"
+	handle_doctor()
 	doctor.put_in_active_hand(tool)
-	doctor.a_intent = I_HELP
-	doctor.germ_level = 0 // forced clean
 
 	// PERFORM THE MAGIC
 	tool.do_surgery( victim, doctor, external_organ_target)
@@ -325,6 +317,17 @@
 
 /obj/machinery/auto_doc/proc/finish_transplant()
 	tools[TOOL_TRANSPLANT] = null
+
+/obj/machinery/auto_doc/proc/handle_doctor()
+	if(!doctor)
+		return
+	doctor.owner_machine = src
+	doctor.name =  "\improper [name]"
+	doctor.real_name = "\improper [name]"
+	doctor.a_intent = I_HELP
+	doctor.germ_level = 0 // forced clean
+	doctor.species.has_fine_manipulation = TRUE // advanced monkey
+	doctor.status_flags = GODMODE // no other flags
 
 #undef TOOL_FIXVEIN
 #undef TOOL_BONEGEL

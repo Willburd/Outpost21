@@ -98,7 +98,6 @@
 	whitelisted_steps.Add("Fix Vein")
 	whitelisted_steps.Add("Glue Bone")
 	whitelisted_steps.Add("Set Bone")
-	whitelisted_steps.Add("Mend Skull")
 	whitelisted_steps.Add("Finish Mending Bone")
 	return whitelisted_steps
 

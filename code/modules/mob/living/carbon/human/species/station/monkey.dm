@@ -55,6 +55,9 @@
 		)
 
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
+	if(istype(H,/mob/living/carbon/human/monkey/auto_doc))
+		// autodoc disgusting code
+		return
 	if(H.stat != CONSCIOUS)
 		return
 	if(isturf(H.loc))

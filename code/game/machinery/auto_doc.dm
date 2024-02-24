@@ -30,8 +30,8 @@
 /obj/machinery/auto_doc
 	name = "Auto-Doc"
 	desc = "Veymed 'Dr.Zaius Auto-Doc'. A machine preprogrammed with various simple medical operations. Known to Reduce strain on understaffed medical facilities."
-	icon = 'icons/obj/survival_pod.dmi' // TEMP
-	icon_state = "tubes" // TEMP
+	icon = 'icons/obj/auto_doc.dmi'
+	icon_state = "idle"
 	density = FALSE
 	anchored = TRUE
 	unacidable = TRUE
@@ -113,6 +113,25 @@
 /obj/machinery/auto_doc/process()
 	if(!(doctor.status_flags & GODMODE))
 		handle_doctor() // force reset doctor
+	if(!use_power || (stat & (NOPOWER|BROKEN)))
+		// fall limp
+		if(operation_active)
+			use_power = USE_POWER_IDLE
+			operation_type = ""
+			operation_active = FALSE
+			next_time = 0
+			operation_stage = 1
+			// and make the doctor mess up too
+			doctor.drop_item(src)
+		if(icon_state != "dead")
+			update_icon()
+		return 0
+	else if(icon_state == "dead")
+		// retract
+		playsound(src, 'sound/machines/turrets/turret_deploy.ogg', 70, 1)
+		flick("end",src)
+		update_icon()
+	// MOVE TIME
 	if(operation_active && next_time > 0 && world.time > next_time)
 		next_time = 0
 		perform_operation()
@@ -239,9 +258,13 @@
 			return
 	// BEGIN
 	playsound(src,  'sound/machines/boobeebeep.ogg', 100, 0)
+	playsound(src, 'sound/machines/turrets/turret_deploy.ogg', 70, 1)
+	use_power = USE_POWER_ACTIVE
 	operation_active = TRUE
 	next_time = world.time + delay_time
 	operation_stage = 1
+	update_icon()
+	flick("start",src)
 
 /obj/machinery/auto_doc/proc/perform_operation()
 	var/mob/living/carbon/human/victim = get_victim()
@@ -286,10 +309,14 @@
 	next_time = world.time + delay_time
 
 /obj/machinery/auto_doc/proc/end_operation(var/success)
+	use_power = USE_POWER_IDLE
 	operation_type = ""
 	operation_active = FALSE
 	next_time = 0
 	operation_stage = 1
+	playsound(src, 'sound/machines/turrets/turret_deploy.ogg', 70, 1)
+	update_icon()
+	flick("end",src)
 
 /obj/machinery/auto_doc/proc/insert_organ(mob/user as mob, var/obj/item/organ/O)
 	if(operation_active)
@@ -328,6 +355,15 @@
 	doctor.germ_level = 0 // forced clean
 	doctor.species.has_fine_manipulation = TRUE // advanced monkey
 	doctor.status_flags = GODMODE // no other flags
+
+/obj/machinery/auto_doc/update_icon()
+	if(!use_power || (stat & (NOPOWER|BROKEN)))
+		icon_state = "dead"
+		return
+	if(operation_active)
+		icon_state = "operate"
+	else
+		icon_state = "idle"
 
 #undef TOOL_FIXVEIN
 #undef TOOL_BONEGEL

@@ -96,6 +96,7 @@
 	whitelisted_steps.Add("Replace Organ")
 	whitelisted_steps.Add("Attach Organ")
 	whitelisted_steps.Add("Fix Vein")
+	whitelisted_steps.Add("Glue Bone")
 	whitelisted_steps.Add("Set Bone")
 	whitelisted_steps.Add("Mend Skull")
 	whitelisted_steps.Add("Finish Mending Bone")

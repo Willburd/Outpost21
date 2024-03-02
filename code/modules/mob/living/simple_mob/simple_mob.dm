@@ -78,7 +78,7 @@
 	var/min_n2 = 0					// N2 min
 	var/max_n2 = 0					// N2 max
 	var/min_ch4 = 0					// CH4 min
-	var/max_ch4 = 0					// CH4 max
+	var/max_ch4 = 5					// CH4 max
 	var/unsuitable_atoms_damage = 2	// This damage is taken when atmos doesn't fit all the requirements above
 
 	//Hostility settings

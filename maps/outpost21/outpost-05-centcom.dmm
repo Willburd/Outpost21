@@ -3891,7 +3891,7 @@
 "snd" = (/obj/effect/floor_decal/spline/plain{dir = 8},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/specialty/redspace)
 "sno" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/wood,/area/specialty/redspace)
 "snq" = (/obj/effect/floor_decal/spline/fancy/wood/corner{dir = 1},/obj/effect/floor_decal/spline/fancy/wood/corner{dir = 4},/turf/simulated/floor/carpet/tealcarpet,/area/specialty/redspace)
-"sns" = (/mob/living/silicon/ai/announcer,/turf/simulated/floor/redgrid/animated,/area/centcom/command)
+"sns" = (/obj/item/toy/AI,/turf/simulated/floor/redgrid/animated,/area/centcom/command)
 "snv" = (/obj/machinery/metal_detector{anchored = 0},/turf/simulated/floor/flesh,/area/specialty/redspace)
 "snE" = (/obj/machinery/light{dir = 8},/obj/effect/floor_decal/industrial/danger{dir = 1},/turf/simulated/floor/tiled/steel_grid,/area/specialty/redspace)
 "snU" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled/steel_grid,/area/specialty/redspace)

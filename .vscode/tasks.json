@@ -3,12 +3,12 @@
 	"tasks": [
 		{
 			"type": "dreammaker",
-			"dme": "vorestation.dme",
+			"dme": "outpost.dme",
 			"problemMatcher": [
 				"$dreammaker"
 			],
 			"group": "build",
-			"label": "dm: build - vorestation.dme"
+			"label": "dm: build - outpost.dme"
 		},
 		{
 			"type": "shell",

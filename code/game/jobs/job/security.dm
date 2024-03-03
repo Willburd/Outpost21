@@ -120,8 +120,8 @@
 	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
 	economic_modifier = 4
-	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
-	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks, access_armory)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks, access_armory)
 	minimal_player_age = 3
 	banned_job_species = list(/*SPECIES_ZADDAT*/, SPECIES_TESHARI, SPECIES_DIONA)
 

@@ -65,6 +65,13 @@
 	ckeywhitelist = list("seagha")
 	character_name = list("Schale Vam")
 
+/datum/gear/fluff/ESHUI_goldhonor
+	display_name = "ESHUI Half-Melted Medal of Heroism"
+	path = /obj/item/clothing/accessory/medal/gold/heroism
+	description = "An extremely rare golden medal awarded only by high ranking officials. To recieve such a medal is the highest honor and as such, very few exist... this one looks charred and half melted."
+	ckeywhitelist = list("nadyr")
+	character_name = list("Taaa")
+
 //  0-9 CKEYS
 
 //  A CKEYS

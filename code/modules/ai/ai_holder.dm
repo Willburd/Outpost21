@@ -356,7 +356,7 @@
 
 	if(stance in STANCES_COMBAT)
 		// Should resist?  We check this before fleeing so that we can actually flee and not be trapped in a chair.
-		if(holder.incapacitated(INCAPACITATION_BUCKLED_PARTIALLY))
+		if(holder.incapacitated(INCAPACITATION_BUCKLED_PARTIALLY) || istype(holder.loc,/obj/belly) )
 			ai_log("handle_stance_tactical() : Going to handle_resist().", AI_LOG_TRACE)
 			handle_resist()
 

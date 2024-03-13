@@ -70,10 +70,10 @@
 // Step 4, give us our selected target.
 /datum/ai_holder/proc/give_target(new_target, urgent = FALSE)
 	ai_log("give_target() : Given '[new_target]', urgent=[urgent].", AI_LOG_TRACE)
-	
+
 	if(target)
 		remove_target()
-	
+
 	target = new_target
 
 	if(target != null)
@@ -117,6 +117,9 @@
 /datum/ai_holder/proc/can_attack(atom/movable/the_target, var/vision_required = TRUE)
 	ai_log("can_attack() : Entering.", AI_LOG_TRACE)
 	if(!can_see_target(the_target) && vision_required)
+		return FALSE
+
+	if(istype(holder.loc,/obj/belly))
 		return FALSE
 
 	if(isliving(the_target))

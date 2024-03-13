@@ -8,21 +8,21 @@
 	icon_state = "fwindow"
 	maxhealth = 80
 
-/obj/machinery/smartfridge/plantvator
+/obj/machinery/smartfridge/produce/plantvator
 	name = "\improper Smart plantavator - Upper"
 	desc = "A refrigerated storage unit for Food and plant storage. With a nice set of hydraulic racks to move items up and down."
-	var/obj/machinery/smartfridge/plantvator/attached
+	var/obj/machinery/smartfridge/produce/plantvator/attached
 
-/obj/machinery/smartfridge/plantvator/down/Destroy()
+/obj/machinery/smartfridge/produce/plantvator/down/Destroy()
 	attached = null
 	return ..()
 
-/obj/machinery/smartfridge/plantvator/down
+/obj/machinery/smartfridge/produce/plantvator/down
 	name = "\improper Smart Plantavator - Lower"
 
-/obj/machinery/smartfridge/plantvator/down/Initialize()
+/obj/machinery/smartfridge/produce/plantvator/down/Initialize()
 	. = ..()
-	var/obj/machinery/smartfridge/plantvator/above = locate(/obj/machinery/smartfridge/plantvator,get_zstep(src,UP))
+	var/obj/machinery/smartfridge/produce/plantvator/above = locate(/obj/machinery/smartfridge/produce/plantvator,get_zstep(src,UP))
 	if(istype(above))
 		above.attached = src
 		attached = above

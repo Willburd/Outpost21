@@ -870,7 +870,7 @@
 "aZr" = (/obj/structure/railing,/turf/simulated/open/muriki{outdoors = 0},/area/mine/explored/muriki/river/hole)
 "aZv" = (/turf/simulated/wall/r_wall,/area/muriki/rooftop/comgen)
 "aZK" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/tiled/milspec,/area/medical/robotics)
-"aZW" = (/obj/machinery/smartfridge/plantvator/down,/obj/effect/floor_decal/corner_kafel/white/diagonal,/turf/simulated/floor/tiled/kafel_full,/area/crew_quarters/kitchen)
+"aZW" = (/obj/machinery/smartfridge/produce/plantvator/down,/obj/effect/floor_decal/corner_kafel/white/diagonal,/turf/simulated/floor/tiled/kafel_full,/area/crew_quarters/kitchen)
 "aZZ" = (/obj/machinery/floodlight,/turf/simulated/floor/airless,/area/engineering/engine_room)
 "baa" = (/obj/structure/cliff{dir = 8},/turf/simulated/floor/outdoors/mud/muriki,/area/mine/explored/muriki/mountaineast)
 "bad" = (/obj/machinery/camera/network/outside{c_tag = "EXT - Engineering Tram Access North"; dir = 8},/turf/simulated/floor/outdoors/newdirt_nograss/muriki,/area/muriki/grounds/tramborder)

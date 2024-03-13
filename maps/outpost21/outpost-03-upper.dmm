@@ -679,7 +679,7 @@
 "ejA" = (/obj/structure/disposalpipe/segment,/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/tiled/techfloor,/area/muriki/crew/civmail)
 "ejR" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/white,/area/rnd/hallway/upper)
 "ekh" = (/obj/effect/floor_decal/corner/lime{dir = 5},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled/hydro,/area/hydroponics/apiary)
-"ekw" = (/obj/machinery/smartfridge/plantvator,/obj/machinery/door/firedoor/glass,/turf/simulated/floor/tiled/steel_grid,/area/hydroponics/apiary)
+"ekw" = (/obj/machinery/smartfridge/produce/plantvator,/obj/machinery/door/firedoor/glass,/turf/simulated/floor/tiled/steel_grid,/area/hydroponics/apiary)
 "ekD" = (/obj/effect/map_effect/interval/atmogland/carbo,/turf/simulated/floor/flesh{carbon_dioxide = 101; nitrogen = 0; oxygen = 0},/area/muriki/processor/gland/co2)
 "eli" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/white,/area/rnd/hallway/upper)
 "elD" = (/obj/machinery/light_switch{dir = 4; pixel_x = -28},/obj/structure/disposalpipe/segment,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/kafel_full,/area/muriki/bathroom/medupper)

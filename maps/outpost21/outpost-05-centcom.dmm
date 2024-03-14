@@ -1810,7 +1810,7 @@
 "hJZ" = (/obj/effect/floor_decal/spline/plain{dir = 9},/obj/structure/bed/chair/bay/chair/padded/red/bignest,/obj/item/weapon/bedsheet/rainbowdouble,/obj/item/toy/plushie/teshari/taaa,/turf/simulated/floor/carpet/gaycarpet,/area/centcom/living)
 "hKi" = (/obj/structure/table/standard,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/turf/simulated/floor/tiled,/area/specialty/redspace)
 "hKj" = (/obj/effect/floor_decal/corner/black{dir = 9},/turf/unsimulated/floor/steel{icon_state = "dark"},/area/centcom/main_hall)
-"hKn" = (/obj/machinery/door/airlock/centcom/nameddorm{matchnames = list("Me'eep"); name = "Me'eep's Residence"},/turf/simulated/floor/wood,/area/centcom/living)
+"hKn" = (/obj/machinery/door/airlock/centcom/nameddorm{matchnames = list("Me Eep"); name = "Me Eep's Residence"},/turf/simulated/floor/wood,/area/centcom/living)
 "hKx" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/effect/floor_decal/eshui/emblem/eshui_l,/obj/structure/handrail{dir = 1},/turf/simulated/shuttle/floor/darkred,/area/shuttle/escape)
 "hKD" = (/obj/effect/floor_decal/corner/orange{dir = 5},/obj/machinery/doorbell_chime{id_tag = "engdinger"; name = "Engineering Dinger"; pixel_y = 32},/turf/simulated/floor/tiled,/area/specialty/redspace)
 "hLi" = (/obj/item/device/geiger/wall/north,/obj/effect/floor_decal/borderfloor{dir = 1},/obj/effect/floor_decal/corner/orange/border{dir = 1},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/specialty/redspace)

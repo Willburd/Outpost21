@@ -210,8 +210,7 @@
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
-	if(!mutations.len) return
-	if((LASER in mutations) && a_intent == I_HURT)
+	if(mutations.len > 0 && (LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 	else if(has_telegrip())
 		if(get_dist(src, A) > tk_maxrange)

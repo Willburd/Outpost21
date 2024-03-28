@@ -6,8 +6,8 @@
 
 	// used to spawn portals at /obj/effect/landmark/redspacestart locations
 	always_run = TRUE
-	interval_lower_bound = 35 SECONDS
-	interval_upper_bound = 95 SECONDS
+	interval_lower_bound = 15 SECONDS
+	interval_upper_bound = 20 SECONDS
 
 /obj/effect/map_effect/interval/redspaceexitcontroller/trigger()
 	var/list/redexitlist = list()

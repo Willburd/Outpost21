@@ -71,17 +71,17 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 				if(R.name == "redexit")
 					redexitlist += R
 
+			if(redexitlist.len > 0)
+				do_teleport(M,pick( redexitlist).loc, 0,local = FALSE)
+			else
+				do_teleport(M, target, 1)  // fail...
+
 			// passout on return to reality
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 				H.AdjustSleeping(15)
 				H.AdjustWeakened(3)
 				H.adjustHalLoss(-9)
-
-			if(redexitlist.len > 0)
-				do_teleport(M,pick( redexitlist).loc, 0,local = FALSE)
-			else
-				do_teleport(M, target, 1)  // fail...
 			return
 
 		else if(prob(redchance))

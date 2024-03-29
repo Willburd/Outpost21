@@ -52,8 +52,8 @@
 
 	vore_default_mode = DM_HOLD
 	vore_active = TRUE
-	vore_standing_too = TRUE // horrifying
-	vore_capacity = 4
+	//vore_standing_too = TRUE // horrifying, disabled due to excessively OP chus
+	vore_capacity = 2
 	vore_pounce_chance = 20
 
 	nutrition = 500 // to prevent hunger issues at start
@@ -105,10 +105,19 @@
 	if(!isnull(vore_organs) && vore_organs.len > 0)
 		for(var/obj/belly/B in vore_organs)
 			for(var/mob/living/L in B)
-				if(L.stat < DEAD && !issilicon(L) && !isrobot(L) && !L.isSynthetic() && !istype(L,/mob/living/simple_mob/vore/alienanimals/chu))
-					foundprey = L
-					foundbelly = B
-					break
+				if(L.stat <= UNCONSCIOUS)
+					continue
+				if(issilicon(L) || isrobot(L) || L.isSynthetic())
+					continue
+				if(ishuman(L))
+					var/mob/living/carbon/human/Hu = L
+					if(istype(Hu.wear_suit, /obj/item/clothing/suit/space) && istype(Hu.head,/obj/item/clothing/head/helmet/space))
+						continue
+				if(istype(L,/mob/living/simple_mob/vore/alienanimals/chu))
+					continue
+				foundprey = L
+				foundbelly = B
+				break
 			// allow us to still give feedback! Attempt loop again but with no restrictions
 			if(isnull(foundprey))
 				for(var/mob/living/L in B)
@@ -126,6 +135,12 @@
 	if(!isliving(foundprey) || (ishuman(foundprey) && foundprey.isSynthetic()) || isrobot(foundprey) || issilicon(foundprey))
 		to_chat(src, "<span class='warning'>\The [foundprey] is not compatible with our biology.</span>")
 		return
+
+	if(ishuman(foundprey))
+		var/mob/living/carbon/human/Hu = foundprey
+		if(istype(Hu.wear_suit, /obj/item/clothing/suit/space) && istype(Hu.head,/obj/item/clothing/head/helmet/space))
+			to_chat(src, "<span class='warning'>Your body cannot penetrate \the [foundprey]'s suit!</span>")
+			return
 
 	if(foundprey.stat == DEAD)
 		to_chat(src, "<span class='warning'>\The [foundprey] is dead!</span>")
@@ -254,8 +269,6 @@
 		if(hasbelly)
 			var/mutable_appearance/I = mutable_appearance(icon,  "[icon_state]-belly")
 			I.appearance_flags |= PIXEL_SCALE
-			I.layer = MOB_LAYER
-			I.plane = MOB_PLANE + 0.1
 			add_overlay(I)
 
 	// overlays for cursed players~
@@ -265,23 +278,18 @@
 	var/mutable_appearance/I = mutable_appearance(icon,  "[icon_state]-fur")
 	I.color = overlay_colors["Body"]
 	I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
-	I.layer = MOB_LAYER
-	I.plane = MOB_PLANE
 	add_overlay(I)
 
 	if(stat != DEAD)
 		I = mutable_appearance(icon,  "[icon_state]-eyes")
 		I.color = overlay_colors["Eyes"]
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
-		I.plane = PLANE_LIGHTING_ABOVE
 		I.blend_mode = BLEND_MULTIPLY
 		add_overlay(I)
 	else
 		I = mutable_appearance(icon,  "[icon_state]-blood")
 		I.color = overlay_colors["Blood"]
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
-		I.layer = MOB_LAYER
-		I.plane = MOB_PLANE
 		I.blend_mode = BLEND_MULTIPLY
 		add_overlay(I)
 

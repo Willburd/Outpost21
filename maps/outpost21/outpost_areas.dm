@@ -1594,6 +1594,22 @@
 	base_turf = /turf/simulated/open
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
+/area/rnd/research/phoronics
+	name = "\improper Phoronics"
+	icon_state = "magblacir"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/burn
+	name = "\improper Phoronics Burn Chamber"
+	icon_state = "redblacir"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/clean
+	name = "\improper Phoronics Cleaning Closet"
+	icon_state = "purwhitri"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+
 //----------------
 /area/rnd/hallway
 	name = "\improper Research hallway"
@@ -1639,6 +1655,17 @@
 	name = "\improper Research Stairwell"
 	icon_state = "purple"
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/hallway/phoronicsbridge
+	name = "\improper Phoronics Access Bridge"
+	icon_state = "magblasqu"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/hallway/phoronicsmainhall
+	name = "\improper Phoronics Main Hallway"
+	icon_state = "magblatri"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
 
 /area/muriki/research/isolation_hall
 	name = "Research Isolation Hall"

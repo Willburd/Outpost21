@@ -109,3 +109,4 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "rift"
 	redchance = -1 // lazy flag
+	target = loc;

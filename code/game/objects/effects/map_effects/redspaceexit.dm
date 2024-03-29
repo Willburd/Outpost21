@@ -7,7 +7,7 @@
 	// used to spawn portals at /obj/effect/landmark/redspacestart locations
 	always_run = TRUE
 	interval_lower_bound = 15 SECONDS
-	interval_upper_bound = 20 SECONDS
+	interval_upper_bound = 30 SECONDS
 
 /obj/effect/map_effect/interval/redspaceexitcontroller/trigger()
 	var/list/redexitlist = list()
@@ -16,6 +16,6 @@
 			redexitlist += R
 
 	if(redexitlist.len > 0)
-		create_wormhole( pick(redexitlist).loc, src.loc, 80, 130, FALSE, TRUE)
+		create_wormhole( pick(redexitlist).loc, pick(redexitlist).loc, 15 SECONDS, 45 SECONDS, FALSE, TRUE)
 	else
-		create_wormhole( src.loc, src.loc, 80, 130, FALSE, TRUE)
+		create_wormhole( src.loc, src.loc, 20, 30, FALSE, TRUE)

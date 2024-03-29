@@ -74,6 +74,7 @@
 		P.icon = 'icons/effects/effects.dmi'
 		P.icon_state = "rift"
 		P.redchance = -1
+		P.set_light(4, 9, "#d678d7")
 	else if(redspace)
 		P.redchance = 100
 	spawn(rand(min_duration,max_duration))

@@ -68,7 +68,6 @@
 					continue
 			// BORGS LOCATED
 			borglist.Add(L)
-
 	// NOW SWIGGTY SWOOTY FOR THEIR BOOTY
 	if(borglist.len)
 		var/mob/living/silicon/S = pick(borglist)
@@ -84,11 +83,14 @@
 	// finally a powerout
 	Sound( 'sound/goonstation/spooky/Station_SpookyAtmosphere1.ogg', affecting_z)
 
-	// This sets off a chain of events that lead to the actual grid check (or perhaps worse).
-	// First, the Supermatter engine makes a power spike.
-	for(var/obj/machinery/power/generator/engine in machines)
-		engine.power_spike(80,TRUE,TRUE)
-		break // Just one engine, please.
+	if(severity == EVENT_LEVEL_MAJOR)
+		power_kill_quick() // OHNO
+	else
+		// This sets off a chain of events that lead to the actual grid check (or perhaps worse).
+		// First, the Supermatter engine makes a power spike.
+		for(var/obj/machinery/power/generator/engine in machines)
+			engine.power_spike(80,TRUE,TRUE)
+			break // Just one engine, please.
 
 /datum/event/psychic_screach/proc/Sound(var/sound, var/list/zlevels)
 	if(!sound)

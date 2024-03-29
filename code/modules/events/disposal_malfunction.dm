@@ -1,5 +1,5 @@
 /datum/event/disposal_damage/announce()
-	if(severity == EVENT_LEVEL_MUNDANE)
+	if(severity < EVENT_LEVEL_MAJOR)
 		return
 	command_announcement.Announce("A sudden drop in the disposal network's pressure has been detected. Verify all disposal units are functioning correctly.", "Structural Alert")
 
@@ -21,11 +21,11 @@
 	var/severity_range = 0
 	switch(severity)
 		if(EVENT_LEVEL_MUNDANE)
-			severity_range = 1
+			severity_range = 4
 		if(EVENT_LEVEL_MODERATE)
-			severity_range = 5
+			severity_range = 11
 		if(EVENT_LEVEL_MAJOR)
-			severity_range = 12
+			severity_range = 30
 
 	// break amount of disposals based on severity
 	while(disposals.len && severity_range-- > 0)

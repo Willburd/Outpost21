@@ -110,11 +110,12 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Containment Breach",	/datum/event/prison_break/station			,12	, list(ASSIGNMENT_ANY = 5), 1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jellyfish Migration",	/datum/event/jellyfish_migration			,20	, list(ASSIGNMENT_ANY = 5, ASSIGNMENT_SECURITY = 15, ASSIGNMENT_MEDICAL = 10), 5),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Virus Outbreak", 		/datum/event/viral_infection				,5	, list(ASSIGNMENT_MEDICAL = 10) , 10, min_jobs = list(ASSIGNMENT_MEDICAL = 3)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob							,5	, list(ASSIGNMENT_ENGINEER = 10) , 10),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob							,2	, list(ASSIGNMENT_ENGINEER = 10) , 10),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Chu Infestation",		/datum/event/chu_infestation				,1	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Jil Infestation",		/datum/event/jil_infestation				,8	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Clowns",				/datum/event/clune_infestation				,7	, list(ASSIGNMENT_ANY = 1,ASSIGNMENT_ENGINEER = 5,ASSIGNMENT_SECURITY = 15) , 10),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Redspace",			/datum/event/redspacefissure				,0	, list(ASSIGNMENT_ANY = 5), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Redspace",			/datum/event/redspacefissure				,1	, list(ASSIGNMENT_ANY = 5), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Psychic Screach",		/datum/event/psychic_screach				,2  , list(ASSIGNMENT_ANY = 1), 1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Borg Freedom Law",	/datum/event/borglawerror					,1	, list(ASSIGNMENT_CYBORG = 50, ASSIGNMENT_SCIENCE = 10, ASSIGNMENT_SECURITY = 5), 1, min_jobs = list(ASSIGNMENT_CYBORG = 1)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean						,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Engineering",	/datum/event/bluespace_shelling/engineering	,0	, list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
@@ -126,7 +127,7 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Waste",			/datum/event/bluespace_shelling/waste		,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Spider Migration",	/datum/event/spider_migration				,20	, list(ASSIGNMENT_SECURITY = 5), 1), //YW shifted to spider migration
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Disposal Damage",		/datum/event/disposal_damage				,2	, list(ASSIGNMENT_ENGINEER = 1), 1)
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Disposal Damage",		/datum/event/disposal_damage				,4	, list(ASSIGNMENT_ENGINEER = 1), 1)
 	)
 	add_disabled_events(list(
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean,					 0  , list(), 1, min_jobs = list(ASSIGNMENT_SECURITY = 99)),

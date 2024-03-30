@@ -231,6 +231,10 @@
 	base_turf = /turf/simulated/mineral/floor/muriki
 	holomap_color = HOLOMAP_AREACOLOR_CIV
 
+/area/muriki/bathroom/phoronics
+	name = "\improper Pressure Release Chamber"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
 //
 // Medical ---------------------------------------------------------
 //
@@ -1076,6 +1080,10 @@
 	base_turf = /turf/simulated/open
 	icon_state = "maint_research_shuttle"
 
+/area/maintenance/scielev
+	name = "\improper Research Phoronics Maintenance"
+	icon_state = "maint_research_shuttle"
+
 /area/maintenance/scielevbasement
 	name = "\improper Research Elevator Maintenance Foundation"
 	icon_state = "pmaint"
@@ -1596,6 +1604,7 @@
 
 /area/rnd/research/phoronics
 	name = "\improper Phoronics"
+	icon = 'icons/turf/areas_vr.dmi'
 	icon_state = "magblacir"
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
@@ -1609,6 +1618,30 @@
 	icon_state = "purwhitri"
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
+/area/rnd/research/phoronics/breakroom
+	name = "\improper Phoronics Break Room"
+	icon_state = "purwhicir"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/gasstore
+	name = "\improper Phoronics Gas Storage"
+	icon_state = "magblasqu"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/extrastore
+	name = "\improper Phoronics Overflow Storage"
+	icon_state = "magwhicir"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/bombrange
+	name = "\improper Phoronics Bomb Testing Range"
+	icon_state = "redwhitri"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
+/area/rnd/research/phoronics/med
+	name = "\improper Phoronics Medical Station"
+	icon_state = "blublacir"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 //----------------
 /area/rnd/hallway

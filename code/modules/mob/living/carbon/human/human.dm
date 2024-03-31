@@ -1792,7 +1792,7 @@
 	if(cli.prefs.addictions & ADDICT_NICOTINE)
 		addict_to_reagent("nicotine")
 	if(cli.prefs.addictions & ADDICT_PAINKILLER)
-		addict_to_reagent("paracetamol")
+		addict_to_reagent("tramadol")
 	if(cli.prefs.addictions & ADDICT_BLISS)
 		addict_to_reagent("bliss")
 	if(cli.prefs.addictions & ADDICT_OXY)

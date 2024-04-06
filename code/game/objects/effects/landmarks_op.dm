@@ -190,7 +190,7 @@
 		return
 
 	// creates stuff like ruptured gas tanks, and landmines
-	switch(rand(1,4))
+	switch(rand(1,3))
 		if(1)
 			var/newpath = pick(
 				/obj/effect/mine/emp,

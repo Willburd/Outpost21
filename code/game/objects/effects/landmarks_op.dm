@@ -169,3 +169,46 @@
 			var/obj/structure/largecrate/animal/dangerous/crate = new /obj/structure/largecrate/animal/dangerous()
 			crate.name = "Super Kobby Friend Crate [rand(999,9999)]"
 			crate.loc = src.loc
+
+
+
+
+/obj/effect/landmark/step_trap
+	name = "step trap spawner"
+
+/obj/effect/landmark/step_trap/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/landmark/step_trap/LateInitialize()
+	. = ..()
+
+	if(prob(40))
+		return;
+
+	if(!isturf(src.loc))
+		return
+
+	// creates stuff like ruptured gas tanks, and landmines
+	switch(rand(1,4))
+		if(1)
+			var/newpath = pick(
+				/obj/effect/mine/emp,
+				/obj/effect/mine/stun,
+				/obj/effect/mine/training,
+				/obj/effect/mine/lasertag/red,
+				/obj/effect/mine/lasertag/blue,
+				/obj/effect/mine/lasertag/omni,
+				/obj/effect/mine/lasertag/all)
+			var/obj/effect/mine/M = new newpath()
+			M.loc = src.loc
+
+		if(2)
+			var/obj/item/device/assembly/mousetrap/armed/M = new /obj/item/device/assembly/mousetrap/armed();
+			M.loc = src.loc
+
+		if(3)
+			var/obj/item/weapon/beartrap/M = new /obj/item/weapon/beartrap();
+			M.deployed = TRUE
+			M.update_icon();
+			M.loc = src.loc

@@ -1582,7 +1582,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/carrotfries/Initialize()
 	. = ..()
 	reagents.add_reagent("imidazoline", 3)
-
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesyfries
 	name = "Cheesy Fries"
@@ -1886,6 +1886,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/fishandchips/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
+	reagents.add_reagent("sodiumchloride", 1)
 
 
 /obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
@@ -2339,6 +2340,7 @@
 	. = ..()
 	reagents.add_reagent("banana", 5)
 	reagents.add_reagent("water", 10)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/vegetablesoup
 	name = "Vegetable soup"
@@ -3194,6 +3196,10 @@
 	nutriment_desc = list("salt" = 1, "cracker" = 2)
 	w_class = ITEMSIZE_TINY
 	nutriment_amt = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/cracker/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/grilled_carp
 	name = "Njarir Merana Grill"
@@ -4152,6 +4158,10 @@
 	nutriment_amt = 2
 	nutriment_desc = list("salt" = 3)
 
+/obj/item/weapon/reagent_containers/food/snacks/roastedsunflower/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
+
 /obj/item/weapon/reagent_containers/food/snacks/roastedpeanuts
 	name = "peanuts"
 	desc = "Stopped being the planetary airline food of Earth in 2120."
@@ -4161,6 +4171,10 @@
 	center_of_mass = list("x"=15, "y"=17)
 	nutriment_amt = 2
 	nutriment_desc = list("salt" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/roastedpeanuts/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood
 	name = "\improper LiquidFood Ration"
@@ -4249,6 +4263,10 @@
 	nutriment_amt = 10
 	nutriment_desc = list("mushroom" = 5, "salt" = 5)
 	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/unajerky
 	name = "Moghes Imported Sissalik Jerky"
@@ -4446,6 +4464,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/cubannachos/Initialize()
 	. = ..()
 	reagents.add_reagent("capsaicin", 4)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/curryrice
 	name = "curry rice"
@@ -4458,6 +4477,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/curryrice/Initialize()
 	. = ..()
 	reagents.add_reagent("capsaicin", 4)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/piginblanket
 	name = "pig in a blanket"
@@ -6168,13 +6188,14 @@
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "cb04"
 	nutriment_amt = 4
-	nutriment_desc = list("chocolate" = 2, "salt = 1", "licorice" = 1)
+	nutriment_desc = list("chocolate" = 2, "salt" = 1, "licorice" = 1)
 	w_class = 1
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb04/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/cb05
 	name = "\improper Andromeda Bar"
@@ -6292,6 +6313,10 @@
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 	bitesize = 1
 
+/obj/item/weapon/reagent_containers/food/snacks/chips/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
+
 /obj/item/weapon/reagent_containers/food/snacks/chips/bbq
 	name = "\improper Legendary BBQ Chips"
 	desc = "You know I can't grab your ghost chips!"
@@ -6337,6 +6362,10 @@
 	nutriment_amt = 10
 	nutriment_desc = list("mushroom" = 5, "salt" = 5)
 	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky
 	name = "Scaredy's Private Reserve Beef Jerky"
@@ -6427,6 +6456,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/squid/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/croutons
 	name = "\improper Suhariki"
@@ -6439,6 +6469,10 @@
 	nutriment_desc = list("bread" = 1, "salt" = 1)
 	nutriment_amt = 3
 	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/croutons/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/salo
 	name = "\improper Salo"
@@ -6455,6 +6489,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/salo/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish
 	name = "\improper Vobla"
@@ -6471,6 +6506,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/driedfish/Initialize()
 	.=..()
 	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin
 	name = "4no Raisins"
@@ -6542,6 +6578,10 @@
 	nutriment_amt = 5
 	bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/triton/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 3)
+
 /obj/item/weapon/reagent_containers/food/snacks/saturn
 	name = "\improper Saturn-Os"
 	icon = 'icons/obj/food_snacks.dmi'
@@ -6553,6 +6593,10 @@
 	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/saturn/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/jupiter
 	name = "\improper Jove Gello"
@@ -6650,6 +6694,10 @@
 	nutriment_amt = 3
 	bitesize = 1
 
+/obj/item/weapon/reagent_containers/food/snacks/pretzels/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
+
 /obj/item/weapon/reagent_containers/food/snacks/hakarl
 	name = "\improper Indigo Co. Hákarl"
 	icon = 'icons/obj/food_snacks.dmi'
@@ -6662,6 +6710,10 @@
 	nutriment_desc = list("fish" = 2, "salt" = 2, "ammonia" = 1)
 	nutriment_amt = 4
 	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/hakarl/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
 
 ////////////////////weeb_vend (Nippon-tan!)////////////////////////////////////////////////////
 
@@ -6892,6 +6944,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar/Initialize()
 	. = ..()
 	reagents.add_reagent("seafood", 5)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true
 	name = "\improper Classic Terran Caviar"
@@ -6908,6 +6961,7 @@
 	. = ..()
 	reagents.add_reagent("seafood", 4)
 	reagents.add_reagent("carpotoxin", 1)
+	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/maps
 	name = "\improper MAPS"

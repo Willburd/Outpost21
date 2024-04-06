@@ -109,6 +109,7 @@
 	TRAITBLOCK_ALLERGY_SOY			= getAssignedBlock("ALRGSOY"		, numsToAssign)
 	TRAITBLOCK_ALLERGY_DAIRY		= getAssignedBlock("ALRGDAIRY"		, numsToAssign)
 	TRAITBLOCK_ALLERGY_FUNGI		= getAssignedBlock("ALRGFUNGI"		, numsToAssign)
+	TRAITBLOCK_ALLERGY_SALT			= getAssignedBlock("ALRGSALT"		, numsToAssign)
 	TRAITBLOCK_ALLERGY_COFFEE		= getAssignedBlock("ALRGCOFFEE"		, numsToAssign)
 	TRAITBLOCK_SPICE_INTOL_EXTREME	= getAssignedBlock("SPICEINTOLEX"	, numsToAssign, DNA_HARDER_BOUNDS)
 	TRAITBLOCK_SPICE_INTOL_BASIC	= getAssignedBlock("SPICEINTOLBAS"	, numsToAssign, DNA_HARD_BOUNDS)

@@ -656,6 +656,19 @@ YW change end */
 	. = ..()
 
 
+/datum/trait/neutral/allergy/salt
+	name = "Allergy: Salt"
+	desc = "You're highly allergic to sodium chloride aka salt. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."
+	cost = 0
+	allergen = ALLERGEN_SALT
+/datum/dna/gene/trait_linked/allergy/salt/New() // Genetically linked trait
+	block = TRAITBLOCK_ALLERGY_SALT
+	activation_messages=list("You feel uncomfortably strange...")
+	deactivation_messages=list("")
+	linked_trait_path = /datum/trait/neutral/allergy/salt
+	. = ..()
+
+
 /datum/trait/neutral/allergy/coffee
 	name = "Allergy: Coffee"
 	desc = "You're highly allergic to coffee in specific. NB: By taking this trait, you acknowledge there is a significant risk your character may suffer a fatal reaction if exposed to this substance."

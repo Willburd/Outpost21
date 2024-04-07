@@ -1450,21 +1450,31 @@
 					detectedtag = "corpse"
 					break
 		else
-			var/obj/item/weapon/card/foundid = null
-			for(var/obj/item/weapon/card/id in H) // send these to medical body disposal as well
-				foundid = id
-				break
-			for(var/obj/item/device/pda/P in H)
-				if(!isnull(P.id)) // send these to medical body disposal as well
-					foundid = P.id
+			// Check for microholders, you can't skip the system this way either!
+			var/obj/item/weapon/holder/hold = null
+			for(var/obj/item/weapon/holder/hl in H)
+				if(!isnull(hl.held_mob) && istype(hl.held_mob,/mob/living/carbon))
+					hold = hl
 					break
-			for(var/obj/item/weapon/storage in H)
-				for(var/obj/item/weapon/card/id in storage.contents)
-					foundid = id // check simple storages for idcards! one level deep only!
-					break
-			// check ID validity
-			if(!isnull(foundid) && !istype(foundid,/obj/item/weapon/card/id/guest))
+			if(!isnull(hold))
 				detectedtag = "corpse"
+			else
+				// check ID validity
+				var/obj/item/weapon/card/foundid = null
+				for(var/obj/item/weapon/card/id in H) // send these to medical body disposal as well
+					foundid = id
+					break
+				for(var/obj/item/device/pda/P in H)
+					if(!isnull(P.id)) // send these to medical body disposal as well
+						foundid = P.id
+						break
+				for(var/obj/item/weapon/storage in H)
+					for(var/obj/item/weapon/card/id in storage.contents)
+						foundid = id // check simple storages for idcards! one level deep only!
+						break
+				// check ID validity
+				if(!isnull(foundid) && !istype(foundid,/obj/item/weapon/card/id/guest))
+					detectedtag = "corpse"
 
 	// outpost 21 edit end
 	var/nextdir = nextdir(H.dir, detectedtag)

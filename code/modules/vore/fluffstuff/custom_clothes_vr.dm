@@ -1764,6 +1764,7 @@ Departamental Swimsuits, for general use
 
 /obj/item/clothing/head/helmet/space/void/security/hasd
 	name = "HASD EVA faceplate"
+	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0) //Same armor as security helmets, because it replaces it.
 	desc = "It's a faceplate that slots into the HASD EVA bodyplate assembly. Functionally useless alone."
 
 	icon = 'icons/vore/custom_clothes_vr.dmi'
@@ -1774,8 +1775,8 @@ Departamental Swimsuits, for general use
 	species_restricted = null
 
 /obj/item/clothing/head/helmet/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-	if(..())
-		if(H.ckey != "Seagha") // outpost 21 edit - requested fluff
+	if(..() && istype(H))
+		if(H.ckey != "seagha") // outpost 21 edit - requested fluff
 			to_chat(H, "<span class='warning'>...The faceplate is clearly not made for your anatomy, thus, does not fit.</span>")
 			return 0
 		else
@@ -1783,7 +1784,7 @@ Departamental Swimsuits, for general use
 
 /obj/item/clothing/suit/space/void/security/hasd
 	name = "HASD EVA bodyplates"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0) //Same armor as security vests, because it replaces it.
 	desc = "A series of armor plates painted black, deployed from a back-mounted module. They fit smoothly over the unit's armor plates and projects a skintight bubble shield over the unit's uncovered parts. Faceplate and coolant unit not included."
 	species_restricted = null
 	icon = 'icons/mob/taursuits_lizard_vr.dmi'
@@ -1792,11 +1793,12 @@ Departamental Swimsuits, for general use
 	pixel_x = -16
 
 /obj/item/clothing/suit/space/void/security/hasd/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
-	if(..() && istype(H) && H.ckey == "Seagha") // outpost 21 edit - requested fluff
-		return 1
-	else
-		to_chat(H, "<span class='warning'>This suit is not designed for you.</span>")
-		return 0
+	if(..() && istype(H))
+		if(H.ckey != "seagha") // outpost 21 edit - requested fluff
+			to_chat(H, "<span class='warning'>...The suit is clearly not made for your anatomy, thus, does not fit.</span>")
+			return 0
+		else
+			return 1
 
 /* outpost 21 edit - fluff removal
 //Zigfe:Zaoozaoo Xrimxuqmqixzix

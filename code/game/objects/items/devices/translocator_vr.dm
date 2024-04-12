@@ -1,7 +1,7 @@
 //The perfect adminboos device?
 /obj/item/device/perfect_tele
 	name = "personal translocator"
-	desc = "Seems absurd, doesn't it? Yet, here we are. Generally considered dangerous contraband unless the user has permission from Central Command." //YW EDIT
+	desc = "A specialized and highly advanced personal translocation tool. Felonious Contraband on most stations without approval from central command." //Op21 edit
 	icon = 'icons/obj/device_alt.dmi'
 	icon_state = "hand_tele"
 	w_class = ITEMSIZE_SMALL
@@ -372,7 +372,7 @@ This device records all warnings given and teleport events for admin review in c
 
 /obj/item/device/perfect_tele_beacon
 	name = "translocator beacon"
-	desc = "That's unusual."
+	desc = "A destination beacon for a translocator."
 	icon = 'icons/obj/device_alt.dmi'
 	icon_state = "motion2"
 	w_class = ITEMSIZE_TINY
@@ -430,11 +430,11 @@ GLOBAL_LIST_BOILERPLATE(premade_tele_beacons, /obj/item/device/perfect_tele_beac
 // A single-beacon variant for use by miners (or whatever)
 /obj/item/device/perfect_tele/one_beacon
 	name = "mini-translocator"
-	desc = "A more limited translocator with a single beacon, useful for some things, like setting the mining department on fire accidentally. Legal for use in the pursuit of NanoTrasen interests, namely mining and exploration." // YW EDIT
+	desc = "A single-usage personal translocator. Legal only for emergency usages." // Op21 edit.
 	icon_state = "minitrans"
 	beacons_left = 1 //Just one
 	cell_type = /obj/item/weapon/cell/device
-	origin_tech = list(TECH_MAGNET = 5, TECH_BLUESPACE = 5)
+	origin_tech = list(TECH_MAGNET = 5, TECH_BLUESPACE = 5, TECH_ILLEGAL = 5)
 
 /*
 /obj/item/device/perfect_tele/one_beacon/teleport_checks(mob/living/target,mob/living/user)

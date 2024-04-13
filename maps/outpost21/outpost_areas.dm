@@ -443,6 +443,7 @@
 	base_turf = /turf/simulated/mineral/floor/muriki
 	icon_state = "blublatri"
 	holomap_color = HOLOMAP_AREACOLOR_CIV
+	flags = RAD_SHIELDED
 
 /area/muriki/crew/civmail
 	name = "\improper Civilian Mail Room"

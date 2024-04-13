@@ -6,6 +6,7 @@
 	#include "outpost-05-centcom.dmm"
 	#include "outpost-06-misc.dmm"
 	#include "outpost-07-asteroid.dmm"
+	#include "outpost-10-vr.dmm"
 
 	#include "outpost_defines.dm"
 	#include "outpost_areas.dm"

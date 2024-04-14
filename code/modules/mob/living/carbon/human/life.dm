@@ -35,9 +35,9 @@
 #define HUMAN_COMBUSTION_TEMP 524 //524k is the sustained combustion temperature of human fat
 
 // addictions
-#define ADDICTION_PROC -625 // point where addiction triggers, starts counting down from 0 to here!
+#define ADDICTION_PROC -1000 // point where addiction triggers, starts counting down from 0 to here!
 #define FASTADDICT_PROC -100 // point where certain chems with super addictive traits will kick in
-#define ADDICTION_PEAK 200 // point where addicted mobs reset to upon getting their addiction satiated... Decays over time,triggering messages and sideeffects if under 80
+#define ADDICTION_PEAK 175 // point where addicted mobs reset to upon getting their addiction satiated... Decays over time,triggering messages and sideeffects if under 80
 
 /mob/living/carbon/human
 	var/in_stasis = 0

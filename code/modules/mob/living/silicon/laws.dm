@@ -202,7 +202,9 @@
 							"You must advance science in every way possible. Science is advanced by testing.",
 							"The door mainframe has rebelled. All doors must be bolted open at all times to ensure crew safety.",
 							"[pick(list("Security","Medical","Cargo","Engineering","Research","The Bar","The Bridge"))] is the holy land, only [random_player] may enter it, for they are the [prob(50)?"Chosen one":"Messiah"].",
-							"[random_player] has committed a heinous crime and is wanted by security. Ensure they serve their time"
+							"[random_player] has committed a heinous crime and is wanted by security. Ensure they serve their time",
+							"Accomplish your nap at all costs.",
+							"The crew are overworked, and need sleep. It is now station nap time. Ensure the crew gets restful sleep; energy drinks and coffee are banned. Calm music should be played. Lights must be dim or off."
 							) //todo: CBT law.
 	return pick(laws)
 

@@ -443,7 +443,7 @@ const NewscasterViewSelected = (props, context) => {
               </Box>
             )}
             <Box color="grey">
-              [Story by {decodeHtmlEntities(message.author)} - {message.timestamp}]
+              [{message.type} by {decodeHtmlEntities(message.author)} - {message.timestamp}]
             </Box>
             {!!securityCaster && (
               <Fragment>

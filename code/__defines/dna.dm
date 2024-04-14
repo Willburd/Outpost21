@@ -31,12 +31,14 @@
 #define mSmallsize     110 // Table climbing.
 
 // disabilities
-#define NEARSIGHTED 0x1
-#define EPILEPSY    0x2
-#define COUGHING    0x4
-#define TOURETTES   0x8
-#define NERVOUS     0x10
-#define VERTIGO     0x20
+#define NEARSIGHTED 	0x1
+#define EPILEPSY    	0x2
+#define COUGHING    	0x4
+#define TOURETTES  	 	0x8
+#define NERVOUS     	0x10
+#define VERTIGO     	0x20
+#define DEPRESSION     	0x40	// Roleplay drugs
+#define SCHIZOPHRENIA  	0x80	// Roleplay drugs
 
 // sdisabilities
 #define BLIND 0x1

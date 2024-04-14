@@ -168,6 +168,12 @@
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/peridaxon = 14)
 	wrapper_color = COLOR_PURPLE
 
+/obj/item/weapon/storage/pill_bottle/lithium
+	name = "pill bottle (Lithium)"
+	desc = "Used in the treatment of schizophrenia, Alzheimer's disease, and dementia. Medicate cautiously."
+	starts_with = list(/obj/item/weapon/reagent_containers/pill/lithium = 14)
+	wrapper_color = COLOR_BABY_BLUE
+
 /obj/item/weapon/storage/pill_bottle/carthatoline
 	name = "pill bottle (Carthatoline)"
 	desc = "Carthatoline is strong evacuant used to treat severe poisoning."

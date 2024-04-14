@@ -1788,6 +1788,13 @@
 		dna.SetSEState(VERTIGOBLOCK,1,1)
 		disabilities |= VERTIGO
 
+	// RP only
+	if(cli.prefs.disabilities & DEPRESSION)
+		disabilities |= DEPRESSION
+
+	if(cli.prefs.disabilities & SCHIZOPHRENIA)
+		disabilities |= SCHIZOPHRENIA
+
 	// automatic addictions
 	if(cli.prefs.addictions & ADDICT_NICOTINE)
 		addict_to_reagent("nicotine")

@@ -590,7 +590,17 @@ var/global/datum/controller/occupations/job_master
 
 	if(!isnull(Bag))
 		//Gives medications for neurological disabilities
-		if(H.disabilities & NERVOUS || H.disabilities & EPILEPSY || H.disabilities & TOURETTES)
+		if(H.disabilities & SCHIZOPHRENIA)
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/lithium()
+			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
+			Bag.contents += perscrip
+
+		if(H.disabilities & DEPRESSION)
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/peridaxon() // stronger meds for more dangerous cases
+			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
+			Bag.contents += perscrip
+
+		if(H.disabilities & DEPRESSION || H.disabilities & NERVOUS || H.disabilities & EPILEPSY || H.disabilities & TOURETTES)
 			var/perscrip = new /obj/item/weapon/storage/pill_bottle/citalopram() // currently the only reasonable med, also one of the few with an actual pill bottle
 			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
 			Bag.contents += perscrip

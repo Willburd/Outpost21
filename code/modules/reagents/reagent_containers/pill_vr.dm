@@ -35,6 +35,15 @@
 	. = ..()
 	reagents.add_reagent("peridaxon", 10)
 
+/obj/item/weapon/reagent_containers/pill/lithium
+	name = "Lithium (5u)"
+	desc = "Used in the treatment of schizophrenia, Alzheimer's disease, and dementia. Medicate cautiously."
+	icon_state = "pill2"
+
+/obj/item/weapon/reagent_containers/pill/lithium/Initialize()
+	. = ..()
+	reagents.add_reagent("lithium", 5)
+
 /obj/item/weapon/reagent_containers/pill/carthatoline
 	name = "Carthatoline (15u)"
 	desc = "Carthatoline is strong evacuant used to treat severe poisoning."

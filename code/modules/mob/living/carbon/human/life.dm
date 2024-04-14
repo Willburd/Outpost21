@@ -406,8 +406,11 @@
 			addict.Add(reagentid)
 	// Only needed for alcohols, will interfere with pills if you detect other things!
 	for(var/datum/reagent/R in ingested.reagent_list)
-		if(istype( SSchemistry.chemical_reagents[R.id], /datum/reagent/ethanol))
-			addict.Add("ethanol")
+		var/reagentid = R.id
+		if(istype( SSchemistry.chemical_reagents[reagentid], /datum/reagent/ethanol))
+			reagentid = "ethanol"
+		if(reagentid in addictives)
+			addict.Add(reagentid)
 
 	for(var/A in addict)
 		if(!(A in addictions))

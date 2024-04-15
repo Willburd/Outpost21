@@ -270,9 +270,11 @@
 	if(!config.footstep_volume || !T.footstep_sounds || !T.footstep_sounds.len)
 		return
 	// Future Upgrades - Multi species support
-	var/list/footstep_sounds = T.footstep_sounds["human"]
-	if(!footstep_sounds)
-		return
+	var/list/footstep_sounds = T.footstep_sounds[src.get_species()]
+	if(!LAZYLEN(footstep_sounds))
+		footstep_sounds = T.footstep_sounds["human"] // Probably doesn't have species sounds, use the default // TODO: replace this with a define, unfortunately SPECIES_HUMAN is "Human" instead of "human"
+		if(!footstep_sounds)
+			return
 
 	var/S = pick(footstep_sounds)
 	GLOB.step_taken_shift_roundstat++

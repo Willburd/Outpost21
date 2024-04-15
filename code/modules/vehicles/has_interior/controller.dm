@@ -262,6 +262,30 @@
 	if(has_breaking_speed)
 		severity = 2 // first smash always best
 
+	// special handling due to vis breaking if it doesn't get a ex_act(1)
+	if(istype(target,/obj/machinery/door/blast))
+		var/obj/machinery/door/blast/BD = target
+
+		if(!BD.density || BD.operating)
+			return 1
+
+		if((prob(10) && has_breaking_speed) || BD.health <= 0)
+			BD.visible_message("<span class='danger'>\The [src] crashes through \the [BD]!</span>")
+			spawn()
+				BD.open(1)
+		else
+			BD.ex_act(3)
+			if(has_breaking_speed)
+				if(BD.opacity)
+					BD.visible_message("<span class='danger'>Something is forcing itself through \the [BD]!</span>")
+				else
+					BD.visible_message("<span class='danger'>\The [src] is forcing itself through \the [BD]!</span>")
+
+		// shakey time
+		playsound(entrance_hatch, get_sfx("vehicle_crush"), 50, 1)
+		shake_cab()
+		return 1
+
 	// blob grinding
 	if(istype(target, /obj/structure/blob/))
 		var/obj/structure/blob/B = target

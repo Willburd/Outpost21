@@ -385,34 +385,6 @@
 	contraband = list(/obj/item/clothing/shoes/syndigaloshes = 1,
 					/obj/item/clothing/shoes/clown_shoes = 1)
 
-/obj/machinery/vending/loadout/uniform
-	name = "The Basics"
-	desc = "A vendor using compressed matter cartridges to store large amounts of basic station uniforms."
-	product_ads = "Don't get caught naked!;Pick up your uniform!;Using compressed matter cartridges and VERY ETHICAL labor practices, we bring you the uniforms you need!;No uniform? No problem!;We've got your covered!;The Basics is not responsible for being crushed under the amount of things inside our machines. DO NOT VEND IN EXCESS!!"
-	icon_state = "loadout"
-	vend_delay = 16
-	products = list(/obj/item/device/pda = 50,
-					/obj/item/device/radio/headset = 50,
-					/obj/item/weapon/storage/backpack/ = 10,
-					/obj/item/weapon/storage/backpack/messenger = 10,
-					/obj/item/weapon/storage/backpack/satchel = 10,
-					/obj/item/clothing/under/color = 5,
-					/obj/item/clothing/under/color/aqua = 5,
-					/obj/item/clothing/under/color/black = 5,
-					/obj/item/clothing/under/color/blackjumpskirt = 5,
-					/obj/item/clothing/under/color/blue = 5,
-					/obj/item/clothing/under/color/brown = 5,
-					/obj/item/clothing/under/color/green = 5,
-					/obj/item/clothing/under/color/grey = 5,
-					/obj/item/clothing/under/color/orange = 5,
-					/obj/item/clothing/under/color/pink = 5,
-					/obj/item/clothing/under/color/red = 5,
-					/obj/item/clothing/under/color/white = 5,
-					/obj/item/clothing/under/color/yellow = 5,
-					/obj/item/clothing/shoes/black = 20,
-					/obj/item/clothing/shoes/white = 20)
-	prices = list()
-
 /obj/machinery/vending/loadout/accessory
 	name = "Looty Inc."
 	desc = "A special vendor for accessories."
@@ -1699,6 +1671,18 @@
 					/obj/item/clothing/under/color/red = 5,
 					/obj/item/clothing/under/color/white = 5,
 					/obj/item/clothing/under/color/yellow = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/orange_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/lightgrey_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/white_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/red_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/orange = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/yellow_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/green_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/blue_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/purple_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/pink_grey = 5,
+					/obj/item/clothing/under/teshari/undercoat/standard/brown_grey = 5,
+					/obj/item/clothing/under/vox/vox_casual = 5,
 					/obj/item/clothing/shoes/black = 20,
 					/obj/item/clothing/shoes/white = 20)
 	prices = list()

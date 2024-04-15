@@ -15,6 +15,11 @@
 	var/maxdistance = (world.view + extrarange) * 2  //VOREStation Edit - 3 to 2
 	var/list/listeners = player_list.Copy()
 	var/list/holo_listeners = list() // sorry for the duped bits of code ahead, but this is somewhat required to have AI holograms listen to game sounds - Willbird
+	// Vehicles with interiors forward the sound to their entrance pos inside it
+	var/list/vehicle_interiors_to_forward_to = list()
+	if(!is_global && !istype(source,/obj/machinery/door/vehicle_interior_hatch/)) // global sounds are heard anyway don't bother forwarding, don't forward if played from inside a vehicle anyway
+		vehicle_interiors_to_forward_to = interior_vehicle_list.Copy();
+
 	for(var/mob/living/silicon/ai/A in listeners)
 		if(A.holo && istype(A.holo.masters[A],/obj/effect/overlay/aiholo/) && (get_turf(A.holo.masters[A]) in hear(maxdistance,source)))
 			holo_listeners += A.holo.masters[A]
@@ -25,6 +30,11 @@
 		for(var/mob/listen in holo_listeners)
 			if(!(get_turf(listen) in hear(maxdistance,source)))
 				holo_listeners -= listen
+		for(var/obj/vehicle/has_interior/controller/listen in vehicle_interiors_to_forward_to)
+			if(!(get_turf(listen) in hear(maxdistance,source)))
+				vehicle_interiors_to_forward_to -= listen
+
+	// Listeners and AI holograms also listening
 	for(var/mob/M as anything in listeners)
 		if(!M || !M.client)
 			continue
@@ -53,6 +63,18 @@
 		if(distance <= maxdistance)
 			if(T && T.z == turf_source.z)
 				H.master.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, channel, pressure_affected, S, preference, volume_channel, T)
+
+	// Forward to vehicle occupants
+	for(var/obj/vehicle/has_interior/controller/V in vehicle_interiors_to_forward_to)
+		var/turf/T = get_turf(V)
+		if(!T)
+			continue
+		var/area/A = T.loc
+		if((A.soundproofed || area_source.soundproofed) && (A != area_source))
+			continue
+		var/distance = get_dist(V, turf_source)
+		if(distance <= maxdistance && T.z == turf_source.z && V.interior_helm != null && vol > 0)
+			playsound(V.interior_helm,soundin, vol * 0.5 * (1 - (distance / maxdistance)), vary, -5, falloff, FALSE, frequency, channel, pressure_affected, TRUE, preference, volume_channel)
 
 /mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, channel = 0, pressure_affected = TRUE, sound/S, preference, volume_channel = null)
 	if(!client || ear_deaf > 0)

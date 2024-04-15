@@ -88,6 +88,7 @@
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = "[name] ([rand(1000,9999)])" // camera bullshit needs unique name
 		camera.replace_networks(list(NETWORK_DEFAULT,NETWORK_ROBOTS))
+	interior_vehicle_list += src
 
 /obj/vehicle/has_interior/controller/Initialize()
 	// find interior entrypos
@@ -241,6 +242,10 @@
 			var/list/offsetxylist = dirlist["[dir]"] // get subsublist with x and y inside
 			W.pixel_x = offsetxylist[1]
 			W.pixel_y = offsetxylist[2]
+
+/obj/vehicle/has_interior/controller/Destroy()
+	. = ..()
+	interior_vehicle_list -= src;
 
 //-------------------------------------------
 // Violence!

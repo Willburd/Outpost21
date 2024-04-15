@@ -89,7 +89,7 @@
 	if(T)
 		var/datum/gas_mixture/air_contents = T.return_air()
 		// recover till at body temp
-		if(air_contents.temperature <= TERRAFORMER_BODY_TEMP - 5)
+		if(air_contents.temperature < TERRAFORMER_BODY_TEMP)
 			air_contents.temperature += 1
 		if(air_contents.temperature > TERRAFORMER_BODY_TEMP + 5)
 			air_contents.temperature -= 2

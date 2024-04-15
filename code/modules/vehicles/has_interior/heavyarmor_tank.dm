@@ -26,21 +26,6 @@
 	icon_state = "sec_tank"
 	w_class = ITEMSIZE_TINY
 
-/obj/item/vehicle_interior_weapon/lmg
-	name = "\improper Ultra AC 2"
-	desc = "A superior version of the standard Solgov Autocannon MK2 design."
-
-	icon = 'icons/obj/pointdefense.dmi'
-	icon_state = "pointdefense2"
-
-	projectile = /obj/item/projectile/bullet/pistol/medium
-	fire_sound = 'sound/weapons/Gunshot_machinegun.ogg'
-	projectiles = 30 //10 bursts, matching the Scattershot's 10. Also, conveniently, doesn't eat your powercell when reloading like 300 bullets does.
-	projectiles_per_shot = 3
-	deviation = 0.3
-	fire_cooldown = 2
-
-
 /obj/item/vehicle_interior_weapon/mainturret
 	name = "\improper TD Type-L Accelerator"
 	desc = "Tandem Logistics Linear-Type Heavy-Ordinance Magnetic Accelerator."
@@ -60,6 +45,8 @@
 	projectiles_per_shot = 1
 	deviation = 0.1
 	fire_cooldown = 6
+
+	freeaim = FALSE
 
 
 // basically just meaner /obj/item/projectile/bullet/srmrocket

@@ -1058,6 +1058,7 @@
 	var/fire_cooldown = 0 //Duration of sleep between firing projectiles in single shot.
 	var/fire_sound //Sound played while firing.
 	var/fire_volume = 50 //How loud it is played.
+	var/freeaim = TRUE //If false, the weapon only aims in 8 directions
 	var/obj/machinery/computer/vehicle_interior_console/control_console = null
 
 /obj/item/vehicle_interior_weapon/GotoAirflowDest(n) // weapon is rooted to tank...
@@ -1071,7 +1072,7 @@
 		return FALSE
 	return TRUE
 
-/obj/item/vehicle_interior_weapon/proc/solve_aim_direction(var/endx, var/endy)
+/obj/item/vehicle_interior_weapon/proc/solve_aim_angle(var/endx, var/endy)
 	var/ev = control_console.interior_controller.extra_view
 
 	// is just /proc/Get_Angle(atom/movable/start,atom/movable/end) but with X/Y on the screen from its center...
@@ -1104,7 +1105,7 @@
 
 	// actually use it!
 	var/turf/curloc = control_console.interior_controller.loc
-	var/angledir = angle2dir( solve_aim_direction(text2num(tX),text2num(tY)) )
+	var/angledir = angle2dir( solve_aim_angle(text2num(tX),text2num(tY)))
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return
@@ -1154,7 +1155,12 @@
 		projectiles--
 
 		var/obj/item/projectile/P = new projectile( get_turf(curloc))
-		Fire(P, target, params, user_calling, dir2angle(dir) )
+
+		// Free aim allows any angle, but still turns weapon
+		var/dirangle = dir2angle(dir)
+		if(freeaim)
+			dirangle = solve_aim_angle(text2num(tX),text2num(tY));
+		Fire(P, target, params, user_calling, dirangle)
 		if(fire_cooldown)
 			sleep(fire_cooldown)
 

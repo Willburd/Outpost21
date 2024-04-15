@@ -13,7 +13,7 @@
 	brute_dam_coeff = 0.4
 	breakwalls = FALSE
 
-	weapons_equiped = list(/obj/item/vehicle_interior_weapon/scattershot)
+	weapons_equiped = list(/obj/item/vehicle_interior_weapon/lmg)
 	weapons_draw_offset = list(list("1" = list(20,20),"2" = list(-20,10),"4" = list(12,20),"8" = list(-12,34)) )
 
 
@@ -37,3 +37,17 @@
 	projectiles = 40
 	projectiles_per_shot = 4
 	deviation = 0.7
+
+/obj/item/vehicle_interior_weapon/lmg
+	name = "\improper Ultra AC 2"
+	desc = "A superior version of the standard Solgov Autocannon MK2 design."
+
+	icon = 'icons/obj/pointdefense.dmi'
+	icon_state = "pointdefense2"
+
+	projectile = /obj/item/projectile/bullet/pistol/medium
+	fire_sound = 'sound/weapons/Gunshot_machinegun.ogg'
+	projectiles = 30 //10 bursts, matching the Scattershot's 10. Also, conveniently, doesn't eat your powercell when reloading like 300 bullets does.
+	projectiles_per_shot = 3
+	deviation = 0.3
+	fire_cooldown = 2

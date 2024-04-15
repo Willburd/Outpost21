@@ -78,3 +78,13 @@
 		T.air.adjust_multi("oxygen", 0, "carbon_dioxide", 0, "nitrogen", 0, "phoron", 0, "methane", ONE_ATMOSPHERE)
 		T.air.group_multiplier = air_contents.group_multiplier
 		T.air.volume = air_contents.volume
+
+/obj/effect/map_effect/interval/atmogland/bodyheat
+	name = "atmogland bodyheat"
+
+/obj/effect/map_effect/interval/atmogland/bodyheat/trigger()
+	var/turf/simulated/T = loc
+	if(T)
+		var/datum/gas_mixture/air_contents = T.return_air()
+		air_contents.temperature = max( air_contents.temperature, 343) // body heat or higher
+		T.air = air_contents

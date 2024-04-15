@@ -1,3 +1,5 @@
+#define TERRAFORMER_BODY_TEMP 333
+
 /obj/effect/map_effect/interval/atmogland
 	name = "atmogland space"
 	icon = 'icons/mob/screen1.dmi'
@@ -86,5 +88,5 @@
 	var/turf/simulated/T = loc
 	if(T)
 		var/datum/gas_mixture/air_contents = T.return_air()
-		air_contents.temperature = max( air_contents.temperature, 343) // body heat or higher
+		air_contents.temperature = max( air_contents.temperature, TERRAFORMER_BODY_TEMP) // body heat or higher
 		T.air = air_contents

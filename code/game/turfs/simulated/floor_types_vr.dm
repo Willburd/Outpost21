@@ -22,7 +22,7 @@
 	desc = "This slick flesh ripples and squishes under your touch"
 	icon_state = "flesh_floor"
 	icon = 'icons/turf/stomach_vr.dmi'
-	temperature = 343
+	temperature = TERRAFORMER_BODY_TEMP
 	initial_flooring = /decl/flooring/flesh
 
 /turf/simulated/floor/flesh/Initialize(mapload)
@@ -91,4 +91,3 @@
 	desc = "It is entirely made of sick, gurgling flesh. It is releasing a sickly odour."
 	icon_state = "bloodfloor_2"
 	icon = 'icons/goonstation/turf/meatland.dmi'
-

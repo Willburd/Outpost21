@@ -490,13 +490,13 @@
 			for(var/obj/item/weapon/implant/I as anything in e.implants)
 				/* outpost 21  edit - nif removal
 				var/obj/item/device/nif/N = I //VOREStation Add: NIFs
+				if(istype(N) && N.known_implant) //VOREStation Add: NIFs
+					imp += "[N] implanted:"
+				 */
 				if(istype(I) && I.known_implant)
 					imp += "[I] implanted:"
-				else if(istype(N) && N.known_implant) //VOREStation Add: NIFs
-					imp += "[N] implanted:"
 				else
-				*/
-				unknown_body++
+					unknown_body++
 
 			if(unknown_body)
 				imp += "Unknown body present:"
@@ -551,7 +551,7 @@
 		if(occupant.disabilities & NEARSIGHTED)
 			dat += "<font color='red'>Retinal misalignment detected.</font><BR>"
 		if(hasMalignants != "")
-			dat += "<font color='red'>Unknown body detected!</font><BR>" + hasMalignants
+			dat += "<font color='red'>Unknown anatomy detected!</font><BR>" + hasMalignants
 	else
 		dat += "\The [src] is empty."
 

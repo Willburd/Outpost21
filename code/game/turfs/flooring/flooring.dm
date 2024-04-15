@@ -391,7 +391,15 @@ var/list/flooring_types
 		'sound/effects/footstep/floor2.ogg',
 		'sound/effects/footstep/floor3.ogg',
 		'sound/effects/footstep/floor4.ogg',
-		'sound/effects/footstep/floor5.ogg'))
+		'sound/effects/footstep/floor5.ogg'),
+		SPECIES_TESHARI = list(
+		'sound/effects/footstep/BudgieStep1.ogg',
+		'sound/effects/footstep/BudgieStep2.ogg',
+		'sound/effects/footstep/BudgieStep3.ogg',
+		'sound/effects/footstep/BudgieStep4.ogg',
+		'sound/effects/footstep/BudgieStep5.ogg',
+		'sound/effects/footstep/BudgieStep6.ogg',
+		))
 
 /decl/flooring/tiling/tech
 	desc = "Scuffed from the passage of countless greyshirts."

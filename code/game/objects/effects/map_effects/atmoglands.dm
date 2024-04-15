@@ -88,5 +88,9 @@
 	var/turf/simulated/T = loc
 	if(T)
 		var/datum/gas_mixture/air_contents = T.return_air()
-		air_contents.temperature = max( air_contents.temperature, TERRAFORMER_BODY_TEMP) // body heat or higher
-		T.air = air_contents
+		// recover till at body temp
+		if(air_contents.temperature <= TERRAFORMER_BODY_TEMP - 5)
+			air_contents.temperature += 1
+		if(air_contents.temperature > TERRAFORMER_BODY_TEMP + 5)
+			air_contents.temperature -= 2
+		T.air = air_contents;

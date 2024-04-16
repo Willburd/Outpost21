@@ -16,6 +16,7 @@
 		)
 	var/xarch_source_mineral = "iron"
 	var/reagent = "silicate"
+	var/spoiler = FALSE
 
 /ore/New()
 	. = ..()

@@ -9,6 +9,7 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 /datum/internal_wiki/main
 	var/list/pages = list()
 
+	var/list/ores = list()
 	var/list/materials = list()
 	var/list/smashers = list()
 
@@ -20,12 +21,14 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	var/list/foodrecipe = list()
 	var/list/drinkrecipe = list()
 
+	var/list/spoilerore = list()
 	var/list/spoilermat = list()
 	var/list/spoilersmasher = list()
 	var/list/spoilerreact = list()
 
 	var/list/catalogs = list()
 
+	var/list/searchcache_ore = list()
 	var/list/searchcache_material = list()
 	var/list/searchcache_smasher = list()
 	var/list/searchcache_foodrecipe = list()
@@ -38,12 +41,24 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 		return // already init
 	log_world("Init game built wiki")
 
+	// assemble ore wiki
+	for(var/N in GLOB.ore_data)
+		var/ore/OR = GLOB.ore_data[N]
+		var/datum/internal_wiki/page/P = new()
+		P.ore_assemble(OR)
+		if(!OR.spoiler)
+			ores["[OR.display_name]"] = P
+			searchcache_ore.Add("[OR.display_name]")
+		else
+			spoilerore["[OR.display_name]"] = P
+		pages.Add(P)
+
 	// assemble material wiki
 	for(var/mat in name_to_material)
 		var/datum/material/M = name_to_material[mat]
 		var/datum/internal_wiki/page/P = new()
+		P.material_assemble(M)
 		if(!M.spoiler)
-			P.material_assemble(M)
 			materials["[M.display_name]"] = P
 			searchcache_material.Add("[M.display_name]")
 		else
@@ -313,6 +328,30 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	// this is so we can override these for catalog records viewing
 	return body
 
+/datum/internal_wiki/page/proc/ore_assemble(var/ore/O)
+	title = O.display_name
+	body = ""
+	if(O.smelts_to)
+		var/datum/material/S = get_material_by_name(O.smelts_to)
+		body += "<b>Smelt: [S.name]</b><br>"
+	if(O.compresses_to)
+		var/datum/material/C = get_material_by_name(O.compresses_to)
+		body += "<b>Compress: [C.name]</b><br>"
+	body += "<b>Grind: [SSchemistry.chemical_reagents[O.reagent].name]</b><br>"
+	if(O.alloy)
+		body += "<br>"
+		body += "<b>Alloy Component of: </b><br>"
+		// Assemble what alloys this ore can make
+		for(var/datum/alloy/A in GLOB.alloy_data)
+			for(var/req in A.requires)
+				if(O.name == req )
+					var/datum/material/M = get_material_by_name(A.metaltag)
+					body += "<b>-[M.display_name]</b><br>"
+					break
+	else
+		body += "<br>"
+		body += "<b>No known Alloys</b><br>"
+
 /datum/internal_wiki/page/proc/material_assemble(var/datum/material/M)
 	title = M.display_name
 	body  = "<b>Integrity: [M.integrity]</b><br>"
@@ -328,6 +367,7 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	body += "<br>"
 	body += "<b>Melting Point: [M.melting_point]</b><br>"
 	body += "<b>Ignition Point: [M.ignition_point]</b><br>"
+	M.get_recipes() // generate if not already
 	if(M.recipes != null && M.recipes.len > 0)
 		body += "<br>"
 		body += "<b>Recipies: </b><br>"
@@ -351,10 +391,10 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 			qdel(scanitm)
 		else
 			body += "<b>Target Item: </b><br>"
-				for(var/Ir in M.items)
-					var/obj/item/scanitm = new Ir()
-					body += "<b>-[scanitm.name]</b><br>"
-					qdel(scanitm)
+			for(var/Ir in M.items)
+				var/obj/item/scanitm = new Ir()
+				body += "<b>-[scanitm.name]</b><br>"
+				qdel(scanitm)
 	body += "<b>Threshold Energy: [M.required_energy_min] - [M.required_energy_max]</b><br>"
 	body += "<b>Threshold Temp: [M.required_atmos_temp_min]k - [M.required_atmos_temp_max]k</b><br>"
 	if(M.reagents != null && M.reagents.len > 0)

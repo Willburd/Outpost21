@@ -93,6 +93,8 @@
 				data["search"] = GLOB.game_wiki.searchcache_material
 			if(searchmode == "Particle Physics")
 				data["search"] = GLOB.game_wiki.searchcache_smasher
+			if(searchmode == "Ores")
+				data["search"] = GLOB.game_wiki.searchcache_ore
 
 			// display message
 			data["title"] = doc_title
@@ -138,6 +140,11 @@
 		if("drinksearch")
 			if(!crash)
 				searchmode = "Drink Recipes"
+			. = TRUE
+
+		if("oresearch")
+			if(!crash)
+				searchmode = "Ores"
 			. = TRUE
 
 		if("matsearch")
@@ -201,6 +208,8 @@
 					P = GLOB.game_wiki.materials[search]
 				if(searchmode == "Particle Physics")
 					P = GLOB.game_wiki.smashers[search]
+				if(searchmode == "Ores")
+					P = GLOB.game_wiki.ores[search]
 
 				if(setpage)
 					if(P)

@@ -281,6 +281,7 @@
 	var/required_atmos_temp_min = 0		// The minimum ambient atmospheric temperature required, in kelvin.
 	var/required_atmos_temp_max = 600	// The maximum ambient atmospheric temperature required, in kelvin.
 	var/probability = 0					// The probability for the recipe to be produced. 0 will make it impossible.
+	var/spoiler = FALSE					// If the recipe appears in the ingame wiki
 
 /datum/particle_smasher_recipe/proc/check_items(var/obj/container as obj)
 	. = 1
@@ -337,6 +338,7 @@
 	required_energy_min = 400
 	required_energy_max = 500
 	probability = 20
+	spoiler = TRUE
 
 /datum/particle_smasher_recipe/plasteel_morphium
 	items = list(/obj/item/prop/alien/junk)

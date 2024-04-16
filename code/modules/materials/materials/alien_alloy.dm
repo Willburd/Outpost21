@@ -11,26 +11,31 @@
 	hardness = 500
 	weight = 500
 	protectiveness = 80 // 80%
+	spoiler = TRUE
 
 /datum/material/alienalloy/elevatorium
 	name = "elevatorium"
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
+	spoiler = TRUE
 
 /datum/material/alienalloy/dungeonium
 	name = "dungeonium"
 	display_name = "ultra-durable"
 	icon_base = "dungeon"
 	icon_colour = "#FFFFFF"
+	spoiler = TRUE
 
 /datum/material/alienalloy/bedrock
 	name = "bedrock"
 	display_name = "impassable rock"
 	icon_base = "rock"
 	icon_colour = "#FFFFFF"
+	spoiler = TRUE
 
 /datum/material/alienalloy/alium
 	name = "alium"
 	display_name = "alien"
 	icon_base = "alien"
 	icon_colour = "#FFFFFF"
+	spoiler = TRUE

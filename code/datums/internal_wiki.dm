@@ -10,6 +10,8 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	var/list/pages = list()
 
 	var/list/materials = list()
+	var/list/smashers = list()
+
 	var/list/foodreact = list()
 	var/list/drinkreact = list()
 	var/list/phororeact = list()
@@ -19,10 +21,13 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	var/list/drinkrecipe = list()
 
 	var/list/spoilermat = list()
+	var/list/spoilersmasher = list()
 	var/list/spoilerreact = list()
 
 	var/list/catalogs = list()
 
+	var/list/searchcache_material = list()
+	var/list/searchcache_smasher = list()
 	var/list/searchcache_foodrecipe = list()
 	var/list/searchcache_drinkrecipe = list()
 	var/list/searchcache_chemreact = list()
@@ -32,15 +37,36 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	if(pages.len)
 		return // already init
 	log_world("Init game built wiki")
+
 	// assemble material wiki
-	for(var/datum/material/M in name_to_material)
+	for(var/mat in name_to_material)
+		var/datum/material/M = name_to_material[mat]
 		var/datum/internal_wiki/page/P = new()
 		if(!M.spoiler)
 			P.material_assemble(M)
-			materials["[M.name]"] = P
+			materials["[M.display_name]"] = P
+			searchcache_material.Add("[M.display_name]")
 		else
-			spoilermat["[M.name]"] = P
+			spoilermat["[M.display_name]"] = P
 		pages.Add(P)
+
+	// assemble particle smasher wiki
+	var/list/smasher_recip = list()
+	for(var/D in subtypesof(/datum/particle_smasher_recipe))
+		smasher_recip += new D
+	for(var/datum/particle_smasher_recipe/R in smasher_recip)
+		var/datum/internal_wiki/page/P = new()
+
+		var/obj/item/res = new R.result;
+		P.smasher_assemble(R,res.name)
+		if(!R.spoiler)
+			smashers["[res.name]"] = P
+			searchcache_smasher.Add("[res.name]")
+		else
+			spoilersmasher["[res.name]"] = P
+		qdel(res)
+		pages.Add(P)
+
 	// assemble chemical reactions wiki
 	for(var/reagent in SSchemistry.chemical_reagents)
 		if(allow_reagent(reagent))
@@ -65,6 +91,7 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 				spoilerreact["[R.name]"] = P
 			pages.Add(P)
 	init_kitchen_data()
+
 	// assemble low reward catalog entries
 	for(var/datum/category_group/G in GLOB.catalogue_data.categories)
 		for(var/datum/category_item/catalogue/item in G.items)
@@ -80,6 +107,7 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 			catalogs["[item.name]"] = P
 			searchcache_catalogs.Add("[item.name]")
 			pages.Add(P)
+
 	log_world("Wiki page count [pages.len]")
 
 /datum/internal_wiki/main/proc/init_kitchen_data()
@@ -286,8 +314,60 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	return body
 
 /datum/internal_wiki/page/proc/material_assemble(var/datum/material/M)
-	title = M.name
-	body  = "<b>Description: </b><br>"
+	title = M.display_name
+	body  = "<b>Integrity: [M.integrity]</b><br>"
+	body += "<b>Hardness: [M.hardness]</b><br>"
+	body += "<b>Weight: [M.weight]</b><br>"
+	body += "<br>"
+	body += "<b>Transparent: [M.opacity ? "No" : "Yes"]</b><br>"
+	body += "<b>Conductive: [M.conductive ? "Yes" : "No"]</b><br>"
+	body += "<b>Stability: [M.protectiveness]</b><br>"
+	body += "<b>Blast Res.: [M.explosion_resistance]</b><br>"
+	body += "<b>Radioactivity: [M.radioactivity]</b><br>"
+	body += "<b>Reflectivity: [M.reflectivity * 100]%</b><br>"
+	body += "<br>"
+	body += "<b>Melting Point: [M.melting_point]</b><br>"
+	body += "<b>Ignition Point: [M.ignition_point]</b><br>"
+	if(M.recipes != null && M.recipes.len > 0)
+		body += "<br>"
+		body += "<b>Recipies: </b><br>"
+		for(var/datum/stack_recipe/R in M.recipes)
+			body += "<b>-[R.title]</b><br>"
+
+/datum/internal_wiki/page/proc/smasher_assemble(var/datum/particle_smasher_recipe/M, var/resultname)
+
+	var/obj/item/stack/material/req_mat = null
+	if(M.required_material)
+		req_mat = new M.required_material
+	title = resultname
+	body  = "";
+	if(req_mat != null)
+		body += "<b>Target Sheet: [req_mat.name]</b><br>"
+	if(M.items != null && M.items.len > 0)
+		if( M.items.len == 1)
+			var/Ir = M.items[1]
+			var/obj/item/scanitm = new Ir()
+			body += "<b>Target Item: [scanitm.name]</b><br>"
+			qdel(scanitm)
+		else
+			body += "<b>Target Item: </b><br>"
+				for(var/Ir in M.items)
+					var/obj/item/scanitm = new Ir()
+					body += "<b>-[scanitm.name]</b><br>"
+					qdel(scanitm)
+	body += "<b>Threshold Energy: [M.required_energy_min] - [M.required_energy_max]</b><br>"
+	body += "<b>Threshold Temp: [M.required_atmos_temp_min]k - [M.required_atmos_temp_max]k</b><br>"
+	if(M.reagents != null && M.reagents.len > 0)
+		body += "<br>"
+		body += "<b>Inducers: </b><br>"
+		for(var/R in M.reagents)
+			var/amnt = M.reagents[R]
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[R]
+			body += "<b>-[Rd.name] [amnt]u</b><br>"
+	body += "<br>"
+	body += "<b>Results: [resultname]</b><br>"
+	body += "<b>Probability: [M.probability]%</b><br>"
+	qdel(req_mat)
 
 /datum/internal_wiki/page/proc/chemical_assemble(var/datum/reagent/R)
 	title = R.name

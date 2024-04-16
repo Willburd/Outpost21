@@ -8,6 +8,7 @@
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0
+	spoiler = TRUE
 
 /datum/material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target, "cult")

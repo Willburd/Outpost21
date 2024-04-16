@@ -63,35 +63,41 @@
 	display_name ="teal"
 	use_name = "teal cloth"
 	icon_colour = "#00EAFA"
+	spoiler = TRUE
 
 /datum/material/cloth/black
 	name = "black"
 	display_name = "black"
 	use_name = "black cloth"
 	icon_colour = "#505050"
+	spoiler = TRUE
 
 /datum/material/cloth/green
 	name = "green"
 	display_name = "green"
 	use_name = "green cloth"
 	icon_colour = "#01C608"
+	spoiler = TRUE
 
 /datum/material/cloth/puple
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
 	icon_colour = "#9C56C4"
+	spoiler = TRUE
 
 /datum/material/cloth/blue
 	name = "blue"
 	display_name = "blue"
 	use_name = "blue cloth"
 	icon_colour = "#6B6FE3"
+	spoiler = TRUE
 
 /datum/material/cloth/beige
 	name = "beige"
 	display_name = "beige"
 	use_name = "beige cloth"
+	spoiler = TRUE
 	icon_colour = "#E8E7C8"
 
 /datum/material/cloth/lime
@@ -99,18 +105,21 @@
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
+	spoiler = TRUE
 
 /datum/material/cloth/yellow
 	name = "yellow"
 	display_name = "yellow"
 	use_name = "yellow cloth"
 	icon_colour = "#EEF573"
+	spoiler = TRUE
 
 /datum/material/cloth/orange
 	name = "orange"
 	display_name = "orange"
 	use_name = "orange cloth"
 	icon_colour = "#E3BF49"
+	spoiler = TRUE
 
 
 
@@ -128,6 +137,7 @@
 	conductive = 0
 	hardness = 5
 	integrity = 40
+	spoiler = TRUE
 
 /datum/material/cotton
 	name = "cotton"

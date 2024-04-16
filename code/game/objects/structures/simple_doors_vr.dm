@@ -13,6 +13,7 @@
 	door_icon_base = "flockdoor"
 	sheet_singular_name = "quanta"
 	sheet_plural_name = "quanta"
+	spoiler = TRUE
 
 /obj/structure/simple_door/flock
 	name = "aperture"

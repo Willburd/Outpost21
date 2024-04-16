@@ -89,6 +89,10 @@
 				data["search"] = GLOB.game_wiki.searchcache_chemreact
 			if(searchmode == "Catalogs")
 				data["search"] = GLOB.game_wiki.searchcache_catalogs
+			if(searchmode == "Materials")
+				data["search"] = GLOB.game_wiki.searchcache_material
+			if(searchmode == "Particle Physics")
+				data["search"] = GLOB.game_wiki.searchcache_smasher
 
 			// display message
 			data["title"] = doc_title
@@ -134,6 +138,16 @@
 		if("drinksearch")
 			if(!crash)
 				searchmode = "Drink Recipes"
+			. = TRUE
+
+		if("matsearch")
+			if(!crash)
+				searchmode = "Materials"
+			. = TRUE
+
+		if("smashsearch")
+			if(!crash)
+				searchmode = "Particle Physics"
 			. = TRUE
 
 		if("chemsearch")
@@ -183,6 +197,10 @@
 					P = GLOB.game_wiki.chemreact[search]
 				if(searchmode == "Catalogs")
 					P = GLOB.game_wiki.catalogs[search]
+				if(searchmode == "Materials")
+					P = GLOB.game_wiki.materials[search]
+				if(searchmode == "Particle Physics")
+					P = GLOB.game_wiki.smashers[search]
 
 				if(setpage)
 					if(P)

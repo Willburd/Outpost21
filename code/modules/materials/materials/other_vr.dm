@@ -9,6 +9,7 @@
 	explosion_resistance = 200
 	hardness = 500
 	weight = 500
+	spoiler = TRUE
 
 /datum/material/fluff //This is to allow for 2 handed weapons that don't want to have a prefix.
 	name = " "
@@ -18,15 +19,18 @@
 	sheet_plural_name = "fluffs"
 	hardness = 60
 	weight = 20 //Strong as iron.
+	spoiler = TRUE
 
 /datum/material/darkglass
 	name = "darkglass"
 	display_name = "darkglass"
 	icon_base = "darkglass"
 	icon_colour = "#FFFFFF"
+	spoiler = TRUE
 
 /datum/material/fancyblack
 	name = "fancyblack"
 	display_name = "fancyblack"
 	icon_base = "fancyblack"
 	icon_colour = "#FFFFFF"
+	spoiler = TRUE

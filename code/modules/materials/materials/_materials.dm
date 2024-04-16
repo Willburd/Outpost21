@@ -295,6 +295,7 @@ var/list/name_to_material
 // Used by walls when qdel()ing to avoid neighbor merging.
 /datum/material/placeholder
 	name = "placeholder"
+	spoiler = TRUE
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /datum/material/proc/place_dismantled_girder(var/turf/target, var/datum/material/reinf_material, var/datum/material/girder_material)

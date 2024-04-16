@@ -358,15 +358,21 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 	body += "<b>Hardness: [M.hardness]</b><br>"
 	body += "<b>Weight: [M.weight]</b><br>"
 	body += "<br>"
-	body += "<b>Transparent: [M.opacity ? "No" : "Yes"]</b><br>"
+	body += "<b>Transparent: [M.opacity >= 0.5 ? "No" : "Yes"]</b><br>"
 	body += "<b>Conductive: [M.conductive ? "Yes" : "No"]</b><br>"
 	body += "<b>Stability: [M.protectiveness]</b><br>"
 	body += "<b>Blast Res.: [M.explosion_resistance]</b><br>"
 	body += "<b>Radioactivity: [M.radioactivity]</b><br>"
 	body += "<b>Reflectivity: [M.reflectivity * 100]%</b><br>"
 	body += "<br>"
-	body += "<b>Melting Point: [M.melting_point]</b><br>"
-	body += "<b>Ignition Point: [M.ignition_point]</b><br>"
+	if(M.melting_point != null)
+		body += "<b>Melting Point: [M.melting_point]k</b><br>"
+	else
+		body += "<b>Melting Point: --- </b><br>"
+	if(M.ignition_point != null)
+		body += "<b>Ignition Point: [M.ignition_point]k</b><br>"
+	else
+		body += "<b>Ignition Point: --- </b><br>"
 	M.get_recipes() // generate if not already
 	if(M.recipes != null && M.recipes.len > 0)
 		body += "<br>"

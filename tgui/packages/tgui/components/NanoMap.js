@@ -163,7 +163,7 @@ const NanoMapMarker = (props, context) => {
     }
   };
 
-  const rx = (x * 2 * zoom - zoom - 3) / (0.5 + config.mapWidthRatio);
+  const rx = (x * 2 * zoom - zoom - 3) / config.mapWidthRatio;
   const ry = y * 2 * zoom - zoom - 3;
   return (
     <div>

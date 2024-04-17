@@ -86,11 +86,11 @@
 	planet_datums_to_make = list(/datum/planet/muriki)
 
 /datum/map/outpost/perform_map_generation()
-	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge, 100, 20, 370, 180)
-	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard, 100, 20, 370, 180)
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 180, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard_huge, 100, 20, 370, 150)
+	seed_submaps(list(Z_LEVEL_OUTPOST_ASTEROID), 90, /area/offworld/asteroidyard/external/yardzone, /datum/map_template/outpost21/space/orbitalyard, 100, 20, 370, 150)
 
-	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 150, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard_huge, 60, 15, 190, 60)
-	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 200, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard, 60, 15, 190, 60)
+	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 150, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard_huge, 60, 15, 150, 60)
+	seed_submaps(list(Z_LEVEL_OUTPOST_SURFACE), 200, /area/muriki/yard, /datum/map_template/outpost21/muriki/cargoyard, 60, 15, 150, 60)
 
 	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, world.maxx, world.maxy) // Create the mining Z-level.
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_OUTPOST_BASEMENT, 64, 64)         // Create the mining ore distribution map.
@@ -201,7 +201,7 @@
 
 // For making the 6-in-1 holomap, we calculate some offsets
 #define OUTPOST21_MAP_SIZEX 400
-#define OUTPOST21_MAP_SIZEY 200
+#define OUTPOST21_MAP_SIZEY 160
 #define OUTPOST21_HOLOMAP_MARGIN_X (HOLOMAP_ICON_SIZE - (2*OUTPOST21_MAP_SIZEX))
 #define OUTPOST21_HOLOMAP_MARGIN_Y (HOLOMAP_ICON_SIZE - (2*OUTPOST21_MAP_SIZEY))
 
@@ -227,7 +227,7 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST|MAP_LEVEL_MAPPABLE|MAP_LEVEL_EVENTS|MAP_LEVEL_AIRMIX_CLEANS
 	base_turf = /turf/simulated/open
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
-	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 0)
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * -0.55)
 	holomap_legend_x = 140
 	holomap_legend_y = 240
 
@@ -237,7 +237,7 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED|MAP_LEVEL_PERSIST|MAP_LEVEL_MAPPABLE|MAP_LEVEL_EVENTS|MAP_LEVEL_AIRMIX_CLEANS
 	base_turf = /turf/simulated/open
 	holomap_offset_x = OUTPOST21_HOLOMAP_MARGIN_X
-	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 1.1)
+	holomap_offset_y = OUTPOST21_HOLOMAP_MARGIN_Y + (OUTPOST21_MAP_SIZEY * 0.88)
 	holomap_legend_x = 140
 	holomap_legend_y = 240
 

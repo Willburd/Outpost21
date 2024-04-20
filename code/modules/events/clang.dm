@@ -5,8 +5,8 @@
 
 /datum/event/clang/announce()
 	command_announcement.Announce("Attention [station_name()]. Unknown ultra-dense high-velocity object entering stratosphere!", "General Alert")
-	if(seclevel2num(get_security_level()) < SEC_LEVEL_RED)
-		set_security_level(SEC_LEVEL_RED) // OHNO
+	if(seclevel2num(get_security_level()) < SEC_LEVEL_BLUE)
+		set_security_level(SEC_LEVEL_BLUE) // OHNO
 
 /datum/event/clang/end()
 	command_announcement.Announce("What the fuck was that?!", "General Alert")

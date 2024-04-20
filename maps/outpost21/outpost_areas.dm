@@ -1589,7 +1589,7 @@
 	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/rnd/research/oldrd
-	name = "\improper Old RDs office"
+	name = "\improper Synthetic Surgery"
 	base_turf = /turf/simulated/open
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 

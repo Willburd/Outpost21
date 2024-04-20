@@ -445,7 +445,33 @@ GLOBAL_DATUM_INIT(game_wiki, /datum/internal_wiki/main, new)
 			for(var/CL in CR.catalysts)
 				body += " <b>-Catalyst: </b>[SSchemistry.chemical_reagents[CL].name]<br>"
 	else
-		body += "<b>Potential Chemical breakdown: </b>UNKNOWN OR BASE-REAGENT<br>"
+		body += "<b>Potential Chemical breakdown: </b><br>UNKNOWN OR BASE-REAGENT<br>"
+
+	if(SSchemistry.distilled_reactions_by_product[R.id] != null && SSchemistry.distilled_reactions_by_product[R.id].len > 0)
+		body += "<br>"
+		var/segment = 1
+
+		var/list/display_reactions = list()
+		for(var/decl/chemical_reaction/distilling/CR in SSchemistry.distilled_reactions_by_product[R.id])
+			if(!CR.spoiler)
+				display_reactions.Add(CR)
+
+		for(var/decl/chemical_reaction/distilling/CR in display_reactions)
+			if(display_reactions.len == 1)
+				body += "<b>Potential Chemical Distillation: </b><br>"
+			else
+				body += "<b>Potential Chemical Distillation [segment]: </b><br>"
+			segment += 1
+
+			body += " <b>-Temperature: </b> [CR.temp_range[1]] - [CR.temp_range[2]]<br>"
+
+			for(var/RQ in CR.required_reagents)
+				body += " <b>-Component: </b>[SSchemistry.chemical_reagents[RQ].name]<br>"
+			for(var/IH in CR.inhibitors)
+				body += " <b>-Inhibitor: </b>[SSchemistry.chemical_reagents[IH].name]<br>"
+			for(var/CL in CR.catalysts)
+				body += " <b>-Catalyst: </b>[SSchemistry.chemical_reagents[CL].name]<br>"
+
 
 /datum/internal_wiki/page/proc/food_assemble(var/datum/reagent/R)
 	title = R.name

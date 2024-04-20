@@ -72,7 +72,32 @@
 							to_chat(user, span("notice", " -catyl [SSchemistry.chemical_reagents[CL].name]<br>"))
 						to_chat(user, span("notice", "<br>"))
 				else
-					to_chat(user, span("notice", "Potential Chemical breakdown: UNKNOWN OR BASE-REAGENT<br><br>"))
+					to_chat(user, span("notice", "Potential Chemical breakdown: <br>UNKNOWN OR BASE-REAGENT<br><br>"))
+
+				if(SSchemistry.distilled_reactions_by_product[R.id] != null && SSchemistry.distilled_reactions_by_product[R.id].len > 0)
+					var/segment = 1
+
+					var/list/display_reactions = list()
+					for(var/decl/chemical_reaction/distilling/CR in SSchemistry.distilled_reactions_by_product[R.id])
+						if(!CR.spoiler)
+							display_reactions.Add(CR)
+
+					for(var/decl/chemical_reaction/distilling/CR in display_reactions)
+						if(display_reactions.len == 1)
+							to_chat(user, span("notice", "Potential Chemical Distillation: <br>"))
+						else
+							to_chat(user, span("notice", "Potential Chemical Distillation [segment]: <br>"))
+						segment += 1
+
+						to_chat(user, span("notice", " -temps [CR.temp_range[1]] - [CR.temp_range[2]]<br>"))
+
+						for(var/RQ in CR.required_reagents)
+							to_chat(user, span("notice", " -parts [SSchemistry.chemical_reagents[RQ].name]<br>"))
+						for(var/IH in CR.inhibitors)
+							to_chat(user, span("notice", " -inhbi [SSchemistry.chemical_reagents[IH].name]<br>"))
+						for(var/CL in CR.catalysts)
+							to_chat(user, span("notice", " -catyl [SSchemistry.chemical_reagents[CL].name]<br>"))
+					to_chat(user, span("notice", "<br>"))
 
 		// Last, unseal it if it's an autoinjector.
 		if(istype(I,/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector) && !(I.flags & OPENCONTAINER))

@@ -1,4 +1,4 @@
-/datum/reagents/distilling/handle_reactions()
+/datum/reagents/proc/handle_distilling()
 	if(QDELETED(my_atom))
 		return FALSE
 	if(my_atom.flags & NOREACT)

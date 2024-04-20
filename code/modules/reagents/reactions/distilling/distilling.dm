@@ -27,17 +27,19 @@
 	var/temp_shift = 0 // How much the temperature changes when the reaction occurs.
 
 /decl/chemical_reaction/distilling/can_happen(var/datum/reagents/holder)
-	if(!istype(holder, /datum/reagents/distilling)) // || !istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery)) // outpost 21 edit - removed reagent_distillery
-		return FALSE
+	// Outpost 21 edit - made bunsen burner actually useful again
+	if(istype(holder.my_atom.loc, /obj/machinery/bunsen_burner))
+		var/obj/machinery/bunsen_burner/B = holder.my_atom.loc
+		if(!B.heating || B.current_temp < temp_range[1] || B.current_temp > temp_range[2])
+			return FALSE
 
 	/* outpost 21 edit - removed reagent_distillery
-	// Super special temperature check.
-	var/obj/machinery/portable_atmospherics/powered/reagent_distillery/RD = holder.my_atom
-	if(RD.current_temp < temp_range[1] || RD.current_temp > temp_range[2])
-		return FALSE
+	if(istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery))
+		// Super special temperature check.
+		var/obj/machinery/portable_atmospherics/powered/reagent_distillery/RD = holder.my_atom
+		if(RD.current_temp < temp_range[1] || RD.current_temp > temp_range[2])
+			return FALSE
 	*/
-
-	// TODO - add a less weird distillery machine or chemistry set that can just be placed on a table or something.
 
 	return ..()
 
@@ -140,7 +142,7 @@
 
 	reaction_rate = HALF_LIFE(30)
 
-	temp_range = list(T20C, T20C + 2)
+	temp_range = list(T0C + 110, T0C + 190)
 
 /decl/chemical_reaction/distilling/ale
 	name = "Distilling Ale"
@@ -153,7 +155,7 @@
 	reaction_rate = HALF_LIFE(30)
 
 	temp_shift = 0.5
-	temp_range = list(T0C + 7, T0C + 13)
+	temp_range = list(T0C + 90, T0C + 150)
 
 // Unique
 /decl/chemical_reaction/distilling/berserkjuice
@@ -182,7 +184,7 @@
 	inhibitors = list("water" = 5)
 	result_amount = 1
 
-	temp_range = list(0, 15)
+	temp_range = list(T0C + 200, T0C + 250)
 	temp_shift = 20
 
 /decl/chemical_reaction/distilling/cryogel/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -217,4 +219,4 @@
 
 	reaction_rate = HALF_LIFE(20)
 
-	temp_range = list(T0C + 90, T0C + 95)
+	temp_range = list(T0C + 90, T0C + 125)

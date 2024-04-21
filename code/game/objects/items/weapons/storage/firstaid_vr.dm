@@ -168,6 +168,12 @@
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/peridaxon = 14)
 	wrapper_color = COLOR_PURPLE
 
+/obj/item/weapon/storage/pill_bottle/paroxetine
+	name = "pill bottle (Paroxetine)"
+	desc = "Stabilizes the mind greatly, but has a chance of adverse effects. Medicate cautiously."
+	starts_with = list(/obj/item/weapon/reagent_containers/pill/paroxetine = 14)
+	wrapper_color = COLOR_PURPLE
+
 /obj/item/weapon/storage/pill_bottle/lithium
 	name = "pill bottle (Lithium)"
 	desc = "Used in the treatment of schizophrenia, Alzheimer's disease, and dementia. Medicate cautiously."

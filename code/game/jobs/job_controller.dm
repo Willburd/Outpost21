@@ -596,7 +596,7 @@ var/global/datum/controller/occupations/job_master
 			Bag.contents += perscrip
 
 		if(H.disabilities & DEPRESSION)
-			var/perscrip = new /obj/item/weapon/storage/pill_bottle/peridaxon() // stronger meds for more dangerous cases
+			var/perscrip = new /obj/item/weapon/storage/pill_bottle/paroxetine() // stronger meds for more dangerous cases
 			to_chat(H, "<span class='notice'>Placing \the [perscrip] medication in your [Bag.name]!</span>")
 			Bag.contents += perscrip
 

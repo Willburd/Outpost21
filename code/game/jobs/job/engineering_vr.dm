@@ -30,7 +30,7 @@
 /datum/job/engineer
 	pto_type = PTO_ENGINEERING
 	alt_titles = list("Maintenance Technician" = /datum/alt_title/maint_tech, "Engine Technician" = /datum/alt_title/engine_tech,
-						"Electrician" = /datum/alt_title/electrician, "Construction Engineer" = /datum/alt_title/construction_engi, "Engineering Contractor" = /datum/alt_title/engineering_contractor, "Station Engineer" = /datum/alt_title/station_engineer ) //YW: added "Station Engineer" Alt Title
+						"Electrician" = /datum/alt_title/electrician, "Construction Engineer" = /datum/alt_title/construction_engi, "Engineering Contractor" = /datum/alt_title/engineering_contractor, "Station Engineer" = /datum/alt_title/station_engineer , "Ship Breaker" = /datum/alt_title/ship_breaker ) //YW: added "Station Engineer" Alt Title
 
 /datum/alt_title/construction_engi
 	title = "Construction Engineer"
@@ -69,3 +69,7 @@
 /datum/alt_title/station_engineer
 	title = "Station Engineer"
 	title_blurb = "A Station Engineer is a maintenance engineer who is responsible for the maintenance of the station's airlock systems, and the maintenance of the station's airlock systems."
+
+/datum/alt_title/ship_breaker
+	title = "Ship Breaker"
+	title_blurb = "An engineer that specializes in the dismantling and recovery of destroyed or retired ships. Often in EVA environments on orbital stations."

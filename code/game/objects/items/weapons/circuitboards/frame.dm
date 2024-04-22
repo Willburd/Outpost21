@@ -68,6 +68,12 @@
 	board_type = new /datum/frame/frame_types/keycard_authenticator
 	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
 
+/obj/item/weapon/circuitboard/lockdown_console
+	name = T_BOARD("lockdown console")
+	build_path = /obj/machinery/lockdown_console
+	board_type = new /datum/frame/frame_types/lockdown_console
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+
 /obj/item/weapon/circuitboard/geiger
 	name = T_BOARD("geiger counter")
 	build_path = /obj/item/device/geiger/wall

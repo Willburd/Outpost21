@@ -15,7 +15,7 @@
 	var/list/linked_jokes = list("Example Name" = "Joke here.")
 
 /obj/machinery/lockdown_console/attack_ai(mob/user as mob)
-	to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
+	attack_hand(user)
 	return
 
 /obj/machinery/lockdown_console/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -62,7 +62,7 @@
 		icon_state = "lockdown"
 
 /obj/machinery/lockdown_console/attack_hand(mob/user as mob)
-	if(!Adjacent(usr))
+	if(!Adjacent(usr) && !isAI(usr))
 		return
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		to_chat(user, "This device is not powered.")
@@ -73,7 +73,7 @@
 	user.set_machine(src)
 
 	var/dat = "<h1>Lockdown Control Console</h1>"
-	if(!unlocked)
+	if(!unlocked && !isAI(user))
 		dat += "Swipe ID card to unlock."
 		dat += "<br><hr><br>"
 	else
@@ -88,14 +88,14 @@
 
 /obj/machinery/lockdown_console/Topic(href, href_list)
 	..()
-	if(!Adjacent(usr))
+	if(!Adjacent(usr) && !isAI(usr))
 		return
 	if(usr.stat || stat & (BROKEN|NOPOWER))
 		to_chat(usr, "This device is without power.")
 		return
 
 	playsound(src, 'sound/machines/button.ogg', 100, 1)
-	if(!unlocked)
+	if(!unlocked && !isAI(usr))
 		to_chat(usr, "<span class='warning'>Access denied.</span>")
 		flick("lockdown_reject",src)
 		return

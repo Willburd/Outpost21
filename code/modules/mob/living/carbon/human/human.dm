@@ -1691,12 +1691,12 @@
 		// then dna
 		name = real_name
 		dna.ready_dna(src)
-		dna.b_type = client.prefs.b_type
 		if(!isnull(forceddna))
 			dna = forceddna.Clone()
 			domutcheck( src, null, MUTCHK_FORCED|GENE_INITIAL_ACTIVATION)
 		else
 			sync_dna_blocks_from_client_setup(client);
+		dna.b_type = b_type
 		sync_organ_dna()
 	else
 		// standard link

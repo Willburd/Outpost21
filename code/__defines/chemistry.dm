@@ -53,6 +53,7 @@ var/list/heartstopper  = list("potassium_chlorophoride", "zombiepowder") // This
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
 var/list/addictives	    = list("oxycodone","nicotine","hyperzine","bliss","ambrosia_extract","talum_quem","methylphenidate","paracetamol","tricordrazine","ethanol")
 var/list/fast_addictives= list("oxycodone","hyperzine","bliss","methylphenidate") // needs to be in above list too
+var/list/slow_addictives= list("paracetamol","tricordrazine") // needs to be in above list too
 
 #define MAX_PILL_SPRITE 24 //max icon state of the pill sprites
 #define MAX_BOTTLE_SPRITE 4 //max icon state of the pill sprites

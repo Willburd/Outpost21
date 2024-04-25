@@ -36,6 +36,7 @@
 
 // addictions
 #define ADDICTION_PROC -1000 // point where addiction triggers, starts counting down from 0 to here!
+#define SLOWADDICT_PROC -5000 // point where certain chems with barely addictive traits will kick in
 #define FASTADDICT_PROC -100 // point where certain chems with super addictive traits will kick in
 #define ADDICTION_PEAK 175 // point where addicted mobs reset to upon getting their addiction satiated... Decays over time,triggering messages and sideeffects if under 80
 
@@ -419,6 +420,10 @@
 		if(addiction_counters[A] <= 0)
 			// Build addiction until it procs
 			addiction_counters[A] -= rand(1,3)
+			if(A in slow_addictives)
+				// Slowest addictions for some medications
+				if(addiction_counters[A] <= SLOWADDICT_PROC)
+					addict_to_reagent(A)
 			if(A in fast_addictives)
 				// quickly addict to these drugs, bliss, oxyco etc
 				if(addiction_counters[A] <= FASTADDICT_PROC)

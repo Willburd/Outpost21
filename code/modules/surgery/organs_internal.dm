@@ -484,7 +484,7 @@
 	var/list/removable_organs = list()
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
-		if(istype(I) && (I.status & ORGAN_CUT_AWAY) && !(I.robotic >= ORGAN_ROBOT) && I.parent_organ == target_zone)
+		if(istype(I) && (I.status & ORGAN_CUT_AWAY) && !(I.robotic >= ORGAN_NANOFORM) && I.parent_organ == target_zone)
 			removable_organs[I.name] = organ
 
 	var/organ_to_replace

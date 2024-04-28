@@ -2018,13 +2018,17 @@
 		if (getToxLoss() >= 45)
 			spawn vomit()
 
-		if(!(species.flags & NO_HALLUCINATION))
+		// Positronics and drones don't go crazy in the dark, doesn't make sense...
+		var/brain_type = get_FBP_type()
+		var/brain_can_hallucinate = brain_type == FBP_CYBORG || brain_type == FBP_NONE
+
+		if(brain_can_hallucinate && !(species.flags & NO_HALLUCINATION))
 			// oxygen loss can result in seeing some crazy stuff
 			if(getOxyLoss() >= 50 && rand(1,15) <= 1)
 				hallucination += 10
 
 		// no spooky scary sounds for species immune to darkness insanity!
-		if(!(species.flags & NO_DARKNESSFEAR))
+		if(brain_can_hallucinate && !(species.flags & NO_HALLUCINATION) && !(species.flags & NO_DARKNESSFEAR))
 			// hallucinate more often if already doing so in the darkness
 			var/checkthreshold = 1
 			if(hallucination > 5)

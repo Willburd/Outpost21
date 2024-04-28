@@ -117,6 +117,7 @@
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Station",		/datum/event/bluespace_shelling				,0  , list()																	, TRUE, min_jobs = list(ASSIGNMENT_SECURITY = 99))
 	)
 	add_disabled_events(list(
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",				/datum/event/blob							,2	, list(ASSIGNMENT_ENGINEER = 5), TRUE), // disabled entirely due to lag issues
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "All Is Clean",		/datum/event/allisclean,					 0  , list(), TRUE, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Engineering",	/datum/event/bluespace_shelling/engineering	,0	, list(), TRUE, min_jobs = list(ASSIGNMENT_SECURITY = 99)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Shell Science",		/datum/event/bluespace_shelling/science		,0	, list(), TRUE, min_jobs = list(ASSIGNMENT_SECURITY = 99)),

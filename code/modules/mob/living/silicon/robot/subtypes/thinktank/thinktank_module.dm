@@ -44,10 +44,10 @@
 	)
 	channels = list(
 		"Science" = 1,
-		"Explorer" = 1
+		"Away Team" = 1
 	)
 
-/obj/item/weapon/robot_module/robot/platform/explorer/New()
+/obj/item/weapon/robot_module/robot/platform/explorer/create_equipment(var/mob/living/silicon/robot/robot)
 	modules += new /obj/item/weapon/tool/wrench/cyborg(src)
 	modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
 	modules += new /obj/item/weapon/tool/wirecutters/cyborg(src)
@@ -66,7 +66,8 @@
 	var/obj/item/weapon/gun/energy/phasegun/mounted/cyborg/phasegun = new(src)
 	modules += phasegun
 
-	emag = new /obj/item/weapon/chainsaw(src)
+	emag += new /obj/item/weapon/chainsaw(src)
+	
 	// DO THIS LAST
 	..()
 
@@ -89,11 +90,11 @@
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 
-/obj/item/weapon/robot_module/robot/platform/cargo/New()
+/obj/item/weapon/robot_module/robot/platform/cargo/create_equipment(var/mob/living/silicon/robot/robot)
 	modules += new /obj/item/weapon/packageWrap(src)
 	modules += new /obj/item/weapon/pen/multi(src)
 	modules += new /obj/item/device/destTagger(src)
-	emag = new /obj/item/weapon/stamp/denied
+	emag += new /obj/item/weapon/stamp/denied
 	// DO THIS LAST
 	..()
 

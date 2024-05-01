@@ -100,12 +100,11 @@
 	if(!istype(W))
 		return
 	if(isturf(loc))
-		if(W.is_wrench())
+		if(W.has_tool_quality(TOOL_WRENCH) && isturf(loc))
 			anchored = !anchored
 			playsound(src, W.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] \the [src].</span>")
-			return
-		if(W.is_screwdriver())
+		if(W.has_tool_quality(TOOL_SCREWDRIVER) && isturf(loc))
 			if(do_after(5))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You dissasemble the desk bell</span>")

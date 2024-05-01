@@ -79,6 +79,8 @@
 /obj/item/weapon/storage/fancy/egg_box/open(mob/user as mob)
 	if(open)
 		return
+	if (isobserver(usr))
+		return
 	open = TRUE
 	update_icon()
 	..()
@@ -248,7 +250,7 @@
 	can_hold = list(/obj/item/clothing/mask/smokable/cigarette, /obj/item/weapon/flame/lighter, /obj/item/trash/cigbutt)
 	icon_type = "cigarette"
 	starts_with = list(/obj/item/clothing/mask/smokable/cigarette = 6)
-	var/brand = "Trans-Stellar Duty-free"
+	var/brand = "\improper Trans-Stellar Duty-free"
 
 /obj/item/weapon/storage/fancy/cigarettes/Initialize()
 	. = ..()
@@ -334,48 +336,48 @@
 	desc = "A packet of six Earth-export DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	description_fluff = "DromedaryCo is one of Sol's oldest cigarette brands, and takes pride in having sourced tobcacco from the same Indian plantations since 2044. Popular with those willing to pay extra for a little nostalgia."
 	icon_state = "Dpacket"
-	brand = "Dromedary Co. cigarette"
+	brand = "\improper Dromedary Co. cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat
 	name = "\improper AcmeCo packet"
 	desc = "A packet of six AcmeCo cigarettes. For those who want to obtain a record for the most cancerous tumors on a budget."
 	description_fluff = "Available anywhere people breathe and want to breathe less, AcmeCo is the cheapest, most widespread cigarette brand in the galaxy. They taste like trash, but when you're keeping them inside your jumpsuit on a 16 hour shift, you're probably not too concerned with flavour."
 	icon_state = "Apacket"
-	brand = "Acme Co. cigarette"
+	brand = "\improper Acme Co. cigarette"
 
 /obj/item/weapon/storage/fancy/cigarettes/luckystars
 	name = "\improper pack of Lucky Stars"
 	desc = "A mellow blend made from synthetic, pod-grown tobacco. The commercial jingle is guaranteed to get stuck in your head."
 	description_fluff = "Lucky Stars are some of the most prolific advertisers in the business, with Gilthari Exports plastering the name and slogan on everything from workplace safety videos to racing bikes. 'Feel the gentle warmth of your Lucky Star'."
 	icon_state = "LSpacket"
-	brand = "Lucky Star"
+	brand = "\improper Lucky Star"
 
 /obj/item/weapon/storage/fancy/cigarettes/jerichos
 	name = "\improper pack of Jerichos"
 	desc = "Typically seen dangling from the lips of Fleet veterans and border world hustlers. Tastes like hickory smoke, feels like warm liquid death down your lungs."
 	description_fluff = "The Jericho brand has carefully cultivated its 'rugged' image ever since its completely accidental association with the SolGov-Hegemony war due to their sizable corporate presence in the region. Prior to the war, Jerichos were considered the realm of drunks and sad divorcees."
 	icon_state = "Jpacket"
-	brand = "Jericho"
+	brand = "\improper Jericho"
 
 /obj/item/weapon/storage/fancy/cigarettes/menthols
 	name = "\improper pack of Temperamento Menthols"
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of science vessel crews. Hardly anyone knows they make 'em in non-menthol!"
 	description_fluff = "Temperamento Menthols are a product of the Aether Atmospherics and Recycling company, and the 'smooth' menthol taste is rumoured to be the chemical by-product of some far more profitable industrial synthesis."
 	icon_state = "TMpacket"
-	brand = "Temperamento Menthol"
+	brand = "\improper Temperamento Menthol"
 
 /obj/item/weapon/storage/fancy/cigarettes/carcinomas
 	name = "\improper pack of Carcinoma Angels"
 	desc = "This previously unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. The rest is history. They sell a variety for cats, too."
 	description_fluff = "The bitter taste of a Carcinoma Angel is considered desirable by many equally bitter wash-ups who consider themselves to be 'hard-boiled'. The smell is practically inseparable from urban security offices, and old men with exonet radio shows."
-	brand = "Carcinoma Angel"
+	brand = "\improper Carcinoma Angel"
 
 /obj/item/weapon/storage/fancy/cigarettes/professionals
 	name = "\improper pack of Professional 120s"
 	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. That's the only excuse. They are, however, very good quality."
 	description_fluff = "Grown and rolled in a meticulously maintained biosphere orbitting Love, P120 tobacco is marketed as 'probably the best in the galaxy'. The premium price point, and the fact that the vast majority of consumers couldn't really tell the difference between this and the next leading brand."
 	icon_state = "P100packet"
-	brand = "Professional 120"
+	brand = "\improper Professional 120"
 
 /*
  * Cigar Box
@@ -383,16 +385,18 @@
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."
-	description_fluff = "The tastefully engraved palm tree tells you that these 'Palma Grande' premium cigars are only sold on the luxury cruises and resorts of Oasis, though ten separate companies produce them for that purpose galaxy-wide. The standard is however very high."
+	description_fluff = "The tasteful stained palm case tells you that these 'Palma Grande' premium \
+	cigars are only sold on the luxury cruises and resorts of Oasis, though ten separate companies \
+	produce them for that purpose galaxy-wide. The standard is however very high."
 	icon_state = "cigarcase"
 	icon = 'icons/obj/cigarettes.dmi'
 	w_class = ITEMSIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	storage_slots = 7
+	storage_slots = 5
 	can_hold = list(/obj/item/clothing/mask/smokable/cigarette/cigar, /obj/item/trash/cigbutt/cigarbutt)
 	icon_type = "cigar"
-	starts_with = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 8)
+	starts_with = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 5)
 
 /obj/item/weapon/storage/fancy/cigar/Initialize()
 	. = ..()
@@ -417,7 +421,7 @@
 	if(open)
 		icon_state = open_state
 		if(contents.len >= 1)
-			add_overlay("cigarcase[contents.len]")
+			add_overlay("[initial(icon_state)][contents.len]")
 	else
 		icon_state = closed_state
 
@@ -433,6 +437,26 @@
 	update_icon()
 	..()
 
+/obj/item/weapon/storage/fancy/cigar/choiba
+	name = "/improper Choiba cigar case"
+	desc = "A fancy case for holding your cigars when you are not smoking them."
+	description_fluff = "The exquisite wooden case bears the markings of the \
+	Choiba cigar company based out of Cuba. The perfectly humidized case keeps \
+	the companies signature Cigars in premium condidtion even when traveling \
+	long distances within a vacuume. The custom case itself can sell for quite \
+	a lot in some places."
+	icon_state = "cohibacase"
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_type = "cigar"
+	starts_with = list(/obj/item/clothing/mask/smokable/cigarette/cigar/cohiba = 5)
+
+/obj/item/weapon/storage/fancy/cigar/havana
+	name = "\improper Havana cigar case"
+	desc = "A fancy case for holding your cigars when you are not smoking them."
+	icon_state = "havanacase"
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_type = "cigar"
+	starts_with = list(/obj/item/clothing/mask/smokable/cigarette/cigar/havana = 5)
 /*
  * Tobacco Bits
  */

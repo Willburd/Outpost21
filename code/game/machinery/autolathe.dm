@@ -33,7 +33,7 @@
 	var/filtertext
 
 /obj/machinery/autolathe/Initialize()
-	AddComponent(/datum/component/material_container, subtypesof(/datum/material), 0, MATCONTAINER_EXAMINE, _after_insert = CALLBACK(src, .proc/AfterMaterialInsert))
+	AddComponent(/datum/component/material_container, subtypesof(/datum/material), 0, MATCONTAINER_EXAMINE, _after_insert = CALLBACK(src, PROC_REF(AfterMaterialInsert)))
 	. = ..()
 	if(!autolathe_recipes)
 		autolathe_recipes = new()
@@ -128,7 +128,7 @@
 
 	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
-		if(O.is_multitool() || O.is_wirecutter())
+		if(O.has_tool_quality(TOOL_MULTITOOL) || O.has_tool_quality(TOOL_WIRECUTTER))
 			wires.Interact(user)
 			return
 
@@ -180,7 +180,7 @@
 						max_sheets = 0
 				//Build list of multipliers for sheets.
 				multiplier = tgui_input_number(usr, "How many do you want to print? (0-[max_sheets])", null, null, max_sheets, 0)
-				if(!multiplier || multiplier <= 0 || multiplier > max_sheets || tgui_status(usr, state) != STATUS_INTERACTIVE)
+				if(!multiplier || multiplier <= 0 || (multiplier != round(multiplier)) || multiplier > max_sheets || tgui_status(usr, state) != STATUS_INTERACTIVE)
 					return FALSE
 
 			//Check if we still have the materials.

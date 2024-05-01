@@ -7,7 +7,6 @@
 
 /obj/machinery/telecomms/relay/preset/station
 	id = "Station Relay"
-	listening_level = 1
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/telecomms
@@ -219,4 +218,3 @@
 	id = "CentCom Broadcaster"
 	network = "tcommsat"
 	produces_heat = 0
-	autolinkers = list("broadcasterCent")

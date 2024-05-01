@@ -7,7 +7,8 @@
 		'sound/effects/footstep/mud1.ogg',
 		'sound/effects/footstep/mud2.ogg',
 		'sound/effects/footstep/mud3.ogg',
-		'sound/effects/footstep/mud4.ogg'))
+		'sound/effects/footstep/mud4.ogg'
+		))
 
 /decl/flooring/grass/outdoors
 	flags = 0

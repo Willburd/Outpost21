@@ -129,6 +129,45 @@
 	extra_overlay = "harpywings_batmarkings"
 	extra_overlay2 = "neckfur"
 
+/datum/sprite_accessory/wing/harpyarmwings
+	name = "harpy arm wings, colorable"
+	desc = ""
+	icon_state = "harpyarmwings"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/wing/harpyarmwings_alt
+	name = "harpy arm wings alt, colorable"
+	desc = ""
+	icon_state = "harpyarmwings_alt"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/wing/harpyarmwings_alt_neckfur
+	name = "harpy arm wings alt & neckfur"
+	desc = ""
+	icon_state = "harpyarmwings_alt"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "neckfur"
+
+/datum/sprite_accessory/wing/harpyarmwings_bat
+	name = "harpy arm wings, bat"
+	desc = ""
+	icon_state = "harpyarmwings_bat"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "harpyarmwings_batmarkings"
+
+/datum/sprite_accessory/wing/harpyarmwings_bat_neckfur
+	name = "harpy arm wings, bat & neckfur"
+	desc = ""
+	icon_state = "harpyarmwings_bat"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "harpyarmwings_batmarkings"
+	extra_overlay2 = "neckfur"
+
 /datum/sprite_accessory/wing/neckfur
 	name = "neck fur"
 	desc = ""
@@ -173,6 +212,14 @@
 	icon_state = "liquidfirefly-eyestalks"
 	//ckeys_allowed = list("liquidfirefly","seiga") //At request.
 
+/datum/sprite_accessory/wing/liquidfirefly_gazer_gray //Original sprite is from liquidfirefly, greyscale version is *not*
+	name = "gazer eyestalks, colorable"
+	desc = ""
+	icon_state = "eyestalkc"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "eyestalkc_eyes"
+
 /datum/sprite_accessory/wing/moth_full
 	name = "moth antenna and wings"
 	desc = ""
@@ -201,6 +248,13 @@
 	desc = ""
 	icon_state = "sepulchre_wingsc"
 	do_colouration = 1
+
+/datum/sprite_accessory/wing/sepulchre_c_yw_w
+	name = "demon wings (colorable, whitescale)"
+	desc = ""
+	icon_state = "sepulchre_wingsc_w"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/wing/cyberdragon
 	name = "Cyber dragon wing (colorable)"
@@ -237,3 +291,102 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "aeromorph_flat_1"
 	extra_overlay2 = "aeromorph_flat_2"
+
+/datum/sprite_accessory/wing/teshbee
+	name = "Teshari bee wings"
+	desc = ""
+	icon = 'icons/mob/vore/wings_vr.dmi'
+	icon_state = "beewings_tesh"
+
+/datum/sprite_accessory/wing/teshdragonfly
+	name = "Teshari dragonfly wings"
+	desc = ""
+	icon = 'icons/mob/vore/wings_vr.dmi'
+	icon_state = "dragonfly_tesh"
+
+/datum/sprite_accessory/wing/snail_shell
+	name = "snail shell, colorable"
+	desc = ""
+	icon_state = "snail_shell"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "snail_shell_markings"
+
+/datum/sprite_accessory/wing/sectdrone_wing //We should some day make a variable to make some wings not be able to fly
+	name = "Sect drone wings (To use with bodytype marking)"
+	desc = ""
+	icon = 'icons/mob/vore/wings_vr.dmi'
+	icon_state = "sectdrone_wing"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/wing/kara //SatinIsle Fluff Item
+	name = "Pterokara wings"
+	desc = ""
+	icon = 'icons/mob/vore/wings_vr.dmi'
+	icon_state = "feathered_kara"
+	ckeys_allowed = list("satinisle")
+
+/datum/sprite_accessory/wing/winglets //smol wingarms at the elbow
+	name = "feathered winglets"
+	desc = ""
+	icon_state = "winglets"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/wing/wingarms_speckles
+	name = "wingarms, speckled"
+	desc = ""
+	icon_state = "wingarms_speckles"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "wingarms_speckles-speckles"
+
+/datum/sprite_accessory/wing/wingarms_2tone
+	name = "wingarms, 2 colors"
+	desc = ""
+	icon_state = "wingarms_2tone"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "wingarms_2tone-1"
+
+/datum/sprite_accessory/wing/feather2_speckles
+	name = "large feathered wings, speckled"
+	desc = ""
+	icon_state = "feather2_speckles"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "feather2_speckles-speckles"
+
+/datum/sprite_accessory/wing/feather2_tricolor
+	name = "large feathered wings, tricolor"
+	desc = ""
+	icon_state = "feather2_tricolor"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "feather2_tricolor-1"
+	extra_overlay2 = "feather2_tricolor-2"
+
+// dino wings
+/datum/sprite_accessory/wing/pterodactyl_wings
+	name = "pterodactyl wings"
+	desc = ""
+	icon_state = "pterodactyl_wing_frame"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "pterodactyl_wing_membrane"
+
+/datum/sprite_accessory/wing/kaiju_spines_a
+	name = "kaiju spines A, colorable"
+	desc = ""
+	icon_state = "kaiju_spikes_a"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
+/datum/sprite_accessory/wing/kaiju_spines_a_glow
+	name = "kaiju spines A, colorable, glow"
+	desc = ""
+	icon_state = "kaiju_spikes_a"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+	extra_overlay = "kaiju_spikes_a_glow"

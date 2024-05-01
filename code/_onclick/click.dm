@@ -199,6 +199,10 @@
 	if(stat)
 		return 0
 
+	// prevent picking up items while being in them
+	if(istype(A, /obj/item) && A == loc)
+		return 0
+
 	return 1
 
 /*
@@ -367,6 +371,10 @@
 	layer = LAYER_HUD_UNDER
 	mouse_opacity = 2
 	screen_loc = "SOUTHWEST to NORTHEAST"
+
+/obj/screen/click_catcher/Initialize(mapload, ...)
+	. = ..()
+	verbs.Cut()
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)

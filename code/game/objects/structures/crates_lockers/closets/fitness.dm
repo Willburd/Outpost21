@@ -97,7 +97,32 @@
 		/obj/item/clothing/suit/bluetag = 4,
 		/obj/item/clothing/head/helmet/lasertag = 4)
 
+/obj/structure/closet/lasertag/red/laserdome
+	name = "red team laserdome equipment"
+	desc = "It's a storage unit for laser tag equipment."
+	closet_appearance = /decl/closet_appearance/wardrobe/red
 
+	starts_with = list(
+		/obj/item/device/encryptionkey/ent = 3,
+		/obj/item/clothing/gloves/bluespace = 3,
+		/obj/item/clothing/under/color/red = 3,
+		/obj/item/weapon/gun/energy/lasertag/red = 3,
+		/obj/item/clothing/head/redtag = 3,
+		/obj/item/clothing/suit/redtag = 3)
+
+/obj/structure/closet/lasertag/blue/laserdome
+	name = "blue team laserdome equipment"
+	desc = "It's a storage unit for laser tag equipment."
+	closet_appearance = /decl/closet_appearance/wardrobe/blue
+
+	starts_with = list(
+		/obj/item/device/encryptionkey/ent = 3,
+		/obj/item/clothing/gloves/bluespace = 3,
+		/obj/item/clothing/under/color/blue = 3,
+		/obj/item/weapon/gun/energy/lasertag/blue = 3,
+		/obj/item/clothing/head/bluetag = 3,
+		/obj/item/clothing/suit/bluetag = 3)
+		
 /obj/structure/closet/lasertag/omni
 	name = "omni laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."

@@ -100,6 +100,7 @@
 		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/reagent_containers/blood,
 		/obj/item/stack/material/phoron,
+		/obj/item/weapon/tank/anesthetic,
 		/obj/item/weapon/disk/body_record //Vorestation Edit: this lets you get an empty sleeve or help someone else
 		)
 
@@ -382,7 +383,7 @@
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
 		if(A.opened)
-			if(A.cell)
+			if(A.cell && is_type_in_list(A.cell, can_hold))
 
 				wrapped = A.cell
 
@@ -399,13 +400,13 @@
 	else if(isrobot(target))
 		var/mob/living/silicon/robot/A = target
 		if(A.opened)
-			if(A.cell)
+			if(A.cell && is_type_in_list(A.cell, can_hold))
 
 				wrapped = A.cell
 
 				A.cell.add_fingerprint(user)
 				A.cell.update_icon()
-				A.updateicon()
+				A.update_icon()
 				A.cell.loc = src
 				A.cell = null
 
@@ -584,15 +585,24 @@
 		else
 			resources += module_string
 
-	dat += tools
-
 	if (emagged)
-		if (!module.emag)
-			dat += text("<B>Resource depleted</B><BR>")
-		else if(activated(module.emag))
-			dat += text("[module.emag]: <B>Activated</B><BR>")
-		else
-			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
+		for (var/O in module.emag)
+
+			var/module_string = ""
+
+			if (!O)
+				module_string += text("<B>Resource depleted</B><BR>")
+			else if(activated(O))
+				module_string += text("[O]: <B>Activated</B><BR>")
+			else
+				module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
+
+			if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
+				tools += module_string
+			else
+				resources += module_string
+
+	dat += tools
 
 	dat += resources
 

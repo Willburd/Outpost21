@@ -252,7 +252,7 @@
 			user.drop_item()
 			W.forceMove(src)
 		return
-	else if(W.is_wrench())
+	else if(W.has_tool_quality(TOOL_WRENCH))
 		if(locked && (anchored || occupant))
 			to_chat(user, "<span class='warning'>Can not do that while [src] is in use.</span>")
 		else
@@ -529,8 +529,8 @@
 
 /obj/item/weapon/disk/data/New()
 	..()
-	var/diskcolor = pick("red","green","blue","yellow","black","white")
-	icon_state = "data-[diskcolor]"
+	var/diskcolor = pick(0,1,2)
+	icon_state = "datadisk[diskcolor]"
 
 /obj/item/weapon/disk/data/attack_self(mob/user as mob)
 	read_only = !read_only

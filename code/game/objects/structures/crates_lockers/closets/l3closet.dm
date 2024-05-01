@@ -49,7 +49,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/scientist,
 		/obj/item/clothing/gloves/sterile/nitrile,
-		/obj/item/clothing/head/bio_hood/scientist)
+		/obj/item/weapon/storage/bag/xeno = 1)
 
 /obj/structure/closet/l3closet/scientist/double
 	starts_with = list(

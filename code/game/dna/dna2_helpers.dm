@@ -343,6 +343,8 @@
 		H.custom_whisper = dna.custom_whisper
 		H.custom_exclaim = dna.custom_exclaim
 		H.species.blood_color = dna.blood_color
+		H.custom_heat = dna.custom_heat
+		H.custom_cold = dna.custom_cold
 		var/datum/species/S = H.species
 		S.produceCopy(dna.species_traits, H, dna.base_species, FALSE, geneflags)
 		H.force_update_organs() //VOREStation Add - Gotta do this too

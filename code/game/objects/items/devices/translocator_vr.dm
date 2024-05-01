@@ -127,12 +127,11 @@ This device can be easily used to break ERP preferences due to the nature of tel
 Make sure you carefully examine someone's OOC prefs before teleporting them if you are going to use this device for ERP purposes.
 This device records all warnings given and teleport events for admin review in case of pref-breaking, so just don't do it.
 "},"OOC Warning")
-
 	if(!in_range(src, user))
 		return
 	var/list/choicelist = beacons.Copy()
 	choicelist["New Beacon"] = 1
-	//var/choice = show_radial_menu(user, radial_menu_anchor, radial_images, custom_check = CALLBACK(src, .proc/check_menu, user), require_near = TRUE, tooltips = TRUE)
+	//var/choice = show_radial_menu(user, radial_menu_anchor, radial_images, custom_check = CALLBACK(src, PROC_REF(check_menu), user), require_near = TRUE, tooltips = TRUE)
 	var/choice = tgui_input_list(user, "Set, or create a new, beacon.", "Beacons", choicelist) // outpost 21 edit - removing radial menu
 
 	if(!in_range(src, user))
@@ -229,8 +228,10 @@ This device records all warnings given and teleport events for admin review in c
 
 	//No, you can't teleport if there's a jammer.
 	if(is_jammed(src) || is_jammed(destination))
-		to_chat(user,"<span class='warning'>\The [src] refuses to teleport you, due to strong interference!</span>")
-		return FALSE
+		var/area/our_area = get_area(src)
+		if(!our_area.no_comms)	//I don't actually want this to block teleporters, just comms
+			to_chat(user,"<span class='warning'>\The [src] refuses to teleport you, due to strong interference!</span>")
+			return FALSE
 
 	//No, you can't port to or from away missions. Stupidly complicated check.
 	var/turf/uT = get_turf(user)
@@ -311,11 +312,11 @@ This device records all warnings given and teleport events for admin review in c
 	if(isbelly(real_dest))
 		var/obj/belly/B = real_dest
 		if(!(target.can_be_drop_prey) && B.owner != user)
-			to_chat(target,"<span class='warning'>\The [src] narrowly avoids teleporting you right into \a [lowertext(real_dest.name)]!</span>")
+			to_chat(target,"<span class='vwarning'>\The [src] narrowly avoids teleporting you right into \a [lowertext(real_dest.name)]!</span>")
 			real_dest = dT //Nevermind!
 		else
 			televored = TRUE
-			to_chat(target,"<span class='warning'>\The [src] teleports you right into \a [lowertext(real_dest.name)]!</span>")
+			to_chat(target,"<span class='vwarning'>\The [src] teleports you right into \a [lowertext(real_dest.name)]!</span>")
 
 	//Phase-out effect
 	phase_out(target,get_turf(target))

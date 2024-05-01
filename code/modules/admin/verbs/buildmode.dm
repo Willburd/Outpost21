@@ -545,6 +545,20 @@
 					for(var/mob/living/unit in holder.selected_mobs)
 						holder.deselect_AI_mob(user.client, unit)
 
+			if(pa.Find("middle"))
+				if(pa.Find("shift"))
+					to_chat(user, SPAN_NOTICE("All selected mobs set to wander"))
+					for(var/mob/living/unit in holder.selected_mobs)
+						var/datum/ai_holder/AI = unit.ai_holder
+						AI.wander = TRUE
+				if(pa.Find("ctrl"))
+					to_chat(user, SPAN_NOTICE("Setting mobs set to NOT wander"))
+					for(var/mob/living/unit in holder.selected_mobs)
+						var/datum/ai_holder/AI = unit.ai_holder
+						AI.wander = FALSE
+				if(pa.Find("alt") && isatom(object))
+					to_chat(user, SPAN_NOTICE("Adding [object] to Entity Narrate List!"))
+					user.client.add_mob_for_narration(object)
 
 			if(pa.Find("right"))
 				// Paste faction

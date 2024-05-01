@@ -69,8 +69,8 @@
 /obj/item/weapon/kinetic_crusher/Initialize()
 	. = ..()
 	if(requires_Wield)
-		RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
-		RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
+		RegisterSignal(src, COMSIG_TWOHANDED_WIELD, PROC_REF(on_wield))
+		RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, PROC_REF(on_unwield))
 
 /obj/item/weapon/kinetic_crusher/ComponentInitialize()
 	. = ..()
@@ -152,11 +152,11 @@
 			if(!isturf(proj_turf))
 				return
 			var/obj/item/projectile/destabilizer/D = new /obj/item/projectile/destabilizer(proj_turf)
-	/*
+/*
 			for(var/t in trophies)
 				var/obj/item/crusher_trophy/T = t
 				T.on_projectile_fire(D, user)
-	*/
+*/
 			D.preparePixelProjectile(target, user, clickparams)
 			D.firer = user
 			D.hammer_synced = src
@@ -164,7 +164,7 @@
 			D.fire()
 			charged = FALSE
 			update_icon()
-			addtimer(CALLBACK(src, .proc/Recharge), charge_time)
+			addtimer(CALLBACK(src, PROC_REF(Recharge)), charge_time)
 			// * (user?.ConflictElementCount(CONFLICT_ELEMENT_CRUSHER) || 1 - tentatively commented out
 			return
 		if(proximity_flag && isliving(target))

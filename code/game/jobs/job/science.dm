@@ -33,7 +33,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 	job_description = "The Research Director manages and maintains the Research department. They are required to ensure the safety of the entire crew, \
-						at least with regards to anything occuring in the Research department, and to inform the crew of any disruptions that \
+						at least with regards to anything occurring in the Research department, and to inform the crew of any disruptions that \
 						might originate from Research. The Research Director often has at least passing knowledge of most of the Research department, but \
 						are encouraged to allow their staff to perform their own duties."
 	alt_titles = list("Research Supervisor" = /datum/alt_title/research_supervisor)
@@ -82,13 +82,12 @@
 	title_blurb = "An Anomalist is a Scientist whose expertise is analyzing alien artifacts. They are familar with the most common methods of testing artifact \
 					function. They work closely with Xenoarchaeologists, or Miners, if either role is present."
 
-/* outpost 21 edit - disabled phoron research
 /datum/alt_title/phoron_research
 	title = "Phoron Researcher"
 	title_blurb = "A Phoron Researcher is a specialist in the practical applications of phoron, and has knowledge of its practical uses and dangers. \
 					Many Phoron Researchers are interested in the combustability and explosive properties of gaseous phoron, as well as the specific hazards \
 					of working with the substance in that state."
-*/
+
 
 //////////////////////////////////
 //			Xenobiologist

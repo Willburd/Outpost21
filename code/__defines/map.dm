@@ -10,8 +10,9 @@
 #define MAP_LEVEL_PERSIST       0x100   // Z-levels where SSpersistence should persist between rounds
 #define MAP_LEVEL_MAPPABLE       0x200   // Z-levels where mapping units will work fully
 #define MAP_LEVEL_BELOW_BLOCKED   0x400   // Z-levels in multiz with level below not meant to be 'normally' accessible
-#define MAP_LEVEL_EVENTS		0x800	// Z-levels where events can spawn. Defaults to station_levels if unset.
-#define MAP_LEVEL_AIRMIX_CLEANS 0x1000 // Z-levels where the airmix of outside tiles are slowly reset, meaning you can never saturate the outside atmosphere
+#define MAP_LEVEL_TEMPERATURE_CHANGEABLE   0x800   // YW Addition: Z-levels in multiz where we can make the station interior math the exterior temps
+#define MAP_LEVEL_EVENTS		0x1000	// Z-levels where events can spawn. Defaults to station_levels if unset.
+#define MAP_LEVEL_AIRMIX_CLEANS 0x2000 // Z-levels where the airmix of outside tiles are slowly reset, meaning you can never saturate the outside atmosphere
 
 // Misc map defines.
 #define SUBMAP_MAP_EDGE_PAD 8 // Automatically created submaps are forbidden from being this close to the main map's edge.	//VOREStation Edit

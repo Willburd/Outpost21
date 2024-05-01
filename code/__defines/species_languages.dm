@@ -39,8 +39,9 @@
 #define ALLERGEN_SUGARS		0x400	// For unathi-like reactions
 #define ALLERGEN_EGGS		0x800	// For Skrell eggs allergy
 #define ALLERGEN_STIMULANT	0x1000	// Stimulants are what makes the Tajaran heart go ruh roh - not just coffee!
-#define ALLERGEN_POLLEN		0x2000  // This one operates weirdly! Runs where disability code does!
-#define ALLERGEN_SALT		0x4000	// Talyxian roleplay
+#define ALLERGEN_CHOCOLATE	0x2000	// Makes dogs die if they want to?
+#define ALLERGEN_POLLEN		0x4000  // This one operates weirdly! Runs where disability code does!
+#define ALLERGEN_SALT		0x8000	// Talyxian roleplay
 
 // Allergen reactions
 #define AG_FLAG_SPECIESBASE	0x1 	// This flag MUST be set when assigning the DEFAULT alergic reactions for a species. /datum/trait/neutral/allergy_effects/apply() uses this to know if it needs to clear all effects!

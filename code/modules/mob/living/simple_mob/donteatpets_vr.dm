@@ -58,7 +58,3 @@
 /mob/living/simple_mob/animal/passive/chick
 	digestable = 0
 	devourable = 0
-
-/mob/living/simple_mob/vore/alienanimals/jil/jillilah
-	digestable = 0
-	devourable = 0

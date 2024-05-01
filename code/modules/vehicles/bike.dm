@@ -131,7 +131,7 @@
 		return
 	if(user != load || !on)
 		return 0
-	if(vehicle_move(get_step(src, direction),direction))
+	if(vehicle_move(get_step(src, direction),direction)) // YW Edit - pr #1294
 		return 1
 	return 0
 

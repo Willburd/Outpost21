@@ -31,6 +31,9 @@
 		if(forced_psay)
 			pme(message)
 			return
+		if(autowhisper)
+			return me_verb_subtle(message)
+
 		//VOREStation Addition End
 
 		if(act == "help")
@@ -130,6 +133,7 @@
 	if(findtext(subtext, "*"))
 		// abort abort!
 		to_chat(emoter, SPAN_WARNING("You may use only one \"["*"]\" symbol in your emote."))
+		to_chat(emoter, SPAN_WARNING(message))
 		return
 
 	if(pretext)
@@ -186,7 +190,10 @@
 
 	if(input)
 		log_emote(message,src) //Log before we add junk
-		message = "<span class='emote'><B>[src]</B> [input]</span>"
+		if(usr && usr.client)
+			message = "<span class='emote'><B>[src]</B> [input]</span>"
+		else
+			message = "<span class='npcemote'><B>[src]</B> [input]</span>"
 	else
 		return
 
@@ -217,6 +224,8 @@
 				if(M)
 					if(isobserver(M))
 						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
+					if(usr && usr.client && M && !(get_z(usr) == get_z(M)))
+						message = "<span class='multizsay'>[message]</span>"
 					M.show_message(message, m_type)
 					M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 

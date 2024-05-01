@@ -235,7 +235,7 @@ GLOBAL_DATUM(gateway_station, /obj/machinery/gateway/centerstation)
 				return
 			to_chat(user, "<span class='notice'><b>Startup programming successful!</b></span>: A destination in another point of space and time has been detected.")
 		else
-			to_chat(user, "<font color='black'>The gate is already calibrated, there is no work for you to do here.</font>")
+			to_chat(user, span_black("The gate is already calibrated, there is no work for you to do here."))
 			return
 
 /////////////////////////////////////Away////////////////////////
@@ -338,7 +338,7 @@ GLOBAL_DATUM(gateway_away, /obj/machinery/gateway/centeraway)
 	if(istype(M, /mob/living/carbon))
 		for(var/obj/item/weapon/implant/exile/E in M)//Checking that there is an exile implant in the contents
 			if(E.imp_in == M)//Checking that it's actually implanted vs just in their pocket
-				to_chat(M, "<font color='black'>The station gate has detected your exile implant and is blocking your entry.</font>")
+				to_chat(M, span_black("The station gate has detected your exile implant and is blocking your entry."))
 				return
 	M.forceMove(get_step(stationgate.loc, SOUTH))
 	M.set_dir(SOUTH)
@@ -349,7 +349,7 @@ GLOBAL_DATUM(gateway_away, /obj/machinery/gateway/centeraway)
 /obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))
 		if(calibrated && stationgate)
-			to_chat(user, "<font color='black'>The gate is already calibrated, there is no work for you to do here.</font>")
+			to_chat(user, span_black("The gate is already calibrated, there is no work for you to do here."))
 			return
 		else
 			// VOREStation Add
@@ -362,6 +362,6 @@ GLOBAL_DATUM(gateway_away, /obj/machinery/gateway/centeraway)
 				return
 			// VOREStation Add End
 			else
-				to_chat(user, "<font color='blue'><b>Recalibration successful!</b>:</font><font color='black'> This gate's systems have been fine tuned. Travel to this gate will now be on target.</font>")
+				to_chat(user, span_blue("<b>Recalibration successful!</b>:") + span_black(" This gate's systems have been fine tuned. Travel to this gate will now be on target."))
 				calibrated = 1
 				return

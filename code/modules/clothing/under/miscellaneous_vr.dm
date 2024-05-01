@@ -127,9 +127,12 @@
 	var/emagged = FALSE
 	var/target_size = 1
 
-/obj/item/clothing/gloves/bluespace/mob_can_equip(mob/M, gloves, disable_warning = 0)
-	. = ..()
-	if(. && ishuman(M) && !disable_warning)
+/obj/item/proc/equip_special()
+	return
+
+/obj/item/clothing/gloves/bluespace/equip_special()
+	var/mob/M = src.loc
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.resizable)
 			return
@@ -175,6 +178,15 @@
 		user.visible_message("<span class='notice'>\The [user] swipes the [emag_source] over the \the [src].</span>","<span class='notice'>You swipes the [emag_source] over the \the [src].</span>")
 		return 1
 
+/obj/item/clothing/gloves/bluespace/emagged
+	emagged = TRUE
+
+/obj/item/clothing/gloves/bluespace/emagged/Initialize()
+	. = ..()
+	target_size = (rand(1,300)) /100
+	if(target_size < 0.1)
+		target_size = 0.1
+
 //Same as Nanotrasen Security Uniforms
 /obj/item/clothing/under/ert
 	armor = list(melee = 5, bullet = 10, laser = 10, energy = 5, bomb = 5, bio = 0, rad = 0)
@@ -192,6 +204,10 @@
 	name = "white qipao"
 	icon_state = "qipao_white"
 	item_state = "qipao_white"
+
+/obj/item/clothing/under/qipao/white/colorable
+	name = "qipao"
+	starting_accessories = list(/obj/item/clothing/accessory/qipaogold)
 
 /obj/item/clothing/under/qipao/red
 	name = "red qipao"
@@ -456,3 +472,259 @@
 	name = "yellow-green feminine jumpsuit"
 	icon_state = "yellowgreen"
 	worn_state = "yellowgreenf"
+
+/obj/item/clothing/under/qipao_colorable
+	name = "qipao"
+	desc = "A traditional Chinese women's garment, typically made from silk."
+	icon = 'icons/inventory/uniform/item.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "qipao3"
+	item_state = "qipao3"
+	worn_state = "qipao3"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/qipao2_colorable
+	name = "slim qipao"
+	desc = "A traditional Chinese women's garment, typically made from silk. This one is fairly slim."
+	icon = 'icons/inventory/uniform/item.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "qipao2"
+	item_state = "qipao2"
+	worn_state = "qipao2"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/dress/antediluvian
+	name = "antediluvian corset"
+	desc = "A regal black and gold tight corset with silky sleeves. A sheer bodystocking accompanies it."
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "antediluvian"
+	item_state = "antediluvian"
+	worn_state = "antediluvian"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/dress/antediluvian/sheerless
+	desc = "A regal black and gold tight corset with silky sleeves. This one is just the corset and sleeves, sans lace stockings and gloves."
+	worn_state = "antediluvian_c"
+
+//Colorable skirts
+/obj/item/clothing/under/skirt/colorable
+	name = "skirt"
+	desc = "A rather plain looking skirt."
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "skirt_casual"
+	item_state = "skirt_casual"
+	worn_state = "skirt_casual"
+
+/obj/item/clothing/under/skirt/colorable/puffy
+	icon_state = "skirt_puffy"
+	item_state = "skirt_puffy"
+	worn_state = "skirt_puffy"
+
+/obj/item/clothing/under/skirt/colorable/skater
+	desc = "A skirt with loose frills."
+	icon_state = "skirt_skater"
+	item_state = "skirt_skater"
+	worn_state = "skirt_skater"
+
+/obj/item/clothing/under/skirt/colorable/pleated
+	desc = "A short skirt featuring pleat trailing up from the hem."
+	icon_state = "skirt_pleated"
+	item_state = "skirt_pleated"
+	worn_state = "skirt_pleated"
+
+/obj/item/clothing/under/skirt/colorable/pencil
+	name = "pencil skirt"
+	desc = "A short skirt that's almost as thin as a pencil. Almost."
+	icon_state = "skirt_pencil"
+	item_state = "skirt_pencil"
+	worn_state = "skirt_pencil"
+
+/obj/item/clothing/under/skirt/colorable/plaid
+	name = "plaid skirt"
+	desc = "A skirt featuring a plaid pattern."
+	icon_state = "skirt_plaid"
+	item_state = "skirt_plaid"
+	worn_state = "skirt_plaid"
+
+/obj/item/clothing/under/skirt/colorable/tube
+	desc = "A long thin skirt that trails beyond the knees."
+	icon_state = "skirt_tube"
+	item_state = "skirt_tube"
+	worn_state = "skirt_tube"
+
+/obj/item/clothing/under/skirt/colorable/long
+	name = "long skirt"
+	icon_state = "skirt_long"
+	item_state = "skirt_long"
+	worn_state = "skirt_long"
+
+/obj/item/clothing/under/skirt/colorable/high
+	name = "high skirt"
+	desc = "A skirt that rests at the waist instead of the hips."
+	icon_state = "skirt_high"
+	item_state = "skirt_high"
+	worn_state = "skirt_high"
+
+/obj/item/clothing/under/skirt/colorable/swept
+	name = "swept skirt"
+	desc = "A skirt with an angled hem; shorter on one side, longer on the other, like a sweep."
+	icon_state = "skirt_swept"
+	item_state = "skirt_swept"
+	worn_state = "skirt_swept"
+
+/obj/item/clothing/under/skirt/colorable/jumper
+	name = "jumper skirt"
+	desc = "A skirt that's held up by suspenders."
+	icon_state = "skirt_jumper"
+	item_state = "skirt_jumper"
+	worn_state = "skirt_jumper"
+
+/obj/item/clothing/under/skirt/colorable/jumperdress
+	name = "jumper dress"
+	desc = "A dress held up by suspenders. Not quite a skirt anymore."
+	icon_state = "skirt_jumperdress"
+	item_state = "skirt_jumperdress"
+	worn_state = "skirt_jumperdress"
+
+// Gwen Beedell's clown outfit
+
+/obj/item/clothing/under/stripeddungarees
+	name = "striped dungarees"
+	desc = "A colourful set of striped dungarees, pretty funny lookin'."
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "striped_clown_uniform"
+
+/obj/item/clothing/under/dress/cdress_fire
+	name = "flame dress"
+	desc = "A small black dress with a flames print on it. Perfect for recoloring!"
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "cdress_fire"
+
+/obj/item/clothing/under/dress/cbridesmaid
+	name = "fancy dress"
+	desc = "A cute, flirty dress. Good for weddings and fancy parties, or if you just want to look fashionable. Perfect for recoloring!"
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "cbridesmaid"
+
+/obj/item/clothing/under/dress/cswoopdress
+	name = "swoop dress"
+	desc = "A fancy gown for those who like to show leg. Perfect for recoloring!"
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "cswoopdress"
+
+//Replikant uniforms
+
+/obj/item/clothing/under/replika
+	name = "generic"
+	desc = "generic"
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "arar"
+	item_state = "arar"
+	rolled_sleeves = -1
+	rolled_down = -1
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/under/replika/arar
+	name = "repair-worker replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the engineering variety. Comes with multiple interfacing ports, arm protectors, and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "arar"
+	item_state = "arar"
+
+
+/obj/item/clothing/under/replika/lstr
+	name = "land-survey replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the exploration variety. Comes with several interfacing ports and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "lstr"
+	item_state = "lstr"
+
+/obj/item/clothing/under/replika/fklr
+	name = "command replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the command variety. Comes with interfacing ports, an air of formality, and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "fklr"
+	item_state = "fklr"
+
+/obj/item/clothing/under/replika/eulr
+	name = "general-purpose replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of multipurpose variety. Comes with default interfacing ports and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "eulr"
+	item_state = "eulr"
+
+/obj/item/clothing/under/replika/klbr
+	name = "controller replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the controller variety. Comes with several interfacing ports and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "klbr"
+	item_state = "klbr"
+
+/obj/item/clothing/under/replika/stcr
+	name = "security-technician replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the security variety. Comes with multiple interfacing ports and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "stcr"
+	item_state = "stcr"
+
+/obj/item/clothing/under/replika/adlr
+	name = "administration replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the administrative variety. Comes with several interfacing ports and a conspicuous lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "adlr"
+	item_state = "adlr"
+
+/obj/item/clothing/under/replika/lstr_alt
+	name = "combat-engineer replikant bodysuit"
+	desc = "A skin-tight bodysuit designed for 2nd generation biosynthetics of the exploration variety. Comes with extra interfacing ports, white armpads, and a familiar lack of leg coverage."
+	description_fluff = "These purpose-made interfacing bodysuits are designed and produced by the Singheim Bureau of Biosynthetic Development for their long-running second generation of Biosynthetics, commonly known by the term Replikant. Although anyone could wear these, their overall cut and metallic ports along the spine make it rather uncomfortable to most."
+	icon_state = "lstr_alt"
+	item_state = "lstr_alt"
+
+//Signalis-themed human-wear
+
+/obj/item/clothing/under/gestalt
+	name = "generic"
+	desc = "generic"
+	icon = 'icons/inventory/uniform/item_vr.dmi'
+	default_worn_icon = 'icons/inventory/uniform/mob_vr.dmi'
+	icon_state = "gestalt_skirt"
+	item_state = "gestalt_skirt"
+	rolled_sleeves = -1
+	rolled_down = -1
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
+/obj/item/clothing/under/gestalt/sleek_skirt
+	name = "sleek crew skirt"
+	desc = "A tight-fitting black uniform with a narrow skirt and striking crimson trim."
+	icon_state = "gestalt_skirt"
+	item_state = "gestalt_skirt"
+
+
+/obj/item/clothing/under/gestalt/sleek
+	name = "sleek crew uniform"
+	desc = "A tight-fitting black uniform with striking crimson trim."
+	icon_state = "gestalt"
+	item_state = "gestalt"
+
+
+/obj/item/clothing/under/gestalt/sleek_fem
+	name = "sleek female crew uniform"
+	desc = "A tight-fitting black uniform with striking crimson trim."
+	icon_state = "gestalt_fem"
+	item_state = "gestalt_fem"
+
+
+/obj/item/clothing/under/gestalt/sleeveless
+	name = "sleeveless sleek crew uniform"
+	desc = "A tight-fitting, sleeveless single-piece black uniform with striking crimson trim."
+	icon_state = "gestalt_sleeveless"
+	item_state = "gestalt_sleeveless"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS

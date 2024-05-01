@@ -341,6 +341,8 @@ steam.start() -- spawns the effect
 	color = "#CCFFFF"
 	alpha = 128
 	strength = 1
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 
 /obj/effect/effect/smoke/elemental/mist/affect(mob/living/L)
 	L.water_act(strength)

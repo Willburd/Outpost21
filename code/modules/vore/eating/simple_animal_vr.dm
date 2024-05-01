@@ -1,7 +1,7 @@
 ///////////////////// Simple Animal /////////////////////
 /mob/living/simple_mob
 	var/swallowTime = (3 SECONDS)		//How long it takes to eat its prey in 1/10 of a second. The default is 3 seconds.
-	var/list/prey_excludes = list()		//For excluding people from being eaten.
+	var/list/prey_excludes = null		//For excluding people from being eaten.
 
 //
 // Simple nom proc for if you get ckey'd into a simple_mob mob! Avoids grabs.
@@ -79,24 +79,23 @@
 				update_icon()
 				set_AI_busy(FALSE)
 			else if(!ai_holder.target) // no using this to clear a retaliate mob's target
-				ai_holder.target = user //just because you're not tasty doesn't mean you get off the hook. A swat for a swat.
+				ai_holder.give_target(user) //just because you're not tasty doesn't mean you get off the hook. A swat for a swat.
 				//AttackTarget() //VOREStation AI Temporary Removal
 				//LoseTarget() // only make one attempt at an attack rather than going into full rage mode
 		else
 			user.visible_message("<span class='info'>[user] swats [src] with [O]!</span>")
 			release_vore_contents()
 			for(var/mob/living/L in living_mobs(0)) //add everyone on the tile to the do-not-eat list for a while
-				if(!(L in prey_excludes)) // Unless they're already on it, just to avoid fuckery.
-					prey_excludes += L
-					addtimer(CALLBACK(src, .proc/removeMobFromPreyExcludes, weakref(L)), 5 MINUTES)
+				if(!(LAZYFIND(prey_excludes, L))) // Unless they're already on it, just to avoid fuckery.
+					LAZYSET(prey_excludes, L, world.time)
+					addtimer(CALLBACK(src, PROC_REF(removeMobFromPreyExcludes), WEAKREF(L)), 5 MINUTES)
 	else if(istype(O, /obj/item/device/healthanalyzer))
 		var/healthpercent = health/maxHealth*100
 		to_chat(user, "<span class='notice'>[src] seems to be [healthpercent]% healthy.</span>")
 	else
 		..()
 
-/mob/living/simple_mob/proc/removeMobFromPreyExcludes(weakref/target)
+/mob/living/simple_mob/proc/removeMobFromPreyExcludes(datum/weakref/target)
 	if(isweakref(target))
 		var/mob/living/L = target.resolve()
-		if(L)
-			LAZYREMOVE(prey_excludes, L)
+		LAZYREMOVE(prey_excludes, L) // It's fine to remove a null from the list if we couldn't resolve L

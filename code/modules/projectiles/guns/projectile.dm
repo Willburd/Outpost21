@@ -17,6 +17,7 @@
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 	var/obj/item/ammo_casing/chambered = null
 
+	reload_time = 1				//Ballistics reload fast, but not instantly
 	//For SINGLE_CASING or SPEEDLOADER guns
 	var/max_shells = 0			//the number of casings that will fit inside
 	var/ammo_type = null		//the type of ammo that the gun comes preloaded with
@@ -33,15 +34,22 @@
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
 
+	var/random_start_ammo = FALSE	//randomize amount of starting ammo
 /obj/item/weapon/gun/projectile/New(loc, var/starts_loaded = 1)
 	..()
 	if(starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
 			for(var/i in 1 to max_shells)
 				loaded += new ammo_type(src)
+				if(random_start_ammo)
+					loaded.Cut(0,rand(0,max_shells))
 		if(ispath(magazine_type) && (load_method & MAGAZINE))
 			ammo_magazine = new magazine_type(src)
 			allowed_magazines += /obj/item/ammo_magazine/smart
+			if(random_start_ammo)
+				var/ammo_cut = rand(0,ammo_magazine.max_ammo)
+				ammo_magazine.contents.Cut(0,ammo_cut)
+				ammo_magazine.stored_ammo.Cut(0,ammo_cut)	 
 	update_icon()
 
 /obj/item/weapon/gun/projectile/consume_next_projectile()
@@ -121,12 +129,13 @@
 				if(ammo_magazine)
 					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>") //already a magazine here
 					return
-				user.remove_from_mob(AM)
-				AM.loc = src
-				ammo_magazine = AM
-				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
-				user.hud_used.update_ammo_hud(user, src)
-				playsound(src, 'sound/weapons/flipblade.ogg', 50, 1)
+				if(do_after(user, reload_time * AM.w_class))
+					user.remove_from_mob(AM)
+					AM.loc = src
+					ammo_magazine = AM
+					user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
+					user.hud_used.update_ammo_hud(user, src)
+					playsound(src, 'sound/weapons/flipblade.ogg', 50, 1)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
 					to_chat(user, "<span class='warning'>[src] is full!</span>")
@@ -141,10 +150,11 @@
 						AM.stored_ammo -= C //should probably go inside an ammo_magazine proc, but I guess less proc calls this way...
 						count++
 						user.hud_used.update_ammo_hud(user, src)
-				if(count)
-					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
-					user.hud_used.update_ammo_hud(user, src)
-					playsound(src, 'sound/weapons/empty.ogg', 50, 1)
+				if(do_after(user, reload_time * AM.w_class))
+					if(count)
+						user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
+						user.hud_used.update_ammo_hud(user, src)
+						playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = A
@@ -154,11 +164,13 @@
 			to_chat(user, "<span class='warning'>[src] is full.</span>")
 			return
 
-		user.remove_from_mob(C)
-		C.loc = src
-		loaded.Insert(1, C) //add to the head of the list
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
-		playsound(src, 'sound/weapons/empty.ogg', 50, 1)
+
+		if(do_after(user, reload_time * C.w_class))
+			user.remove_from_mob(C)
+			C.loc = src
+			loaded.Insert(1, C) //add to the head of the list
+			user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+			playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 
 	else if(istype(A, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/storage = A

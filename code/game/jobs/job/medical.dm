@@ -201,4 +201,4 @@
 	title = "Emergency Medical Technician"
 	title_blurb = "An Emergency Medical Technician is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their \
 					own. They are capable of keeping a patient stabilized until they reach the hands of someone with more training."
-	title_outfit = /decl/hierarchy/outfit/job/medical/paramedic/emt
+	title_outfit = /decl/hierarchy/outfit/job/medical/paramedic/emt			   

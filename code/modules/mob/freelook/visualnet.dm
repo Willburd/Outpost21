@@ -48,8 +48,8 @@
 
 	var/list/chunks_pre_seen = list()
 	var/list/chunks_post_seen = list()
-
-	for(var/mob/observer/eye as anything in moved_eyes)
+	
+	for(var/mob/observer/eye/eye as anything in moved_eyes)
 		if(C)
 			chunks_pre_seen |= eye.visibleChunks
 		// 0xf = 15
@@ -78,7 +78,7 @@
 			chunks_post_seen |= eye.visibleChunks
 
 	if(C)
-		for(var/mob/observer/eye as anything in other_eyes)
+		for(var/mob/observer/eye/eye as anything in other_eyes)
 			chunks_post_seen |= eye.visibleChunks
 
 		var/list/remove = chunks_pre_seen - chunks_post_seen

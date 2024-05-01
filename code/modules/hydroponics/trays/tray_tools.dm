@@ -3,6 +3,9 @@
 /obj/item/weapon/tool/wirecutters/clippers
 	name = "plant clippers"
 	desc = "A tool used to take samples from plants."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "clippers"
+	random_color = FALSE
 
 /obj/item/weapon/tool/wirecutters/clippers/trimmers
     name = "hedgetrimmers"
@@ -10,6 +13,13 @@
     icon_state = "hedget"
     item_state = "hedget"
     force = 7 //One point extra than standard wire cutters.
+
+/obj/item/weapon/tool/wirecutters/clippers/trimmers/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+	if(!proximity) return
+	..()
+	if(A && istype(A,/obj/effect/plant))
+		var/obj/effect/plant/P = A
+		P.die_off()
 
 /obj/item/device/analyzer/plant_analyzer
 	name = "plant analyzer"

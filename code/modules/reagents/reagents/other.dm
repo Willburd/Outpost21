@@ -453,7 +453,7 @@
 	..()
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
-		C.clean_blood()
+		C.clean_blood(TRUE)
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	..()
@@ -677,7 +677,6 @@
 	reagent_state = LIQUID
 	color = "#b51d05"
 	taste_description = "carpet"
-
 	spoiler = TRUE
 
 /datum/reagent/carpet/black
@@ -735,6 +734,14 @@
 	reagent_state = LIQUID
 	color = "#f16e16"
 	taste_description = "extremely overengineered carpet"
+
+/datum/reagent/essential_oil
+	name = "Essential Oils"
+	id = "essential_oil"
+	description = "A slurry of compounds that contains the basic requirements for life."
+	taste_description = "a mixture of thick, sweet, salty, salty and spicy flavours that all blend together to not be very nice at all"
+	reagent_state = LIQUID
+	color = "#e8e2b0"
 
 //YW Edit Start
 /datum/reagent/nutriment/paper //Paper is made from cellulose. You can eat it. It doesn't fill you up very much at all.

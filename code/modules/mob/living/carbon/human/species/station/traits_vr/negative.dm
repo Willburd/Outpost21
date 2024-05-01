@@ -6,6 +6,8 @@
 	desc = "Allows you to move slower on average than baseline."
 	cost = -3 //YW EDIT
 	var_changes = list("slowdown" = 0.5)
+	banned_species = list(SPECIES_ALRAUNE, SPECIES_SHADEKIN_CREW, SPECIES_DIONA, SPECIES_UNATHI) //These are already this slow.
+	
 /datum/dna/gene/trait_linked/speed_slow/New() // Genetically linked trait
 	block = TRAITBLOCK_SLOWDOWN
 	activation_messages=list("You feel slower.")
@@ -14,12 +16,13 @@
 	linked_trait_path = /datum/trait/negative/speed_slow
 	. = ..()
 
-
 /datum/trait/negative/speed_slow_plus
 	name = "Slowdown, Major"
 	desc = "Allows you to move MUCH slower on average than baseline."
 	cost = -5 //YW EDIT
 	var_changes = list("slowdown" = 1.0)
+	banned_species = list(SPECIES_DIONA) //Diona are even slower than this
+	
 /datum/dna/gene/trait_linked/speed_slow_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_SLOWDOWNEX
 	activation_messages=list("You feel a lot slower.")
@@ -28,12 +31,13 @@
 	linked_trait_path = /datum/trait/negative/speed_slow_plus
 	. = ..()
 
-
 /datum/trait/negative/weakling
 	name = "Weakling"
 	desc = "Causes heavy equipment to slow you down more when carried."
 	cost = -1
 	var_changes = list("item_slowdown_mod" = 1.5)
+	banned_species = list(SPECIES_SHADEKIN_CREW, SPECIES_TESHARI) //These are already this weak.
+	
 /datum/dna/gene/trait_linked/weakling/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAK
 	activation_messages=list("You feel weaker.")
@@ -41,12 +45,13 @@
 	linked_trait_path = /datum/trait/negative/weakling
 	. = ..()
 
-
 /datum/trait/negative/weakling_plus
 	name = "Weakling, Major"
 	desc = "Allows you to carry heavy equipment with much more slowdown."
 	cost = -2
 	var_changes = list("item_slowdown_mod" = 2.0)
+	banned_species = list(SPECIES_TESHARI) //These are already this weak.
+
 /datum/dna/gene/trait_linked/weakling_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAKEX
 	activation_messages=list("You feel a lot weaker.")
@@ -54,12 +59,13 @@
 	linked_trait_path = /datum/trait/negative/weakling_plus
 	. = ..()
 
-
 /datum/trait/negative/endurance_low
 	name = "Low Endurance"
 	desc = "Reduces your maximum total hitpoints to 75."
 	cost = -2
 	var_changes = list("total_health" = 75)
+	banned_species = list(SPECIES_TESHARI, SPECIES_SHADEKIN_CREW) //These are already this weak.
+	
 /datum/dna/gene/trait_linked/endurance_low/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURLOW
 	activation_messages=list("You feel more frail.")
@@ -69,7 +75,7 @@
 	. = ..()
 
 /datum/trait/negative/endurance_low/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.setMaxHealth(S.total_health)
 
 /datum/trait/negative/endurance_low/unapply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -82,6 +88,8 @@
 	desc = "Reduces your maximum total hitpoints to 50."
 	cost = -3 //Teshari HP. This makes the person a lot more suseptable to getting stunned, killed, etc.
 	var_changes = list("total_health" = 50)
+	banned_species = list(SPECIES_TESHARI) //These are already this weak.
+
 /datum/dna/gene/trait_linked/endurance_very_low/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURLOWEX
 	activation_messages=list("You feel a lot more frail.")
@@ -91,7 +99,7 @@
 	. = ..()
 
 /datum/trait/negative/endurance_very_low/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.setMaxHealth(S.total_health)
 
 /datum/trait/negative/endurance_very_low/unapply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -129,6 +137,8 @@
 	desc = "Increases damage from brute damage sources by 10%" //YW EDIT
 	cost = -1
 	var_changes = list("brute_mod" = 1.1) //YW EDIT
+	banned_species = list(SPECIES_TESHARI, SPECIES_TAJ, SPECIES_ZADDAT, SPECIES_SHADEKIN_CREW) //These are already this weak.
+
 /datum/dna/gene/trait_linked/minor_brute_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK_MINOR
 	activation_messages=list("Everything feels a little more dangerous.")
@@ -136,12 +146,13 @@
 	linked_trait_path = /datum/trait/negative/minor_brute_weak
 	. = ..()
 
-
 /datum/trait/negative/brute_weak
 	name = "Brute Weakness"
 	desc = "Increases damage from brute damage sources by 20%" //YW EDIT
 	cost = -2
 	var_changes = list("brute_mod" = 1.2) //YW EDIT
+	banned_species = list(SPECIES_TESHARI, SPECIES_SHADEKIN_CREW) //These are already this weak.
+	
 /datum/dna/gene/trait_linked/brute_weak/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK
 	activation_messages=list("Everything feels more dangerous.")
@@ -149,19 +160,18 @@
 	linked_trait_path = /datum/trait/negative/brute_weak
 	. = ..()
 
-
 /datum/trait/negative/brute_weak_plus
 	name = "Brute Weakness, Major"
 	desc = "Increases damage from brute damage sources by 40%" //YW EDIT
 	cost = -3
 	var_changes = list("brute_mod" = 1.4) //YW EDIT
+	
 /datum/dna/gene/trait_linked/brute_weak_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTEWEAK_MAJOR
 	activation_messages=list("Everything feels a lot more dangerous.")
 	deactivation_messages=list("You feel less vulnerable.")
 	linked_trait_path = /datum/trait/negative/brute_weak_plus
 	. = ..()
-
 
 /datum/trait/negative/minor_burn_weak
 	name = "Burn Weakness, Minor"
@@ -233,7 +243,8 @@
 	name = "Liver of Air"
 	desc = "The only way you can hold a drink is if it's in your own two hands, and even then you'd best not inhale too deeply near it. Drinks hit thrice as hard. You may wish to note this down in your medical records, and perhaps your exploitable info as well."
 	cost = -1
-	var_changes = list("alcohol_mod" = 3)
+	var_changes = list("chem_strength_alcohol" = 3)
+	
 /datum/dna/gene/trait_linked/alcohol_intolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_AIRLIVER
 	activation_messages=list("You feel like a glass of water could make you tipsy.")
@@ -241,12 +252,12 @@
 	linked_trait_path = /datum/trait/negative/alcohol_intolerance_advanced
 	. = ..()
 
-
 /datum/trait/negative/pain_intolerance_basic
 	name = "Pain Intolerant"
 	desc = "You are frail and sensitive to pain. You experience 25% more pain from all sources."
 	cost = -1
 	var_changes = list("pain_mod" = 1.25)
+	
 /datum/dna/gene/trait_linked/pain_intolerance_basic/New() // Genetically linked trait
 	block = TRAITBLOCK_PAININTOL
 	activation_messages=list("Everything feels more sensitive.")
@@ -336,7 +347,7 @@
 	. = ..()
 
 /datum/trait/negative/hollow/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	for(var/obj/item/organ/external/O in H.organs)
 		O.min_broken_damage *= 0.5
 		O.min_bruised_damage *= 0.5
@@ -367,6 +378,8 @@
 	desc = "Your nerves are particularly sensitive to physical changes, leading to experiencing twice the intensity of pain and pleasure alike. Makes all pain effects twice as strong, and occur at half as much damage."
 	cost = -1
 	var_changes = list("trauma_mod" = 2)
+	can_take = ORGANICS
+
 /datum/dna/gene/trait_linked/neural_hypersensitivity/New() // Genetically linked trait
 	block = TRAITBLOCK_HYPERSENSITIVE
 	activation_messages=list("Everything feels more intense.")
@@ -457,6 +470,12 @@
 	cost = -1
 	var_changes = list("gun_accuracy_mod" = -35)
 	varchange_type = TRAIT_VARCHANGE_MORE_BETTER
+/datum/trait/negative/bad_swimmer
+	name = "Bad Swimmer"
+	desc = "You can't swim very well, all water slows you down a lot and you drown in deep water."
+	cost = -1
+	custom_only = FALSE
+	var_changes = list("bad_swimmer" = 1, "water_movement" = 4)
 
 
 //YW ADDITIONS: START

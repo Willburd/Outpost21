@@ -14,8 +14,10 @@
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_SAGARU)
 	name_language = LANGUAGE_SAGARU
+	species_language = LANGUAGE_SAGARU
 	color_mult = 1
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 110
@@ -78,13 +80,15 @@
 	//burn_mod =  1.15
 	//gluttonous = 1
 	num_alternate_languages = 3
-	secondary_langs = list(LANGUAGE_SKRELLIAN)
-	name_language = LANGUAGE_SKRELLIAN
+	secondary_langs = list(LANGUAGE_SPACER)
+	name_language = LANGUAGE_SPACER
+	species_language = LANGUAGE_SPACER
 	color_mult = 1
-	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
+	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX, LANGUAGE_PROMETHEAN)
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair, /mob/living/carbon/human/proc/water_stealth, /mob/living/carbon/human/proc/underwater_devour)
 	min_age = 18
-	max_age = 110
+	max_age = 110 // YW EDIT: 110
+	digi_allowed = TRUE
 
 	blurb = "The Akula are a species of amphibious humanoids like the Skrell, but have an appearance very similar to that of a shark. \
 	They were first discovered as a primitive race of underwater dwelling tribal creatures by the Skrell. At first they were not believed \
@@ -130,13 +134,15 @@
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_BIRDSONG)
 	name_language = LANGUAGE_BIRDSONG
+	species_language = LANGUAGE_BIRDSONG
 	color_mult = 1
 	inherent_verbs = list(/mob/living/proc/flying_toggle,
 		/mob/living/proc/flying_vore_toggle,
 		/mob/living/proc/start_wings_hovering,
 		/mob/living/carbon/human/proc/tie_hair)
 	min_age = 18
-	max_age = 110
+	max_age = 110 // YW EDIT: 110
+	digi_allowed = TRUE
 
 	blurb = "Nevreans are a race of avian and dinosaur-like creatures living on Tal. They belong to a group of races that hails from Eltus, \
 	in the Vilous system. Unlike sergals whom they share a star system with, their species is a very peaceful one. They possess remarkable \
@@ -176,20 +182,21 @@
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_TERMINUS)
 	name_language = LANGUAGE_TERMINUS
+	species_language = LANGUAGE_TERMINUS
 	inherent_verbs = list(/mob/living/carbon/human/proc/lick_wounds,
 		/mob/living/proc/shred_limb,
 		/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 110
 
-	blurb = "The fox-like Zorren are native to Virgo-Prime, however there are two distinct varieties of Zorren one with large ears and shorter fur, \
-	and the other with longer fur that is a bit more vibrant. The long-eared, short-furred Zorren have come to be known as Flatland Zorren as that \
-	is where most of their settlements are located. The Flatland Zorren are somewhat tribal and shamanistic as they have only recently started to be \
-	hired by the Trans-Stellar Corporations. The other variety of Zorren are known as Highland Zorren as they frequently settle in hilly and/or \
-	mountainous areas, they have a differing societal structure than the Flatland Zorren having a more feudal social structure, like the Flatland Zorren, \
-	the Highland Zorren have also only recently been hired by the Trans-Stellar Corporations, but thanks to the different social structure they seem to \
-	have adjusted better to their new lives. Though similar fox-like beings have been seen they are different than the Zorren."
+	blurb = "The fennec-like, blue-blooded Zorren are native to Virgo 4/Menhir and are descendants of a precursor species \
+			that is thought to be responsible for the near-collapse of the biosphere of the planet. \
+			With societies organised around hierarchal caste systems (such as the Royal Zorren) or freedom and strength (such as the Free Tribe Zorren), \
+			they now slowly recover from their previous hubris and aim to revitalize their planet. While many Zorren live in pre-industrial conditions by necessity, \
+			they are an interstellar species known for their pride and stubbornness and doggedly hold out on a Deathworld of their own creation. \
+			As local species, they hold moderate sway on local corporations and are hired by NT and other companies, although they find \"Outlander\" culture deeply weird."
 	wikilink="https://yawn.izac.live/Zorren"
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/zorren)
@@ -201,6 +208,8 @@
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
 	blood_color = "#240bc4"
+	blood_reagents = "copper"
+	reagent_tag = IS_ZORREN
 	color_mult = 1
 
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
@@ -225,6 +234,7 @@
 //	default_language = "Sol Common"
 	secondary_langs = list(LANGUAGE_CANILUNZT)
 	name_language = LANGUAGE_CANILUNZT
+	species_language = LANGUAGE_CANILUNZT
 	primitive_form = "Wolpin"
 	tail = "vulptail"
 	tail_animation = 'icons/mob/species/vulpkanin/tail.dmi' // probably need more than just one of each, but w/e
@@ -235,6 +245,7 @@
 	color_mult = 1
 	inherent_verbs = list(/mob/living/carbon/human/proc/lick_wounds,
 		/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	wikilink="https://yawn.izac.live/Vulpkanin" //YW EDIT: Wiki
 
@@ -309,6 +320,8 @@
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	wikilink="https://yawn.izac.live/Tajaran"
 	agility = 90
+	can_climb = TRUE
+	climbing_delay = 1.00 //Cats are good climbers.
 
 /datum/species/skrell
 	spawn_flags = SPECIES_CAN_JOIN
@@ -376,7 +389,11 @@
 	min_age = 18
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair) //Get ya quills done did
 	icobase = 'icons/mob/human_races/r_vox_old.dmi'
+	tail = "voxtail"
+	tail_animation = 'icons/mob/species/vox/tail.dmi'
 	deform = 'icons/mob/human_races/r_def_vox_old.dmi'
+	color_mult = 1
+
 	descriptors = list(
 		/datum/mob_descriptor/vox_markings = 0
 		)
@@ -392,11 +409,13 @@
 	icobase_tail = 1
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	num_alternate_languages = 3
-	secondary_langs = list(LANGUAGE_BIRDSONG)
+	secondary_langs = list(LANGUAGE_BIRDSONG, LANGUAGE_UNATHI)
+	species_language = LANGUAGE_UNATHI
 	name_language = null
 	color_mult = 1
 	genders = list(MALE, FEMALE, PLURAL, NEUTER)
 	inherent_verbs = list(/mob/living/proc/flying_toggle,/mob/living/proc/flying_vore_toggle,/mob/living/proc/start_wings_hovering,/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 80
@@ -439,6 +458,7 @@
 	taken to calling these creatures 'Shadekin', and the name has generally stuck and spread. "		//TODO: Something more fitting for black-eyes
 	wikilink = "https://wiki.vore-station.net/Shadekin"
 	catalogue_data = list(/datum/category_item/catalogue/fauna/shadekin)
+	digi_allowed = TRUE
 
 	language = LANGUAGE_SHADEKIN
 	name_language = LANGUAGE_SHADEKIN
@@ -447,6 +467,8 @@
 	num_alternate_languages = 3
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	rarity_value = 5	//INTERDIMENSIONAL FLUFFERS
+
+	inherent_verbs = list(/mob/proc/adjust_hive_range)
 
 	siemens_coefficient = 0
 	darksight = 10
@@ -544,7 +566,9 @@
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_TERMINUS)
 	name_language = LANGUAGE_TERMINUS
+	species_language = LANGUAGE_TERMINUS
 	inherent_verbs = list(/mob/living/carbon/human/proc/lick_wounds,/mob/living/proc/shred_limb,/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 80
@@ -576,6 +600,7 @@
 	darksight = 4 //Better hunters in the dark.
 	hunger_factor = 0.1 //In exchange, they get hungry a tad faster.
 	num_alternate_languages = 3
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 80
@@ -609,12 +634,13 @@
 	icobase = 'icons/mob/human_races/r_altevian.dmi'
 	deform = 'icons/mob/human_races/r_def_altevian.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	language = LANGUAGE_TAVAN
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_TAVAN)
+	species_language = LANGUAGE_TAVAN
 	name_language = null
 	color_mult = 1
 	inherent_verbs = list(/mob/living/carbon/human/proc/tie_hair)
+	digi_allowed = TRUE
 
 	min_age = 18
 	max_age = 80

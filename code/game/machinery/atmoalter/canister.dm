@@ -259,7 +259,23 @@ update_flag
 	..()
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!W.is_wrench() && !istype(W, /obj/item/weapon/tank) && !istype(W, /obj/item/device/analyzer) && !istype(W, /obj/item/device/pda))
+	if(W.has_tool_quality(TOOL_WELDER)) //Vorestart: Deconstructable Canisters
+		var/obj/item/weapon/weldingtool/WT = W.get_welder()
+		if(!WT.remove_fuel(0, user))
+			to_chat(user, "The welding tool must be on to complete this task.")
+			return
+		if(air_contents.return_pressure() > 1 && !destroyed) // Empty or broken cans are able to be deconstructed
+			to_chat(user, "<span class ='warning'>\The [src]'s internal pressure is too high! Empty the canister before attempting to weld it apart.</span>")
+			return
+		playsound(src, WT.usesound, 50, 1)
+		if(do_after(user, 20 * WT.toolspeed))
+			if(!src || !WT.isOn()) return
+			to_chat(user, "<span class='notice'>You deconstruct the [src].</span>")
+			new /obj/item/stack/material/steel( src.loc, 10)
+			qdel(src)
+			return
+	//Voreend
+	if(!W.has_tool_quality(TOOL_WRENCH) && !istype(W, /obj/item/weapon/tank) && !istype(W, /obj/item/device/analyzer) && !istype(W, /obj/item/device/pda))
 		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
 		src.health -= W.force
 		src.add_fingerprint(user)

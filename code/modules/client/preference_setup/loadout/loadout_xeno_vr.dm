@@ -92,8 +92,9 @@
 	sort_category = "Xenowear"
 
 /datum/gear/uniform/altevian_outfit
-	description = "A uniform commonly seen from altevians during their work. The material on this uniform seems to be made of durable thread that can handle the stress of most matters of labor."
+	description = "A uniform commonly seen worn by altevians. The material on this uniform is made of a durable thread that can handle the stress of most forms of labor."
 	display_name = "altevian duty jumpsuit selection (Altevian)"
+	whitelisted = SPECIES_ALTEVIAN
 	sort_category = "Xenowear"
 
 /datum/gear/uniform/altevian_outfit/New()
@@ -102,6 +103,39 @@
 	for(var/obj/item/clothing/under/altevian/uniform_type as anything in typesof(/obj/item/clothing/under/altevian))
 		pants[initial(uniform_type.name)] = uniform_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))
+
+/datum/gear/accessory/altevian_aquila
+	description = "An emblem found across all altevian vessels. The specific metals and jewels denote ranks. Otherwise, it's just a pretty rat skull emblem with a set of crystals for their eyes and fangs."
+	display_name = "royal altevian navy emblem selection"
+	whitelisted = SPECIES_ALTEVIAN
+	sort_category = "Xenowear"
+
+/datum/gear/accessory/altevian_aquila/New()
+	..()
+	var/list/badges = list(
+						"gold emblem" = /obj/item/clothing/accessory/altevian_badge/aquila,
+						"silver emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/silver,
+						"bronze emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/bronze,
+						"black emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/black,
+						"blue emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/exotic,
+						"purple emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/phoron,
+						"red emblem" = /obj/item/clothing/accessory/altevian_badge/aquila/hydrogen)
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(badges))
+
+/datum/gear/suit/altevian_officer_suit
+	description = "A comfortable official suit for altevian command officers."
+	display_name = "altevian officer's suit selection, site manager"
+	whitelisted = SPECIES_ALTEVIAN
+	allowed_roles = list("Site Manager")
+	sort_category = "Xenowear"
+
+/datum/gear/suit/altevian_officer_suit/New()
+	..()
+	var/list/suits = list()
+	for(var/ratsuit in typesof(/obj/item/clothing/suit/captunic/capjacket/altevian_admiral))
+		var/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/specific_ratsuit = ratsuit
+		suits[initial(specific_ratsuit.name)] = specific_ratsuit
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(suits))
 
 // Taur stuff
 /datum/gear/suit/taur/drake_cloak

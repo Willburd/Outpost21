@@ -25,6 +25,7 @@
 	name = "darkglass"
 	display_name = "darkglass"
 	icon_base = "darkglass"
+	table_icon_base = "darkglass"
 	icon_colour = "#FFFFFF"
 	spoiler = TRUE
 
@@ -32,5 +33,6 @@
 	name = "fancyblack"
 	display_name = "fancyblack"
 	icon_base = "fancyblack"
+	table_icon_base = "fancyblack"
 	icon_colour = "#FFFFFF"
 	spoiler = TRUE

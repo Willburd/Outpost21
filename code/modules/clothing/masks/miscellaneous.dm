@@ -341,7 +341,17 @@
 		"X" = image(icon = src.icon, icon_state = "xmask"),
 		"Bugeyes" = image(icon = src.icon, icon_state = "bugmask"),
 		"Double" = image(icon = src.icon, icon_state = "doublemask"),
-		"Mark" = image(icon = src.icon, icon_state = "markmask")
+		""Mark" = image(icon = src.icon, icon_state = "markmask"),
+		"Line" = image(icon = src.icon, icon_state = "linemask"),
+		"Minus" = image(icon = src.icon, icon_state = "minusmask"),
+		"Four" = image(icon = src.icon, icon_state = "fourmask"),
+		"Diamond" = image(icon = src.icon, icon_state = "diamondmask"),
+		"Cat" = image(icon = src.icon, icon_state = "catmask"),
+		"Big Eyes" = image(icon = src.icon, icon_state = "bigeyemask"),
+		"Good" = image(icon = src.icon, icon_state = "goodmask"),
+		"Bad" = image(icon = src.icon, icon_state = "badmask"),
+		"Happy" = image(icon = src.icon, icon_state = "happymask"),
+		"Sad" = image(icon = src.icon, icon_state = "sadmask")										
 		)
 
 /obj/item/clothing/mask/paper/attack_self(mob/user)
@@ -355,16 +365,21 @@
 							"Sleeping" ="sleepingmask", "Heart" = "heartmask", "Core" = "coremask",
 							"Plus" = "plusmask", "Square" ="squaremask", "Bullseye" = "bullseyemask",
 							"Vertical" = "verticalmask", "Horizontal" = "horizontalmask", "X" ="xmask",
-							"Bugeyes" = "bugmask", "Double" = "doublemask", "Mark" = "markmask")
+							"Bugeyes" = "bugmask", "Double" = "doublemask", "Mark" = "markmask",
+							"Line" = "linemask", "Minus" = "minusmask", "Four" = "fourmask",
+							"Diamond" = "diamondmask", "Cat" = "catmask", "Big Eyes" = "bigeyemask",
+							"Good" = "goodmask", "Bad" = "badmask", "Happy" = "happymask", "Sad" = "sadmask"
+							)
 
-	// var/choice = show_radial_menu(user, src, papermask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
-	var/choice = tgui_input_list(user, "Choose your mask's design.", "Design", papermask_designs) // outpost 21 - remove radial menus
-	if(src && choice && options[choice] && !user.incapacitated() && in_range(user,src))
+	var/choice = show_radial_menu(user, src, papermask_designs, custom_check = FALSE, radius = 36, require_near = TRUE)
+
+	if(src && choice && !user.incapacitated() && in_range(user,src))
 		icon_state = options[choice]
 		user.update_inv_wear_mask()
 		user.update_action_buttons()
 		to_chat(user, "<span class='notice'>Your paper mask now is now [choice].</span>")
 		return 1
+
 
 /obj/item/clothing/mask/emotions
 	name = "emotional mask"

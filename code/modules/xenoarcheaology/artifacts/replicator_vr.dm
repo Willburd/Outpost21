@@ -19,10 +19,9 @@
 	/mob/living/simple_mob/vore/rabbit,
 	/mob/living/simple_mob/animal/goat,
 	/mob/living/simple_mob/animal/sif/tymisian,
-	/mob/living/simple_mob/animal/wolf/direwolf,
-	/mob/living/simple_mob/otie/friendly,
+	/mob/living/simple_mob/vore/wolf/direwolf,
+	/mob/living/simple_mob/vore/otie/friendly,
 	/mob/living/simple_mob/vore/alienanimals/catslug,
-	/mob/living/simple_mob/vore/alienanimals/teppi,
 	/mob/living/simple_mob/vore/fennec,
 	/mob/living/simple_mob/vore/xeno_defanged,
 	/mob/living/simple_mob/vore/redpanda/fae,
@@ -72,7 +71,7 @@
 	if(spawning_types.len && powered())
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
-			src.visible_message("<span class='notice'>\icon[src][bicon(src)] [src] pings!</span>")
+			src.visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src] pings!</span>")
 
 			var/obj/source_material = pop(stored_materials)
 			var/spawn_type = pop(spawning_types)
@@ -201,7 +200,7 @@
 				icon_state = "borgcharger0(old)"
 
 		else if(prob(5))
-			src.visible_message("<span class='notice'>\icon[src][bicon(src)] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")].</span>")
+			src.visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")].</span>")
 
 	last_process_time = world.time
 
@@ -270,7 +269,7 @@
 						inserted_human.drop_from_inventory(I)
 				inserted_mob.loc = src
 				stored_materials.Add(inserted_mob)
-				src.visible_message("<b>\The [user]</b> inserts \the [inserted_mob] into \the [src].")
+				src.visible_message("<span class='filter_notice'><b>\The [user]</b> inserts \the [inserted_mob] into \the [src].</span>")
 				return
 		else
 			to_chat(user, "<span class='notice'>You cannot put \the [W] into the machine. ((The micro must be connected to the server.))</span>")
@@ -291,7 +290,7 @@
 			//Now that we've dropped all the items they have, let's shove them back into the micro holder.
 	W.loc = src
 	stored_materials.Add(W)
-	src.visible_message("<b>\The [user]</b> inserts \the [W] into \the [src].")
+	src.visible_message("<span class='filter_notice'><b>\The [user]</b> inserts \the [W] into \the [src].</span>")
 
 /obj/machinery/replicator/vore/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
 	var/list/data = ..()
@@ -308,9 +307,9 @@
 			if(key in created_mobs)
 				if(LAZYLEN(stored_materials) > LAZYLEN(spawning_types))
 					if(LAZYLEN(spawning_types))
-						visible_message("<span class='notice'>\icon[src][bicon(src)] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")].</span>")
+						visible_message("<span class='notice'>[icon2html(src,viewers(src))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")].</span>")
 					else
-						visible_message("<span class='notice'>\icon[src][bicon(src)] [src]'s front compartment slides shut.</span>")
+						visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src]'s front compartment slides shut.</span>")
 					spawning_types.Add(created_mobs[key])
 					spawn_progress_time = 0
 					update_use_power(USE_POWER_ACTIVE)
@@ -424,7 +423,7 @@
 	if(spawning_types.len && powered())
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
-			src.visible_message("<span class='notice'>\icon[src][bicon(src)] [src] pings!</span>")
+			src.visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src] pings!</span>")
 
 			var/obj/source_material = pop(stored_materials)
 			var/spawn_type = pop(spawning_types)
@@ -469,7 +468,7 @@
 				icon_state = "borgcharger0(old)"
 
 		else if(prob(5))
-			src.visible_message("<span class='notice'>\icon[src][bicon(src)] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")].</span>")
+			src.visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")].</span>")
 
 	last_process_time = world.time
 
@@ -537,7 +536,7 @@
 						inserted_human.drop_from_inventory(I)
 				inserted_mob.loc = src
 				stored_materials.Add(inserted_mob)
-				src.visible_message("<b>\The [user]</b> inserts \the [inserted_mob] into \the [src].")
+				src.visible_message("<span class='filter_notice'><b>\The [user]</b> inserts \the [inserted_mob] into \the [src].</span>")
 				return
 		else
 			to_chat(user, "<span class='notice'>You cannot put \the [W] into the machine. ((They must be connected to the server.))</span>")
@@ -556,7 +555,7 @@
 			//Now that we've dropped all the items they have, let's shove them back into the micro holder.
 	W.loc = src
 	stored_materials.Add(W)
-	src.visible_message("<b>\The [user]</b> inserts \the [W] into \the [src].")
+	src.visible_message("<span class='filter_notice'><b>\The [user]</b> inserts \the [W] into \the [src].</span>")
 
 
 /obj/machinery/replicator/clothing/tgui_interact(mob/user, datum/tgui/ui) //This creates the menu.
@@ -580,9 +579,9 @@
 			if(key in created_items)
 				if(LAZYLEN(stored_materials) > LAZYLEN(spawning_types))
 					if(LAZYLEN(spawning_types))
-						visible_message("<span class='notice'>\icon[src][bicon(src)] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")].</span>")
+						visible_message("<span class='notice'>[icon2html(src,viewers(src))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")].</span>")
 					else
-						visible_message("<span class='notice'>\icon[src][bicon(src)] [src]'s front compartment slides shut.</span>")
+						visible_message("<span class='notice'>[icon2html(src,viewers(src))] [src]'s front compartment slides shut.</span>")
 					spawning_types.Add(created_items[key])
 					spawn_progress_time = 0
 					update_use_power(USE_POWER_ACTIVE)

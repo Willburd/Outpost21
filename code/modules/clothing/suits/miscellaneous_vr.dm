@@ -147,3 +147,31 @@
 	desc = "A high tech looking vest. It's made out of tough materials, and can protect fairly well against bullets. Wake the fuck up, Samurai."
 
 	icon_state = "cyberpunk_recolor"
+
+// Altevian admiralty stuff
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral				// Subtype of capjacket because A) it makes sense and B) conviniently matching stats
+	name = "altevian officer's suit"
+	desc = "A formal jacket worn by the bridge and command crew from the Altevian Hegemony. The material is of high quality silk, and provides maximum comfort and breathing room."
+	icon_state = "altevian-admiral"
+
+	species_restricted = list(SPECIES_ALTEVIAN)
+
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/gray
+	name = "gray altevian officer's suit"
+	icon_state = "altevian-admiral-gray"
+
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/white
+	name = "white altevian officer's suit"
+	icon_state = "altevian-admiral-white"
+
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/dark
+	name = "dark altevian officer's suit"
+	icon_state = "altevian-admiral-dark"
+
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/olive
+	name = "olive altevian officer's suit"
+	icon_state = "altevian-admiral-olive"
+
+/obj/item/clothing/suit/captunic/capjacket/altevian_admiral/yellow
+	name = "yellow altevian officer's suit"
+	icon_state = "altevian-admiral-yellow"

@@ -32,6 +32,14 @@
 	sort_string = "TAVBB"
 */
 
+/datum/design/item/general/bluespace_collar
+	name = "Bluespace collar"
+	id = "bluespacecollar"
+	req_tech = list(TECH_BLUESPACE = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 2000)
+	build_path = /obj/item/clothing/accessory/collar/shock/bluespace
+	sort_string = "TAVBC"
+
 /datum/design/item/general/bodysnatcher
 	name = "Body Snatcher"
 	id = "bodysnatcher"

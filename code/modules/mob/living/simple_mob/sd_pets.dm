@@ -104,7 +104,7 @@
 	value = CATALOGUER_REWARD_EASY
 
 
-/mob/living/simple_mob/otie/red/chubby/cocoa
+/mob/living/simple_mob/vore/otie/red/chubby/cocoa
 	name = "Cocoa"
 	desc = "A good boi, eats the scraps when you're not looking."
 	devourable = 0

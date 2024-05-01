@@ -50,14 +50,17 @@
 			B.owner = tf_mob_holder
 			tf_mob_holder.vore_organs |= B
 			vore_organs -= B
-
 	if(tf_mob_holder)
 		tf_mob_holder = null
 	//VOREStation Addition End
-
-	qdel(selected_image)
-	QDEL_NULL(vorePanel) //VOREStation Add
-	QDEL_LIST_NULL(vore_organs) //VOREStation Add
+	if(hud_list) //prune out images in hud_list
+		for(var/item in hud_list)
+			if(item)
+				item = null
+	if(selected_image)
+		selected_image = null
+	//QDEL_NULL(vorePanel) //VOREStation Add commented and moved to /mob
+	//QDEL_LIST_NULL(vore_organs) //VOREStation Add commented and moved to /mob
 	temp_language_sources = null //VOREStation Add
 	temp_languages = null //VOREStation Add
 
@@ -96,7 +99,7 @@
 	if(!..())
 		return 0
 
-	usr.visible_message("<b>[src]</b> points to [A]")
+	usr.visible_message("<span class='filter_notice'><b>[src]</b> points to [A].</span>")
 	return 1
 
 /mob/living/verb/succumb()
@@ -109,14 +112,14 @@
 		confirm2 = tgui_alert(usr, "Pressing this buttom will really kill you, no going back", "Are you sure?", list("Yes", "No")) //Swapped answers to protect from accidental double clicks.
 	if (src.health < 0 && stat != DEAD && confirm1 == "Yes" && confirm2 == "Yes") // Checking both confirm1 and confirm2 for good measure. I don't trust TGUI.
 		src.death()
-		to_chat(src, "<font color='blue'>You have given up life and succumbed to death.</font>")
+		to_chat(src, span_blue("You have given up life and succumbed to death."))
 	else
 		if(stat == DEAD)
-			to_chat(src, "<font color='blue'>As much as you'd like, you can't die when already dead</font>")
+			to_chat(src, span_blue("As much as you'd like, you can't die when already dead"))
 		else if(confirm1 == "No" || confirm2 == "No")
-			to_chat(src, "<font color='blue'>You chose to live another day.</font>")
+			to_chat(src, span_blue("You chose to live another day."))
 		else
-			to_chat(src, "<font color='blue'>You are not injured enough to succumb to death!</font>")
+			to_chat(src, span_blue("You are not injured enough to succumb to death!"))
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
@@ -384,7 +387,17 @@
 	return result
 
 /mob/living/proc/setMaxHealth(var/newMaxHealth)
-	health = (health/maxHealth) * (newMaxHealth) //VOREStation Add - Adjust existing health
+	var/h_mult = maxHealth / newMaxHealth	//VOREStation Add Start - Calculate change multiplier
+	if(bruteloss)							//In case a damage value is 0, divide by 0 bad
+		bruteloss = round(bruteloss / h_mult)		//Health is calculated on life based on damage types, so we update the damage and let life handle health
+	if(fireloss)
+		fireloss = round(fireloss / h_mult)
+	if(toxloss)
+		toxloss = round(toxloss / h_mult)
+	if(oxyloss)
+		oxyloss = round(oxyloss / h_mult)
+	if(cloneloss)
+		cloneloss = round(cloneloss / h_mult)	//VOREStation Add End
 	maxHealth = newMaxHealth
 
 /mob/living/Stun(amount)
@@ -630,12 +643,18 @@
 	SetStunned(0)
 	SetWeakened(0)
 
+	// undo various death related conveniences
+	sight = initial(sight)
+	see_in_dark = initial(see_in_dark)
+	see_invisible = initial(see_invisible)
+
 	// shut down ongoing problems
 	radiation = 0
 	nutrition = 400
 	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
+	resting = FALSE
 
 	// fix blindness and deafness
 	blinded = 0
@@ -681,13 +700,14 @@
 	//VOREStation Edit Start - Making it so SSD people have prefs with fallback to original style.
 	if(config.allow_Metadata)
 		if(ooc_notes)
-			to_chat(usr, "[src]'s Metainfo:<br>[ooc_notes]")
+			ooc_notes_window(usr)
+//			to_chat(usr, "<span class='filter_notice'>[src]'s Metainfo:<br>[ooc_notes]</span>")
 		else if(client)
-			to_chat(usr, "[src]'s Metainfo:<br>[client.prefs.metadata]")
+			to_chat(usr, "<span class='filter_notice'>[src]'s Metainfo:<br>[client.prefs.metadata]</span>")
 		else
-			to_chat(usr, "[src] does not have any stored infomation!")
+			to_chat(usr, "<span class='filter_notice'>[src] does not have any stored infomation!</span>")
 	else
-		to_chat(usr, "OOC Metadata is not supported by this server!")
+		to_chat(usr, "<span class='filter_notice'>OOC Metadata is not supported by this server!</span>")
 	//VOREStation Edit End - Making it so SSD people have prefs with fallback to original style.
 
 	return
@@ -757,7 +777,7 @@
 	set category = VERBTAB_IC
 
 	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 	update_canmove()
 
 //called when the mob receives a bright flash
@@ -997,15 +1017,18 @@
 		if(!isnull(M.icon_scale_y_percent))
 			. *= M.icon_scale_y_percent
 
-/mob/living/update_transform()
+/mob/living/update_transform(var/instant = FALSE)
 	// First, get the correct size.
 	var/desired_scale_x = size_multiplier * icon_scale_x //VOREStation edit
 	var/desired_scale_y = size_multiplier * icon_scale_y //VOREStation edit
+	var/cent_offset = center_offset
 
 	// Now for the regular stuff.
+	if(fuzzy || offset_override || dir == EAST || dir == WEST)
+		cent_offset = 0
 	var/matrix/M = matrix()
 	M.Scale(desired_scale_x, desired_scale_y)
-	M.Translate(0, (vis_height/2)*(desired_scale_y-1)) //VOREStation edit
+	M.Translate(cent_offset * desired_scale_x, (vis_height/2)*(desired_scale_y-1))
 	src.transform = M //VOREStation edit
 	handle_status_indicators()
 
@@ -1126,7 +1149,7 @@
 		var/mob/living/carbon/human/H = target
 		if(H.in_throw_mode && H.a_intent == I_HELP && unEquip(I))
 			H.put_in_hands(I) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
-			visible_message("<b>[src]</b> hands \the [H] \a [I].", SPAN_NOTICE("You give \the [target] \a [I]."))
+			visible_message("<span class='filter_notice'><b>[src]</b> hands \the [H] \a [I].</span>", SPAN_NOTICE("You give \the [target] \a [I]."))
 		else
 			to_chat(src, SPAN_NOTICE("You offer \the [I] to \the [target]."))
 			do_give(H)
@@ -1269,15 +1292,15 @@
 /mob/living/vv_get_header()
 	. = ..()
 	. += {"
-		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
+		<a href='?_src_=vars;[HrefToken()];rename=\ref[src]'><b>[src]</b></a><font size='1'>
+		<br><a href='?_src_=vars;[HrefToken()];datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;[HrefToken()];datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
-		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
-		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=fire'>[getFireLoss()]</a>
-		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=toxin'>[getToxLoss()]</a>
-		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=oxygen'>[getOxyLoss()]</a>
-		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=clone'>[getCloneLoss()]</a>
-		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brain'>[getBrainLoss()]</a>
+		BRUTE:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
+		FIRE:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=fire'>[getFireLoss()]</a>
+		TOXIN:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=toxin'>[getToxLoss()]</a>
+		OXY:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=oxygen'>[getOxyLoss()]</a>
+		CLONE:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=clone'>[getCloneLoss()]</a>
+		BRAIN:<a href='?_src_=vars;[HrefToken()];mobToDamage=\ref[src];adjustDamage=brain'>[getBrainLoss()]</a>
 		</font>
 		"}
 
@@ -1307,7 +1330,7 @@
 
 /datum/component/character_setup/RegisterWithParent()
 	. = ..()
-	RegisterSignal(parent, COMSIG_MOB_CLIENT_LOGIN, .proc/create_mob_button)
+	RegisterSignal(parent, COMSIG_MOB_CLIENT_LOGIN, PROC_REF(create_mob_button))
 	var/mob/owner = parent
 	if(owner.client)
 		create_mob_button(parent)
@@ -1341,7 +1364,7 @@
 /datum/component/character_setup/proc/character_setup_click(source, location, control, params, user)
 	var/mob/owner = user
 	if(owner.client?.prefs)
-		INVOKE_ASYNC(owner.client.prefs, /datum/preferences/proc/ShowChoices, owner)
+		INVOKE_ASYNC(owner.client.prefs, TYPE_PROC_REF(/datum/preferences, ShowChoices), owner)
 
 /**
  * Screen object for vore panel
@@ -1351,3 +1374,8 @@
 	icon = 'icons/mob/screen/midnight.dmi'
 	icon_state = "character"
 	screen_loc = ui_smallquad
+
+/mob/living/set_dir(var/new_dir)
+	. = ..()
+	if(size_multiplier != 1 || icon_scale_x != DEFAULT_ICON_SCALE_X && center_offset > 0)
+		update_transform(TRUE)

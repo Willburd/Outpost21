@@ -241,6 +241,11 @@
 		if(mannequin.species && (mannequin.species.appearance_flags & HAS_SKIN_COLOR))
 			styles["Body Color"] = list("colorHref" = "skin_color", "color" = MOB_HEX_COLOR(mannequin, skin))
 
+		if (mannequin.species && mannequin.species.selects_bodytype)
+			if (!mannequin.species.base_species)
+				mannequin.species.base_species = mannequin.species.name
+			styles["Bodytype"] = list("styleHref" = "custom_base", "style" = mannequin.species.base_species)
+
 		var/datum/preferences/designer/P = new()
 		apply_markings_to_prefs(mannequin, P)
 		data["activeBodyRecord"]["markings"] = P.body_markings
@@ -552,6 +557,7 @@
 	var/href_list = list()
 	href_list["src"] = "\ref[src]"
 	href_list["[params["target_href"]]"] = params["target_value"]
+	var/datum/category_item/player_setup_item/to_use = (params["target_href"] in use_different_category) ? use_different_category[params["target_href"]] : B
 
 	if(params["target_href"] == "flavor_text")
 		F.OnTopic(list2params(href_list), href_list, user)
@@ -572,6 +578,7 @@
 		mannequin.dna.ready_dna(mannequin)
 		mannequin.sync_organ_dna()
 		active_br.init_from_mob(mannequin, FALSE, FALSE) // reinit
+
 		update_preview_icon()
 		return 1
 

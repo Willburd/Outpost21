@@ -11,7 +11,7 @@
 	qdel(src)
 
 /obj/structure/sign/attackby(obj/item/tool, mob/user)	//deconstruction
-	if(tool.is_screwdriver() && !istype(src, /obj/structure/sign/scenery) && !istype(src, /obj/structure/sign/double))
+	if(tool.has_tool_quality(TOOL_SCREWDRIVER) && !istype(src, /obj/structure/sign/scenery) && !istype(src, /obj/structure/sign/double))
 		playsound(src, tool.usesound, 50, 1)
 		unfasten(user)
 	else ..()
@@ -23,6 +23,7 @@
 	S.desc = desc
 	S.icon_state = icon_state
 	S.sign_state = icon_state
+	S.original_type = type
 	qdel(src)
 
 /obj/item/sign
@@ -33,10 +34,10 @@
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
-	if(tool.is_screwdriver() && isturf(user.loc))
+	if(tool.has_tool_quality(TOOL_SCREWDRIVER) && isturf(user.loc))
 		var/direction = tgui_input_list(usr, "In which direction?", "Select direction.", list("North", "East", "South", "West", "Cancel"))
 		if(direction == "Cancel") return
-		var/target_type = /obj/structure/sign
+		var/target_type = original_type || /obj/structure/sign
 		var/obj/structure/sign/S = new target_type(user.loc)
 		switch(direction)
 			if("North")
@@ -253,12 +254,12 @@
 
 /obj/structure/sign/redcross
 	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
+	desc = "An interstellar symbol of medical institutions. You'll probably get help here."
 	icon_state = "bluecross"
 
 /obj/structure/sign/greencross
 	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
+	desc = "An interstellar symbol of medical institutions. You'll probably get help here."
 	icon_state = "bluecross2"
 
 /obj/structure/sign/goldenplaque
@@ -507,12 +508,12 @@
 /obj/structure/sign/directions/science/toxins
 	name = "\improper Toxins Lab"
 	desc = "A direction sign, pointing out the way to the Toxins Lab."
-	icon_state = "direction_sci"
+	icon_state = "direction_toxins"
 
 /obj/structure/sign/levels/science/toxins
 	name = "\improper Toxins Lab"
 	desc = "A level sign, stating the level to find the Toxins Lab on."
-	icon_state = "level_sci"
+	icon_state = "level_toxins"
 
 /obj/structure/sign/directions/science/robotics
 	name = "\improper Robotics Workshop"
@@ -814,6 +815,15 @@
 	desc = "A pictographic direction sign with a knife, plate, and fork, stating the level to find the nearest dining establishment on."
 	icon_state = "level_kitchen"
 
+/obj/structure/sign/directions/shuttle_bay
+	name = "\improper Shuttle Bay"
+	desc = "A direction sign, pointing out the way to the nearest shuttle bay."
+	icon_state = "direction_bay"
+
+/obj/structure/sign/levels/shuttle_bay
+	name = "\improper Shuttle Bay"
+	desc = "A direction sign, stating the level to find the nearest shuttle bay on."
+	icon_state = "level_bay"
 /obj/structure/sign/directions/tram
 	name = "\improper Public Transit Station"
 	desc = "A direction sign, pointing out the way to the nearest public transit station."
@@ -945,12 +955,15 @@
 	desc = "Flashy and pretty."
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "xmaslights"
+	layer = 4.9
+	plane = PLANE_LIGHTING_ABOVE		 
 
 /obj/structure/sign/christmas/wreath
 	name = "wreath"
 	desc = "Prickly and festive."
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "doorwreath"
+	layer = 5
 
 /obj/structure/sign/hostilefauna
 	icon = 'icons/obj/decals_vr.dmi'
@@ -1838,7 +1851,7 @@
 /obj/structure/sign/flag/fivearrows
 	name = "Five Arrows flag"
 	desc = "The red flag of the Five Arrows."
-	description_fluff = "The Five Arrows is an independent government entity that seceded from the Solar Confederate Government in 2570, in response to percieved \
+	description_fluff = "The Five Arrows is an independent government entity that seceded from the Solar Confederate Government in 2570, in response to perceived \
 	failures in aiding the Sagittarius Heights during the Skathari Incursion. The success of the government in achieving effective local defense and prosperity has \
 	since attracted the membership of Kauq'xum, a remote Skrellian colony. \The Five Arrows formed the model for SolGov's own semi-autonomous \"Regional Blocs\"."
 	icon_state = "fivearrows"
@@ -1853,7 +1866,7 @@
 /obj/item/flag/fivearrows
 	name = "Five Arrows flag"
 	desc = "The red flag of the Five Arrows."
-	description_fluff = "The Five Arrows is an independent government entity that seceded from the Solar Confederate Government in 2570, in response to percieved \
+	description_fluff = "The Five Arrows is an independent government entity that seceded from the Solar Confederate Government in 2570, in response to perceived \
 	failures in aiding the Sagittarius Heights during the Skathari Incursion. The success of the government in achieving effective local defense and prosperity has \
 	since attracted the membership of Kauq'xum, a remote Skrellian colony. \The Five Arrows formed the model for SolGov's own semi-autonomous \"Regional Blocs\"."
 	flag_path = "fivearrows"

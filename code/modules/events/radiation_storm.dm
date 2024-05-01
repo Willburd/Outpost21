@@ -41,7 +41,9 @@
 			continue
 		if(ishuman(C))
 			var/mob/living/carbon/human/H = C
-			if(prob(5))
+			var/chance = 5.0
+			chance -= (chance / 100) * C.getarmor(null, "rad")
+			if(prob(chance))
 				if (prob(75))
 					randmutb(H) // Applies bad mutation
 					domutcheck(H,null,MUTCHK_FORCED)

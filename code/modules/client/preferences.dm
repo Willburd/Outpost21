@@ -31,16 +31,26 @@ var/list/preferences_datums = list()
 	var/tgui_input_mode = FALSE			// All the Input Boxes (Text,Number,List,Alert)
 	var/tgui_large_buttons = TRUE
 	var/tgui_swapped_buttons = FALSE
+	var/obfuscate_key = FALSE
+	var/obfuscate_job = FALSE
+	var/chat_timestamp = FALSE
+	var/throwmode_loud = FALSE
 
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/nickname						//our character's nickname
 	var/age = 30						//age of character
+	var/bday_month = 0					//Birthday month
+	var/bday_day = 0					//Birthday day
+	var/last_birthday_notification = 0	//The last year we were notified about our birthday
+	var/bday_announce = FALSE			//Public announcement for birthdays
 	var/spawnpoint = "Elevator" 		//where this character will spawn (0-2). // outpost 21 edit - new default
 	var/b_type = "A+"					//blood type (not-chooseable)
+	var/blood_reagents = "default"		//blood restoration reagents
 	var/backbag = 2						//backpack type
 	var/pdachoice = 1					//PDA type
+	var/shoe_hater = FALSE				//RS ADD - if true, will spawn with no shoes
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
@@ -74,10 +84,12 @@ var/list/preferences_datums = list()
 	var/g_synth							//Same as above
 	var/b_synth							//Same as above
 	var/synth_markings = 1				//Enable/disable markings on synth parts. //VOREStation Edit - 1 by default
+	var/digitigrade = 0
 
 		//Some faction information.
-	var/home_system = "Unset"           //System of birth.
-	var/citizenship = "None"            //Current home system.
+	var/home_system = "Unset"           //Current home or residence.
+	var/birthplace = "Unset"           //Location of birth.
+	var/citizenship = "None"            //Government or similar entity with which you hold citizenship.
 	var/faction = "None"                //General associated faction.
 	var/religion = "None"               //Religious association.
 	var/antag_faction = "None"			//Antag associated faction.
@@ -120,10 +132,11 @@ var/list/preferences_datums = list()
 	var/list/rlimb_data = list()
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
-	var/list/body_markings = list() // "name" = "#rgbcolor"
+	var/list/body_markings = list() // "name" = "#rgbcolor" //VOREStation Edit: "name" = list(BP_HEAD = list("on" = <enabled>, "color" = "#rgbcolor"), BP_TORSO = ...)
 
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
+	var/custom_link = null
 
 	var/list/body_descriptors = list()
 
@@ -141,6 +154,8 @@ var/list/preferences_datums = list()
 
 	// OOC Metadata:
 	var/metadata = ""
+	var/metadata_likes = ""
+	var/metadata_dislikes = ""
 	var/list/ignored_players = list()
 
 	var/client/client = null
@@ -149,8 +164,8 @@ var/list/preferences_datums = list()
 	// Communicator identity data
 	//var/communicator_visibility = 0 // outpost 21 edit - communicator removal
 
-	// Default ringtone for character; if blank, use job default. YW EDIT
-	var/ttone = null
+	/// Default ringtone for character; if blank, use job default.
+	var/ringtone = null
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
@@ -261,8 +276,9 @@ var/list/preferences_datums = list()
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
 		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
-		dat += "<a href='?src=\ref[src];copy=1'>Copy slot</a>"
-
+		dat += "<a href='?src=\ref[src];copy=1'>Copy slot</a> - "
+		dat += "<a href='?src=\ref[src];export=1'>Save &amp; export all</a>" // YW Edit - "Add option to export character to JSON"
+		//dat += "<a href='?src=\ref[src];import=1'>Import all</a>" 		 // YW Edit - "Add option to import character from JSON"
 	else
 		dat += "Please create an account to save your preferences."
 
@@ -356,9 +372,9 @@ var/list/preferences_datums = list()
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["resetslot"])
-		if("No" == tgui_alert(usr, "This will reset the current slot. Continue?", "Reset current slot?", list("No", "Yes")))
+		if("Yes" != tgui_alert(usr, "This will reset the current slot. Continue?", "Reset current slot?", list("No", "Yes")))
 			return 0
-		if("No" == tgui_alert(usr, "Are you completely sure that you want to reset this character slot?", "Reset current slot?", list("No", "Yes")))
+		if("Yes" != tgui_alert(usr, "Are you completely sure that you want to reset this character slot?", "Reset current slot?", list("No", "Yes")))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
@@ -370,6 +386,13 @@ var/list/preferences_datums = list()
 		// User closed preferences window, cleanup anything we need to.
 		clear_character_previews()
 		return 1
+	// YW Edit - "Add option to export character to JSON"
+	else if(href_list["export"])
+		save_preferences()
+		save_character()
+		export_prefs_json()
+		return 1
+	// YW Edit End
 	else
 		return 0
 
@@ -415,6 +438,7 @@ var/list/preferences_datums = list()
 	var/name
 	var/nickname //vorestation edit - This set appends nicknames to the save slot
 	var/list/charlist = list()
+	var/default //VOREStation edit
 	for(var/i=1, i<= config.character_slots, i++)
 		S.cd = "/character[i]"
 		S["real_name"] >> name
@@ -425,10 +449,12 @@ var/list/preferences_datums = list()
 			name = "►[i] - [name]"
 		else
 			name = "[i] - [name]"
+		if (i == default_slot) //VOREStation edit
+			default = "[name][nickname ? " ([nickname])" : ""]"
 		charlist["[name][nickname ? " ([nickname])" : ""]"] = i
 
 	selecting_slots = TRUE
-	var/choice = tgui_input_list(user, "Select a character to load:", "Load Slot", charlist)
+	var/choice = tgui_input_list(user, "Select a character to load:", "Load Slot", charlist, default)
 	selecting_slots = FALSE
 	if(!choice)
 		return

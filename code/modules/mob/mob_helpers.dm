@@ -87,10 +87,12 @@
 /proc/is_admin(var/mob/user)
 	return check_rights(R_ADMIN|R_EVENT, 0, user) != 0
 
-
+/**
+ * Moved into its own file as part of port from CHOMP.
+ *
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
-
+*/
 /*
 	Miss Chance
 */
@@ -208,9 +210,10 @@
 			if(lowertext(newletter)=="s")	newletter="ch"
 			if(lowertext(newletter)=="a")	newletter="ah"
 			if(lowertext(newletter)=="c")	newletter="k"
-		switch(rand(1,15))
+		switch(rand(1,9))
 			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
+			//if(2,4,6,15)	newletter="[uppertext(newletter)]"
+			if(2,4,6,9)	newletter="[uppertext(newletter)]"
 			if(7)	newletter+="'"
 			//if(9,10)	newletter="<b>[newletter]</b>"
 			//if(11,12)	newletter="<big>[newletter]</big>"
@@ -667,11 +670,11 @@ var/global/image/backplane
 
 	return TRUE
 
-/mob/proc/get_sound_env( var/spot, var/pressure_factor)
+/mob/proc/get_sound_env(var/pressure_factor)
 	if (pressure_factor < 0.5)
 		return SPACE
 	else
-		var/area/A = get_area(spot)
+		var/area/A = get_area(src)
 		return A.sound_env
 
 /mob/proc/position_hud_item(var/obj/item/item, var/slot)

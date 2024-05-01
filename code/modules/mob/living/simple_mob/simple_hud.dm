@@ -158,22 +158,40 @@
 	healths.screen_loc = ui_health
 	hud_elements |= healths
 
-	// outpost 21 edit begin - add up/down buttons
-	using = new /obj/screen/mob_living/up()
-	using.screen_loc = ui_moveupdown
-	using.hud = src
-	hud_elements |= using
+	autowhisper_display = new /obj/screen()
+	autowhisper_display.icon = 'icons/mob/screen/minimalist.dmi'
+	autowhisper_display.icon_state = "autowhisper"
+	autowhisper_display.name = "autowhisper"
+	autowhisper_display.screen_loc = "EAST-1:28,CENTER-2:13"
+	hud_elements |= autowhisper_display
 
-	using = new /obj/screen/mob_living/down()
-	using.screen_loc = ui_moveupdown
-	using.hud = src
-	hud_elements |= using
-	// outpost 21 edit end
+	var/obj/screen/aw = new /obj/screen()
+	aw.icon = 'icons/mob/screen/minimalist.dmi'
+	aw.icon_state = "aw-select"
+	aw.name = "autowhisper mode"
+	aw.screen_loc = "EAST-1:28,CENTER-2:13"
+	hud_elements |= aw
 
-	borer_chem_display = new /obj/screen/borer/chems()
-	borer_chem_display.screen_loc = ui_ling_chemical_display
-	borer_chem_display.icon_state = "borer_chems"
-	hud_elements |= borer_chem_display
+	aw = new /obj/screen()
+	aw.icon = 'icons/mob/screen/minimalist.dmi'
+	aw.icon_state = "lang"
+	aw.name = "check known languages"
+	aw.screen_loc = ui_under_health
+	hud_elements |= aw
+
+	aw = new /obj/screen()
+	aw.icon = 'icons/mob/screen/minimalist.dmi'
+	aw.icon_state = "up"
+	aw.name = "move upwards"
+	aw.screen_loc = ui_under_health
+	hud_elements |= aw
+
+	aw = new /obj/screen()
+	aw.icon = 'icons/mob/screen/minimalist.dmi'
+	aw.icon_state = "down"
+	aw.name = "move downwards"
+	aw.screen_loc = ui_under_health
+	hud_elements |= aw
 
 	pain = new /obj/screen( null )
 

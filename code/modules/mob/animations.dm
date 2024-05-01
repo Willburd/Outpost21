@@ -296,6 +296,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return TRUE //Found an item, doing item attack animation.
 
 /mob/proc/spin(spintime, speed)
+	if(!speed || speed < 1)		// Do NOT spin with infinite speed, it will break the reality
+		return
 	if(istype(buckled,/obj/structure/bed/chair/office))
 		playsound(src, 'sound/effects/roll.ogg', 100, 1) // weeeee
 	spawn()

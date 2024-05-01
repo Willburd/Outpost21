@@ -444,8 +444,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	*/
 	for(var/mob/living/silicon/robot/M in sortmob)
 		moblist.Add(M)
+	var/list/delaylist = list()
 	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
+		if(M.low_sorting_priority && !M.client)
+			delaylist.Add(M)
+		else
+			moblist.Add(M)
+	moblist.Add(delaylist)
 	for(var/mob/living/carbon/brain/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/carbon/alien/M in sortmob)
@@ -628,7 +633,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Returns: all the areas in the world, sorted.
 /proc/return_sorted_areas()
-	return sortTim(return_areas(), /proc/cmp_text_asc)
+	return sortTim(return_areas(), GLOBAL_PROC_REF(cmp_text_asc))
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all turfs in areas of that type of that type in the world.
@@ -828,10 +833,22 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	else
 		O=new original.type(locate(0,0,0))
 
+	var/static/list/blacklisted_var_names = list(
+		"ATOM_TOPIC_EXAMINE",
+		"type",
+		"loc",
+		"locs",
+		"vars",
+		"parent",
+		"parent_type",
+		"verbs",
+		"ckey",
+		"key"
+	)
 	if(perfectcopy)
 		if((O) && (original))
 			for(var/V in original.vars)
-				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
+				if(!(V in blacklisted_var_names))
 					O.vars[V] = original.vars[V]
 	return O
 
@@ -1020,7 +1037,8 @@ var/global/list/common_tools = list(
 /obj/item/weapon/tool/screwdriver,
 /obj/item/weapon/tool/wirecutters,
 /obj/item/device/multitool,
-/obj/item/weapon/tool/crowbar)
+/obj/item/weapon/tool/crowbar,
+/obj/item/weapon/tool/transforming)
 
 /proc/istool(O)
 	if(O && is_type_in_list(O, common_tools))
@@ -1029,7 +1047,7 @@ var/global/list/common_tools = list(
 
 
 /proc/is_wire_tool(obj/item/I)
-	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())
+	if(istype(I, /obj/item/device/multitool) || I.has_tool_quality(TOOL_WIRECUTTER))
 		return TRUE
 	if(istype(I, /obj/item/device/assembly/signaler))
 		return TRUE
@@ -1040,6 +1058,12 @@ var/global/list/common_tools = list(
 		if(/obj/item/weapon/weldingtool)
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.isOn())
+				return 3800
+			else
+				return 0
+		if(/obj/item/weapon/tool/transforming)
+			var/obj/item/weapon/tool/transforming/TT = W
+			if(TT.possible_tooltypes[TT.current_tooltype] == TOOL_WELDER)
 				return 3800
 			else
 				return 0
@@ -1090,7 +1114,7 @@ var/global/list/common_tools = list(
 	if(W.sharp)
 		return TRUE
 	return ( \
-		W.is_screwdriver()		     				              || \
+		W.has_tool_quality(TOOL_SCREWDRIVER)		     				              || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)					  || \
 		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \
@@ -1340,9 +1364,9 @@ var/mob/dview/dview_mob = new
 //datum may be null, but it does need to be a typed var
 #define NAMEOF(datum, X) (#X || ##datum.##X)
 
-#define VARSET_LIST_CALLBACK(target, var_name, var_value) CALLBACK(GLOBAL_PROC, /proc/___callbackvarset, ##target, ##var_name, ##var_value)
+#define VARSET_LIST_CALLBACK(target, var_name, var_value) CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(___callbackvarset), ##target, ##var_name, ##var_value)
 //dupe code because dm can't handle 3 level deep macros
-#define VARSET_CALLBACK(datum, var, var_value) CALLBACK(GLOBAL_PROC, /proc/___callbackvarset, ##datum, NAMEOF(##datum, ##var), ##var_value)
+#define VARSET_CALLBACK(datum, var, var_value) CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(___callbackvarset), ##datum, NAMEOF(##datum, ##var), ##var_value)
 //we'll see about those 3-level deep macros
 #define VARSET_IN(datum, var, var_value, time) addtimer(VARSET_CALLBACK(datum, var, var_value), time)
 

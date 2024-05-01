@@ -6,6 +6,7 @@
 	desc = "Allows you to move faster on average than baseline."
 	cost = 3 //YW EDIT
 	var_changes = list("slowdown" = -0.5)
+	
 /datum/dna/gene/trait_linked/speed_fast/New() // Genetically linked trait
 	block = TRAITBLOCK_SPEEDFAST
 	activation_messages=list("You feel faster.")
@@ -13,7 +14,6 @@
 	primitive_expression_messages=list("dances around.")
 	linked_trait_path = /datum/trait/positive/speed_fast
 	. = ..()
-
 
 //YW ADDITION: START
 /datum/trait/positive/speed_fast_plus
@@ -37,13 +37,14 @@
 	desc = "Allows you to carry heavy equipment with less slowdown."
 	cost = 1
 	var_changes = list("item_slowdown_mod" = 0.5)
+	
 /datum/dna/gene/trait_linked/hardy/New() // Genetically linked trait
 	block = TRAITBLOCK_HARDY
 	activation_messages=list("You feel hardy.")
 	deactivation_messages=list("You feel less hardy.")
 	linked_trait_path = /datum/trait/positive/hardy
+	banned_species = list(SPECIES_ALRAUNE, SPECIES_TESHARI, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_PROTEAN) //Either not applicable or buffs are too strong
 	. = ..()
-
 
 /datum/trait/positive/hardy_plus
 	name = "Hardy, Major"
@@ -51,29 +52,32 @@
 	allowed_species = list(SPECIES_XENOCHIMERA) // outpost 21 edit - most extreme traits are xenochimera locked
 	cost = 2
 	var_changes = list("item_slowdown_mod" = 0.25)
+	
 /datum/dna/gene/trait_linked/hardy_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_HARDYEX
 	activation_messages=list("You feel a lot more hardy.")
 	deactivation_messages=list("You feel less hardy.")
 	linked_trait_path = /datum/trait/positive/hardy_plus
+	banned_species = list(SPECIES_ALRAUNE, SPECIES_TESHARI, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_PROTEAN) //Either not applicable or buffs are too strong
 	. = ..()
-
 
 /datum/trait/positive/endurance_high
 	name = "High Endurance"
 	desc = "Increases your maximum total hitpoints to 125"
 	cost = 2 //YW EDIT
 	var_changes = list("total_health" = 125)
+	
 /datum/dna/gene/trait_linked/endurance_high/New() // Genetically linked trait
 	block = TRAITBLOCK_ENDURANCE
 	activation_messages=list("You feel sturdier.")
 	deactivation_messages=list("You feel less sturdy.")
 	primitive_expression_messages=list("wiggles around.")
 	linked_trait_path = /datum/trait/positive/endurance_high
+	banned_species = list(SPECIES_TESHARI, SPECIES_UNATHI, SPECIES_SHADEKIN_CREW) //Either not applicable or buffs are too strong
 	. = ..()
 
 /datum/trait/positive/endurance_high/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.setMaxHealth(S.total_health)
 
 /datum/trait/positive/endurance_high/unapply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -177,14 +181,15 @@
 	desc = "Allows you to see a short distance in the dark, but causes sensitivity to sudden flashes of light."
 	cost = 1
 	var_changes = list("darksight" = 5, "flash_mod" = 1.1)
+	
 /datum/dna/gene/trait_linked/darksight/New() // Genetically linked trait
 	block = TRAITBLOCK_DARKSIGHT
 	activation_messages=list("The darkness fades away.")
 	deactivation_messages=list("The darkness returns.")
 	primitive_expression_messages=list("squints at the light.")
 	linked_trait_path = /datum/trait/positive/darksight
+	banned_species = list(SPECIES_TAJARAN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN, SPECIES_XENOHYBRID, SPECIES_VULPKANIN, SPECIES_XENO, SPECIES_XENOCHIMERA, SPECIES_VASILISSAN, SPECIES_WEREBEAST) //These species already have strong darksight by default.
 	. = ..()
-
 
 /datum/trait/positive/darksight_plus
 	name = "Darksight, Major"
@@ -192,14 +197,15 @@
 	allowed_species = list(SPECIES_XENOCHIMERA) // outpost 21 edit - most extreme traits are xenochimera locked
 	cost = 2
 	var_changes = list("darksight" = 8, "flash_mod" = 1.2)
+	
 /datum/dna/gene/trait_linked/darksight_plus/New() // Genetically linked trait
 	block = TRAITBLOCK_DARKSIGHTEX
 	activation_messages=list("The darkness vanishes.")
 	deactivation_messages=list("The darkness returns.")
 	primitive_expression_messages=list("looks blinded by the light.")
 	linked_trait_path = /datum/trait/positive/darksight_plus
+	banned_species = list(SPECIES_TAJARAN, SPECIES_SHADEKIN_CREW, SPECIES_SHADEKIN, SPECIES_XENOHYBRID, SPECIES_VULPKANIN, SPECIES_XENO, SPECIES_XENOCHIMERA, SPECIES_VASILISSAN, SPECIES_WEREBEAST) //These species already have strong darksight by default.
 	. = ..()
-
 
 /datum/trait/positive/melee_attack
 	name = "Special Attack: Sharp Melee" // Trait Organization for easier browsing. TODO: Proper categorization of 'health/ability/resist/etc'
@@ -230,13 +236,14 @@
 	desc = "Adds 10% resistance to brute damage sources." //YW EDIT
 	cost = 1 //YW EDIT
 	var_changes = list("brute_mod" = 0.9) //YW EDIT
+	
 /datum/dna/gene/trait_linked/minor_brute_resist/New() // Genetically linked trait
 	block = TRAITBLOCK_BRUTERESIST_MINOR
 	activation_messages=list("You feel a little more durable.")
 	deactivation_messages=list("You feel less durable.")
 	linked_trait_path = /datum/trait/positive/minor_brute_resist
+	banned_species = list(SPECIES_TESHARI, SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_VASILISSAN, SPECIES_WEREBEAST) //Most of these are already this resistant or stronger, or it'd be way too much of a boost for tesh.
 	. = ..()
-
 
 /datum/trait/positive/brute_resist
 	name = "Brute Resist"
@@ -327,7 +334,8 @@
 	name = "Liver of Steel"
 	desc = "Drinks tremble before your might! You can hold your alcohol twice as well as those blue-bellied barnacle boilers! You may wish to note this down in your medical records."
 	cost = 1
-	var_changes = list("alcohol_mod" = 0.5)
+	var_changes = list("chem_strength_alcohol" = 0.5)
+	
 /datum/dna/gene/trait_linked/alcohol_tolerance_advanced/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_TOLEX
 	activation_messages=list("You feel like your can drink anything.")
@@ -335,19 +343,18 @@
 	linked_trait_path = /datum/trait/positive/alcohol_tolerance_advanced
 	. = ..()
 
-
 /datum/trait/positive/alcohol_immunity
 	name = "Liver of Durasteel"
 	desc = "You've drunk so much that most booze doesn't even faze you. It takes something like a Pan-Galactic or a pint of Deathbell for you to even get slightly buzzed. You may wish to note this down in your medical records."
 	cost = 2
-	var_changes = list("alcohol_mod" = 0.25)
+	var_changes = list("chem_strength_alcohol" = 0.25)
+	
 /datum/dna/gene/trait_linked/alcohol_immunity/New() // Genetically linked trait
 	block = TRAITBLOCK_ALCOHOL_IMMUNE
 	activation_messages=list("You feel like there isn't a drink in the universe that you can't take.")
 	deactivation_messages=list("You feel less confident.")
 	linked_trait_path = /datum/trait/positive/alcohol_immunity
 	. = ..()
-
 
 /datum/trait/positive/pain_tolerance_basic
 	name = "Pain Tolerant"
@@ -410,6 +417,8 @@
 	desc = "Allows you to fly by using your wings. Don't forget to bring them!"
 	allowed_species = list(SPECIES_XENOCHIMERA) // outpost 21 edit - most extreme traits are xenochimera locked
 	cost = 1 //YW EDIT
+	has_preferences = list("flight_vore" = list(TRAIT_PREF_TYPE_BOOLEAN, "Flight Vore enabled on spawn", TRAIT_VAREDIT_TARGET_MOB, FALSE))
+	
 /datum/dna/gene/trait_linked/winged_flight/New() // Genetically linked trait
 	block = TRAITBLOCK_WINGFLIGHT
 	activation_messages=list("You feel like you could take flight")
@@ -419,7 +428,7 @@
 	. = ..()
 
 /datum/trait/positive/winged_flight/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.verbs |= /mob/living/proc/flying_toggle
 	H.verbs |= /mob/living/proc/flying_vore_toggle
 	H.verbs |= /mob/living/proc/start_wings_hovering
@@ -579,6 +588,9 @@
 	desc = "You can produce silk and create various articles of clothing and objects."
 	cost = 2
 	var_changes = list("is_weaver" = 1)
+	has_preferences = list("silk_production" = list(TRAIT_PREF_TYPE_BOOLEAN, "Silk production on spawn", TRAIT_VAREDIT_TARGET_SPECIES), \
+							"silk_color" = list(TRAIT_PREF_TYPE_COLOR, "Silk color", TRAIT_VAREDIT_TARGET_SPECIES))
+
 /datum/dna/gene/trait_linked/weaver/New() // Genetically linked trait
 	block = TRAITBLOCK_WEAVER
 	activation_messages=list("You start to leak silk.")
@@ -618,7 +630,7 @@
 	. = ..()
 
 /datum/trait/positive/aquatic/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.verbs |= /mob/living/carbon/human/proc/water_stealth
 	H.verbs |= /mob/living/carbon/human/proc/underwater_devour
 
@@ -639,7 +651,7 @@
 	. = ..()
 
 /datum/trait/positive/cocoon_tf/apply(var/datum/species/S,var/mob/living/carbon/human/H)
-	..(S,H)
+	..()
 	H.verbs |= /mob/living/carbon/human/proc/enter_cocoon
 
 /datum/trait/positive/cocoon_tf/unapply(var/datum/species/S,var/mob/living/carbon/human/H)
@@ -671,6 +683,7 @@
 	var_changes = list("trauma_mod" = 0.85)
 	excludes = list(/datum/trait/negative/neural_hypersensitivity)
 	can_take = ORGANICS
+	
 /datum/dna/gene/trait_linked/pain_tolerance/New() // Genetically linked trait
 	block = TRAITBLOCK_PAINTOLLERANT
 	activation_messages=list("You feel like the world can't hurt you.")
@@ -703,3 +716,61 @@
 	deactivation_messages=list("You feel less slimey.")
 	linked_trait_path = /datum/trait/positive/enzyme_immune
 	. = ..()
+	
+/datum/trait/positive/throw_resistance
+	name = "Firm Body"
+	desc = "Your body is firm enough that small thrown items can't do anything to you."
+	cost = 1
+	var_changes = list("throwforce_absorb_threshold" = 10)
+
+
+/* outpost 21 - we let you climb anyway
+/datum/trait/positive/wall_climber
+	name = "Climber, Amateur"
+	desc = "You can climb certain walls without tools! This is likely a personal skill you developed."
+	tutorial = "You must approach a wall and right click it and select the \
+	'climb wall' verb to climb it. You suffer from a movement delay of 1.5 with this trait.\n \
+	Your total climb time is expected to be 17.5 seconds. Tools may reduce this. \n\n \
+	This likewise allows descending walls, provided you're facing an empty space and standing on \
+	a climbable wall. To climbe like so, use the verb 'Climb Down Wall' in IC tab!"
+	cost = 1
+	custom_only = FALSE
+	banned_species = list(SPECIES_TAJ, SPECIES_VASILISSAN)	// They got unique climbing delay.
+	var_changes = list("can_climb" = TRUE)
+	excludes = list(/datum/trait/positive/wall_climber_pro, /datum/trait/positive/wall_climber_natural)
+
+/datum/trait/positive/wall_climber_natural
+	name = "Climber, Natural"
+	desc = "You can climb certain walls without tools! This is likely due to the unique anatomy of your species. CUSTOM AND XENOCHIM ONLY"
+	tutorial = "You must approach a wall and right click it and select the \
+	'climb wall' verb to climb it. You suffer from a movement delay of 1.5 with this trait.\n \
+	Your total climb time is expected to be 17.5 seconds. Tools may reduce this. \n\n \
+	This likewise allows descending walls, provided you're facing an empty space and standing on \
+	a climbable wall. To climbe like so, use the verb 'Climb Down Wall' in IC tab!"
+	cost = 0
+	custom_only = FALSE
+	var_changes = list("can_climb" = TRUE)
+	allowed_species = list(SPECIES_XENOCHIMERA, SPECIES_CUSTOM)	//So that we avoid needless bloat for xenochim
+	excludes = list(/datum/trait/positive/wall_climber_pro, /datum/trait/positive/wall_climber)
+
+/datum/trait/positive/wall_climber_pro
+	name = "Climber, Professional"
+	desc = "You can climb certain walls without tools! You are a professional rock climber at this, letting you climb almost twice as fast!"
+	tutorial = "You must approach a wall and right click it and select the \
+	'climb wall' verb to climb it. Your movement delay is just 1.25 with this trait.\n \
+	Your climb time is expected to be 9 seconds. Tools may reduce this. \n\n \
+	This likewise allows descending walls, provided you're facing an empty space and standing on \
+	a climbable wall. To climbe like so, use the verb 'Climb Down Wall' in IC tab!"
+	cost = 2
+	custom_only = FALSE
+	var_changes = list("climbing_delay" = 1.25)
+	varchange_type = TRAIT_VARCHANGE_LESS_BETTER
+	excludes = list(/datum/trait/positive/wall_climber,/datum/trait/positive/wall_climber_natural)
+
+// This feels jank, but it's the cleanest way I could do TRAIT_VARCHANGE_LESS_BETTER while having a boolean var change
+// Alternate would've been banned_species = list(SPECIES_TAJ, SPECIES_VASSILISIAN)
+// Opted for this as it's "future proof"
+/datum/trait/positive/wall_climber_pro/apply(var/datum/species/S,var/mob/living/carbon/human/H)
+	..()
+	S.can_climb = TRUE
+*/

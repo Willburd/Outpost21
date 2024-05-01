@@ -1125,7 +1125,7 @@
 
 			// This is not a status display message, since it's something the character
 			// themselves is meant to see BEFORE putting the money in
-			to_chat(usr, "\icon[cashmoney][bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
+			to_chat(usr, "[icon2html(cashmoney,user.client)] <span class='warning'>That is not enough money.</span>")
 			return 0
 
 		if(istype(cashmoney, /obj/item/weapon/spacecash))
@@ -1336,4 +1336,4 @@
 		T.update_icon()
 		O = T
 		to_chat(user, "<span class='notice'>You turn in 2 tickets to the [src] and claim a prize!</span>")
-		return
+		return							

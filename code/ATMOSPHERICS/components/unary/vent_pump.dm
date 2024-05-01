@@ -79,6 +79,13 @@
 	pressure_checks = 2
 	pressure_checks_default = 2
 
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/relief // YW ADDITION relief vent, that connects to the waste line as a subtype to make it easier to map in
+	name = "Relief vent"
+	external_pressure_bound = ONE_ATMOSPHERE+2
+	external_pressure_bound_default = ONE_ATMOSPHERE+2
+	pressure_checks = 1
+	pressure_checks_default = 1
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	. = ..()
 	//soundloop = new(list(src), FALSE)
@@ -393,8 +400,8 @@
 	return
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.has_tool_quality(TOOL_WELDER))
+		var/obj/item/weapon/weldingtool/WT = W.get_welder()
 		if (WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
 			if(do_after(user, 20 * WT.toolspeed))
@@ -432,7 +439,7 @@
 		update_icon()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!W.is_wrench())
+	if (!W.has_tool_quality(TOOL_WRENCH))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")

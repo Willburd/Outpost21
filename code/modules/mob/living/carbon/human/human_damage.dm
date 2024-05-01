@@ -277,21 +277,21 @@
 			if (candidates.len)
 				var/obj/item/organ/external/O = pick(candidates)
 				O.mutate()
-				to_chat(src, "<span class = 'notice'>Something is not right with your [O.name]...</span>")
+				to_chat(src, "<span class='notice'>Something is not right with your [O.name]...</span>")
 				return
 	else
 		if (prob(heal_prob))
 			for (var/obj/item/organ/external/O in organs)
 				if (O.status & ORGAN_MUTATED)
 					O.unmutate()
-					to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
+					to_chat(src, "<span class='notice'>Your [O.name] is shaped normally again.</span>")
 					return
 
 	if (getCloneLoss() < 1)
 		for (var/obj/item/organ/external/O in organs)
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
-				to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
+				to_chat(src, "<span class='notice'>Your [O.name] is shaped normally again.</span>")
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
@@ -600,7 +600,7 @@ This function restores all organs.
 			if(organ.take_damage(0, damage, sharp, edge, used_weapon))
 				UpdateDamageIcon()
 
-	// outpost 21 addition, screaming from most damage types! halucinations are handled earlier! Do not scream if we are knocked out
+	// outpost 21 addition, screaming from most damage types! hallucinations are handled earlier! Do not scream if we are knocked out
 	if(damage > 0 && !incapacitated() && ((damagetype != TOX) && (damagetype != OXY) && (damagetype != CLONE) && (damagetype != HALLOSS)))
 		// Sharp weapons increase probability of scream, low health also leads to screams
 		var/weaponBonusProb = 0

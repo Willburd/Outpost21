@@ -177,7 +177,7 @@ Buildable meters
 		return ..()
 
 /obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(W.is_wrench())
+	if(W.has_tool_quality(TOOL_WRENCH))
 		return wrench_act(user, W)
 	return ..()
 
@@ -266,7 +266,7 @@ Buildable meters
 	var/piping_layer = PIPING_LAYER_DEFAULT
 
 /obj/item/pipe_meter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(W.is_wrench())
+	if(W.has_tool_quality(TOOL_WRENCH))
 		return wrench_act(user, W)
 	return ..()
 

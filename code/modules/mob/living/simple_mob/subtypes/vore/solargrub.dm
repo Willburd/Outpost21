@@ -33,7 +33,7 @@ List of things solar grubs should be able to do:
 	melee_damage_lower = 1
 	melee_damage_upper = 3	//low damage, but poison and stuns are strong
 
-	movement_cooldown = 8
+	movement_cooldown = 3
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/grubmeat
 	meat_amount = 6
@@ -52,6 +52,8 @@ List of things solar grubs should be able to do:
 	var/obj/structure/cable/attached        // the attached cable
 	var/shock_chance = 10 // Beware
 	var/tracked = FALSE
+
+	glow_override = TRUE
 
 /datum/say_list/solargrub
 	emote_see = list("squelches", "squishes")
@@ -138,6 +140,8 @@ List of things solar grubs should be able to do:
 	if(. == 0 && !is_dead())
 		set_light(2.5, 1, COLOR_YELLOW)
 		return 1
+	else if(is_dead())
+		glow_override = FALSE
 
 /mob/living/simple_mob/vore/solargrub/init_vore()
 	..()

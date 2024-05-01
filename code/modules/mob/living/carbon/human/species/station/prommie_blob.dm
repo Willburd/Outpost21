@@ -8,7 +8,7 @@
 	unity = TRUE
 	water_resist = 100 // Lets not kill the prommies
 	cores = 0
-	movement_cooldown = 3
+	movement_cooldown = 0
 	//appearance_flags = RADIATION_GLOWS
 	shock_resist = 0 // Lets not be immune to zaps.
 	friendly = list("nuzzles", "glomps", "snuggles", "cuddles", "squishes") // lets be cute :3
@@ -63,6 +63,12 @@
 
 /mob/living/simple_mob/slime/promethean/Destroy()
 	humanform = null
+	drop_l_hand()
+	drop_r_hand()
+	drop_from_inventory(mob_radio, loc)
+	mob_radio = null
+	drop_from_inventory(myid, loc)
+	myid = null
 	vore_organs = null
 	vore_selected = null
 	set_light(0)
@@ -70,8 +76,9 @@
 
 /mob/living/carbon/human/Destroy()
 	if(stored_blob)
-		stored_blob = null
-		qdel(stored_blob)
+		stored_blob.drop_l_hand()
+		stored_blob.drop_r_hand()
+		QDEL_NULL(stored_blob)
 	return ..()
 
 /mob/living/simple_mob/slime/promethean/Stat()
@@ -386,6 +393,8 @@
 	blob.transforming = TRUE
 	blob.ckey = ckey
 	blob.ooc_notes = ooc_notes
+	blob.ooc_notes_likes = ooc_notes_likes
+	blob.ooc_notes_dislikes = ooc_notes_dislikes
 	blob.transforming = FALSE
 	blob.name = name
 	blob.nutrition = nutrition
@@ -395,7 +404,8 @@
 		blob.rad_glow = CLAMP(radiation,0,250)
 		set_light(0)
 		blob.set_light(max(1,min(5,radiation/15)), max(1,min(10,radiation/25)), blob.color)
-		blob.handle_light()
+	else
+		blob.set_light(0)
 	if(has_hat)
 		blob.hat = new_hat
 		new_hat.forceMove(src)
@@ -458,6 +468,8 @@
 	transforming = TRUE
 	ckey = blob.ckey
 	ooc_notes = blob.ooc_notes // Updating notes incase they change them in blob form.
+	ooc_notes_likes = blob.ooc_notes_likes
+	ooc_notes_dislikes = blob.ooc_notes_dislikes
 	transforming = FALSE
 	blob.name = "Promethean Blob"
 	var/obj/item/hat = blob.hat

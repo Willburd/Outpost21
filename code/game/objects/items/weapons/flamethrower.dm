@@ -114,7 +114,7 @@
 
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
-	if(W.is_wrench() && !status)//Taking this apart
+	if(W.has_tool_quality(TOOL_WRENCH) && !status)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(weldtool)
 			weldtool.loc = T
@@ -129,7 +129,7 @@
 		qdel(src)
 		return
 
-	if(W.is_screwdriver() && igniter && !lit)
+	if(W.has_tool_quality(TOOL_SCREWDRIVER) && igniter && !lit)
 		status = !status
 		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
 		update_icon()
@@ -180,7 +180,7 @@
 	usr.set_machine(src)
 	if(href_list["light"])
 		if(!ptank)	return
-		if(!check_fuel())	return
+		if(ptank.air_contents.gas["phoron"] < 1)	return
 		if(!status)	return
 		lit = !lit
 		if(lit)

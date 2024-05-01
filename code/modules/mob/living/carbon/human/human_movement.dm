@@ -7,9 +7,6 @@
 	if (istype(loc, /turf/space))
 		return ..() - 1
 
-	if(force_max_speed)
-		return ..() + HUMAN_LOWEST_SLOWDOWN
-
 	if(species.slowdown)
 		switch(m_intent)
 			if("run")
@@ -18,6 +15,9 @@
 			if("walk")
 				// attempt to normalize the speeds, while still allowing some minor varience if walking
 				. += species.slowdown * 0.05 // 5% of species slowdown delay, 0 is default human delay!
+
+	if(force_max_speed)
+		return ..() + HUMAN_LOWEST_SLOWDOWN
 
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.haste) && M.haste == TRUE)
@@ -134,13 +134,9 @@
 // It is in a seperate place to avoid an infinite loop situation with dragging mobs dragging each other.
 // Also its nice to have these things seperated.
 /mob/living/carbon/human/proc/calculate_item_encumbrance()
-	if(!buckled && shoes) // Shoes can make you go faster.
-		. += shoes.slowdown
-
-	//VOREStation Addition Start
-	if(buckled && istype(buckled, /obj/machinery/power/rtg/reg))
-		. += shoes.slowdown
-	//VOREStation Addition End
+	if(shoes)	// Shoes can make you go faster.	 
+		if(!buckled || (buckled && istype(buckled, /obj/machinery/power/rtg/reg)))
+			. += shoes.slowdown
 
 	// Loop through some slots, and add up their slowdowns.
 	// Includes slots which can provide armor, the back slot, and suit storage.
@@ -164,7 +160,7 @@
 				turf_move_cost = CLAMP(turf_move_cost + species.water_movement, HUMAN_LOWEST_SLOWDOWN, 15)
 			if(shoes)
 				var/obj/item/clothing/shoes/feet = shoes
-				if(feet.water_speed)
+				if(istype(feet) && feet.water_speed)
 					turf_move_cost = CLAMP(turf_move_cost + feet.water_speed, HUMAN_LOWEST_SLOWDOWN, 15)
 			. += turf_move_cost
 		else if(istype(T, /turf/simulated/floor/outdoors/snow))
@@ -172,7 +168,7 @@
 				turf_move_cost = CLAMP(turf_move_cost + species.snow_movement, HUMAN_LOWEST_SLOWDOWN, 15)
 			if(shoes)
 				var/obj/item/clothing/shoes/feet = shoes
-				if(feet.water_speed)
+				if(istype(feet) && feet.snow_speed)
 					turf_move_cost = CLAMP(turf_move_cost + feet.snow_speed, HUMAN_LOWEST_SLOWDOWN, 15)
 			. += turf_move_cost
 		else
@@ -273,8 +269,8 @@
 	var/list/footstep_sounds = T.footstep_sounds[src.get_species()]
 	if(!LAZYLEN(footstep_sounds))
 		footstep_sounds = T.footstep_sounds["human"] // Probably doesn't have species sounds, use the default // TODO: replace this with a define, unfortunately SPECIES_HUMAN is "Human" instead of "human"
-		if(!footstep_sounds)
-			return
+	if(!footstep_sounds)
+		return
 
 	var/S = pick(footstep_sounds)
 	GLOB.step_taken_shift_roundstat++

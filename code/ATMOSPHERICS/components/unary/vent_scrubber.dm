@@ -309,7 +309,7 @@
 		else
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			return 1
-	if (!W.is_wrench())
+	if (!W.has_tool_quality(TOOL_WRENCH))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")

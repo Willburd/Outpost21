@@ -71,4 +71,4 @@ var/global/datum/repository/crew/crew_repository = new()
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C
-	return tracked
+	return tracked 

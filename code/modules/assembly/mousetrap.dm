@@ -42,7 +42,7 @@
 	else if(ismouse(target))
 		var/mob/living/simple_mob/animal/passive/mouse/M = target
 		if(M.getMaxHealth() < 20) // In case a badmin makes giant mice or something.
-			visible_message("<font color='red'><b>SPLAT!</b></font>")
+			visible_message(span_red("<b>SPLAT!</b>"))
 			M.splat()
 	else if(istype(target,/mob/living/simple_mob/vore/alienanimals/jil))
 		var/mob/living/simple_mob/vore/alienanimals/jil/J = target

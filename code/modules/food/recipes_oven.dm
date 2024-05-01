@@ -344,6 +344,12 @@
 	result = /obj/item/weapon/reagent_containers/food/snacks/cinnamonbun
 	result_quantity = 4
 
+/datum/recipe/jaffacake
+	appliance = OVEN
+	fruit = list("orange" = 1)
+	reagents = list("cakebatter" = 15, "coco" = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/jaffacake
+	result_quantity = 6
 
 //Pizzas
 //=========================

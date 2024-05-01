@@ -45,6 +45,8 @@
 	var/body_hair                      // Icon blend for body hair if any.
 	var/mob/living/applied_pressure
 	var/list/markings = list()         // Markings (body_markings) to apply to the icon
+	var/skip_robo_icon = FALSE 			//to force it to use the normal species icon
+	var/digi_prosthetic = FALSE 		//is it a prosthetic that can be digitigrade
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -85,16 +87,21 @@
 
 	if(parent && parent.children)
 		parent.children -= src
+		parent = null
 
 	if(children)
 		for(var/obj/item/organ/external/C in children)
+			children -= C
+			C.parent = null
 			qdel(C)
 
 	if(internal_organs)
 		for(var/obj/item/organ/O in internal_organs)
+			internal_organs -= O
 			qdel(O)
 
 	if(splinted && splinted.loc == src)
+		splinted.loc = null
 		qdel(splinted)
 	splinted = null
 
@@ -201,6 +208,12 @@
 		O = O.parent
 	return 0
 
+//new function to check for markings
+/obj/item/organ/external/proc/is_hidden_by_markings()
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		if(istype(mark_style,/datum/sprite_accessory/marking) && (organ_tag in mark_style.hide_body_parts))
+			return 1
 
 /obj/item/organ/external/proc/dislocate()
 	if(dislocated == -1)
@@ -461,11 +474,12 @@
 		if("omni")src.heal_damage(repair_amount, repair_amount, 0, 1)
 
 	if(damage_desc)
+		var/fix_verb = (damage_amount > repair_amount) ? "patches" : "finishes patching"
 		if(user == src.owner)
 			var/datum/gender/T = gender_datums[user.get_visible_gender()]
-			user.visible_message("<b>\The [user]</b> patches [damage_desc] on [T.his] [src.name] with [tool].")
+			user.visible_message("<b>\The [user]</b> [fix_verb] [damage_desc] on [T.his] [src.name] with [tool].")
 		else
-			user.visible_message("<b>\The [user]</b> patches [damage_desc] on [owner]'s [src.name] with [tool].")
+			user.visible_message("<b>\The [user]</b> [fix_verb] [damage_desc] on [owner]'s [src.name] with [tool].")
 
 	return 1
 
@@ -748,7 +762,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!(W.can_autoheal() || (bicardose && inaprovaline) || myeldose))	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, unless it is so small that it is already healing
 				W.open_wound(0.1 * wound_update_accuracy)
 
-			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
+			owner.remove_blood( wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [name]!", 50)
 
@@ -1424,6 +1438,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!istype(I,/obj/item/weapon/implant)) // && !istype(I,/obj/item/device/nif)) //VOREStation Add - NIFs outpost 21  edit - nif removal
 				return 1
 
-/obj/item/organ/external/proc/is_hidden_by_tail()
+/obj/item/organ/external/proc/is_hidden_by_sprite_accessory(var/clothing_only = FALSE)			// Clothing only will mean the check should only be used in places where we want to hide clothing icon, not organ itself.
 	if(owner && owner.tail_style && owner.tail_style.hide_body_parts && (organ_tag in owner.tail_style.hide_body_parts))
 		return 1
+	if(clothing_only && markings.len)
+		for(var/M in markings)
+			var/datum/sprite_accessory/marking/mark = markings[M]["datum"]
+			if(mark.hide_body_parts && (organ_tag in mark.hide_body_parts))
+				return 1

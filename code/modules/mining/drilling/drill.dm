@@ -118,6 +118,12 @@
 	qdel_null(cell)
 	return ..()
 
+/obj/machinery/mining/drill/dismantle()
+	if(cell)
+		cell.forceMove(loc)
+		cell = null
+	return ..()
+
 /obj/machinery/mining/drill/get_cell()
 	return cell
 
@@ -468,7 +474,7 @@
 	if(default_part_replacement(user,W))
 		return
 
-	if(W.is_wrench())
+	if(W.has_tool_quality(TOOL_WRENCH))
 
 		if(istype(get_turf(src), /turf/space))
 			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")

@@ -20,6 +20,8 @@
 	var/ooc_notes = null //For holding prefs
 	var/list/langs_stored = list()
 	var/genderident_stored = null
+	var/ooc_notes_likes = null
+	var/ooc_notes_dislikes = null
 
 	// Resleeving database this machine interacts with. Blank for default database
 	// Needs a matching /datum/transcore_db with key defined in code
@@ -36,15 +38,19 @@
 	ooc_notes = null
 	langs_stored = list()
 	genderident_stored = null
+	ooc_notes_likes = null
+	ooc_notes_dislikes = null
 	update_icon()
 
 /obj/item/device/sleevemate/proc/get_mind(mob/living/M)
 	ASSERT(M.mind)
-	ooc_notes = M.ooc_notes
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		langs_stored = H.languages.Copy()
-		genderident_stored = H.identifying_gender
+	genderident_stored = M.identifying_gender
+	ooc_notes = M.ooc_notes
+	ooc_notes_likes = M.ooc_notes_likes
+	ooc_notes_dislikes = M.ooc_notes_dislikes
 	stored_mind = M.mind
 	M.ghostize()
 	M.mind = null
@@ -58,6 +64,9 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.transfer_mental_traits( genderident_stored, null, ooc_notes, langs_stored)
+	M.ooc_notes = ooc_notes
+	M.ooc_notes_likes = ooc_notes_likes
+	M.ooc_notes_dislikes = ooc_notes_dislikes
 	clear_mind()
 
 
@@ -333,3 +342,17 @@
 		icon_state = "[initial(icon_state)]_on"
 	else
 		icon_state = initial(icon_state)
+
+/obj/item/device/sleevemate/emag_act(var/remaining_charges, var/mob/user)
+	to_chat(user,"<span class='danger'>You hack [src]!</span>")
+	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+	spark_system.set_up(5, 0, src.loc)
+	spark_system.start()
+	playsound(src, "sparks", 50, 1)
+	if(istype(src.loc,/mob/living))
+		var/mob/living/L = src.loc
+		L.unEquip(src)
+	src.forceMove(get_turf(src))
+	new /obj/item/device/bodysnatcher(src.loc)
+	qdel(src)
+	return 1

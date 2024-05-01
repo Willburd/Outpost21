@@ -21,6 +21,8 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws/shadekin, /datum/unarmed_attack/bite/sharp/shadekin)
 	rarity_value = 15	//INTERDIMENSIONAL FLUFFERS
 
+	inherent_verbs = list(/mob/proc/adjust_hive_range)
+
 	siemens_coefficient = 1
 	darksight = 10
 
@@ -68,11 +70,15 @@
 
 	virus_immune = 1
 
-	breath_type = null
-	poison_type = null
-	water_breather = TRUE	//They don't quite breathe
+	//YW changes - breathing boyes now
+	breath_type = "oxygen"								// Non-oxygen gas breathed, if any.
+	poison_type = "phoron"								// Poisonous air.
+	exhale_type = "carbon_dioxide"						// Exhaled gas type.
+	water_breather = FALSE
+	bad_swimmer = FALSE
+	//End YW changes
 
-	vision_flags = SEE_SELF|SEE_MOBS
+	vision_flags = SEE_SELF
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_UNDERWEAR
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
@@ -86,7 +92,8 @@
 		O_EYES =		/obj/item/organ/internal/eyes,
 		O_STOMACH =		/obj/item/organ/internal/stomach,
 		O_INTESTINE =	/obj/item/organ/internal/intestine,
-		O_BUTT = 		/obj/item/organ/internal/butt
+		O_BUTT = 		/obj/item/organ/internal/butt,
+		O_LUNGS =	/obj/item/organ/internal/lungs // YW Add - Lungs
 		)
 
 	has_limbs = list(
@@ -111,6 +118,9 @@
 	var/kin_type
 	var/energy_light = 0.25
 	var/energy_dark = 0.75
+
+	var/phase_gentle = TRUE //CHOMPEdit - Add gentle phasing, defaults to on.
+	var/doing_phase = FALSE //CHOMPEdit - Prevent bugs when spamming phase button
 
 /datum/species/shadekin/New()
 	..()
@@ -311,27 +321,27 @@
 
 	switch(eyecolor_type)
 		if(BLUE_EYES)
-			total_health = 100
+			total_health = 75 //ChompEDIT - balance tweaks
 			energy_light = 0.5
 			energy_dark = 0.5
 		if(RED_EYES)
-			total_health = 200
+			total_health = 150 //ChompEDIT - balance tweaks
 			energy_light = -1
 			energy_dark = 0.1
 		if(PURPLE_EYES)
-			total_health = 150
+			total_health = 100 //ChompEDIT - balance tweaks
 			energy_light = -0.5
 			energy_dark = 1
 		if(YELLOW_EYES)
-			total_health = 100
+			total_health = 50 //ChompEDIT - balance tweaks
 			energy_light = -2
 			energy_dark = 3
 		if(GREEN_EYES)
-			total_health = 100
+			total_health = 100 //ChompEDIT - balance tweaks
 			energy_light = 0.125
 			energy_dark = 2
 		if(ORANGE_EYES)
-			total_health = 175
+			total_health = 125 //ChompEDIT - balance tweaks
 			energy_light = -0.5
 			energy_dark = 0.25
 

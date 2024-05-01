@@ -131,6 +131,10 @@
 	combustion = FALSE
 	hud_state = "plasma_blast"
 
+/obj/item/projectile/energy/excavate/weak
+	damage = 15
+	excavation_amount = 100
+
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
@@ -269,7 +273,7 @@
 /obj/item/projectile/energy/blue_pellet
 	name = "suppressive pellet"
 	icon_state = "blue_pellet"
-	fire_sound = 'sound/weapons/Laser.ogg'
+	fire_sound = 'sound/weapons/Laser4.ogg'
 	damage = 5
 	armor_penetration = 75
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE

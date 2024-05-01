@@ -172,6 +172,7 @@
 /area/security/perma
 	name = "\improper Prison"
 	icon_state = "security"
+	flags = PHASE_SHIELDED
 
 /area/security/perma/bathroom
 	name = "\improper Prison Bathroom"
@@ -191,7 +192,7 @@
 /area/security/outpost
 	name = "\improper Security outpost"
 	icon_state = "security"
-	flags = RAD_SHIELDED
+	flags = RAD_SHIELDED | PHASE_SHIELDED
 
 /area/security/labor
 	name = "Labor camp access"

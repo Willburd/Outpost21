@@ -63,7 +63,7 @@ var/list/be_special_flags = list(
 	"Maint Pred"       = BE_MAINTPRED,
 	//"Morph"            = BE_MORPH,
 	//"Corgi"            = BE_CORGI,
-	//"Cursed Sword"     = BE_CURSEDSWORD,
+	//"Cursed Sword"     = BE_CURSEDSWORD
 	//VOREStation Add End
 	// outpost 21 addition begin
 	"Deep Hunger"      	= BE_DEEPHUNGER,

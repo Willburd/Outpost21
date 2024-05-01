@@ -341,12 +341,16 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "aH" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/effect/floor_decal/milspec/color/black/corner,
+/obj/effect/floor_decal/milspec/color/silver/corner{
 	dir = 4
 	},
-/mob/living/simple_mob/vore/alienanimals/teppi/baby,
-/turf/simulated/floor/grass,
-/area/hydroponics)
+/obj/structure/closet/hydrant{
+	dir = 4;
+	pixel_x = 27
+	},
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/fore)
 "aI" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -407,10 +411,18 @@
 /turf/simulated/floor/tiled/eris/dark/orangecorner,
 /area/engineering/engine_eva)
 "aP" = (
-/obj/structure/disposalpipe/segment,
-/mob/living/simple_mob/vore/alienanimals/teppi/baby,
-/turf/simulated/floor/grass,
-/area/hydroponics)
+/obj/effect/floor_decal/milspec/color/black/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/milspec/color/silver/corner{
+	dir = 8
+	},
+/obj/structure/closet/hydrant{
+	dir = 8;
+	pixel_x = -27
+	},
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/fore)
 "aQ" = (
 /obj/structure/grille,
 /turf/simulated/floor/airless,
@@ -614,12 +626,6 @@
 	pixel_x = 32;
 	pixel_y = 6
 	},
-/obj/structure/sign/directions{
-	desc = "A direction sign, pointing out the way to Exploration.";
-	name = "\improper Exploration Department";
-	pixel_x = 32;
-	pixel_y = -6
-	},
 /obj/structure/sign/directions/security{
 	pixel_x = 32;
 	pixel_y = 12
@@ -630,6 +636,10 @@
 	},
 /obj/structure/railing/grey{
 	dir = 4
+	},
+/obj/structure/sign/directions/shuttle_bay{
+	pixel_x = 32;
+	pixel_y = -6
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/stellardelight/deck2/aftport)
@@ -684,12 +694,6 @@
 	pixel_x = -32;
 	pixel_y = 6
 	},
-/obj/structure/sign/directions{
-	desc = "A direction sign, pointing out the way to Exploration.";
-	name = "\improper Exploration Department";
-	pixel_x = -32;
-	pixel_y = -6
-	},
 /obj/structure/sign/directions/security{
 	pixel_x = -32;
 	pixel_y = 12
@@ -700,6 +704,10 @@
 	},
 /obj/structure/railing/grey{
 	dir = 8
+	},
+/obj/structure/sign/directions/shuttle_bay{
+	pixel_x = -32;
+	pixel_y = -6
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/stellardelight/deck2/aftstarboard)
@@ -930,7 +938,7 @@
 	dir = 1;
 	pixel_y = 24
 	},
-/mob/living/simple_mob/otie/red/chubby/cocoa,
+/mob/living/simple_mob/vore/otie/red/chubby/cocoa,
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/crew_quarters/bar)
 "bP" = (
@@ -1477,15 +1485,23 @@
 /area/stellardelight/deck2/fore)
 "cZ" = (
 /obj/item/device/flashlight/lamp/green{
+	pixel_x = 7;
+	pixel_y = 16
+	},
+/obj/item/weapon/folder/blue_captain{
+	pixel_x = -6;
 	pixel_y = 7
 	},
-/obj/item/weapon/folder/blue_captain,
 /obj/structure/table/darkglass,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
 /obj/machinery/requests_console/preset/captain{
 	pixel_x = -30
+	},
+/obj/item/weapon/melee/chainofcommand,
+/obj/item/weapon/folder/blue_captain{
+	pixel_x = -6
 	},
 /turf/simulated/floor/carpet/blucarpet,
 /area/crew_quarters/captain)
@@ -1786,6 +1802,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals5{
 	dir = 1
 	},
+/obj/structure/closet/walllocker_double/emergency_engi/north,
 /turf/simulated/floor/tiled,
 /area/stellardelight/deck2/fore)
 "dH" = (
@@ -1902,9 +1919,6 @@
 	},
 /obj/machinery/camera/network/engineering{
 	dir = 4
-	},
-/obj/structure/sign/scenery/fakefireaxe{
-	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/monitoring)
@@ -2161,16 +2175,11 @@
 /area/bridge)
 "ex" = (
 /obj/structure/closet/hydrant{
-	pixel_x = -32
+	dir = 4;
+	pixel_x = 27
 	},
-/obj/effect/floor_decal/milspec/color/black/corner{
-	dir = 1
-	},
-/obj/effect/floor_decal/milspec/color/silver/corner{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/stellardelight/deck2/fore)
+/turf/simulated/floor/tiled/eris/white/bluecorner,
+/area/stellardelight/deck2/triage)
 "ey" = (
 /obj/machinery/door/firedoor/glass,
 /obj/structure/window/bay/reinforced,
@@ -2622,6 +2631,25 @@
 	},
 /turf/simulated/floor/tiled/eris/white/cargo,
 /area/stellardelight/deck2/triage)
+"fy" = (
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/weapon/tank/emergency/oxygen/engi,
+/obj/item/weapon/tank/emergency/oxygen/engi,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/mask/breath,
+/obj/structure/closet/crate/medical{
+	desc = "A crate full of emergency supplies to help with response and rescue operations. A logo of NanoTrasen with a checkmark is stamped on the crate.";
+	name = "NanoTrasen Emergency Supply Crate"
+	},
+/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/weapon/storage/firstaid/adv,
+/obj/item/weapon/storage/firstaid/regular,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/turf/simulated/floor/tiled/eris/dark/monofloor,
+/area/bridge)
 "fz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -2651,6 +2679,40 @@
 	},
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/crew_quarters/bar)
+"fC" = (
+/obj/effect/floor_decal/steeldecal/steel_decals5{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	dir = 4;
+	pixel_x = 27
+	},
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/starboard)
+"fD" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals5{
+	dir = 8
+	},
+/obj/structure/closet/hydrant{
+	dir = 8;
+	pixel_x = -27
+	},
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/aftport)
+"fE" = (
+/obj/item/weapon/storage/pill_bottle/dice_nerd,
+/obj/item/weapon/storage/pill_bottle/dice,
+/obj/item/weapon/storage/dicecup,
+/obj/item/weapon/deck/cah,
+/obj/item/weapon/deck/cah/black,
+/obj/item/weapon/deck/cards,
+/obj/item/weapon/deck/cards/casino,
+/obj/structure/closet/walllocker_double/misc_civ/north,
+/turf/simulated/floor/tiled/eris/dark/cargo,
+/area/crew_quarters/recreation_area)
 "fF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /obj/structure/cable/white{
@@ -2675,6 +2737,46 @@
 	},
 /turf/simulated/floor,
 /area/engineering/atmos/monitoring)
+"fH" = (
+/obj/item/canvas,
+/obj/item/canvas,
+/obj/item/canvas,
+/obj/item/canvas,
+/obj/item/canvas,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/twentyfour_twentyfour,
+/obj/item/canvas/twentyfour_twentyfour,
+/obj/item/canvas/twentyfour_twentyfour,
+/obj/item/canvas/twentyfour_twentyfour,
+/obj/item/canvas/twentyfour_twentyfour,
+/obj/item/canvas/twentythree_nineteen,
+/obj/item/canvas/twentythree_nineteen,
+/obj/item/canvas/twentythree_nineteen,
+/obj/item/canvas/twentythree_nineteen,
+/obj/item/canvas/twentythree_nineteen,
+/obj/item/canvas/twentythree_twentythree,
+/obj/item/canvas/twentythree_twentythree,
+/obj/item/canvas/twentythree_twentythree,
+/obj/item/canvas/twentythree_twentythree,
+/obj/item/canvas/twentythree_twentythree,
+/obj/structure/table/standard,
+/obj/machinery/recharger,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/paint_palette,
+/obj/item/paint_palette,
+/obj/item/paint_brush,
+/obj/item/paint_brush,
+/obj/effect/landmark/vines,
+/obj/structure/closet/walllocker_double/misc_civ/north,
+/turf/simulated/floor/tiled,
+/area/storage/art)
 "fI" = (
 /obj/effect/floor_decal/milspec/color/white/corner{
 	dir = 8
@@ -2703,6 +2805,24 @@
 /obj/machinery/station_slot_machine,
 /turf/simulated/floor/tiled/eris/dark/cargo,
 /area/crew_quarters/recreation_area)
+"fM" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/photocopier/faxmachine{
+	department = "Bridge"
+	},
+/obj/machinery/light/floortube{
+	dir = 4;
+	pixel_x = 6
+	},
+/obj/item/weapon/paper/dockingcodes/sd,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/structure/closet/walllocker_double/command/east,
+/turf/simulated/floor/tiled/eris/dark/monofloor,
+/area/bridge)
 "fN" = (
 /obj/machinery/door/firedoor/glass,
 /obj/structure/window/bay/reinforced,
@@ -2763,6 +2883,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/stellardelight/deck2/port)
+"fS" = (
+/obj/structure/cable/blue{
+	icon_state = "4-8"
+	},
+/obj/item/weapon/book/manual/command_guide,
+/obj/item/weapon/book/manual/standard_operating_procedure,
+/obj/item/weapon/book/manual/security_space_law,
+/obj/item/weapon/book/manual/sd_guide,
+/obj/structure/closet/walllocker_double/command/north,
+/turf/simulated/floor/wood,
+/area/crew_quarters/captain)
 "fT" = (
 /obj/structure/table/reinforced,
 /obj/fiftyspawner/steel,
@@ -2770,11 +2901,6 @@
 /obj/fiftyspawner/steel,
 /obj/fiftyspawner/steel,
 /obj/fiftyspawner/steel,
-/obj/structure/closet/walllocker_double/north{
-	dir = 4;
-	pixel_x = 32;
-	pixel_y = 0
-	},
 /obj/fiftyspawner/wood,
 /obj/item/stack/material/glass/phoronrglass{
 	amount = 20
@@ -2785,6 +2911,9 @@
 /obj/fiftyspawner/plastic,
 /obj/item/stack/material/plasteel{
 	amount = 30
+	},
+/obj/structure/closet/walllocker_double/engineering/east{
+	name = "material sheets"
 	},
 /turf/simulated/floor/tiled/eris/dark/orangecorner,
 /area/engineering/workshop)
@@ -2845,6 +2974,15 @@
 /obj/machinery/smartfridge/sheets/persistent_lossy,
 /turf/simulated/floor/tiled/eris/steel/cargo,
 /area/quartermaster/storage)
+"gc" = (
+/obj/structure/cable/cyan{
+	icon_state = "1-2"
+	},
+/obj/item/weapon/book/manual/engineering_particle_accelerator,
+/obj/item/weapon/book/manual/tesla_engine,
+/obj/structure/closet/walllocker_double/engineering/west,
+/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/area/engineering/engine_room)
 "gd" = (
 /obj/machinery/door/firedoor/glass,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3024,6 +3162,15 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/stellardelight/deck2/combustionworkshop)
+"gt" = (
+/obj/item/weapon/storage/box/lights/mixed,
+/obj/item/weapon/tape_roll,
+/obj/item/weapon/storage/belt/utility,
+/obj/item/device/multitool,
+/obj/fiftyspawner/steel,
+/obj/structure/closet/walllocker_double/cargo/east,
+/turf/simulated/floor/tiled/eris/steel/cargo,
+/area/quartermaster/storage)
 "gu" = (
 /obj/machinery/firealarm/angled,
 /obj/item/device/defib_kit/loaded,
@@ -3064,6 +3211,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/monitoring)
+"gz" = (
+/obj/effect/floor_decal/steeldecal/steel_decals5{
+	dir = 4
+	},
+/obj/structure/closet/walllocker_double/emergency_engi/east,
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/starboard)
 "gA" = (
 /obj/structure/railing/grey{
 	dir = 4
@@ -3100,6 +3254,13 @@
 	},
 /turf/simulated/floor/tiled/eris/dark/gray_platform,
 /area/bridge)
+"gD" = (
+/obj/structure/table/reinforced,
+/obj/random/powercell,
+/obj/random/tech_supply,
+/obj/item/device/t_scanner,
+/turf/simulated/floor/tiled/eris/dark/orangecorner,
+/area/engineering/workshop)
 "gE" = (
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -3150,6 +3311,15 @@
 	},
 /turf/simulated/floor/tiled/eris/white/bluecorner,
 /area/medical/reception)
+"gI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/item/weapon/circuitboard/tesla_coil,
+/obj/item/weapon/circuitboard/tesla_coil,
+/obj/structure/closet/walllocker_double/engineering/north,
+/turf/simulated/floor/tiled/eris/dark/orangecorner,
+/area/engineering/engine_eva)
 "gJ" = (
 /obj/structure/medical_stand,
 /turf/simulated/floor/tiled/white,
@@ -3450,6 +3620,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/stellardelight/deck2/o2production)
+"hv" = (
+/obj/effect/floor_decal/steeldecal/steel_decals5{
+	dir = 4
+	},
+/obj/structure/closet/walllocker_double/emergency_engi/east,
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/port)
 "hw" = (
 /obj/structure/table/standard,
 /obj/machinery/alarm/angled,
@@ -3477,19 +3654,16 @@
 /turf/simulated/floor/airless,
 /area/stellardelight/deck2/exterior)
 "hA" = (
-/obj/structure/closet/walllocker_double/south{
-	dir = 2;
-	pixel_y = 30
+/obj/structure/closet/walllocker_double/emergency_engi/south,
+/turf/simulated/floor/tiled/eris/white/cargo,
+/area/stellardelight/deck2/triage)
+"hB" = (
+/obj/effect/floor_decal/steeldecal/steel_decals5{
+	dir = 4
 	},
-/obj/item/weapon/storage/pill_bottle/dice_nerd,
-/obj/item/weapon/storage/pill_bottle/dice,
-/obj/item/weapon/storage/dicecup,
-/obj/item/weapon/deck/cah,
-/obj/item/weapon/deck/cah/black,
-/obj/item/weapon/deck/cards,
-/obj/item/weapon/deck/cards/casino,
-/turf/simulated/floor/tiled/eris/dark/cargo,
-/area/crew_quarters/recreation_area)
+/obj/structure/closet/walllocker_double/emergency_engi/east,
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/fore)
 "hC" = (
 /obj/structure/filingcabinet/chestdrawer{
 	name = "Medical Forms"
@@ -3503,6 +3677,13 @@
 /obj/effect/landmark/start/visitor,
 /turf/simulated/floor/carpet/turcarpet,
 /area/crew_quarters/recreation_area)
+"hE" = (
+/obj/effect/floor_decal/milspec/color/green/half{
+	dir = 8
+	},
+/obj/structure/closet/walllocker_double/emergency_engi/west,
+/turf/simulated/floor/tiled,
+/area/stellardelight/deck2/fore)
 "hF" = (
 /obj/machinery/vending/wallmed1{
 	dir = 1;
@@ -3510,6 +3691,29 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
+"hG" = (
+/obj/effect/floor_decal/industrial/outline,
+/obj/effect/floor_decal/steeldecal/steel_decals9,
+/obj/effect/floor_decal/steeldecal/steel_decals9{
+	dir = 4
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals9{
+	dir = 1
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals9{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/disposal/wall/cleaner{
+	dir = 4
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/crew_quarters/locker)
 "hH" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -3582,25 +3786,12 @@
 /turf/simulated/floor,
 /area/maintenance/stellardelight/deck2/portfore)
 "hP" = (
-/obj/effect/floor_decal/industrial/outline,
-/obj/effect/floor_decal/steeldecal/steel_decals9,
-/obj/effect/floor_decal/steeldecal/steel_decals9{
-	dir = 4
-	},
-/obj/effect/floor_decal/steeldecal/steel_decals9{
+/obj/structure/bed/chair/bay/comfy/brown{
 	dir = 1
 	},
-/obj/effect/floor_decal/steeldecal/steel_decals9{
-	dir = 8
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/obj/machinery/disposal/wall/cleaner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/crew_quarters/locker)
+/obj/effect/landmark/start/entrepreneur,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/recreation_area)
 "hQ" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
@@ -3682,6 +3873,15 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/crew_quarters/kitchen)
+"ia" = (
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32;
+	pixel_y = -32
+	},
+/obj/structure/table/bench/steel,
+/obj/effect/landmark/start/entrepreneur,
+/turf/simulated/floor/tiled/eris/dark/cargo,
+/area/crew_quarters/recreation_area)
 "ib" = (
 /obj/machinery/power/grounding_rod,
 /obj/structure/cable/yellow{
@@ -3696,6 +3896,11 @@
 /obj/effect/landmark/start/visitor,
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/crew_quarters/bar)
+"id" = (
+/obj/structure/table/bench/steel,
+/obj/effect/landmark/start/entrepreneur,
+/turf/simulated/floor/tiled/eris/dark/cargo,
+/area/crew_quarters/recreation_area)
 "ie" = (
 /turf/simulated/wall/bay/r_wall/steel,
 /area/maintenance/stellardelight/deck2/portsolars)
@@ -3793,12 +3998,6 @@
 /obj/structure/low_wall/bay/reinforced/white,
 /turf/simulated/floor,
 /area/medical/psych)
-"iq" = (
-/obj/structure/closet/hydrant{
-	pixel_x = 32
-	},
-/turf/simulated/floor/tiled/eris/white/bluecorner,
-/area/stellardelight/deck2/triage)
 "ir" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -3979,17 +4178,6 @@
 	},
 /turf/simulated/floor,
 /area/stellardelight/deck2/starboardescape)
-"iM" = (
-/obj/structure/cable/blue{
-	icon_state = "4-8"
-	},
-/obj/item/weapon/book/manual/command_guide,
-/obj/item/weapon/book/manual/standard_operating_procedure,
-/obj/item/weapon/book/manual/security_space_law,
-/obj/structure/closet/walllocker_double/north,
-/obj/item/weapon/book/manual/sd_guide,
-/turf/simulated/floor/wood,
-/area/crew_quarters/captain)
 "iN" = (
 /obj/machinery/door/firedoor/glass,
 /obj/machinery/door/airlock/angled_bay/standard/glass{
@@ -4135,6 +4323,9 @@
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/weapon/reagent_containers/dropper,
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/injector_maker{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/eris/white/bluecorner,
 /area/medical/chemistry)
 "jg" = (
@@ -4394,9 +4585,6 @@
 /area/stellardelight/deck2/fore)
 "jK" = (
 /obj/structure/table/glass,
-/obj/machinery/camera/network/medbay{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/eris/white/bluecorner,
 /area/stellardelight/deck2/triage)
 "jL" = (
@@ -5107,7 +5295,6 @@
 /obj/structure/closet/secure_closet/captains,
 /obj/item/clothing/glasses/omnihud/all,
 /obj/item/weapon/disk/nuclear,
-/obj/item/weapon/paper/dockingcodes/sd,
 /obj/item/device/retail_scanner/command,
 /turf/simulated/floor/wood,
 /area/crew_quarters/captain)
@@ -5473,17 +5660,15 @@
 	pixel_x = 32;
 	pixel_y = 6
 	},
-/obj/structure/sign/directions{
-	desc = "A direction sign, pointing out the way to Exploration.";
-	dir = 1;
-	name = "\improper Exploration Department";
-	pixel_x = 32;
-	pixel_y = -12
-	},
 /obj/structure/sign/directions/stairs_down{
 	dir = 1;
 	pixel_x = 32;
 	pixel_y = 12
+	},
+/obj/structure/sign/directions/shuttle_bay{
+	dir = 1;
+	pixel_x = 32;
+	pixel_y = -12
 	},
 /turf/simulated/open,
 /area/stellardelight/deck2/fore)
@@ -6615,15 +6800,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos/monitoring)
-"or" = (
-/obj/structure/closet/walllocker_double/east,
-/obj/item/weapon/storage/box/lights/mixed,
-/obj/item/weapon/tape_roll,
-/obj/item/weapon/storage/belt/utility,
-/obj/item/device/multitool,
-/obj/fiftyspawner/steel,
-/turf/simulated/floor/tiled/eris/steel/cargo,
-/area/quartermaster/storage)
 "os" = (
 /obj/machinery/door/firedoor/glass/hidden/steel{
 	dir = 8
@@ -6992,15 +7168,6 @@
 	},
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/quartermaster/storage)
-"pm" = (
-/obj/structure/closet/hydrant{
-	pixel_x = 32
-	},
-/obj/effect/floor_decal/steeldecal/steel_decals5{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/stellardelight/deck2/starboard)
 "pn" = (
 /obj/machinery/alarm/angled{
 	dir = 4
@@ -7855,15 +8022,6 @@
 /obj/effect/landmark/start/cargo,
 /turf/simulated/floor/tiled/eris/steel/cargo,
 /area/quartermaster/storage)
-"rf" = (
-/obj/structure/cable/cyan{
-	icon_state = "1-2"
-	},
-/obj/structure/closet/walllocker_double/west,
-/obj/item/weapon/book/manual/engineering_particle_accelerator,
-/obj/item/weapon/book/manual/tesla_engine,
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
-/area/engineering/engine_room)
 "rg" = (
 /obj/structure/bed/chair/sofa/corp/corner{
 	dir = 8
@@ -8164,8 +8322,6 @@
 /area/crew_quarters/captain)
 "rO" = (
 /obj/structure/closet/secure_closet/hydroponics,
-/obj/item/weapon/shovel/spade,
-/obj/item/weapon/storage/belt/utility,
 /obj/item/stack/material/sandstone{
 	amount = 5
 	},
@@ -9663,17 +9819,6 @@
 	},
 /turf/simulated/floor,
 /area/stellardelight/deck2/combustionworkshop)
-"vm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4
-	},
-/obj/structure/closet/walllocker_double/north{
-	color = "#8da4a6"
-	},
-/obj/item/weapon/circuitboard/tesla_coil,
-/obj/item/weapon/circuitboard/tesla_coil,
-/turf/simulated/floor/tiled/eris/dark/orangecorner,
-/area/engineering/engine_eva)
 "vn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow{
 	dir = 10
@@ -10520,14 +10665,14 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/engineering/atmos/storage)
 "xv" = (
-/obj/item/weapon/melee/chainofcommand,
-/obj/item/weapon/coin/phoron{
-	desc = "The face of the coin shows a portrait of the explorer who discovered the Virgo-Erigone system. The back depicts a Zodiac symbol that represents Virgo.";
-	name = "limited edition phoron coin"
-	},
-/obj/item/weapon/folder/blue_captain,
-/obj/item/weapon/stamp/captain,
 /obj/structure/table/darkglass,
+/obj/machinery/computer/skills{
+	pixel_x = 9
+	},
+/obj/item/weapon/paper_bin{
+	pixel_x = -7;
+	pixel_y = -2
+	},
 /turf/simulated/floor/carpet/blucarpet,
 /area/crew_quarters/captain)
 "xw" = (
@@ -11105,18 +11250,6 @@
 	},
 /turf/simulated/floor/tiled/eris/steel/cargo,
 /area/quartermaster/storage)
-"yD" = (
-/obj/structure/closet/hydrant{
-	pixel_x = -32
-	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/steeldecal/steel_decals5{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/stellardelight/deck2/aftport)
 "yE" = (
 /obj/structure/medical_stand,
 /turf/simulated/floor/tiled/eris/white/bluecorner,
@@ -11720,6 +11853,7 @@
 /obj/structure/cable/blue{
 	icon_state = "1-2"
 	},
+/obj/machinery/papershredder,
 /turf/simulated/floor/wood,
 /area/stellardelight/deck2/briefingroom)
 "Ae" = (
@@ -12031,9 +12165,6 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "AO" = (
-/obj/machinery/computer/skills{
-	pixel_y = 7
-	},
 /obj/structure/table/darkglass,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -12042,6 +12173,16 @@
 	id = "captaindoor";
 	pixel_x = -15;
 	pixel_y = 2
+	},
+/obj/item/weapon/stamp/captain{
+	pixel_x = 10;
+	pixel_y = 6
+	},
+/obj/item/weapon/coin/phoron{
+	desc = "The face of the coin shows a portrait of the explorer who discovered the Virgo-Erigone system. The back depicts a Zodiac symbol that represents Virgo.";
+	name = "limited edition phoron coin";
+	pixel_x = 11;
+	pixel_y = -3
 	},
 /turf/simulated/floor/carpet/blucarpet,
 /area/crew_quarters/captain)
@@ -14018,29 +14159,6 @@
 	},
 /turf/simulated/floor,
 /area/maintenance/stellardelight/deck2/portsolars)
-"Fp" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/structure/table/steel_reinforced,
-/obj/machinery/photocopier/faxmachine{
-	department = "Bridge"
-	},
-/obj/machinery/light/floortube{
-	dir = 4;
-	pixel_x = 6
-	},
-/obj/structure/closet/walllocker_double/north{
-	color = "#8da4a6";
-	dir = 4;
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/obj/item/weapon/paper/dockingcodes/sd,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/eris/dark/monofloor,
-/area/bridge)
 "Fq" = (
 /obj/structure/table/standard,
 /obj/item/device/healthanalyzer,
@@ -14121,7 +14239,7 @@
 	input_tag = "cooling_in";
 	name = "Engine Cooling Control";
 	output_tag = "cooling_out";
-	sensors = list("burn_chamber"="Burn Chamber");
+	sensors = list("burn_chamber" = "Burn Chamber");
 	throwpass = 1
 	},
 /turf/simulated/floor,
@@ -14657,7 +14775,7 @@
 	frequency = 1443;
 	level = 3;
 	name = "Distribution and Waste Monitor";
-	sensors = list("dist_main_meter"="Surface - Distribution Loop","scrub_main_meter"="Surface - Scrubbers Loop","mair_main_meter"="Surface - Mixed Air Tank","dist_aux_meter"="Station - Distribution Loop","scrub_aux_meter"="Station - Scrubbers Loop","mair_aux_meter"="Station - Mixed Air Tank","mair_mining_meter"="Mining Outpost - Mixed Air Tank")
+	sensors = list("dist_main_meter" = "Surface - Distribution Loop", "scrub_main_meter" = "Surface - Scrubbers Loop", "mair_main_meter" = "Surface - Mixed Air Tank", "dist_aux_meter" = "Station - Distribution Loop", "scrub_aux_meter" = "Station - Scrubbers Loop", "mair_aux_meter" = "Station - Mixed Air Tank", "mair_mining_meter" = "Mining Outpost - Mixed Air Tank")
 	},
 /obj/machinery/power/apc/angled{
 	dir = 1
@@ -15232,6 +15350,8 @@
 /obj/structure/sign/poster{
 	dir = 8
 	},
+/obj/item/device/healthanalyzer/guide,
+/obj/item/device/healthanalyzer/guide,
 /turf/simulated/floor/tiled/eris/white/bluecorner,
 /area/stellardelight/deck2/triage)
 "HN" = (
@@ -15642,14 +15762,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/engineering/engine_room)
-"Iy" = (
-/obj/structure/table/reinforced,
-/obj/random/powercell,
-/obj/random/tech_supply,
-/obj/structure/closet/walllocker_double/west,
-/obj/item/device/t_scanner,
-/turf/simulated/floor/tiled/eris/dark/orangecorner,
-/area/engineering/workshop)
 "Iz" = (
 /obj/item/stack/cable_coil/yellow,
 /turf/simulated/floor/airless,
@@ -16518,48 +16630,6 @@
 	},
 /turf/simulated/floor/tiled/eris/dark/orangecorner,
 /area/engineering/engine_eva)
-"KC" = (
-/obj/structure/closet/walllocker_double{
-	pixel_y = 28
-	},
-/obj/item/canvas,
-/obj/item/canvas,
-/obj/item/canvas,
-/obj/item/canvas,
-/obj/item/canvas,
-/obj/item/canvas/nineteen_nineteen,
-/obj/item/canvas/nineteen_nineteen,
-/obj/item/canvas/nineteen_nineteen,
-/obj/item/canvas/nineteen_nineteen,
-/obj/item/canvas/nineteen_nineteen,
-/obj/item/canvas/twentyfour_twentyfour,
-/obj/item/canvas/twentyfour_twentyfour,
-/obj/item/canvas/twentyfour_twentyfour,
-/obj/item/canvas/twentyfour_twentyfour,
-/obj/item/canvas/twentyfour_twentyfour,
-/obj/item/canvas/twentythree_nineteen,
-/obj/item/canvas/twentythree_nineteen,
-/obj/item/canvas/twentythree_nineteen,
-/obj/item/canvas/twentythree_nineteen,
-/obj/item/canvas/twentythree_nineteen,
-/obj/item/canvas/twentythree_twentythree,
-/obj/item/canvas/twentythree_twentythree,
-/obj/item/canvas/twentythree_twentythree,
-/obj/item/canvas/twentythree_twentythree,
-/obj/item/canvas/twentythree_twentythree,
-/obj/structure/table/standard,
-/obj/machinery/recharger,
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/item/paint_palette,
-/obj/item/paint_palette,
-/obj/item/paint_brush,
-/obj/item/paint_brush,
-/obj/effect/landmark/vines,
-/turf/simulated/floor/tiled,
-/area/storage/art)
 "KD" = (
 /obj/structure/cable/green{
 	icon_state = "1-2"
@@ -18441,7 +18511,7 @@
 	name = "box of measuring cups";
 	pixel_x = 2;
 	pixel_y = 3;
-	starts_with = list(/obj/item/weapon/reagent_containers/glass/beaker/measuring_cup=7)
+	starts_with = list(/obj/item/weapon/reagent_containers/glass/beaker/measuring_cup = 7)
 	},
 /turf/simulated/floor/tiled/eris/cafe,
 /area/crew_quarters/kitchen)
@@ -18681,9 +18751,6 @@
 	},
 /obj/structure/flora/pottedplant/smallcactus{
 	pixel_y = 14
-	},
-/obj/structure/fireaxecabinet{
-	pixel_y = 28
 	},
 /turf/simulated/floor/wood,
 /area/stellardelight/deck2/briefingroom)
@@ -19376,14 +19443,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/stellardelight/deck2/exterior)
-"QJ" = (
-/obj/machinery/computer/ship/navigation/telescreen{
-	pixel_x = -32;
-	pixel_y = -32
-	},
-/obj/structure/table/bench/steel,
-/turf/simulated/floor/tiled/eris/dark/cargo,
-/area/crew_quarters/recreation_area)
 "QK" = (
 /obj/machinery/atmospherics/omni/mixer{
 	name = "Air Mixer";
@@ -19397,16 +19456,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/engineering/atmos/storage)
-"QM" = (
-/obj/structure/closet/hydrant{
-	pixel_x = 32
-	},
-/obj/effect/floor_decal/milspec/color/black/corner,
-/obj/effect/floor_decal/milspec/color/silver/corner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/stellardelight/deck2/fore)
 "QN" = (
 /obj/structure/extinguisher_cabinet{
 	dir = 4;
@@ -19625,10 +19674,6 @@
 	},
 /turf/simulated/floor/tiled/eris/steel/brown_platform,
 /area/quartermaster/storage)
-"Ri" = (
-/obj/structure/table/bench/steel,
-/turf/simulated/floor/tiled/eris/dark/cargo,
-/area/crew_quarters/recreation_area)
 "Rj" = (
 /obj/effect/floor_decal/milspec/color/blue/half{
 	dir = 4
@@ -21222,12 +21267,6 @@
 	},
 /turf/simulated/floor/tiled/eris/dark/techfloor_grid,
 /area/storage/tech)
-"UW" = (
-/obj/structure/sign/poster{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/eris/dark/cargo,
-/area/crew_quarters/recreation_area)
 "UX" = (
 /obj/structure/table/gamblingtable,
 /turf/simulated/floor/carpet,
@@ -22130,6 +22169,9 @@
 	},
 /obj/machinery/camera/network/medbay{
 	dir = 8
+	},
+/obj/machinery/injector_maker{
+	pixel_x = 29
 	},
 /turf/simulated/floor/tiled/eris/white/bluecorner,
 /area/stellardelight/deck2/triage)
@@ -31078,7 +31120,7 @@ sA
 iZ
 ii
 WN
-aH
+ok
 LS
 Jp
 KK
@@ -31221,7 +31263,7 @@ wP
 JI
 fa
 aJ
-aP
+rP
 rP
 hf
 Nw
@@ -31249,7 +31291,7 @@ Cj
 tP
 tU
 jd
-Cj
+hv
 Bf
 NG
 cO
@@ -31686,7 +31728,7 @@ HG
 bk
 Mc
 Mc
-yD
+fD
 SQ
 nX
 SQ
@@ -31781,7 +31823,7 @@ zO
 Qe
 Qe
 Qe
-Qe
+hE
 PZ
 GY
 Qe
@@ -32062,7 +32104,7 @@ HR
 of
 cP
 yh
-QM
+aH
 Xe
 qo
 ek
@@ -32349,7 +32391,7 @@ De
 QZ
 Ho
 aE
-QJ
+ia
 WR
 nt
 Rq
@@ -32911,7 +32953,7 @@ VG
 KH
 zz
 nt
-UW
+mt
 Bp
 oS
 oS
@@ -32955,7 +32997,7 @@ wz
 RQ
 Ze
 Eo
-Ze
+hA
 QP
 gu
 Kf
@@ -33058,7 +33100,7 @@ Dl
 UX
 UX
 UX
-vS
+hP
 mt
 mt
 mt
@@ -33626,7 +33668,7 @@ Dl
 UX
 UX
 UX
-vS
+hP
 mt
 mt
 mt
@@ -33641,7 +33683,7 @@ jU
 TP
 Ld
 Uj
-Zj
+fy
 Zj
 rN
 ry
@@ -33763,7 +33805,7 @@ EE
 KH
 zz
 nt
-hA
+fE
 Bp
 io
 io
@@ -33807,7 +33849,7 @@ zD
 ik
 Ze
 og
-Ze
+hA
 QP
 sJ
 nJ
@@ -33825,7 +33867,7 @@ HZ
 Nj
 NN
 ae
-or
+gt
 WE
 Ui
 BO
@@ -33926,7 +33968,7 @@ Dh
 lo
 lB
 GW
-Fp
+fM
 rN
 VE
 oc
@@ -34070,7 +34112,7 @@ gC
 rN
 rN
 rN
-iM
+fS
 uP
 IV
 IV
@@ -34195,7 +34237,7 @@ cC
 iO
 mt
 lO
-Ri
+id
 sH
 nt
 Rq
@@ -34368,7 +34410,7 @@ fh
 MS
 NF
 qQ
-iq
+ex
 zX
 vf
 LV
@@ -34618,7 +34660,7 @@ Tl
 pH
 eX
 Ga
-ex
+aP
 zs
 lS
 eV
@@ -34819,7 +34861,7 @@ Lt
 Xf
 Lc
 kA
-Iy
+gD
 CL
 To
 jm
@@ -34899,7 +34941,7 @@ FA
 Zr
 sj
 FU
-Zr
+hB
 Zr
 vj
 pZ
@@ -35185,7 +35227,7 @@ WZ
 CF
 wt
 hT
-hP
+hG
 fl
 ZA
 zm
@@ -35790,10 +35832,10 @@ Tk
 yu
 IX
 Mk
-Mk
+gz
 LH
 Mk
-pm
+fC
 Mk
 XE
 lv
@@ -35812,12 +35854,12 @@ Nm
 eo
 OF
 Oq
-rf
+gc
 RG
 lN
 is
 OF
-vm
+gI
 KB
 gX
 lK
@@ -35902,7 +35944,7 @@ xK
 aw
 Dd
 mT
-KC
+fH
 Bi
 XD
 jj

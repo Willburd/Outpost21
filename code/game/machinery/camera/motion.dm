@@ -58,4 +58,4 @@
 	// Motion cameras outside of an "ai monitored" area will use this to detect stuff.
 	if (!area_motion)
 		if(isliving(AM))
-			newTarget(AM)
+			newTarget(AM)

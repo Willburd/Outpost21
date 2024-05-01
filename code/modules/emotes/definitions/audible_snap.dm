@@ -13,7 +13,14 @@
 			var/obj/item/organ/external/L = H.get_organ(limb)
 			if(istype(L) && L.is_usable() && !L.splinted)
 				return TRUE
-	return FALSE
+	else if(isanimal(user))		//VOREStation Addition Start
+		var/mob/living/simple_mob/S = user
+		if(S.has_hands)
+			return TRUE
+	else if(ispAI(user))
+		return TRUE
+	else						//VOREStation Addition End
+		return FALSE
 
 // a pretty awful way to do this, but it's not used anywhere else at all, and I'm not making it a 1% chance to burst into flames for no reason on a single snap
 /mob/living

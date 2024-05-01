@@ -61,7 +61,8 @@
 	// replaced by /datum/gear/plushie_teshlifelike
 	blacklisted_types += /obj/item/toy/plushie/teshari
 	blacklisted_types += subtypesof(/obj/item/toy/plushie/teshari)
-	/obj/item/clothing/under/suit_jacket/female/fluff
+	blacklisted_types += /obj/item/toy/plushie/borgplushie/drake //VOREStation addition
+	blacklisted_types += /obj/item/clothing/under/suit_jacket/female/fluff
 	for(var/obj/item/toy/plushie/plushie_type as anything in subtypesof(/obj/item/toy/plushie) - blacklisted_types)
 		plushies[initial(plushie_type.name)] = plushie_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(plushies))

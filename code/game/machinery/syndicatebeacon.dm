@@ -54,12 +54,13 @@
 				updateUsrDialog()
 				spawn(rand(50,200)) selfdestruct()
 				return
-		if(ishuman(M))
-			var/mob/living/carbon/human/N = M
-			to_chat(N, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
-			traitors.add_antagonist(N.mind)
-			traitors.equip(N)
-			message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
+			if(2)
+				if(ishuman(M))
+					var/mob/living/carbon/human/N = M
+					to_chat(N, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
+					traitors.add_antagonist(N.mind)
+					traitors.equip(N)
+					message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
 
 	updateUsrDialog()
 	return
@@ -119,7 +120,7 @@
 		return
 
 /obj/machinery/power/singularity_beacon/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
+	if(W.has_tool_quality(TOOL_SCREWDRIVER))
 		if(active)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return

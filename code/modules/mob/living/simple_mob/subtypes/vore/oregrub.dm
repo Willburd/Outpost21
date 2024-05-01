@@ -40,7 +40,7 @@
 	melee_damage_lower = 1
 	melee_damage_upper = 3	//low damage, they prefer to flee
 
-	movement_cooldown = 8
+	movement_cooldown = 3.5
 
 	meat_type = /obj/item/weapon/ore/coal
 
@@ -64,7 +64,7 @@
 	vore_capacity = 1
 	vore_pounce_chance = 0 //grubs only eat incapacitated targets
 	vore_default_mode = DM_DIGEST
-	
+
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0
@@ -88,6 +88,8 @@
 				"rad"		= 100
 				)
 
+	glow_override = TRUE
+
 /mob/living/simple_mob/vore/oregrub/lava
 	name = "mature lavagrub"
 	desc = "A mature, rocky lavagrub"
@@ -96,7 +98,7 @@
 	icon_living = "lavagrub"
 	icon_dead = "lavagrub-dead"
 
-	movement_cooldown = 5
+	movement_cooldown = 2
 	maxHealth = 75 //lavagrubs are really hardy
 	health = 75
 	ai_holder_type = /datum/ai_holder/simple_mob/oregrub/lava
@@ -110,10 +112,10 @@
 				"bio"		= 100,
 				"rad"		= 100
 				)
-	
+
 	var/lava_min_ore = 6
 	var/lava_max_ore = 10
-	
+
 	poison_per_bite = 5
 	poison_chance = 66
 
@@ -141,6 +143,8 @@
 	if(. == 0 && !is_dead())
 		set_light(2.5, 1, COLOR_ORANGE)
 		return 1
+	else if(is_dead())
+		glow_override = FALSE
 
 /mob/living/simple_mob/vore/oregrub/lava/death()
 	set_light(0)

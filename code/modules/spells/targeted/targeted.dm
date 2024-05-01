@@ -143,3 +143,4 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	target.dizziness += amt_dizziness
 	target.Confuse(amt_confused)
 	target.stuttering += amt_stuttering
+					   

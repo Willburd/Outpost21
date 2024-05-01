@@ -1,4 +1,6 @@
 /mob/living/carbon/human/GetAltName()
+	if(ability_flags & AB_PHASE_SHIFTED)
+		return ""
 	if(name != GetVoice())
 		return " (as [get_id_name("Unknown")])"
 
@@ -137,6 +139,7 @@
 		for(var/datum/multilingual_say_piece/S in message_data[1])
 			S.message = speedboost_initial.Replace(S.message, "")
 			S.message = speedboost_main.Replace(S.message, "")
+		. = 1
 	else
 		. = ..(message_data)
 

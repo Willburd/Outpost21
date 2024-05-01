@@ -62,6 +62,7 @@
 	key = new key_type(src)
 	var/image/I = new(icon = 'icons/obj/vehicles_vr.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs		//VOREStation edit
 	add_overlay(I)
+	update_icon()
 	turn_off()	//so engine verbs are correctly set
 
 /obj/vehicle/train/engine/vehicle_move(var/turf/destination)
@@ -81,7 +82,7 @@
 	return ..()
 
 /obj/vehicle/train/trolley/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(open && W.is_wirecutter())
+	if(open && W.has_tool_quality(TOOL_WIRECUTTER))
 		passenger_allowed = !passenger_allowed
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 	else
@@ -177,19 +178,19 @@
 
 /obj/vehicle/train/trolley/RunOver(var/mob/living/M)
 	..()
-	attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey])</font>")
+	attack_log += text("\[[time_stamp()]\] [span_red("ran over [M.name] ([M.ckey])")]")
 
 /obj/vehicle/train/engine/RunOver(var/mob/living/M)
 	..()
 
 	if(is_train_head() && ishuman(load))
 		var/mob/living/carbon/human/D = load
-		to_chat(D, "<font color='red'><B>You ran over [M]!</B></font>")
-		visible_message("<B><font color='red'>\The [src] ran over [M]!</B></font>")
+		to_chat(D, span_red("<B>You ran over [M]!</B>"))
+		visible_message(span_red("<B>\The [src] ran over [M]!</B>"))
 		add_attack_logs(D,M,"Ran over with [src.name]")
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey]), driven by [D.name] ([D.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] [span_red("ran over [M.name] ([M.ckey]), driven by [D.name] ([D.ckey])")]")
 	else
-		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [M.name] ([M.ckey])</font>")
+		attack_log += text("\[[time_stamp()]\] [span_red("ran over [M.name] ([M.ckey])")]")
 
 
 //-------------------------------------------
@@ -204,7 +205,7 @@
 	if(is_train_head())
 		if(direction == reverse_direction(dir) && tow)
 			return 0
-		if(vehicle_move(get_step(src, direction),direction))
+		if(vehicle_move(get_step(src, direction),direction)) // YW Edit - pr #1294
 			return 1
 		return 0
 	else

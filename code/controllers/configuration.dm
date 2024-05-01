@@ -131,6 +131,7 @@ var/list/gamemode_cache = list()
 	var/static/discordurl
 	var/static/rulesurl
 	var/static/mapurl
+	var/static/patreonurl
 
 	//Alert level description
 	var/static/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -305,6 +306,26 @@ var/list/gamemode_cache = list()
 
 	var/static/suggested_byond_version
 	var/static/suggested_byond_build
+
+	var/static/invoke_youtubedl = null
+
+
+	var/static/asset_transport
+
+	var/static/cache_assets = FALSE
+
+	var/static/save_spritesheets = FALSE
+
+	var/static/asset_simple_preload = FALSE
+
+	var/static/asset_cdn_webroot
+
+	var/static/asset_cdn_url
+
+	//Enables/Disables the appropriate mob type from obtaining the verb on spawn. Still allows admins to manually give it to them.
+	var/static/allow_robot_recolor = FALSE
+	var/static/allow_simple_mob_recolor = FALSE
+
 
 /datum/configuration/New()
 	var/list/L = subtypesof(/datum/game_mode)
@@ -559,6 +580,9 @@ var/list/gamemode_cache = list()
 
 				if ("discordurl")
 					config.discordurl = value
+
+				if ("patreonurl")
+					config.patreonurl = value
 
 				if ("guest_jobban")
 					config.guest_jobban = 1
@@ -987,6 +1011,27 @@ var/list/gamemode_cache = list()
 					config.vgs_server_port = text2num(value)
 				// VOREStation Edit End
 
+				if("invoke_youtubedl")
+					config.invoke_youtubedl = value
+
+				if("asset_transport")
+					config.asset_transport = value
+
+				if("cache_assets")
+					config.cache_assets = TRUE
+
+				if("save_spritesheets")
+					config.save_spritesheets = TRUE
+
+				if("asset_simple_preload")
+					config.asset_simple_preload = TRUE
+
+				if("asset_cdn_webroot")
+					config.asset_cdn_webroot = value
+
+				if("asset_cdn_url")
+					config.asset_cdn_url = value
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -1055,6 +1100,10 @@ var/list/gamemode_cache = list()
 
 				if("loadout_whitelist")
 					config.loadout_whitelist = text2num(value)
+				if("allow_robot_recolor")
+					config.allow_robot_recolor = 1
+				if("allow_simple_mob_recolor")
+					config.allow_simple_mob_recolor = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -12,6 +12,7 @@
  * Lasertag
  */
 
+#define LASER_TAG_HEALTH 3	//how many strikes do we get?
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armor"
 	desc = "Laser tag armor for the Blue team. Minor padding can prevent accidental smacks with a laser tag weapon."
@@ -22,6 +23,7 @@
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/blue)
 	armor = list(melee = 10, bullet = 0, laser = 5 ,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 3.0
+	var/lasertag_health = LASER_TAG_HEALTH		   
 
 /obj/item/clothing/suit/bluetag/sub
 	name = "Brigader Armor"
@@ -38,6 +40,7 @@
 	allowed = list (/obj/item/weapon/gun/energy/lasertag/red)
 	armor = list(melee = 10, bullet = 0, laser = 5 ,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 3.0
+	var/lasertag_health = LASER_TAG_HEALTH   
 
 /obj/item/clothing/suit/redtag/dom
 	name = "Ma'bu'tol Armor"
@@ -791,6 +794,13 @@
 	name = "brown varsity jacket"
 	icon_state = "varsity_brown"
 
+/obj/item/clothing/suit/runner
+	name = "runner jacket"
+	desc = "A yellow sports jacket with white trim and an unfolded collar."
+	icon_state = "runner"
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	item_state_slots = list(slot_r_hand_str = "suit_red", slot_l_hand_str = "suit_red")
+	flags_inv = HIDEHOLSTER
 /*
  * Department Jackets
  */
@@ -1054,3 +1064,45 @@
 	body_parts_covered = FEET|LOWER_TORSO|UPPER_TORSO|LEGS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
 	item_state_slots = list(slot_r_hand_str = "green_labcoat", slot_l_hand_str = "green_labcoat")
+
+//Cropped hoodies
+/obj/item/clothing/suit/storage/croppedhoodie
+	name = "cropped hoodie"
+	desc = "This style of hoodie is sometimes worn by those who cannot fit, or choose not to hide their delectable bellies under the full, soft confines of a hoodie. The hood is cosmetic, and non-functional."
+	icon_state = "croppedhoodie"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/croppedhoodie/croppier
+    name = "high cropped hoodie"
+    desc = "This style of hoodie is worn by those that wish to display ample amounts of midriff, or never threw out their childhood apparel. The hood is cosmetic, and non-functional."
+    icon_state = "croppierhoodie"
+
+/obj/item/clothing/suit/storage/croppedhoodie/croppierer
+    name = "very high cropped hoodie"
+    desc = "This style of hoodie is worn by those that wish to display ample amounts of underboob, and love the breeze. Comes with a free 'functionally_nude' sticker. The hood is cosmetic, and non-functional."
+    icon_state = "highcrophoodie"
+
+/obj/item/clothing/suit/storage/croppedhoodie/croppiest
+    name = "super cropped hoodie"
+    desc = "This style of hoodie is worn by those that have little respect for the concept of a hoodie. Often seen in nightclubs and your daughter's wardrdobe. The hood is cosmetic, and non-functional."
+    icon_state = "supercroppedhoodie"
+
+//Drive jacket
+/obj/item/clothing/suit/storage/drive
+	name = "relatable jacket"
+	desc = "An all white jacket with a shine. It seems easy to identify with the wearer."
+	icon_state = "drivejacket"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/toggle/moto_jacket
+	name = "motorcycle jacket"
+	desc = "A recreation of one of the famous Sol-based biwheeled driver assemblies. Patches on the back denote an AI-generated 'biker logo'. It looks unintelligible."
+	icon_state = "motojacket"
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask) //same as leather jackets
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/punkvest
+    name = "punk vest"
+    desc = "For the spiritual rebels that nevertheless wish to conform to standard goth trends. You're totally showing them your anti-authority spunk."
+    icon_state = "punkvest"
+    body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO

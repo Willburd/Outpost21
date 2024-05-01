@@ -27,6 +27,7 @@ GLOBAL_VAR_INIT(prey_digested_roundstat, 0)		//VOREStation Edit - Obviously
 GLOBAL_VAR_INIT(items_digested_roundstat, 0)	//VOREStation Edit - Obviously
 GLOBAL_VAR_INIT(landmines_stepped_on_roundstat, 0)//Outpost21 edit - oh boy
 GLOBAL_VAR_INIT(gibber_fellin_roundstat, 0)//Outpost21 edit - oh boy
+var/global/list/security_printer_tickets = list()	//VOREStation Edit
 
 
 /hook/roundend/proc/RoundTrivia()//bazinga
@@ -63,6 +64,22 @@ GLOBAL_VAR_INIT(gibber_fellin_roundstat, 0)//Outpost21 edit - oh boy
 	else if(GLOB.gibber_fellin_roundstat > 0)
 		valid_stats_list.Add("[GLOB.gibber_fellin_roundstat] crew members were sacrificed to the gibber god of hydroponics!")
 	// outpost 21 add - end
+	
+	//VOREStation add Start - Ticket time!
+	if(security_printer_tickets.len)
+		valid_stats_list.Add("<span class = 'danger'>[security_printer_tickets.len] unique security tickets were issued today!</span><br>Examples include:")
+		var/good_num = 5
+		var/ourticket
+		while(good_num > 0)
+			ourticket = null
+			if(security_printer_tickets.len)
+				ourticket = pick(security_printer_tickets)
+				security_printer_tickets -= ourticket
+				if(ourticket)
+					valid_stats_list.Add("<b>-</b>\"[ourticket]\"")
+				good_num--
+			else
+				good_num = 0
 
 	//VOREStation Add Start - Vore stats lets gooooo
 	if(GLOB.prey_eaten_roundstat > 0)

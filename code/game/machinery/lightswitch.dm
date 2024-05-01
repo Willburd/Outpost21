@@ -32,14 +32,14 @@
 	// outpost21 change, areas start off if a lightswitch is present
 	area.lightswitch = FALSE
 	on = area.lightswitch
-	updateicon()
+	update_icon()
 
 /obj/machinery/light_switch/Destroy()
 	area = null
 	overlay = null
 	return ..()
 
-/obj/machinery/light_switch/proc/updateicon()
+/obj/machinery/light_switch/proc/update_icon()
 	cut_overlays()
 	if(stat & NOPOWER)
 		icon_state = "light-p"
@@ -63,12 +63,12 @@
 	on = !on
 
 	area.lightswitch = on
-	area.updateicon()
+	area.update_icon()
 	playsound(src, 'sound/machines/button.ogg', 100, 1, 0) // VOREStation Edit
 
 	for(var/obj/machinery/light_switch/L in area)
 		L.on = on
-		L.updateicon()
+		L.update_icon()
 
 	area.power_change()
 	GLOB.lights_switched_on_roundstat++
@@ -81,7 +81,7 @@
 		else
 			stat |= NOPOWER
 
-		updateicon()
+		update_icon()
 
 /obj/machinery/light_switch/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

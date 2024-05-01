@@ -26,6 +26,7 @@
 #define IS_TESHARI 7
 #define IS_SLIME   8
 //#define IS_ZADDAT  9 outpost 21 - race removal
+//#define IS_ZORREN  10 - race removal
 
 #define CE_STABLE "stable" // Inaprovaline
 #define CE_ANTIBIOTIC "antibiotic" // Antibiotics

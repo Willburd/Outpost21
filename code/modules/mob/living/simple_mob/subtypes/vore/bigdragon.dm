@@ -71,7 +71,7 @@ I think I covered everything.
 	response_help = "pats"
 	response_disarm = "shoves"
 	response_harm = "smacks"
-	movement_cooldown = 4 //Fixed from 2, given our slower natural speed any mob at movement cooldown 2 is a nightmare let alone a boss that has a pounce
+	movement_cooldown = 2
 	maxHealth = 800
 	attacktext = list("slashed")
 	see_in_dark = 8
@@ -125,6 +125,8 @@ I think I covered everything.
 	var/small_icon = 'icons/mob/bigdragon_small.dmi'
 	var/small_icon_state = "dragon_small"
 	var/flames
+	var/firebreathtimer
+	var/chargetimer
 
 	tame_items = list(
 	/obj/item/weapon/coin/gold = 100,
@@ -192,6 +194,7 @@ I think I covered everything.
 	player_msg = "You're a variant of the large dragon stripped of its firebreath attack (harm intent). You can still charge (disarm) and tail sweep (grab). Rest to heal slowly. Check your abilities tab for functions."
 	norange = 1
 	noenrage = 1
+	nom_mob = TRUE
 
 // Weakened variant for maintpreds
 /mob/living/simple_mob/vore/bigdragon/friendly/maintpred
@@ -262,6 +265,10 @@ I think I covered everything.
 
 /mob/living/simple_mob/vore/bigdragon/runechat_y_offset(width, height)
 	return (..()*size_multiplier) + 40
+
+/mob/living/simple_mob/vore/bigdragon/death()
+	. = ..()
+	canceltimers()
 
 ///
 ///		Verbs
@@ -571,7 +578,7 @@ I think I covered everything.
 	autotransferwait = 150
 	escapable = 1
 	escapechance = 100
-	escapetime = 30
+	escapetime = 15
 	fancy_vore = 1
 	contamination_color = "grey"
 	contamination_flavor = "Wet"
@@ -741,7 +748,7 @@ I think I covered everything.
 		var/atom/movable/AM = am
 		if(AM == src || AM.anchored)
 			continue
-		addtimer(CALLBACK(src, .proc/yeet, am), 1)
+		addtimer(CALLBACK(src, PROC_REF(yeet), am), 1)
 	playsound(src, "sound/weapons/punchmiss.ogg", 50, 1)
 
 //Split repulse into two parts so I can recycle this later
@@ -774,10 +781,14 @@ I think I covered everything.
 
 	do_windup_animation(A, charge_warmup)
 	//callbacks are more reliable than byond's process scheduler
-	addtimer(CALLBACK(src, .proc/chargeend, A), charge_warmup)
+	chargetimer = addtimer(CALLBACK(src, PROC_REF(chargeend), A), charge_warmup, TIMER_STOPPABLE)
 
 
 /mob/living/simple_mob/vore/bigdragon/proc/chargeend(var/atom/A, var/explicit = 0, var/gentle = 0)
+	//make sure our target still exists and is on a turf
+	if(QDELETED(A) || !isturf(get_turf(A)))
+		set_AI_busy(FALSE)
+		return
 	status_flags |= LEAPING
 	flying  = 1		//So we can thunk into things
 	hovering = 1	// So we don't hurt ourselves running off cliffs
@@ -812,10 +823,14 @@ I think I covered everything.
 		set_AI_busy(TRUE)
 	flames = 1
 	build_icons()
-	addtimer(CALLBACK(src, .proc/firebreathend, A), charge_warmup)
+	firebreathtimer = addtimer(CALLBACK(src, PROC_REF(firebreathend), A), charge_warmup, TIMER_STOPPABLE)
 	playsound(src, "sound/magic/Fireball.ogg", 50, 1)
 
 /mob/living/simple_mob/vore/bigdragon/proc/firebreathend(var/atom/A)
+	//make sure our target still exists and is on a turf
+	if(QDELETED(A) || !isturf(get_turf(A)))
+		set_AI_busy(FALSE)
+		return
 	var/obj/item/projectile/P = new /obj/item/projectile/bullet/dragon(get_turf(src))
 	src.visible_message("<span class='danger'>\The [src] spews fire at \the [A]!</span>")
 	playsound(src, "sound/weapons/Flamer.ogg", 50, 1)
@@ -899,6 +914,9 @@ I think I covered everything.
 	vore_selected = gut2 //Just incase it eats someone right after being tamed
 	ai_holder = new /datum/ai_holder/simple_mob/healbelly/retaliate/dragon(src)
 
+	//Cancel any charges or firebreaths winding up
+	canceltimers()
+
 /datum/ai_holder/simple_mob/healbelly
 	intelligence_level = 3
 	can_breakthrough = 0
@@ -964,6 +982,17 @@ I think I covered everything.
 		if(L.stat)
 			if(L.stat == DEAD && !handle_corpse) // Leave dead things alone
 				return
+		if(isanimal(L))	//Don't attack simplemobs unless they are hostile.
+			var/mob/living/simple_mob/M = L
+			if(M.client)	//Don't attack players for no reason even if they're a traditionally hostile mob
+				return 0
+			if(M.nom_mob)	//Don't attack mobs that are hostile for their vore functions to work
+				return 0
+			if(M.ai_holder)	//Don't attack non-hostile mobs
+				if(M.ai_holder.hostile)
+					return 1
+				else return 0
+			else return 0
 		if(holder.IIsAlly(L))
 			if(confirmPatient(L))
 				holder.a_intent = I_HELP
@@ -1041,6 +1070,17 @@ I think I covered everything.
 	ai_holder = D
 	vore_selected = gut1
 	D.give_target(attacker)
+
+/mob/living/simple_mob/vore/bigdragon/proc/canceltimers()
+	//Cancel any charges or firebreaths winding up
+	if(firebreathtimer)
+		deltimer(firebreathtimer)
+		firebreathtimer = null
+	if(chargetimer)
+		deltimer(chargetimer)
+		chargetimer = null
+	//re-enable the AI
+	set_AI_busy(FALSE)
 
 //Smack people it warns
 /datum/ai_holder/simple_mob/healbelly/retaliate/dragon/proc/dissuade(var/chump)

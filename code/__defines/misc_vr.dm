@@ -14,6 +14,11 @@
 #define VANTAG_KIDNAP  "vantag_kidnap"
 #define VANTAG_KILL    "vantag_kill"
 
+// ColorMate states
+#define COLORMATE_TINT 1
+#define COLORMATE_HSV 2
+#define COLORMATE_MATRIX 3
+
 #define DEPARTMENT_OFFDUTY			"Off-Duty"
 
 #define ANNOUNCER_NAME "Facility PA"
@@ -36,6 +41,9 @@
 #define SHUTTLE_CRASHED 3 // Yup that can happen now
 
 #define BLUE_SHIELDED 2 // Shield from bluespace teleportation (telescience)
+#define TEMPERATURE_SHIELDED 4 // YW Addition: Temperature change shielding
+// YW Addition: 8 used for persistence block somewhere else
+#define PHASE_SHIELDED 16 // YW Addition: Prevents shadekin phasing in/out in this area
 
 //Assistant/Visitor/Whatever
 #define USELESS_JOB "Visitor"

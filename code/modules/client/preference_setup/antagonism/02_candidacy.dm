@@ -19,7 +19,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"zombie" = 1,										// 15
 	"lost drone" = 1,									// 16
 	"maint pred" = 1,									// 17
-	"deep hunger" = 1,									// 18
+	"deep hunger" = 1									// 18
 )
 
 /datum/category_item/player_setup_item/antagonism/candidacy

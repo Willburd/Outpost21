@@ -115,7 +115,7 @@
 
 	var/input = tgui_input_list(usr, "Select a ghost pod:", "Ghost Jump", observe_list_format(active_ghost_pods))
 	if(!input)
-		to_chat(src, "No active ghost pods detected.")
+		to_chat(src, "<span class='filter_notice'>No active ghost pods detected.</span>")
 		return
 
 	var/target = observe_list_format(active_ghost_pods)[input]
@@ -129,7 +129,7 @@
 			forceMove(T)
 			stop_following()
 		else
-			to_chat(src, "This ghost pod is not located in the game world.")
+			to_chat(src, "<span class='filter_notice'>This ghost pod is not located in the game world.</span>")
 
 /mob/observer/dead/verb/findautoresleever()
 	set category = VERBTAB_GHOST

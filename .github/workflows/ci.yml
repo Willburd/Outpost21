@@ -10,9 +10,9 @@ env:
 jobs:
   file_tests:
     name: Run Linters
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # YW EDIT: 20.04 to 22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Ensure +x on CI directory
         run: |
           chmod -R +x ./tools/ci
@@ -21,7 +21,7 @@ jobs:
           bash tools/ci/install_build_deps.sh
       - name: Restore Yarn cache
         if: "${{ contains(github.event.pull_request.labels.*.name, 'Type: TGUI Bundle') }}"
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: tgui/.yarn/cache
           key: ${{ runner.os }}-yarn-${{ secrets.CACHE_PURGE_KEY }}-${{ hashFiles('tgui/yarn.lock') }}
@@ -36,12 +36,12 @@ jobs:
 
   dreamchecker:
     name: DreamChecker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # YW EDIT: 20.04 to 22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Cache SpacemanDMM
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/SpacemanDMM
           key: ${{ runner.os }}-dreamchecker-${{ hashFiles('dependencies.sh')}}
@@ -71,14 +71,14 @@ jobs:
     # YW EDIT: end
     name: Integration Tests
     # needs: ['file_tests', 'dreamchecker']
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04 # YW EDIT: 20.04 to 22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Ensure +x on CI directory
         run: |
           chmod -R +x ./tools/ci
       - name: Setup Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: $HOME/BYOND
           key: ${{ runner.os }}-byond
@@ -124,13 +124,12 @@ jobs:
           #REPLACE: false
           # YW EDIT: end
           RUN: "0"
-  # YW EDIT: start
-  #tests_successful:
-    #name: Integration Tests
-    #needs: ['file_tests', 'dreamchecker', 'unit_tests']
-    #runs-on: ubuntu-latest
-    #steps:
-      #- name: Report Success
-        #run: |
-          #echo "Jobs Successful!"
-  # YW EDIT: end
+
+  tests_successful:
+    name: Integration Tests
+    needs: ['file_tests', 'dreamchecker', 'unit_tests']
+    runs-on: ubuntu-22.04 # YW EDIT: 20.04 to 22.04
+    steps:
+      - name: Report Success
+        run: |
+          echo "Jobs Successful!"

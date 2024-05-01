@@ -83,7 +83,7 @@
 	var/sql = "INSERT INTO erro_ban (`id`,`bantime`,`serverip`,`bantype`,`reason`,`job`,`duration`,`rounds`,`expiration_time`,`ckey`,`computerid`,`ip`,`a_ckey`,`a_computerid`,`a_ip`,`who`,`adminwho`,`edits`,`unbanned`,`unbanned_datetime`,`unbanned_ckey`,`unbanned_computerid`,`unbanned_ip`) VALUES (null, Now(), '[serverip]', '[bantype_str]', '[reason]', '[job]', [(duration)?"[duration]":"0"], [(rounds)?"[rounds]":"0"], Now() + INTERVAL [(duration>0) ? duration : 0] MINUTE, '[ckey]', '[computerid]', '[ip]', '[a_ckey]', '[a_computerid]', '[a_ip]', '[who]', '[adminwho]', '', null, null, null, null, null)"
 	var/DBQuery/query_insert = dbcon.NewQuery(sql)
 	query_insert.Execute()
-	to_chat(usr, "<span class='filter_adminlog'><font color='blue'>Ban saved to database.</font></span>")
+	to_chat(usr, "<span class='filter_adminlog'>[span_blue("Ban saved to database.")]</span>")
 	message_admins("[key_name_admin(usr)] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([duration] minutes)":""] with the reason: \"[reason]\" to the ban database.",1)
 
 
@@ -137,17 +137,17 @@
 		ban_number++;
 
 	if(ban_number == 0)
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Database update failed due to no bans fitting the search criteria. If this is not a legacy ban you should contact the database admin.</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Database update failed due to no bans fitting the search criteria. If this is not a legacy ban you should contact the database admin.")]</span>")
 		return
 
 	if(ban_number > 1)
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Database update failed due to multiple bans fitting the search criteria. Note down the ckey, job and current time and contact the database admin.</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Database update failed due to multiple bans fitting the search criteria. Note down the ckey, job and current time and contact the database admin.")]</span>")
 		return
 
 	if(istext(ban_id))
 		ban_id = text2num(ban_id)
 	if(!isnum(ban_id))
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Database update failed due to a ban ID mismatch. Contact the database admin.</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Database update failed due to a ban ID mismatch. Contact the database admin.")]</span>")
 		return
 
 	DB_ban_unban_by_id(ban_id)
@@ -228,11 +228,11 @@
 		ban_number++;
 
 	if(ban_number == 0)
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Database update failed due to a ban id not being present in the database.</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Database update failed due to a ban id not being present in the database.")]</span>")
 		return
 
 	if(ban_number > 1)
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Database update failed due to multiple bans having the same ID. Contact the database admin.</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Database update failed due to multiple bans having the same ID. Contact the database admin.")]</span>")
 		return
 
 	if(!src.owner || !istype(src.owner, /client))
@@ -268,7 +268,7 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr, "<span class='filter_adminlog'><font color='red'>Failed to establish database connection</font></span>")
+		to_chat(usr, "<span class='filter_adminlog'>[span_red("Failed to establish database connection")]</span>")
 		return
 
 	var/output = "<div align='center'><table width='90%'><tr>"
@@ -279,7 +279,8 @@
 
 	output += "<td width='65%' align='center' bgcolor='#f9f9f9'>"
 
-	output += "<form method='GET' action='?src=\ref[src]'><b>Add custom ban:</b> (ONLY use this if you can't ban through any other method)"
+	output += "<form method='GET' action='?src=\ref[src]'>[HrefTokenFormField()]"
+	output += "<b>Add custom ban:</b> (ONLY use this if you can't ban through any other method)"
 	output += "<input type='hidden' name='src' value='\ref[src]'>"
 	output += "<table width='100%'><tr>"
 	output += "<td width='50%' align='right'><b>Ban type:</b><select name='dbbanaddtype'>"
@@ -314,7 +315,8 @@
 	output += "</tr>"
 	output += "</table>"
 
-	output += "<form method='GET' action='?src=\ref[src]'><table width='60%'><tr><td colspan='2' align='left'><b>Search:</b>"
+	output += "<form method='GET' action='?src=\ref[src]'>[HrefTokenFormField()]"
+	output += "<table width='60%'><tr><td colspan='2' align='left'><b>Search:</b>"
 	output += "<input type='hidden' name='src' value='\ref[src]'></td></tr>"
 	output += "<tr><td width='50%' align='right'><b>Ckey:</b> <input type='text' name='dbsearchckey' value='[playerckey]'></td>"
 	output += "<td width='50%' align='right'><b>Admin ckey:</b> <input type='text' name='dbsearchadmin' value='[adminckey]'></td></tr>"
@@ -435,7 +437,7 @@
 					if("PERMABAN")
 						typedesc = "<font color='red'><b>PERMABAN</b></font>"
 					if("TEMPBAN")
-						typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];[HrefToken()];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
 					if("JOB_PERMABAN")
 						typedesc = "<b>JOBBAN</b><br><font size='2'>([job])</font>"
 					if("JOB_TEMPBAN")
@@ -446,14 +448,14 @@
 				output += "<td align='center'><b>[ckey]</b></td>"
 				output += "<td align='center'>[bantime]</td>"
 				output += "<td align='center'><b>[ackey]</b></td>"
-				output += "<td align='center'>[(unbanned || auto) ? "" : "<b><a href=\"byond://?src=\ref[src];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
+				output += "<td align='center'>[(unbanned || auto) ? "" : "<b><a href=\"byond://?src=\ref[src];[HrefToken()];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
 				output += "</tr>"
 				output += "<tr bgcolor='[dcolor]'>"
 				output += "<td align='center' colspan='2' bgcolor=''><b>IP:</b> [ip]</td>"
 				output += "<td align='center' colspan='3' bgcolor=''><b>CIP:</b> [cid]</td>"
 				output += "</tr>"
 				output += "<tr bgcolor='[lcolor]'>"
-				output += "<td align='center' colspan='5'><b>Reason: [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
+				output += "<td align='center' colspan='5'><b>Reason: [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];[HrefToken()];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
 				output += "</tr>"
 				if(edits)
 					output += "<tr bgcolor='[dcolor]'>"

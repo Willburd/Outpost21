@@ -25,7 +25,8 @@
 	var/languages = list()
 	var/mind_oocnotes = ""
 	var/hiderecord = FALSE
-
+	var/mind_ooclikes = ""
+	var/mind_oocdislikes = ""
 	var/nif_path
 	var/nif_durability
 	var/list/nif_software
@@ -90,6 +91,8 @@
 	var/speciesname
 	var/bodygender
 	var/body_oocnotes
+	var/body_ooclikes
+	var/body_oocdislikes
 	var/list/limb_data = list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO)
 	var/list/organ_data = list(O_HEART, O_EYES, O_LUNGS, O_BRAIN)
 	var/list/genetic_modifiers = list()

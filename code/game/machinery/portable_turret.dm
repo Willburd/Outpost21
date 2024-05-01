@@ -495,7 +495,7 @@
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
 	if(stat & BROKEN)
-		if(I.is_crowbar())
+		if(I.has_tool_quality(TOOL_CROWBAR))
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
 			to_chat(user, "<span class='notice'>You begin prying the metal coverings off.</span>")
@@ -514,7 +514,7 @@
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
 				qdel(src) // qdel
 
-	else if(I.is_wrench())
+	else if(I.has_tool_quality(TOOL_WRENCH))
 		if(enabled || raised)
 			to_chat(user, "<span class='warning'>You cannot unsecure an active turret!</span>")
 			return
@@ -700,15 +700,22 @@
 		seenturfs += T
 
 	for(var/mob/M as anything in living_mob_list)
-		if(M.z != z) //Skip
+		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
 			continue
-		if(get_turf(M) in seenturfs)
-			assess_and_assign(M, targets, secondarytargets)
+		switch(assess_living(M))
+			if(TURRET_PRIORITY_TARGET)
+				targets += M
+			if(TURRET_SECONDARY_TARGET)
+				secondarytargets += M
 
-	/* This was dumb. Why do this and then check line of sight later?
-	for(var/mob/M in mobs_in_xray_view(world.view, src))
-		assess_and_assign(M, targets, secondarytargets)
-	*/
+	for(var/obj/mecha/M as anything in mechas_list)
+		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
+			continue
+		switch(assess_mecha(M))
+			if(TURRET_PRIORITY_TARGET)
+				targets += M
+			if(TURRET_SECONDARY_TARGET)
+				secondarytargets += M
 
 	if(stuncounter > 0) // lasertag stun cooldown
 		stuncounter -= 1 SECOND
@@ -716,23 +723,12 @@
 			// reset
 			spark_system.start()	//creates some sparks because they look cool
 			playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
-	else if(!tryToShootAt(targets))
-		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			timeout--
-			if(timeout <= 0)
-				spawn()
-					popDown() // no valid targets, close the cover
+	else if(!tryToShootAt(targets) && !tryToShootAt(secondarytargets) && --timeout <= 0)
+			popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
 		use_power(20000)
 		health = min(health+1, maxhealth) // 1HP for 20kJ
-
-/obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
-	switch(assess_living(L))
-		if(TURRET_PRIORITY_TARGET)
-			targets += L
-		if(TURRET_SECONDARY_TARGET)
-			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
 	if(!istype(L))
@@ -790,6 +786,14 @@
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
+/obj/machinery/porta_turret/proc/assess_mecha(var/obj/mecha/M)
+	if(!istype(M))
+		return TURRET_NOT_TARGET
+
+	if(!M.occupant)
+		return check_all ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+
+	return assess_living(M.occupant)
 /obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
 	if(!H || !istype(H))
 		return 0
@@ -811,6 +815,7 @@
 
 
 /obj/machinery/porta_turret/proc/popUp()	//pops the turret up
+	set waitfor = FALSE	  
 	if(disabled)
 		return
 	if(raising || raised)
@@ -832,6 +837,7 @@
 	timeout = 10
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
+	set waitfor = FALSE
 	last_target = null
 	if(disabled)
 		return
@@ -860,17 +866,18 @@
 
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)
-		return
+		return FALSE
 	if(target)
-		last_target = target
-		spawn()
+		if(target in check_trajectory(target, src))	//Finally, check if we can actually hit the target
+			last_target = target
+		 
 			popUp()				//pop the turret up if it's not already up.
-		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
-		playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
-		spawn()
-			shootAt(target)
-		return 1
-	return
+			set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
+			playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
+			spawn()
+				shootAt(target)
+			return TRUE
+	return FALSE
 
 /obj/machinery/porta_turret/proc/shootAt(var/mob/living/target)
 	//any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
@@ -901,7 +908,12 @@
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
-	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
+	var/power_mult = 1
+	if(emagged)
+		power_mult = 4 // Lethal beams + higher rate of fire
+	else if(lethal)
+		power_mult = 2 // Lethal beams
+	use_power(reqpower * power_mult)
 
 	//Turrets aim for the center of mass by default.
 	//If the target is grabbing someone then the turret smartly aims for extremities
@@ -969,14 +981,14 @@
 	//this is a bit unwieldy but self-explanatory
 	switch(build_step)
 		if(0)	//first step
-			if(I.is_wrench() && !anchored)
+			if(I.has_tool_quality(TOOL_WRENCH) && !anchored)
 				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You secure the external bolts.</span>")
 				anchored = TRUE
 				build_step = 1
 				return
 
-			else if(I.is_crowbar() && !anchored)
+			else if(I.has_tool_quality(TOOL_CROWBAR) && !anchored)
 				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You dismantle the turret construction.</span>")
 				new /obj/item/stack/material/steel(loc, 5)
@@ -994,7 +1006,7 @@
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(I.is_wrench())
+			else if(I.has_tool_quality(TOOL_WRENCH))
 				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
 				anchored = FALSE
@@ -1002,14 +1014,14 @@
 				return
 
 		if(2)
-			if(I.is_wrench())
+			if(I.has_tool_quality(TOOL_WRENCH))
 				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You bolt the metal armor into place.</span>")
 				build_step = 3
 				return
 
-			else if(istype(I, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = I
+			else if(I.has_tool_quality(TOOL_WELDER))
+				var/obj/item/weapon/weldingtool/WT = I.get_welder()
 				if(!WT.isOn())
 					return
 				if(WT.get_fuel() < 5) //uses up 5 fuel.
@@ -1042,7 +1054,7 @@
 				qdel(I) //delete the gun :(
 				return
 
-			else if(I.is_wrench())
+			else if(I.has_tool_quality(TOOL_WRENCH))
 				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You remove the turret's metal armor bolts.</span>")
 				build_step = 2
@@ -1061,7 +1073,7 @@
 			//attack_hand() removes the gun
 
 		if(5)
-			if(I.is_screwdriver())
+			if(I.has_tool_quality(TOOL_SCREWDRIVER))
 				playsound(src, I.usesound, 100, 1)
 				build_step = 6
 				to_chat(user, "<span class='notice'>You close the internal access hatch.</span>")
@@ -1079,15 +1091,15 @@
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(I.is_screwdriver())
+			else if(I.has_tool_quality(TOOL_SCREWDRIVER))
 				playsound(src, I.usesound, 100, 1)
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")
 				return
 
 		if(7)
-			if(istype(I, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = I
+			if(I.has_tool_quality(TOOL_WELDER))
+				var/obj/item/weapon/weldingtool/WT = I.get_welder()
 				if(!WT.isOn()) return
 				if(WT.get_fuel() < 5)
 					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
@@ -1109,7 +1121,7 @@
 
 					qdel(src) // qdel
 
-			else if(I.is_crowbar())
+			else if(I.has_tool_quality(TOOL_CROWBAR))
 				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You pry off the turret's exterior armor.</span>")
 				new /obj/item/stack/material/steel(loc, 2)

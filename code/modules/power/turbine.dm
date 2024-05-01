@@ -62,7 +62,7 @@
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
 	var/id = 0
-	var/door_status = TRUE
+	var/door_status = FALSE
 
 /obj/item/weapon/circuitboard/machine/power_compressor
 	name = T_BOARD("power compressor")
@@ -190,9 +190,9 @@
 // These are crucial to working of a turbine - the stats modify the power output. TurbGenQ modifies how much raw energy can you get from
 // rpms, TurbGenG modifies the shape of the curve - the lower the value the less straight the curve is.
 
-#define TURBPRES 7000000
-#define TURBGENQ 850000
-#define TURBGENG 0.62
+#define TURBPRES 9000000
+#define TURBGENQ 100000
+#define TURBGENG 0.8
 
 /obj/machinery/power/turbine/Initialize()
 	. = ..()

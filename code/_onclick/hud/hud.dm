@@ -176,6 +176,7 @@ var/list/global_huds = list(
 	var/obj/screen/l_hand_hud_object
 	var/obj/screen/action_intent
 	var/obj/screen/move_intent
+	var/obj/screen/control_vtec
 
 	var/list/adding
 	/// Misc hud elements that are hidden when the hud is minimized
@@ -205,7 +206,7 @@ var/list/global_huds = list(
 
 /datum/hud/Destroy()
 	. = ..()
-	qdel_null(minihuds)
+	QDEL_NULL_LIST(minihuds)
 	grab_intent = null
 	hurt_intent = null
 	disarm_intent = null
@@ -219,12 +220,15 @@ var/list/global_huds = list(
 	l_hand_hud_object = null
 	action_intent = null
 	move_intent = null
+	control_vtec = null
 	adding = null
 	other = null
 	other_important = null
 	hotkeybuttons = null
 //	item_action_list = null // ?
-	QDEL_LIST(ammo_hud_list)
+	for (var/x in ammo_hud_list)
+		remove_ammo_hud(mymob, x)
+	ammo_hud_list = null
 	mymob = null
 
 /datum/hud/proc/hidden_inventory_update()

@@ -24,7 +24,8 @@
 		ManualFollow(A)
 	// Otherwise jump
 	else
-		following = null
+		if(following)
+			stop_following()
 		forceMove(get_turf(A))
 
 /mob/observer/dead/ClickOn(var/atom/A, var/params)

@@ -173,6 +173,7 @@ VS Edit - anyone can select these. */
 	species_cannot_use = GLOB.all_species.Copy()
 	species_cannot_use -= SPECIES_TESHARI //VOREStation add - let 'em be selected.
 	// species_cannot_use -= SPECIES_CUSTOM //VOREStation add - let 'em be selected. outpost 21 - custom race removal
+	species_cannot_use -= SPECIES_PROTEAN //VOREStation add - let 'em be selected.
 	..()
 
 /obj/item/weapon/disk/limb/dsi_teshari

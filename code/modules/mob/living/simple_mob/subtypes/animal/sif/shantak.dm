@@ -42,9 +42,9 @@
 				"bio" = 0,
 				"rad" = 0
 				)
-	heat_resist = -0.50
-	cold_resist = 0.75
-	movement_cooldown = 5
+	heat_resist = -0.50 //yw edit, Makes mobs survive cryogaia temps
+	cold_resist = 0.75 //yw edit, Makes mobs survive cryogaia temps
+	movement_cooldown = -1
 	minbodytemp = 175 //yw edit, Makes mobs survive cryogaia temps
 	melee_damage_lower = 6
 	melee_damage_upper = 14

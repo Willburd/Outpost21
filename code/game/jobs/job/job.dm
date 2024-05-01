@@ -74,7 +74,8 @@
 			if(CLASS_MIDDLE)	income = 1
 			if(CLASS_LOWMID)	income = 0.75
 			if(CLASS_LOWER)		income = 0.50
-
+			if(CLASS_BROKE)		income = 0	//VOREStation Add - Rent's not cheap
+																   
 	//give them an account in the station database
 	var/money_amount = (rand(15,40) + rand(15,40)) * income * economic_modifier * ECO_MODIFIER //VOREStation Edit - Smoothed peaks, ECO_MODIFIER rather than per-species ones.
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null, offmap_spawn)
@@ -186,4 +187,3 @@
 		return TRUE
 	if(brain_type in banned_job_species)
 		return TRUE
-	*/

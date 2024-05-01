@@ -13,7 +13,7 @@ var/list/wrapped_species_by_ref = list()
 
 	var/list/valid_transform_species = list()
 	var/monochromatic
-	var/default_form = SPECIES_HUMAN
+	//var/default_form = SPECIES_HUMAN //VOREStation edit
 
 /datum/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
 	return valid_transform_species
@@ -161,6 +161,7 @@ var/list/wrapped_species_by_ref = list()
 		return
 	shapeshifter_change_shape(new_species)
 
+/* VOREStation edit - moved to species_shapeshift_vr.dm
 /mob/living/carbon/human/proc/shapeshifter_change_shape(var/new_species = null)
 	if(!new_species)
 		return
@@ -170,6 +171,7 @@ var/list/wrapped_species_by_ref = list()
 
 	visible_message("<b>\The [src]</b> shifts and contorts, taking the form of \a [new_species]!")
 	regenerate_icons()
+*/
 
 /mob/living/carbon/human/proc/shapeshifter_import_species_overlay_flags(var/new_species = null)
 	if(!new_species)

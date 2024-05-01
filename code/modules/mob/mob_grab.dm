@@ -182,14 +182,13 @@
 		//VOREStation Edit
 		if(BP_HEAD)
 			if(force_down)
-				if(user.a_intent == I_HELP)
-					if(announce)
-						assailant.visible_message("<span class='warning'>[assailant] sits on [target]'s face!</span>")
-					// outpost 21 edit - also blinds and silences heheheh
-					if(target.silent < 3)
-						target.silent = 3
-					if(affecting.eye_blind < 3)
-						affecting.Blind(3)
+				if(announce)
+					assailant.visible_message("<span class='warning'>[assailant] sits on [target]'s face!</span>")
+				// outpost 21 edit - also blinds and silences heheheh
+				if(target.silent < 3)
+					target.silent = 3
+				if(affecting.eye_blind < 3)
+					affecting.Blind(3)
 		//VOREStation Edit End
 
 /obj/item/weapon/grab/attack_self()

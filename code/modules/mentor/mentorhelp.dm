@@ -53,15 +53,16 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 	if(!l2b)
 		return
 	var/list/dat = list("<html><head><title>[title]</title></head>")
-	dat += "<A HREF='?_src_=mentorholder;mhelp_tickets=[state]'>Refresh</A><br><br>"
+	dat += "<A HREF='?_src_=mentorholder;[HrefToken()];mhelp_tickets=[state]'>Refresh</A><br><br>"
 	for(var/datum/mentor_help/MH as anything in l2b)
-		dat += "<span class='adminnotice'><span class='adminhelp'>Ticket #[MH.id]</span>: <A HREF='?_src_=mentorholder;mhelp=\ref[MH];mhelp_action=ticket'>[MH.initiator_ckey]: [MH.name]</A></span><br>"
+		dat += "<span class='adminnotice'><span class='adminhelp'>Ticket #[MH.id]</span>: <A HREF='?_src_=mentorholder;mhelp=\ref[MH];[HrefToken()];mhelp_action=ticket'>[MH.initiator_ckey]: [MH.name]</A></span><br>"
 
 	usr << browse(dat.Join(), "window=mhelp_list[state];size=600x480")
 
 //Tickets statpanel
 /datum/mentor_help_tickets/proc/stat_entry()
 	var/num_disconnected = 0
+	stat("== Mentor Tickets ==")
 	stat("Active Tickets:", astatclick.update("[active_tickets.len]"))
 	for(var/datum/mentor_help/MH as anything in active_tickets)
 		if(MH.initiator)
@@ -173,24 +174,24 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 /datum/mentor_help/proc/ClosureLinks(ref_src)
 	if(!ref_src)
 		ref_src = "\ref[src]"
-	. = " (<A HREF='?_src_=mentorholder;mhelp=[ref_src];mhelp_action=resolve'>RSLVE</A>)"
+	. = " (<A HREF='?_src_=mentorholder;mhelp=[ref_src];[HrefToken()];mhelp_action=resolve'>RSLVE</A>)"
 
 //private
 /datum/mentor_help/proc/LinkedReplyName(ref_src)
 	if(!ref_src)
 		ref_src = "\ref[src]"
-	return "<A HREF='?_src_=mentorholder;mhelp=[ref_src];mhelp_action=reply'>[initiator_ckey]</A>"
+	return "<A HREF='?_src_=mentorholder;mhelp=[ref_src];[HrefToken()];mhelp_action=reply'>[initiator_ckey]</A>"
 
 //private
 /datum/mentor_help/proc/TicketHref(msg, ref_src, action = "ticket")
 	if(!ref_src)
 		ref_src = "\ref[src]"
-	return "<A HREF='?_src_=mentorholder;mhelp=[ref_src];mhelp_action=[action]'>[msg]</A>"
+	return "<A HREF='?_src_=mentorholder;mhelp=[ref_src];[HrefToken()];mhelp_action=[action]'>[msg]</A>"
 
 //message from the initiator without a target, all people with mentor powers will see this
 /datum/mentor_help/proc/MessageNoRecipient(msg)
 	var/ref_src = "\ref[src]"
-	var/chat_msg = "<span class='notice'>(<A HREF='?_src_=mentorholder;mhelp=[ref_src];mhelp_action=escalate'>ESCALATE</A>) Ticket [TicketHref("#[id]", ref_src)]<b>: [LinkedReplyName(ref_src)]:</b> [msg]</span>"
+	var/chat_msg = "<span class='notice'>(<A HREF='?_src_=mentorholder;mhelp=[ref_src];[HrefToken()];mhelp_action=escalate'>ESCALATE</A>) Ticket [TicketHref("#[id]", ref_src)]<b>: [LinkedReplyName(ref_src)]:</b> [msg]</span>"
 	AddInteraction("<font color='red'>[LinkedReplyName(ref_src)]: [msg]</font>")
 	for (var/client/C in GLOB.mentors)
 		if (C.is_preference_enabled(/datum/client_preference/play_mentorhelp_ping))
@@ -223,7 +224,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 
 	AddInteraction("<font color='purple'>Reopened by [usr.ckey]</font>")
 	if(initiator)
-		to_chat(initiator, "<span class='filter_adminlog'><font color='purple'>Ticket [TicketHref("#[id]")] was reopened by [usr.ckey].</font></span>")
+		to_chat(initiator, "<span class='filter_adminlog'>[span_purple("Ticket [TicketHref("#[id]")] was reopened by [usr.ckey].")]</span>")
 	var/msg = "<span class='adminhelp'>Ticket [TicketHref("#[id]")] reopened by [usr.ckey].</span>"
 	message_mentors(msg)
 	log_admin(msg)
@@ -248,9 +249,9 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 	state = AHELP_RESOLVED
 	GLOB.mhelp_tickets.ListInsert(src)
 
-	AddInteraction("<span class='filter_adminlog'><font color='green'>Resolved by [usr.ckey].</font></span>")
+	AddInteraction("<span class='filter_adminlog'>[span_green("Resolved by [usr.ckey].")]</span>")
 	if(initiator)
-		to_chat(initiator, "<span class='filter_adminlog'><font color='green'>Ticket [TicketHref("#[id]")] was marked resolved by [usr.ckey].</font></span>")
+		to_chat(initiator, "<span class='filter_adminlog'>[span_green("Ticket [TicketHref("#[id]")] was marked resolved by [usr.ckey].")]</span>")
 	if(!silent)
 		feedback_inc("mhelp_resolve")
 		var/msg = "Ticket [TicketHref("#[id]")] resolved by [usr.ckey]"
@@ -259,6 +260,9 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 
 //Show the ticket panel
 /datum/mentor_help/proc/TicketPanel()
+	tgui_interact(usr.client.mob)
+
+/datum/mentor_help/proc/TicketPanelLegacy()
 	var/list/dat = list("<html><head><title>Ticket #[id]</title></head>")
 	var/ref_src = "\ref[src]"
 	dat += "<h4>Mentor Help Ticket #[id]: [LinkedReplyName(ref_src)]</h4>"
@@ -287,6 +291,63 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 
 	usr << browse(dat.Join(), "window=mhelp[id];size=620x480")
 
+/datum/mentor_help/tgui_fallback(payload)
+	if(..())
+		return
+
+	TicketPanelLegacy()
+
+/datum/mentor_help/tgui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "MentorTicketPanel", "Ticket #[id] - [LinkedReplyName("\ref[src]")]")
+		ui.open()
+
+/datum/mentor_help/tgui_state(mob/user)
+	return GLOB.tgui_mentor_state
+
+/datum/mentor_help/tgui_data(mob/user)
+	var/list/data = list()
+
+	data["id"] = id
+
+	var/ref_src = "\ref[src]"
+	data["title"] = name
+	data["name"] = LinkedReplyName(ref_src)
+
+	switch(state)
+		if(AHELP_ACTIVE)
+			data["state"] = "open"
+		if(AHELP_RESOLVED)
+			data["state"] = "resolved"
+		else
+			data["state"] = "unknown"
+
+	data["opened_at"] = (world.time - opened_at)
+	data["closed_at"] = (world.time - closed_at)
+	data["opened_at_date"] = gameTimestamp(wtime = opened_at)
+	data["closed_at_date"] = gameTimestamp(wtime = closed_at)
+
+	data["actions"] = Context(ref_src)
+
+	data["log"] = _interactions
+
+	return data
+
+/datum/mentor_help/tgui_act(action, params)
+	if(..())
+		return
+	switch(action)
+		if("escalate")
+			Escalate()
+			. = TRUE
+		if("reopen")
+			Reopen()
+			. = TRUE
+		if("legacy")
+			TicketPanelLegacy()
+			. = TRUE
+
 //Kick ticket to admins
 /datum/mentor_help/proc/Escalate()
 	if(tgui_alert(usr, "Really escalate this ticket to admins? No mentors will ever be able to interact with it again if you do.","Escalate",list("Yes","No")) != "Yes")
@@ -309,7 +370,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 	if(state == AHELP_ACTIVE)
 		. += ClosureLinks(ref_src)
 	if(state != AHELP_RESOLVED)
-		. += " (<A HREF='?_src_=mentorholder;mhelp=[ref_src];mhelp_action=escalate'>ESCALATE</A>)"
+		. += " (<A HREF='?_src_=mentorholder;[HrefToken()];mhelp=[ref_src];mhelp_action=escalate'>ESCALATE</A>)"
 
 //Forwarded action from admin/Topic OR mentor/Topic depending on which rank the caller has
 /datum/mentor_help/proc/Action(action)
@@ -367,6 +428,25 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/mentor_help_tickets, new)
 
 	if(!msg)
 		return
+
+	// Making sure there's actually a mentor or admin who can respond.
+	var/list/admins = get_admin_counts()
+	var/list/activeAdmins = admins["present"]
+	var/list/mentors = GLOB.mentors
+	if(!mentors.len && !activeAdmins.len)
+		var/choice = tgui_alert(usr, "There are no active admins or mentors online. Would you like to make an ahelp instead, so that staff is notified of your issue? \
+		Alternatively, you may go to the discord yourself and repeat your question in #cadet-academy. Please note, if choosing the later, do not include current-round information.",
+		"Send to discord?", list("Admin-help!", "Still mentorhelp!", "Cancel"))
+		if(choice == "Admin-help!")
+			usr.client.adminhelp(msg)
+			src.verbs -= /client/verb/mentorhelp
+			spawn(1200)
+				src.verbs += /client/verb/mentorhelp // 2 minute cd to prevent abusing this to spam admins.
+			return
+		else if(choice == "Cancel")
+			return
+
+
 
 	//remove out adminhelp verb temporarily to prevent spamming of admins.
 	src.verbs -= /client/verb/mentorhelp

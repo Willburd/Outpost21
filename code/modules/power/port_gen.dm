@@ -32,11 +32,11 @@
 /obj/machinery/power/port_gen/proc/TogglePower()
 	if(active)
 		active = FALSE
-		icon_state = "[initial(icon_state)]"
+		update_icon()
 		// soundloop.stop()
 	else if(HasFuel())
 		active = TRUE
-		icon_state = "[initial(icon_state)]on"
+		update_icon()
 		// soundloop.start()
 
 /obj/machinery/power/port_gen/process()
@@ -45,9 +45,14 @@
 		UseFuel()
 	else
 		active = FALSE
-		icon_state = initial(icon_state)
+		update_icon()
 		handleInactive()
 
+/obj/machinery/power/port_gen/update_icon()
+	if(active)
+		icon_state = "[initial(icon_state)]on"
+	else
+		icon_state = initial(icon_state)
 /obj/machinery/power/powered()
 	return 1 //doesn't require an external power source
 
@@ -273,7 +278,7 @@
 		updateUsrDialog()
 		return
 	else if(!active)
-		if(O.is_wrench())
+		if(O.has_tool_quality(TOOL_WRENCH))
 			if(!anchored)
 				connect_to_network()
 				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")

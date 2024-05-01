@@ -3,31 +3,6 @@
 
 var/global/list/obj/item/device/pda/PDAs = list()
 
-// global, so that preferences can read it!
-var/global/list/pda_ttones = list("beep" 	= 'sound/machines/twobeep.ogg',
-							"boom" 	= 'sound/effects/explosionfar.ogg',
-							"bubble"= 'sound/effects/bubbles.ogg',
-							"slip" 	= 'sound/misc/slip.ogg',
-							"honk" 	= 'sound/items/bikehorn.ogg',
-							"silly" = 'sound/effects/whistle.ogg',
-							"SKREE" = 'sound/voice/shriek1.ogg',
-							//"holy" = 'sound/items/PDA/ambicha4-short.ogg',
-							"frog" 	= 'sound/voice/Croak.ogg',
-							"notice"= 'sound/misc/notice3.ogg',
-							"bork"	= 'sound/voice/bork.ogg',
-							"peep" 	= 'sound/voice/peep.ogg',
-							"quack" = 'sound/voice/quack.ogg',
-							"ough" 	= 'sound/misc/ough.ogg',
-							"xeno" 	= 'sound/voice/hiss1.ogg',
-							"dust" 	= 'sound/effects/supermatter.ogg',
-							"spark" = 'sound/effects/sparks4.ogg',
-							"rad" 	= 'sound/items/geiger/high1.ogg',
-							"stamp" = 'sound/bureaucracy/stamp.ogg',
-							"gnome" = 'sound/items/hooh.ogg',
-							"ratchet"= 'sound/items/Ratchet.ogg',
-							"tether"= 'sound/items/tinytether.ogg',
-							"servo" = 'sound/machines/rig/rigservo.ogg')
-
 /obj/item/device/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
@@ -146,13 +121,24 @@ var/global/list/pda_ttones = list("beep" 	= 'sound/machines/twobeep.ogg',
 	new /obj/item/weapon/pen(src)
 	pdachoice = isnull(H) ? 1 : (ishuman(H) ? H.pdachoice : 1)
 	switch(pdachoice)
-		if(1) icon = 'icons/obj/pda_vr.dmi'			//VOREStation edit
-		if(2) icon = 'icons/obj/pda_slim.dmi'
-		if(3) icon = 'icons/obj/pda_old.dmi'
-		if(4) icon = 'icons/obj/pda_rugged.dmi'
-		if(5) icon = 'icons/obj/pda_holo.dmi'
+		if(1)
+			icon = 'icons/obj/pda_vr.dmi'			//VOREStation edit
+			model_name = "Thinktronic 5230 Personal Data Assistant"
+		if(2)
+			icon = 'icons/obj/pda_slim.dmi'
+			model_name = "Ward-Takahashi SlimFit� Personal Data Assistant"
+		if(3)
+			icon = 'icons/obj/pda_old.dmi'
+			model_name = "Thinktronic 5120 Personal Data Assistant"
+		if(4)
+			icon = 'icons/obj/pda_rugged.dmi'
+			model_name = "Hephaestus WARDEN Personal Data Assistant"
+		if(5)
+			icon = 'icons/obj/pda_holo.dmi'
+			model_name = "LunaCorp Holo-PDAssistant"
 		if(6)
 			icon = 'icons/obj/pda_wrist.dmi'
+			model_name = "Omnitech K100 Personal Data Assistant"
 			item_state = icon_state
 			item_icons = list(
 				slot_belt_str = 'icons/mob/pda_wrist.dmi',
@@ -165,7 +151,14 @@ var/global/list/pda_ttones = list("beep" 	= 'sound/machines/twobeep.ogg',
 				SPECIES_TESHARI = 'icons/mob/species/teshari/pda_wrist.dmi',
 				SPECIES_VR_TESHARI = 'icons/mob/species/teshari/pda_wrist.dmi',
 			)
-		if(7) icon = 'icons/obj/pda_slider.dmi'			//VOREStation edit
+		if(7)
+			icon = 'icons/obj/pda_slider.dmi'			//VOREStation edit
+			model_name = "Slider� Personal Data Assistant"
+		if(8)
+			icon = 'icons/obj/pda_vintage.dmi'
+			model_name = "\[ERR:INVALID_MANUFACTURER_ID\] Personal Data Assistant"
+			desc = "A vintage communication device. This device has been refitted for compatibility with modern messaging systems, ROM cartridges and ID cards. Despite its heavy modifications it does not feature voice communication."
+
 		else
 			icon = 'icons/obj/pda_old.dmi'
 			log_debug("Invalid switch for PDA, defaulting to old PDA icons. [pdachoice] chosen.")

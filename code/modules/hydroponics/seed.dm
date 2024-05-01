@@ -140,7 +140,7 @@
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.name] greedily!</span>")
-			target.apply_damage(damage, BRUTE, target_limb, blocked, soaked, "Thorns", sharp = TRUE, edge=has_edge)
+			target.apply_damage(damage, BRUTE, target_limb, blocked, soaked, TRUE, has_edge, "Thorns")
 		else
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>")
 			target.adjustBruteLoss(damage)
@@ -149,7 +149,7 @@
 		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
 		if(affecting)
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.name]!</span>")
-			target.apply_damage(damage, BRUTE, target_limb, blocked, "Thorns", sharp = TRUE, edge=has_edge)
+			target.apply_damage(damage, BRUTE, target_limb, blocked, soaked, TRUE, has_edge, "Thorns")
 		else
 			to_chat(target, "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>")
 			target.adjustBruteLoss(damage)
@@ -414,7 +414,7 @@
 
 	roundstart = 0
 	mysterious = 1
-	seed_noun = pick("spores","nodes","cuttings","seeds")
+	seed_noun = pick("spores","nodes","cuttings","seeds","pits")
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(SSplants.accessible_product_sprites))
@@ -795,7 +795,7 @@
 			to_chat(user, "<span class='danger'>You fail to harvest anything useful.</span>")
 	else
 		if(istype(user))
-			to_chat(user, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
+			to_chat(user, "<span class='filter_notice'>You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].</span>")
 
 		//This may be a new line. Update the global if it is.
 		if(name == "new line" || !(name in SSplants.seeds))

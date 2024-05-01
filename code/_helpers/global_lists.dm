@@ -12,7 +12,7 @@ var/global/list/dead_mob_list = list()				//List of all dead mobs, including cli
 var/global/list/observer_mob_list = list()			//List of all /mob/observer/dead, including clientless.
 var/global/list/listening_objects = list()			//List of all objects which care about receiving messages (communicators, radios, etc)
 var/global/list/cleanbot_reserved_turfs = list()	//List of all turfs currently targeted by some cleanbot
-
+var/global/list/event_triggers = list()				//Associative list of creator_ckey:list(landmark references) for event triggers
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
@@ -54,7 +54,7 @@ var/datum/category_collection/underwear/global_underwear = new()
 
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag", "Sports Bag", "Strapless Satchel") //VOREStation edit
-var/global/list/pdachoicelist = list("Default", "Slim", "Old", "Rugged", "Holographic", "Wrist-Bound", "Slider")
+var/global/list/pdachoicelist = list("Default", "Slim", "Old", "Rugged", "Holographic", "Wrist-Bound","Slider", "Vintage")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets
@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 		GLOB.all_species[S.name] = S
 
 	//Shakey shakey shake
-	sortTim(GLOB.all_species, /proc/cmp_species, associative = TRUE)
+	sortTim(GLOB.all_species, GLOBAL_PROC_REF(cmp_species), associative = TRUE)
 
 	//Split up the rest
 	for(var/speciesname in GLOB.all_species)
@@ -274,6 +274,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 	init_crafting_recipes(GLOB.crafting_recipes)
 	*/
 
+/*
 	// Custom species traits
 	paths = subtypesof(/datum/trait)
 	for(var/path in paths)
@@ -290,6 +291,7 @@ GLOBAL_LIST_EMPTY(mannequins)
 				neutral_traits[path] = instance
 			if(0.1 to INFINITY)
 				positive_traits[path] = instance
+*/
 
 	// Custom species icon bases
 	var/list/blacklisted_icons = list(/*SPECIES_CUSTOM,*/SPECIES_PROMETHEAN)

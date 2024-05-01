@@ -45,31 +45,21 @@ GLOBAL_LIST_INIT(bibleitemstates, list(
 		return FALSE
 
 	if (!user.mind.my_religion.configured)
-		if(!in_range(src, user))
-			return
+		var/list/skins = list()
+		for(var/i in 1 to GLOB.biblestates.len)
+			var/image/bible_image = image(icon = 'icons/obj/storage.dmi', icon_state = GLOB.biblestates[i])
+			skins += list("[GLOB.biblenames[i]]" = bible_image)
 
-		if(check_menu(user))
-			var/list/skins = list()
-			for(var/i in 1 to GLOB.biblestates.len)
-				var/image/bible_image = image(icon = 'icons/obj/storage.dmi', icon_state = GLOB.biblestates[i])
-				skins += list("[GLOB.biblenames[i]]" = bible_image)
+		var/choice = show_radial_menu(user, src, skins, custom_check = CALLBACK(src, PROC_REF(check_menu), user), radius = 40, require_near = TRUE)
+		if(!choice)
+			return FALSE
+		var/bible_index = GLOB.biblenames.Find(choice)
+		if(!bible_index)
+			return FALSE
 
-			//var/choice = show_radial_menu(user, src, skins, custom_check = CALLBACK(src, .proc/check_menu, user), radius = 40, require_near = TRUE)
-			var/choice = tgui_input_list(user, "Choose your religion's holy book. You can only do this once!", "Holy Book", skins) // outpost 21 edit - removing radial menu
-			if(!in_range(src, user))
-				return
-			if(!choice)
-				return FALSE
-			if(!skins[choice])
-				return
-			var/bible_index = GLOB.biblenames.Find(choice)
-			if(!bible_index)
-				return FALSE
-
-			user.mind.my_religion.bible_icon_state = GLOB.biblestates[bible_index]
-			user.mind.my_religion.bible_item_state = GLOB.bibleitemstates[bible_index]
-			user.mind.my_religion.configured = TRUE
-
+		user.mind.my_religion.bible_icon_state = GLOB.biblestates[bible_index]
+		user.mind.my_religion.bible_item_state = GLOB.bibleitemstates[bible_index]
+		user.mind.my_religion.configured = TRUE
 	deity_name = user.mind.my_religion.deity
 	name = user.mind.my_religion.bible_name
 	icon_state = user.mind.my_religion.bible_icon_state

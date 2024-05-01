@@ -60,7 +60,7 @@
 		src.has_power = 1
 	else
 		if (src.has_power)
-			to_chat(src, "<font color='red'>You are now running on emergency backup power.</font>")
+			to_chat(src, span_red("You are now running on emergency backup power."))
 			// disable all items so that they don't vanish from your inventory
 			var/current_selection_index = get_selected_module() // Will be 0 if nothing is selected.
 			var/i = 0
@@ -96,7 +96,7 @@
 		death()
 
 	if (src.stat != 2) //Alive.
-		if (src.paralysis || src.stunned || src.weakened || !src.has_power) //Stunned etc.
+		if (src.paralysis || src.stunned || !src.has_power) //Stunned etc.
 			src.set_stat(UNCONSCIOUS)
 			if (src.stunned > 0)
 				AdjustStunned(-1)
@@ -199,6 +199,10 @@
 		src.see_in_dark = 8
 		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
 		fullbright = TRUE
+	else if (src.sight_mode & BORGANOMALOUS)
+		src.see_in_dark = 8
+		src.see_invisible = INVISIBILITY_SHADEKIN
+		fullbright = TRUE
 	else if (!seedarkness)
 		src.sight &= ~SEE_MOBS
 		src.sight &= ~SEE_TURFS
@@ -238,21 +242,21 @@
 					else
 						src.healths.icon_state = "health6"
 			else
-				switch(health)
-					if(200 to INFINITY)
-						src.healths.icon_state = "health0"
-					if(150 to 200)
-						src.healths.icon_state = "health1"
-					if(100 to 150)
-						src.healths.icon_state = "health2"
-					if(50 to 100)
-						src.healths.icon_state = "health3"
-					if(0 to 50)
-						src.healths.icon_state = "health4"
-					if(config.health_threshold_dead to 0)
-						src.healths.icon_state = "health5"
-					else
-						src.healths.icon_state = "health6"
+				if(health >= 200)
+						
+					src.healths.icon_state = "health0"
+				else if(health >= 150)
+					src.healths.icon_state = "health1"
+				else if(health >= 100)
+					src.healths.icon_state = "health2"
+				else if(health >= 50)
+					src.healths.icon_state = "health3"
+				else if(health >= 0)
+					src.healths.icon_state = "health4"
+				else if(health >= config.health_threshold_dead)
+					src.healths.icon_state = "health5"
+				else
+					src.healths.icon_state = "health6"
 		else
 			src.healths.icon_state = "health7"
 
@@ -343,7 +347,7 @@
 		module_state_2:screen_loc = ui_inv2
 	if(module_state_3)
 		module_state_3:screen_loc = ui_inv3
-	updateicon()
+	update_icon()
 
 /mob/living/silicon/robot/proc/process_killswitch()
 	if(killswitch)
@@ -381,8 +385,8 @@
 		IgniteMob()
 
 /mob/living/silicon/robot/handle_light()
-	. = ..()
-	if(. == FALSE) // If no other light sources are on.
-		if(lights_on)
-			set_light(integrated_light_power, 1, "#FFFFFF")
-			return TRUE
+	if(lights_on)
+		set_light(integrated_light_power, 1, "#FFFFFF")
+		return TRUE
+	else
+		. = ..()

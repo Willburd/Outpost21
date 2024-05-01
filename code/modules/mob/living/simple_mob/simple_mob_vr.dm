@@ -31,6 +31,7 @@
 	var/vore_digest_chance = 25			// Chance to switch to digest mode if resisted
 	var/vore_absorb_chance = 0			// Chance to switch to absorb mode if resisted
 	var/vore_escape_chance = 25			// Chance of resisting out of mob
+	var/vore_escape_chance_absorbed = 20// Chance of absorbed prey finishing an escape. Requires a successful escape roll against the above as well.
 
 	var/vore_stomach_name				// The name for the first belly if not "stomach"
 	var/vore_stomach_flavor				// The flavortext for the first belly if not the default
@@ -43,7 +44,10 @@
 	var/vore_fullness = 0				// How "full" the belly is (controls icons)
 	var/vore_icons = 0					// Bitfield for which fields we have vore icons for.
 	var/vore_eyes = FALSE				// For mobs with fullness specific eye overlays.
+	var/belly_size_multiplier = 1
 	var/life_disabled = 0				// For performance reasons
+
+	var/vore_attack_override = FALSE	// Enable on mobs you want to have special behaviour on melee grab attack.
 
 	var/mount_offset_x = 5				// Horizontal riding offset.
 	var/mount_offset_y = 8				// Vertical riding offset
@@ -53,12 +57,12 @@
 	can_be_drop_pred = TRUE				// Mobs are pred by default.
 	var/damage_threshold  = 0 //For some mobs, they have a damage threshold required to deal damage to them.
 
+	var/nom_mob = FALSE //If a mob is meant to be hostile for vore purposes but is otherwise not hostile, if true makes certain AI ignore the mob
 
 // Release belly contents before being gc'd!
 /mob/living/simple_mob/Destroy()
 	release_vore_contents()
-	if(prey_excludes)
-		prey_excludes.Cut()
+	LAZYCLEARLIST(prey_excludes)
 	return ..()
 
 //For all those ID-having mobs
@@ -73,6 +77,7 @@
 		for(var/mob/living/M in B)
 			new_fullness += M.size_multiplier
 	new_fullness = new_fullness / size_multiplier //Divided by pred's size so a macro mob won't get macro belly from a regular prey.
+	new_fullness = new_fullness * belly_size_multiplier // Some mobs are small even at 100% size. Let's account for that.
 	new_fullness = round(new_fullness, 1) // Because intervals of 0.25 are going to make sprite artists cry.
 	vore_fullness = min(vore_capacity, new_fullness)
 
@@ -113,7 +118,7 @@
 	if(!M.allowmobvore || !M.devourable || config.disable_vore) // Don't eat people who don't want to be ate by mobs, outpost 21 change
 		//ai_log("vr/wont eat [M] because they don't allow mob vore", 3) //VORESTATION AI TEMPORARY REMOVAL
 		return 0
-	if(M in prey_excludes) // They're excluded
+	if(LAZYFIND(prey_excludes, M)) // They're excluded
 		//ai_log("vr/wont eat [M] because they are excluded", 3) //VORESTATION AI TEMPORARY REMOVAL
 		return 0
 	if(M.size_multiplier < vore_min_size || M.size_multiplier > vore_max_size)
@@ -233,6 +238,7 @@
 		B.contamination_color = vore_default_contamination_color
 		B.escapable = vore_escape_chance > 0
 		B.escapechance = vore_escape_chance
+		B.escapechance_absorbed = vore_escape_chance_absorbed
 		B.digestchance = vore_digest_chance
 		B.absorbchance = vore_absorb_chance
 		B.human_prey_swallow_time = swallowTime
@@ -259,6 +265,7 @@
 			"The churning walls slowly pulverize you into meaty nutrients.",
 			"The stomach glorps and gurgles as it tries to work you into slop.")
 		can_be_drop_pred = TRUE // Mobs will eat anyone that decides to drop/slip into them by default.
+		B.belly_fullscreen = "yet_another_tumby"
 
 /mob/living/simple_mob/Bumped(var/atom/movable/AM, yes)
 	if(tryBumpNom(AM))
@@ -268,6 +275,8 @@
 /mob/living/simple_mob/proc/tryBumpNom(var/mob/tmob)
 	//returns TRUE if we actually start an attempt to bumpnom, FALSE if checks fail or the random bump nom chance fails
 	if(istype(tmob) && will_eat(tmob) && !istype(tmob, type) && prob(vore_bump_chance) && !ckey) //check if they decide to eat. Includes sanity check to prevent cannibalism.
+		if(!faction_bump_vore && faction == tmob.faction)
+			return FALSE
 		if(tmob.canmove && prob(vore_pounce_chance)) //if they'd pounce for other noms, pounce for these too, otherwise still try and eat them if they hold still
 			tmob.Weaken(5)
 		tmob.visible_message("<span class='danger'>\The [src] [vore_bump_emote] \the [tmob]!</span>!")

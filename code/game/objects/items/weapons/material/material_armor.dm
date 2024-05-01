@@ -323,12 +323,12 @@ Protectiveness | Armor %
 		..()
 
 //Make plating inserts for modular armour.
-/obj/item/weapon/material/armor_plating/insert/attackby(var/obj/O, mob/user)
+/obj/item/weapon/material/armor_plating/insert/attackby(var/obj/item/O, mob/user)
 
 	. = ..()
 
-	if(istype(O, /obj/item/weapon/weldingtool))
-		var /obj/item/weapon/weldingtool/S = O
+	if(O.has_tool_quality(TOOL_WELDER))
+		var /obj/item/weapon/weldingtool/S = O.get_welder()
 		if(S.remove_fuel(0,user))
 			if(!src || !S.isOn()) return
 			to_chat(user, "<span class='notice'>You trim down the edges to size.</span>")

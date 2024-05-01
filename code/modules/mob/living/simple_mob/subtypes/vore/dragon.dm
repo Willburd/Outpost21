@@ -108,10 +108,24 @@
 		riding_datum = new /datum/riding/simple_mob(src)
 	verbs |= /mob/living/simple_mob/proc/animal_mount
 	verbs |= /mob/living/proc/toggle_rider_reins
-	movement_cooldown = 3
+	movement_cooldown = 0
 
 /mob/living/simple_mob/vore/aggressive/dragon/MouseDrop_T(mob/living/M, mob/living/user)
 	return
 
 /datum/say_list/dragonboss
 	say_got_target = list("roars and snaps it jaws!")
+
+/mob/living/simple_mob/vore/aggressive/dragon/space
+	name = "space dragon"
+	tt_desc = "Astra Draconinae"
+	maxHealth = 300
+	health = 300
+	faction = "dragon"
+	icon_dead = "space_dragon_dead"
+	icon_living = "space_dragon"
+	icon_state = "space_dragon"
+	mount_offset_y = 24
+	mount_offset_x = -9
+	has_eye_glow = TRUE
+	vore_eyes = TRUE

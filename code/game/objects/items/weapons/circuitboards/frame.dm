@@ -62,6 +62,13 @@
 	board_type = new /datum/frame/frame_types/intercom
 	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
 
+
+/obj/item/weapon/circuitboard/intercom/Destroy()
+	if(istype(loc, /obj/item/device/radio/intercom))
+		var/obj/item/device/radio/intercom/my_machine = loc
+		my_machine.circuit = null
+	. = ..()
+
 /obj/item/weapon/circuitboard/keycard_auth
 	name = T_BOARD("keycard authenticator")
 	build_path = /obj/machinery/keycard_auth
@@ -79,6 +86,12 @@
 	build_path = /obj/item/device/geiger/wall
 	board_type = new /datum/frame/frame_types/geiger
 	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+
+/obj/item/weapon/circuitboard/electrochromic
+	name = T_BOARD("electrochromic button")
+	build_path = /obj/machinery/button/windowtint
+	board_type = new /datum/frame/frame_types/electrochromic_button
+	matter = list(MAT_STEEL = 50, "glass" = 50)
 
 //Computer
 
@@ -284,3 +297,14 @@
 							/obj/item/weapon/stock_parts/capacitor/adv = 1,		//for the JUICE
 							/obj/item/weapon/stock_parts/motor = 2,
 							/obj/item/stack/cable_coil = 5)
+
+/obj/item/weapon/circuitboard/injector_maker
+	name = T_BOARD("Ready-to-Use Medicine 3000")
+	build_path = /obj/machinery/injector_maker
+	board_type = new /datum/frame/frame_types/injector_maker
+	origin_tech = list(TECH_BIO = 3, TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/micro_laser = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1)

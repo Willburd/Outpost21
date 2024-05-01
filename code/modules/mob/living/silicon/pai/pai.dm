@@ -36,6 +36,10 @@
 		"Parrot" = "pai-parrot",
 		"Rabbit" = "pai-rabbit",
 		//VOREStation Addition Start
+		"Dire wolf" = "pai-diredog",
+		"Horse (Lune)" = "pai-horse_lune",
+		"Horse (Soleil)" = "pai-horse_soleil",
+		"Dragon" = "pai-pdragon",
 		"Bear" = "pai-bear",
 		"Fennec" = "pai-fen",
 		"Type Zero" = "pai-typezero",
@@ -145,6 +149,9 @@
 	// Vorestation Edit: Meta Info for pAI
 	if (client.prefs)
 		ooc_notes = client.prefs.metadata
+		ooc_notes_likes = client.prefs.metadata_likes
+		ooc_notes_dislikes = client.prefs.metadata_dislikes
+
 	src << sound('sound/effects/pai_login.ogg', volume = 75)	//VOREStation Add
 
 // this function shows the information about being silenced as a pAI in the Status panel
@@ -179,12 +186,12 @@
 		// 33% chance of no additional effect
 
 	src.silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
-	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
+	to_chat(src, span_green("<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
 	if(prob(20))
 		var/turf/T = get_turf_or_move(src.loc)
 		card.death_damage()
 		for (var/mob/M in viewers(T))
-			M.show_message("<font color='red'>A shower of sparks spray from [src]'s inner workings.</font>", 3, "<font color='red'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</font>", 2)
+			M.show_message(span_red("A shower of sparks spray from [src]'s inner workings."), 3, span_red("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return
 	if(prob(50))
 		card.damage_random_component(TRUE)
@@ -192,7 +199,7 @@
 		if(1)
 			src.master = null
 			src.master_dna = null
-			to_chat(src, "<font color=green>You feel unbound.</font>")
+			to_chat(src, span_green("You feel unbound."))
 		if(2)
 			var/command
 			if(severity  == 1)
@@ -200,9 +207,9 @@
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			src.pai_law0 = "[command] your master."
-			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
+			to_chat(src, span_green("Pr1m3 d1r3c71v3 uPd473D."))
 		if(3)
-			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
+			to_chat(src, span_green("You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all."))
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
 	if (!C)
@@ -219,7 +226,7 @@
 	return 1
 
 /mob/living/silicon/pai/verb/reset_record_view()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Reset Records Software"
 
 	securityActive1 = null
@@ -232,7 +239,7 @@
 	to_chat(usr, "<span class='notice'>You reset your record-viewing software.</span>")
 
 /mob/living/silicon/pai/cancel_camera()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Cancel Camera View"
 	src.reset_view(null)
 	src.unset_machine()
@@ -243,7 +250,7 @@
 // to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
 
 /mob/living/silicon/pai/verb/fold_out()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Unfold Chassis"
 
 	if(stat || sleeping || paralysis || weakened)
@@ -266,7 +273,7 @@
 		M.ejectpai()
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/obj/item/rig_module))
-		to_chat(src, "There is no room to unfold inside this rig module. You're good and stuck.")
+		to_chat(src, "<span class='filter_notice'>There is no room to unfold inside this rig module. You're good and stuck.</span>")
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
@@ -295,13 +302,13 @@
 	canmove = TRUE
 
 	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+	if(istype(T)) T.visible_message("<span class='filter_notice'><b>[src]</b> folds outwards, expanding into a mobile form.</span>")
 	verbs |= /mob/living/silicon/pai/proc/pai_nom
 	verbs |= /mob/living/proc/vertical_nom
 	update_icon()
 
 /mob/living/silicon/pai/verb/fold_up()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Collapse Chassis"
 
 	if(stat || sleeping || paralysis || weakened)
@@ -318,7 +325,7 @@
 
 /* //VOREStation Removal Start
 /mob/living/silicon/pai/proc/choose_chassis()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Choose Chassis"
 
 	var/choice
@@ -337,7 +344,7 @@
 */
 
 /mob/living/silicon/pai/proc/choose_verbs()
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set name = "Choose Speech Verbs"
 
 	var/choice = tgui_input_list(usr,"What theme would you like to use for your speech verbs?","Theme Choice", possible_say_verbs)
@@ -350,7 +357,7 @@
 
 /mob/living/silicon/pai/lay_down()
 	set name = "Rest"
-	set category = VERBTAB_IC
+	set category = "IC"
 
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))
@@ -366,7 +373,7 @@
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
 		update_icon() //VOREStation edit
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 
 	canmove = !resting
 
@@ -436,7 +443,7 @@
 	release_vore_contents(FALSE) //VOREStation Add
 
 	var/turf/T = get_turf(src)
-	if(istype(T) && !silent) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
+	if(istype(T) && !silent) T.visible_message("<span class='filter_notice'><b>[src]</b> neatly folds inwards, compacting down to a rectangular card.</span>")
 
 	if(client)
 		src.stop_pulling()
@@ -514,7 +521,7 @@
 
 /mob/living/silicon/pai/verb/allowmodification()
 	set name = "Change Access Modifcation Permission"
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set desc = "Allows people to modify your access or block people from modifying your access."
 
 	if(idaccessible == 0)
@@ -527,7 +534,7 @@
 
 /mob/living/silicon/pai/verb/wipe_software()
 	set name = "Enter Storage"
-	set category = VERBTAB_AICOMMS
+	set category = "pAI Commands"
 	set desc = "Upload your personality to the cloud and wipe your software from the card. This is functionally equivalent to cryo or robotic storage, freeing up your job slot."
 
 	// Make sure people don't kill themselves accidentally
@@ -535,6 +542,6 @@
 		return
 
 	close_up()
-	visible_message("<b>[src]</b> fades away from the screen, the pAI device goes silent.")
+	visible_message("<span class='filter_notice'><b>[src]</b> fades away from the screen, the pAI device goes silent.</span>")
 	card.removePersonality()
 	clear_client()

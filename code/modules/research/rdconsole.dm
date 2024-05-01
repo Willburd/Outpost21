@@ -44,6 +44,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
+	var/is_public = FALSE //Above mentions the option for public consoles. But for that, we need to remove the sync tab from the console entirely
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
@@ -69,7 +70,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			return_name = "Diamond"
 	return return_name
 
-/obj/machinery/computer/rdconsole/proc/CallReagentName(var/ID)
+/obj/machinery/computer/rdconsole/proc/CallReagentName(var/ID) 
 	if(isnull(SSchemistry.chemical_reagents[ID]))
 		return ID
 	return SSchemistry.chemical_reagents[ID].name
@@ -116,7 +117,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	//Loading a disk into it.
 	if(istype(D, /obj/item/weapon/disk))
 		if(t_disk || d_disk)
-			to_chat(user, "A disk is already loaded into the machine.")
+			to_chat(user, "<span class='filter_notice'>A disk is already loaded into the machine.</span>")
 			return
 
 		if(istype(D, /obj/item/weapon/disk/tech_disk))
@@ -140,7 +141,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if(!emagged)
 		playsound(src, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
+		to_chat(user, "<span class='notice'>You disable the security protocols.</span>")
 		return 1
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
@@ -179,4 +180,4 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/core
 	name = "Core R&D Console"
-	id = 1
+	id = 1					  

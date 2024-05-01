@@ -43,10 +43,6 @@
 	i.plane = PLANE_LIGHTING_ABOVE
 	add_overlay(i)
 
-/turf/simulated/floor/weird_things/dark/ChangeTurf()
-	. = ..()
-	cut_overlays()
-
 /turf/unsimulated/wall/dark
 	name = "dark"
 	desc = "It's a strange, impenetrable darkness."
@@ -63,11 +59,6 @@
 	var/image/i = image('icons/turf/flooring/weird_vr.dmi', choice)
 	i.plane = PLANE_LIGHTING_ABOVE
 	add_overlay(i)
-
-/turf/unsimulated/wall/dark/ChangeTurf()
-	. = ..()
-	cut_overlays()
-
 
 /turf/unsimulated/floor/dark
 	name = "dark"
@@ -123,8 +114,6 @@
 			choiceb = "overlay-[rand(1,6)]"
 		var/image/ii = image('icons/turf/flooring/weird_vr.dmi', choiceb)
 		add_overlay(ii)
-
-
 
 /turf/unsimulated/floor/dark/ChangeTurf()
 	. = ..()

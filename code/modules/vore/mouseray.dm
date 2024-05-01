@@ -216,6 +216,8 @@
 	//For primarily copying vore preference settings from a carbon mob to a simplemob
 	//It can be used for other things, but be advised, if you're using it to put a simplemob into a carbon mob, you're gonna be overriding a bunch of prefs
 	new_mob.ooc_notes = ooc_notes
+	new_mob.ooc_notes_likes = ooc_notes_likes
+	new_mob.ooc_notes_dislikes = ooc_notes_dislikes
 	new_mob.digestable = digestable
 	new_mob.devourable = devourable
 	new_mob.absorbable = absorbable
@@ -234,6 +236,7 @@
 	new_mob.stumble_vore = stumble_vore
 	new_mob.slip_vore = slip_vore
 	new_mob.throw_vore = throw_vore
+	new_mob.food_vore = food_vore
 	new_mob.resizable = resizable
 	new_mob.show_vore_fx = show_vore_fx
 	new_mob.step_mechanics_pref = step_mechanics_pref
@@ -241,6 +244,9 @@
 	new_mob.vore_taste = vore_taste
 	new_mob.vore_smell = vore_smell
 	new_mob.nutrition_message_visible = nutrition_message_visible
+	// new_mob.allow_spontaneous_tf = allow_spontaneous_tf
+	new_mob.eating_privacy_global = eating_privacy_global
+	new_mob.text_warnings = text_warnings
 
 /////SUBTYPES/////
 
@@ -380,21 +386,20 @@
 		"space bear" = /mob/living/simple_mob/animal/space/bear,
 		"voracious lizard" = /mob/living/simple_mob/vore/aggressive/dino,
 		"giant frog" = /mob/living/simple_mob/vore/aggressive/frog,
-		"jelly blob" = /mob/living/simple_mob/animal/space/jelly,
-		"wolf" = /mob/living/simple_mob/animal/wolf,
-		"direwolf" = /mob/living/simple_mob/animal/wolf/direwolf,
+		"jelly blob" = /mob/living/simple_mob/vore/jelly,
+		"wolf" = /mob/living/simple_mob/vore/wolf,
+		"direwolf" = /mob/living/simple_mob/vore/wolf/direwolf,
 		"great wolf" = /mob/living/simple_mob/vore/greatwolf,
 		"sect queen" = /mob/living/simple_mob/vore/sect_queen,
 		"sect drone" = /mob/living/simple_mob/vore/sect_drone,
 		"panther" = /mob/living/simple_mob/vore/aggressive/panther,
 		"giant snake" = /mob/living/simple_mob/vore/aggressive/giant_snake,
 		"deathclaw" = /mob/living/simple_mob/vore/aggressive/deathclaw,
-		"otie" = /mob/living/simple_mob/otie,
-		"mutated otie" =/mob/living/simple_mob/otie/feral,
-		"red otie" = /mob/living/simple_mob/otie/red,
+		"otie" = /mob/living/simple_mob/vore/otie,
+		"mutated otie" =/mob/living/simple_mob/vore/otie/feral,
+		"red otie" = /mob/living/simple_mob/vore/otie/red,
 		"defanged xenomorph" = /mob/living/simple_mob/vore/xeno_defanged,
 		"catslug" = /mob/living/simple_mob/vore/alienanimals/catslug,
-		"teppi" = /mob/living/simple_mob/vore/alienanimals/teppi,
 		"monkey" = /mob/living/carbon/human/monkey,
 		"wolpin" = /mob/living/carbon/human/wolpin,
 		"sparra" = /mob/living/carbon/human/sparram,
@@ -458,11 +463,11 @@
 
 /obj/item/weapon/gun/energy/mouseray/otie
 	name = "otie ray"
-	tf_type = /mob/living/simple_mob/otie
+	tf_type = /mob/living/simple_mob/vore/otie
 
 /obj/item/weapon/gun/energy/mouseray/direwolf
 	name = "dire wolf ray"
-	tf_type = /mob/living/simple_mob/animal/wolf/direwolf
+	tf_type = /mob/living/simple_mob/vore/wolf/direwolf
 
 /obj/item/weapon/gun/energy/mouseray/giantrat
 	name = "giant rat ray"
@@ -505,7 +510,6 @@
 				prob(5);/obj/item/weapon/gun/energy/mouseray/giantrat,
 				prob(50);/obj/item/weapon/gun/energy/mouseray/redpanda,
 				prob(5);/obj/item/weapon/gun/energy/mouseray/catslug,
-				prob(5);/obj/item/weapon/gun/energy/mouseray/teppi,
 				prob(1);/obj/item/weapon/gun/energy/mouseray/metamorphosis,
 				prob(1);/obj/item/weapon/gun/energy/mouseray/metamorphosis/advanced/random
 				)

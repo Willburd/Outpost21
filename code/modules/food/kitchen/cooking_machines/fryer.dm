@@ -24,7 +24,7 @@
 	// Power used to maintain temperature once it's heated.
 	// Going with 25% of the active power. This is a somewhat arbitrary value.
 
-	resistance = 10 KILOWATTS	// Approx. 10 minutes to heat up.
+	resistance = 2 KILOWATTS	// Approx. 2 minutes to heat up.
 
 	max_contents = 2
 	container_type = /obj/item/weapon/reagent_containers/cooking_container/fryer
@@ -246,9 +246,9 @@
 		else
 			to_chat(victim, "<span class='danger'>Searing hot oil scorches your [E ? E.name : "flesh"]!</span>")
 
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has [cook_type] \the [victim] ([victim.ckey]) in \a [src]</font>")
-		victim.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [cook_type] in \a [src] by [user.name] ([user.ckey])</font>")
-		msg_admin_attack("[key_name_admin(user)] [cook_type] \the [victim] ([victim.ckey]) in \a [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		user.attack_log += text("\[[time_stamp()]\] [span_red("Has [cook_type] \the [victim] ([victim.ckey]) in \a [src]")]")
+		victim.attack_log += text("\[[time_stamp()]\] [span_orange("Has been [cook_type] in \a [src] by [user.name] ([user.ckey])")]")
+		msg_admin_attack("[key_name_admin(user)] [cook_type] \the [victim] ([victim.ckey]) in \a [src]. (<A HREF='?_src_=holder;[HrefToken()];adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	//Coat the victim in some oil
 	oil.trans_to(victim, 40)
@@ -260,7 +260,7 @@
 		if (I.reagents.total_volume <= 0 && oil)
 			//Its empty, handle scooping some hot oil out of the fryer
 			oil.trans_to(I, I.reagents.maximum_volume)
-			user.visible_message("[user] scoops some oil out of \the [src].", span("notice","You scoop some oil out of \the [src]."))
+			user.visible_message("<span class='filter_notice'>[user] scoops some oil out of \the [src].</span>", span("notice","You scoop some oil out of \the [src]."))
 			return 1
 		else
 	//It contains stuff, handle pouring any oil into the fryer
@@ -276,7 +276,7 @@
 					I.reagents.remove_reagent(R.id, delta)
 					amount += delta
 			if (amount > 0)
-				user.visible_message("[user] pours some oil into \the [src].", span("notice","You pour [amount]u of oil into \the [src]."), "<span class='notice'>You hear something viscous being poured into a metal container.</span>")
+				user.visible_message("<span class='filter_notice'>[user] pours some oil into \the [src].</span>", "<span class='notice'>You pour [amount]u of oil into \the [src].</span>", "<span class='notice'>You hear something viscous being poured into a metal container.</span>")
 				return 1
 	//If neither of the above returned, then call parent as normal
 	..()

@@ -58,18 +58,18 @@
 				to_chat(src, "Alert cancelled. Power has been restored without our assistance.")
 				aiRestorePowerRoutine = 0
 				clear_fullscreen("blind")
-				updateicon()
+				update_icon()
 				return
 			else if (aiRestorePowerRoutine==3)
 				to_chat(src, "Alert cancelled. Power has been restored.")
 				aiRestorePowerRoutine = 0
 				clear_fullscreen("blind")
-				updateicon()
+				update_icon()
 				return
 			else if (APU_power)
 				aiRestorePowerRoutine = 0
 				clear_fullscreen("blind")
-				updateicon()
+				update_icon()
 				return
 		else
 			var/area/current_area = get_area(src)
@@ -79,7 +79,7 @@
 					aiRestorePowerRoutine = 1
 
 					//Blind the AI
-					updateicon()
+					update_icon()
 					overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 					src.sight = src.sight&~SEE_TURFS
 					src.sight = src.sight&~SEE_MOBS
@@ -152,7 +152,7 @@
 									aiRestorePowerRoutine = 3
 									to_chat(src, "Here are your current laws:")
 									show_laws()
-									updateicon()
+									update_icon()
 							sleep(50)
 							theAPC = null
 

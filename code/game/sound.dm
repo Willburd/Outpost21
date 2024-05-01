@@ -109,6 +109,8 @@
 			T = get_turf(A.holo.masters[A])
 			listener_position = A.holo.masters[A]
 	if(isturf(turf_source))
+		var/turf/T = get_turf(src)
+
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 

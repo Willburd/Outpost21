@@ -499,12 +499,13 @@
 	var/obj/item/organ/internal/I = null //Used for further down below when an organ is picked.
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
-			if(!glow_toggle) // stops glowing body trait promies from turning off instantly if they WANT to glow
-				set_light(0)
+			glow_override = FALSE
+			set_light(0)
 		if(accumulated_rads)
 			accumulated_rads -= RADIATION_SPEED_COEFFICIENT //Accumulated rads slowly dissipate very slowly. Get to medical to get it treated!
 	else if(((life_tick % 5 == 0) && radiation) || (radiation > 600)) //Radiation is a slow, insidious killer. Unless you get a massive dose, then the onset is sudden!
 		if(species.appearance_flags & RADIATION_GLOWS)
+			glow_override = TRUE
 			set_light(max(1,min(5,radiation/15)), max(1,min(10,radiation/25)), species.get_flesh_colour(src))
 		// END DOGSHIT SNOWFLAKE
 
@@ -650,7 +651,7 @@
 				if(prob(50) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					spawn vomit()
 				if(!paralysis && prob(30) && prob(100 * RADIATION_SPEED_COEFFICIENT)) //CNS is shutting down.
-					to_chat(src, "<font color='Critical'>You have a seizure!</font>")
+					to_chat(src, "<span class='critical'>You have a seizure!</span>")
 					Paralyse(10)
 					make_jittery(1000)
 					if(!lying)
@@ -714,7 +715,7 @@
 					drop_item()
 			if(accumulated_rads > 700) // (12Gy)
 				if(!paralysis && prob(1) && prob(100 * RADIATION_SPEED_COEFFICIENT)) //1 in 1000 chance per tick.
-					to_chat(src, "<font color='Critical'>You have a seizure!</font>")
+					to_chat(src, "<span class='critical'>You have a seizure!</span>")
 					Paralyse(10)
 					make_jittery(1000)
 					if(!lying)
@@ -973,8 +974,6 @@
 			if(prob(20))
 				spawn(0) emote(pick("giggle", "laugh"))
 		breath.adjust_gas("nitrous_oxide", -breath.gas["nitrous_oxide"]/6, update = 0) //update after
-
-
 
 	// Were we able to breathe?
 	if (failed_inhale || failed_exhale)
@@ -1449,7 +1448,6 @@
 		else if(isturf(loc))
 			var/turf/T = loc
 			light_amount = T.get_lumcount() * 10
-
 		if(light_amount > species.light_dam) //if there's enough light, start dying
 			take_overall_damage(1,1)
 		else //heal in the dark
@@ -1536,6 +1534,10 @@
 			Paralyse(10)
 			setHalLoss(species.total_health - 1)
 
+		if(tiredness) //tiredness for vore drain
+			tiredness = (tiredness - 1)
+			if(tiredness >= 100)
+			
 		if(paralysis || sleeping)
 			blinded = 1
 			set_stat(UNCONSCIOUS)
@@ -1732,7 +1734,21 @@
 			overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
 		else
 			clear_fullscreen("brute")
-
+		//tiredness for drain vore															  
+		if(tiredness)
+			var/severity = 0
+			switch(tiredness)
+				if(10 to 20)		severity = 1
+				if(20 to 30)		severity = 2
+				if(30 to 45)		severity = 3
+				if(45 to 60)		severity = 4
+				if(60 to 75)		severity = 5
+				if(75 to 90)		severity = 6
+				if(90 to INFINITY)	severity = 7
+			overlay_fullscreen("tired", /obj/screen/fullscreen/oxy, severity)
+		else
+			clear_fullscreen("tired")
+			   
 		if(healths)
 			if (chem_effects[CE_PAINKILLER] > 100)
 				healths.icon_state = "health_numb"
@@ -1836,7 +1852,9 @@
 
 		if(!isbelly(loc)) //VOREStation Add - Belly fullscreens safety
 			clear_fullscreen("belly")
-			//clear_fullscreen("belly2") //For multilayered stomachs. Not currently implemented.
+			clear_fullscreen("belly2")
+			clear_fullscreen("belly3")
+			clear_fullscreen("belly4")													
 
 		if(config.welder_vision)
 			var/found_welder
@@ -2015,7 +2033,7 @@
 				if(prob(5))
 					to_chat(src, "<span class='danger'>You lose directional control!</span>")
 					Confuse(10)
-		if (getToxLoss() >= 45)
+		if (getToxLoss() >= 45 && !isSynthetic())
 			spawn vomit()
 
 		// Positronics and drones don't go crazy in the dark, doesn't make sense...

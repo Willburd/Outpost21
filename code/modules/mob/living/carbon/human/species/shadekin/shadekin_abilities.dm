@@ -26,6 +26,7 @@
 	verbpath = /mob/living/carbon/human/proc/phase_shift
 	ability_icon_state = "tech_passwall"
 
+/* //ChompEDIT - Moved to modular_chomp
 /mob/living/carbon/human/proc/phase_shift()
 	set name = "Phase Shift (100)"
 	set desc = "Shift yourself out of alignment with realspace to travel quickly to different areas."
@@ -41,6 +42,9 @@
 
 	if(buckled)
 		to_chat(src,"<span class='warning'>You can't use that while buckled!</span>")
+		return FALSE
+		
+	if(ability_flags & AB_PHASE_SHIFTING)
 		return FALSE
 
 	var/brightness = T.get_lumcount() //Brightness in 0.0 to 1.0
@@ -91,8 +95,9 @@
 	//Shifting in
 	if(ability_flags & AB_PHASE_SHIFTED)
 		ability_flags &= ~AB_PHASE_SHIFTED
+		ability_flags |= AB_PHASE_SHIFTING
 		mouse_opacity = 1
-		name = real_name
+		name = get_visible_name()
 		for(var/obj/belly/B as anything in vore_organs)
 			B.escapable = initial(B.escapable)
 
@@ -121,7 +126,9 @@
 				var/mob/living/target = pick(potentials)
 				if(istype(target) && target.devourable && !config.disable_vore && target.can_be_drop_prey && vore_selected) // outpost 21 change
 					target.forceMove(vore_selected)
-					to_chat(target,"<span class='warning'>\The [src] phases in around you, [vore_selected.vore_verb]ing you into their [vore_selected.name]!</span>")
+					to_chat(target,"<span class='vwarning'>\The [src] phases in around you, [vore_selected.vore_verb]ing you into their [vore_selected.name]!</span>")
+
+		ability_flags &= ~AB_PHASE_SHIFTING
 
 		//Affect nearby lights
 		var/destroy_lights = 0
@@ -138,9 +145,10 @@
 	//Shifting out
 	else
 		ability_flags |= AB_PHASE_SHIFTED
+		ability_flags |= AB_PHASE_SHIFTING
 		mouse_opacity = 0
 		custom_emote(1,"phases out!")
-		name = "Something"
+		name = get_visible_name()
 
 		for(var/obj/belly/B as anything in vore_organs)
 			B.escapable = FALSE
@@ -162,6 +170,14 @@
 		incorporeal_move = TRUE
 		density = FALSE
 		force_max_speed = TRUE
+		ability_flags &= ~AB_PHASE_SHIFTING
+*/ //ChompEDIT END - moved to modular_chomp
+
+//CHOMPEdit Start - Shadekin probably shouldn't be hit while phasing
+/datum/modifier/shadekin_phase
+	name = "Shadekin Phasing"
+	evasion = 100
+//CHOMPEdit End
 
 /datum/modifier/shadekin_phase_vision
 	name = "Shadekin Phase Vision"
